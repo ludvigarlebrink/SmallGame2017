@@ -19,7 +19,7 @@ public:
 	void ShutDown();
 
 	//::.. GET FUNCTIONS ..:://
-	VideoManager& Get();
+	static VideoManager& Get();
 
 	glm::vec2 GetScreenResolution() const;
 
