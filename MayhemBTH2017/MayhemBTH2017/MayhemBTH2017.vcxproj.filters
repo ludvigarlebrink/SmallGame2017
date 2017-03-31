@@ -45,6 +45,18 @@
     <ClCompile Include="MasterShader.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="AResource.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="String.cpp" />
+    <ClCompile Include="ImageLoader.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="PicoPNG.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManager.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackPool.h">
@@ -62,8 +74,20 @@
     <ClInclude Include="Vector.h">
       <Filter>Memory\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="MasterShader.h">
-      <Filter>Rendering</Filter>
+    <ClInclude Include="AResource.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="String.h" />
+    <ClInclude Include="GLTexture.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="PicoPNG.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLoader.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.h">
+      <Filter>Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
