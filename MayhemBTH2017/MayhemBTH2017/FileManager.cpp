@@ -1,7 +1,7 @@
-#include "IOManager.h"
+#include "FileManager.h"
 
 
-bool IOManager::ReadFile(std::string filePath, std::vector<unsigned char>& buffer)
+bool FileManager::ReadFile(std::string filePath, std::vector<unsigned char>& buffer)
 {
 	std::ifstream file(filePath.c_str(),   std::ios::binary);
 
