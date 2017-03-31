@@ -137,7 +137,7 @@ Vector<glm::vec3> DeferredManager::GetLightPos()const
 	return this->m_lightPosition;
 }
 
-Vector<glm::vec3> DeferredManager::GetLightPos()const
+Vector<glm::vec3> DeferredManager::GetLightColor()const
 {
 	return this->m_lightColor;
 }
