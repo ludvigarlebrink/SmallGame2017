@@ -52,6 +52,9 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="DeferredManager.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackPool.h">
@@ -76,5 +79,8 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="DeferredManager.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
