@@ -47,7 +47,6 @@
     </ClCompile>
     <ClCompile Include="AResource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="String.cpp" />
     <ClCompile Include="ImageLoader.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
@@ -56,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="FileManager.cpp">
       <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>Memory\Containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,7 +78,6 @@
     </ClInclude>
     <ClInclude Include="AResource.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="String.h" />
     <ClInclude Include="GLTexture.h">
       <Filter>Misc</Filter>
     </ClInclude>
@@ -88,6 +89,9 @@
     </ClInclude>
     <ClInclude Include="FileManager.h">
       <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="String.h">
+      <Filter>Memory\Containers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,9 @@
 #include "VideoManager.h"
 #include "InputManager.h"
 
+#include "String.h"
+#include "Vector.h"
+
 
 #include <iostream>
 
