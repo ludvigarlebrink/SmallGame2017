@@ -136,7 +136,6 @@
     <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshManager.cpp" />
-    <ClCompile Include="PicoPNG.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="StackPool.cpp" />
     <ClCompile Include="String.cpp" />
@@ -152,7 +151,6 @@
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshManager.h" />
-    <ClInclude Include="PicoPNG.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="StackPool.h" />
     <ClInclude Include="String.h" />
