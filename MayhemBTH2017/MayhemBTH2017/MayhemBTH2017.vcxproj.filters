@@ -60,9 +60,6 @@
     <ClCompile Include="ImageLoader.cpp">
       <Filter>Engine\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="PicoPNG.cpp">
-      <Filter>Engine\Misc</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Engine\Misc</Filter>
     </ClCompile>
@@ -71,6 +68,9 @@
     </ClCompile>
     <ClCompile Include="String.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureCache.cpp">
+      <Filter>Engine\Misc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,9 +104,6 @@
     <ClInclude Include="ImageLoader.h">
       <Filter>Engine\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="PicoPNG.h">
-      <Filter>Engine\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Misc</Filter>
     </ClInclude>
@@ -115,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="String.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureCache.h">
+      <Filter>Engine\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
