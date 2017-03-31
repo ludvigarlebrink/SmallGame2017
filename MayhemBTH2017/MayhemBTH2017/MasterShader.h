@@ -28,6 +28,7 @@ public:
 	void Release();
 	void virtual Update() = 0;
 	void Bind();
+	void virtual Render() = 0;
 
 private:
 	//::..HELPER FUNCTIONS..:://
