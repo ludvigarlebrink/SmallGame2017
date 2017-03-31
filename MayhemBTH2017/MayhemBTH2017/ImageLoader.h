@@ -1,15 +1,16 @@
 #ifndef __IMAGELOADER_H__
 #define __IMAGELOADER_H__
 
-#include "GLTexture.h"
-
 #include <string>
-#include "PicoPNG.h"
+#include <SDL.h>
+
+#include "GLTexture.h"
+#include "FileManager.h"
 
 class ImageLoader
 {
 public:
-	GLTexture loadPNG(std::string filepath);
+	static GLTexture loadBMP(std::string filepath);
 };
 
 

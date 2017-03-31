@@ -1,7 +1,7 @@
 #include "FileManager.h"
 
 
-bool FileManager::ReadFile(std::string filePath, std::vector<unsigned char>& buffer)
+bool FileManager::ReadFile(std::string filePath, Vector<unsigned char>& buffer)
 {
 	std::ifstream file(filePath.c_str(),   std::ios::binary);
 
@@ -18,7 +18,7 @@ bool FileManager::ReadFile(std::string filePath, std::vector<unsigned char>& buf
 
 	fileSize -= file.tellg();
 	
-	buffer.resize(fileSize);
+	buffer.Resize(fileSize);
 
 	file.read((char*)&buffer[0], fileSize);
 

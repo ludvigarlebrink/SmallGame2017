@@ -1,29 +1,25 @@
 #include "ImageLoader.h"
 
-GLTexture ImageLoader::loadPNG(std::string filepath)
+GLTexture ImageLoader::loadBMP(std::string filepath)
 {
 	GLTexture texture = {};
 
-	std::vector<unsigned char> in;
-	std::vector<unsigned char> out;
-
 	unsigned long width, height;
 
-	//read file with iomanager with in.
-
-
-	int errorCode = decodePNG(out, width, height, &in[0], in.size());
-
-	if (errorCode != 0)
+	SDL_Surface* img = SDL_LoadBMP(filepath.c_str());
+	texture.width = img->w;
+	texture.height = img->h;
+	
+	if (!img) 
 	{
-		// failed to load png.
+		// SDL_GetError();
 	}
 
 	glGenTextures(1, &texture.ID);
 
 	glBindTexture(GL_TEXTURE_2D, texture.ID);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, &out[0]);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -32,8 +28,9 @@ GLTexture ImageLoader::loadPNG(std::string filepath)
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	return GLTexture();
+	SDL_free(img);
+
+	return texture;
 }

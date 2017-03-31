@@ -22,7 +22,7 @@ to know this information yourself to be able to use the data so this only
 works for trusted PNG files. Use LodePNG instead of picoPNG if you need this information.
 return: 0 if success, not 0 if some error occured.
 */
-int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width, unsigned long& image_height, const unsigned char* in_png, size_t in_size, bool convert_to_rgba32)
+int decodePNG(Vector<unsigned char>& out_image, unsigned long& image_width, unsigned long& image_height, const unsigned char* in_png, size_t in_size, bool convert_to_rgba32)
 {
 	// picoPNG version 20101224
 	// Copyright (c) 2005-2010 Lode Vandevenne
@@ -66,9 +66,9 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 		}
 		struct HuffmanTree
 		{
-			int makeFromLengths(const std::vector<unsigned long>& bitlen, unsigned long maxbitlen)
+			int makeFromLengths(Vector<unsigned long>& bitlen, unsigned long maxbitlen)
 			{ //make tree given the lengths
-				unsigned long numcodes = (unsigned long)(bitlen.size()), treepos = 0, nodefilled = 0;
+				unsigned long numcodes = (unsigned long)(bitlen.Size()), treepos = 0, nodefilled = 0;
 				std::vector<unsigned long> tree1d(numcodes), blcount(maxbitlen + 1, 0), nextcode(maxbitlen + 1, 0);
 				for (unsigned long bits = 0; bits < numcodes; bits++) blcount[bitlen[bits]]++; //count number of instances of each code length
 				for (unsigned long bits = 1; bits <= maxbitlen; bits++) nextcode[bits] = (nextcode[bits - 1] + blcount[bits - 1]) << 1;
@@ -120,7 +120,12 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 			}
 			void generateFixedTrees(HuffmanTree& tree, HuffmanTree& treeD) //get the tree of a deflated block with fixed tree
 			{
-				std::vector<unsigned long> bitlen(288, 8), bitlenD(32, 5);;
+				Vector<unsigned long> bitlen;
+				Vector<unsigned long> bitlenD;
+				bitlen.Push_Back(288);
+				bitlen.Push_Back(8);
+				bitlenD.Push_Back(32);
+				bitlenD.Push_Back(5);
 				for (size_t i = 144; i <= 255; i++) bitlen[i] = 9;
 				for (size_t i = 256; i <= 279; i++) bitlen[i] = 7;
 				tree.makeFromLengths(bitlen, 15);
@@ -254,7 +259,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 			std::vector<unsigned char> palette;
 		} info;
 		int error;
-		void decode(std::vector<unsigned char>& out, const unsigned char* in, size_t size, bool convert_to_rgba32)
+		void decode(Vector<unsigned char>& out, const unsigned char* in, size_t size, bool convert_to_rgba32)
 		{
 			error = 0;
 			if (size == 0 || in == 0) { error = 48; return; } //the given data is empty
@@ -322,7 +327,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 			Zlib zlib; //decompress with the Zlib decompressor
 			error = zlib.decompress(scanlines, idat); if (error) return; //stop if the zlib decompressor returned an error
 			size_t bytewidth = (bpp + 7) / 8, outlength = (info.height * info.width * bpp + 7) / 8;
-			out.resize(outlength); //time to fill the out buffer
+			out.Resize(outlength); //time to fill the out buffer
 			unsigned char* out_ = outlength ? &out[0] : 0; //use a regular pointer to the std::vector for faster code if compiled without optimization
 			if (info.interlaceMethod == 0) //no interlace, just filter
 			{
@@ -355,13 +360,13 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 				size_t passstart[7] = { 0 };
 				size_t pattern[28] = { 0,4,0,2,0,1,0,0,0,4,0,2,0,1,8,8,4,4,2,2,1,8,8,8,4,4,2,2 }; //values for the adam7 passes
 				for (int i = 0; i < 6; i++) passstart[i + 1] = passstart[i] + passh[i] * ((passw[i] ? 1 : 0) + (passw[i] * bpp + 7) / 8);
-				std::vector<unsigned char> scanlineo((info.width * bpp + 7) / 8), scanlinen((info.width * bpp + 7) / 8); //"old" and "new" scanline
+				Vector<unsigned char> scanlineo((info.width * bpp + 7) / 8), scanlinen((info.width * bpp + 7) / 8); //"old" and "new" scanline
 				for (int i = 0; i < 7; i++)
 					adam7Pass(&out_[0], &scanlinen[0], &scanlineo[0], &scanlines[passstart[i]], info.width, pattern[i], pattern[i + 7], pattern[i + 14], pattern[i + 21], passw[i], passh[i], bpp);
 			}
 			if (convert_to_rgba32 && (info.colorType != 6 || info.bitDepth != 8)) //conversion needed
 			{
-				std::vector<unsigned char> data = out;
+				Vector<unsigned char> data = out;
 				error = convert(out, &data[0], info, info.width, info.height);
 			}
 		}
@@ -457,11 +462,11 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 			else if (info.colorType >= 4) return (info.colorType - 2) * info.bitDepth;
 			else return info.bitDepth;
 		}
-		int convert(std::vector<unsigned char>& out, const unsigned char* in, Info& infoIn, unsigned long w, unsigned long h)
+		int convert(Vector<unsigned char>& out, const unsigned char* in, Info& infoIn, unsigned long w, unsigned long h)
 		{ //converts from any color type to 32-bit. return value = LodePNG error code
 			size_t numpixels = w * h, bp = 0;
-			out.resize(numpixels * 4);
-			unsigned char* out_ = out.empty() ? 0 : &out[0]; //faster if compiled without optimization
+			out.Resize(numpixels * 4);
+			unsigned char* out_ = out.Empty() ? 0 : &out[0]; //faster if compiled without optimization
 			if (infoIn.bitDepth == 8 && infoIn.colorType == 0) //greyscale
 				for (size_t i = 0; i < numpixels; i++)
 				{

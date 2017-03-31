@@ -39,6 +39,9 @@ public:
 	// Basicly a get function for m_isEmpty
 	bool Empty();
 
+	// Resizes the container to contain n elements
+	void Resize(size_t n);
+
 	//::.. ACCESS FUNCTIONS ..:://
 	// Access value at element
 	T At(size_t n);
