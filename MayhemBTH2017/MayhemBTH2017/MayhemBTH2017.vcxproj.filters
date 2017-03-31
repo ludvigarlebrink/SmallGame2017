@@ -51,12 +51,10 @@
     <ClCompile Include="ImageLoader.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
-    <ClCompile Include="PicoPNG.cpp">
-      <Filter>Misc</Filter>
-    </ClCompile>
     <ClCompile Include="FileManager.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
+    <ClCompile Include="TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackPool.h">
@@ -80,14 +78,12 @@
     <ClInclude Include="GLTexture.h">
       <Filter>Misc</Filter>
     </ClInclude>
-    <ClInclude Include="PicoPNG.h">
-      <Filter>Misc</Filter>
-    </ClInclude>
     <ClInclude Include="ImageLoader.h">
       <Filter>Misc</Filter>
     </ClInclude>
     <ClInclude Include="FileManager.h">
       <Filter>Misc</Filter>
     </ClInclude>
+    <ClInclude Include="TextureCache.h" />
   </ItemGroup>
 </Project>

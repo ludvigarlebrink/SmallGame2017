@@ -70,6 +70,12 @@ bool Vector<T>::Empty()
 	return m_vector.empty();
 }
 
+template<class T>
+void Vector<T>::Resize(size_t n)
+{
+	m_vector.resize(n);
+}
+
 // Access value at element
 template<class T>
 T Vector<T>::At(size_t n)

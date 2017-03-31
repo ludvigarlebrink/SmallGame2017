@@ -12,7 +12,7 @@
 class FileManager
 {
 public:
-	bool FileManager::ReadFile(std::string filePath, std::vector<unsigned char>& buffer);
+	static bool FileManager::ReadFile(std::string filePath, Vector<unsigned char>& buffer);
 };
 
 

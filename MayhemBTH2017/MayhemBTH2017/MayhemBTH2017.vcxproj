@@ -135,10 +135,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MasterShader.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
-    <ClCompile Include="PicoPNG.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="StackPool.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="VideoManager.cpp" />
   </ItemGroup>
@@ -149,10 +149,10 @@
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MemoryManager.h" />
-    <ClInclude Include="PicoPNG.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="StackPool.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="TextureCache.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoManager.h" />
   </ItemGroup>
