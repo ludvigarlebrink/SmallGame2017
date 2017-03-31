@@ -45,6 +45,16 @@
     <ClCompile Include="MasterShader.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="AResource.cpp" />
+    <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="IOManager.cpp" />
+    <ClCompile Include="PicoPNG.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="String.cpp" />
+    <ClCompile Include="MeshManager.cpp">
+      <Filter>Managers\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackPool.h">
@@ -62,8 +72,15 @@
     <ClInclude Include="Vector.h">
       <Filter>Memory\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="MasterShader.h">
-      <Filter>Rendering</Filter>
+    <ClInclude Include="AResource.h" />
+    <ClInclude Include="GLTexture.h" />
+    <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="PicoPNG.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="String.h" />
+    <ClInclude Include="MeshManager.h">
+      <Filter>Managers\ResourceManager</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh.h" />
   </ItemGroup>
 </Project>
