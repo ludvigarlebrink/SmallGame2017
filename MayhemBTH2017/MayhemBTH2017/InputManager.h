@@ -4,6 +4,34 @@
 
 #include <SDL.h>
 
+enum class Button
+{
+	// Face buttons
+	BUTTON_A,
+	BUTTON_B,
+	BUTTON_X,
+	BUTTON_Y,
+
+	// Sticks
+	RIGHT_STICK,
+	LEFT_STICK,
+	D_PAD_UP,
+	D_PAD_DOWN,
+	D_PAD_LEFT,
+	D_PAD_RIGHT,
+
+	// Bumpers
+	RIGHT_BUMPER,
+	LEFT_BUMPER,
+
+	// Triggers
+	RIGHT_TRIGGER,
+	LEFT_TRIGGER,
+
+	// Menu
+	START_BUTTON,
+	BACK_BUTTON
+};
 
 class InputManager
 {
@@ -20,6 +48,7 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	InputManager& Get();
+	void GetButtonInput(Button button);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
