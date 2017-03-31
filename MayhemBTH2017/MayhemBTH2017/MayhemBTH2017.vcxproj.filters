@@ -22,6 +22,9 @@
     <Filter Include="Misc">
       <UniqueIdentifier>{ab1c212f-a1b1-4430-921f-512d59900304}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Rendering setups">
+      <UniqueIdentifier>{dee7b0bb-1a79-4ef5-979e-5ef45cbe764f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,6 +48,13 @@
     <ClCompile Include="MasterShader.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="AResource.cpp" />
+    <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="IOManager.cpp" />
+    <ClCompile Include="PicoPNG.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="String.cpp" />
+    <ClCompile Include="DeferredManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackPool.h">
@@ -62,8 +72,12 @@
     <ClInclude Include="Vector.h">
       <Filter>Memory\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="MasterShader.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
+    <ClInclude Include="AResource.h" />
+    <ClInclude Include="GLTexture.h" />
+    <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="PicoPNG.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="String.h" />
+    <ClInclude Include="DeferredManager.h" />
   </ItemGroup>
 </Project>
