@@ -17,7 +17,7 @@ void Terminate();
 
 int main(int argc, char *argv[])
 {
-	if (true);
+	if (false);
 	BigInit();
 
 	//LOl
