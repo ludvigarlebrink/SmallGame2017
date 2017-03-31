@@ -1,90 +1,120 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Core">
-      <UniqueIdentifier>{b36956b7-f3e4-41da-b13e-83c2b290fcda}</UniqueIdentifier>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{74f09888-46d2-44fc-b889-3979fc8f6d7b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Memory">
-      <UniqueIdentifier>{b4b7cc19-24a3-4af1-b8d6-55327c64befb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Managers">
-      <UniqueIdentifier>{9cb0e605-dc82-4c34-bae1-a4503b77de27}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering">
+    <Filter Include="Engine\Rendering">
       <UniqueIdentifier>{22755bee-5352-42ce-a804-ae10307e0143}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Memory\Containers">
-      <UniqueIdentifier>{21cbb6ac-7fb1-4156-8f31-7d50cd288481}</UniqueIdentifier>
+    <Filter Include="Engine\Core">
+      <UniqueIdentifier>{b36956b7-f3e4-41da-b13e-83c2b290fcda}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers\ResourceManager">
+    <Filter Include="Engine\Managers">
+      <UniqueIdentifier>{9cb0e605-dc82-4c34-bae1-a4503b77de27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Managers\ResourceManager">
       <UniqueIdentifier>{4bd8f9dc-2971-4ad8-a0d2-9ab5782c3b55}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc">
+    <Filter Include="Engine\Memory">
+      <UniqueIdentifier>{b4b7cc19-24a3-4af1-b8d6-55327c64befb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Memory\Containers">
+      <UniqueIdentifier>{21cbb6ac-7fb1-4156-8f31-7d50cd288481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Misc">
       <UniqueIdentifier>{ab1c212f-a1b1-4430-921f-512d59900304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{75c15395-003c-47e1-81f0-98299159eca3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Core</Filter>
+      <Filter>Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="StackPool.cpp">
-      <Filter>Memory</Filter>
+      <Filter>Engine\Memory</Filter>
     </ClCompile>
     <ClCompile Include="MemoryManager.cpp">
-      <Filter>Managers</Filter>
+      <Filter>Engine\Managers</Filter>
     </ClCompile>
     <ClCompile Include="VideoManager.cpp">
-      <Filter>Managers</Filter>
+      <Filter>Engine\Managers</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Managers</Filter>
+      <Filter>Engine\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Vector.cpp">
-      <Filter>Memory\Containers</Filter>
+      <Filter>Engine\Memory\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshManager.cpp">
+      <Filter>Engine\Managers\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="MasterShader.cpp">
-      <Filter>Rendering</Filter>
+      <Filter>Engine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="AResource.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="AResource.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
     <ClCompile Include="ImageLoader.cpp">
-      <Filter>Misc</Filter>
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="String.cpp">
-      <Filter>Memory\Containers</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MeshManager.cpp" />
+    <ClCompile Include="TextureCache.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackPool.h">
-      <Filter>Memory</Filter>
+      <Filter>Engine\Memory</Filter>
     </ClInclude>
     <ClInclude Include="MemoryManager.h">
-      <Filter>Managers</Filter>
+      <Filter>Engine\Managers</Filter>
     </ClInclude>
     <ClInclude Include="VideoManager.h">
-      <Filter>Managers</Filter>
+      <Filter>Engine\Managers</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Managers</Filter>
+      <Filter>Engine\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
-      <Filter>Memory\Containers</Filter>
+      <Filter>Engine\Memory\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="AResource.h" />
-    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="MeshManager.h">
+      <Filter>Engine\Managers\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterShader.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="AResource.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
     <ClInclude Include="GLTexture.h">
-      <Filter>Misc</Filter>
+      <Filter>Engine\Misc</Filter>
     </ClInclude>
     <ClInclude Include="ImageLoader.h">
-      <Filter>Misc</Filter>
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="String.h">
-      <Filter>Memory\Containers</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="MasterShader.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MeshManager.h" />
+    <ClInclude Include="TextureCache.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
