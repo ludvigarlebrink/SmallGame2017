@@ -13,6 +13,9 @@ public:
 	//::.. CONSTRUCTORS ..:://
 	Vector();
 	virtual ~Vector();
+	Vector(const T value[]);
+
+	//::.. OPERATOR ..:://
 	T& operator[] (size_t n);
 	T& operator= (const T &value);
 
@@ -48,7 +51,6 @@ public:
 
 	// Access last element
 	T Last();
-
 
 private:
 	MemoryManager m_memory;

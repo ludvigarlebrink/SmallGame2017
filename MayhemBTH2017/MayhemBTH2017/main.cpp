@@ -2,6 +2,9 @@
 #include "VideoManager.h"
 #include "InputManager.h"
 
+#include "String.h"
+#include "Vector.h"
+
 
 #include <iostream>
 
@@ -28,6 +31,7 @@ int main(int argc, char *argv[])
 	}
 	
 	Terminate();
+
 
 	return 0;
 }

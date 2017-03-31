@@ -17,6 +17,15 @@ Vector<T>::~Vector()
 }
 
 template<class T>
+Vector<T>::Vector(const T value[])
+{
+	for (int i = 0; i < sizeof(value) / sizeof(*value); i++)
+	{
+		m_vector.push_back(value[i]);
+	}
+}
+
+template<class T>
 T & Vector<T>::operator[](size_t n)
 {
 	return m_vector[n];
