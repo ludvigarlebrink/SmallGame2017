@@ -48,9 +48,6 @@
     <ClCompile Include="Vector.cpp">
       <Filter>Engine\Memory\Containers</Filter>
     </ClCompile>
-    <ClCompile Include="MeshManager.cpp">
-      <Filter>Engine\Managers\ResourceManager</Filter>
-    </ClCompile>
     <ClCompile Include="MasterShader.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
@@ -60,18 +57,19 @@
     <ClCompile Include="ImageLoader.cpp">
       <Filter>Engine\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Engine\Misc</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="String.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="TextureCache.cpp">
-      <Filter>Engine\Misc</Filter>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Engine\Managers\ResourceManager</Filter>
     </ClCompile>
+    <ClCompile Include="TextureCache.cpp">
+      <Filter>Engine\Managers\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshCache.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackPool.h">
@@ -89,9 +87,6 @@
     <ClInclude Include="Vector.h">
       <Filter>Engine\Memory\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="MeshManager.h">
-      <Filter>Engine\Managers\ResourceManager</Filter>
-    </ClInclude>
     <ClInclude Include="MasterShader.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
@@ -104,17 +99,19 @@
     <ClInclude Include="ImageLoader.h">
       <Filter>Engine\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Engine\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="String.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="TextureCache.h">
-      <Filter>Engine\Misc</Filter>
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Engine\Managers\ResourceManager</Filter>
     </ClInclude>
+    <ClInclude Include="TextureCache.h">
+      <Filter>Engine\Managers\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshCache.h" />
   </ItemGroup>
 </Project>
