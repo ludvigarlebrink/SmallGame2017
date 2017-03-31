@@ -1,5 +1,7 @@
 #include "MasterShader.h"
 
+
+
 //::..CONSTRUCTORS..:://
 AShader::AShader(const std::string& filename)
 	: m_programID(glCreateProgram())
@@ -20,21 +22,28 @@ GLuint AShader::GetProgramID() {
 }
 
 //::..HELPER FUNCTIONS..:://
-void AShader::Init(const std::string& filename) {
-	//create shader
-	m_shader[0] = CreateShader(LoadShader(filename + ".vert"), GL_VERTEX_SHADER); //text of shader, shader type (vs)
+void AShader::Init(const std::string& filename) 
+{
+	// Create shader.
+	m_shader[0] = CreateShader(LoadShader(filename + ".vert"), GL_VERTEX_SHADER);
 	m_shader[1] = CreateShader(LoadShader(filename + ".frag"), GL_FRAGMENT_SHADER);
-	m_shader[2] = CreateShader(LoadShader(filename + ".geo"), GL_GEOMETRY_SHADER);
+	m_shader[2] = CreateShader(LoadShader(filename + ".geom"), GL_GEOMETRY_SHADER);
 
-	//add every shader to our shader program
-	for (GLuint i = 0; i < NR_SHADERS; i++) {
-		glAttachShader(m_programID, m_shader[i]); //add the shader of myShaders[i] to our shader program myProgram
+	// Add every shader to our shader program.
+	for (GLuint i = 0; i < NR_SHADERS; i++) 
+	{
+		// Add the shader of myShaders[i] to our shader program.
+		glAttachShader(m_programID, m_shader[i]);
+
+#ifdef _DEBUG
 		Debug(m_shader[i], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+#endif
+
 	}
 
-	//These are three attributes are set for all shaders
-	glBindAttribLocation(m_programID, 0, "vertex_position"); //program which the association is made, index of vertex, name bound to vertex shader attribute index
-	glBindAttribLocation(m_programID, 1, "vertex_color"); //these are non-uniform, in comparision with glGetUniformLocation which are uniform
+	// These are three attributes are set for all shaders.
+	glBindAttribLocation(m_programID, 0, "vertex_position"); 
+	glBindAttribLocation(m_programID, 1, "vertex_color"); 
 	glBindAttribLocation(m_programID, 2, "uv_coordinates");
 
 	//Custom attributes for children of MasterShader
@@ -47,7 +56,9 @@ void AShader::Init(const std::string& filename) {
 	Debug(m_programID, GL_VALIDATE_STATUS, true, "Error: Invalid program: ");
 }
 
-void AShader::Release() {
+
+void AShader::Release() 
+{
 	for (unsigned int i = 0; i < NR_SHADERS; i++) {
 		glDetachShader(m_programID, m_shader[i]);
 		glDeleteShader(m_shader[i]);
@@ -55,10 +66,16 @@ void AShader::Release() {
 
 	glDeleteProgram(m_programID);
 }
-void AShader::Bind() {
+
+
+void AShader::Bind()
+{
 	glUseProgram(m_programID);
 }
-GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType) {
+
+
+GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType) 
+{
 
 	GLuint shader = glCreateShader(shaderType);
 	if (shader == 0)
@@ -74,36 +91,51 @@ GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType) {
 	glCompileShader(shader);
 	Debug(shader, GL_COMPILE_STATUS, false, "Compilation failed\n");
 	glValidateProgram(shader);
+
 	return shader;
 }
-std::string AShader::LoadShader(const std::string& filename) {
 
+std::string AShader::LoadShader(const std::string& filename) 
+{
 	std::string line;
-	std::ifstream readFile(filename); // read the file
+	std::ifstream readFile(filename);
 	std::string tempFile;
-	while (std::getline(readFile, line)) {
+
+	while (std::getline(readFile, line)) 
+	{
 		tempFile += line;
 		tempFile.push_back('\n');
 	}
 
 	return tempFile;
 }
-void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg) {
+
+void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg) 
+{
 
 	GLint errorCheck = 0;
 	GLchar logLenght[1024] = { 0 };
 
 	if (isProgram)
+	{
 		glGetProgramiv(shader, flag, &errorCheck);
+	}
 	else
+	{
 		glGetShaderiv(shader, flag, &errorCheck);
+	}
 
-	if (errorCheck == GL_FALSE) {
-
+	if (errorCheck == GL_FALSE) 
+	{
 		if (isProgram)
+		{
 			glGetProgramInfoLog(shader, sizeof(logLenght), 0, logLenght);
+		}
 		else
+		{
 			glGetShaderInfoLog(shader, sizeof(logLenght), 0, logLenght);
+		}
+
 		std::cout << errorMsg << ": '" << logLenght << "'" << std::endl;
 	}
 }
