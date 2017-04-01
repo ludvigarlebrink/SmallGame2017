@@ -6,7 +6,7 @@ GLTexture ImageLoader::loadBMP(String filepath)
 
 	unsigned long width, height;
 
-	SDL_Surface* img = SDL_LoadBMP(filepath.C_Str().c_str());
+	SDL_Surface* img = SDL_LoadBMP(filepath.GetAsCStr());
 	texture.width = img->w;
 	texture.height = img->h;
 	

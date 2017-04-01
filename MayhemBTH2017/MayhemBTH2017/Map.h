@@ -2,9 +2,10 @@
 #define __MAP_H__
 
 
-#include <map>
+#include <vector>
 
-template <class KEY, class DATA>
+
+template <class T>
 class Map
 {
 public:
@@ -12,24 +13,33 @@ public:
 	Map();
 	virtual ~Map();
 
-	void Insert(KEY key, DATA data);
+//	void Insert(T data);
+
+	//::.. GET FUNCTIONS ..:://
+	bool Exists(const String& name);
 
 private:
-	std::map<KEY, DATA> m_map;
+	std::vector<String> str;
 
 };
 
 
-template <class KEY, class DATA>
-Map<KEY, DATA>::Map()
+#endif // __MAP_H__
+
+
+template <class T>
+Map<T>::Map()
 {
 }
 
-template <class KEY, class DATA>
-Map<KEY, DATA>::Insert(KEY key, DATA data)
+template<class T>
+inline Map<T>::~Map()
+{
+}
+
+template <class T>
+Map<T>::Insert(KEY key, T data)
 {
 	m_map.insert(key, data);
 }
 
-
-#endif // __MAP_H__

@@ -2,25 +2,29 @@
 #define __MESHCACHE_H__
 
 
+#include "Vector.h"
+#include "String.h"
 #include "Mesh.h"
-
-#include <string>
-#include <map>
 
 
 class MeshCache
 {
 public:
-	//::.. CONSTRUCTORS .:://
 	MeshCache();
 	virtual ~MeshCache();
-
+	
 	//::.. GET FUNCTIONS ..:://
-	Mesh GetMesh(uint32_t meshID);
+	Mesh& GetMesh(const String& filepath);
 
 private:
-	std::map<uint32_t, Mesh> m_meshMap;
+	bool LoadMesh();
+
+private:
+	Vector<String>	m_key;
+	Vector<Mesh>	m_mesh;
+
+	
 };
 
 
-#endif
+#endif // __RESOURCECACHE_H__

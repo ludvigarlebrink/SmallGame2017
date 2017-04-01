@@ -13,7 +13,6 @@ StackPool::StackPool(Marker marker)
 	InitMemory(marker);
 }
 
-
 StackPool::~StackPool()
 {
 	// Do nothing...
