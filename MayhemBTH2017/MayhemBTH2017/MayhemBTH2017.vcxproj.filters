@@ -10,9 +10,6 @@
     <Filter Include="Engine\Core">
       <UniqueIdentifier>{b36956b7-f3e4-41da-b13e-83c2b290fcda}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Managers">
-      <UniqueIdentifier>{9cb0e605-dc82-4c34-bae1-a4503b77de27}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Memory">
       <UniqueIdentifier>{b4b7cc19-24a3-4af1-b8d6-55327c64befb}</UniqueIdentifier>
     </Filter>
@@ -34,14 +31,20 @@
     <Filter Include="Engine\Resources\ResourceCaches">
       <UniqueIdentifier>{1dccb4f0-6f6b-4902-ab72-d82d797de79d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Memory\Pools">
-      <UniqueIdentifier>{05fe5ab1-814a-4d65-9b27-aa18d90beeb6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Resources\Importers">
       <UniqueIdentifier>{a68479e9-0ab3-4a9a-9d0b-9b2dcd747a00}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\GameObjects">
       <UniqueIdentifier>{52dc7d03-1780-48d4-8855-e9c60e23901b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Memory\Allocators">
+      <UniqueIdentifier>{05fe5ab1-814a-4d65-9b27-aa18d90beeb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObjects\Renderable">
+      <UniqueIdentifier>{778654a6-99ca-4a3c-a9a6-0e5b95eb3dde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Managers">
+      <UniqueIdentifier>{9cb0e605-dc82-4c34-bae1-a4503b77de27}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,19 +52,16 @@
       <Filter>Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="VideoManager.cpp">
-      <Filter>Engine\Managers</Filter>
+      <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Engine\Managers</Filter>
+      <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
     <ClCompile Include="MasterShader.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="ImageLoader.cpp">
       <Filter>Engine\Misc</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Engine\Resources</Filter>
     </ClCompile>
     <ClCompile Include="String.cpp">
       <Filter>Engine\Memory\Containers</Filter>
@@ -79,7 +79,7 @@
       <Filter>Engine\Resources\ResourceCaches</Filter>
     </ClCompile>
     <ClCompile Include="StackPool.cpp">
-      <Filter>Engine\Memory\Pools</Filter>
+      <Filter>Engine\Memory\Allocators</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
@@ -99,17 +99,32 @@
     <ClCompile Include="System.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Scene.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="AGameObject.cpp">
+      <Filter>Engine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultAllocator.cpp">
+      <Filter>Engine\Memory\Allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="ARenderable.cpp">
+      <Filter>Engine\GameObjects\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Engine\Core\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
-      <Filter>Engine\Managers</Filter>
+      <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Engine\Managers</Filter>
+      <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Engine\Memory\Containers</Filter>
@@ -123,13 +138,7 @@
     <ClInclude Include="ImageLoader.h">
       <Filter>Engine\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Engine\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="String.h">
-      <Filter>Engine\Memory\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
       <Filter>Engine\Memory\Containers</Filter>
     </ClInclude>
     <ClInclude Include="AResource.h">
@@ -145,7 +154,7 @@
       <Filter>Engine\Resources\ResourceCaches</Filter>
     </ClInclude>
     <ClInclude Include="StackPool.h">
-      <Filter>Engine\Memory\Pools</Filter>
+      <Filter>Engine\Memory\Allocators</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
@@ -165,9 +174,27 @@
     <ClInclude Include="System.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Scene.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="AGameObject.h">
+      <Filter>Engine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultAllocator.h">
+      <Filter>Engine\Memory\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="AAllocator.h">
+      <Filter>Engine\Memory\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="ARenderable.h">
+      <Filter>Engine\GameObjects\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Engine\Core\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

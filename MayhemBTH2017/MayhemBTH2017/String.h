@@ -16,15 +16,15 @@ public:
 
 	//::.. OPERATOR OVERLOADING ..:://
 	char& operator[] (size_t position);		// [] operator overloaded.
-	String operator= (const String &other);	// = operator overloaded.
+	void operator= (const String &other);	// = operator overloaded.
 	bool operator== (const String &other);	// == operator overloaded.
 
 	//::.. MODIFY FUNCTIONS ..:://
-	String& Append(const std::string &value);	// Append to string.
-	void PushBack(char value);					// Append character to end of string.
-	void PopBack();								// Delete character at end of string.
-	void Clear(); 								// Clear the contents of the string.
-	void Reserve(size_t value);					// Resizes the string.
+	void Append(const std::string &value);	// Append to string.
+	void PushBack(char value);				// Append character to end of string.
+	void PopBack();							// Delete character at end of string.
+	void Clear(); 							// Clear the contents of the string.
+	void Reserve(size_t value);				// Resizes the string.
 
 	//::.. GET FUNCTIONS ..:://
 	size_t GetLength() const;		// Returns length of string in terms of bytes.

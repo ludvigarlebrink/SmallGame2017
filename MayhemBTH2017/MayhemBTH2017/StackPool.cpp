@@ -46,7 +46,6 @@ void StackPool::Clear()
 	m_currentMarker = m_marker;
 }
 
-
 void StackPool::InitMemory(Marker marker)
 {
 	m_marker = marker;

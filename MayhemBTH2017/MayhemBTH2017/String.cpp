@@ -19,14 +19,14 @@ char & String::operator[](size_t position)
 	return m_string[position];
 }
 
-String String::operator=(const String &other)
+void String::operator=(const String &object)
 {
-	return * this;
+	m_string = object.m_string;
 }
 
-bool String::operator==(const String &other)
+bool String::operator==(const String &object)
 {
-	if (m_string == other.m_string)
+	if (m_string == object.m_string)
 	{
 		return true;
 	}
@@ -35,10 +35,9 @@ bool String::operator==(const String &other)
 }
 
 //::.. MODIFY FUNCTIONS ..:://
-String& String::Append(const std::string & value)
+void String::Append(const std::string & value)
 {
 	m_string.append(value);
-	return *this;
 }
 
 void String::PushBack(char value)

@@ -2,7 +2,9 @@
 #define __VECTOR_H__
 
 
-#include "MemoryManager.h"
+#include "AAllocator.h"
+#include "DefaultAllocator.h"
+
 #include <vector>
 
 
@@ -13,11 +15,11 @@ public:
 
 	//::.. CONSTRUCTORS ..:://
 	Vector();						// Default constructor.
-	Vector(StackPool stackPool);	// Consturctor with Stackpool.
+	Vector(AAllocator* allocator);	// Consturctor with allocator.
 	Vector(const T value[]);
 	virtual ~Vector();				// Destructor.
 
-	//::.. OPERATOR ..:://
+	//::.. OPERATOR OVERLOADING ..:://
 	T& operator[] (size_t n);		// [] operator overloaded.
 	T& operator= (const T &value);	// = operator overloaded.
 
@@ -38,7 +40,7 @@ public:
 	T Last();		// Access last element.
 
 private:
-	StackPool stackPool;
+	AAllocator* m_allocator;
 
 	std::vector<T> m_vector;
 
@@ -67,6 +69,8 @@ inline Vector<T>::Vector(const T value[])
 	}
 }
 
+
+//::.. OPERATOR OVERLOADING ..:://
 template<class T>
 inline T & Vector<T>::operator[](size_t n)
 {
@@ -79,6 +83,8 @@ inline T & Vector<T>::operator=(const T & value)
 	m_vector = value;
 }
 
+
+//::.. MODIFY FUNCTIONS ..:://
 template<class T>
 inline void Vector<T>::PushBack(const T &value)
 {
@@ -104,6 +110,14 @@ inline void Vector<T>::Clear()
 }
 
 template<class T>
+inline void Vector<T>::Resize(size_t n)
+{
+	m_vector.resize(n);
+}
+
+
+//::.. GET FUNCTIONS ..:://
+template<class T>
 inline size_t Vector<T>::GetSize()
 {
 	return m_vector.size();
@@ -115,12 +129,8 @@ inline bool Vector<T>::IsEmpty()
 	return m_vector.empty();
 }
 
-template<class T>
-inline void Vector<T>::Resize(size_t n)
-{
-	m_vector.resize(n);
-}
 
+//::.. ACCESS FUNCTIONS ..:://
 template<class T>
 inline T Vector<T>::At(size_t n)
 {
