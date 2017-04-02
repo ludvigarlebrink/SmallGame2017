@@ -16,7 +16,7 @@ VideoManager::~VideoManager()
 }
 
 
-//::.. FAKE FUNCTIONS ..:://
+//::.. FAKE CONSTRUCTORS ..:://
 void VideoManager::StartUp()
 {
 	if (m_instance == nullptr)

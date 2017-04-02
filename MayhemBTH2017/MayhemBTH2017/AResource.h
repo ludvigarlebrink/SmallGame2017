@@ -7,33 +7,26 @@
 class AResource
 {
 public:
-
 	//::.. CONSTRUCTORS ..:://
 	AResource();
 	AResource(std::string& filePath, std::string& fileName);
 	AResource(const AResource & original);
 
-	// Destructor.
-	virtual ~AResource();
+	virtual ~AResource(); 	// Destructor
 
 	//::.. GET FUNCTIONS ..:://
-	std::string getFilePath()const;
-	std::string getFileName()const;
+	std::string GetFilePath() const;
+	std::string GetFileName() const;
 
 	//::.. READ FUNCTIONS ..:://
-	virtual bool ReadFile() const = 0;
+	virtual bool LoadResource() const = 0;
 
 private:
-
 	std::string m_filePath;
 	std::string m_fileName;
 
 };
 
 
-
-
-
-
-#endif
+#endif // __ARESOURCE_H__
 
