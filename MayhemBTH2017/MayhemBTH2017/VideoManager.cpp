@@ -28,7 +28,9 @@ void VideoManager::StartUp()
 
 void VideoManager::ShutDown()
 {
-	DisplayShutDown();
+	SDL_GL_DeleteContext(m_glContext);
+	SDL_DestroyWindow(m_window);
+	SDL_Quit();
 }
 
 
@@ -63,23 +65,39 @@ SDL_Window* VideoManager::GetWindow()const
 //::.. HELPER FUNCTIONS ..:://
 void VideoManager::Init()
 {
-	// Init SDL.
-	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Init(SDL_INIT_EVERYTHING);
 
-	DisplayCreate(800, 600, "test");
+//	SDL_GL_SetAttribute(
+//		SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG
+//	);
+//
+	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-	// Window debugging.
+	m_window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+		800, 600, SDL_WINDOW_OPENGL);
 
-#ifdef _DEBUG
+	m_glContext = SDL_GL_CreateContext(m_window);
+	GLenum status = glewInit();
 
-	if (m_window == nullptr)
+	if (status != GLEW_OK)
 	{
-		SDL_GetError();
-		exit(1);
+		std::cout << "GLEW STATUS FAIL\n";
 	}
 
-#endif
+//	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+//	glEnable(GL_DEBUG_OUTPUT);
+//	glDebugMessageCallback(openglCallbackFunction, nullptr);
+//	glDebugMessageControl(
+//		GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
 
+
+	m_isClosed = false;
 }
 
 #ifdef _DEBUG
@@ -93,55 +111,9 @@ static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint i
 
 #endif
 
-void VideoManager::DisplayCreate(int width, int height, const std::string& title)
-{
-	m_screenWidth = width;
-	m_screenHeight = height;
 
-	SDL_GL_SetAttribute(
-		SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG
-	);
 
-	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED
-		, width, height, SDL_WINDOW_OPENGL);
-
-	m_glContext = SDL_GL_CreateContext(m_window);
-	GLenum status = glewInit();
-
-#ifdef _DEBUG
-
-	if (status != GLEW_OK)
-	{
-		std::cout << "GLEW STATUS FAIL\n";
-	}
-
-	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-	glEnable(GL_DEBUG_OUTPUT);
-	glDebugMessageCallback(openglCallbackFunction, nullptr);
-	glDebugMessageControl(
-		GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
-
-#endif
-
-	SDL_SetRelativeMouseMode(SDL_FALSE);
-	m_isClosed = false;
-}
-
-void VideoManager::DisplayShutDown()
-{
-	SDL_GL_DeleteContext(m_glContext);
-	SDL_DestroyWindow(m_window);
-	SDL_Quit();
-
-}
-
-void VideoManager::DisplayUpdate()
+void VideoManager::Swap()
 {
 	SDL_GL_SwapWindow(m_window);
 }

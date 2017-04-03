@@ -29,7 +29,7 @@ public:
 	int GetScreenHeight()const;
 	int GetScreenWidth()const;
 	SDL_Window* GetWindow()const;
-	void DisplayUpdate();
+	void Swap();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetIsClosed(bool x);
@@ -39,8 +39,7 @@ public:
 private:
 	//::.. HELPER FUNCTIONS ..:://
 	void Init();
-	void DisplayCreate(int width, int height, const std::string& title);
-	void DisplayShutDown();
+	void Create(int width, int height, const std::string& title);
 
 
 private:
