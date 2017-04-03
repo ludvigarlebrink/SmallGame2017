@@ -60,9 +60,6 @@
     <ClCompile Include="VideoManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="MasterShader.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="ImageLoader.cpp">
       <Filter>Engine\Misc</Filter>
     </ClCompile>
@@ -129,6 +126,9 @@
     <ClCompile Include="MemoryManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="AShader.cpp">
+      <Filter>Engine\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -136,9 +136,6 @@
     </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Engine\Memory\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="MasterShader.h">
-      <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="GLTexture.h">
       <Filter>Engine\Misc</Filter>
@@ -211,6 +208,9 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="MemoryManager.h">
       <Filter>Engine\Core\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="AShader.h">
+      <Filter>Engine\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

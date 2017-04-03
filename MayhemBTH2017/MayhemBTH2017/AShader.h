@@ -1,9 +1,9 @@
-#pragma once
 #ifndef __SHADER_H__
 #define __SHADER_H__
 
-//#include "MemoryManager.h"
-//#include "StackAllocator.h"
+
+#include "Transform.h"
+
 
 #include <glew.h>
 #include <SDL.h>
@@ -12,32 +12,43 @@
 #include <fstream>
 #include <string>
 
+
 class AShader {
 public:
-	//::..CONSTRUCTORS..:://
-	AShader(const std::string& filename);
+	//::.. CONSTRUCTORS ..:://
+	AShader();
+	AShader(const std::string& filename, bool hasGeomShader);
+	virtual ~AShader();											//Destructor
 
-	//Destructor
-	virtual ~AShader();
-
-	//::..GET FUNCTIONS..:://
+	//::.. GET FUNCTIONS ..:://
 	GLuint GetProgramID();
 
-	//::..HELPER FUNCTIONS..:://
-	void Init(const std::string& filename);
+	//::.. MODIFY FUNCTIONS ..:://
+	void Init(const std::string& filename, bool hasGeomShader);
 	void Release();
-	void virtual Update() = 0;
 	void Bind();
-	void virtual Render() = 0;
+	void virtual Update(Transform transform) = 0;
+
+protected:
+	void virtual AddAttributeLocation();
 
 private:
-	//::..HELPER FUNCTIONS..:://
+	//::.. HELP FUNCTIONS ..:://
 	static GLuint CreateShader(const std::string& textfile, GLenum shaderType);
 	static std::string LoadShader(const std::string& filename);
 	static void Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg);
-	void virtual AddAttributeLocation() = 0;
+
 private:
-	const static GLuint NR_SHADERS = 3;
+	enum Shader
+	{
+		VERTEX_SHADER = 0,
+		FRAGMENT_SHADER,
+		GEOMETRY_SHADER,
+		NR_SHADERS
+	};
+
+	bool m_hasGeomShader;
+
 	GLuint m_programID;
 	GLuint m_shader[NR_SHADERS];
 
