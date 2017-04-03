@@ -54,9 +54,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Engine\Core</Filter>
-    </ClCompile>
     <ClCompile Include="VideoManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
@@ -127,6 +124,9 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="testMaincpp.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Engine\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
