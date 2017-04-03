@@ -1,12 +1,14 @@
 #include "MemoryManager.h"
+#include "ResourceManager.h"
 #include "VideoManager.h"
 #include "InputManager.h"
 
+#include "System.h"
 
-#include <iostream>
 
-
+// Global singleton managers.
 MemoryManager	g_memoryManager;
+ResourceManager	g_resourceManager;
 VideoManager	g_videoManager;
 InputManager	g_inputManager;
 
@@ -17,31 +19,34 @@ void Terminate();
 
 int main(int argc, char *argv[])
 {
-	if (false);
+	// Init all singleton managers.
 	BigInit();
 
-	//LOl
-	while (true)
-	{
-		// TESTING
-		g_inputManager.Update();
-	}
-	
-	Terminate();
+	// Create the main system.
+	System system;
 
+	// Start the main loop.
+	system.Run();
+
+	// Terminate all singleton managers in
+	// reverse order from creation.
+	Terminate();
 
 	return 0;
 }
 
 void BigInit()
 {
-	g_memoryManager.StartUp();	
-	g_videoManager.StartUp();
-	g_inputManager.StartUp();
+	g_memoryManager.StartUp();		// 1.
+	g_resourceManager.StartUp();	// 2.
+	g_videoManager.StartUp();		// 3.
+	g_inputManager.StartUp();		// 4.
 }
 
 void Terminate()
 {
-	g_videoManager.ShutDown();
-	g_memoryManager.ShutDown();
+	g_inputManager.ShutDown();		// 4.
+	g_videoManager.ShutDown();		// 3.
+	g_resourceManager.ShutDown();	// 2.
+	g_memoryManager.ShutDown();		// 1.
 }
