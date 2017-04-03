@@ -10,7 +10,7 @@ public:
 	Sprite();
 	virtual ~Sprite();
 
-	void init(float x, float y, float z, float width, float height);
+	void init(float x, float y, float width, float height);
 
 	void draw();
 

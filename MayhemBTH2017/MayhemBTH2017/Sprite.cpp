@@ -12,7 +12,7 @@ Sprite::~Sprite()
 {
 }
 
-void Sprite::init(float x, float y, float z, float width, float height)
+void Sprite::init(float x, float y, float width, float height)
 {
 
 	m_quad.m_arr[0].m_position = glm::vec2(x, y);
@@ -22,8 +22,6 @@ void Sprite::init(float x, float y, float z, float width, float height)
 	m_quad.m_arr[0].m_position = glm::vec2(x, y + height);
 
 	m_quad.m_arr[0].m_position = glm::vec2(x + width, y + height);
-
-
 
 
 	if (m_vboID == 0)
