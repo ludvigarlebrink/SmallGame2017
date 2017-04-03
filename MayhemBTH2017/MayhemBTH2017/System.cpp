@@ -1,9 +1,11 @@
 #include "System.h"
 
 
+
 //::.. DUMMY CONSTRUCTORS ..:://
 System::System()
 {
+	Init();
 }
 
 
@@ -16,6 +18,12 @@ void System::Run()
 {
 	while (true)
 	{
-		// TODO: implement the main loop;
+		// Switch between back and front buffer.
+		m_videoManager->DisplayUpdate();
 	}
+}
+
+void System::Init()
+{
+	m_videoManager = VideoManager::Get();
 }

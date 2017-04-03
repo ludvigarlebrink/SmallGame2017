@@ -21,6 +21,7 @@ void VideoManager::StartUp()
 {
 	if (m_instance == nullptr)
 	{
+		m_instance = this;
 		Init();
 	}
 }
@@ -32,9 +33,9 @@ void VideoManager::ShutDown()
 
 
 //::.. GET FUNCTIONS ..:://
-VideoManager & VideoManager::Get()
+VideoManager * VideoManager::Get()
 {
-	return *m_instance;
+	return m_instance;
 }
 
 
@@ -128,7 +129,7 @@ void VideoManager::DisplayCreate(int width, int height, const std::string& title
 
 #endif
 
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 	m_isClosed = false;
 }
 

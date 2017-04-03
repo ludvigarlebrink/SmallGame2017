@@ -10,3 +10,7 @@ ARenderable::ARenderable()
 ARenderable::~ARenderable()
 {
 }
+
+void ARenderable::Render()
+{
+}

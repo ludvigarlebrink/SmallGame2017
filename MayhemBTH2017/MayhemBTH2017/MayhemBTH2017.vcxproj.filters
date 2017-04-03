@@ -46,6 +46,12 @@
     <Filter Include="Engine\Core\Managers">
       <UniqueIdentifier>{9cb0e605-dc82-4c34-bae1-a4503b77de27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Resources\Exporters">
+      <UniqueIdentifier>{6ed95845-988a-47b2-b4bf-39972ef85bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\LevelEditor">
+      <UniqueIdentifier>{9321c573-78f5-4120-87c9-4978bc7be59f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -53,12 +59,6 @@
     </ClCompile>
     <ClCompile Include="VideoManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Engine\Core\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="MasterShader.cpp">
-      <Filter>Engine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="ImageLoader.cpp">
       <Filter>Engine\Misc</Filter>
@@ -93,9 +93,6 @@
     <ClCompile Include="ShaderImporter.cpp">
       <Filter>Engine\Resources\Importers</Filter>
     </ClCompile>
-    <ClCompile Include="MemoryManager.cpp">
-      <Filter>Engine\Memory</Filter>
-    </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
@@ -112,25 +109,33 @@
     <ClCompile Include="ARenderable.cpp">
       <Filter>Engine\GameObjects\Renderable</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Engine\Core\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelExporter.cpp">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEditor.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Engine\Core\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="MemoryManager.cpp">
+      <Filter>Engine\Core\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="AShader.cpp">
+      <Filter>Engine\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
       <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Engine\Core\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Engine\Memory\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="MasterShader.h">
-      <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="GLTexture.h">
       <Filter>Engine\Misc</Filter>
@@ -168,9 +173,6 @@
     <ClInclude Include="ShaderImporter.h">
       <Filter>Engine\Resources\Importers</Filter>
     </ClInclude>
-    <ClInclude Include="MemoryManager.h">
-      <Filter>Engine\Memory</Filter>
-    </ClInclude>
     <ClInclude Include="System.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
@@ -190,11 +192,25 @@
     <ClInclude Include="ARenderable.h">
       <Filter>Engine\GameObjects\Renderable</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Engine\Core\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Core\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelExporter.h">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEditor.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Engine\Core\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h" />
+    <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="MemoryManager.h">
+      <Filter>Engine\Core\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="AShader.h">
+      <Filter>Engine\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
