@@ -42,9 +42,6 @@
     <ClCompile Include="VideoManager.cpp">
       <Filter>Engine\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Engine\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Vector.cpp">
       <Filter>Engine\Memory\Containers</Filter>
     </ClCompile>
@@ -72,6 +69,7 @@
     <ClCompile Include="TextureCache.cpp">
       <Filter>Engine\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackPool.h">
@@ -81,9 +79,6 @@
       <Filter>Engine\Managers</Filter>
     </ClInclude>
     <ClInclude Include="VideoManager.h">
-      <Filter>Engine\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
       <Filter>Engine\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
@@ -116,5 +111,6 @@
     <ClInclude Include="TextureCache.h">
       <Filter>Engine\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerController.h" />
   </ItemGroup>
 </Project>

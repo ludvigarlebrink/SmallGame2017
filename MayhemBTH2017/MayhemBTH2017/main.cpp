@@ -1,6 +1,6 @@
 #include "MemoryManager.h"
 #include "VideoManager.h"
-#include "InputManager.h"
+#include "PlayerController.h" //Used for testing, will be replace by a manager
 
 #include "String.h"
 #include "Vector.h"
@@ -11,7 +11,7 @@
 
 MemoryManager	g_memoryManager;
 VideoManager	g_videoManager;
-InputManager	g_inputManager;
+PlayerController g_playerController;
 
 
 void BigInit();
@@ -23,11 +23,12 @@ int main(int argc, char *argv[])
 	if (false);
 	BigInit();
 
-	//LOl
+	
 	while (true)
 	{
 		// TESTING
-		g_inputManager.Update();
+		g_playerController.Update();
+
 	}
 	
 	Terminate();
@@ -40,7 +41,7 @@ void BigInit()
 {
 	g_memoryManager.StartUp();	
 	g_videoManager.StartUp();
-	g_inputManager.StartUp();
+	g_playerController.StartUp();
 }
 
 void Terminate()
