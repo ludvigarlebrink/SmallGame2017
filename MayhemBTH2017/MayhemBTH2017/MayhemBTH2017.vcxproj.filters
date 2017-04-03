@@ -46,6 +46,12 @@
     <Filter Include="Engine\Core\Managers">
       <UniqueIdentifier>{9cb0e605-dc82-4c34-bae1-a4503b77de27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Resources\Exporters">
+      <UniqueIdentifier>{6ed95845-988a-47b2-b4bf-39972ef85bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\LevelEditor">
+      <UniqueIdentifier>{9321c573-78f5-4120-87c9-4978bc7be59f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -112,14 +118,17 @@
     <ClCompile Include="ARenderable.cpp">
       <Filter>Engine\GameObjects\Renderable</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Engine\Core\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteBatch.cpp">
-      <Filter>Engine\Misc</Filter>
+    <ClCompile Include="LevelExporter.cpp">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEditor.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
@@ -194,17 +203,17 @@
     <ClInclude Include="ARenderable.h">
       <Filter>Engine\GameObjects\Renderable</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Engine\Core\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteBatch.h">
-      <Filter>Engine\Misc</Filter>
+    <ClInclude Include="LevelExporter.h">
+      <Filter>Engine\Resources\Exporters</Filter>
     </ClInclude>
-    <ClInclude Include="GUIQuad.h">
-      <Filter>Engine\Misc</Filter>
+    <ClInclude Include="LevelEditor.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h" />
   </ItemGroup>

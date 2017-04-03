@@ -2,6 +2,9 @@
 #define __SYSTEM_H__
 
 
+#include "VideoManager.h"
+
+
 class System
 {
 public:
@@ -12,7 +15,13 @@ public:
 	//::.. THE MAIN LOOP ..:://
 	void Run();
 
+private:
+	//::.. HELP FUNCTIONS ..:://
+	void Init();
+
+private:
+	VideoManager * m_videoManager;
 };
 
 
-#endif // __SYSTEMMANAGER_H__
+#endif // __SYSTEM_H__

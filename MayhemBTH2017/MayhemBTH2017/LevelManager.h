@@ -8,11 +8,11 @@
 #include <cstdint>
 
 
-class SceneManager
+class LevelManager
 {
 public:
-	SceneManager();
-	virtual ~SceneManager();
+	LevelManager();
+	virtual ~LevelManager();
 
 	void StartUp();
 	void ShutDown();
@@ -24,7 +24,7 @@ public:
 	bool LoadScene();
 	
 private:
-	static SceneManager * m_instance;
+	static LevelManager * m_instance;
 
 
 };
