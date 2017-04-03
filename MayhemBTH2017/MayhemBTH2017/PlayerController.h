@@ -39,9 +39,6 @@ private:
 	SDL_Event				m_event;
 	SDL_GameController *	m_controller;
 
-	//Used for debugging
-	int tempCounter;
-
 };
 
 #endif
