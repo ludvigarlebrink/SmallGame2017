@@ -184,9 +184,9 @@
     <ClInclude Include="VideoManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DebuggShader.frag" />
-    <None Include="DebuggShader.geom" />
-    <None Include="DebuggShader.vert" />
+    <None Include="DebugShader.frag" />
+    <None Include="DebugShader.geom" />
+    <None Include="DebugShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

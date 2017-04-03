@@ -203,13 +203,13 @@
     <ClInclude Include="Camera.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DebuggShader.frag">
+    <None Include="DebugShader.frag">
       <Filter>Engine\Rendering\GLSL</Filter>
     </None>
-    <None Include="DebuggShader.geom">
+    <None Include="DebugShader.geom">
       <Filter>Engine\Rendering\GLSL</Filter>
     </None>
-    <None Include="DebuggShader.vert">
+    <None Include="DebugShader.vert">
       <Filter>Engine\Rendering\GLSL</Filter>
     </None>
   </ItemGroup>

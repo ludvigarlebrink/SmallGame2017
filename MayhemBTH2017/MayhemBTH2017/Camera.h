@@ -28,9 +28,9 @@ public:
 
 
 	void Update();
+	void Init();
 private:
 	//::.. HELPER FUNCTIONS ..:://
-	void Init();
 private:
 	glm::mat4 m_mvp;
 	glm::mat4 m_model;
