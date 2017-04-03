@@ -11,7 +11,6 @@ public:
 	AResource();
 	AResource(std::string& filePath, std::string& fileName);
 	AResource(const AResource & original);
-
 	virtual ~AResource(); 	// Destructor
 
 	//::.. GET FUNCTIONS ..:://

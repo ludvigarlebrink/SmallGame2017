@@ -22,6 +22,7 @@ void MemoryManager::StartUp()
 {
 	if (m_instance == nullptr)
 	{
+		m_instance = this;
 		Init();
 	}
 }
@@ -50,7 +51,6 @@ StackPool& MemoryManager::GetTexturePool()
 void MemoryManager::Init()
 {
 	// Allocating heap memory.
-	m_instance = (MemoryManager*)malloc(sizeof MemoryManager);
 	m_marker = (Marker)malloc(MEMORY_SIZE);
 	m_currentMarker = m_marker;
 

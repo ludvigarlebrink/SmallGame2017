@@ -1,16 +1,20 @@
-#include "MasterShader.h"
+#include "AShader.h"
+#include "AShader.h"
 
 
 
 //::..CONSTRUCTORS..:://
-AShader::AShader(const std::string& filename)
+AShader::AShader()
+{
+}
+
+AShader::AShader(const std::string& filename, bool hasGeomShader)
 	: m_programID(glCreateProgram())
 {
-	Init(filename);
+	Init(filename, hasGeomShader);
 
 }
 
-//Destructor
 AShader:: ~AShader() {
 
 	Release();
@@ -22,12 +26,16 @@ GLuint AShader::GetProgramID() {
 }
 
 //::..HELPER FUNCTIONS..:://
-void AShader::Init(const std::string& filename) 
+void AShader::Init(const std::string& filename, bool hasGeomShader) 
 {
-	// Create shader.
+	// Create shaders.
 	m_shader[0] = CreateShader(LoadShader(filename + ".vert"), GL_VERTEX_SHADER);
 	m_shader[1] = CreateShader(LoadShader(filename + ".frag"), GL_FRAGMENT_SHADER);
-	m_shader[2] = CreateShader(LoadShader(filename + ".geom"), GL_GEOMETRY_SHADER);
+
+	if (hasGeomShader)
+	{
+		m_shader[2] = CreateShader(LoadShader(filename + ".geom"), GL_GEOMETRY_SHADER);
+	}
 
 	// Add every shader to our shader program.
 	for (GLuint i = 0; i < NR_SHADERS; i++) 
@@ -41,19 +49,21 @@ void AShader::Init(const std::string& filename)
 
 	}
 
-	// These are three attributes are set for all shaders.
-	glBindAttribLocation(m_programID, 0, "vertex_position"); 
-	glBindAttribLocation(m_programID, 1, "vertex_color"); 
-	glBindAttribLocation(m_programID, 2, "uv_coordinates");
-
 	//Custom attributes for children of MasterShader
 	AddAttributeLocation();
 
+
 	glLinkProgram(m_programID);
 
+#ifdef _DEBUG
 	Debug(m_programID, GL_LINK_STATUS, true, "Error: Linking failed: ");
+#endif
+
 	glValidateProgram(m_programID);
+	
+#ifdef _DEBUG
 	Debug(m_programID, GL_VALIDATE_STATUS, true, "Error: Invalid program: ");
+#endif
 }
 
 
@@ -71,6 +81,14 @@ void AShader::Release()
 void AShader::Bind()
 {
 	glUseProgram(m_programID);
+}
+
+void AShader::AddAttributeLocation()
+{
+	// These are three attributes are set for all shaders.
+	glBindAttribLocation(m_programID, 0, "vertex_position");
+	glBindAttribLocation(m_programID, 1, "vertex_color");
+	glBindAttribLocation(m_programID, 2, "uv_coordinates");
 }
 
 

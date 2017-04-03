@@ -19,7 +19,6 @@ AResource::AResource(const AResource & original)
 {
 	m_filePath = original.GetFilePath();
 	m_fileName = original.GetFilePath();
-
 }
 
 AResource::~AResource()

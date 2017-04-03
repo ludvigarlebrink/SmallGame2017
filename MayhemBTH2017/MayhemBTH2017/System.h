@@ -3,6 +3,7 @@
 
 
 #include "VideoManager.h"
+#include "InputManager.h"
 
 
 class System
@@ -21,6 +22,7 @@ private:
 
 private:
 	VideoManager * m_videoManager;
+	InputManager * m_inputManager;
 };
 
 
