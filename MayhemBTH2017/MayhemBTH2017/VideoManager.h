@@ -24,7 +24,7 @@ public:
 	void ShutDown();
 
 	//::.. GET FUNCTIONS ..:://
-	static VideoManager& Get();
+	static VideoManager* Get();
 	bool GetIsClosed()const;
 	int GetScreenHeight()const;
 	int GetScreenWidth()const;

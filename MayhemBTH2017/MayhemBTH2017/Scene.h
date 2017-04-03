@@ -27,9 +27,9 @@ private:
 	void Traverse();
 
 private:
-	// CAMERA ASWELL
+	// Camera
 	Vector<AGameObject> m_gameObjects;
-
+	
 };
 
 
