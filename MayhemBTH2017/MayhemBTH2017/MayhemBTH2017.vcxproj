@@ -132,9 +132,14 @@
     <ClCompile Include="ARenderable.cpp" />
     <ClCompile Include="AResource.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="InputManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="MasterShader.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -142,7 +147,9 @@
     <ClCompile Include="MeshImporter.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ShaderCache.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -150,6 +157,7 @@
     <ClCompile Include="StackPool.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="testMaincpp.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -162,9 +170,12 @@
     <ClInclude Include="AResource.h" />
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="GLTexture.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="GUIQuad.h" />
     <ClInclude Include="ImageLoader.h" />
-    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="InputManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="MasterShader.h" />
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="Mesh.h" />
@@ -172,7 +183,9 @@
     <ClInclude Include="MeshImporter.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ShaderCache.h" />
     <ClInclude Include="ShaderImporter.h" />
     <ClInclude Include="Sprite.h" />
@@ -185,6 +198,11 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="leo.frag" />
+    <None Include="leo.geom" />
+    <None Include="leo.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
