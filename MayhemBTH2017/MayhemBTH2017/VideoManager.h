@@ -2,9 +2,14 @@
 #define __VIDEOMANAGER_H__
 
 
+#include "glew.h"
+#include <Windows.h>
 #include <assert.h>
+#include <string>
 #include <SDL.h>
 #include <glm.hpp>
+#include <iostream>
+
 
 
 class VideoManager
@@ -19,13 +24,24 @@ public:
 	void ShutDown();
 
 	//::.. GET FUNCTIONS ..:://
-	static VideoManager& Get();
+	static VideoManager* Get();
+	bool GetIsClosed()const;
+	int GetScreenHeight()const;
+	int GetScreenWidth()const;
+	SDL_Window* GetWindow()const;
+	void DisplayUpdate();
 
-	glm::vec2 GetScreenResolution() const;
+	//::.. SET FUNCTIONS ..:://
+	void SetIsClosed(bool x);
+	void SetScreenHeight(int x);
+	void SetScreenWidth(int x);
 
 private:
 	//::.. HELPER FUNCTIONS ..:://
 	void Init();
+	void DisplayCreate(int width, int height, const std::string& title);
+	void DisplayShutDown();
+
 
 private:
 	static VideoManager * m_instance;
@@ -34,6 +50,11 @@ private:
 
 	glm::vec2	m_scrRes;
 	bool		m_isFullScreen;
+
+	bool m_isClosed;
+	int m_screenHeight;
+	int m_screenWidth;
+	SDL_GLContext m_glContext;
 };
 
 

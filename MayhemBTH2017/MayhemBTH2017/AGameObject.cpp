@@ -17,6 +17,14 @@ AGameObject::~AGameObject()
 {
 }
 
+void AGameObject::Start()
+{
+}
+
+void AGameObject::Update()
+{
+}
+
 
 //::.. SET FUNCTIONS ..:://
 void AGameObject::SetInstanceID(uint32_t id)
