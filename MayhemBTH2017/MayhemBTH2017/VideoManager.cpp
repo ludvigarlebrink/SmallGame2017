@@ -37,10 +37,6 @@ VideoManager & VideoManager::Get()
 	return *m_instance;
 }
 
-glm::vec2 VideoManager::GetScreenResolution() const
-{
-	return glm::vec2();
-}
 
 bool VideoManager::GetIsClosed()const
 {
