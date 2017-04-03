@@ -73,33 +73,27 @@ void PlayerController::ButtonInput(const SDL_ControllerButtonEvent controllerEve
 	switch (controllerEvent.button)
 	{
 	case SDL_CONTROLLER_BUTTON_A:
-		tempCounter += 1;
-		std::cout << "Pressed A! tempCounter: " << tempCounter << std::endl;
+		std::cout << "Pressed A!" << std::endl;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_B:
-		tempCounter += 1;
-		std::cout << "Pressed B! tempCounter: " << tempCounter << std::endl;
+		std::cout << "Pressed B!" << std::endl;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_X:
-		tempCounter += 1;
-		std::cout << "Pressed X! tempCounter: " << tempCounter << std::endl;
+		std::cout << "Pressed X!" << std::endl;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_Y:
-		tempCounter += 1;
-		std::cout << "Pressed Y! tempCounter: " << tempCounter << std::endl;
+		std::cout << "Pressed Y!" << std::endl;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_BACK:
-		tempCounter += 1;
-		std::cout << "Pressed BACK! tempCounter: " << tempCounter << std::endl;
+		std::cout << "Pressed BACK!" << std::endl;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_START:
-		tempCounter += 1;
-		std::cout << "Pressed START! tempCounter: " << tempCounter << std::endl;
+		std::cout << "Pressed START!" << std::endl;
 		break;
 
 	}
@@ -107,26 +101,29 @@ void PlayerController::ButtonInput(const SDL_ControllerButtonEvent controllerEve
 
 void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 {
+
 	switch (controllerEvent.axis)
 	{
+		//Left Stick
 	case SDL_CONTROLLER_AXIS_LEFTX:
-		tempCounter += 1;
-		std::cout << "AXIS_LEFTX" << tempCounter << std::endl;
+		if (controllerEvent.value > 2500 || controllerEvent.value < -2500)
+			std::cout << "AXIS_LEFTX Value: " << controllerEvent.value << std::endl;
 		break;
 
 	case SDL_CONTROLLER_AXIS_LEFTY:
-		tempCounter += 1;
-		std::cout << "AXIS_LEFTY" << tempCounter << std::endl;
+		if (controllerEvent.value > 1500 || controllerEvent.value < -1500)
+			std::cout << "AXIS_LEFTY Value: " << controllerEvent.value << std::endl;
 		break;
 
+		//Right Stick
 	case SDL_CONTROLLER_AXIS_RIGHTX:
-		tempCounter += 1;
-		std::cout << "AXIS_RIGHTX" << tempCounter << std::endl;
+		if (controllerEvent.value > 3500 || controllerEvent.value < -3500)
+			std::cout << "AXIS_RIGHTX Value: " << controllerEvent.value << std::endl;
 		break;
 
 	case SDL_CONTROLLER_AXIS_RIGHTY:
-		tempCounter += 1;
-		std::cout << "AXIS_RIGHTY" << tempCounter << std::endl;
+		if (controllerEvent.value > 3500 || controllerEvent.value < -3500)
+			std::cout << "AXIS_RIGHTY Value: " << controllerEvent.value << std::endl;
 		break;
 	}
 }
