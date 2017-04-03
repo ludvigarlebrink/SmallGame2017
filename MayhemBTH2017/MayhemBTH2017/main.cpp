@@ -1,7 +1,7 @@
 #include "MemoryManager.h"
 #include "ResourceManager.h"
 #include "VideoManager.h"
-#include "InputManager.h"
+#include "StateManager.h"
 
 #include "System.h"
 
@@ -10,7 +10,7 @@
 MemoryManager	g_memoryManager;
 ResourceManager	g_resourceManager;
 VideoManager	g_videoManager;
-InputManager	g_inputManager;
+StateManager	g_stateManager;
 
 
 void BigInit();
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	// Terminate all singleton managers in
 	// reverse order from creation.
 	Terminate();
-	getchar();
+
 	return 0;
 }
 
@@ -40,13 +40,12 @@ void BigInit()
 	g_memoryManager.StartUp();		// 1.
 	g_resourceManager.StartUp();	// 2.
 	g_videoManager.StartUp();		// 3.
-	g_inputManager.StartUp();		// 4.
-
+	g_stateManager.StartUp();		// 4.
 }
 
 void Terminate()
 {
-	g_inputManager.ShutDown();		// 4.
+	g_stateManager.ShutDown();		// 4.
 	g_videoManager.ShutDown();		// 3.
 	g_resourceManager.ShutDown();	// 2.
 	g_memoryManager.ShutDown();		// 1.

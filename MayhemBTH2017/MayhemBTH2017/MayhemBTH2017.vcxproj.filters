@@ -46,11 +46,8 @@
     <Filter Include="Engine\Core\Managers">
       <UniqueIdentifier>{9cb0e605-dc82-4c34-bae1-a4503b77de27}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Resources\Exporters">
-      <UniqueIdentifier>{6ed95845-988a-47b2-b4bf-39972ef85bf5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\LevelEditor">
-      <UniqueIdentifier>{9321c573-78f5-4120-87c9-4978bc7be59f}</UniqueIdentifier>
+    <Filter Include="Engine\Rendering\GLSL">
+      <UniqueIdentifier>{47f1e50b-2c7a-4653-8b3e-19da930ebafb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +55,9 @@
       <Filter>Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="VideoManager.cpp">
+      <Filter>Engine\Core\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
     <ClCompile Include="MasterShader.cpp">
@@ -115,18 +115,19 @@
     <ClCompile Include="ARenderable.cpp">
       <Filter>Engine\GameObjects\Renderable</Filter>
     </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Engine\Core\Managers</Filter>
+    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="SpriteBatch.cpp" />
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
+      <Filter>Engine\Core\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
       <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
@@ -193,15 +194,23 @@
     <ClInclude Include="ARenderable.h">
       <Filter>Engine\GameObjects\Renderable</Filter>
     </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Engine\Core\Managers</Filter>
+    </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="GUIQuad.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="SpriteBatch.h" />
-    <ClInclude Include="PlayerController.h">
-      <Filter>Game</Filter>
-    </ClInclude>
+    <ClInclude Include="Camera.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DebugShader.frag">
+      <Filter>Engine\Rendering\GLSL</Filter>
+    </None>
+    <None Include="DebugShader.geom">
+      <Filter>Engine\Rendering\GLSL</Filter>
+    </None>
+    <None Include="DebugShader.vert">
+      <Filter>Engine\Rendering\GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>
