@@ -145,6 +145,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ShaderCache.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
+    <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="StackPool.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="System.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ShaderCache.h" />
     <ClInclude Include="ShaderImporter.h" />
+    <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="StackPool.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="System.h" />
