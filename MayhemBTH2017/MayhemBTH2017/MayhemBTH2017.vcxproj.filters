@@ -127,6 +127,7 @@
     <ClCompile Include="LevelManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -208,5 +209,6 @@
     <ClInclude Include="LevelManager.h">
       <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Sprite.h" />
   </ItemGroup>
 </Project>

@@ -133,8 +133,7 @@
     <ClCompile Include="AResource.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
-    <ClCompile Include="LevelEditor.cpp" />
-    <ClCompile Include="LevelExporter.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MasterShader.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
@@ -143,9 +142,11 @@
     <ClCompile Include="MeshImporter.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ShaderCache.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="StackPool.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="System.cpp" />
@@ -161,9 +162,9 @@
     <ClInclude Include="AResource.h" />
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="GLTexture.h" />
+    <ClInclude Include="GUIQuad.h" />
     <ClInclude Include="ImageLoader.h" />
-    <ClInclude Include="LevelEditor.h" />
-    <ClInclude Include="LevelExporter.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="MasterShader.h" />
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="Mesh.h" />
@@ -171,9 +172,11 @@
     <ClInclude Include="MeshImporter.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ShaderCache.h" />
     <ClInclude Include="ShaderImporter.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="StackPool.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="System.h" />
