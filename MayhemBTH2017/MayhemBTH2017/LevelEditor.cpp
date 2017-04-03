@@ -1,6 +1,7 @@
 #include "LevelEditor.h"
 
-
+//Used for debugging
+#include <iostream>
 
 //::.. CONSTRUCTORS ..:://
 LevelEditor::LevelEditor()
@@ -16,9 +17,9 @@ LevelEditor::~LevelEditor()
 
 void LevelEditor::Update()
 {
-	for (size_t x = 0; x < SIZE_X; x++)
+	for (uint32_t x = 0; x < SIZE_X; x++)
 	{
-		for (size_t y = 0; y < SIZE_Y; y++)
+		for (uint32_t y = 0; y < SIZE_Y; y++)
 		{
 			if (!m_grid[x][y].isOccupied)
 			{
