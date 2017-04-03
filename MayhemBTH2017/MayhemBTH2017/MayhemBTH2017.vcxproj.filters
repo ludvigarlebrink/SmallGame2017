@@ -121,6 +121,7 @@
     <ClCompile Include="SpriteBatch.cpp">
       <Filter>Engine\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -205,5 +206,6 @@
     <ClInclude Include="GUIQuad.h">
       <Filter>Engine\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="Sprite.h" />
   </ItemGroup>
 </Project>
