@@ -24,13 +24,14 @@ public:
 	void StartUp();
 	void ShutDown();
 
+	//::.. MODIFY FUNCTIONS ..:://
 	void Update();
+	void AddPlayerController(SDL_ControllerDeviceEvent PlayerControllerID);
+	void RemovePlayerController();
 
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
-	void AddPlayerController(SDL_ControllerDeviceEvent PlayerControllerID);
-	void RemovePlayerController();
 	void ButtonInput(const SDL_ControllerButtonEvent controllerEvent);
 	void AxisInput(const SDL_ControllerAxisEvent controllerEvent);
 
