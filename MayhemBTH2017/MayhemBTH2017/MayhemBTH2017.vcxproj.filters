@@ -46,6 +46,9 @@
     <Filter Include="Engine\Core\Managers">
       <UniqueIdentifier>{9cb0e605-dc82-4c34-bae1-a4503b77de27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Rendering\GLSL">
+      <UniqueIdentifier>{47f1e50b-2c7a-4653-8b3e-19da930ebafb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -198,5 +201,16 @@
       <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DebuggShader.frag">
+      <Filter>Engine\Rendering\GLSL</Filter>
+    </None>
+    <None Include="DebuggShader.geom">
+      <Filter>Engine\Rendering\GLSL</Filter>
+    </None>
+    <None Include="DebuggShader.vert">
+      <Filter>Engine\Rendering\GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>
