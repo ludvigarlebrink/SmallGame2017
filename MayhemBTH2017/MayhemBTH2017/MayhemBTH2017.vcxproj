@@ -160,6 +160,7 @@
     <ClInclude Include="AResource.h" />
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="GLTexture.h" />
+    <ClInclude Include="GUIQuad.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MasterShader.h" />

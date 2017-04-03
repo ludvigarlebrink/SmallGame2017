@@ -196,5 +196,8 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="GUIQuad.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
