@@ -27,6 +27,7 @@ public:
 	void ShutDown();
 
 	//::.. GET FUNCTIONS ..:://
+	MemoryManager& Get();
 	StackPool& GetMeshPool();
 	StackPool& GetTexturePool();
 

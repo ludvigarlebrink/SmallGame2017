@@ -11,11 +11,11 @@ MemoryManager::MemoryManager()
 	// Do nothing...
 }
 
-
 MemoryManager::~MemoryManager()
 {
 	// Do nothing...
 }
+
 
 //::.. FAKE CONSTRUCTORS ..:://
 void MemoryManager::StartUp()
@@ -29,6 +29,11 @@ void MemoryManager::StartUp()
 void MemoryManager::ShutDown()
 {
 	free((void*)m_marker);
+}
+
+MemoryManager & MemoryManager::Get()
+{
+	return *m_instance;
 }
 
 StackPool& MemoryManager::GetMeshPool()

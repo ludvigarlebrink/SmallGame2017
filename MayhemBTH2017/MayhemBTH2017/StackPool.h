@@ -16,9 +16,7 @@ public:
 	//::.. CONSTRUCTORS ..:://
 	StackPool();
 	StackPool(Marker marker);
-
-	// Destructor.
-	virtual ~StackPool();
+	virtual ~StackPool();		// Destructor.
 
 	//::.. POOL FUNCTIONS ..:://
 	void InitMemory(Marker marker);

@@ -1,12 +1,12 @@
 #include "ImageLoader.h"
 
-GLTexture ImageLoader::loadBMP(std::string filepath)
+GLTexture ImageLoader::loadBMP(String filepath)
 {
 	GLTexture texture = {};
 
 	unsigned long width, height;
 
-	SDL_Surface* img = SDL_LoadBMP(filepath.c_str());
+	SDL_Surface* img = SDL_LoadBMP(filepath.GetAsCStr());
 	texture.width = img->w;
 	texture.height = img->h;
 	
