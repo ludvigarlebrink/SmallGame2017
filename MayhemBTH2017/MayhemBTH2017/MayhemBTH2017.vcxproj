@@ -131,6 +131,7 @@
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="ARenderable.cpp" />
     <ClCompile Include="AResource.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="ARenderable.h" />
     <ClInclude Include="AResource.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="ImageLoader.h" />
@@ -186,6 +188,11 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DebugShader.frag" />
+    <None Include="DebugShader.geom" />
+    <None Include="DebugShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
