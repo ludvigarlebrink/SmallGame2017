@@ -28,7 +28,7 @@ void Sprite::init(float x, float y, float width, float height)
 	{
 		glGenBuffers(1, &m_vboID);
 	}
-
+	//sdf
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
 	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(m_quad.m_arr[0]), &m_quad.m_arr[0], GL_STATIC_DRAW);
