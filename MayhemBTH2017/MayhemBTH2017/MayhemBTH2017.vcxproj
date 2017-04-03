@@ -131,6 +131,7 @@
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="ARenderable.cpp" />
     <ClCompile Include="AResource.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="ARenderable.h" />
     <ClInclude Include="AResource.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="ImageLoader.h" />

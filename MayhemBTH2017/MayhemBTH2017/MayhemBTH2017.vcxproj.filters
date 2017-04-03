@@ -118,6 +118,7 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -196,5 +197,6 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h" />
   </ItemGroup>
 </Project>
