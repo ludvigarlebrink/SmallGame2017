@@ -1,6 +1,5 @@
 #include <string>
 #include "GUI.h"
-#include "MasterShader.h"
 
 
 int main(int argc, char *argv[])
@@ -30,7 +29,7 @@ int main(int argc, char *argv[])
 
 	glewInit();
 
-	GUI gui1("leo");
+	GUI gui1("leo" , true);
 
 	Sprite s1;
 

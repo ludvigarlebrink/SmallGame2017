@@ -2,8 +2,8 @@
 
 
 
-GUI::GUI(const std::string & filename) 
-	: AShader(filename)
+GUI::GUI(const std::string & filename, bool geom) 
+	: AShader(filename, geom)
 {
 
 }

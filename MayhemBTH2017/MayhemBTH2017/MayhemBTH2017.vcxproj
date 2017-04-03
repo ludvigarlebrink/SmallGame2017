@@ -157,7 +157,9 @@
     <ClCompile Include="StackPool.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="System.cpp" />
-    <ClCompile Include="testMaincpp.cpp" />
+    <ClCompile Include="testMaincpp.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="Transform.cpp" />
