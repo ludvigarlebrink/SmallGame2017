@@ -9,66 +9,52 @@ AShader::AShader()
 }
 
 AShader::AShader(const std::string& filename, bool hasGeomShader)
-	: m_programID(glCreateProgram())
 {
 	Init(filename, hasGeomShader);
-
 }
 
-AShader:: ~AShader() {
-
+AShader:: ~AShader() 
+{
 	Release();
 }
 
 //::..GET FUNCTIONS..:://
-GLuint AShader::GetProgramID() {
+GLuint AShader::GetProgramID() 
+{
 	return m_programID;
 }
 
 //::..HELPER FUNCTIONS..:://
 void AShader::Init(const std::string& filename, bool hasGeomShader) 
 {
+	m_programID = glCreateProgram();
+
+	m_hasGeomShader = false;
+
 	// Create shaders.
-	m_shader[0] = CreateShader(LoadShader(filename + ".vert"), GL_VERTEX_SHADER);
-	m_shader[1] = CreateShader(LoadShader(filename + ".frag"), GL_FRAGMENT_SHADER);
+	m_shader[VERTEX_SHADER] = CreateShader(LoadShader(filename + ".vert"), GL_VERTEX_SHADER);
+	m_shader[FRAGMENT_SHADER] = CreateShader(LoadShader(filename + ".frag"), GL_FRAGMENT_SHADER);
 
-	if (hasGeomShader)
-	{
-		m_shader[2] = CreateShader(LoadShader(filename + ".geom"), GL_GEOMETRY_SHADER);
-	}
+	glAttachShader(m_programID, m_shader[VERTEX_SHADER]);
+	Debug(m_shader[VERTEX_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+	glAttachShader(m_programID, m_shader[FRAGMENT_SHADER]);
+	Debug(m_shader[FRAGMENT_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
 
-	// Add every shader to our shader program.
-	for (GLuint i = 0; i < NR_SHADERS; i++) 
-	{
-		// Add the shader of myShaders[i] to our shader program.
-		glAttachShader(m_programID, m_shader[i]);
-
-#ifdef _DEBUG
-		Debug(m_shader[i], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
-#endif
-
-	}
-
-	//Custom attributes for children of MasterShader
 	AddAttributeLocation();
 
-
 	glLinkProgram(m_programID);
-
-#ifdef _DEBUG
 	Debug(m_programID, GL_LINK_STATUS, true, "Error: Linking failed: ");
-#endif
 
 	glValidateProgram(m_programID);
-	
-#ifdef _DEBUG
 	Debug(m_programID, GL_VALIDATE_STATUS, true, "Error: Invalid program: ");
-#endif
+
+	AddUniforms();
 }
 
 
 void AShader::Release() 
 {
+	// OBS DOESNT WORK YET
 	for (unsigned int i = 0; i < NR_SHADERS; i++) {
 		glDetachShader(m_programID, m_shader[i]);
 		glDeleteShader(m_shader[i]);
@@ -83,12 +69,26 @@ void AShader::Bind()
 	glUseProgram(m_programID);
 }
 
+void AShader::Update(Transform& transform, Camera& camera)
+{
+	glUniformMatrix4fv(m_uniforms[M], 1, GL_FALSE, &transform.GetModelMatrix()[0][0]);
+	glUniformMatrix4fv(m_uniforms[V], 1, GL_FALSE, &camera.GetView()[0][0]);
+	glUniformMatrix4fv(m_uniforms[P], 1, GL_FALSE, &camera.GetProjection()[0][0]);
+}
+
 void AShader::AddAttributeLocation()
 {
 	// These are three attributes are set for all shaders.
-	glBindAttribLocation(m_programID, 0, "vertex_position");
-	glBindAttribLocation(m_programID, 1, "vertex_color");
-	glBindAttribLocation(m_programID, 2, "uv_coordinates");
+	glBindAttribLocation(m_programID, 0, "Position");
+	glBindAttribLocation(m_programID, 1, "Normal");
+	glBindAttribLocation(m_programID, 2, "TexCoords");
+}
+
+void AShader::AddUniforms()
+{
+	m_uniforms[0] = glGetUniformLocation(m_programID, "M");
+	m_uniforms[1] = glGetUniformLocation(m_programID, "V");
+	m_uniforms[2] = glGetUniformLocation(m_programID, "P");
 }
 
 
@@ -97,42 +97,47 @@ GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
 
 	GLuint shader = glCreateShader(shaderType);
 	if (shader == 0)
+	{
 		std::cout << "Error while creating shader" << std::endl;
+	}
 
 	const GLchar* shaderSource[1];
-	GLint sourceLenght[1];
+	GLint sourceLength[1];
 
 	shaderSource[0] = textfile.c_str();
-	sourceLenght[0] = textfile.length();
+	sourceLength[0] = textfile.length();
 
-	glShaderSource(shader, 1, shaderSource, sourceLenght);
+	glShaderSource(shader, 1, shaderSource, sourceLength);
 	glCompileShader(shader);
 	Debug(shader, GL_COMPILE_STATUS, false, "Compilation failed\n");
-	glValidateProgram(shader);
 
 	return shader;
 }
 
 std::string AShader::LoadShader(const std::string& filename) 
 {
-	std::string line;
-	std::ifstream readFile(filename);
-	std::string tempFile;
+	std::ifstream in(filename.c_str());
 
-	while (std::getline(readFile, line)) 
+	std::string output;
+	std::string line;
+
+	if (in.is_open())
 	{
-		tempFile += line;
-		tempFile.push_back('\n');
+		while (in.good())
+		{
+			getline(in, line);
+			output.append(line + '\n');
+		}
 	}
 
-	return tempFile;
+	return output;
 }
 
 void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg) 
 {
 
 	GLint errorCheck = 0;
-	GLchar logLenght[1024] = { 0 };
+	GLchar logLength[1024] = { 0 };
 
 	if (isProgram)
 	{
@@ -147,13 +152,13 @@ void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::strin
 	{
 		if (isProgram)
 		{
-			glGetProgramInfoLog(shader, sizeof(logLenght), 0, logLenght);
+			glGetProgramInfoLog(shader, sizeof(logLength), 0, logLength);
 		}
 		else
 		{
-			glGetShaderInfoLog(shader, sizeof(logLenght), 0, logLenght);
+			glGetShaderInfoLog(shader, sizeof(logLength), 0, logLength);
 		}
 
-		std::cout << errorMsg << ": '" << logLenght << "'" << std::endl;
+		std::cout << errorMsg << ": '" << logLength << "'" << std::endl;
 	}
 }

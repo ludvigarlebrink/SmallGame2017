@@ -4,6 +4,8 @@
 
 #include "LevelExporter.h"
 #include "Transform.h"
+#include "DebugShaderTech.h"
+#include "Camera.h"
 #include "Mesh.h"
 
 
@@ -55,6 +57,8 @@ private:
 	uint32_t m_posX;
 	uint32_t m_posY;
 	
+	AShader			m_debugShader;
+	Camera			m_camera;
 };
 
 #endif // __LEVELEDITOR_H__

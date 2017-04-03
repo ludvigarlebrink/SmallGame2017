@@ -147,6 +147,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="ShaderCache.cpp" />
+    <ClCompile Include="DebugShaderTech.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
     <ClCompile Include="StackPool.cpp" />
     <ClCompile Include="StateManager.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="ShaderCache.h" />
+    <ClInclude Include="DebugShaderTech.h" />
     <ClInclude Include="ShaderImporter.h" />
     <ClInclude Include="StackPool.h" />
     <ClInclude Include="StateManager.h" />
