@@ -109,6 +109,7 @@ void LevelEditor::InitMeshes()
 			tmpTransform.SetPosition(x * 2, y * 2, 100);
 			m_meshObjects[x][y].transform = tmpTransform;
 			m_meshObjects[x][y].mesh.LoadMesh(verts, 6, 3);
+			//HEJ
 		}
 	}
 }
