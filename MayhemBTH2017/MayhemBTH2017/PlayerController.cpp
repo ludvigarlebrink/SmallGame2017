@@ -111,7 +111,7 @@ void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEven
 
 	case SDL_CONTROLLER_BUTTON_B:
 		m_button[CONTROLLER_BUTTON_B].isHeld = true;
-		m_button[CONTROLLER_BUTTON_A].isUp = false;
+		m_button[CONTROLLER_BUTTON_B].isDown = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_X:
@@ -122,15 +122,46 @@ void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEven
 	case SDL_CONTROLLER_BUTTON_Y:
 		m_button[CONTROLLER_BUTTON_Y].isDown = true;
 		m_button[CONTROLLER_BUTTON_Y].isHeld = true;
-		std::cout << "Y DOWN!" << std::endl;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_BACK:
-		std::cout << "Pressed BACK!" << std::endl;
+		m_button[CONTROLLER_BUTTON_BACK].isDown = true;
+		m_button[CONTROLLER_BUTTON_BACK].isHeld = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_START:
-		std::cout << "Pressed START!" << std::endl;
+		m_button[CONTROLLER_BUTTON_START].isDown = true;
+		m_button[CONTROLLER_BUTTON_START].isHeld = true;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_LEFTSHOULDER:
+		m_button[CONTROLLER_BUTTON_LEFTSHOULDER].isDown = true;
+		m_button[CONTROLLER_BUTTON_LEFTSHOULDER].isHeld = true;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
+		m_button[CONTROLLER_BUTTON_RIGHTSHOULDER].isDown = true;
+		m_button[CONTROLLER_BUTTON_RIGHTSHOULDER].isHeld = true;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_DPAD_UP:
+		m_button[CONTROLLER_BUTTON_DPAD_UP].isDown = true;
+		m_button[CONTROLLER_BUTTON_DPAD_UP].isHeld = true;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
+		m_button[CONTROLLER_BUTTON_DPAD_DOWN].isDown = true;
+		m_button[CONTROLLER_BUTTON_DPAD_DOWN].isHeld = true;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
+		m_button[CONTROLLER_BUTTON_DPAD_LEFT].isDown = true;
+		m_button[CONTROLLER_BUTTON_DPAD_LEFT].isHeld = true;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
+		m_button[CONTROLLER_BUTTON_DPAD_RIGHT].isDown = true;
+		m_button[CONTROLLER_BUTTON_DPAD_RIGHT].isHeld = true;
 		break;
 
 	}
@@ -141,32 +172,63 @@ void PlayerController::ButtonUp(const SDL_ControllerButtonEvent controllerEvent)
 	switch (controllerEvent.button)
 	{
 	case SDL_CONTROLLER_BUTTON_A:
-		m_button[CONTROLLER_BUTTON_A].isHeld = false;
 		m_button[CONTROLLER_BUTTON_A].isUp = true;
+		m_button[CONTROLLER_BUTTON_A].isHeld = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_B:
+		m_button[CONTROLLER_BUTTON_B].isUp = false;
 		m_button[CONTROLLER_BUTTON_B].isHeld = false;
-		m_button[CONTROLLER_BUTTON_B].isUp = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_X:
-		m_button[CONTROLLER_BUTTON_X].isHeld = false;
 		m_button[CONTROLLER_BUTTON_X].isUp = true;
+		m_button[CONTROLLER_BUTTON_X].isHeld = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_Y:
-		m_button[CONTROLLER_BUTTON_Y].isHeld = false;
 		m_button[CONTROLLER_BUTTON_Y].isUp = true;
-		std::cout << "Y UP!" << std::endl;
+		m_button[CONTROLLER_BUTTON_Y].isHeld = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_BACK:
-		std::cout << "Pressed BACK!" << std::endl;
+		m_button[CONTROLLER_BUTTON_BACK].isUp = true;
+		m_button[CONTROLLER_BUTTON_BACK].isHeld = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_START:
-		std::cout << "Pressed START!" << std::endl;
+		m_button[CONTROLLER_BUTTON_START].isUp = true;
+		m_button[CONTROLLER_BUTTON_START].isHeld = false;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_LEFTSHOULDER:
+		m_button[CONTROLLER_BUTTON_LEFTSHOULDER].isUp = true;
+		m_button[CONTROLLER_BUTTON_LEFTSHOULDER].isHeld = false;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
+		m_button[CONTROLLER_BUTTON_RIGHTSHOULDER].isUp = true;
+		m_button[CONTROLLER_BUTTON_RIGHTSHOULDER].isHeld = false;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_DPAD_UP:
+		m_button[CONTROLLER_BUTTON_DPAD_UP].isUp = true;
+		m_button[CONTROLLER_BUTTON_DPAD_UP].isHeld = false;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
+		m_button[CONTROLLER_BUTTON_DPAD_DOWN].isUp = true;
+		m_button[CONTROLLER_BUTTON_DPAD_DOWN].isHeld = false;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
+		m_button[CONTROLLER_BUTTON_DPAD_LEFT].isUp = true;
+		m_button[CONTROLLER_BUTTON_DPAD_LEFT].isHeld = false;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
+		m_button[CONTROLLER_BUTTON_DPAD_RIGHT].isUp = true;
+		m_button[CONTROLLER_BUTTON_DPAD_RIGHT].isHeld = false;
 		break;
 
 	}
