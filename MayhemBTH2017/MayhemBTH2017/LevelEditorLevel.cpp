@@ -54,6 +54,16 @@ bool LevelEditorLevel::GetOccupied(uint32_t posX, uint32_t posY)
 	return m_grid[posX][posY].isOccupied;
 }
 
+bool LevelEditorLevel::GetIsSpawnPoint(uint32_t posX, uint32_t posY)
+{
+	return m_grid[posX][posY].isSpawnPoint;
+}
+
+uint32_t LevelEditorLevel::GetTextureID(uint32_t posX, uint32_t posY)
+{
+	return m_grid[posX][posY].textureID;
+}
+
 
 //::.. HELP FUNCTIONS ..:://
 void LevelEditorLevel::Init()

@@ -16,9 +16,7 @@ LevelEditor::~LevelEditor()
 
 //::.. UPDATE FUNCTIONS ..:://
 void LevelEditor::Update()
-{
-	// DO A LOT OF SHIT
-	
+{	
 	
 	Move();
 
