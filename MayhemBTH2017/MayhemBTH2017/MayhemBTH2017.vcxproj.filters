@@ -125,16 +125,9 @@
     </ClCompile>
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="LevelEditor.cpp">
-      <Filter>Engine\Level Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelExporter.cpp">
-      <Filter>Engine\Level Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelManager.cpp">
       <Filter>Engine\Level Editor</Filter>
     </ClCompile>
     <ClCompile Include="AShader.cpp">
@@ -150,6 +143,7 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="LevelEditorLevel.cpp" />
+    <ClCompile Include="ToonShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -227,16 +221,9 @@
     <ClInclude Include="GUI.h" />
     <ClInclude Include="GUIQuad.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="LevelEditor.h">
-      <Filter>Engine\Level Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelExporter.h">
-      <Filter>Engine\Level Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelManager.h">
       <Filter>Engine\Level Editor</Filter>
     </ClInclude>
     <ClInclude Include="AShader.h">
@@ -252,10 +239,23 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="LevelEditorLevel.h" />
+    <ClInclude Include="ToonShader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="leo.frag" />
     <None Include="leo.geom" />
     <None Include="leo.vert" />
+    <None Include="DebugShader.frag" />
+    <None Include="DebugShader.geom" />
+    <None Include="DebugShader.vert" />
+    <None Include="MainShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="MainShader.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="MainShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

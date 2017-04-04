@@ -17,12 +17,12 @@ void LevelEditor::Update()
 {
 	// SELECT THE SHADER
 	// UPDATE THE SHADER
-	m_debugShader.Bind();
+	m_toonShader.Bind();
 	for (uint32_t x = 0; x < SIZE_X; x++)
 	{
 		for (uint32_t y = 0; y < SIZE_Y; y++)
 		{
-			m_debugShader.Update(m_meshObjects[x][y].transform, m_camera);
+			m_toonShader.UpdateUniforms(m_meshObjects[x][y].transform, m_camera);
 			if (m_grid[x][y].isOccupied)
 			{
 				m_meshObjects[x][y].mesh.Render();
@@ -55,7 +55,9 @@ void LevelEditor::SaveLevel()
 //::.. HELP FUNCTIONS ..:://
 void LevelEditor::Init()
 {
-	m_debugShader.Init("DebugShader", false);
+	ImageLoader load;
+	load.loadBMP("BMP_test.bmp");
+	m_toonShader.Init("MainShader", false);
 	InitGrid();
 	InitMeshes();
 }

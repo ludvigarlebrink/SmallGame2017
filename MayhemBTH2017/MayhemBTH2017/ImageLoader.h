@@ -3,16 +3,17 @@
 
 #include "GLTexture.h"
 #include "FileManager.h"
-#include "String.h"
 
 
+#include "String.h" 
 #include <string>
 #include <SDL.h>
+#include <iostream>
 
 class ImageLoader
 {
 public:
-	static GLTexture loadBMP(String filepath);
+	static GLTexture loadBMP(const std::string& filepath);
 };
 
 

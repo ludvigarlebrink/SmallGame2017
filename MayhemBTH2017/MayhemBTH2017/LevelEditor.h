@@ -7,10 +7,13 @@
 #include "DebugShaderTech.h"
 #include "Camera.h"
 #include "Mesh.h"
+#include "ToonShader.h"
+#include "ImageLoader.h"
 
 
 #include <glm.hpp>
 #include <cstdint>
+#include <string>
 
 
 class LevelEditor
@@ -57,7 +60,7 @@ private:
 	uint32_t m_posX;
 	uint32_t m_posY;
 	
-	AShader			m_debugShader;
+	ToonShader		m_toonShader;
 	Camera			m_camera;
 };
 
