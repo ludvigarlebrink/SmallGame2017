@@ -67,8 +67,6 @@ void InputManager::RemovePlayer(uint32_t value)
 
 void InputManager::Update()
 {
-	for (int i = 0; i < m_nrOfPlayers; i++)
-		m_playerController[i].FirstUpdate();
 }
 
 void InputManager::Init()

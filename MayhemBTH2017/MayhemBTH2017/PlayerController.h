@@ -38,6 +38,7 @@ public:
 	bool GetButtonDown(size_t button);
 	bool GetButtonHeld(size_t button);
 	bool GetButtonUp(size_t button);
+	size_t GetNumButtons();
 
 private:
 	//::.. HELP FUNCTIONS ..:://

@@ -73,6 +73,11 @@ bool PlayerController::GetButtonUp(size_t button)
 	return m_button[button].isUp;
 }
 
+size_t PlayerController::GetNumButtons()
+{
+	return NUM_BUTTONS;
+}
+
 
 //::.. HELP FUNCTIONS ..:://
 void PlayerController::Init()
@@ -93,21 +98,25 @@ void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEven
 	case SDL_CONTROLLER_BUTTON_A:
 		m_button[CONTROLLER_BUTTON_A].isDown = true;
 		m_button[CONTROLLER_BUTTON_A].isHeld = true;
+		m_button[CONTROLLER_BUTTON_A].isUp = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_B:
 		m_button[CONTROLLER_BUTTON_B].isDown = true;
 		m_button[CONTROLLER_BUTTON_B].isHeld = true;
+		m_button[CONTROLLER_BUTTON_A].isUp = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_X:
 		m_button[CONTROLLER_BUTTON_X].isDown = true;
 		m_button[CONTROLLER_BUTTON_X].isHeld = true;
+		m_button[CONTROLLER_BUTTON_A].isUp = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_Y:
 		m_button[CONTROLLER_BUTTON_Y].isDown = true;
 		m_button[CONTROLLER_BUTTON_Y].isHeld = true;
+		m_button[CONTROLLER_BUTTON_A].isUp = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_BACK:
@@ -126,21 +135,25 @@ void PlayerController::ButtonUp(const SDL_ControllerButtonEvent controllerEvent)
 	switch (controllerEvent.button)
 	{
 	case SDL_CONTROLLER_BUTTON_A:
+		m_button[CONTROLLER_BUTTON_Y].isDown = false;
 		m_button[CONTROLLER_BUTTON_A].isHeld = false;
 		m_button[CONTROLLER_BUTTON_A].isUp = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_B:
+		m_button[CONTROLLER_BUTTON_Y].isDown = false;
 		m_button[CONTROLLER_BUTTON_B].isHeld = false;
 		m_button[CONTROLLER_BUTTON_B].isUp = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_X:
+		m_button[CONTROLLER_BUTTON_Y].isDown = false;
 		m_button[CONTROLLER_BUTTON_X].isHeld = false;
 		m_button[CONTROLLER_BUTTON_X].isUp = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_Y:
+		m_button[CONTROLLER_BUTTON_Y].isDown = false;
 		m_button[CONTROLLER_BUTTON_Y].isHeld = false;
 		m_button[CONTROLLER_BUTTON_Y].isUp = true;
 		break;

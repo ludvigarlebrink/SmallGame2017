@@ -62,15 +62,25 @@ SDL_Window* VideoManager::GetWindow()const
 }
 
 
+#ifdef _DEBUG
+
+static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei lenght, const GLchar* message, const void* userParam)
+{
+	std::string output = message;
+	output += "\n";
+	OutputDebugStringA((output).c_str());
+}
+
+#endif
 //::.. HELPER FUNCTIONS ..:://
 void VideoManager::Init()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-//	SDL_GL_SetAttribute(
-//		SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG
-//	);
-//
+	SDL_GL_SetAttribute(
+		SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG
+	);
+
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
@@ -90,26 +100,16 @@ void VideoManager::Init()
 		std::cout << "GLEW STATUS FAIL\n";
 	}
 
-//	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-//	glEnable(GL_DEBUG_OUTPUT);
-//	glDebugMessageCallback(openglCallbackFunction, nullptr);
-//	glDebugMessageControl(
-//		GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
+	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+	glEnable(GL_DEBUG_OUTPUT);
+	glDebugMessageCallback(openglCallbackFunction, nullptr);
+	glDebugMessageControl(
+		GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
 
 
 	m_isClosed = false;
 }
 
-#ifdef _DEBUG
-
-static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei lenght, const GLchar* message, const void* userParam)
-{
-	std::string output = message;
-	output += "\n";
-	OutputDebugStringA((output).c_str());
-}
-
-#endif
 
 
 

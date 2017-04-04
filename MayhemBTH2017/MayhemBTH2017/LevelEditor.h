@@ -2,6 +2,7 @@
 #define __LEVELEDITOR_H__
 
 
+#include "InputManager.h"
 #include "LevelEditorLevel.h"
 
 
@@ -16,13 +17,18 @@ public:
 	LevelEditor();
 	virtual ~LevelEditor();
 
+	//::.. UPDATE FUNCTIONS ..:://
 	void Update();
 
+private:
+	//::.. HELP FUNCTIONS ..:://
+	void Move();
+
 
 private:
-
-private:
-	LevelEditorLevel m_level;
+	LevelEditorLevel	m_level;
+	uint32_t			m_posX;
+	uint32_t			m_posY;
 
 };
 
