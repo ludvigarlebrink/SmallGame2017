@@ -3,6 +3,7 @@
 
 //::.. CONSTRUCTORS ..:://
 LevelEditor::LevelEditor()
+	: m_posX(0), m_posY(0)
 {
 	m_input = InputManager::Get();
 }
@@ -21,8 +22,11 @@ void LevelEditor::Update()
 	
 	Move();
 
-	if(m_input->GetButtonDown(CONTROLLER_BUTTON_A))
-		std::cout << "Hejsan" << std::endl;
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
+	{
+		m_level.SetOccupied(m_posX, m_posY, !m_level.GetOccupied(m_posX, m_posY));
+	}
+
 
 	m_level.Render();
 }

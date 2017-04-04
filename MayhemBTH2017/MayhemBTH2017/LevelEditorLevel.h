@@ -36,6 +36,9 @@ public:
 	void SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied);
 	void SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint);
 
+	//::.. GET FUNCTIONS ..:://
+	bool GetOccupied(uint32_t posX, uint32_t posY);
+
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();

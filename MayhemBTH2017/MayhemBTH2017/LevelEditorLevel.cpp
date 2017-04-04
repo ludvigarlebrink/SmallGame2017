@@ -39,12 +39,19 @@ void LevelEditorLevel::SetTexture(uint32_t posX, uint32_t posY, uint32_t texture
 
 void LevelEditorLevel::SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied)
 {
-	m_grid[posX][posY].textureID = isOccupied;
+	m_grid[posX][posY].isOccupied = isOccupied;
 }
 
 void LevelEditorLevel::SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint)
 {
-	m_grid[posX][posY].textureID = isSpawnPoint;
+	m_grid[posX][posY].isSpawnPoint = isSpawnPoint;
+}
+
+
+//::.. GET FUNCTIONS ..:://
+bool LevelEditorLevel::GetOccupied(uint32_t posX, uint32_t posY)
+{
+	return m_grid[posX][posY].isOccupied;
 }
 
 
@@ -63,7 +70,7 @@ void LevelEditorLevel::InitGrid()
 		for (size_t y = 0; y < SIZE_Y; y++)
 		{
 			m_grid[x][y].textureID = 0;
-			m_grid[x][y].isOccupied = true;
+			m_grid[x][y].isOccupied = false;
 			m_grid[x][y].isSpawnPoint = false;
 		}
 	}
