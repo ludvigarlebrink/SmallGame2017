@@ -84,7 +84,15 @@ void InputManager::Update()
 {
 	for (int i = 0; i < m_nrOfPlayers; i++)
 	{
-		m_playerController[i].FirstUpdate();
+		m_playerController[i].Update();
+	}
+}
+
+void InputManager::Reset()
+{
+	for (int i = 0; i < m_nrOfPlayers; i++)
+	{
+		m_playerController[i].Reset();
 	}
 }
 

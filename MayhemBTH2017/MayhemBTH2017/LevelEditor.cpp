@@ -21,6 +21,9 @@ void LevelEditor::Update()
 	
 	Move();
 
+	if(m_input->GetButtonDown(CONTROLLER_BUTTON_A))
+		std::cout << "Hejsan" << std::endl;
+
 	m_level.Render();
 }
 

@@ -29,7 +29,7 @@ private:
 	InputManager *		m_input;	
 
 	LevelEditorLevel	m_level;
-	InputManager*		m_input;
+
 	uint32_t			m_posX;
 	uint32_t			m_posY;
 

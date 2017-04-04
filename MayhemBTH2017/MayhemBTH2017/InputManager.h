@@ -30,6 +30,7 @@ public:
 	void AddPlayer();
 	void RemovePlayer(uint32_t value);
 	void Update();
+	void Reset();
 
 private:
 	//::.. HELP FUNCTIONS ..:://

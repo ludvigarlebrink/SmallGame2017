@@ -32,7 +32,7 @@ void System::Run()
 
 		l.Update();
 
-
+		m_inputManager->Reset();
 
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
