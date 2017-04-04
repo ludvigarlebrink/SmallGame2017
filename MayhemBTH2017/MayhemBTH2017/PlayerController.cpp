@@ -58,14 +58,13 @@ void PlayerController::AddPlayerController(SDL_ControllerDeviceEvent PlayerContr
 	if (SDL_IsGameController(PlayerControllerID.which))
 	{
 		SDL_GameController * m_controller = SDL_GameControllerOpen(PlayerControllerID.which);
-		std::cout << "Controller added!: " << PlayerControllerID.which << std::endl;
 	}
 }
 
 void PlayerController::RemovePlayerController()
 {
 	SDL_GameControllerClose(m_controller);
-	std::cout << "Controller removed!: " << m_controller << std::endl;
+	m_controller = nullptr;
 }
 
 void PlayerController::ButtonInput(const SDL_ControllerButtonEvent controllerEvent)
