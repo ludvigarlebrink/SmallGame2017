@@ -4,6 +4,7 @@
 //::.. CONSTRUCTORS ..:://
 LevelEditor::LevelEditor()
 {
+	m_input = InputManager::Get();
 }
 
 LevelEditor::~LevelEditor()
@@ -16,6 +17,8 @@ LevelEditor::~LevelEditor()
 void LevelEditor::Update()
 {
 	// DO A LOT OF SHIT
+	
+	
 	Move();
 
 	m_level.Render();
@@ -26,8 +29,11 @@ void LevelEditor::Update()
 void LevelEditor::Move()
 {
 	// MOVE THE POS;
-
+	
+	// IF RIGHT IS PRESSED
 	++m_posX;
+	
+	// OSV
 	--m_posX;
 	++m_posY;
 	--m_posY;
