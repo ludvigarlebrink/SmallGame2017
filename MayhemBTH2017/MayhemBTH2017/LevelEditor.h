@@ -13,6 +13,9 @@
 class LevelEditor
 {
 public:
+	const static int SIZE_X = 16;
+	const static int SIZE_Y = 16;
+
 	//::.. CONSTRUCTORS ..:://
 	LevelEditor();
 	virtual ~LevelEditor();
@@ -23,6 +26,7 @@ public:
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Move();
+	void ClampPos();
 
 
 private:
