@@ -53,7 +53,6 @@ void InputManager::AddPlayer()
 	{
 		m_nrOfPlayers++;
 		m_playerController[m_nrOfPlayers].StartUp();
-		std::cout << "Player Added!: " << m_nrOfPlayers << std::endl;
 	}
 }
 
@@ -61,7 +60,6 @@ void InputManager::RemovePlayer(uint32_t value)
 {
 
 	m_playerController[value].RemovePlayerController();
-	std::cout << "Player Removed!: " << m_nrOfPlayers << std::endl;
 	m_nrOfPlayers--;
 
 }
@@ -77,7 +75,6 @@ void InputManager::Init()
 	m_nrOfPlayers = 1;
 	m_maxNrOfPlayers = 4;
 	m_playerController[m_nrOfPlayers].StartUp();
-	std::cout << "Input manager initiated!" << std::endl;
 }
 
 

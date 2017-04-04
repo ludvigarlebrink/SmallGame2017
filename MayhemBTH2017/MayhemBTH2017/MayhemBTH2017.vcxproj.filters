@@ -52,6 +52,9 @@
     <Filter Include="Engine\Resources\Exporters">
       <UniqueIdentifier>{bb95d1ce-612f-4a0b-855d-d0b3b35d4ce6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Level Editor">
+      <UniqueIdentifier>{17b46d9f-af33-4e8d-a0f5-2051a451e687}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -114,25 +117,39 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="LevelEditor.cpp" />
-    <ClCompile Include="PlayerController.cpp" />
-    <ClCompile Include="LevelManager.cpp" />
-    <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="AShader.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelExporter.cpp">
-      <Filter>Engine\Resources\Exporters</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="DebugShaderTech.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteBatch.cpp" />
+    <ClCompile Include="LevelEditor.cpp">
+      <Filter>Engine\Level Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelExporter.cpp">
+      <Filter>Engine\Level Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Engine\Level Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="AShader.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEditorLevel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -201,35 +218,44 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="LevelEditor.h" />
-    <ClInclude Include="PlayerController.h" />
-    <ClInclude Include="LevelManager.h" />
-    <ClInclude Include="StateManager.h" />
-    <ClInclude Include="AShader.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelExporter.h">
-      <Filter>Engine\Resources\Exporters</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="DebugShaderTech.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="GUI.h" />
+    <ClInclude Include="GUIQuad.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteBatch.h" />
+    <ClInclude Include="LevelEditor.h">
+      <Filter>Engine\Level Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelExporter.h">
+      <Filter>Engine\Level Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Engine\Level Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="AShader.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEditorLevel.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DebugShader.frag">
-      <Filter>GLSL</Filter>
-    </None>
-    <None Include="DebugShader.geom">
-      <Filter>GLSL</Filter>
-    </None>
-    <None Include="DebugShader.vert">
-      <Filter>GLSL</Filter>
-    </None>
+    <None Include="leo.frag" />
+    <None Include="leo.geom" />
+    <None Include="leo.vert" />
   </ItemGroup>
 </Project>
