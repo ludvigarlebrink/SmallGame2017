@@ -19,6 +19,9 @@ public:
 	//::.. GET FUNCTIONS ..:://
 	static InputManager* Get();
 	uint32_t GetNrOfPlayers();
+	bool GetButtonDown(size_t button, size_t controller = 0);
+	bool GetButtonHeld(size_t button, size_t controller = 0);
+	bool GetButtonUp(size_t button, size_t controller = 0);
 
 	//::.. SET FUNCTIONS ..:://
 	void SetNrOfPlayers(uint32_t value);

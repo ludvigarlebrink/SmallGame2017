@@ -44,6 +44,21 @@ uint32_t InputManager::GetNrOfPlayers()
 	return m_nrOfPlayers;
 }
 
+bool InputManager::GetButtonDown(size_t button, size_t controller)
+{
+	return m_playerController[controller].GetButtonDown(button);
+}
+
+bool InputManager::GetButtonHeld(size_t button, size_t controller)
+{
+	return m_playerController[controller].GetButtonHeld(button);
+}
+
+bool InputManager::GetButtonUp(size_t button, size_t controller)
+{
+	return m_playerController[controller].GetButtonUp(button);
+}
+
 void InputManager::SetNrOfPlayers(uint32_t value)
 {
 	m_nrOfPlayers = value;
@@ -67,6 +82,10 @@ void InputManager::RemovePlayer(uint32_t value)
 
 void InputManager::Update()
 {
+	for (int i = 0; i < m_nrOfPlayers; i++)
+	{
+		m_playerController[i].FirstUpdate();
+	}
 }
 
 void InputManager::Init()

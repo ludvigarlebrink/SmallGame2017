@@ -4,6 +4,7 @@
 //::.. CONSTRUCTORS ..:://
 LevelEditor::LevelEditor()
 {
+
 }
 
 LevelEditor::~LevelEditor()
@@ -18,7 +19,11 @@ void LevelEditor::Update()
 	// DO A LOT OF SHIT
 	Move();
 
-	m_level.Render();
+	if (m_input->GetButtonDown(0,0))
+		std::cout << "Hejsan!" << std::endl;
+	
+		m_level.Render();
+
 }
 
 

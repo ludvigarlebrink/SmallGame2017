@@ -10,6 +10,7 @@ LevelEditorLevel::LevelEditorLevel()
 
 LevelEditorLevel::~LevelEditorLevel()
 {
+
 }
 
 void LevelEditorLevel::Render()
