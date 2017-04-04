@@ -3,7 +3,7 @@
 
 
 #include "InputManager.h"
-#include "LevelEditorLevel.h"
+#include "Level.h"
 
 
 #include <glm.hpp>
@@ -32,7 +32,7 @@ private:
 private:
 	InputManager *		m_input;	
 
-	LevelEditorLevel	m_level;
+	Level				m_level;
 
 	AShader				m_green;
 	uint32_t			m_posX;

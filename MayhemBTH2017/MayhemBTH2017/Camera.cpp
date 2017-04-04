@@ -28,9 +28,6 @@ void Camera::SetRotation(float x, float y)
 	direction.y = sin(glm::radians(y));
 	direction.z = cos(glm::radians(x))*cos(glm::radians(y));
 	m_front = glm::normalize(direction);
-
-	std::cout << m_front.x << std::endl;
-	
 }
 
 

@@ -144,9 +144,6 @@
     <ClCompile Include="StateManager.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="LevelEditorLevel.cpp">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClCompile>
     <ClCompile Include="SpriteBatch.cpp">
       <Filter>Engine\GUI</Filter>
     </ClCompile>
@@ -158,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Engine\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -248,9 +248,6 @@
     <ClInclude Include="StateManager.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="LevelEditorLevel.h">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteBatch.h">
       <Filter>Engine\GUI</Filter>
     </ClInclude>
@@ -265,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Engine\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

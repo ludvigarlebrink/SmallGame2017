@@ -13,7 +13,7 @@
 #include <cstdint>
 
 
-class LevelEditorLevel
+class Level
 {
 public:
 	const static int SIZE_X = 84;
@@ -26,8 +26,8 @@ public:
 		bool		isSpawnPoint;
 	};
 
-	LevelEditorLevel();
-	virtual ~LevelEditorLevel();
+	Level();
+	virtual ~Level();
 
 	void Render(Camera camera);
 
@@ -49,7 +49,9 @@ private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
 	void InitGrid();
-	void InitMeshes();
+	void InitMesh();
+
+	void UpdateIsOccupied(uint32_t posX, uint32_t posY, bool isOccupied);
 
 
 private:
@@ -62,10 +64,13 @@ private:
 	Block m_grid[SIZE_X][SIZE_Y];
 	MeshObjects m_meshObjects[SIZE_X][SIZE_Y];
 
-	AShader			m_debugShader;
+	Mesh		m_mesh;
+	Vertex *	m_vertices;
 
-	uint32_t		m_nrOfSpawnPoints;
-	uint32_t		m_nrOfBlocks;
+	AShader		m_debugShader;
+
+	uint32_t	m_nrOfSpawnPoints;
+	uint32_t	m_nrOfBlocks;
 };
 
 

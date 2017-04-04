@@ -16,7 +16,7 @@ Mesh::~Mesh()
 
 
 //::.. INITIALIZERS ..:://
-bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts, uint16_t numAttr)
+bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts)
 {
 	if (m_isLoaded)
 	{
@@ -24,6 +24,7 @@ bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts, uint16_t numAttr)
 	}
 
 	m_drawCount = numVerts;
+	m_vertices = vertices;
 
 	// Generate VAO.
 	glGenVertexArrays(1, &m_vao);
@@ -31,11 +32,10 @@ bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts, uint16_t numAttr)
 	// Bind VAO.
 	glBindVertexArray(m_vao);
 
-	// Enable attributes.
-	for (uint16_t i = 0; i < numAttr; i++)
-	{
-		glEnableVertexAttribArray(i);
-	}
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
+	glEnableVertexAttribArray(3);
 
 	// Generate buffers.
 	glGenBuffers(1, &m_buffer);
@@ -49,14 +49,14 @@ bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts, uint16_t numAttr)
 
 	// Position.
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(offset));
-	offset += 3;
+	offset += sizeof(glm::vec3);
 	
 	// Normal.
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(offset));
-	offset += 3;
+	offset += sizeof(glm::vec3);
 	
 	// Texture Coordinates.
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(offset));
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(offset));
 
 	// Unbind
 	glBindVertexArray(0);
@@ -94,4 +94,10 @@ bool Mesh::Render()
 bool Mesh::GetIsLoaded()
 {
 	return m_isLoaded;
+}
+
+void Mesh::Update()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * m_drawCount, m_vertices, GL_STATIC_DRAW);
 }

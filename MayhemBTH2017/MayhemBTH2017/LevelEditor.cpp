@@ -5,7 +5,8 @@
 LevelEditor::LevelEditor()
 	: m_posX(0), m_posY(0)
 {
-	m_camera.SetPosition(glm::vec3((SIZE_X / 2) - 0.5f, (SIZE_Y / 2) - 0.5f, -50));
+	m_camera.SetRotation(0.0f, -10.0f);
+	m_camera.SetPosition(glm::vec3((SIZE_X / 2) - 0.5f, (SIZE_Y / 2) + 10, -70));
 	m_input = InputManager::Get();
 	m_green.Init("DebugGreen", false);
 
@@ -13,30 +14,30 @@ LevelEditor::LevelEditor()
 
 	verts[0].position = glm::vec3(0.5f, 0.5f, 0.0f);
 	verts[0].normal = glm::vec3(0.5f, 0.5f, 0.0f);
-	verts[0].texCoords = glm::vec2(0.0f, 1.0f);
+	verts[0].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
 	verts[1].position = glm::vec3(0.5f, -0.5f, 0.0f);
 	verts[1].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[1].texCoords = glm::vec2(0.0f, 1.0f);
+	verts[1].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
 	verts[2].position = glm::vec3(-0.5f, 0.5f, 0.0f);
 	verts[2].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[2].texCoords = glm::vec2(0.0f, 1.0f);
+	verts[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[3].position = glm::vec3(0.5f, -0.5f, 0.0f);
+	verts[3].position = glm::vec3(-0.5f, 0.5f, 0.0f);
 	verts[3].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[3].texCoords = glm::vec2(0.0f, 1.0f);
+	verts[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[4].position = glm::vec3(-0.5f, 0.5f, 0.0f);
+	verts[4].position = glm::vec3(0.5f, -0.5f, 0.0f);
 	verts[4].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[4].texCoords = glm::vec2(0.0f, 1.0f);
+	verts[4].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
 	verts[5].position = glm::vec3(-0.5f, -0.5f, 0.0f);
 	verts[5].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[5].texCoords = glm::vec2(0.0f, 1.0f);
+	verts[5].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	m_transform.SetPosition(0, 0, 99);
-	m_mesh.LoadMesh(verts, 6, 3);
+	m_transform.SetPosition(0.0f, 0.0f, 0.0f);
+	m_mesh.LoadMesh(verts, 6);
 
 }
 

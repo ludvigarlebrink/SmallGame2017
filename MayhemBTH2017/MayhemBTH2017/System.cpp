@@ -19,7 +19,8 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-	glDisable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 	LevelEditor l;
 
 	glEnable(GL_DEPTH_TEST);
