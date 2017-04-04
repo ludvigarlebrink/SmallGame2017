@@ -30,7 +30,8 @@ public:
 	virtual ~PlayerController();
 
 	//::.. MODIFY FUNCTIONS ..:://
-	void FirstUpdate();
+	void Update();
+	void Reset();
 	void AddPlayerController(SDL_ControllerDeviceEvent PlayerControllerID);
 	void RemovePlayerController();
 

@@ -25,13 +25,18 @@ void System::Run()
 
 	while (true)
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		m_inputManager->Update();
+
+		glClear(GL_COLOR_BUFFER_BIT);
 
 
 		l.Update();
+
+
+
 		// Switch between back and front buffer.
-		m_inputManager->Update();
 		m_videoManager->Swap();
+
 	}
 }
 
