@@ -55,7 +55,7 @@ void PlayerController::AddPlayerController(SDL_ControllerDeviceEvent PlayerContr
 {
 	if (SDL_IsGameController(PlayerControllerID.which))
 	{
-		SDL_GameController * m_controller = SDL_GameControllerOpen(PlayerControllerID.which);
+		SDL_GameController * m_controller = SDL_GameControllerOpen(PlayerControllerID.which);		
 	}
 }
 
@@ -111,7 +111,7 @@ void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEven
 
 	case SDL_CONTROLLER_BUTTON_B:
 		m_button[CONTROLLER_BUTTON_B].isHeld = true;
-		m_button[CONTROLLER_BUTTON_B].isDown = false;
+		m_button[CONTROLLER_BUTTON_B].isDown = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_X:
@@ -177,7 +177,7 @@ void PlayerController::ButtonUp(const SDL_ControllerButtonEvent controllerEvent)
 		break;
 
 	case SDL_CONTROLLER_BUTTON_B:
-		m_button[CONTROLLER_BUTTON_B].isUp = false;
+		m_button[CONTROLLER_BUTTON_B].isUp = true;
 		m_button[CONTROLLER_BUTTON_B].isHeld = false;
 		break;
 
