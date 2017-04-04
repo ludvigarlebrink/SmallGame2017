@@ -4,23 +4,13 @@
 
 PlayerController::PlayerController()
 {
-	// Do nothing...
+	Init();
 }
 
 
 PlayerController::~PlayerController()
 {
 	// Do nothing...
-}
-
-void PlayerController::StartUp()
-{
-	Init();
-}
-
-void PlayerController::ShutDown()
-{
-	//Shutdown
 }
 
 void PlayerController::Update()

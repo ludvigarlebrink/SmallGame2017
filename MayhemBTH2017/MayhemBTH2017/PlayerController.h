@@ -6,13 +6,6 @@
 //Used for debug
 #include <iostream>
 
-enum ControllerInput
-{
-	BUTTON_A,
-	BUTTON_B,
-	NUM_BUTTONS
-};
-
 class PlayerController
 {
 public:

@@ -22,6 +22,8 @@ public:
 private:
 
 private:
+	uint32_t m_posX;
+	uint32_t m_posY;
 	LevelEditorLevel m_level;
 
 };
