@@ -286,5 +286,11 @@
     <None Include="leo.vert">
       <Filter>GLSL</Filter>
     </None>
+    <None Include="DebugGreen.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="DebugGreen.vert">
+      <Filter>GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

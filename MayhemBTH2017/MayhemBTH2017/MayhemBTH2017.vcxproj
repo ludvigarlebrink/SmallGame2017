@@ -203,6 +203,8 @@
     <ClInclude Include="VideoManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DebugGreen.frag" />
+    <None Include="DebugGreen.vert" />
     <None Include="DebugShader.frag" />
     <None Include="DebugShader.geom" />
     <None Include="DebugShader.vert" />

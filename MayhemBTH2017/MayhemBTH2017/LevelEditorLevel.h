@@ -60,6 +60,7 @@ private:
 
 	AShader			m_debugShader;
 	Camera			m_camera;
+
 };
 
 

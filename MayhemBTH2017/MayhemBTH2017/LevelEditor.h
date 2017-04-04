@@ -34,9 +34,12 @@ private:
 
 	LevelEditorLevel	m_level;
 
+	AShader				m_green;
 	uint32_t			m_posX;
 	uint32_t			m_posY;
-
+	Transform			m_transform;
+	Camera				m_camera;
+	Mesh				m_mesh;
 };
 
 #endif // __LEVELEDITOR_H__

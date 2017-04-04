@@ -22,12 +22,14 @@ void System::Run()
 	glDisable(GL_CULL_FACE);
 	LevelEditor l;
 
+	glEnable(GL_DEPTH_TEST);
+
 
 	while (true)
 	{
 		m_inputManager->Update();
 
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
 		l.Update();
