@@ -1,7 +1,9 @@
 #include "InputManager.h"
 
 
+
 InputManager * InputManager::m_instance = nullptr;
+
 
 InputManager::InputManager()
 {
@@ -52,7 +54,6 @@ void InputManager::AddPlayer()
 	if (m_nrOfPlayers < m_maxNrOfPlayers)
 	{
 		m_nrOfPlayers++;
-		m_playerController[m_nrOfPlayers].StartUp();
 	}
 }
 
@@ -67,14 +68,14 @@ void InputManager::RemovePlayer(uint32_t value)
 void InputManager::Update()
 {
 	for (int i = 0; i < m_nrOfPlayers; i++)
-		m_playerController[i].Update();
+		m_playerController[i].FirstUpdate();
 }
 
 void InputManager::Init()
 {
+	SDL_Init(SDL_INIT_GAMECONTROLLER);
 	m_nrOfPlayers = 1;
 	m_maxNrOfPlayers = 4;
-	m_playerController[m_nrOfPlayers].StartUp();
 }
 
 
