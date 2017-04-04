@@ -32,9 +32,9 @@ public:
 	void Render();
 
 	//::.. SET FUNCTIONS ..:://
-	void SetTexture(uint32_t textureID);
-	void SetOccupied(bool isOccupied);
-	void SetSpawnPoint(bool isSpawnPoint);
+	void SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID);
+	void SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied);
+	void SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
@@ -52,8 +52,6 @@ private:
 
 	Block m_grid[SIZE_X][SIZE_Y];
 	MeshObjects m_meshObjects[SIZE_X][SIZE_Y];
-	uint32_t m_posX;
-	uint32_t m_posY;
 
 	AShader			m_debugShader;
 	Camera			m_camera;

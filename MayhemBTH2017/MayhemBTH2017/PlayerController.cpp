@@ -13,7 +13,7 @@ PlayerController::~PlayerController()
 	// Do nothing...
 }
 
-void PlayerController::Update()
+void PlayerController::FirstUpdate()
 {
 	while (SDL_PollEvent(&m_event) != 0)
 	{
@@ -28,7 +28,11 @@ void PlayerController::Update()
 			break;
 
 		case SDL_CONTROLLERBUTTONDOWN:
-			ButtonInput(m_event.cbutton);
+			ButtonDown(m_event.cbutton);
+			break;
+
+		case SDL_CONTROLLERBUTTONUP:
+			ButtonUp(m_event.cbutton);
 			break;
 
 		case SDL_CONTROLLERAXISMOTION:
@@ -36,11 +40,6 @@ void PlayerController::Update()
 			break;
 		}
 	}
-}
-
-void PlayerController::Init()
-{
-	SDL_Init(SDL_INIT_GAMECONTROLLER);
 }
 
 void PlayerController::AddPlayerController(SDL_ControllerDeviceEvent PlayerControllerID)
@@ -57,24 +56,93 @@ void PlayerController::RemovePlayerController()
 	m_controller = nullptr;
 }
 
-void PlayerController::ButtonInput(const SDL_ControllerButtonEvent controllerEvent)
+
+//::.. GET FUNCTIONS ..:://
+bool PlayerController::GetButtonDown(size_t button)
+{
+	return m_button[button].isDown;
+}
+
+bool PlayerController::GetButtonHeld(size_t button)
+{
+	return m_button[button].isHeld;
+}
+
+bool PlayerController::GetButtonUp(size_t button)
+{
+	return m_button[button].isUp;
+}
+
+
+//::.. HELP FUNCTIONS ..:://
+void PlayerController::Init()
+{
+	for (size_t i = 0; i < NUM_BUTTONS; i++)
+	{
+		m_button[i].isDown = false;
+		m_button[i].isDown = false;
+		m_button[i].isUp = false;
+	}
+}
+
+
+void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEvent)
 {
 	switch (controllerEvent.button)
 	{
 	case SDL_CONTROLLER_BUTTON_A:
-		std::cout << "Pressed A!" << std::endl;
+		m_button[CONTROLLER_BUTTON_A].isDown = true;
+		m_button[CONTROLLER_BUTTON_A].isHeld = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_B:
-		std::cout << "Pressed B!" << std::endl;
+		m_button[CONTROLLER_BUTTON_B].isDown = true;
+		m_button[CONTROLLER_BUTTON_B].isHeld = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_X:
-		std::cout << "Pressed X!" << std::endl;
+		m_button[CONTROLLER_BUTTON_X].isDown = true;
+		m_button[CONTROLLER_BUTTON_X].isHeld = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_Y:
-		std::cout << "Pressed Y!" << std::endl;
+		m_button[CONTROLLER_BUTTON_Y].isDown = true;
+		m_button[CONTROLLER_BUTTON_Y].isHeld = true;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_BACK:
+		std::cout << "Pressed BACK!" << std::endl;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_START:
+		std::cout << "Pressed START!" << std::endl;
+		break;
+
+	}
+}
+
+void PlayerController::ButtonUp(const SDL_ControllerButtonEvent controllerEvent)
+{
+	switch (controllerEvent.button)
+	{
+	case SDL_CONTROLLER_BUTTON_A:
+		m_button[CONTROLLER_BUTTON_A].isHeld = false;
+		m_button[CONTROLLER_BUTTON_A].isUp = true;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_B:
+		m_button[CONTROLLER_BUTTON_B].isHeld = false;
+		m_button[CONTROLLER_BUTTON_B].isUp = true;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_X:
+		m_button[CONTROLLER_BUTTON_X].isHeld = false;
+		m_button[CONTROLLER_BUTTON_X].isUp = true;
+		break;
+
+	case SDL_CONTROLLER_BUTTON_Y:
+		m_button[CONTROLLER_BUTTON_Y].isHeld = false;
+		m_button[CONTROLLER_BUTTON_Y].isUp = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_BACK:
