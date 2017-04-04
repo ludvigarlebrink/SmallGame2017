@@ -15,11 +15,13 @@ public:
 
 	//::.. SET FUNCTIONS ..::J//
 	void SetPosition(glm::vec3 pos);
+	void SetRotation(float x, float y);
 	//void SetPosition()
 
 	//::.. GET FUNCTIONS ..:://
 	glm::mat4 GetView();
 	glm::mat4 GetProjection();
+	glm::vec3 GetPosition();
 
 
 private:
@@ -27,7 +29,9 @@ private:
 	void Init();
 
 private:
+	
 	glm::mat4 m_perspective;
+
 	glm::vec3 m_pos;
 	glm::vec3 m_front;
 	glm::vec3 m_up;

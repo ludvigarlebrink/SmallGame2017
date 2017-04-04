@@ -5,7 +5,8 @@
 LevelEditor::LevelEditor()
 	: m_posX(0), m_posY(0)
 {
-	m_camera.SetPosition(glm::vec3(8, 8, -24));
+	m_camera.SetRotation(0, -20);
+	m_camera.SetPosition(glm::vec3(8, 20, -24));
 	m_input = InputManager::Get();
 	m_green.Init("DebugGreen", false);
 
@@ -72,7 +73,6 @@ void LevelEditor::Update()
 void LevelEditor::Move()
 {
 	// MOVE THE POS;
-	
 
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))

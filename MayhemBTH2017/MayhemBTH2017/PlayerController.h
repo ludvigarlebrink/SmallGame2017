@@ -60,7 +60,7 @@ private:
 	Button m_button[NUM_BUTTONS];
 
 	SDL_Event				m_event;
-	SDL_GameController *	m_controller;
+	SDL_GameController*		m_controller;
 
 };
 
