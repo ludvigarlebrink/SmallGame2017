@@ -41,6 +41,10 @@ public:
 	bool GetIsSpawnPoint(uint32_t posX, uint32_t posY);
 	uint32_t GetTextureID(uint32_t posX, uint32_t posY);
 
+	//::.. GET FUNCTIONS ..:://
+	void AddBlock(uint32_t posX, uint32_t posY);
+	void AddSpawnPoint(uint32_t posX, uint32_t posY);
+
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
@@ -61,6 +65,8 @@ private:
 	AShader			m_debugShader;
 	Camera			m_camera;
 
+	uint32_t		m_nrOfSpawnPoints;
+	uint32_t		m_nrOfBlocks;
 };
 
 

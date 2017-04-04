@@ -64,6 +64,19 @@ uint32_t LevelEditorLevel::GetTextureID(uint32_t posX, uint32_t posY)
 	return m_grid[posX][posY].textureID;
 }
 
+void LevelEditorLevel::AddBlock(uint32_t posX, uint32_t posY)
+{
+	SetOccupied(posX, posY, !GetOccupied(posX, posY));
+}
+
+void LevelEditorLevel::AddSpawnPoint(uint32_t posX, uint32_t posY)
+{
+	if (!GetOccupied(posX, posY))
+	{
+		SetSpawnPoint(posX, posY, !GetIsSpawnPoint(posX, posY));
+	}
+}
+
 
 //::.. HELP FUNCTIONS ..:://
 void LevelEditorLevel::Init()
@@ -119,7 +132,7 @@ void LevelEditorLevel::InitMeshes()
 			verts[5].texCoords = glm::vec2(0.0f, 1.0f);
 
 			Transform tmpTransform;
-			tmpTransform.SetPosition(x * 2, y * 2, 100);
+			tmpTransform.SetPosition(x, y, 50);
 			m_meshObjects[x][y].transform = tmpTransform;
 			m_meshObjects[x][y].mesh.LoadMesh(verts, 6, 3);
 		}
