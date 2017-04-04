@@ -16,8 +16,8 @@
 class LevelEditorLevel
 {
 public:
-	const static int SIZE_X = 16;
-	const static int SIZE_Y = 16;
+	const static int SIZE_X = 84;
+	const static int SIZE_Y = 48;
 
 	struct Block
 	{
@@ -37,7 +37,7 @@ public:
 	void SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint);
 
 	//::.. GET FUNCTIONS ..:://
-	bool GetOccupied(uint32_t posX, uint32_t posY);
+	bool GetIsOccupied(uint32_t posX, uint32_t posY);
 	bool GetIsSpawnPoint(uint32_t posX, uint32_t posY);
 	uint32_t GetTextureID(uint32_t posX, uint32_t posY);
 

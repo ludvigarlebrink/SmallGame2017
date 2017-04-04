@@ -32,6 +32,8 @@ void LevelEditorLevel::Render(Camera camera)
 	}
 }
 
+
+//::.. SET FUNCTIONS ..:://
 void LevelEditorLevel::SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID)
 {
 	m_grid[posX][posY].textureID = textureID;
@@ -49,7 +51,7 @@ void LevelEditorLevel::SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnP
 
 
 //::.. GET FUNCTIONS ..:://
-bool LevelEditorLevel::GetOccupied(uint32_t posX, uint32_t posY)
+bool LevelEditorLevel::GetIsOccupied(uint32_t posX, uint32_t posY)
 {
 	return m_grid[posX][posY].isOccupied;
 }
@@ -66,12 +68,15 @@ uint32_t LevelEditorLevel::GetTextureID(uint32_t posX, uint32_t posY)
 
 void LevelEditorLevel::AddBlock(uint32_t posX, uint32_t posY)
 {
-	SetOccupied(posX, posY, !GetOccupied(posX, posY));
+	if (!m_grid[posX][posY].isOccupied)
+	{
+		SetOccupied(posX, posY, !GetIsOccupied(posX, posY));
+	}
 }
 
 void LevelEditorLevel::AddSpawnPoint(uint32_t posX, uint32_t posY)
 {
-	if (!GetOccupied(posX, posY))
+	if (!GetIsOccupied(posX, posY))
 	{
 		SetSpawnPoint(posX, posY, !GetIsSpawnPoint(posX, posY));
 	}
@@ -108,27 +113,27 @@ void LevelEditorLevel::InitMeshes()
 			Vertex verts[6];
 
 			verts[0].position = glm::vec3(0.5f, 0.5f, 0.0f);
-			verts[0].normal = glm::vec3(0.5f, 0.5f, 0.0f);
+			verts[0].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			verts[0].texCoords = glm::vec2(0.0f, 1.0f);
 
 			verts[1].position = glm::vec3(0.5f, -0.5f, 0.0f);
-			verts[1].normal = glm::vec3(1.0f, 1.0f, 0.0f);
+			verts[1].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			verts[1].texCoords = glm::vec2(0.0f, 1.0f);
 
 			verts[2].position = glm::vec3(-0.5f, 0.5f, 0.0f);
-			verts[2].normal = glm::vec3(1.0f, 1.0f, 0.0f);
+			verts[2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			verts[2].texCoords = glm::vec2(0.0f, 1.0f);
 
 			verts[3].position = glm::vec3(0.5f, -0.5f, 0.0f);
-			verts[3].normal = glm::vec3(1.0f, 1.0f, 0.0f);
+			verts[3].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			verts[3].texCoords = glm::vec2(0.0f, 1.0f);
 
 			verts[4].position = glm::vec3(-0.5f, 0.5f, 0.0f);
-			verts[4].normal = glm::vec3(1.0f, 1.0f, 0.0f);
+			verts[4].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			verts[4].texCoords = glm::vec2(0.0f, 1.0f);
 
 			verts[5].position = glm::vec3(-0.5f, -0.5f, 0.0f);
-			verts[5].normal = glm::vec3(1.0f, 1.0f, 0.0f);
+			verts[5].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			verts[5].texCoords = glm::vec2(0.0f, 1.0f);
 
 			Transform tmpTransform;

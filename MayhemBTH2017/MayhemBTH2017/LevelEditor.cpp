@@ -5,7 +5,7 @@
 LevelEditor::LevelEditor()
 	: m_posX(0), m_posY(0)
 {
-	m_camera.SetPosition(glm::vec3(8, 8, -24));
+	m_camera.SetPosition(glm::vec3((SIZE_X / 2) - 0.5f, (SIZE_Y / 2) - 0.5f, -50));
 	m_input = InputManager::Get();
 	m_green.Init("DebugGreen", false);
 
@@ -49,7 +49,6 @@ LevelEditor::~LevelEditor()
 //::.. UPDATE FUNCTIONS ..:://
 void LevelEditor::Update()
 {	
-	
 	Move();
 	ClampPos();
 
@@ -64,6 +63,12 @@ void LevelEditor::Update()
 		m_level.AddBlock(m_posX, m_posY);
 	}
 
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
+	{
+		exit(-1);
+	}
+
 	m_level.Render(m_camera);
 }
 
@@ -71,10 +76,6 @@ void LevelEditor::Update()
 //::.. HELP FUNCTIONS ..:://
 void LevelEditor::Move()
 {
-	// MOVE THE POS;
-	
-
-
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
 	{
 		++m_posY;
@@ -94,12 +95,6 @@ void LevelEditor::Move()
 	{
 		--m_posX;
 	}
-	
-	// OSV
-	//	--m_posX;
-	//	++m_posY;
-	//	--m_posY;
-
 }
 
 void LevelEditor::ClampPos()

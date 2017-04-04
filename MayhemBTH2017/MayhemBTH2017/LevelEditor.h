@@ -13,8 +13,8 @@
 class LevelEditor
 {
 public:
-	const static int SIZE_X = 16;
-	const static int SIZE_Y = 16;
+	const static int SIZE_X = 84;
+	const static int SIZE_Y = 48;
 
 	//::.. CONSTRUCTORS ..:://
 	LevelEditor();
