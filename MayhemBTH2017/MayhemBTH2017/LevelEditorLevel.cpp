@@ -13,7 +13,7 @@ LevelEditorLevel::~LevelEditorLevel()
 
 }
 
-void LevelEditorLevel::Render()
+void LevelEditorLevel::Render(Camera camera)
 {
 	// SELECT THE SHADER
 	// UPDATE THE SHADER
@@ -23,7 +23,7 @@ void LevelEditorLevel::Render()
 	{
 		for (uint32_t y = 0; y < SIZE_Y; y++)
 		{
-			m_debugShader.Update(m_meshObjects[x][y].transform, m_camera);
+			m_debugShader.Update(m_meshObjects[x][y].transform, camera);
 			if (m_grid[x][y].isOccupied)
 			{
 				m_meshObjects[x][y].mesh.Render();
@@ -132,7 +132,7 @@ void LevelEditorLevel::InitMeshes()
 			verts[5].texCoords = glm::vec2(0.0f, 1.0f);
 
 			Transform tmpTransform;
-			tmpTransform.SetPosition(x, y, 50);
+			tmpTransform.SetPosition(x, y, 0.0f);
 			m_meshObjects[x][y].transform = tmpTransform;
 			m_meshObjects[x][y].mesh.LoadMesh(verts, 6, 3);
 		}

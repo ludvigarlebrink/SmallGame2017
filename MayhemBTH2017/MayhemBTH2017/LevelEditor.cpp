@@ -5,6 +5,7 @@
 LevelEditor::LevelEditor()
 	: m_posX(0), m_posY(0)
 {
+	m_camera.SetPosition(glm::vec3(8, 8, -24));
 	m_input = InputManager::Get();
 	m_green.Init("DebugGreen", false);
 
@@ -52,7 +53,7 @@ void LevelEditor::Update()
 	Move();
 	ClampPos();
 
-	m_transform.SetPosition(m_posX, m_posY, 49.99f);
+	m_transform.SetPosition(m_posX, m_posY, 0.001f);
 
 	m_green.Bind();
 	m_green.Update(m_transform, m_camera);
@@ -63,7 +64,7 @@ void LevelEditor::Update()
 		m_level.AddBlock(m_posX, m_posY);
 	}
 
-	m_level.Render();
+	m_level.Render(m_camera);
 }
 
 

@@ -12,6 +12,14 @@ Camera::~Camera()
 {
 }
 
+
+//::.. SET FUNCTIONS ..:://
+void Camera::SetPosition(glm::vec3 pos)
+{
+	m_pos = pos;
+}
+
+
 //::.. GET FUNCTIONS ..:://
 glm::mat4 Camera::GetView()
 {
@@ -31,5 +39,5 @@ void Camera::Init()
 	m_front = glm::vec3(0, 0, 1);
 	m_up = glm::vec3(0, 1, 0);
 
-	m_perspective = glm::perspective(70.0f, 800.0f/600.0f, 0.03f, 1000.0f);
+	m_perspective = glm::perspective(70.0f, 1280.0f/ 720.0f, 0.03f, 1000.0f);
 }

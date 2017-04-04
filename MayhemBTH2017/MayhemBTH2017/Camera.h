@@ -13,6 +13,10 @@ public:
 	Camera();
 	virtual ~Camera();
 
+	//::.. SET FUNCTIONS ..::J//
+	void SetPosition(glm::vec3 pos);
+	//void SetPosition()
+
 	//::.. GET FUNCTIONS ..:://
 	glm::mat4 GetView();
 	glm::mat4 GetProjection();

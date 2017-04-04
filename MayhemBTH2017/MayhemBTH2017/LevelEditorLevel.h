@@ -29,7 +29,7 @@ public:
 	LevelEditorLevel();
 	virtual ~LevelEditorLevel();
 
-	void Render();
+	void Render(Camera camera);
 
 	//::.. SET FUNCTIONS ..:://
 	void SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID);
@@ -63,7 +63,6 @@ private:
 	MeshObjects m_meshObjects[SIZE_X][SIZE_Y];
 
 	AShader			m_debugShader;
-	Camera			m_camera;
 
 	uint32_t		m_nrOfSpawnPoints;
 	uint32_t		m_nrOfBlocks;

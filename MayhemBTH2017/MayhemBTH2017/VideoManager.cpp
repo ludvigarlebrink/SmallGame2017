@@ -90,7 +90,7 @@ void VideoManager::Init()
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	m_window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		800, 600, SDL_WINDOW_OPENGL);
+		1280, 720, SDL_WINDOW_OPENGL);
 
 	m_glContext = SDL_GL_CreateContext(m_window);
 	GLenum status = glewInit();
