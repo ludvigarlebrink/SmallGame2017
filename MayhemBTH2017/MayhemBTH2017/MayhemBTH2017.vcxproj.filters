@@ -52,6 +52,15 @@
     <Filter Include="Engine\Resources\Exporters">
       <UniqueIdentifier>{bb95d1ce-612f-4a0b-855d-d0b3b35d4ce6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\LevelEditor">
+      <UniqueIdentifier>{f7badb5c-be81-48ff-9151-36942c4a479a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\HID">
+      <UniqueIdentifier>{815a1da3-e075-4442-9a75-2241e697b9fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GUI">
+      <UniqueIdentifier>{274f0393-a23b-4426-8020-bd089f3c017d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -114,24 +123,38 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="LevelEditor.cpp" />
-    <ClCompile Include="PlayerController.cpp" />
-    <ClCompile Include="LevelManager.cpp" />
-    <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="AShader.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelExporter.cpp">
-      <Filter>Engine\Resources\Exporters</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="DebugShaderTech.cpp">
       <Filter>Engine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="AShader.cpp">
+      <Filter>Engine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Engine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEditor.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Engine\HID</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Engine\HID</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Engine\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteBatch.cpp">
+      <Filter>Engine\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -201,24 +224,41 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="LevelEditor.h" />
-    <ClInclude Include="PlayerController.h" />
-    <ClInclude Include="LevelManager.h" />
-    <ClInclude Include="StateManager.h" />
-    <ClInclude Include="AShader.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelExporter.h">
-      <Filter>Engine\Resources\Exporters</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="DebugShaderTech.h">
       <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="AShader.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEditor.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Engine\HID</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Engine\HID</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Engine\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIQuad.h">
+      <Filter>Engine\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteBatch.h">
+      <Filter>Engine\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +270,15 @@
     </None>
     <None Include="DebugShader.vert">
       <Filter>GLSL</Filter>
+    </None>
+    <None Include="leo.frag">
+      <Filter>Engine\GUI</Filter>
+    </None>
+    <None Include="leo.geom">
+      <Filter>Engine\GUI</Filter>
+    </None>
+    <None Include="leo.vert">
+      <Filter>Engine\GUI</Filter>
     </None>
   </ItemGroup>
 </Project>
