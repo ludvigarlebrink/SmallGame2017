@@ -64,6 +64,19 @@ uint32_t LevelEditorLevel::GetTextureID(uint32_t posX, uint32_t posY)
 	return m_grid[posX][posY].textureID;
 }
 
+void LevelEditorLevel::AddBlock(uint32_t posX, uint32_t posY)
+{
+	SetOccupied(posX, posY, !GetOccupied(posX, posY));
+}
+
+void LevelEditorLevel::AddSpawnPoint(uint32_t posX, uint32_t posY)
+{
+	if (!GetOccupied(posX, posY))
+	{
+		SetSpawnPoint(posX, posY, !GetIsSpawnPoint);
+	}
+}
+
 
 //::.. HELP FUNCTIONS ..:://
 void LevelEditorLevel::Init()

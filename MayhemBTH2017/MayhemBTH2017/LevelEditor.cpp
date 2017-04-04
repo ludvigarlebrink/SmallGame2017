@@ -23,10 +23,8 @@ void LevelEditor::Update()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 	{
-		m_level.SetOccupied(m_posX, m_posY, !m_level.GetOccupied(m_posX, m_posY));
+		m_level.AddBlock(m_posX, m_posY);
 	}
-
-
 
 	m_level.Render();
 }
