@@ -38,6 +38,8 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	bool GetOccupied(uint32_t posX, uint32_t posY);
+	bool GetIsSpawnPoint(uint32_t posX, uint32_t posY);
+	uint32_t GetTextureID(uint32_t posX, uint32_t posY);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
