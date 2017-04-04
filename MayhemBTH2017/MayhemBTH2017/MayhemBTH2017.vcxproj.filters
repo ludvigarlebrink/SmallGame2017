@@ -156,6 +156,7 @@
     <ClCompile Include="SpriteBatch.cpp">
       <Filter>Engine\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="LevelEditorLevel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -260,6 +261,7 @@
     <ClInclude Include="SpriteBatch.h">
       <Filter>Engine\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="LevelEditorLevel.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">
