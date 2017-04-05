@@ -37,8 +37,6 @@ void TimeManager::UpdateDeltaTime()
 	
 	m_deltaTime = currentFrame - m_lastFrame;
 	m_lastFrame = currentFrame;
-
-	std::cout << m_deltaTime << std::endl;
 }
 
 float TimeManager::GetDeltaTime()
