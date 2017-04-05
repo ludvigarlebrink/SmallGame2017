@@ -26,18 +26,6 @@ void Level::Render(Camera camera)
 
 	m_mesh.Render();
 	m_mesh2.Render();
-
-//	for (uint32_t x = 0; x < SIZE_X; x++)
-//	{
-//		for (uint32_t y = 0; y < SIZE_Y; y++)
-//		{
-//			m_debugShader.Update(m_meshObjects[x][y].transform, camera);
-//			if (m_grid[x][y].isOccupied)
-//			{
-//				m_meshObjects[x][y].mesh.Render();
-//			}
-//		}
-//	}
 }
 
 

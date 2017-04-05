@@ -29,7 +29,7 @@ private:
 	void AxisMove();
 	void ButtonInput();
 	void ClampPos();
-
+	void RenderSelector();
 
 private:
 	InputManager *		m_input;	

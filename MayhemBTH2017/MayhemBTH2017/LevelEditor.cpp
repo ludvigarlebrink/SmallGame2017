@@ -5,34 +5,38 @@
 LevelEditor::LevelEditor()
 	: m_currentPosX(0), m_currentPosY(0)
 {
-	m_camera.SetRotation(0.0f, -10.0f);
-	m_camera.SetPosition(glm::vec3((SIZE_X / 2) - 0.5f, (SIZE_Y / 2) + 10, -70));
+	m_camera.SetRotation(0.0f, -0.0f);
+	m_camera.SetPosition(glm::vec3(((SIZE_X / 2) - 0.5f), ((SIZE_Y / 2) + 0.5f), -60));
 	m_input = InputManager::Get();
 	m_green.Init("DebugGreen", false);
 
 	Vertex verts[6];
 
-	verts[0].position = glm::vec3(0.5f, 0.5f, 0.0f);
+	float scaler = 1.0f;
+
+	m_timer.SetTimer(0.1f, true, true);
+
+	verts[0].position = glm::vec3(0.5f * scaler, 0.5f, 0.0f);
 	verts[0].normal = glm::vec3(0.5f, 0.5f, 0.0f);
 	verts[0].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[1].position = glm::vec3(0.5f, -0.5f, 0.0f);
+	verts[1].position = glm::vec3(0.5f * scaler, -0.5f, 0.0f);
 	verts[1].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[1].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[2].position = glm::vec3(-0.5f, 0.5f, 0.0f);
+	verts[2].position = glm::vec3(-0.5f * scaler, 0.5f, 0.0f);
 	verts[2].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[3].position = glm::vec3(-0.5f, 0.5f, 0.0f);
+	verts[3].position = glm::vec3(-0.5f * scaler, 0.5f, 0.0f);
 	verts[3].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[4].position = glm::vec3(0.5f, -0.5f, 0.0f);
+	verts[4].position = glm::vec3(0.5f * scaler, -0.5f, 0.0f);
 	verts[4].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[4].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[5].position = glm::vec3(-0.5f, -0.5f, 0.0f);
+	verts[5].position = glm::vec3(-0.5f * scaler, -0.5f, 0.0f);
 	verts[5].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[5].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
@@ -49,16 +53,15 @@ LevelEditor::~LevelEditor()
 
 //::.. UPDATE FUNCTIONS ..:://
 void LevelEditor::Update()
-{
-	AxisMove();
+{	
+	if (m_timer.Update())
+	{
+		AxisMove();
+	}
 	ClampPos();
 	ButtonInput();
 
-	m_transform.SetPosition(m_currentPosX, m_currentPosY, 0.001f);
-
-	m_green.Bind();
-	m_green.Update(m_transform, m_camera);
-	m_mesh.Render();
+	RenderSelector();
 
 	m_level.Render(m_camera);
 }
@@ -68,22 +71,97 @@ void LevelEditor::Update()
 void LevelEditor::AxisMove()
 {
 	//Left stick
-
-	// Up/Down
-	if (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY) != 0.0f || m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f)
+	if(m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTY))
 	{
-		m_currentPosY += -1.1 * (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY));
-		m_currentPosX -= (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX));
-		//std::cout << "m_currentPosY: " << m_currentPosY << std::endl;
-		std::cout << "m_currentPosY: " << -1.1 * (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY)) << std::endl;
+		++m_currentPosY;
+		std::cout << "m_posY: " << m_currentPosY << std::endl;
+	}
+
+	if(m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTY))
+	{
+		--m_currentPosY;
+		std::cout << "m_posY: " << m_currentPosY << std::endl;
+	}
+
+	if (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTX))
+	{
+		++m_currentPosX;
+		std::cout << "m_posX: " << m_currentPosX << std::endl;
+	}
+
+	if (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTX))
+	{
+		--m_currentPosX;
+		std::cout << "m_posX: " << m_currentPosX << std::endl;
+	}
+
+	//Right stick
+	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTY) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTY))
+	{
+		++m_currentPosY;
+	}
+
+	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTY) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTY))
+	{
+		--m_currentPosY;
+	}
+
+	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTX))
+	{
+		++m_currentPosX;
+	}
+
+	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTX))
+	{
+		--m_currentPosX;
 	}
 }
 
 void LevelEditor::ButtonInput()
 {
-	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_A))
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 	{
-		m_level.AddBlock(m_currentPosX, m_currentPosY);
+		m_savedPosX = m_currentPosX;
+		m_savedPosY = m_currentPosY;
+	}
+
+	if (m_input->GetButtonUp(CONTROLLER_BUTTON_A))
+	{
+
+		uint32_t startX;
+		uint32_t startY;
+		uint32_t endX;
+		uint32_t endY;
+		
+		if (m_currentPosX > m_savedPosX)
+		{
+			startX = m_savedPosX;
+			endX = m_currentPosX;
+		}
+		else
+		{
+			startX = m_currentPosX;
+			endX = m_savedPosX;
+		}
+		
+		if (m_currentPosY > m_savedPosY)
+		{
+			startY = m_savedPosY;
+			endY = m_currentPosY;
+		}
+		else
+		{
+			startY = m_currentPosY;
+			endY = m_savedPosY;
+		}
+
+		for (size_t x = startX; x <= endX; x++)
+		{
+			for (size_t y = startY; y <= endY; y++)
+			{
+				m_level.AddBlock(x, y);
+			}
+		}
 	}
 
 	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_X))
@@ -121,5 +199,60 @@ void LevelEditor::ClampPos()
 	{
 		m_currentPosY = 1;
 	}
+}
+
+void LevelEditor::RenderSelector()
+{
+	m_green.Bind();
+
+	Transform tran;
+	
+
+	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_A))
+	{
+		uint32_t startX;
+		uint32_t startY;
+		uint32_t endX;
+		uint32_t endY;
+
+		if (m_currentPosX > m_savedPosX)
+		{
+			startX = m_savedPosX;
+			endX = m_currentPosX;
+		}
+		else
+		{
+			startX = m_currentPosX;
+			endX = m_savedPosX;
+		}
+
+		if (m_currentPosY > m_savedPosY)
+		{
+			startY = m_savedPosY;
+			endY = m_currentPosY;
+		}
+		else
+		{
+			startY = m_currentPosY;
+			endY = m_savedPosY;
+		}
+
+		for (size_t x = startX; x <= endX; x++)
+		{
+			for (size_t y = startY; y <= endY; y++)
+			{
+				tran.SetPosition(x, y, -2.001f);
+				m_green.Update(tran, m_camera);
+				m_mesh.Render();
+			}
+		}
+	}
+	else
+	{
+		m_transform.SetPosition(m_currentPosX, m_currentPosY, -2.001f);
+		m_green.Update(m_transform, m_camera);
+		m_mesh.Render();
+	}
+
 }
 
