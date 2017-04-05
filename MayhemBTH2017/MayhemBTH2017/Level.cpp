@@ -84,6 +84,17 @@ void Level::AddBlock(uint32_t posX, uint32_t posY)
 	m_mesh.Update();
 }
 
+void Level::RemoveBlock(uint32_t posX, uint32_t posY)
+{
+	if (m_grid[posX][posY].isOccupied)
+	{
+		SetOccupied(posX, posY, !GetIsOccupied(posX, posY));
+	}
+
+	UpdateIsOccupied(posX, posY, false);
+	m_mesh.Update();
+}
+
 void Level::AddSpawnPoint(uint32_t posX, uint32_t posY)
 {
 	if (!GetIsOccupied(posX, posY))

@@ -59,9 +59,14 @@ void LevelEditor::Update()
 	m_green.Update(m_transform, m_camera);
 	m_mesh.Render();
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
+	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_A))
 	{
 		m_level.AddBlock(m_posX, m_posY);
+	}
+
+	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_X))
+	{
+		m_level.RemoveBlock(m_posX, m_posY);
 	}
 
 
@@ -77,22 +82,22 @@ void LevelEditor::Update()
 //::.. HELP FUNCTIONS ..:://
 void LevelEditor::Move()
 {
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
+	if(m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTY))
 	{
 		++m_posY;
 	}
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
+	if(m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTY))
 	{
 		--m_posY;
 	}
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_LEFT))
+	if (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTX))
 	{
 		++m_posX;
 	}
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_RIGHT))
+	if (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTX))
 	{
 		--m_posX;
 	}
