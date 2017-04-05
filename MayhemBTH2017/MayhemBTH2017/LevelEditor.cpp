@@ -16,27 +16,27 @@ LevelEditor::LevelEditor()
 
 	m_timer.SetTimer(0.1f, true, true);
 
-	verts[0].position = glm::vec3(0.5f * scaler, 0.5f * scaler, 0.0f);
+	verts[0].position = glm::vec3(0.5f * scaler, 0.5f, 0.0f);
 	verts[0].normal = glm::vec3(0.5f, 0.5f, 0.0f);
 	verts[0].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[1].position = glm::vec3(0.5f * scaler, -0.5f * scaler, 0.0f);
+	verts[1].position = glm::vec3(0.5f * scaler, -0.5f, 0.0f);
 	verts[1].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[1].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[2].position = glm::vec3(-0.5f * scaler, 0.5f * scaler, 0.0f);
+	verts[2].position = glm::vec3(-0.5f * scaler, 0.5f, 0.0f);
 	verts[2].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[3].position = glm::vec3(-0.5f * scaler, 0.5f * scaler, 0.0f);
+	verts[3].position = glm::vec3(-0.5f * scaler, 0.5f, 0.0f);
 	verts[3].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[4].position = glm::vec3(0.5f * scaler, -0.5f * scaler, 0.0f);
+	verts[4].position = glm::vec3(0.5f * scaler, -0.5f, 0.0f);
 	verts[4].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[4].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[5].position = glm::vec3(-0.5f * scaler, -0.5f * scaler, 0.0f);
+	verts[5].position = glm::vec3(-0.5f * scaler, -0.5f, 0.0f);
 	verts[5].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[5].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
@@ -61,12 +61,7 @@ void LevelEditor::Update()
 	ClampPos();
 	ButtonInput();
 
-	m_transform.SetPosition(m_currentPosX, m_currentPosY, -2.001f);
-
-	m_green.Bind();
-
-	m_green.Update(m_transform, m_camera);
-	m_mesh.Render();
+	RenderSelector();
 
 	m_level.Render(m_camera);
 }
@@ -160,8 +155,6 @@ void LevelEditor::ButtonInput()
 			endY = m_savedPosY;
 		}
 
-
-
 		for (size_t x = startX; x <= endX; x++)
 		{
 			for (size_t y = startY; y <= endY; y++)
@@ -206,5 +199,60 @@ void LevelEditor::ClampPos()
 	{
 		m_currentPosY = 1;
 	}
+}
+
+void LevelEditor::RenderSelector()
+{
+	m_green.Bind();
+
+	Transform tran;
+	
+
+	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_A))
+	{
+		uint32_t startX;
+		uint32_t startY;
+		uint32_t endX;
+		uint32_t endY;
+
+		if (m_currentPosX > m_savedPosX)
+		{
+			startX = m_savedPosX;
+			endX = m_currentPosX;
+		}
+		else
+		{
+			startX = m_currentPosX;
+			endX = m_savedPosX;
+		}
+
+		if (m_currentPosY > m_savedPosY)
+		{
+			startY = m_savedPosY;
+			endY = m_currentPosY;
+		}
+		else
+		{
+			startY = m_currentPosY;
+			endY = m_savedPosY;
+		}
+
+		for (size_t x = startX; x <= endX; x++)
+		{
+			for (size_t y = startY; y <= endY; y++)
+			{
+				tran.SetPosition(x, y, -2.001f);
+				m_green.Update(tran, m_camera);
+				m_mesh.Render();
+			}
+		}
+	}
+	else
+	{
+		m_transform.SetPosition(m_currentPosX, m_currentPosY, -2.001f);
+		m_green.Update(m_transform, m_camera);
+		m_mesh.Render();
+	}
+
 }
 

@@ -28,6 +28,7 @@ void Timer::StartTimer()
 
 void Timer::Reset()
 {
+
 }
 
 bool Timer::Update()
