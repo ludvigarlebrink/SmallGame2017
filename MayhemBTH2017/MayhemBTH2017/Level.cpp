@@ -25,6 +25,7 @@ void Level::Render(Camera camera)
 	m_debugShader.Update(tran, camera);
 
 	m_mesh.Render();
+	m_mesh2.Render();
 
 //	for (uint32_t x = 0; x < SIZE_X; x++)
 //	{
@@ -82,6 +83,7 @@ void Level::AddBlock(uint32_t posX, uint32_t posY)
 
 	UpdateIsOccupied(posX, posY, true);
 	m_mesh.Update();
+	m_mesh2.Update();
 }
 
 void Level::AddSpawnPoint(uint32_t posX, uint32_t posY)
@@ -117,47 +119,161 @@ void Level::InitGrid()
 void Level::InitMesh()
 {
 	const uint64_t length = SIZE_X * SIZE_Y * 6;
-	m_vertices = (Vertex*)malloc(sizeof(Vertex) * 24192);
+	const uint64_t length2 = SIZE_X * SIZE_Y * 12;
+	m_vertices = (Vertex*)malloc(sizeof(Vertex) * length);
+	m_vertices2 = (Vertex*)malloc(sizeof(Vertex) * length2);
 	
 	uint64_t i = 0;
+
+	float scaler = 1.0f;
 
 	for (uint64_t x = 0; x < SIZE_X; x++)
 	{
 		for (uint64_t y = 0; y < SIZE_Y; y++)
 		{
-
-			m_vertices[i].position = glm::vec3(x + 0.5f, y + 0.5f, 0.0f);
+			// Quad 1.
+			m_vertices[i].position = glm::vec3((x + 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			m_vertices[i].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
-			m_vertices[i + 1].position = glm::vec3(x + 0.5f, y - 0.5f, 0.0f);
+			m_vertices[i + 1].position = glm::vec3((x + 0.5f), (y - 0.5f), -2.0f * scaler);
 			m_vertices[i + 1].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			m_vertices[i + 1].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
-			m_vertices[i + 2].position = glm::vec3(x - 0.5f, y + 0.5f, 0.0f);
+			m_vertices[i + 2].position = glm::vec3((x - 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i + 2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-			m_vertices[i + 2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices[i + 2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, -2.0f);
 
-			m_vertices[i + 3].position = glm::vec3(x - 0.5f, y + 0.5f, 0.0f);
+			m_vertices[i + 3].position = glm::vec3((x - 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i + 3].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			m_vertices[i + 3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
-			m_vertices[i + 4].position = glm::vec3(x + 0.5f, y - 0.5f, 0.0f);
+			m_vertices[i + 4].position = glm::vec3((x + 0.5f), (y - 0.5f), -2.0f * scaler);
 			m_vertices[i + 4].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			m_vertices[i + 4].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
-			m_vertices[i + 5].position = glm::vec3(x - 0.5f, y - 0.5f, 0.0f);
+			m_vertices[i + 5].position = glm::vec3((x - 0.5f), (y - 0.5f), -2.0f * scaler);
 			m_vertices[i + 5].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			m_vertices[i + 5].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+
+	//		// Quad 2.
+	//		m_vertices[i + 6].position = glm::vec3((x + 0.5f) * scaler, (y + 0.5f) * scaler, 2.0f * scaler);
+	//		m_vertices[i + 6].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+	//		m_vertices[i + 6].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+	//
+	//		m_vertices[i + 7].position = glm::vec3((x + 0.5f) * scaler, (y + 0.5f) * scaler, -2.0f * scaler);
+	//		m_vertices[i + 7].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+	//		m_vertices[i + 7].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+	//
+	//		m_vertices[i + 8].position = glm::vec3((x - 0.5f) * scaler, (y + 0.5f) * scaler, -2.0f * scaler);
+	//		m_vertices[i + 8].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+	//		m_vertices[i + 8].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+	//
+	//		m_vertices[i + 9].position = glm::vec3((x - 0.5f) * scaler, (y + 0.5f) * scaler, 2.0f * scaler);
+	//		m_vertices[i + 9].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+	//		m_vertices[i + 9].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+	//
+	//		m_vertices[i + 10].position = glm::vec3((x + 0.5f) * scaler, (y + 0.5f) * scaler, 2.0f * scaler);
+	//		m_vertices[i + 10].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+	//		m_vertices[i + 10].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+	//
+	//		m_vertices[i + 11].position = glm::vec3((x - 0.5f) * scaler, (y + 0.5f) * scaler, -2.0f * scaler);
+	//		m_vertices[i + 11].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+	//		m_vertices[i + 11].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+	//
+	//		// Quad 3.
+	//		m_vertices[i + 12].position = glm::vec3(x + 0.5f, y + 0.5f, 2.0f);
+	//		m_vertices[i + 12].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+	//		m_vertices[i + 12].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
+	//
+	//		m_vertices[i + 13].position = glm::vec3(x + 0.5f, y - 0.5f, -2.0f);
+	//		m_vertices[i + 13].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+	//		m_vertices[i + 13].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+	//
+	//		m_vertices[i + 14].position = glm::vec3(x + 0.5f, y + 0.5f, -2.0f);
+	//		m_vertices[i + 14].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+	//		m_vertices[i + 14].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+	//
+	//		m_vertices[i + 15].position = glm::vec3(x + 0.5f, y + 0.5f, 2.0f);
+	//		m_vertices[i + 15].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+	//		m_vertices[i + 15].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+	//
+	//		m_vertices[i + 16].position = glm::vec3(x + 0.5f, y - 0.5f, 2.0f);
+	//		m_vertices[i + 16].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+	//		m_vertices[i + 10].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+	//
+	//		m_vertices[i + 17].position = glm::vec3(x + 0.5f, y - 0.5f, -2.0f);
+	//		m_vertices[i + 17].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+	//		m_vertices[i + 17].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
 
 			i += 6;
 		}
 	}
 
+	i = 0;
+
+	for (uint64_t x = 0; x < SIZE_X; x++)
+	{
+		for (uint64_t y = 0; y < SIZE_Y; y++)
+		{
+			// Quad 2.
+			m_vertices2[i].position = glm::vec3(x + 0.5f, y + 0.5f, 2.0f);
+			m_vertices2[i].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices2[i].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+
+			m_vertices2[i + 1].position = glm::vec3(x + 0.5f, y + 0.5f, -2.0f);
+			m_vertices2[i + 1].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices2[i + 1].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+
+			m_vertices2[i + 2].position = glm::vec3(x - 0.5f, y + 0.5f, -2.0f);
+			m_vertices2[i + 2].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices2[i + 2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+
+			m_vertices2[i + 3].position = glm::vec3(x - 0.5f, (y + 0.5f), 2.0f);
+			m_vertices2[i + 3].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices2[i + 3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+
+			m_vertices2[i + 4].position = glm::vec3(x + 0.5f, y + 0.5f, 2.0f);
+			m_vertices2[i + 4].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices2[i + 4].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+
+			m_vertices2[i + 5].position = glm::vec3(x - 0.5f, y + 0.5f, -2.0f);
+			m_vertices2[i + 5].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices2[i + 5].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+
+			// Quad 3.
+			m_vertices2[i + 6].position = glm::vec3(x + 0.5f, y + 0.5f, 2.0f);
+			m_vertices2[i + 6].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+			m_vertices2[i + 6].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
+
+			m_vertices2[i + 7].position = glm::vec3(x + 0.5f, y - 0.5f, -2.0f);
+			m_vertices2[i + 7].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+			m_vertices2[i + 7].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+
+			m_vertices2[i + 8].position = glm::vec3(x + 0.5f, y + 0.5f, -2.0f);
+			m_vertices2[i + 8].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+			m_vertices2[i + 8].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+
+			m_vertices2[i + 9].position = glm::vec3(x + 0.5f, y + 0.5f, 2.0f);
+			m_vertices2[i + 9].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+			m_vertices2[i + 9].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+
+			m_vertices2[i + 10].position = glm::vec3(x + 0.5f, y - 0.5f, 2.0f);
+			m_vertices2[i + 10].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+			m_vertices2[i + 10].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+
+			m_vertices2[i + 11].position = glm::vec3(x + 0.5f, y - 0.5f, -2.0f);
+			m_vertices2[i + 11].normal = glm::vec3(1.0f, 0.0f, 0.0f);
+			m_vertices2[i + 11].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+
+			i += 12;
+		}
+	}
+
+
 	m_mesh.LoadMesh(m_vertices, length);
+	m_mesh2.LoadMesh(m_vertices2, length2);
 }
-
-
 
 void Level::UpdateIsOccupied(uint32_t posX, uint32_t posY, bool isOccupied)
 {
@@ -173,6 +289,60 @@ void Level::UpdateIsOccupied(uint32_t posX, uint32_t posY, bool isOccupied)
 		{
 			m_vertices[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
 				m_vertices[pos + i].texCoordsAlpha.y, 0.0f);
+		}
+	}
+
+	pos = (posY + (posX * SIZE_Y)) * 12;
+
+	for (size_t i = 0; i < 12; i++)
+	{
+		if (isOccupied)
+		{
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
+				m_vertices2[pos + i].texCoordsAlpha.y, 1.0f);
+		}
+		else
+		{
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
+				m_vertices2[pos + i].texCoordsAlpha.y, 0.0f);
+		}
+	}
+
+
+	pos = (posY - 1 + (posX * SIZE_Y)) * 12;
+
+	if (pos < 0)
+	{
+		return;
+	}
+
+	for (size_t i = 0; i < 6; i++)
+	{
+		if (isOccupied)
+		{
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
+				m_vertices2[pos + i].texCoordsAlpha.y, 1.0f);
+		}
+		else
+		{
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
+				m_vertices2[pos + i].texCoordsAlpha.y, 0.0f);
+		}
+	}
+
+	pos = (posY - SIZE_Y +(posX * SIZE_Y)) * 12;
+
+	for (size_t i = 6; i < 12; i++)
+	{
+		if (isOccupied)
+		{
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
+				m_vertices2[pos + i].texCoordsAlpha.y, 1.0f);
+		}
+		else
+		{
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
+				m_vertices2[pos + i].texCoordsAlpha.y, 0.0f);
 		}
 	}
 }

@@ -5,34 +5,36 @@
 LevelEditor::LevelEditor()
 	: m_posX(0), m_posY(0)
 {
-	m_camera.SetRotation(0.0f, -10.0f);
-	m_camera.SetPosition(glm::vec3((SIZE_X / 2) - 0.5f, (SIZE_Y / 2) + 10, -70));
+	m_camera.SetRotation(0.0f, -0.0f);
+	m_camera.SetPosition(glm::vec3(((SIZE_X / 2) - 0.5f), ((SIZE_Y / 2) + 0.5f), -100));
 	m_input = InputManager::Get();
 	m_green.Init("DebugGreen", false);
 
 	Vertex verts[6];
 
-	verts[0].position = glm::vec3(0.5f, 0.5f, 0.0f);
+	float scaler = 1.0f;
+
+	verts[0].position = glm::vec3(0.5f * scaler, 0.5f * scaler, 0.0f);
 	verts[0].normal = glm::vec3(0.5f, 0.5f, 0.0f);
 	verts[0].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[1].position = glm::vec3(0.5f, -0.5f, 0.0f);
+	verts[1].position = glm::vec3(0.5f * scaler, -0.5f * scaler, 0.0f);
 	verts[1].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[1].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[2].position = glm::vec3(-0.5f, 0.5f, 0.0f);
+	verts[2].position = glm::vec3(-0.5f * scaler, 0.5f * scaler, 0.0f);
 	verts[2].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[3].position = glm::vec3(-0.5f, 0.5f, 0.0f);
+	verts[3].position = glm::vec3(-0.5f * scaler, 0.5f * scaler, 0.0f);
 	verts[3].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[4].position = glm::vec3(0.5f, -0.5f, 0.0f);
+	verts[4].position = glm::vec3(0.5f * scaler, -0.5f * scaler, 0.0f);
 	verts[4].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[4].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-	verts[5].position = glm::vec3(-0.5f, -0.5f, 0.0f);
+	verts[5].position = glm::vec3(-0.5f * scaler, -0.5f * scaler, 0.0f);
 	verts[5].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[5].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
@@ -53,9 +55,10 @@ void LevelEditor::Update()
 	Move();
 	ClampPos();
 
-	m_transform.SetPosition(m_posX, m_posY, 0.001f);
+	m_transform.SetPosition(m_posX, m_posY, -2.001f);
 
 	m_green.Bind();
+
 	m_green.Update(m_transform, m_camera);
 	m_mesh.Render();
 
