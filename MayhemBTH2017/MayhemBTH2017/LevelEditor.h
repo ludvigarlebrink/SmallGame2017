@@ -4,6 +4,7 @@
 
 #include "InputManager.h"
 #include "Level.h"
+#include "Timer.h"
 
 
 #include <glm.hpp>
@@ -36,11 +37,15 @@ private:
 	Level				m_level;
 
 	AShader				m_green;
-	uint32_t			m_posX;
-	uint32_t			m_posY;
+	uint32_t			m_currentPosX;
+	uint32_t			m_currentPosY;
+	uint32_t			m_savedPosX;
+	uint32_t			m_savedPosY;
 	Transform			m_transform;
 	Camera				m_camera;
 	Mesh				m_mesh;
+
+	Timer				m_timer;
 };
 
 #endif // __LEVELEDITOR_H__

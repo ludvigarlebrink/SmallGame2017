@@ -3,16 +3,18 @@
 
 //::.. CONSTRUCTORS ..:://
 LevelEditor::LevelEditor()
-	: m_posX(0), m_posY(0)
+	: m_currentPosX(0), m_currentPosY(0)
 {
 	m_camera.SetRotation(0.0f, -0.0f);
-	m_camera.SetPosition(glm::vec3(((SIZE_X / 2) - 0.5f), ((SIZE_Y / 2) + 0.5f), -100));
+	m_camera.SetPosition(glm::vec3(((SIZE_X / 2) - 0.5f), ((SIZE_Y / 2) + 0.5f), -60));
 	m_input = InputManager::Get();
 	m_green.Init("DebugGreen", false);
 
 	Vertex verts[6];
 
 	float scaler = 1.0f;
+
+	m_timer.SetTimer(0.1f, true, true);
 
 	verts[0].position = glm::vec3(0.5f * scaler, 0.5f * scaler, 0.0f);
 	verts[0].normal = glm::vec3(0.5f, 0.5f, 0.0f);
@@ -52,11 +54,14 @@ LevelEditor::~LevelEditor()
 //::.. UPDATE FUNCTIONS ..:://
 void LevelEditor::Update()
 {	
-	AxisMove();
+	if (m_timer.Update())
+	{
+		AxisMove();
+	}
 	ClampPos();
 	ButtonInput();
 
-	m_transform.SetPosition(m_posX, m_posY, -2.001f);
+	m_transform.SetPosition(m_currentPosX, m_currentPosY, -2.001f);
 
 	m_green.Bind();
 
@@ -73,65 +78,107 @@ void LevelEditor::AxisMove()
 	//Left stick
 	if(m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTY))
 	{
-		++m_posY;
-		std::cout << "m_posY: " << m_posY << std::endl;
+		++m_currentPosY;
+		std::cout << "m_posY: " << m_currentPosY << std::endl;
 	}
 
 	if(m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTY))
 	{
-		--m_posY;
-		std::cout << "m_posY: " << m_posY << std::endl;
+		--m_currentPosY;
+		std::cout << "m_posY: " << m_currentPosY << std::endl;
 	}
 
 	if (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTX))
 	{
-		++m_posX;
-		std::cout << "m_posX: " << m_posX << std::endl;
+		++m_currentPosX;
+		std::cout << "m_posX: " << m_currentPosX << std::endl;
 	}
 
 	if (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTX))
 	{
-		--m_posX;
-		std::cout << "m_posX: " << m_posX << std::endl;
+		--m_currentPosX;
+		std::cout << "m_posX: " << m_currentPosX << std::endl;
 	}
 
 	//Right stick
 	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTY) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTY))
 	{
-		++m_posY;
+		++m_currentPosY;
 	}
 
 	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTY) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTY))
 	{
-		--m_posY;
+		--m_currentPosY;
 	}
 
 	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTX))
 	{
-		++m_posX;
+		++m_currentPosX;
 	}
 
 	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTX))
 	{
-		--m_posX;
+		--m_currentPosX;
 	}
 }
 
 void LevelEditor::ButtonInput()
 {
-	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_A))
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 	{
-		m_level.AddBlock(m_posX, m_posY);
+		m_savedPosX = m_currentPosX;
+		m_savedPosY = m_currentPosY;
+	}
+
+	if (m_input->GetButtonUp(CONTROLLER_BUTTON_A))
+	{
+
+		uint32_t startX;
+		uint32_t startY;
+		uint32_t endX;
+		uint32_t endY;
+		
+		if (m_currentPosX > m_savedPosX)
+		{
+			startX = m_savedPosX;
+			endX = m_currentPosX;
+		}
+		else
+		{
+			startX = m_currentPosX;
+			endX = m_savedPosX;
+		}
+		
+		if (m_currentPosY > m_savedPosY)
+		{
+			startY = m_savedPosY;
+			endY = m_currentPosY;
+		}
+		else
+		{
+			startY = m_currentPosY;
+			endY = m_savedPosY;
+		}
+
+
+
+		for (size_t x = startX; x <= endX; x++)
+		{
+			for (size_t y = startY; y <= endY; y++)
+			{
+				m_level.AddBlock(x, y);
+			}
+		}
 	}
 
 	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_X))
 	{
-		m_level.RemoveBlock(m_posX, m_posY);
+		m_level.RemoveBlock(m_currentPosX, m_currentPosY);
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
 	{
-		m_level.AddSpawnPoint(m_posX, m_posY);
+		m_level.AddSpawnPoint(m_currentPosX, m_currentPosY);
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
@@ -142,22 +189,22 @@ void LevelEditor::ButtonInput()
 
 void LevelEditor::ClampPos()
 {
-	if (m_posX >= SIZE_X)
+	if (m_currentPosX >= SIZE_X)
 	{
-		m_posX = SIZE_X - 1;
+		m_currentPosX = SIZE_X - 1;
 	}
-	else if (m_posX <= 1)
+	else if (m_currentPosX <= 1)
 	{
-		m_posX = 1;
+		m_currentPosX = 1;
 	}
 
-	if (m_posY >= SIZE_Y)
+	if (m_currentPosY >= SIZE_Y)
 	{
-		m_posY = SIZE_Y - 1;
+		m_currentPosY = SIZE_Y - 1;
 	}
-	else if (m_posY <= 1)
+	else if (m_currentPosY <= 1)
 	{
-		m_posY = 1;
+		m_currentPosY = 1;
 	}
 }
 
