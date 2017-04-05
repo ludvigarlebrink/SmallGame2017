@@ -3,18 +3,30 @@
 
 #include "GLTexture.h"
 #include "FileManager.h"
-#include "String.h"
 
-
+#include <glew.h>
+#include "String.h" 
 #include <string>
 #include <SDL.h>
+#include <iostream>
+#include "Textures.h"
+#include <cassert>
 
 class ImageLoader
 {
 public:
-	static GLTexture loadBMP(String filepath);
+	ImageLoader();
+	virtual ~ImageLoader();
+	void loadBMP(const std::string& filepath, Textures& texture);
+	void Bind(unsigned int id);
+
+	GLuint GetTex()const;
+
+private:
+private:
+	GLuint m_texture;
+	int test;
 };
 
 
 #endif
-

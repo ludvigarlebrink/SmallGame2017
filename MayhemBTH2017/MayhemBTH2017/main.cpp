@@ -3,6 +3,7 @@
 #include "VideoManager.h"
 #include "StateManager.h"
 #include "InputManager.h"
+#include "TextureManager.h"
 
 #include "System.h"
 
@@ -13,6 +14,7 @@ ResourceManager	g_resourceManager;
 VideoManager	g_videoManager;
 StateManager	g_stateManager;
 InputManager	g_inputManager;
+TextureManager g_textureManager;
 
 
 void BigInit();
@@ -44,10 +46,13 @@ void BigInit()
 	g_videoManager.StartUp();		// 3.
 	g_stateManager.StartUp();		// 4.
 	g_inputManager.StartUp();		// 5.
+	g_textureManager.StartUp();		// 6.
+
 }
 
 void Terminate()
 {
+	g_textureManager.ShutDown();	// 6.
 	g_inputManager.ShutDown();		// 5.
 	g_stateManager.ShutDown();		// 4.
 	g_videoManager.ShutDown();		// 3.

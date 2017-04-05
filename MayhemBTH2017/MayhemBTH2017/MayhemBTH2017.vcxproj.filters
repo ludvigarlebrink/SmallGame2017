@@ -63,9 +63,6 @@
     <ClCompile Include="VideoManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="ImageLoader.cpp">
-      <Filter>Engine\Misc</Filter>
-    </ClCompile>
     <ClCompile Include="String.cpp">
       <Filter>Engine\Memory\Containers</Filter>
     </ClCompile>
@@ -125,16 +122,9 @@
     </ClCompile>
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="LevelEditor.cpp">
-      <Filter>Engine\Level Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelExporter.cpp">
-      <Filter>Engine\Level Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelManager.cpp">
       <Filter>Engine\Level Editor</Filter>
     </ClCompile>
     <ClCompile Include="AShader.cpp">
@@ -150,6 +140,10 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="LevelEditorLevel.cpp" />
+    <ClCompile Include="ToonShader.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Textures.cpp" />
+    <ClCompile Include="ImageLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -157,12 +151,6 @@
     </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Engine\Memory\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="GLTexture.h">
-      <Filter>Engine\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageLoader.h">
-      <Filter>Engine\Misc</Filter>
     </ClInclude>
     <ClInclude Include="String.h">
       <Filter>Engine\Memory\Containers</Filter>
@@ -227,16 +215,9 @@
     <ClInclude Include="GUI.h" />
     <ClInclude Include="GUIQuad.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="LevelEditor.h">
-      <Filter>Engine\Level Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelExporter.h">
-      <Filter>Engine\Level Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelManager.h">
       <Filter>Engine\Level Editor</Filter>
     </ClInclude>
     <ClInclude Include="AShader.h">
@@ -252,10 +233,29 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="LevelEditorLevel.h" />
+    <ClInclude Include="ToonShader.h" />
+    <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="GLTexture.h">
+      <Filter>GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h" />
+    <ClInclude Include="ImageLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="leo.frag" />
     <None Include="leo.geom" />
     <None Include="leo.vert" />
+    <None Include="DebugShader.frag" />
+    <None Include="DebugShader.geom" />
+    <None Include="DebugShader.vert" />
+    <None Include="MainShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="MainShader.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="MainShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -23,6 +23,7 @@ private:
 private:
 	VideoManager * m_videoManager;
 	InputManager * m_inputManager;
+
 };
 
 
