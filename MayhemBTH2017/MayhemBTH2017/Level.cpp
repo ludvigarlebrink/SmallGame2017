@@ -86,7 +86,7 @@ void Level::AddBlock(uint32_t posX, uint32_t posY)
 
 void Level::RemoveBlock(uint32_t posX, uint32_t posY)
 {
-	if (m_grid[posX][posY].isOccupied)
+	if (!m_grid[posX][posY].isOccupied)
 	{
 		SetOccupied(posX, posY, !GetIsOccupied(posX, posY));
 	}

@@ -25,7 +25,8 @@ public:
 
 private:
 	//::.. HELP FUNCTIONS ..:://
-	void Move();
+	void AxisMove();
+	void ButtonInput();
 	void ClampPos();
 
 

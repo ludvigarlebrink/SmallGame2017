@@ -296,28 +296,50 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 			m_button[CONTROLLER_AXIS_LEFTY].isDown = false;
 			m_button[CONTROLLER_AXIS_LEFTY].axisDirection = 0;
 		}
-
 		break;
 
 		//Right Stick
 	case SDL_CONTROLLER_AXIS_RIGHTX:
-		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
+		if (ScaleRange(controllerEvent.value) > m_deadzone)
 		{
+			m_button[CONTROLLER_AXIS_RIGHTX].isHeld = true;
 			m_button[CONTROLLER_AXIS_RIGHTX].isDown = true;
+			m_button[CONTROLLER_AXIS_RIGHTX].axisDirection = -1;
+		}
+		if (ScaleRange(controllerEvent.value) < -m_deadzone)
+		{
+			m_button[CONTROLLER_AXIS_RIGHTX].isHeld = true;
+			m_button[CONTROLLER_AXIS_RIGHTX].isDown = true;
+			m_button[CONTROLLER_AXIS_RIGHTX].axisDirection = 1;
+		}
 
+		if (ScaleRange(controllerEvent.value) > m_deadzone < m_deadzone && ScaleRange(controllerEvent.value) > -m_deadzone)
+		{
+			m_button[CONTROLLER_AXIS_RIGHTX].isHeld = false;
+			m_button[CONTROLLER_AXIS_RIGHTX].isDown = false;
+			m_button[CONTROLLER_AXIS_RIGHTX].axisDirection = 0;
 		}
 		break;
 
 	case SDL_CONTROLLER_AXIS_RIGHTY:
-		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
+		if (ScaleRange(controllerEvent.value) > m_deadzone)
 		{
 			m_button[CONTROLLER_AXIS_RIGHTY].isHeld = true;
 			m_button[CONTROLLER_AXIS_RIGHTY].isDown = true;
+			m_button[CONTROLLER_AXIS_RIGHTY].axisDirection = -1;
 		}
-		else
+		if (ScaleRange(controllerEvent.value) < -m_deadzone)
+		{
+			m_button[CONTROLLER_AXIS_RIGHTY].isHeld = true;
+			m_button[CONTROLLER_AXIS_RIGHTY].isDown = true;
+			m_button[CONTROLLER_AXIS_RIGHTY].axisDirection = 1;
+		}
+
+		if (ScaleRange(controllerEvent.value) > m_deadzone < m_deadzone && ScaleRange(controllerEvent.value) > -m_deadzone)
 		{
 			m_button[CONTROLLER_AXIS_RIGHTY].isHeld = false;
 			m_button[CONTROLLER_AXIS_RIGHTY].isDown = false;
+			m_button[CONTROLLER_AXIS_RIGHTY].axisDirection = 0;
 		}
 		break;
 	}
