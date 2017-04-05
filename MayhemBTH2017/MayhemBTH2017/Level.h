@@ -41,8 +41,9 @@ public:
 	bool GetIsSpawnPoint(uint32_t posX, uint32_t posY);
 	uint32_t GetTextureID(uint32_t posX, uint32_t posY);
 
-	//::.. GET FUNCTIONS ..:://
+	//::.. ADD FUNCTIONS ..:://
 	void AddBlock(uint32_t posX, uint32_t posY);
+	void RemoveBlock(uint32_t posX, uint32_t posY);
 	void AddSpawnPoint(uint32_t posX, uint32_t posY);
 
 private:

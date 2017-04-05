@@ -11,6 +11,8 @@ struct Button
 	bool isDown;
 	bool isHeld;
 	bool isUp;
+	int axisDirection;
+
 };
 
 enum ControllerInput
@@ -27,6 +29,10 @@ enum ControllerInput
 	CONTROLLER_BUTTON_DPAD_DOWN,
 	CONTROLLER_BUTTON_DPAD_LEFT,
 	CONTROLLER_BUTTON_DPAD_RIGHT,
+	CONTROLLER_AXIS_LEFTX,
+	CONTROLLER_AXIS_LEFTY,
+	CONTROLLER_AXIS_RIGHTX,
+	CONTROLLER_AXIS_RIGHTY,
 	NUM_BUTTONS
 };
 
@@ -47,6 +53,7 @@ public:
 	bool GetButtonDown(size_t button);
 	bool GetButtonHeld(size_t button);
 	bool GetButtonUp(size_t button);
+	float GetAxisDirection(size_t button);
 	size_t GetNumButtons();
 
 private:
@@ -55,10 +62,11 @@ private:
 	void ButtonDown(const SDL_ControllerButtonEvent controllerEvent);
 	void ButtonUp(const SDL_ControllerButtonEvent controllerEvent);
 	void AxisInput(const SDL_ControllerAxisEvent controllerEvent);
+	float ScaleRange(Sint16 value);
 
 private:
-	Button m_button[NUM_BUTTONS];
-
+	Button					m_button[NUM_BUTTONS];
+	float					m_deadzone; //Set to 0.5 in Init()
 	SDL_Event				m_event;
 	SDL_GameController*		m_controller;
 

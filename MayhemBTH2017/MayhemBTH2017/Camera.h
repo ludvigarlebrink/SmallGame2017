@@ -31,7 +31,6 @@ private:
 private:
 	
 	glm::mat4 m_perspective;
-
 	glm::vec3 m_pos;
 	glm::vec3 m_front;
 	glm::vec3 m_up;
