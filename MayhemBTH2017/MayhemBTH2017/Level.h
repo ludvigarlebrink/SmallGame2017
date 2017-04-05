@@ -68,6 +68,9 @@ private:
 	Mesh		m_mesh;
 	Vertex *	m_vertices;
 
+	Mesh		m_mesh2;
+	Vertex *	m_vertices2;
+
 	AShader		m_debugShader;
 
 	uint32_t	m_nrOfSpawnPoints;

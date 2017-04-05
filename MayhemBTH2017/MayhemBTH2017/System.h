@@ -4,7 +4,7 @@
 
 #include "VideoManager.h"
 #include "InputManager.h"
-
+#include "TimeManager.h"
 
 class System
 {
@@ -21,8 +21,10 @@ private:
 	void Init();
 
 private:
-	VideoManager * m_videoManager;
-	InputManager * m_inputManager;
+	VideoManager *	m_videoManager;
+	InputManager *	m_inputManager;
+	TimeManager *	m_timeManager;
+
 };
 
 

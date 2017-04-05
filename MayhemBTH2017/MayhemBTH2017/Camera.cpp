@@ -56,5 +56,5 @@ void Camera::Init()
 	m_up = glm::vec3(0, 1, 0);
 
 	
-	m_perspective = glm::perspective(70.0f, 1280.0f/ 720.0f, 0.03f, 1000.0f);
+	m_perspective = glm::perspective(70.0f, 1280.0f/ 720.0f, 10.0f, 200.0f);
 }

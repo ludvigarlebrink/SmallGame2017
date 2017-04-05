@@ -159,6 +159,8 @@
     <ClCompile Include="Level.cpp">
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
+    <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -266,6 +268,8 @@
     <ClInclude Include="Level.h">
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
+    <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">

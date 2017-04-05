@@ -16,22 +16,20 @@ System::~System()
 {
 }
 
+
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	LevelEditor l;
 
+	LevelEditor l;
+	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
 
 	while (true)
 	{
-		m_inputManager->Update();
-
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+		m_inputManager->Update();
 
 		l.Update();
 
@@ -39,7 +37,7 @@ void System::Run()
 
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
-
+		m_timeManager->UpdateDeltaTime();
 	}
 }
 
@@ -47,4 +45,5 @@ void System::Init()
 {
 	m_videoManager = VideoManager::Get();
 	m_inputManager = InputManager::Get();
+	m_timeManager = TimeManager::Get();
 }
