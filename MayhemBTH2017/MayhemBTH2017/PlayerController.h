@@ -62,7 +62,7 @@ private:
 	void ButtonDown(const SDL_ControllerButtonEvent controllerEvent);
 	void ButtonUp(const SDL_ControllerButtonEvent controllerEvent);
 	void AxisInput(const SDL_ControllerAxisEvent controllerEvent);
-	float ScaleRange(Sint16 value);
+	float ScaleRange(Sint16 value); //Scale value to [-1, 1]
 
 private:
 	Button					m_button[NUM_BUTTONS];
