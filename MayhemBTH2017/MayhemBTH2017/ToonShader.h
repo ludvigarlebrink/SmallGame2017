@@ -3,6 +3,7 @@
 
 
 #include "AShader.h"
+#include "Textures.h"
 
 class ToonShader :
 	public AShader

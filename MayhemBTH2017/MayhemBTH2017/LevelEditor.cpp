@@ -15,6 +15,11 @@ LevelEditor::~LevelEditor()
 
 void LevelEditor::Update()
 {
+	//TextureManager * tx = TextureManager::Get();
+	//tx->bindTexture(0);
+	//tx->bindTexture(1);
+	//tx->bindTexture(2);
+	//tx->bindTexture(3);
 	// SELECT THE SHADER
 	// UPDATE THE SHADER
 	m_toonShader.Bind();
@@ -55,9 +60,19 @@ void LevelEditor::SaveLevel()
 //::.. HELP FUNCTIONS ..:://
 void LevelEditor::Init()
 {
-	ImageLoader load;
-	load.loadBMP("BMP_test.bmp");
+	TextureManager * tx = TextureManager::Get();
+	tx->AddTexture(0, "BMPTEST.bmp");
+	tx->bindTexture(1);
+	//tx->AddTexture(1, "BMP_test.bmp");
+	//tx->bindTexture(1);
+	//tx->AddTexture(2, "Bliss.bmp");
+	//tx->bindTexture(2);
+	//tx->AddTexture(3, "BMPTEST.bmp");
+	//tx->bindTexture(3);
+
+
 	m_toonShader.Init("MainShader", false);
+	m_toonShader.UpdateTextures();
 	InitGrid();
 	InitMeshes();
 }
@@ -83,27 +98,27 @@ void LevelEditor::InitMeshes()
 		{
 			Vertex verts[6];
 
-			verts[0].position = glm::vec3(0.5f, 0.5f, 0.0f);
+			verts[0].position = glm::vec3(5.5f, 5.5f, 0.0f);
 			verts[0].normal = glm::vec3(0.5f, 0.5f, 0.0f);
-			verts[0].texCoords = glm::vec2(0.0f, 1.0f);
+			verts[0].texCoords = glm::vec2(0.0f, 0.0f);
 
-			verts[1].position = glm::vec3(0.5f, -0.5f, 0.0f);
+			verts[1].position = glm::vec3(5.5f, -5.5f, 0.0f);
 			verts[1].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 			verts[1].texCoords = glm::vec2(0.0f, 1.0f);
 
-			verts[2].position = glm::vec3(-0.5f, 0.5f, 0.0f);
+			verts[2].position = glm::vec3(-5.5f, 5.5f, 0.0f);
 			verts[2].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-			verts[2].texCoords = glm::vec2(0.0f, 1.0f);
+			verts[2].texCoords = glm::vec2(1.0f, 1.0f);
 
-			verts[3].position = glm::vec3(0.5f, -0.5f, 0.0f);
+			verts[3].position = glm::vec3(5.5f, -5.5f, 0.0f);
 			verts[3].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 			verts[3].texCoords = glm::vec2(0.0f, 1.0f);
 
-			verts[4].position = glm::vec3(-0.5f, 0.5f, 0.0f);
+			verts[4].position = glm::vec3(-5.5f, 5.5f, 0.0f);
 			verts[4].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 			verts[4].texCoords = glm::vec2(0.0f, 1.0f);
 
-			verts[5].position = glm::vec3(-0.5f, -0.5f, 0.0f);
+			verts[5].position = glm::vec3(-5.5f, -5.5f, 0.0f);
 			verts[5].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 			verts[5].texCoords = glm::vec2(0.0f, 1.0f);
 

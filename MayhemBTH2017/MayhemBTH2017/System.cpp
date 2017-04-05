@@ -38,5 +38,5 @@ void System::Run()
 void System::Init()
 {
 	m_videoManager = VideoManager::Get();
-	m_inputManager = InputManager::Get();
+	m_inputManager = InputManager::Get();	
 }

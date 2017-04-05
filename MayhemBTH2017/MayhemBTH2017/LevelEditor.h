@@ -1,6 +1,7 @@
 #ifndef __LEVELEDITOR_H__
 #define __LEVELEDITOR_H__
 
+#include "TextureManager.h"
 
 #include "LevelExporter.h"
 #include "Transform.h"
@@ -9,6 +10,7 @@
 #include "Mesh.h"
 #include "ToonShader.h"
 #include "ImageLoader.h"
+#include "GLTexture.h"
 
 
 #include <glm.hpp>

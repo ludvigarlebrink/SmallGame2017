@@ -17,6 +17,15 @@ ToonShader::~ToonShader()
 void ToonShader::UpdateTextures()
 {
 	glUseProgram(this->GetProgramID());
+
+	//glUniform1i(glGetUniformLocation(this->GetProgramID(),
+	//	"test"),0);
+	glUniform1i(glGetUniformLocation(this->GetProgramID(),
+		"t"), 1);
+	/*glUniform1i(glGetUniformLocation(this->GetProgramID(),
+		"tx"), 2);
+	glUniform1i(glGetUniformLocation(this->GetProgramID(),
+		"ty"), 3);*/
 	//TBA
 }
 

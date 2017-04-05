@@ -160,6 +160,8 @@
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureCache.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Textures.cpp" />
     <ClCompile Include="ToonShader.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="VideoManager.cpp" />
@@ -199,6 +201,8 @@
     <ClInclude Include="System.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureCache.h" />
+    <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Textures.h" />
     <ClInclude Include="ToonShader.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector.h" />

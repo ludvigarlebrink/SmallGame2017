@@ -49,11 +49,11 @@ bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts, uint16_t numAttr)
 
 	// Position.
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(offset));
-	offset += 3;
+	offset += sizeof(glm::vec3);
 	
 	// Normal.
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(offset));
-	offset += 3;
+	offset += sizeof(glm::vec3);
 	
 	// Texture Coordinates.
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(offset));

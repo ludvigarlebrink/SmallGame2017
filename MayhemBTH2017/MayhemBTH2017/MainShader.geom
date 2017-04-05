@@ -3,11 +3,12 @@ layout(triangles) in;
 layout(triangle_strip, max_vertices = 3) out;
 
 
-in vec2 TexCoords;
+in vec2 TexCoord[3];
 
 
 out vec3 tangent;
 out mat3 TBN;
+out vec2 TexCoords;
 
 void CreateNormalMap()
 {
@@ -44,6 +45,7 @@ void createGeometry()
 		for(int i = 0; i < 3; i++)
 		{
 			gl_Position = gl_in[i].gl_Position;
+			TexCoords = TexCoord[i];
 			EmitVertex();
 		}
 		EndPrimitive();
