@@ -55,16 +55,6 @@ int VideoManager::GetScreenWidth()const
 {
 	return m_screenWidth;
 }
-#ifdef _DEBUG
-
-static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei lenght, const GLchar* message, const void* userParam)
-{
-	std::string output = message;
-	output += "\n";
-	OutputDebugStringA((output).c_str());
-}
-
-#endif
 
 SDL_Window* VideoManager::GetWindow()const
 {
@@ -82,6 +72,7 @@ static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint i
 }
 
 #endif
+
 //::.. HELPER FUNCTIONS ..:://
 void VideoManager::Init()
 {
