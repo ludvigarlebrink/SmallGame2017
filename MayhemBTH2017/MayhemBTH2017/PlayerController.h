@@ -11,7 +11,7 @@ struct Button
 	bool isDown;
 	bool isHeld;
 	bool isUp;
-	int axisDirection;
+	float axisDirection;
 
 };
 

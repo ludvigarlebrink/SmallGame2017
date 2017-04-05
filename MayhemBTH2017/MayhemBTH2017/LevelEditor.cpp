@@ -49,7 +49,7 @@ LevelEditor::~LevelEditor()
 
 //::.. UPDATE FUNCTIONS ..:://
 void LevelEditor::Update()
-{	
+{
 	AxisMove();
 	ClampPos();
 	ButtonInput();
@@ -68,49 +68,14 @@ void LevelEditor::Update()
 void LevelEditor::AxisMove()
 {
 	//Left stick
-	if(m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTY))
-	{
-		++m_posY;
-		std::cout << "m_posY: " << m_posY << std::endl;
-	}
 
-	if(m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTY))
+	// Up/Down
+	if (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY) != 0.0f || m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f)
 	{
-		--m_posY;
-		std::cout << "m_posY: " << m_posY << std::endl;
-	}
-
-	if (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTX))
-	{
-		++m_posX;
-		std::cout << "m_posX: " << m_posX << std::endl;
-	}
-
-	if (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_LEFTX))
-	{
-		--m_posX;
-		std::cout << "m_posX: " << m_posX << std::endl;
-	}
-
-	//Right stick
-	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTY) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTY))
-	{
-		++m_posY;
-	}
-
-	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTY) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTY))
-	{
-		--m_posY;
-	}
-
-	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) > 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTX))
-	{
-		++m_posX;
-	}
-
-	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) < 0 && m_input->GetButtonHeld(CONTROLLER_AXIS_RIGHTX))
-	{
-		--m_posX;
+		m_posY += -1.1 * (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY));
+		m_posX -= (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX));
+		//std::cout << "m_posY: " << m_posY << std::endl;
+		std::cout << "m_posY: " << -1.1 * (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY)) << std::endl;
 	}
 }
 

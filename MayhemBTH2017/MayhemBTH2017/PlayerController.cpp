@@ -84,13 +84,7 @@ bool PlayerController::GetButtonUp(size_t button)
 
 float PlayerController::GetAxisDirection(size_t button)
 {
-	if (m_button[button].axisDirection > 0)
-		return 1.0f;
-	else if (m_button[button].axisDirection < 0)
-		return -1.0f;
-	else
-		return 0.0f;
-
+	return m_button[button].axisDirection;
 }
 
 size_t PlayerController::GetNumButtons()
@@ -255,91 +249,33 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 	{
 		//Left Stick
 	case SDL_CONTROLLER_AXIS_LEFTX:
-		if (ScaleRange(controllerEvent.value) > m_deadzone)
+		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
 			m_button[CONTROLLER_AXIS_LEFTX].isHeld = true;
 			m_button[CONTROLLER_AXIS_LEFTX].isDown = true;
-			m_button[CONTROLLER_AXIS_LEFTX].axisDirection = -1;
+			m_button[CONTROLLER_AXIS_LEFTX].axisDirection = ScaleRange(controllerEvent.value);
 		}
-		if (ScaleRange(controllerEvent.value) < -m_deadzone)
-		{
-			m_button[CONTROLLER_AXIS_LEFTX].isHeld = true;
-			m_button[CONTROLLER_AXIS_LEFTX].isDown = true;
-			m_button[CONTROLLER_AXIS_LEFTX].axisDirection = 1;
-		}
-
-		if (ScaleRange(controllerEvent.value) > m_deadzone < m_deadzone && ScaleRange(controllerEvent.value) > -m_deadzone)
+		else
 		{
 			m_button[CONTROLLER_AXIS_LEFTX].isHeld = false;
 			m_button[CONTROLLER_AXIS_LEFTX].isDown = false;
-			m_button[CONTROLLER_AXIS_LEFTX].axisDirection = 0;
+			m_button[CONTROLLER_AXIS_LEFTX].axisDirection = 0.0f;
 		}
 		break;
 
 	case SDL_CONTROLLER_AXIS_LEFTY:
-		if (ScaleRange(controllerEvent.value) > m_deadzone)
+		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
 			m_button[CONTROLLER_AXIS_LEFTY].isHeld = true;
 			m_button[CONTROLLER_AXIS_LEFTY].isDown = true;
-			m_button[CONTROLLER_AXIS_LEFTY].axisDirection = -1;
-		}
-		if (ScaleRange(controllerEvent.value) < -m_deadzone)
-		{
-			m_button[CONTROLLER_AXIS_LEFTY].isHeld = true;
-			m_button[CONTROLLER_AXIS_LEFTY].isDown = true;
-			m_button[CONTROLLER_AXIS_LEFTY].axisDirection = 1;
+			m_button[CONTROLLER_AXIS_LEFTY].axisDirection = ScaleRange(controllerEvent.value);
 		}
 
-		if (ScaleRange(controllerEvent.value) > m_deadzone < m_deadzone && ScaleRange(controllerEvent.value) > -m_deadzone)
+		else
 		{
 			m_button[CONTROLLER_AXIS_LEFTY].isHeld = false;
 			m_button[CONTROLLER_AXIS_LEFTY].isDown = false;
-			m_button[CONTROLLER_AXIS_LEFTY].axisDirection = 0;
-		}
-		break;
-
-		//Right Stick
-	case SDL_CONTROLLER_AXIS_RIGHTX:
-		if (ScaleRange(controllerEvent.value) > m_deadzone)
-		{
-			m_button[CONTROLLER_AXIS_RIGHTX].isHeld = true;
-			m_button[CONTROLLER_AXIS_RIGHTX].isDown = true;
-			m_button[CONTROLLER_AXIS_RIGHTX].axisDirection = -1;
-		}
-		if (ScaleRange(controllerEvent.value) < -m_deadzone)
-		{
-			m_button[CONTROLLER_AXIS_RIGHTX].isHeld = true;
-			m_button[CONTROLLER_AXIS_RIGHTX].isDown = true;
-			m_button[CONTROLLER_AXIS_RIGHTX].axisDirection = 1;
-		}
-
-		if (ScaleRange(controllerEvent.value) > m_deadzone < m_deadzone && ScaleRange(controllerEvent.value) > -m_deadzone)
-		{
-			m_button[CONTROLLER_AXIS_RIGHTX].isHeld = false;
-			m_button[CONTROLLER_AXIS_RIGHTX].isDown = false;
-			m_button[CONTROLLER_AXIS_RIGHTX].axisDirection = 0;
-		}
-		break;
-
-	case SDL_CONTROLLER_AXIS_RIGHTY:
-		if (ScaleRange(controllerEvent.value) > m_deadzone)
-		{
-			m_button[CONTROLLER_AXIS_RIGHTY].isHeld = true;
-			m_button[CONTROLLER_AXIS_RIGHTY].isDown = true;
-			m_button[CONTROLLER_AXIS_RIGHTY].axisDirection = -1;
-		}
-		if (ScaleRange(controllerEvent.value) < -m_deadzone)
-		{
-			m_button[CONTROLLER_AXIS_RIGHTY].isHeld = true;
-			m_button[CONTROLLER_AXIS_RIGHTY].isDown = true;
-			m_button[CONTROLLER_AXIS_RIGHTY].axisDirection = 1;
-		}
-
-		if (ScaleRange(controllerEvent.value) > m_deadzone < m_deadzone && ScaleRange(controllerEvent.value) > -m_deadzone)
-		{
-			m_button[CONTROLLER_AXIS_RIGHTY].isHeld = false;
-			m_button[CONTROLLER_AXIS_RIGHTY].isDown = false;
-			m_button[CONTROLLER_AXIS_RIGHTY].axisDirection = 0;
+			m_button[CONTROLLER_AXIS_LEFTY].axisDirection = 0.0f;
 		}
 		break;
 	}
