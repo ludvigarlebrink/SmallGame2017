@@ -92,6 +92,8 @@ void AShader::AddUniforms()
 }
 
 
+
+
 GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType) 
 {
 
