@@ -1,36 +1,55 @@
 #include "ImageLoader.h"
 
-GLTexture ImageLoader::loadBMP(String filepath)
+ImageLoader::ImageLoader()
 {
-	GLTexture texture = {};
 
-	unsigned long width, height;
+}
 
-	SDL_Surface* img = SDL_LoadBMP(filepath.GetAsCStr());
-	texture.width = img->w;
-	texture.height = img->h;
+ImageLoader::~ImageLoader()
+{
+	//glDeleteTextures(1, &m_texture);
+}
+
+
+void ImageLoader::loadBMP(const std::string& filepath, Textures& texture)
+{
+	SDL_Surface *img = SDL_LoadBMP(filepath.c_str());
+	texture.SetHeight(img->h);
+	texture.SetWidth(img->w);
+	if (img == NULL)
+	{
+		std::cout << "BMP Error\n";
+	}
+
 	
 	if (!img) 
 	{
 		// SDL_GetError();
 	}
+	glGenTextures(1, &m_texture);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
 
-	glGenTextures(1, &texture.ID);
-
-	glBindTexture(GL_TEXTURE_2D, texture.ID);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img->w, img->h, 0, GL_BGR, GL_UNSIGNED_BYTE, img->pixels);
+	//glGenerateMipmap(GL_TEXTURE_2D);
 
 	SDL_free(img);
 
-	return texture;
+	//glBindTexture(GL_TEXTURE_2D, 0);
+	//return texture;
+}
+
+
+void ImageLoader::Bind(unsigned int id)
+{
+	assert(id >= 0 && id <= 31);
+	glActiveTexture(GL_TEXTURE0 + id);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+
+
 }

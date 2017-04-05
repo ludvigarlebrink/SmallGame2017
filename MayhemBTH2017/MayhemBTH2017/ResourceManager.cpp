@@ -43,11 +43,11 @@ Mesh& ResourceManager::GetMesh(const String& filepath)
 	return m_meshCache.GetMesh(filepath);
 }
 
-Texture& ResourceManager::GetTexture(const String& filepath)
-{
-	Texture tex;
-	return tex;
-}
+//Texture& ResourceManager::GetTexture(const String& filepath)
+//{
+//	Texture tex;
+//	return tex;
+//}
 
 void ResourceManager::GetShader()
 {
