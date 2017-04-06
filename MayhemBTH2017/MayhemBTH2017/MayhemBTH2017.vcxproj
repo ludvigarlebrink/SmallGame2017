@@ -135,7 +135,6 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="GUI.cpp" />
-    <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -179,7 +178,6 @@
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="GUIQuad.h" />
-    <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>

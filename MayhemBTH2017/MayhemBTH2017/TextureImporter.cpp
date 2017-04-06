@@ -1,6 +1,8 @@
 #include "TextureImporter.h"
+#include <stb_image.h>
 
 
+#include <iostream>
 
 TextureImporter::TextureImporter()
 {
@@ -10,24 +12,26 @@ TextureImporter::~TextureImporter()
 {
 }
 
-void TextureImporter::Import(const char * filepath)
+Texture& TextureImporter::Import(const char * filepath)
 {
 	int width, height, numComponents;
 	unsigned char* imageData = stbi_load(filepath, &width, &height, &numComponents, STBI_rgb_alpha);
-	unsigned char* m_imageData = (unsigned char*)malloc(width * height * numComponents);
+	unsigned char length = sizeof(imageData) / sizeof(*imageData);
+	GLuint * imageData2 = (GLuint*)malloc(sizeof(GLuint) * length);
 
-	//glGenTextures(1, &m_texture);
-	//glBindTexture(GL_TEXTURE_2D, m_texture);
-	//
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	//
-	//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	//
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width,
-	//	height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+	std::cout << length << std::endl;
 
-	stbi_image_free(imageData);
+//	for (size_t i = 0; i < length; i++)
+//	{
+//		imageData2[i] = static_cast<GLuint>(imageData[i]);
+//	}
+//
+//	stbi_image_free(imageData);
+//
+	Texture texture;
+
+	texture.LoadTexture((GLuint*)imageData, width, height, numComponents);
+
+	return texture;
 }
 

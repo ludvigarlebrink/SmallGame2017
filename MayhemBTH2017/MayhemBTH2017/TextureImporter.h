@@ -1,11 +1,13 @@
 #ifndef __TEXTUREIMPORTER_H__
 #define __TEXTUREIMPORTER_H__
+
 #define STB_IMAGE_IMPLEMENTATION
+
+#include "Texture.h"
 
 #include <cstdint>
 #include <cstdlib>
 #include <glew.h>
-#include <stb_image.h>
 
 
 class TextureImporter
@@ -14,7 +16,7 @@ public:
 	TextureImporter();
 	virtual ~TextureImporter();
 
-	void Import(const char* filepath);
+	Texture& Import(const char* filepath);
 };
 
 
