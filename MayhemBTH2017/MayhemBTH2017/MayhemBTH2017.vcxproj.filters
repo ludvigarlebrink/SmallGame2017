@@ -161,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="LevelExporter.cpp">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -270,6 +273,9 @@
     </ClInclude>
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="LevelExporter.h">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">
