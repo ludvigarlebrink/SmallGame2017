@@ -5,7 +5,6 @@
 #include <string>
 
 #include "GLTexture.h"
-#include "ImageLoader.h"
 #include "String.h"
 
 

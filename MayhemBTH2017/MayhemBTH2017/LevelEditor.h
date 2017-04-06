@@ -5,7 +5,7 @@
 #include "InputManager.h"
 #include "Level.h"
 #include "Timer.h"
-
+#include "TextureImporter.h"
 
 #include <glm.hpp>
 #include <cstdint>
@@ -46,6 +46,8 @@ private:
 	Mesh				m_mesh;
 
 	Timer				m_timer;
+	TextureImporter		texImp;
+	Texture				m_texture;
 };
 
 #endif // __LEVELEDITOR_H__

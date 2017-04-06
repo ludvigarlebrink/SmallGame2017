@@ -69,9 +69,6 @@
     <ClCompile Include="VideoManager.cpp">
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="ImageLoader.cpp">
-      <Filter>Engine\Misc</Filter>
-    </ClCompile>
     <ClCompile Include="String.cpp">
       <Filter>Engine\Memory\Containers</Filter>
     </ClCompile>
@@ -173,9 +170,6 @@
       <Filter>Engine\Memory\Containers</Filter>
     </ClInclude>
     <ClInclude Include="GLTexture.h">
-      <Filter>Engine\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageLoader.h">
       <Filter>Engine\Misc</Filter>
     </ClInclude>
     <ClInclude Include="String.h">

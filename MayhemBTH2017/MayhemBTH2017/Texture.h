@@ -12,21 +12,18 @@ public:
 	Texture();
 	virtual ~Texture();
 
-	void LoadTexture(uint32_t id);
+	void LoadTexture(GLuint * textureData, GLsizei width, GLsizei height, GLuint numComponents);
 
 	//::.. GET FUNCTIONS ..:://
-	GLuint GetId() const;
-	GLuint GetHeight() const;
-	GLuint GetWidth() const;
+	uint32_t GetHeight() const;
+	uint32_t GetWidth() const;
 
-	//::.. SET FUNCTIONS ..:://
-	void SetHeight(GLuint y);
-	void SetWidth(GLuint x);
+	void Bind();
 
 private:
-	GLuint m_id;
-	GLuint m_height;
-	GLuint m_width;
+	GLuint m_texture;
+	uint32_t m_height;
+	uint32_t m_width;
 
 
 };
