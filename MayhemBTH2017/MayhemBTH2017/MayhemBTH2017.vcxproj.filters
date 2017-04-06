@@ -161,8 +161,8 @@
     </ClCompile>
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="LevelExporter.cpp">
-      <Filter>Engine\Resources\Exporters</Filter>
+    <ClCompile Include="TextureImporter.cpp">
+      <Filter>Engine\Resources\Importers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -273,8 +273,8 @@
     </ClInclude>
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="LevelExporter.h">
-      <Filter>Engine\Resources\Exporters</Filter>
+    <ClInclude Include="TextureImporter.h">
+      <Filter>Engine\Resources\Importers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
