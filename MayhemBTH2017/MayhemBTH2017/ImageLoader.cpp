@@ -11,7 +11,7 @@ ImageLoader::~ImageLoader()
 }
 
 
-void ImageLoader::loadBMP(const std::string& filepath, Textures& texture)
+void ImageLoader::loadBMP(const std::string& filepath, Texture& texture)
 {
 	SDL_Surface *img = SDL_LoadBMP(filepath.c_str());
 	texture.SetHeight(img->h);

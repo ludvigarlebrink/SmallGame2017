@@ -9,7 +9,7 @@
 #include <string>
 #include <SDL.h>
 #include <iostream>
-#include "Textures.h"
+#include "Texture.h"
 #include <cassert>
 
 class ImageLoader
@@ -17,7 +17,7 @@ class ImageLoader
 public:
 	ImageLoader();
 	virtual ~ImageLoader();
-	void loadBMP(const std::string& filepath, Textures& texture);
+	void loadBMP(const std::string& filepath, Texture& texture);
 	void Bind(unsigned int id);
 
 	GLuint GetTex()const;

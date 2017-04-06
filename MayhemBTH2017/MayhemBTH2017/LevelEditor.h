@@ -5,6 +5,8 @@
 #include "InputManager.h"
 #include "Level.h"
 #include "Timer.h"
+#include "LevelExporter.h"
+#include "LevelImporter.h"
 
 
 #include <glm.hpp>
@@ -34,6 +36,8 @@ private:
 private:
 	InputManager *		m_input;	
 
+	LevelExporter		m_levelExporter;
+	LevelImporter		m_levelImporter;
 	Level				m_level;
 
 	AShader				m_green;

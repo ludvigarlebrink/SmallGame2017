@@ -1,8 +1,6 @@
 #ifndef __LEVELEDITORLEVEL_H__
 #define __LEVELEDITORLEVEL_H__
 
-
-#include "LevelExporter.h"
 #include "Transform.h"
 #include "DebugShaderTech.h"
 #include "Camera.h"
