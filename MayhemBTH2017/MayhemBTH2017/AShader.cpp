@@ -74,6 +74,8 @@ void AShader::Update(Transform& transform, Camera& camera)
 	glUniformMatrix4fv(m_uniforms[M], 1, GL_FALSE, &transform.GetModelMatrix()[0][0]);
 	glUniformMatrix4fv(m_uniforms[V], 1, GL_FALSE, &camera.GetView()[0][0]);
 	glUniformMatrix4fv(m_uniforms[P], 1, GL_FALSE, &camera.GetProjection()[0][0]);
+
+	glUniform1i(m_uniforms[DIFFUSE_MAP], 0);
 }
 
 void AShader::AddAttributeLocation()
@@ -86,9 +88,10 @@ void AShader::AddAttributeLocation()
 
 void AShader::AddUniforms()
 {
-	m_uniforms[0] = glGetUniformLocation(m_programID, "M");
-	m_uniforms[1] = glGetUniformLocation(m_programID, "V");
-	m_uniforms[2] = glGetUniformLocation(m_programID, "P");
+	m_uniforms[M] = glGetUniformLocation(m_programID, "M");
+	m_uniforms[V] = glGetUniformLocation(m_programID, "V");
+	m_uniforms[P] = glGetUniformLocation(m_programID, "P");
+	m_uniforms[DIFFUSE_MAP] = glGetUniformLocation(m_programID, "DiffuseMap");
 }
 
 
