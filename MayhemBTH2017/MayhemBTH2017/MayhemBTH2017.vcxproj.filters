@@ -144,6 +144,7 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="AntiAliasing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -240,6 +241,7 @@
     </ClInclude>
     <ClInclude Include="Textures.h" />
     <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="AntiAliasing.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="leo.frag" />

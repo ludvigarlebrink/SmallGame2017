@@ -16,7 +16,7 @@ void main()
 
 	
 	//FragColor = vec4(Color, 0);
-	//FragColor = vec4(1,0,1,1) * vec4(TexCoord, 1, 0);
-	FragColor = texture2D(tx, TexCoord) * vec4(1,1,1,0);
+	FragColor = vec4(1,0,1,1) * vec4(TexCoord, 1, 0);
+	//FragColor = texture2D(tx, TexCoord) * vec4(1,1,1,0);
 
 }

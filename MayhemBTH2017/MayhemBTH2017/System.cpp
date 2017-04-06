@@ -3,7 +3,7 @@
 
 #include "LevelEditor.h"
 #include "InputManager.h"
-
+#include "AntiAliasing.h"
 
 
 System::System()
@@ -21,6 +21,8 @@ void System::Run()
 {
 	glDisable(GL_CULL_FACE);
 	LevelEditor l;
+	AntiAliasing msaa;
+	msaa.Init();
 
 
 	while (true)
@@ -29,6 +31,7 @@ void System::Run()
 
 
 		l.Update();
+		msaa.Update();
 		// Switch between back and front buffer.
 		m_inputManager->Update();
 		m_videoManager->Swap();
