@@ -86,7 +86,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\User\Source\Repos\SmallGame2017\MayhemBTH2017\MayhemBTH2017\Include\LUA;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,7 +117,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\User\Source\Repos\SmallGame2017\MayhemBTH2017\MayhemBTH2017\Include\LUA;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -136,12 +136,12 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="GUI.cpp" />
-    <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="LevelEditor.cpp" />
-    <ClCompile Include="LevelEditorLevel.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelExporter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -161,9 +161,9 @@
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureCache.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="Textures.cpp" />
-    <ClCompile Include="ToonShader.cpp" />
+    <ClCompile Include="TextureImporter.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="VideoManager.cpp" />
   </ItemGroup>
@@ -179,12 +179,12 @@
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="GUIQuad.h" />
-    <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="LevelEditor.h" />
-    <ClInclude Include="LevelEditorLevel.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelExporter.h" />
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshCache.h" />
@@ -203,23 +203,22 @@
     <ClInclude Include="System.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureCache.h" />
-    <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="Textures.h" />
-    <ClInclude Include="ToonShader.h" />
+    <ClInclude Include="TextureImporter.h" />
+    <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DebugGreen.frag" />
+    <None Include="DebugGreen.vert" />
     <None Include="DebugShader.frag" />
     <None Include="DebugShader.geom" />
     <None Include="DebugShader.vert" />
     <None Include="leo.frag" />
     <None Include="leo.geom" />
     <None Include="leo.vert" />
-    <None Include="MainShader.frag" />
-    <None Include="MainShader.geom" />
-    <None Include="MainShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
