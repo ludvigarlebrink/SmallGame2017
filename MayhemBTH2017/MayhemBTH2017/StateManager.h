@@ -1,19 +1,18 @@
 #ifndef __STATEMANAGER_H__
 #define __STATEMANAGER_H__
 
+enum class GameState
+{
+	START,
+	MAIN_MENU,
+	LEVEL_EDITOR,
+	GAME,
+	EXIT
+};
 
 class StateManager
 {
 public:
-	enum class State
-	{
-		START,
-		MAIN_MENU,
-		LEVEL_EDITOR,
-		GAME,
-		EXIT
-	};
-
 	//::.. DUMMY CONSTRUCTORS ..:://
 	StateManager();
 	virtual ~StateManager();
@@ -23,11 +22,11 @@ public:
 	void ShutDown();
 
 	//::.. SET FUNCTIONS ..:://
-	void SetCurrentState(State state);
+	void SetCurrentState(GameState state);
 
 	//::.. GET FUNCTIONS ..:://
 	StateManager * Get();
-	State GetCurrentState();
+	GameState GetCurrentState();
 
 private:
 	void Init();
@@ -35,7 +34,7 @@ private:
 private:
 	static StateManager * m_instance;
 
-	State m_currentState;
+	GameState m_currentState;
 
 };
 
