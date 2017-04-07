@@ -66,7 +66,7 @@ private:
 
 private:
 	Button					m_button[NUM_BUTTONS];
-	float					m_deadzone; //Set to 0.5 in Init()
+	float					m_deadzone; //Set in Init()
 	SDL_Event				m_event;
 	SDL_GameController*		m_controller;
 
