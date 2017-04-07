@@ -41,18 +41,21 @@ public:
 	uint32_t GetTextureID(uint32_t posX, uint32_t posY);
 	//get grid
 
-	//::.. ADD FUNCTIONS ..:://
+	//::.. MODIFY FUNCTIONS ..:://
 	void AddBlock(uint32_t posX, uint32_t posY);
 	void RemoveBlock(uint32_t posX, uint32_t posY);
 	void AddSpawnPoint(uint32_t posX, uint32_t posY);
+
+
+	void Clear();
+
+	void UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
 	void InitGrid();
 	void InitMesh();
-
-	void UpdateIsOccupied(uint32_t posX, uint32_t posY, bool isOccupied);
 
 
 private:

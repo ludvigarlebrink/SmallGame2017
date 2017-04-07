@@ -34,12 +34,20 @@ private:
 	void RenderSelector();
 
 private:
+	enum MarkerMode
+	{
+		NORMAL = 0,
+		ADD,
+		REMOVE
+	};
+
 	InputManager *		m_input;	
 
 	Level				m_level;
 	LevelExporter		m_levelExporter;
 	LevelImporter		m_levelImporter;
 
+	// MARKER
 	AShader				m_green;
 	uint32_t			m_currentPosX;
 	uint32_t			m_currentPosY;
@@ -50,8 +58,10 @@ private:
 	Mesh				m_mesh;
 
 	Timer				m_timer;
-	TextureImporter		texImp;
+	TextureImporter		m_textureTemp;
 	Texture				m_texture;
+
+	uint32_t			m_mode;
 };
 
 #endif // __LEVELEDITOR_H__
