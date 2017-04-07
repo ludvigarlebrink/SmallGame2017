@@ -168,6 +168,12 @@
     <ClCompile Include="LevelImporter.cpp">
       <Filter>Engine\Resources\Importers</Filter>
     </ClCompile>
+    <ClCompile Include="AMenu.cpp">
+      <Filter>Engine\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="StartMenu.cpp">
+      <Filter>Engine\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -280,6 +286,12 @@
     <ClInclude Include="TextureImporter.h" />
     <ClInclude Include="LevelImporter.h">
       <Filter>Engine\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="AMenu.h">
+      <Filter>Engine\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="StartMenu.h">
+      <Filter>Engine\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
