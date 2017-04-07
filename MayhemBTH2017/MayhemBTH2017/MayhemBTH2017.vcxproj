@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AGameObject.cpp" />
+    <ClCompile Include="AMenu.cpp" />
     <ClCompile Include="ARenderable.cpp" />
     <ClCompile Include="AResource.cpp" />
     <ClCompile Include="AShader.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="StackPool.cpp" />
+    <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="System.cpp" />
@@ -170,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="AAllocator.h" />
     <ClInclude Include="AGameObject.h" />
+    <ClInclude Include="AMenu.h" />
     <ClInclude Include="ARenderable.h" />
     <ClInclude Include="AResource.h" />
     <ClInclude Include="AShader.h" />
@@ -198,6 +201,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="StackPool.h" />
+    <ClInclude Include="StartMenu.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="System.h" />
