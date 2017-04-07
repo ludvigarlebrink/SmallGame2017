@@ -61,6 +61,9 @@
     <Filter Include="Engine\LevelEditor">
       <UniqueIdentifier>{17b46d9f-af33-4e8d-a0f5-2051a451e687}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Menu">
+      <UniqueIdentifier>{15bbf7ad-3aa4-415a-8294-f8c0e338a052}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
