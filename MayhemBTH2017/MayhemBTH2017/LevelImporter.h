@@ -6,7 +6,7 @@
 #include <fstream>
 
 
-class LevelImporter : public Level
+class LevelImporter
 {
 public:
 	LevelImporter();
