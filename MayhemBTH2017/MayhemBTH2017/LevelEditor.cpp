@@ -146,7 +146,7 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
 	{
-		exit(-1);
+		m_levelImporter.ImportLevel(m_level);
 	}
 }
 

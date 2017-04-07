@@ -15,6 +15,7 @@ void LevelExporter::Export(Level & level)
 {
 	const int nrOfBlocks = level.SIZE_X * level.SIZE_Y;
 
+	//TextureID: 4 bytes, isOccupised: 1 byte, isSpawn: 1 byte
 	//In file: (hex) 20 means false, 01 means true for bool
 	//In file: (binary) 00 means false, 01 means true
 	std::ofstream m_fileName("ExportTestLOL.mrlevel", std::ios::binary); //REPLACE WITH FILENAME
@@ -24,10 +25,11 @@ void LevelExporter::Export(Level & level)
 	bool isOccupied[nrOfBlocks] = { 0 };
 	bool isSpawn[nrOfBlocks] = { 0 };
 	uint32_t i = 0;
+	
 
-	for (size_t x = 0; x < level.SIZE_X; x++)
+	for (size_t x = 1; x < level.SIZE_X; x++)
 	{
-		for (size_t y = 0; y < level.SIZE_Y; y++)
+		for (size_t y = 1; y < level.SIZE_Y; y++)
 		{
 			textureID[i] = level.GetTextureID(x, y);
 			isOccupied[i] = level.GetIsOccupied(x, y);
@@ -35,7 +37,7 @@ void LevelExporter::Export(Level & level)
 			i++;
 		}
 	}
-
+	
 	m_fileName.write(reinterpret_cast<char*>(textureID), sizeof(uint32_t) * (level.SIZE_X * level.SIZE_Y));
 	m_fileName.write(reinterpret_cast<char*>(isOccupied), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	m_fileName.write(reinterpret_cast<char*>(isSpawn), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));

@@ -19,9 +19,9 @@ public:
 
 	struct Block
 	{
-		uint32_t	textureID;
-		bool		isOccupied;
-		bool		isSpawnPoint;
+		uint32_t	textureID; // 4 bytes
+		bool		isOccupied; // 1 byte
+		bool		isSpawnPoint; // 1 byte
 	};
 
 	Level();
@@ -33,11 +33,13 @@ public:
 	void SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID);
 	void SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied);
 	void SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint);
+	//set grid
 
 	//::.. GET FUNCTIONS ..:://
 	bool GetIsOccupied(uint32_t posX, uint32_t posY);
 	bool GetIsSpawnPoint(uint32_t posX, uint32_t posY);
 	uint32_t GetTextureID(uint32_t posX, uint32_t posY);
+	//get grid
 
 	//::.. ADD FUNCTIONS ..:://
 	void AddBlock(uint32_t posX, uint32_t posY);
@@ -60,7 +62,7 @@ private:
 		Mesh mesh;
 	};
 
-	Block m_grid[SIZE_X][SIZE_Y];
+	Block		m_grid[SIZE_X][SIZE_Y];
 	MeshObjects m_meshObjects[SIZE_X][SIZE_Y];
 
 	Mesh		m_mesh;
