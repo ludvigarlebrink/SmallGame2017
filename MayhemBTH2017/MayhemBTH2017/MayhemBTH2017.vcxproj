@@ -141,6 +141,7 @@
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelExporter.cpp" />
+    <ClCompile Include="LevelImporter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelExporter.h" />
+    <ClInclude Include="LevelImporter.h" />
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshCache.h" />

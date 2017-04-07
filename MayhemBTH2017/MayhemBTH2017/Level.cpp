@@ -122,7 +122,7 @@ void Level::InitMesh()
 	const uint64_t length2 = SIZE_X * SIZE_Y * 12;
 	m_vertices = (Vertex*)malloc(sizeof(Vertex) * length);
 	m_vertices2 = (Vertex*)malloc(sizeof(Vertex) * length2);
-	
+
 	uint64_t i = 0;
 
 	float scaler = 1.0f;
@@ -279,7 +279,7 @@ void Level::UpdateIsOccupied(uint32_t posX, uint32_t posY, bool isOccupied)
 		}
 	}
 
-	pos = (posY - SIZE_Y +(posX * SIZE_Y)) * 12;
+	pos = (posY - SIZE_Y + (posX * SIZE_Y)) * 12;
 
 	for (size_t i = 6; i < 12; i++)
 	{

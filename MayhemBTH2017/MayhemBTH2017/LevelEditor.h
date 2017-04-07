@@ -6,6 +6,8 @@
 #include "Level.h"
 #include "Timer.h"
 #include "TextureImporter.h"
+#include "LevelExporter.h"
+#include "LevelImporter.h"
 
 #include <glm.hpp>
 #include <cstdint>
@@ -35,6 +37,8 @@ private:
 	InputManager *		m_input;	
 
 	Level				m_level;
+	LevelExporter		m_levelExporter;
+	LevelImporter		m_levelImporter;
 
 	AShader				m_green;
 	uint32_t			m_currentPosX;
