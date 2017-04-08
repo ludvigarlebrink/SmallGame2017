@@ -31,11 +31,12 @@ void MenuSystem::Update()
 	if (m_inputManager->GetButtonDown(CONTROLLER_BUTTON_A))
 	{
 		m_rootMenu->OnPressed();
+		std::cout << "GO FORWARD" << std::endl;
 	}
 
 	if (m_inputManager->GetButtonDown(CONTROLLER_BUTTON_B))
 	{
-		// GO BACK
+		
 	}
 
 	m_rootMenu->Render();

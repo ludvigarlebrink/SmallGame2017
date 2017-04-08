@@ -47,7 +47,7 @@ void AMenu::OnPressed()
 	else if (m_type[m_currentSelection] == GAMESTATE)
 	{
 		m_stateManager->SetCurrentState(m_gameState[m_index[m_currentSelection]]);
-		m_isActive = false;
+		//m_isActive = false;
 	}
 
 }
