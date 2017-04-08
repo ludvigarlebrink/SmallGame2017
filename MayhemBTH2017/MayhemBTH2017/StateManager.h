@@ -4,6 +4,7 @@
 enum class GameState
 {
 	START,
+	LOAD_MAIN_MENU,
 	MAIN_MENU,
 	LEVEL_EDITOR,
 	GAME,
@@ -25,7 +26,7 @@ public:
 	void SetCurrentState(GameState state);
 
 	//::.. GET FUNCTIONS ..:://
-	StateManager * Get();
+	static StateManager * Get();
 	GameState GetCurrentState();
 
 private:

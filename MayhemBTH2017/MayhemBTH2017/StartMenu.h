@@ -3,13 +3,18 @@
 
 
 #include "AMenu.h"
+#include "MainMenu.h"
 
 
-class StartMenu
+class StartMenu : public AMenu
 {
 public:
 	StartMenu();
 	virtual ~StartMenu();
+
+private:
+
+	MainMenu*	m_mainMenu;
 };
 
 

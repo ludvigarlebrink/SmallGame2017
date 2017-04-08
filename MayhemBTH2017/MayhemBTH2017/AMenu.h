@@ -14,9 +14,6 @@ public:
 	AMenu();
 	virtual ~AMenu();
 
-	//::.. PURE VIRTUAL FUNCTIONS ..:://
-	virtual void Init() = 0;
-	virtual void Update() = 0;
 	virtual void Render();
 
 	//::.. MODIFY FUNCTIONS ..:://
@@ -25,10 +22,12 @@ public:
 	void MoveDown();
 
 	//::.. GET FUNCTIONS ..:://
-	uint32_t GetParentID();
+	AMenu * GetParent();
+	bool GetIsActive();
 
 	//::.. SET FUNCTIONS ..:://
-	void SetParentID(uint32_t parentID);
+	void SetParent(AMenu * parent);
+	void SetIsActive(bool value);
 
 protected:
 	//::.. PROTECTED FUNCTIONS ..:://
@@ -45,13 +44,15 @@ private:
 
 	bool					m_isActive;
 
-	uint32_t				m_parentID;
+	AMenu *					m_parent;
 	std::vector<AMenu*>		m_subMenu;
 	std::vector<GameState>	m_gameState;
 	std::vector<uint32_t>	m_index;
 	std::vector<uint32_t>	m_type;
 	uint32_t				m_currentSelection;
 	uint32_t				m_activeSubMenu;
+
+	StateManager *			m_stateManager;
 };
 
 

@@ -175,6 +175,8 @@
       <Filter>Engine\Menu</Filter>
     </ClCompile>
     <ClCompile Include="LevelMarker.cpp" />
+    <ClCompile Include="MenuSystem.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -295,6 +297,8 @@
       <Filter>Engine\Menu</Filter>
     </ClInclude>
     <ClInclude Include="LevelMarker.h" />
+    <ClInclude Include="MenuSystem.h" />
+    <ClInclude Include="MainMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">

@@ -37,6 +37,7 @@ void StateManager::ShutDown()
 //::.. SET FUNCTIONS ..:://
 void StateManager::SetCurrentState(GameState state)
 {
+	m_currentState = state;
 }
 
 StateManager * StateManager::Get()

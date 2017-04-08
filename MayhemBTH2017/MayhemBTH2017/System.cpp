@@ -1,10 +1,7 @@
 #include "System.h"
 
 
-#include "LevelEditor.h"
-#include "InputManager.h"
-
-
+#include "MenuSystem.h"
 
 System::System()
 {
@@ -22,16 +19,36 @@ void System::Run()
 {
 
 	LevelEditor l;
+	MenuSystem m;
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
+	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
+	bool isRunning = true;
 
-	while (true)
+	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		m_inputManager->Update();
 
-		l.Update();
+		switch (m_stateManager->GetCurrentState())
+		{
+		case GameState::START:
+			break;
+		case GameState::MAIN_MENU:
+			m.Update();
+			break;
+		case GameState::LEVEL_EDITOR:
+			l.Update();
+			break;
+		case GameState::GAME:
+			break;
+		case GameState::EXIT:
+			isRunning = false;
+			break;
+		default:
+			break;
+		}
 
 		m_inputManager->Reset();
 
@@ -46,4 +63,5 @@ void System::Init()
 	m_videoManager = VideoManager::Get();
 	m_inputManager = InputManager::Get();
 	m_timeManager = TimeManager::Get();
+	m_stateManager = StateManager::Get();
 }
