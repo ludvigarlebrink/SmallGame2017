@@ -8,7 +8,6 @@ AMenu::AMenu()
 	// Do nothing...
 	m_stateManager = StateManager::Get();
 	m_currentSelection = 0;
-
 }
 
 
@@ -30,11 +29,11 @@ void AMenu::Render()
 
 }
 
-void AMenu::OnPressed()
+void AMenu::GoForward()
 {
 	if (!m_isActive)
 	{
-		m_subMenu[m_activeSubMenu]->OnPressed();
+		m_subMenu[m_activeSubMenu]->GoForward();
 		return;
 	}
 
@@ -47,9 +46,25 @@ void AMenu::OnPressed()
 	else if (m_type[m_currentSelection] == GAMESTATE)
 	{
 		m_stateManager->SetCurrentState(m_gameState[m_index[m_currentSelection]]);
-		m_isActive = false;
+		FreeChildren();
+	}
+}
+
+void AMenu::GoBack()
+{
+	if (!m_isActive)
+	{
+		m_subMenu[m_activeSubMenu]->GoBack();
+		return;
 	}
 
+	if (m_parent == nullptr)
+	{
+		return;
+	}
+
+	m_parent->SetIsActive(true);
+	m_isActive = false;
 }
 
 //::.. MODIFY FUNCTIONS ..:://
@@ -129,5 +144,17 @@ void AMenu::AddChild(GameState gameState)
 AMenu * AMenu::GetChildAt(uint32_t index)
 {
 	return m_subMenu[index];
+}
+
+void AMenu::FreeChildren()
+{
+	if (m_parent == nullptr)
+	{
+		m_isActive = true;
+		return;
+	}
+
+	m_isActive = false;
+	m_parent->FreeChildren();
 }
 

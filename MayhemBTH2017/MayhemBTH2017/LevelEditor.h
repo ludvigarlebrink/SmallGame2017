@@ -8,6 +8,8 @@
 #include "TextureImporter.h"
 #include "LevelExporter.h"
 #include "LevelImporter.h"
+#include "StateManager.h"
+
 
 #include <glm.hpp>
 #include <cstdint>
@@ -32,6 +34,7 @@ private:
 	void ButtonInput();
 	void ClampPos();
 	void RenderSelector();
+	void Reset();
 
 private:
 	enum MarkerMode

@@ -55,7 +55,7 @@ LevelEditor::~LevelEditor()
 
 //::.. UPDATE FUNCTIONS ..:://
 void LevelEditor::Update()
-{	
+{
 	if (m_timer.Update())
 	{
 		AxisMove();
@@ -64,7 +64,7 @@ void LevelEditor::Update()
 	ButtonInput();
 	m_texture.Bind();
 	RenderSelector();
-	
+
 	m_level.Render(m_camera);
 }
 
@@ -104,7 +104,7 @@ void LevelEditor::ButtonInput()
 		uint32_t startY;
 		uint32_t endX;
 		uint32_t endY;
-		
+
 		if (m_currentPosX > m_savedPosX)
 		{
 			startX = m_savedPosX;
@@ -115,7 +115,7 @@ void LevelEditor::ButtonInput()
 			startX = m_currentPosX;
 			endX = m_savedPosX;
 		}
-		
+
 		if (m_currentPosY > m_savedPosY)
 		{
 			startY = m_savedPosY;
@@ -150,12 +150,15 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_X))
 	{
-		m_level.RemoveBlock(m_currentPosX, m_currentPosY);
+		if (m_level.GetIsOccupied(m_currentPosX, m_currentPosY))
+			m_level.RemoveBlock(m_currentPosX, m_currentPosY);
 	}
 
 	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_X))
 	{
-		m_level.RemoveBlock(m_currentPosX, m_currentPosY);
+		if (m_level.GetIsOccupied(m_currentPosX, m_currentPosY))
+			m_level.RemoveBlock(m_currentPosX, m_currentPosY);
+
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
@@ -165,7 +168,15 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
 	{
+		Reset();
 		m_levelImporter.ImportLevel(m_level);
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
+	{
+		Reset();
+		StateManager * state = StateManager::Get();
+		state->SetCurrentState(GameState::MAIN_MENU);
 	}
 }
 
@@ -236,7 +247,7 @@ void LevelEditor::RenderSelector()
 		}
 		else
 		{
-			offsetX = (startX + (sizeX / 2)) ;
+			offsetX = (startX + (sizeX / 2));
 		}
 
 		if (sizeY % 2 == 0)
@@ -262,5 +273,20 @@ void LevelEditor::RenderSelector()
 		m_mesh.Render();
 	}
 
+}
+
+void LevelEditor::Reset()
+{
+
+
+	for (size_t x = 1; x < SIZE_X; x++)
+	{
+		for (size_t y = 1; y < SIZE_Y; y++)
+		{
+			if (m_level.GetIsOccupied(x, y))
+				m_level.RemoveBlock(x, y);
+
+		}
+	}
 }
 

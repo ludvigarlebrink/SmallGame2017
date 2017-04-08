@@ -17,7 +17,8 @@ public:
 	virtual void Render();
 
 	//::.. MODIFY FUNCTIONS ..:://
-	void OnPressed();
+	void GoForward();
+	void GoBack();
 	void MoveUp();
 	void MoveDown();
 
@@ -34,6 +35,8 @@ protected:
 	void AddChild(AMenu* subMenu);
 	void AddChild(GameState gameState);
 	AMenu* GetChildAt(uint32_t index);
+
+	void FreeChildren();
 
 private:
 	enum
