@@ -164,7 +164,6 @@
     <ClCompile Include="LevelExporter.cpp">
       <Filter>Engine\Resources\Exporters</Filter>
     </ClCompile>
-    <ClCompile Include="TextureImporter.cpp" />
     <ClCompile Include="LevelImporter.cpp">
       <Filter>Engine\Resources\Importers</Filter>
     </ClCompile>
@@ -174,9 +173,14 @@
     <ClCompile Include="StartMenu.cpp">
       <Filter>Engine\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="LevelMarker.cpp" />
     <ClCompile Include="MenuSystem.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="TextureImporter.cpp">
+      <Filter>Engine\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelMarker.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -286,7 +290,6 @@
     <ClInclude Include="LevelExporter.h">
       <Filter>Engine\Resources\Exporters</Filter>
     </ClInclude>
-    <ClInclude Include="TextureImporter.h" />
     <ClInclude Include="LevelImporter.h">
       <Filter>Engine\Resources\Importers</Filter>
     </ClInclude>
@@ -296,9 +299,14 @@
     <ClInclude Include="StartMenu.h">
       <Filter>Engine\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="LevelMarker.h" />
     <ClInclude Include="MenuSystem.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="TextureImporter.h">
+      <Filter>Engine\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelMarker.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">

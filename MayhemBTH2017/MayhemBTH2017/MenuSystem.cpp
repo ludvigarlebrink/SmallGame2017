@@ -8,6 +8,7 @@ MenuSystem::MenuSystem()
 	m_stateManager = StateManager::Get();
 	m_rootMenu = new StartMenu;
 	m_rootMenu->SetIsActive(true);
+	m_rootMenu->SetParent(nullptr);
 }
 
 
@@ -30,13 +31,12 @@ void MenuSystem::Update()
 
 	if (m_inputManager->GetButtonDown(CONTROLLER_BUTTON_A))
 	{
-		m_rootMenu->OnPressed();
-		std::cout << "GO FORWARD" << std::endl;
+		m_rootMenu->GoForward();
 	}
 
 	if (m_inputManager->GetButtonDown(CONTROLLER_BUTTON_B))
 	{
-		
+		m_rootMenu->GoBack();
 	}
 
 	m_rootMenu->Render();

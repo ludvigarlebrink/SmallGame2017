@@ -4,7 +4,6 @@
 enum class GameState
 {
 	START,
-	LOAD_MAIN_MENU,
 	MAIN_MENU,
 	LEVEL_EDITOR,
 	GAME,

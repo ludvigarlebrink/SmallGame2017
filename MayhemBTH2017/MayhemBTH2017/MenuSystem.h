@@ -24,9 +24,9 @@ public:
 
 
 private:
-	AMenu * m_rootMenu;
-	InputManager * m_inputManager;
-	StateManager * m_stateManager;
+	AMenu *			m_rootMenu;
+	InputManager *	m_inputManager;
+	StateManager *	m_stateManager;
 
 
 };

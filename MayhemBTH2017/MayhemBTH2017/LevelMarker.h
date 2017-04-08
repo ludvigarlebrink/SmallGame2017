@@ -13,14 +13,30 @@
 #include <cstdint>
 
 
+enum MarkerMode
+{
+	NORMAL = 0,
+	ADD,
+	ADD_DRAG,
+	REMOVE,
+	REMOVE_DRAG,
+};
+
 class LevelMarker
 {
 public:
 	LevelMarker();
 	virtual ~LevelMarker();
 
+	void SetMarkerMode();
+	void MoveUp(float speed);
+	void MoveRight(float speed);
+
+	void Update();
+	void Render();
 
 private:
+
 	// MARKER
 	AShader				m_green;
 	uint32_t			m_currentPosX;
