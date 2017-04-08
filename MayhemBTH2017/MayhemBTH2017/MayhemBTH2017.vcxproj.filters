@@ -55,6 +55,9 @@
     <Filter Include="Engine\Level Editor">
       <UniqueIdentifier>{17b46d9f-af33-4e8d-a0f5-2051a451e687}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GLSL\Postprocessing">
+      <UniqueIdentifier>{71fd0ccb-82a7-4781-ba96-577919bd4ff2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -139,12 +142,16 @@
     <ClCompile Include="StateManager.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="LevelEditorLevel.cpp" />
-    <ClCompile Include="ToonShader.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="Textures.cpp" />
-    <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="AntiAliasing.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelExporter.cpp" />
+    <ClCompile Include="TextureImporter.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="QuadShader.cpp" />
+    <ClCompile Include="MeshQuad.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -233,31 +240,65 @@
     <ClInclude Include="StateManager.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="LevelEditorLevel.h" />
-    <ClInclude Include="ToonShader.h" />
-    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="GLTexture.h">
       <Filter>GLSL</Filter>
     </ClInclude>
-    <ClInclude Include="Textures.h" />
-    <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="AntiAliasing.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelExporter.h" />
+    <ClInclude Include="TextureImporter.h" />
+    <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="QuadShader.h" />
+    <ClInclude Include="MeshQuad.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="leo.frag" />
     <None Include="leo.geom" />
     <None Include="leo.vert" />
-    <None Include="DebugShader.frag" />
-    <None Include="DebugShader.geom" />
-    <None Include="DebugShader.vert" />
-    <None Include="MainShader.frag">
+    <None Include="DebugGreen.frag">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="MainShader.geom">
+    <None Include="DebugGreen.vert">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="MainShader.vert">
+    <None Include="DebugShader.geom">
       <Filter>GLSL</Filter>
+    </None>
+    <None Include="DebugShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="DebugShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="QuadShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="QuadShader.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="QuadShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="BlurrShader.frag">
+      <Filter>GLSL\Postprocessing</Filter>
+    </None>
+    <None Include="BlurrShader.geom">
+      <Filter>GLSL\Postprocessing</Filter>
+    </None>
+    <None Include="BlurrShader.vert">
+      <Filter>GLSL\Postprocessing</Filter>
+    </None>
+    <None Include="SharpnelShader.frag">
+      <Filter>GLSL\Postprocessing</Filter>
+    </None>
+    <None Include="SharpnelShader.geom">
+      <Filter>GLSL\Postprocessing</Filter>
+    </None>
+    <None Include="SharpnelShader.vert">
+      <Filter>GLSL\Postprocessing</Filter>
     </None>
   </ItemGroup>
 </Project>

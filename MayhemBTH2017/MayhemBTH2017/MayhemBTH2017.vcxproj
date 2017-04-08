@@ -147,7 +147,9 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshCache.cpp" />
     <ClCompile Include="MeshImporter.cpp" />
+    <ClCompile Include="MeshQuad.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="QuadShader.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderCache.cpp" />
@@ -189,7 +191,9 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshCache.h" />
     <ClInclude Include="MeshImporter.h" />
+    <ClInclude Include="MeshQuad.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="QuadShader.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShaderCache.h" />
@@ -211,6 +215,9 @@
     <ClInclude Include="VideoManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BlurrShader.frag" />
+    <None Include="BlurrShader.geom" />
+    <None Include="BlurrShader.vert" />
     <None Include="DebugGreen.frag" />
     <None Include="DebugGreen.vert" />
     <None Include="DebugShader.frag" />
@@ -219,6 +226,12 @@
     <None Include="leo.frag" />
     <None Include="leo.geom" />
     <None Include="leo.vert" />
+    <None Include="QuadShader.frag" />
+    <None Include="QuadShader.geom" />
+    <None Include="QuadShader.vert" />
+    <None Include="SharpnelShader.frag" />
+    <None Include="SharpnelShader.geom" />
+    <None Include="SharpnelShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
