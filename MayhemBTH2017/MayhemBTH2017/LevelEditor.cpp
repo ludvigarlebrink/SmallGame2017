@@ -142,12 +142,12 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
 	{
-		m_level.AddSpawnPoint(m_currentPosX, m_currentPosY);
+		m_levelExporter.Export(m_level);
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
 	{
-		exit(-1);
+		m_levelImporter.ImportLevel(m_level);
 	}
 }
 
