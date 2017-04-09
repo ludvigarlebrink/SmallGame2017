@@ -15,6 +15,8 @@ class Level
 {
 public:
 	const static int SIZE_X = 84;
+
+
 	const static int SIZE_Y = 48;
 
 	struct Block
