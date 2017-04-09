@@ -155,7 +155,6 @@
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShaderCache.cpp" />
-    <ClCompile Include="DebugShaderTech.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="StackPool.cpp" />
@@ -198,7 +197,6 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderCache.h" />
-    <ClInclude Include="DebugShaderTech.h" />
     <ClInclude Include="ShaderImporter.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="StackPool.h" />

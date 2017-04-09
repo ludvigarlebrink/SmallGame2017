@@ -2,7 +2,7 @@
 #define __LEVELEDITORLEVEL_H__
 
 #include "Transform.h"
-#include "DebugShaderTech.h"
+#include "AShader.h"
 #include "Camera.h"
 #include "Mesh.h"
 
@@ -61,14 +61,7 @@ private:
 
 
 private:
-	struct MeshObjects
-	{
-		Transform transform;
-		Mesh mesh;
-	};
-
 	Block		m_grid[SIZE_X][SIZE_Y];
-	MeshObjects m_meshObjects[SIZE_X][SIZE_Y];
 
 	Mesh		m_mesh;
 	Vertex *	m_vertices;

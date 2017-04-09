@@ -39,9 +39,22 @@ void AMenu::Render()
 	{
 		m_transform.SetPosition(glm::vec3(0.0f, -(1.0f * i), -0.1f * i));
 		m_shader.Update(m_transform, camera);
-		m_button[i]->texture->Bind();
-		m_button[i]->text->Render();
+		
+		if (m_button[i]->isActive)
+		{
+			m_shader.TempUpdateAlpha(1.0f);
+			m_button[i]->texture->Bind();
+			m_button[i]->text->Render();
+		}
+		else
+		{
+			m_shader.TempUpdateAlpha(0.4f);
+			m_button[i]->texture->Bind();
+			m_button[i]->text->Render();
+		}
 	}
+
+	m_shader.TempUpdateAlpha(1.0f);
 }
 
 void AMenu::GoForward()
@@ -92,12 +105,16 @@ void AMenu::MoveUp()
 		return;
 	}
 
-	++m_currentSelection;
+	m_button[m_currentSelection]->isActive = false;
 
-	if (m_currentSelection >= m_index.size())
+	--m_currentSelection;
+
+	if (m_currentSelection < 0)
 	{
-		m_currentSelection = m_index.size() - 1;
+		m_currentSelection = 0;
 	}
+
+	m_button[m_currentSelection]->isActive = true;
 }
 
 void AMenu::MoveDown()
@@ -108,13 +125,17 @@ void AMenu::MoveDown()
 		return;
 	}
 
-	--m_currentSelection;
+	// TEMP
+	m_button[m_currentSelection]->isActive = false;
 
-	if (m_currentSelection < 0)
+	++m_currentSelection;
+
+	if (m_currentSelection >= m_index.size())
 	{
-		m_currentSelection = 0;
+		m_currentSelection = m_index.size() - 1;
 	}
 
+	m_button[m_currentSelection]->isActive = true;
 }
 
 
@@ -152,6 +173,14 @@ void AMenu::AddChild(AMenu *subMenu, char* title)
 	Text * text = new Text;
 	text->Init();
 	button->text = text;
+	if (m_button.size() == 0)
+	{
+		button->isActive = true;
+	}
+	else
+	{
+		button->isActive = false;
+	}
 	m_button.push_back(button);
 }
 
@@ -173,6 +202,16 @@ void AMenu::AddChild(GameState gameState, char* title)
 	text->Init();
 	button->texture = texture;
 	button->text = text;
+
+	if (m_button.size() == 0)
+	{
+		button->isActive = true;
+	}
+	else
+	{
+		button->isActive = false;
+	}
+
 	m_button.push_back(button);
 }
 

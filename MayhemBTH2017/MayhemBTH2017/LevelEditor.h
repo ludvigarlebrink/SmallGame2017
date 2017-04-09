@@ -27,8 +27,6 @@ public:
 
 	//::.. UPDATE FUNCTIONS ..:://
 	void Update();
-	//Temp!
-	void UpdateQuad();
 
 private:
 	//::.. HELP FUNCTIONS ..:://

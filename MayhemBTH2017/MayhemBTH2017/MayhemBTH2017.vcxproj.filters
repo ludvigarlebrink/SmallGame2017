@@ -123,9 +123,6 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="DebugShaderTech.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="LevelEditor.cpp">
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
@@ -239,9 +236,6 @@
       <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugShaderTech.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="LevelEditor.h">

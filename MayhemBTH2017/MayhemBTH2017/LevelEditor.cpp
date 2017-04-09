@@ -265,6 +265,7 @@ void LevelEditor::RenderSelector()
 		m_transform.SetScale(sizeX, sizeY, 1.0f);
 		m_transform.SetPosition(offsetX, offsetY, -2.001f);
 		m_green.Update(m_transform, m_camera);
+		m_green.TempUpdateAlpha(1.0f);
 		m_mesh.Render();
 	}
 	else
@@ -272,11 +273,9 @@ void LevelEditor::RenderSelector()
 		m_transform.SetScale(1.0f, 1.0f, 1.0f);
 		m_transform.SetPosition(m_currentPosX, m_currentPosY, -2.001f);
 		m_green.Update(m_transform, m_camera);
+		m_green.TempUpdateAlpha(1.0f);
 		m_mesh.Render();
 	}
-
-
-
 
 }
 
