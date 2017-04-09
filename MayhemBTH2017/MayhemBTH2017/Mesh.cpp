@@ -81,6 +81,9 @@ bool Mesh::FreeMesh()
 }
 
 
+
+
+
 //::.. RENDER ..:://
 bool Mesh::Render()
 {
@@ -89,6 +92,7 @@ bool Mesh::Render()
 	glBindVertexArray(0);
 	return true;
 }
+
 
 
 //::.. GET FUNCTIONS ..:://
