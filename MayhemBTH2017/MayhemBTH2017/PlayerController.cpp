@@ -82,9 +82,9 @@ bool PlayerController::GetButtonUp(size_t button)
 	return m_button[button].isUp;
 }
 
-float PlayerController::GetAxisDirection(size_t button)
+float PlayerController::GetAxisDirection(size_t axis)
 {
-	return m_button[button].axisDirection;
+	return m_axis[axis].axisDirection;
 }
 
 size_t PlayerController::GetNumButtons()
@@ -101,7 +101,6 @@ void PlayerController::Init()
 		m_button[i].isDown = false;
 		m_button[i].isHeld = false;
 		m_button[i].isUp = false;
-		m_button[i].axisDirection = 0;
 	}
 
 	m_deadzone = 0.3f;
@@ -253,50 +252,42 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 	case SDL_CONTROLLER_AXIS_LEFTX:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_button[CONTROLLER_AXIS_LEFTX].isHeld = true;
-			m_button[CONTROLLER_AXIS_LEFTX].isDown = true;
-			m_button[CONTROLLER_AXIS_LEFTX].axisDirection = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = ScaleRange(controllerEvent.value);
 
-			if (m_button[CONTROLLER_AXIS_LEFTX].axisDirection > m_deadzone)
+			if (m_axis[CONTROLLER_AXIS_LEFTX].axisDirection > m_deadzone)
 			{
-				m_button[CONTROLLER_AXIS_LEFTX].axisDirection = 1.0f;
+				m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = 1.0f;
 			}
 
-			if (m_button[CONTROLLER_AXIS_LEFTX].axisDirection < -m_deadzone)
+			if (m_axis[CONTROLLER_AXIS_LEFTX].axisDirection < -m_deadzone)
 			{
-				m_button[CONTROLLER_AXIS_LEFTX].axisDirection = -1.0f;
+				m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = -1.0f;
 			}
 		}
 		else
 		{
-			m_button[CONTROLLER_AXIS_LEFTX].isHeld = false;
-			m_button[CONTROLLER_AXIS_LEFTX].isDown = false;
-			m_button[CONTROLLER_AXIS_LEFTX].axisDirection = 0.0f;
+			m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = 0.0f;
 		}
 		break;
 		//Vetical
 	case SDL_CONTROLLER_AXIS_LEFTY:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_button[CONTROLLER_AXIS_LEFTY].isHeld = true;
-			m_button[CONTROLLER_AXIS_LEFTY].isDown = true;
-			m_button[CONTROLLER_AXIS_LEFTY].axisDirection = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_LEFTY].axisDirection = ScaleRange(controllerEvent.value);
 
-			if (m_button[CONTROLLER_AXIS_LEFTY].axisDirection > m_deadzone)
+			if (m_axis[CONTROLLER_AXIS_LEFTY].axisDirection > m_deadzone)
 			{
-				m_button[CONTROLLER_AXIS_LEFTY].axisDirection = 1.0f;
+				m_axis[CONTROLLER_AXIS_LEFTY].axisDirection = 1.0f;
 			}
 
-			if (m_button[CONTROLLER_AXIS_LEFTY].axisDirection < -m_deadzone)
+			if (m_axis[CONTROLLER_AXIS_LEFTY].axisDirection < -m_deadzone)
 			{
-				m_button[CONTROLLER_AXIS_LEFTY].axisDirection = -1.0f;
+				m_axis[CONTROLLER_AXIS_LEFTY].axisDirection = -1.0f;
 			}
 		}
 		else
 		{
-			m_button[CONTROLLER_AXIS_LEFTY].isHeld = false;
-			m_button[CONTROLLER_AXIS_LEFTY].isDown = false;
-			m_button[CONTROLLER_AXIS_LEFTY].axisDirection = 0.0f;
+			m_axis[CONTROLLER_AXIS_LEFTY].axisDirection = 0.0f;
 		}
 		break;
 
@@ -306,50 +297,42 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 	case SDL_CONTROLLER_AXIS_RIGHTX:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_button[CONTROLLER_AXIS_RIGHTX].isHeld = true;
-			m_button[CONTROLLER_AXIS_RIGHTX].isDown = true;
-			m_button[CONTROLLER_AXIS_RIGHTX].axisDirection = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = ScaleRange(controllerEvent.value);
 
-			if (m_button[CONTROLLER_AXIS_RIGHTX].axisDirection > m_deadzone)
+			if (m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection > m_deadzone)
 			{
-				m_button[CONTROLLER_AXIS_RIGHTX].axisDirection = 1.0f;
+				m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = 1.0f;
 			}
 
-			if (m_button[CONTROLLER_AXIS_RIGHTX].axisDirection < -m_deadzone)
+			if (m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection < -m_deadzone)
 			{
-				m_button[CONTROLLER_AXIS_RIGHTX].axisDirection = -1.0f;
+				m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = -1.0f;
 			}
 		}
 		else
 		{
-			m_button[CONTROLLER_AXIS_RIGHTX].isHeld = false;
-			m_button[CONTROLLER_AXIS_RIGHTX].isDown = false;
-			m_button[CONTROLLER_AXIS_RIGHTX].axisDirection = 0.0f;
+			m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = 0.0f;
 		}
 		break;
 
 	case SDL_CONTROLLER_AXIS_RIGHTY:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_button[CONTROLLER_AXIS_RIGHTY].isHeld = true;
-			m_button[CONTROLLER_AXIS_RIGHTY].isDown = true;
-			m_button[CONTROLLER_AXIS_RIGHTY].axisDirection = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection = ScaleRange(controllerEvent.value);
 
-			if (m_button[CONTROLLER_AXIS_RIGHTY].axisDirection > m_deadzone)
+			if (m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection > m_deadzone)
 			{
-				m_button[CONTROLLER_AXIS_RIGHTY].axisDirection = 1.0f;
+				m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection = 1.0f;
 			}
 
-			if (m_button[CONTROLLER_AXIS_RIGHTY].axisDirection < -m_deadzone)
+			if (m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection < -m_deadzone)
 			{
-				m_button[CONTROLLER_AXIS_RIGHTY].axisDirection = -1.0f;
+				m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection = -1.0f;
 			}
 		}
 		else
 		{
-			m_button[CONTROLLER_AXIS_RIGHTY].isHeld = false;
-			m_button[CONTROLLER_AXIS_RIGHTY].isDown = false;
-			m_button[CONTROLLER_AXIS_RIGHTY].axisDirection = 0.0f;
+			m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection = 0.0f;
 		}
 		break;
 	}
