@@ -27,6 +27,7 @@ GLuint AShader::GetProgramID()
 //::.. HELP FUNCTIONS ..:://
 void AShader::Init(const std::string& filename, bool hasGeomShader) 
 {
+	//awsd
 	m_programID = glCreateProgram();
 
 	m_hasGeomShader = false;
