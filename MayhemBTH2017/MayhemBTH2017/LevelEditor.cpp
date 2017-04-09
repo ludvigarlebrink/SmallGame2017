@@ -45,6 +45,8 @@ LevelEditor::LevelEditor()
 	m_transform.SetPosition(0.0f, 0.0f, 0.0f);
 	m_mesh.LoadMesh(verts, 6);
 
+	std::cout << round(3.6f) << std::endl;
+
 }
 
 LevelEditor::~LevelEditor()
