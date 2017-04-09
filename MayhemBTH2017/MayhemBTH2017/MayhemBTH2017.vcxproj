@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="AMenu.cpp" />
+    <ClCompile Include="AntiAliasing.cpp" />
     <ClCompile Include="ARenderable.cpp" />
     <ClCompile Include="AResource.cpp" />
     <ClCompile Include="AShader.cpp" />
@@ -153,7 +154,6 @@
     <ClCompile Include="MeshImporter.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderCache.cpp" />
     <ClCompile Include="DebugShaderTech.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
@@ -174,13 +174,13 @@
     <ClInclude Include="AAllocator.h" />
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="AMenu.h" />
+    <ClInclude Include="AntiAliasing.h" />
     <ClInclude Include="ARenderable.h" />
     <ClInclude Include="AResource.h" />
     <ClInclude Include="AShader.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DefaultAllocator.h" />
-    <ClInclude Include="GLTexture.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -197,7 +197,6 @@
     <ClInclude Include="MeshImporter.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Scene.h" />
     <ClInclude Include="ShaderCache.h" />
     <ClInclude Include="DebugShaderTech.h" />
     <ClInclude Include="ShaderImporter.h" />

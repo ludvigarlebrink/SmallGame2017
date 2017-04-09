@@ -79,7 +79,6 @@ void LevelEditor::AxisMove()
 	{
 		m_currentPosY -= m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY);
 		m_currentPosX -= m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX);
-		std::cout << m_currentPosX << std::endl;
 	}
 
 	//Right stick

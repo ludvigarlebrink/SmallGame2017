@@ -108,9 +108,6 @@
     <ClCompile Include="System.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="AGameObject.cpp">
       <Filter>Engine\GameObjects</Filter>
     </ClCompile>
@@ -179,6 +176,9 @@
     <ClCompile Include="Button.cpp">
       <Filter>Engine\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="AntiAliasing.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -186,9 +186,6 @@
     </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Engine\Memory\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="GLTexture.h">
-      <Filter>Engine\Misc</Filter>
     </ClInclude>
     <ClInclude Include="String.h">
       <Filter>Engine\Memory\Containers</Filter>
@@ -225,9 +222,6 @@
     </ClInclude>
     <ClInclude Include="System.h">
       <Filter>Engine\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="AGameObject.h">
       <Filter>Engine\GameObjects</Filter>
@@ -299,6 +293,9 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Engine\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiAliasing.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
