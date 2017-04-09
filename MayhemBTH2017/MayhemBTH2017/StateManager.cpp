@@ -35,8 +35,9 @@ void StateManager::ShutDown()
 
 
 //::.. SET FUNCTIONS ..:://
-void StateManager::SetCurrentState(State state)
+void StateManager::SetCurrentState(GameState state)
 {
+	m_currentState = state;
 }
 
 StateManager * StateManager::Get()
@@ -46,12 +47,12 @@ StateManager * StateManager::Get()
 
 
 //::.. GET FUNCTIONS ..:://
-StateManager::State StateManager::GetCurrentState()
+GameState StateManager::GetCurrentState()
 {
 	return m_currentState;
 }
 
 void StateManager::Init()
 {
-	m_currentState = State::START;
+	m_currentState = GameState::START;
 }

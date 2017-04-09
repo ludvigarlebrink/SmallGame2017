@@ -66,22 +66,22 @@ void Level::AddBlock(uint32_t posX, uint32_t posY)
 {
 	if (!m_grid[posX][posY].isOccupied)
 	{
-		SetOccupied(posX, posY, !GetIsOccupied(posX, posY));
+		SetOccupied(posX, posY, true);
 	}
 
-	UpdateIsOccupied(posX, posY, true);
+	UpdateBlocks(posX, posY, true);
 	m_mesh.Update();
 	m_mesh2.Update();
 }
 
 void Level::RemoveBlock(uint32_t posX, uint32_t posY)
 {
-	if (!m_grid[posX][posY].isOccupied)
+	if (m_grid[posX][posY].isOccupied)
 	{
-		SetOccupied(posX, posY, !GetIsOccupied(posX, posY));
+		SetOccupied(posX, posY, false);
 	}
 
-	UpdateIsOccupied(posX, posY, false);
+	UpdateBlocks(posX, posY, false);
 	m_mesh.Update();
 	m_mesh2.Update();
 }
@@ -224,7 +224,7 @@ void Level::InitMesh()
 	m_mesh2.LoadMesh(m_vertices2, length2);
 }
 
-void Level::UpdateIsOccupied(uint32_t posX, uint32_t posY, bool isOccupied)
+void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied)
 {
 	uint64_t pos = (posY + (posX * SIZE_Y)) * 6;
 	for (size_t i = 0; i < 6; i++)

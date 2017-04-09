@@ -5,6 +5,7 @@
 Timer::Timer()
 {
 	m_timeManager = TimeManager::Get();
+	// Temp
 }
 
 

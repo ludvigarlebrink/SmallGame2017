@@ -1,10 +1,11 @@
 #ifndef __SYSTEM_H__
 #define __SYSTEM_H__
 
-
+#include "LevelEditor.h"
 #include "VideoManager.h"
 #include "InputManager.h"
 #include "TimeManager.h"
+#include "StateManager.h"
 
 class System
 {
@@ -24,6 +25,7 @@ private:
 	VideoManager *	m_videoManager;
 	InputManager *	m_inputManager;
 	TimeManager *	m_timeManager;
+	StateManager*	m_stateManager;
 
 };
 

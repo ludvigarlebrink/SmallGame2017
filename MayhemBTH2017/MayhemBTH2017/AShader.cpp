@@ -3,7 +3,7 @@
 
 
 
-//::..CONSTRUCTORS..:://
+//::.. CONSTRUCTORS ..:://
 AShader::AShader()
 {
 }
@@ -18,13 +18,13 @@ AShader:: ~AShader()
 	Release();
 }
 
-//::..GET FUNCTIONS..:://
+//::.. GET FUNCTIONS ..:://
 GLuint AShader::GetProgramID() 
 {
 	return m_programID;
 }
 
-//::..HELPER FUNCTIONS..:://
+//::.. HELP FUNCTIONS ..:://
 void AShader::Init(const std::string& filename, bool hasGeomShader) 
 {
 	m_programID = glCreateProgram();

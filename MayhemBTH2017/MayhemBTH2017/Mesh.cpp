@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-
+#include <iostream>
 
 //::.. CONSTRUCTORS ..:://
 Mesh::Mesh()
@@ -45,7 +45,7 @@ bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts)
 	// Copy data to the gpu.
 	glBufferData(GL_ARRAY_BUFFER, sizeof (Vertex) * numVerts, vertices, GL_STATIC_DRAW);
 	
-	uint64_t offset = 0;
+	GLuint offset = 0;
 
 	// Position.
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(offset));
@@ -60,7 +60,6 @@ bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts)
 
 	// Unbind
 	glBindVertexArray(0);
-
 
 	m_isLoaded = true;
 	return true;
@@ -80,9 +79,6 @@ bool Mesh::FreeMesh()
 }
 
 
-
-
-
 //::.. RENDER ..:://
 bool Mesh::Render()
 {
@@ -91,7 +87,6 @@ bool Mesh::Render()
 	glBindVertexArray(0);
 	return true;
 }
-
 
 
 //::.. GET FUNCTIONS ..:://

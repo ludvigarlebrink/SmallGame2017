@@ -59,9 +59,9 @@ bool InputManager::GetButtonUp(size_t button, size_t controller)
 	return m_playerController[controller].GetButtonUp(button);
 }
 
-float InputManager::GetAxisDirection(size_t button, size_t controller)
+float InputManager::GetAxisDirection(size_t axis, size_t controller)
 {
-	return m_playerController[controller].GetAxisDirection(button);
+	return m_playerController[controller].GetAxisDirection(axis);
 }
 
 void InputManager::SetNrOfPlayers(uint32_t value)
