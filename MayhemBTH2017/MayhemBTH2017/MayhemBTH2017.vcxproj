@@ -91,7 +91,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>.\Lib\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -124,7 +124,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>.\Lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -133,9 +133,9 @@
     <ClCompile Include="ARenderable.cpp" />
     <ClCompile Include="AResource.cpp" />
     <ClCompile Include="AShader.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
-    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -157,10 +157,8 @@
     <ClCompile Include="ShaderCache.cpp" />
     <ClCompile Include="DebugShaderTech.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="SpriteBatch.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="StackPool.cpp" />
-    <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="System.cpp" />
@@ -179,11 +177,10 @@
     <ClInclude Include="ARenderable.h" />
     <ClInclude Include="AResource.h" />
     <ClInclude Include="AShader.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="GLTexture.h" />
-    <ClInclude Include="GUI.h" />
-    <ClInclude Include="GUIQuad.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -204,10 +201,8 @@
     <ClInclude Include="ShaderCache.h" />
     <ClInclude Include="DebugShaderTech.h" />
     <ClInclude Include="ShaderImporter.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="SpriteBatch.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="StackPool.h" />
-    <ClInclude Include="StartMenu.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="System.h" />

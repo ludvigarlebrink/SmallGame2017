@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-
+#include <iostream>
 
 //::.. CONSTRUCTORS ..:://
 Mesh::Mesh()
@@ -61,6 +61,7 @@ bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts)
 	// Unbind
 	glBindVertexArray(0);
 
+	std::cout << "Test" << std::endl;
 
 	m_isLoaded = true;
 	return true;

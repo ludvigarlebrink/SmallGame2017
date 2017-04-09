@@ -6,7 +6,7 @@ MenuSystem::MenuSystem()
 {
 	m_inputManager = InputManager::Get();
 	m_stateManager = StateManager::Get();
-	m_rootMenu = new StartMenu;
+	m_rootMenu = new MainMenu;
 	m_rootMenu->SetIsActive(true);
 	m_rootMenu->SetParent(nullptr);
 }

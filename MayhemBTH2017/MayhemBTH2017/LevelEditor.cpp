@@ -7,7 +7,7 @@ LevelEditor::LevelEditor()
 {
 	m_mode = NORMAL;
 
-	m_camera.SetRotation(0.0f, -0.0f);
+
 	m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
 	m_input = InputManager::Get();
 	m_green.Init("DebugGreen", false);
