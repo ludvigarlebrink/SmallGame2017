@@ -4,16 +4,18 @@
 
 #include "Mesh.h"
 
-
 #include <SDL_ttf.h>
 
 
 class Text
 {
 public:
+
+	//::.. DUMMY CONSTRUCTORS ..:://
 	Text();
 	virtual ~Text();
 
+	//::.. HELP FUNCTIONS ..:://
 	void Init();
 	void Render();
 

@@ -92,6 +92,11 @@ size_t PlayerController::GetNumButtons()
 	return NUM_BUTTONS;
 }
 
+size_t PlayerController::GetNumAxis()
+{
+	return NUM_AXIS;
+}
+
 
 //::.. HELP FUNCTIONS ..:://
 void PlayerController::Init()

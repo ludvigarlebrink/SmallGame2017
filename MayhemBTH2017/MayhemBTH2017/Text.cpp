@@ -4,11 +4,13 @@
 
 Text::Text()
 {
+	// Do nothing...
 }
 
 
 Text::~Text()
 {
+	// Do nothing...
 }
 
 
