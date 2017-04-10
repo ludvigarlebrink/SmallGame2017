@@ -3,27 +3,38 @@
 
 in vec3 inPos;
 in vec3 inDir;
-in vec3 inCol;
+in vec4 inCol;
 
-in float inVel;
 in float inLife;
-
+in float inSize;
 
 out vec3 outPos;
 out vec3 outDir;
-out vec3 outCol;
+out vec4 outCol;
 
-out float outVel;
 out float outLife;
+out float outSize;
 
 
 void main()
 {
-	outPos=inPos+inLife*inDir;
+	if(outLife<10.0f){
+	outPos=inPos+0.06f*normalize(inDir);
+	outCol.a=inCol.a-outLife;
+	outCol.x=inCol.x;
+	outCol.y=inCol.y;
+	outCol.z=inCol.z;
 	outDir=inDir;
-	outCol=inCol;
-	outVel=inVel;
-	outLife=sin(sin(inLife)+05f);
+	outLife=inLife+0.05f;
+	outSize=inSize;
+	}
+
+
+	if(outLife>10.0f){
+		outPos=inPos;
+		outLife=0.0f;
+	}
+
 
 }
 

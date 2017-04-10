@@ -18,11 +18,12 @@ class ParticleSystem : public AShader
 {
 public:
 	//::..CONSTRUCTORS..:://
-	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec3 col);
+	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf);
 	void UpdateParticles();
 
 	//Destructor
 	virtual ~ParticleSystem();
+	void RenderTransformed(GLuint textureID);
 
 	//::..HELPER FUNCTIONS..:://
 
@@ -34,7 +35,6 @@ private:
 	void AddTimerUniform();
 	void ShadersInit();
 	void LoadParticleVBOS(Particle* p, GLuint nrOfVerts);
-	void RenderTransformed();
 	void TransformFeedbackSwap();
 	glm::vec3 GetRandomDir();
 
@@ -42,7 +42,7 @@ private:
 	Particle m_part[1];
 
 
-	const uint64_t PARTICLE_COUNT = 10000;
+	uint64_t PARTICLE_COUNT;
 	AShader	m_pShader;
 	AShader	m_emitterShader;
 	AShader m_drawShader;
@@ -68,7 +68,7 @@ private:
 	GLuint testBUffer;
 	GLfloat info[6];
 	GLuint particlePosID, particleDirID, particleColorID, particleVelocityID, particleTimeAliveID;
-	GLuint inPosID, inDirID, inColID, inVelID, inTimeID;
+	GLuint inPosID, inDirID, inColID, inTimeID, inSizeID;
 	uint64_t offset;
 
 };

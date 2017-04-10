@@ -13,11 +13,11 @@
 
 
 struct Particle {
-	glm::vec3 position = glm::vec3(0.0, 0.0, 0.0);
-	glm::vec3 direction = glm::vec3(0.0, 0.0, 0.0);
-	glm::vec3 color = glm::vec3(0.0, 1.0, 0.0);
-	GLfloat velocity = 1.0f;
-	GLfloat timeAlive = 0.0f;
+	glm::vec3 position;
+	glm::vec3 direction;
+	glm::vec4 color;
+	GLfloat life;
+	GLfloat size;
 
 
 };

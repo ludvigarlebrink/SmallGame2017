@@ -24,13 +24,13 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	GLuint GetProgramID();
+	GLuint GetTextureID();
 
 	//::.. MODIFY FUNCTIONS ..:://
 	void Init(const std::string& filename, bool hasGeomShader, bool particles);
 	void Release();
 	void Bind();
 	virtual void Update(Transform& transform, Camera& camera);
-
 
 	//::.. PROTECTED FUNCTIONS ..:://
 	virtual void AddAttributeLocation();
@@ -65,6 +65,7 @@ private:
 	GLuint m_programID;
 	GLuint m_shader[NR_SHADERS];
 	GLuint m_uniforms[NR_UNIFORMS];
+	GLuint m_textureID;
 };
 
 #endif

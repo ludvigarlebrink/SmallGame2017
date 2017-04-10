@@ -2,29 +2,36 @@
 
 
 
-ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec3 col)
+ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf)
 
 {
 	m_drawShader.Init("DrawShader", 1, 0); //Shade for drawing the transformed particles
-	m_pShader.Init(shadername, false, 1); //sets varying to "outValue" and only uses a vertex shader
 
+
+
+	//vertex shader program only
+	m_pShader.Init(shadername, false, 1); //sets varying to "outValue" and only uses a vertex shader
 	glLinkProgram(m_pShader.GetProgramID()); ///////////////////////////////////////////////LINK THE PROGRAM
 	glUseProgram(m_pShader.GetProgramID());
 
 	//GENERATE VERTEX ARRAY OBJECT
 	glGenVertexArrays(1, &m_vao[0]); //Vertex array object to store  the data
 	glBindVertexArray(m_vao[0]); //use this vertex arrray object
+	
+	PARTICLE_COUNT = nrOf;
 
+	Particle particle[10000]; //Max number of particles
 
-	Particle particle[10000];
+	//for nr of particles in parameter, fill with info
 
-	for (uint64_t i = 0; i < 10000; i++) {
+	for (uint64_t i = 0; i < nrOf; i++) {
 
 		particle[i].position = pos;
+		particle[i].direction =(GetRandomDir());
 		particle[i].color = col;
-		particle[i].direction = normalize(GetRandomDir());
-		particle[i].velocity = 0.5f;
-		particle[i].timeAlive = 0.0f;
+		particle[i].life = 0.0f;
+		particle[i].size = size;
+
 	}
 
 
@@ -33,31 +40,35 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec3 
 	glBindBuffer(GL_ARRAY_BUFFER, m_particleBufferA);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Particle)*PARTICLE_COUNT, particle, GL_STREAM_DRAW);
 
-	offset = 0;
+	
 	//SET ATTRIBUTE POINTERS
 	inPosID = glGetAttribLocation(m_pShader.GetProgramID(), "inPos");
 	glEnableVertexAttribArray(inPosID);
 	glVertexAttribPointer(inPosID, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(0));
-	offset += 3;
+
 
 	inDirID = glGetAttribLocation(m_pShader.GetProgramID(), "inDir");
 	glEnableVertexAttribArray(inDirID);
 	glVertexAttribPointer(inDirID, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3)));
-	offset += 3;
+
 
 	inColID = glGetAttribLocation(m_pShader.GetProgramID(), "inCol");
 	glEnableVertexAttribArray(inColID);
-	glVertexAttribPointer(inColID, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3) * 2));
-	offset += 3;
+	glVertexAttribPointer(inColID, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3)*2));
 
-	inVelID = glGetAttribLocation(m_pShader.GetProgramID(), "inVel");
-	glEnableVertexAttribArray(inVelID);
-	glVertexAttribPointer(inVelID, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3) * 3));
-	offset += 1;
+
 
 	inTimeID = glGetAttribLocation(m_pShader.GetProgramID(), "inLife");
 	glEnableVertexAttribArray(inTimeID);
-	glVertexAttribPointer(inTimeID, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3) * 3 + sizeof(GLfloat)));
+	glVertexAttribPointer(inTimeID, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3)*3+sizeof(glm::vec4)));
+
+
+
+	inSizeID = glGetAttribLocation(m_pShader.GetProgramID(), "inSize");
+	glEnableVertexAttribArray(inSizeID);
+	glVertexAttribPointer(inSizeID, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3)*3+sizeof(GLfloat)));
+
+
 
 	//Buffer to hold the outValue retrieved from the geopass vertex shader
 	glGenBuffers(1, &m_particleBufferB);
@@ -80,9 +91,6 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec3 
 
 	glDisable(GL_RASTERIZER_DISCARD);
 	glBindVertexArray(0);
-
-
-
 
 
 	//// INFO FOR TRIANGLE
@@ -135,10 +143,10 @@ void ParticleSystem::LoadParticleVBOS(Particle* p, GLuint nrOfVerts) {
 
 }
 
-void ParticleSystem::RenderTransformed() {
+void ParticleSystem::RenderTransformed(GLuint textureID) {
 
+	
 
-	glUseProgram(m_drawShader.GetProgramID()); //the program that draws the transformed particle
 	glBindVertexArray(m_drawVAO);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glBindVertexArray(0);
@@ -146,8 +154,8 @@ void ParticleSystem::RenderTransformed() {
 }
 void ParticleSystem::UpdateParticles() {
 
-	glUseProgram(m_pShader.GetProgramID());
 
+	glUseProgram(m_pShader.GetProgramID());
 	glEnable(GL_RASTERIZER_DISCARD);
 	glBindBuffer(GL_ARRAY_BUFFER, m_particleBufferA);
 
@@ -157,24 +165,27 @@ void ParticleSystem::UpdateParticles() {
 	glEnableVertexAttribArray(inPosID);
 	glVertexAttribPointer(inPosID, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(0));
 
+
 	inDirID = glGetAttribLocation(m_pShader.GetProgramID(), "inDir");
 	glEnableVertexAttribArray(inDirID);
 	glVertexAttribPointer(inDirID, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3)));
+
 
 	inColID = glGetAttribLocation(m_pShader.GetProgramID(), "inCol");
 	glEnableVertexAttribArray(inColID);
 	glVertexAttribPointer(inColID, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3) * 2));
 
-	inVelID = glGetAttribLocation(m_pShader.GetProgramID(), "inVel");
-	glEnableVertexAttribArray(inVelID);
-	glVertexAttribPointer(inVelID, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3) * 3));
 
 	inTimeID = glGetAttribLocation(m_pShader.GetProgramID(), "inLife");
 	glEnableVertexAttribArray(inTimeID);
-	glVertexAttribPointer(inTimeID, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3) * 3 + sizeof(GLfloat)));
+	glVertexAttribPointer(inTimeID, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3) * 3 + sizeof(glm::vec4)));
 
+
+	inSizeID = glGetAttribLocation(m_pShader.GetProgramID(), "inSize");
+	glEnableVertexAttribArray(inSizeID);
+	glVertexAttribPointer(inSizeID, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3) * 3 + sizeof(GLfloat)));
+	
 	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBufferB);
-
 	glBeginTransformFeedback(GL_POINTS);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glEndTransformFeedback();
@@ -184,16 +195,17 @@ void ParticleSystem::UpdateParticles() {
 	//glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(info), &info);
 	//std::cout << info[0] << ". " << info[1] << ", " << info[2] << ", " << info[3] << ", " << info[4] << ", " << info[5] << std::endl;
 
-
-	const static int SIZE_X = 84;
-	const static int SIZE_Y = 48;
-
-	m_camera.SetRotation(0.0f, -0.0f);
-	m_camera.SetPosition(glm::vec3(((SIZE_X / 2) - 0.5f), ((SIZE_Y / 2) + 0.5f), -60));
-
-	m_drawShader.Bind();
+	glUseProgram(m_drawShader.GetProgramID());
+	
+	m_camera.SetRotation(0.0f, 0.0f);
+	m_camera.SetPosition(glm::vec3(((48 / 2) - 0.5f), ((54 / 2) + 0.5f), -60));
+	
 	m_drawShader.Update(tmpTransform, m_camera);
-	RenderTransformed();
+	
+	//Clear depth buffer for the particles
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
 
 }
 

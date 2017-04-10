@@ -7,7 +7,6 @@
 #include "MeshQuad.h"
 #include "ParticleSystem.h"
 
-
 System::System()
 {
 	Init();
@@ -25,16 +24,17 @@ void System::Run()
 	MeshQuad quad;
 	AntiAliasing msaa;
 	LevelEditor l;
-	ParticleSystem p("GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+	ParticleSystem p("GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec4(0.0, 1.0, 0.0, 1.0), 0.005f, 50);
 	msaa.Init();
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
-
+	TextureImporter teximp;
+	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
+	
 
 	while (true)
 	{
-		p.UpdateParticles();
-
+		
 		msaa.Reset();
 		m_inputManager->Update();
 		l.Update();
@@ -43,6 +43,17 @@ void System::Run()
 		quad.Render();
 		msaa.Bind();
 		quad.Draw();
+
+		p.Bind();
+		p.UpdateParticles();
+		texture.Bind();
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glDepthMask(GL_FALSE);
+		p.RenderTransformed(1);
+		glDisable(GL_BLEND);
+		glDepthMask(TRUE);
+
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
