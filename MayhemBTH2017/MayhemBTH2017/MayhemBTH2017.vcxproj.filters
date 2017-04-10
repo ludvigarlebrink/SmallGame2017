@@ -183,6 +183,8 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="ShadowMap.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="ShadowShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -305,6 +307,9 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="ShadowMap.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ShadowShader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">
@@ -329,6 +334,16 @@
       <Filter>GLSL</Filter>
     </None>
     <None Include="DebugGreen.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="DrawShader.frag" />
+    <None Include="DrawShader.geom" />
+    <None Include="DrawShader.vert" />
+    <None Include="GeometryPass.vert" />
+    <None Include="Assets\GLSL\ShadowShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ShadowPass.frag">
       <Filter>GLSL</Filter>
     </None>
   </ItemGroup>

@@ -160,6 +160,7 @@
     <ClCompile Include="ShaderCache.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
+    <ClCompile Include="ShadowShader.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="StackPool.cpp" />
     <ClCompile Include="StateManager.cpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="ShaderCache.h" />
     <ClInclude Include="ShaderImporter.h" />
     <ClInclude Include="ShadowMap.h" />
+    <ClInclude Include="ShadowShader.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="StackPool.h" />
     <ClInclude Include="StateManager.h" />
@@ -222,6 +224,8 @@
     <ClInclude Include="VideoManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\GLSL\ShadowPass.frag" />
+    <None Include="Assets\GLSL\ShadowShader.vert" />
     <None Include="DebugGreen.frag" />
     <None Include="DebugGreen.vert" />
     <None Include="DebugShader.frag" />

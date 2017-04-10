@@ -53,7 +53,7 @@ void ShadowMap::SecPass()
 
 void ShadowMap::Bind()
 {
-	glActiveTexture(GL_TEXTURE3);
+	glActiveTexture(GL_TEXTURE10);
 	glBindTexture(GL_TEXTURE_2D, m_depthMap);
 }
 
