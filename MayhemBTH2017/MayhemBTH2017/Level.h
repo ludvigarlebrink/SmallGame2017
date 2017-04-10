@@ -64,10 +64,10 @@ private:
 	Block		m_grid[SIZE_X][SIZE_Y];
 
 	Mesh		m_mesh;
-	Vertex *	m_vertices;
+	Vertex3D *	m_vertices;
 
 	Mesh		m_mesh2;
-	Vertex *	m_vertices2;
+	Vertex3D *	m_vertices2;
 
 	AShader		m_debugShader;
 

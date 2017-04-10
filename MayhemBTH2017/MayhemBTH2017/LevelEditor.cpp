@@ -14,7 +14,7 @@ LevelEditor::LevelEditor()
 
 	m_texture = m_textureTemp.Import(".\\Assets\\Textures\\stone.jpg");
 
-	Vertex verts[6];
+	Vertex3D verts[6];
 
 	m_timer.SetTimer(0.1f, true, true);
 

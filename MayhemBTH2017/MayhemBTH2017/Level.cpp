@@ -120,8 +120,8 @@ void Level::InitMesh()
 {
 	const uint64_t length = SIZE_X * SIZE_Y * 6;
 	const uint64_t length2 = SIZE_X * SIZE_Y * 12;
-	m_vertices = (Vertex*)malloc(sizeof(Vertex) * length);
-	m_vertices2 = (Vertex*)malloc(sizeof(Vertex) * length2);
+	m_vertices = (Vertex3D*)malloc(sizeof(Vertex3D) * length);
+	m_vertices2 = (Vertex3D*)malloc(sizeof(Vertex3D) * length2);
 
 	uint64_t i = 0;
 
