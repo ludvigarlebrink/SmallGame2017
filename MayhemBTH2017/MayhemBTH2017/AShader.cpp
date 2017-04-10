@@ -57,8 +57,8 @@ void AShader::Init(const std::string& filename, bool hasGeomShader, bool particl
 	if (particles) {
 		std::cout << "Particles transform feedback active" << std::endl;
 		//Names of ouput from vertex shader
-		const char* varyings[7] = { "outPos", "outDir", "outCol", "outVel", "outLife", "outSize", "outAngle" };
-		glTransformFeedbackVaryings(m_programID, 7, varyings, GL_INTERLEAVED_ATTRIBS);
+		const char* varyings[5] = { "outPos", "outDir", "outCol", "outVel", "outLife"};
+		glTransformFeedbackVaryings(m_programID, 5, varyings, GL_INTERLEAVED_ATTRIBS);
 		
 
 

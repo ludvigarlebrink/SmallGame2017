@@ -8,7 +8,7 @@ LevelEditor::LevelEditor()
 	m_camera.SetRotation(0.0f, -0.0f);
 	m_camera.SetPosition(glm::vec3(((SIZE_X / 2) - 0.5f), ((SIZE_Y / 2) + 0.5f), -60));
 	m_input = InputManager::Get();
-	m_green.Init("DebugGreen", false);
+	m_green.Init("DebugGreen", false, 0);
 
 	m_texture = texImp.Import(".\\Assets\\Textures\\stone.jpg");
 
@@ -55,7 +55,7 @@ LevelEditor::~LevelEditor()
 
 //::.. UPDATE FUNCTIONS ..:://
 void LevelEditor::Update()
-{	
+{
 	if (m_timer.Update())
 	{
 		AxisMove();
@@ -64,7 +64,7 @@ void LevelEditor::Update()
 	ButtonInput();
 	m_texture.Bind();
 	RenderSelector();
-	
+
 	m_level.Render(m_camera);
 }
 
@@ -103,7 +103,7 @@ void LevelEditor::ButtonInput()
 		uint32_t startY;
 		uint32_t endX;
 		uint32_t endY;
-		
+
 		if (m_currentPosX > m_savedPosX)
 		{
 			startX = m_savedPosX;
@@ -114,7 +114,7 @@ void LevelEditor::ButtonInput()
 			startX = m_currentPosX;
 			endX = m_savedPosX;
 		}
-		
+
 		if (m_currentPosY > m_savedPosY)
 		{
 			startY = m_savedPosY;
@@ -177,7 +177,7 @@ void LevelEditor::RenderSelector()
 	m_green.Bind();
 
 	Transform tran;
-	
+
 
 	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_A))
 	{

@@ -5,7 +5,7 @@
 #include "InputManager.h"
 #include "AntiAliasing.h"
 #include "MeshQuad.h"
-
+#include "ParticleSystem.h"
 
 
 System::System()
@@ -25,6 +25,7 @@ void System::Run()
 	MeshQuad quad;
 	AntiAliasing msaa;
 	LevelEditor l;
+	ParticleSystem p("GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
 	msaa.Init();
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
@@ -32,6 +33,8 @@ void System::Run()
 
 	while (true)
 	{
+		p.UpdateParticles();
+
 		msaa.Reset();
 		m_inputManager->Update();
 		l.Update();

@@ -72,16 +72,8 @@ static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint i
 
 #endif
 
-#ifdef _DEBUG
 
-static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei lenght, const GLchar* message, const void* userParam)
-{
-	std::string output = message;
-	output += "\n";
-	OutputDebugStringA((output).c_str());
-}
 
-#endif
 
 //::.. HELPER FUNCTIONS ..:://
 void VideoManager::Init()

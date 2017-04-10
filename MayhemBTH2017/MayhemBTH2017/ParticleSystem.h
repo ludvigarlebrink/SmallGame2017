@@ -18,8 +18,7 @@ class ParticleSystem : public AShader
 {
 public:
 	//::..CONSTRUCTORS..:://
-	ParticleSystem();
-	ParticleSystem(std::string shadername, glm::vec3 startpos, glm::vec3 color, GLfloat size, GLfloat angle);
+	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec3 col);
 	void UpdateParticles();
 
 	//Destructor
@@ -42,7 +41,6 @@ private:
 private:
 	Particle m_part[1];
 
-	ParticleTransform m_pTransform;
 
 	const uint64_t PARTICLE_COUNT = 10000;
 	AShader	m_pShader;
@@ -69,8 +67,8 @@ private:
 	GLuint testVAO;
 	GLuint testBUffer;
 	GLfloat info[6];
-	GLuint particlePosID, particleDirID, particleColorID, particleVelocityID, particleTimeAliveID, particleSizeID, particleAngleID;
-	GLuint inPosID, inDirID, inColID, inVelID, inTimeID, inSizeID, inAngleID;
+	GLuint particlePosID, particleDirID, particleColorID, particleVelocityID, particleTimeAliveID;
+	GLuint inPosID, inDirID, inColID, inVelID, inTimeID;
 	uint64_t offset;
 
 };

@@ -10,17 +10,16 @@ uniform mat4 P;
 in int seed[];
 
 in vec3 position1[];
-in vec3 dir1[];
 in vec3 color1[];
+in vec3 dir1[];
 in float vel1[];
 in float life1[];
-in float size1[];
-in float angle1[];
+
 
 
 out vec3 color2;
 
-float particleSize=0.21f;
+float particleSize=6.21f;
 
 out vec3 finalCol;
 out vec2 UV;
@@ -42,7 +41,7 @@ void CreateQuad(){
 
 
 		//First vertex
-		vec3 firstVert=position1[0].xyz-(right+up)*size1[0];
+		vec3 firstVert=position1[0].xyz-(right+up)*particleSize;
 		firstVert.z=0.0;
 		gl_Position=P*V*M*vec4(firstVert+position1[i].xyz, 1.0);
 		
@@ -50,7 +49,7 @@ void CreateQuad(){
 		EmitVertex();
 	
 		//Second vertex
-		vec3 secondVert=position1[0].xyz-(right-up)*size1[0];
+		vec3 secondVert=position1[0].xyz-(right-up)*particleSize;
 		secondVert.z=0.0;
 		gl_Position=P*V*M*vec4(secondVert.xyz+position1[i].xyz, 1.0);
 	
@@ -58,7 +57,7 @@ void CreateQuad(){
 		EmitVertex();
 	
 		//Third vertex
-		vec3 thirdVert=position1[0].xyz+(right-up)*size1[0];
+		vec3 thirdVert=position1[0].xyz+(right-up)*particleSize;
 		thirdVert.z=0.0;
 		gl_Position=P*V*M*vec4(thirdVert+position1[i].xyz, 1.0);
 
@@ -66,7 +65,7 @@ void CreateQuad(){
 		EmitVertex();
 
 		//Fourth vertex
-		vec3 fourthVert=position1[0].xyz+(right+up)*size1[0];
+		vec3 fourthVert=position1[0].xyz+(right+up)*particleSize;
 		fourthVert.z=0.0;
 		gl_Position=P*V*M*vec4(fourthVert+position1[i].xyz ,1.0);
 
