@@ -1,5 +1,5 @@
-#ifndef __ANIMATION_H__
-#define __ANIMATION_H__
+#ifndef __ANIMATIONCLIP_H__
+#define __ANIMATIONCLIP_H__
 
 
 #include "KeyFrame.h"
@@ -9,11 +9,11 @@
 #include <cstdint>
 
 
-class Animation
+class AnimationClip
 {
 public:
-	Animation();
-	virtual ~Animation();
+	AnimationClip();
+	virtual ~AnimationClip();
 
 	//::.. MODIFY FUNCTIONS ..:://
 	void Play();
@@ -22,10 +22,13 @@ public:
 	void LoadKeyFrames();
 
 	//::.. GET FUNCTIONS ..:://
+	bool GetIsPlaying();
 	uint32_t GetNrOfKeyFrames();
 
 
 private:
+	bool					m_isPlaying;
+	bool					m_isRepeating;
 	float					m_timer;
 	std::vector<KeyFrame>	m_keyFrames;
 };

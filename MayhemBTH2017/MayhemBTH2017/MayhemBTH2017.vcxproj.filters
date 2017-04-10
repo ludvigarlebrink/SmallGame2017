@@ -191,7 +191,7 @@
     <ClCompile Include="AnimationController.cpp">
       <Filter>Engine\Rendering\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
+    <ClCompile Include="AnimationClip.cpp">
       <Filter>Engine\Rendering\Animation</Filter>
     </ClCompile>
   </ItemGroup>
@@ -321,7 +321,7 @@
     <ClInclude Include="AnimationController.h">
       <Filter>Engine\Rendering\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
+    <ClInclude Include="AnimationClip.h">
       <Filter>Engine\Rendering\Animation</Filter>
     </ClInclude>
   </ItemGroup>

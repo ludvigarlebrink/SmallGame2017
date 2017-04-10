@@ -14,9 +14,13 @@ public:
 	Joint();
 	virtual ~Joint();
 
+	//::.. GET FUNCTIONS ..:://
 	uint32_t GetParentID();
 
+	//::.. SET FUNCTIONS ..:://
 	void SetParentID(uint32_t parentID);
+
+	
 
 private:
 	uint32_t	m_parentID;

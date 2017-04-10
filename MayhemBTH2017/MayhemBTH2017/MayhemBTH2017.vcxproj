@@ -130,7 +130,7 @@
   <ItemGroup>
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="AMenu.cpp" />
-    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationClip.cpp" />
     <ClCompile Include="AnimationController.cpp" />
     <ClCompile Include="AntiAliasing.cpp" />
     <ClCompile Include="ARenderable.cpp" />
@@ -178,7 +178,7 @@
     <ClInclude Include="AAllocator.h" />
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="AMenu.h" />
-    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimationClip.h" />
     <ClInclude Include="AnimationController.h" />
     <ClInclude Include="AntiAliasing.h" />
     <ClInclude Include="ARenderable.h" />

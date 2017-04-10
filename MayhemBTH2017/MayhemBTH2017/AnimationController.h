@@ -4,7 +4,7 @@
 
 #include "Mesh.h"
 #include "JointSkeleton.h"
-#include "Animation.h"
+#include "AnimationClip.h"
 
 
 #include <vector>
@@ -23,10 +23,10 @@ public:
 	uint32_t GetCurrentPlayingAnimation();
 
 private:
-	Mesh					m_mesh;
-	JointSkeleton			m_bindPose;
-	std::vector<Animation>	m_animations;
-	uint32_t				m_currentAnimation;
+	Mesh						m_mesh;
+	JointSkeleton				m_bindPose;
+	std::vector<AnimationClip>	m_animations;
+	uint32_t					m_currentAnimation;
 	
 
 
