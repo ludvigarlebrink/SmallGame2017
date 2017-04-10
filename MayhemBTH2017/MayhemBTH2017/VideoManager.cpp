@@ -72,6 +72,17 @@ static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint i
 
 #endif
 
+#ifdef _DEBUG
+
+static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei lenght, const GLchar* message, const void* userParam)
+{
+	std::string output = message;
+	output += "\n";
+	OutputDebugStringA((output).c_str());
+}
+
+#endif
+
 //::.. HELPER FUNCTIONS ..:://
 void VideoManager::Init()
 {
@@ -90,7 +101,9 @@ void VideoManager::Init()
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	m_window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		800, 600, SDL_WINDOW_OPENGL);
+		1280, 720, SDL_WINDOW_OPENGL);
+
+//	SDL_SetWindowFullscreen(m_window, SDL_WINDOW_FULLSCREEN);
 
 	m_glContext = SDL_GL_CreateContext(m_window);
 	GLenum status = glewInit();

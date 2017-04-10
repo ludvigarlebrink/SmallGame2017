@@ -3,7 +3,8 @@
 
 #include "LevelEditor.h"
 #include "InputManager.h"
-#include "ParticleSystem.h"
+#include "AntiAliasing.h"
+#include "MeshQuad.h"
 
 
 
@@ -17,27 +18,31 @@ System::~System()
 {
 }
 
+
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-	glDisable(GL_CULL_FACE);
+	MeshQuad quad;
+	AntiAliasing msaa;
 	LevelEditor l;
-
-
-	ParticleSystem p("GeometryPass", glm::vec3(0.0, 0.0, 0.0),  glm::vec3(0.0, 1.0, 0.0), 0.5f, 0.0f);
-
+	msaa.Init();
+	glDepthFunc(GL_LESS);
+	glEnable(GL_DEPTH_TEST);
 
 
 	while (true)
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		p.UpdateParticles();
-	
-		//l.Update();
-		// Switch between back and front buffer.
+		msaa.Reset();
 		m_inputManager->Update();
+		l.Update();
+		msaa.Update();
+		m_inputManager->Reset();
+		quad.Render();
+		msaa.Bind();
+		quad.Draw();
+		// Switch between back and front buffer.
 		m_videoManager->Swap();
+		m_timeManager->UpdateDeltaTime();
 	}
 }
 
@@ -45,4 +50,5 @@ void System::Init()
 {
 	m_videoManager = VideoManager::Get();
 	m_inputManager = InputManager::Get();
+	m_timeManager = TimeManager::Get();
 }

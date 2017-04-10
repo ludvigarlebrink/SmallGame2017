@@ -2,12 +2,12 @@
 #define __LEVELEDITOR_H__
 
 
+#include "InputManager.h"
+#include "Level.h"
+#include "Timer.h"
+#include "TextureImporter.h"
 #include "LevelExporter.h"
-#include "Transform.h"
-#include "DebugShaderTech.h"
-#include "Camera.h"
-#include "Mesh.h"
-
+#include "LevelImporter.h"
 
 #include <glm.hpp>
 #include <cstdint>
@@ -16,49 +16,44 @@
 class LevelEditor
 {
 public:
-	const static int SIZE_X = 16;
-	const static int SIZE_Y = 16;
-
-	struct Block
-	{
-		uint32_t	textureID;
-		bool		isOccupied;
-		bool		isSpawnPoint;
-	};
+	const static int SIZE_X = 84;
+	const static int SIZE_Y = 48;
 
 	//::.. CONSTRUCTORS ..:://
 	LevelEditor();
 	virtual ~LevelEditor();
 
+	//::.. UPDATE FUNCTIONS ..:://
 	void Update();
-
-	//::.. SET FUNCTIONS ..:://
-	void SetTexture(uint32_t textureID);
-	void SetOccupied(bool isOccupied);
-	void SetSpawnPoint(bool isSpawnPoint);
-
-	void SaveLevel();
+	//Temp!
+	void UpdateQuad();
 
 private:
 	//::.. HELP FUNCTIONS ..:://
-	void Init();
-	void InitGrid();
-	void InitMeshes();
+	void AxisMove();
+	void ButtonInput();
+	void ClampPos();
+	void RenderSelector();
 
 private:
-	struct MeshObjects
-	{
-		Transform transform;
-		Mesh mesh;
-	};
+	InputManager *		m_input;	
 
-	Block m_grid[SIZE_X][SIZE_Y];
-	MeshObjects m_meshObjects[SIZE_X][SIZE_Y];
-	uint32_t m_posX;
-	uint32_t m_posY;
-	
-	AShader			m_debugShader;
-	Camera			m_camera;
+	Level				m_level;
+	LevelExporter		m_levelExporter;
+	LevelImporter		m_levelImporter;
+
+	AShader				m_green;
+	uint32_t			m_currentPosX;
+	uint32_t			m_currentPosY;
+	uint32_t			m_savedPosX;
+	uint32_t			m_savedPosY;
+	Transform			m_transform;
+	Camera				m_camera;
+	Mesh				m_mesh;
+
+	Timer				m_timer;
+	TextureImporter		texImp;
+	Texture				m_texture;
 };
 
 #endif // __LEVELEDITOR_H__

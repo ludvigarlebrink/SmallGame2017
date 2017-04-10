@@ -86,7 +86,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\User\Source\Repos\SmallGame2017\MayhemBTH2017\MayhemBTH2017\Include\LUA;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,7 +117,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\User\Source\Repos\SmallGame2017\MayhemBTH2017\MayhemBTH2017\Include\LUA;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -129,26 +129,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AGameObject.cpp" />
+    <ClCompile Include="AntiAliasing.cpp" />
     <ClCompile Include="ARenderable.cpp" />
     <ClCompile Include="AResource.cpp" />
     <ClCompile Include="AShader.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="GUI.cpp" />
-    <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="LevelEditor.cpp" />
-    <ClCompile Include="LevelEditorLevel.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelExporter.cpp" />
+    <ClCompile Include="LevelImporter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshCache.cpp" />
     <ClCompile Include="MeshImporter.cpp" />
-    <ClCompile Include="ParticleSystem.cpp" />
-    <ClCompile Include="ParticleTransform.cpp" />
+    <ClCompile Include="MeshQuad.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="QuadShader.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderCache.cpp" />
@@ -162,12 +164,16 @@
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureCache.cpp" />
+    <ClCompile Include="TextureImporter.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="VideoManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AAllocator.h" />
     <ClInclude Include="AGameObject.h" />
+    <ClInclude Include="AntiAliasing.h" />
     <ClInclude Include="ARenderable.h" />
     <ClInclude Include="AResource.h" />
     <ClInclude Include="AShader.h" />
@@ -176,20 +182,20 @@
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="GUIQuad.h" />
-    <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="LevelEditor.h" />
-    <ClInclude Include="LevelEditorLevel.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelExporter.h" />
+    <ClInclude Include="LevelImporter.h" />
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshCache.h" />
     <ClInclude Include="MeshImporter.h" />
-    <ClInclude Include="Particle.h" />
-    <ClInclude Include="ParticleSystem.h" />
-    <ClInclude Include="ParticleTransform.h" />
+    <ClInclude Include="MeshQuad.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="QuadShader.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShaderCache.h" />
@@ -203,24 +209,31 @@
     <ClInclude Include="System.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureCache.h" />
+    <ClInclude Include="TextureImporter.h" />
+    <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BlurrShader.frag" />
+    <None Include="BlurrShader.geom" />
+    <None Include="BlurrShader.vert" />
+    <None Include="DebugGreen.frag" />
+    <None Include="DebugGreen.vert" />
     <None Include="DebugShader.frag" />
     <None Include="DebugShader.geom" />
     <None Include="DebugShader.vert" />
-    <None Include="DrawShader.frag" />
-    <None Include="DrawShader.geom" />
-    <None Include="DrawShader.vert" />
-    <None Include="emitterShader.frag" />
-    <None Include="emitterShader.vert" />
     <None Include="leo.frag" />
     <None Include="leo.geom" />
     <None Include="leo.vert" />
-    <None Include="GeometryPass.vert" />
-    <None Include="ParticleDrop.vert" />
+    <None Include="QuadShader.frag" />
+    <None Include="QuadShader.geom" />
+    <None Include="QuadShader.vert" />
+    <None Include="SharpnelShader.frag" />
+    <None Include="SharpnelShader.geom" />
+    <None Include="SharpnelShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
