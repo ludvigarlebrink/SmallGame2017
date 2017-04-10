@@ -11,15 +11,17 @@
 
 
 #include <cstdint>
-
+#include <math.h>
+#include <glm.hpp>
 
 enum MarkerMode
 {
 	NORMAL = 0,
-	ADD,
-	ADD_DRAG,
-	REMOVE,
-	REMOVE_DRAG,
+	ADD_BLOCK,
+	ADD_BLOCK_DRAG,
+	REMOVE_BLOCK,
+	REMOVE_BLOCK_DRAG,
+	ADD_SPAWN_POINT
 };
 
 class LevelMarker
@@ -36,8 +38,8 @@ public:
 	void Render();
 
 private:
+	glm::vec2			m_position;
 
-	// MARKER
 	AShader				m_green;
 	uint32_t			m_currentPosX;
 	uint32_t			m_currentPosY;

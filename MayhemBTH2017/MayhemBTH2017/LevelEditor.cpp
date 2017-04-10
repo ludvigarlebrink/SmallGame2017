@@ -7,7 +7,7 @@ LevelEditor::LevelEditor()
 {
 	m_mode = NORMAL;
 
-	m_camera.SetRotation(0.0f, -0.0f);
+
 	m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
 	m_input = InputManager::Get();
 	m_green.Init("DebugGreen", false);
@@ -44,6 +44,8 @@ LevelEditor::LevelEditor()
 
 	m_transform.SetPosition(0.0f, 0.0f, 0.0f);
 	m_mesh.LoadMesh(verts, 6);
+
+	std::cout << round(3.6f) << std::endl;
 
 }
 
@@ -263,6 +265,7 @@ void LevelEditor::RenderSelector()
 		m_transform.SetScale(sizeX, sizeY, 1.0f);
 		m_transform.SetPosition(offsetX, offsetY, -2.001f);
 		m_green.Update(m_transform, m_camera);
+		m_green.TempUpdateAlpha(1.0f);
 		m_mesh.Render();
 	}
 	else
@@ -270,6 +273,7 @@ void LevelEditor::RenderSelector()
 		m_transform.SetScale(1.0f, 1.0f, 1.0f);
 		m_transform.SetPosition(m_currentPosX, m_currentPosY, -2.001f);
 		m_green.Update(m_transform, m_camera);
+		m_green.TempUpdateAlpha(1.0f);
 		m_mesh.Render();
 	}
 

@@ -1,31 +1,29 @@
-#include "AShader.h"
-#include "AShader.h"
-
+#include "QuadShader.h"
 
 
 //::..CONSTRUCTORS..:://
-AShader::AShader()
+QuadShader::QuadShader()
 {
 }
 
-AShader::AShader(const std::string& filename, bool hasGeomShader)
+QuadShader::QuadShader(const std::string& filename, bool hasGeomShader)
 {
 	Init(filename, hasGeomShader);
 }
 
-AShader:: ~AShader()
+QuadShader:: ~QuadShader()
 {
 	Release();
 }
 
 //::..GET FUNCTIONS..:://
-GLuint AShader::GetProgramID()
+GLuint QuadShader::GetProgramID()
 {
 	return m_programID;
 }
 
 //::..HELPER FUNCTIONS..:://
-void AShader::Init(const std::string& filename, bool hasGeomShader)
+void QuadShader::Init(const std::string& filename, bool hasGeomShader)
 {
 	m_programID = glCreateProgram();
 
@@ -52,7 +50,7 @@ void AShader::Init(const std::string& filename, bool hasGeomShader)
 }
 
 
-void AShader::Release()
+void QuadShader::Release()
 {
 	// OBS DOESNT WORK YET
 	for (unsigned int i = 0; i < NR_SHADERS; i++) {
@@ -64,46 +62,39 @@ void AShader::Release()
 }
 
 
-void AShader::Bind()
+void QuadShader::Bind()
 {
 	glUseProgram(m_programID);
 }
 
-void AShader::Update(Transform& transform, Camera& camera)
+void QuadShader::Update(Transform& transform, Camera& camera)
 {
 	glUniformMatrix4fv(m_uniforms[M], 1, GL_FALSE, &transform.GetModelMatrix()[0][0]);
 	glUniformMatrix4fv(m_uniforms[V], 1, GL_FALSE, &camera.GetView()[0][0]);
 	glUniformMatrix4fv(m_uniforms[P], 1, GL_FALSE, &camera.GetProjection()[0][0]);
 
-	glUniform1i(m_uniforms[DIFFUSE_MAP], 0);
+	glUniform1i(m_uniforms[DIFFUSE_MAP], 1);
 }
 
-void AShader::TempUpdateAlpha(GLfloat a)
-{
-	glUniform1f(m_uniforms[ALPHA], a);
-}
-
-void AShader::AddAttributeLocation()
+void QuadShader::AddAttributeLocation()
 {
 	// These are three attributes are set for all shaders.
 	glBindAttribLocation(m_programID, 0, "Position");
-	glBindAttribLocation(m_programID, 1, "Normal");
-	glBindAttribLocation(m_programID, 2, "TexCoords");
+	glBindAttribLocation(m_programID, 1, "TexCoords");
 }
 
-void AShader::AddUniforms()
+void QuadShader::AddUniforms()
 {
 	m_uniforms[M] = glGetUniformLocation(m_programID, "M");
 	m_uniforms[V] = glGetUniformLocation(m_programID, "V");
 	m_uniforms[P] = glGetUniformLocation(m_programID, "P");
-	m_uniforms[ALPHA] = glGetUniformLocation(m_programID, "Alpha");
 	m_uniforms[DIFFUSE_MAP] = glGetUniformLocation(m_programID, "DiffuseMap");
 }
 
 
 
 
-GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
+GLuint QuadShader::CreateShader(const std::string& textfile, GLenum shaderType)
 {
 
 	GLuint shader = glCreateShader(shaderType);
@@ -125,7 +116,7 @@ GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
 	return shader;
 }
 
-std::string AShader::LoadShader(const std::string& filename)
+std::string QuadShader::LoadShader(const std::string& filename)
 {
 	std::ifstream in(filename.c_str());
 
@@ -144,7 +135,7 @@ std::string AShader::LoadShader(const std::string& filename)
 	return output;
 }
 
-void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg)
+void QuadShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg)
 {
 
 	GLint errorCheck = 0;

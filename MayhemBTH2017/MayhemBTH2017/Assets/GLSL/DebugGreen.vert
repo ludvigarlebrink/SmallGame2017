@@ -9,7 +9,6 @@ out vec3 TexCoords1;
 uniform mat4 M;
 uniform mat4 V;
 uniform mat4 P;
-uniform float Alpha;
 
 void main()
 {

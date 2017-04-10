@@ -8,6 +8,7 @@ AMenu::AMenu()
 	// Do nothing...
 	m_stateManager = StateManager::Get();
 	m_currentSelection = 0;
+	m_shader.Init("DebugGreen", false);
 }
 
 
@@ -24,9 +25,36 @@ void AMenu::Render()
 		m_subMenu[m_activeSubMenu]->Render();
 	}
 
-	// ELSE RENDER THIS MENU
+	// FIX THIS :D
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	Camera camera;
 
+	m_shader.Bind();
+	camera.SetPosition(glm::vec3(0.0f, 0.0f, -11.0f));
+	m_transform.SetScale(5.0f, 5.0f, 1.0f);
+	m_shader.Update(m_transform, camera);
 
+	for (uint32_t i = 0; i < m_button.size(); i++)
+	{
+		m_transform.SetPosition(glm::vec3(0.0f, -(1.0f * i), -0.1f * i));
+		m_shader.Update(m_transform, camera);
+		
+		if (m_button[i]->isActive)
+		{
+			m_shader.TempUpdateAlpha(1.0f);
+			m_button[i]->texture->Bind();
+			m_button[i]->text->Render();
+		}
+		else
+		{
+			m_shader.TempUpdateAlpha(0.4f);
+			m_button[i]->texture->Bind();
+			m_button[i]->text->Render();
+		}
+	}
+
+	m_shader.TempUpdateAlpha(1.0f);
 }
 
 void AMenu::GoForward()
@@ -77,12 +105,16 @@ void AMenu::MoveUp()
 		return;
 	}
 
-	++m_currentSelection;
+	m_button[m_currentSelection]->isActive = false;
 
-	if (m_currentSelection >= m_index.size())
+	--m_currentSelection;
+
+	if (m_currentSelection < 0)
 	{
-		m_currentSelection = m_index.size() - 1;
+		m_currentSelection = 0;
 	}
+
+	m_button[m_currentSelection]->isActive = true;
 }
 
 void AMenu::MoveDown()
@@ -93,13 +125,17 @@ void AMenu::MoveDown()
 		return;
 	}
 
-	--m_currentSelection;
+	// TEMP
+	m_button[m_currentSelection]->isActive = false;
 
-	if (m_currentSelection < 0)
+	++m_currentSelection;
+
+	if (m_currentSelection >= m_index.size())
 	{
-		m_currentSelection = 0;
+		m_currentSelection = m_index.size() - 1;
 	}
 
+	m_button[m_currentSelection]->isActive = true;
 }
 
 
@@ -127,18 +163,56 @@ void AMenu::SetIsActive(bool value)
 
 
 //::.. PROTECTED FUNCTIONS ..:://
-void AMenu::AddChild(AMenu *subMenu)
+void AMenu::AddChild(AMenu *subMenu, char* title)
 {
 	m_subMenu.push_back(subMenu);
 	m_index.push_back(m_subMenu.size() - 1);
 	m_type.push_back(SUBMENU);
+
+	Button * button = new Button;
+	Text * text = new Text;
+	text->Init();
+	button->text = text;
+	if (m_button.size() == 0)
+	{
+		button->isActive = true;
+	}
+	else
+	{
+		button->isActive = false;
+	}
+	m_button.push_back(button);
 }
 
-void AMenu::AddChild(GameState gameState)
+void AMenu::AddChild(GameState gameState, char* title)
 {
 	m_gameState.push_back(gameState);
 	m_index.push_back(m_gameState.size() - 1);
 	m_type.push_back(GAMESTATE);
+	
+	TextureImporter textImp;
+	std::string tmp = ".\\Assets\\Sprites\\";
+	tmp.append(title);
+	tmp.append(".png");
+	Texture * texture = new Texture;
+	*texture = textImp.Import(tmp.c_str());;
+
+	Button * button = new Button;
+	Text * text = new Text;
+	text->Init();
+	button->texture = texture;
+	button->text = text;
+
+	if (m_button.size() == 0)
+	{
+		button->isActive = true;
+	}
+	else
+	{
+		button->isActive = false;
+	}
+
+	m_button.push_back(button);
 }
 
 AMenu * AMenu::GetChildAt(uint32_t index)

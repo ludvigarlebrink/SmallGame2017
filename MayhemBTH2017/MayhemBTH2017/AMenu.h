@@ -3,6 +3,10 @@
 
 
 #include "StateManager.h"
+#include "AShader.h"
+#include "Texture.h"
+#include "TextureImporter.h"
+#include "Text.h"
 
 #include <iostream>
 #include <vector>
@@ -32,18 +36,27 @@ public:
 
 protected:
 	//::.. PROTECTED FUNCTIONS ..:://
-	void AddChild(AMenu* subMenu);
-	void AddChild(GameState gameState);
+	void AddChild(AMenu* subMenu, char* title);
+	void AddChild(GameState gameState, char* title);
 	AMenu* GetChildAt(uint32_t index);
 
 	void FreeChildren();
 
 private:
-	enum
+	enum 
 	{
 		SUBMENU = 0,
 		GAMESTATE
 	};
+
+	struct Button
+	{
+		Text * text;
+		Texture * texture;
+		bool isActive;
+	};
+
+	std::vector<Button *>	m_button;
 
 	bool					m_isActive;
 
@@ -52,10 +65,13 @@ private:
 	std::vector<GameState>	m_gameState;
 	std::vector<uint32_t>	m_index;
 	std::vector<uint32_t>	m_type;
-	uint32_t				m_currentSelection;
+	int				m_currentSelection;
 	uint32_t				m_activeSubMenu;
 
 	StateManager *			m_stateManager;
+
+	AShader					m_shader;
+	Transform				m_transform;
 };
 
 

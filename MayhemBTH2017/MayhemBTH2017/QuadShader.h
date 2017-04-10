@@ -1,5 +1,6 @@
-#ifndef __SHADER_H__
-#define __SHADER_H__
+#ifndef __QUADSHADER_H__
+#define __QUADSHADER_H__
+
 
 
 #include "Transform.h"
@@ -14,15 +15,15 @@
 #include <string>
 
 
-class AShader 
+class QuadShader
 {
 public:
 	//::.. CONSTRUCTORS ..:://
-	AShader();
-	AShader(const std::string& filename, bool hasGeomShader);
-	virtual ~AShader();											//Destructor
+	QuadShader();
+	QuadShader(const std::string& filename, bool hasGeomShader);
+	virtual ~QuadShader();											//Destructor
 
-	//::.. GET FUNCTIONS ..:://
+																//::.. GET FUNCTIONS ..:://
 	GLuint GetProgramID();
 
 	//::.. MODIFY FUNCTIONS ..:://
@@ -30,7 +31,7 @@ public:
 	void Release();
 	void Bind();
 	virtual void Update(Transform& transform, Camera& camera);
-	void TempUpdateAlpha(GLfloat a);
+
 
 	//::.. PROTECTED FUNCTIONS ..:://
 	virtual void AddAttributeLocation();
@@ -55,7 +56,6 @@ private:
 		M,
 		V,
 		P,
-		ALPHA,
 		DIFFUSE_MAP,
 		NR_UNIFORMS
 	};

@@ -108,9 +108,6 @@
     <ClCompile Include="System.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="AGameObject.cpp">
       <Filter>Engine\GameObjects</Filter>
     </ClCompile>
@@ -124,9 +121,6 @@
       <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugShaderTech.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="LevelEditor.cpp">
@@ -144,17 +138,8 @@
     <ClCompile Include="StateManager.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteBatch.cpp">
-      <Filter>Engine\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Engine\HID</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI.cpp">
-      <Filter>Engine\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Engine\GUI</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Engine\LevelEditor</Filter>
@@ -170,16 +155,26 @@
     <ClCompile Include="AMenu.cpp">
       <Filter>Engine\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="StartMenu.cpp">
-      <Filter>Engine\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuSystem.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="TextureImporter.cpp">
       <Filter>Engine\Resources\Importers</Filter>
     </ClCompile>
     <ClCompile Include="LevelMarker.cpp">
       <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Engine\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Engine\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuSystem.cpp">
+      <Filter>Engine\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AntiAliasing.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,9 +183,6 @@
     </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Engine\Memory\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="GLTexture.h">
-      <Filter>Engine\Misc</Filter>
     </ClInclude>
     <ClInclude Include="String.h">
       <Filter>Engine\Memory\Containers</Filter>
@@ -228,9 +220,6 @@
     <ClInclude Include="System.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClInclude>
     <ClInclude Include="AGameObject.h">
       <Filter>Engine\GameObjects</Filter>
     </ClInclude>
@@ -249,9 +238,6 @@
     <ClInclude Include="Transform.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="DebugShaderTech.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="LevelEditor.h">
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
@@ -267,20 +253,8 @@
     <ClInclude Include="StateManager.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteBatch.h">
-      <Filter>Engine\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Engine\HID</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI.h">
-      <Filter>Engine\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GUIQuad.h">
-      <Filter>Engine\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Engine\GUI</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Engine\LevelEditor</Filter>
@@ -296,16 +270,26 @@
     <ClInclude Include="AMenu.h">
       <Filter>Engine\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="StartMenu.h">
-      <Filter>Engine\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuSystem.h" />
-    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="TextureImporter.h">
       <Filter>Engine\Resources\Importers</Filter>
     </ClInclude>
     <ClInclude Include="LevelMarker.h">
       <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Engine\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Engine\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuSystem.h">
+      <Filter>Engine\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiAliasing.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
