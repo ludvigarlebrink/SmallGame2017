@@ -153,6 +153,7 @@
     <ClCompile Include="MeshCache.cpp" />
     <ClCompile Include="MeshImporter.cpp" />
     <ClCompile Include="MeshQuad.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="QuadShader.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -198,6 +199,8 @@
     <ClInclude Include="MeshCache.h" />
     <ClInclude Include="MeshImporter.h" />
     <ClInclude Include="MeshQuad.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="QuadShader.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -224,6 +227,10 @@
     <None Include="DebugShader.frag" />
     <None Include="DebugShader.geom" />
     <None Include="DebugShader.vert" />
+    <None Include="DrawShader.frag" />
+    <None Include="DrawShader.geom" />
+    <None Include="DrawShader.vert" />
+    <None Include="GeometryPass.vert" />
     <None Include="leo.frag" />
     <None Include="leo.geom" />
     <None Include="leo.vert" />

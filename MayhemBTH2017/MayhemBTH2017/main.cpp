@@ -9,6 +9,7 @@
 #include "System.h"
 
 
+
 // Global singleton managers.
 MemoryManager	g_memoryManager;
 ResourceManager	g_resourceManager;
