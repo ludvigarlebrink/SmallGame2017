@@ -53,7 +53,7 @@ public:
 	bool GetIsLoaded();
 
 	//::.. SET FUNCTIONS ..:://
-
+	void SetRenderMode(GLenum renderMode);
 
 	void Update();
 
@@ -63,8 +63,10 @@ private:
 	GLuint		m_vao;
 	GLuint		m_buffer;
 
-	Vertex3D *	m_vertices;
+	Vertex2D *	m_vertices2D;
+	Vertex3D *	m_vertices3D;
 
+	GLenum		m_renderMode;
 
 
 };
