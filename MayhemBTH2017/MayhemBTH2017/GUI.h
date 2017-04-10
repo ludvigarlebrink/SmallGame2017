@@ -12,7 +12,7 @@
 class GUI : public AShader
 {
 public:
-	GUI(const std::string & filename, bool geom);
+	GUI(const std::string & filename, bool geom, bool particles);
 	virtual ~GUI();
 
 	void AddSprite(Sprite sprite);

@@ -19,14 +19,14 @@ class AShader
 public:
 	//::.. CONSTRUCTORS ..:://
 	AShader();
-	AShader(const std::string& filename, bool hasGeomShader);
+	AShader(const std::string& filename, bool hasGeomShader, bool particles);
 	virtual ~AShader();											//Destructor
 
 	//::.. GET FUNCTIONS ..:://
 	GLuint GetProgramID();
 
 	//::.. MODIFY FUNCTIONS ..:://
-	void Init(const std::string& filename, bool hasGeomShader);
+	void Init(const std::string& filename, bool hasGeomShader, bool particles);
 	void Release();
 	void Bind();
 	virtual void Update(Transform& transform, Camera& camera);
@@ -46,6 +46,7 @@ private:
 	enum Shader
 	{
 		VERTEX_SHADER = 0,
+		GEOMETRY_SHADER,
 		FRAGMENT_SHADER,
 		NR_SHADERS
 	};

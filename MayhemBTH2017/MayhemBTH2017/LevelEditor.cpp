@@ -55,7 +55,7 @@ void LevelEditor::SaveLevel()
 //::.. HELP FUNCTIONS ..:://
 void LevelEditor::Init()
 {
-	m_debugShader.Init("DebugShader", false);
+	m_debugShader.Init("DebugShader", false,0);
 	InitGrid();
 	InitMeshes();
 }

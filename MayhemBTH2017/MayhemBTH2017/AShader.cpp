@@ -8,24 +8,24 @@ AShader::AShader()
 {
 }
 
-AShader::AShader(const std::string& filename, bool hasGeomShader)
+AShader::AShader(const std::string& filename, bool hasGeomShader, bool particles)
 {
-	Init(filename, hasGeomShader);
+	Init(filename, hasGeomShader, particles);
 }
 
-AShader:: ~AShader() 
+AShader:: ~AShader()
 {
 	Release();
 }
 
 //::..GET FUNCTIONS..:://
-GLuint AShader::GetProgramID() 
+GLuint AShader::GetProgramID()
 {
 	return m_programID;
 }
 
 //::..HELPER FUNCTIONS..:://
-void AShader::Init(const std::string& filename, bool hasGeomShader) 
+void AShader::Init(const std::string& filename, bool hasGeomShader, bool particles)
 {
 	m_programID = glCreateProgram();
 
@@ -33,14 +33,36 @@ void AShader::Init(const std::string& filename, bool hasGeomShader)
 
 	// Create shaders.
 	m_shader[VERTEX_SHADER] = CreateShader(LoadShader(filename + ".vert"), GL_VERTEX_SHADER);
-	m_shader[FRAGMENT_SHADER] = CreateShader(LoadShader(filename + ".frag"), GL_FRAGMENT_SHADER);
 
+	if (hasGeomShader)
+		m_shader[GEOMETRY_SHADER] = CreateShader(LoadShader(filename + ".geom"), GL_GEOMETRY_SHADER);
+
+	if (!particles) {
+		//if particles, only use a vertex shader
+		m_shader[FRAGMENT_SHADER] = CreateShader(LoadShader(filename + ".frag"), GL_FRAGMENT_SHADER);
+
+		glAttachShader(m_programID, m_shader[FRAGMENT_SHADER]);
+		Debug(m_shader[FRAGMENT_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+	}
+	
+	//Attach vertex
 	glAttachShader(m_programID, m_shader[VERTEX_SHADER]);
 	Debug(m_shader[VERTEX_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
-	glAttachShader(m_programID, m_shader[FRAGMENT_SHADER]);
-	Debug(m_shader[FRAGMENT_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
-
+	//Attach geo
+	glAttachShader(m_programID, m_shader[GEOMETRY_SHADER]);
+	Debug(m_shader[GEOMETRY_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+	
 	AddAttributeLocation();
+
+	if (particles) {
+		std::cout << "Particles transform feedback active" << std::endl;
+		//Names of ouput from vertex shader
+		const char* varyings[7] = { "outPos", "outDir", "outCol", "outVel", "outLife", "outSize", "outAngle" };
+		glTransformFeedbackVaryings(m_programID, 7, varyings, GL_INTERLEAVED_ATTRIBS);
+		
+
+
+	}
 
 	glLinkProgram(m_programID);
 	Debug(m_programID, GL_LINK_STATUS, true, "Error: Linking failed: ");
@@ -52,7 +74,7 @@ void AShader::Init(const std::string& filename, bool hasGeomShader)
 }
 
 
-void AShader::Release() 
+void AShader::Release()
 {
 	// OBS DOESNT WORK YET
 	for (unsigned int i = 0; i < NR_SHADERS; i++) {
@@ -78,6 +100,7 @@ void AShader::Update(Transform& transform, Camera& camera)
 
 void AShader::AddAttributeLocation()
 {
+	std::cout << "ASHADERS" << std::endl;
 	// These are three attributes are set for all shaders.
 	glBindAttribLocation(m_programID, 0, "Position");
 	glBindAttribLocation(m_programID, 1, "Normal");
@@ -92,7 +115,7 @@ void AShader::AddUniforms()
 }
 
 
-GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType) 
+GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
 {
 
 	GLuint shader = glCreateShader(shaderType);
@@ -114,7 +137,7 @@ GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
 	return shader;
 }
 
-std::string AShader::LoadShader(const std::string& filename) 
+std::string AShader::LoadShader(const std::string& filename)
 {
 	std::ifstream in(filename.c_str());
 
@@ -133,7 +156,7 @@ std::string AShader::LoadShader(const std::string& filename)
 	return output;
 }
 
-void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg) 
+void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg)
 {
 
 	GLint errorCheck = 0;
@@ -148,7 +171,7 @@ void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::strin
 		glGetShaderiv(shader, flag, &errorCheck);
 	}
 
-	if (errorCheck == GL_FALSE) 
+	if (errorCheck == GL_FALSE)
 	{
 		if (isProgram)
 		{

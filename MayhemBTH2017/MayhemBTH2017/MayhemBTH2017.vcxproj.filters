@@ -125,16 +125,9 @@
     </ClCompile>
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="LevelEditor.cpp">
-      <Filter>Engine\Level Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelExporter.cpp">
-      <Filter>Engine\Level Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelManager.cpp">
       <Filter>Engine\Level Editor</Filter>
     </ClCompile>
     <ClCompile Include="AShader.cpp">
@@ -150,6 +143,12 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="LevelEditorLevel.cpp" />
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Engine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleTransform.cpp">
+      <Filter>Engine\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -227,16 +226,9 @@
     <ClInclude Include="GUI.h" />
     <ClInclude Include="GUIQuad.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="LevelEditor.h">
-      <Filter>Engine\Level Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelExporter.h">
-      <Filter>Engine\Level Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelManager.h">
       <Filter>Engine\Level Editor</Filter>
     </ClInclude>
     <ClInclude Include="AShader.h">
@@ -252,10 +244,49 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="LevelEditorLevel.h" />
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleTransform.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="leo.frag" />
     <None Include="leo.geom" />
     <None Include="leo.vert" />
+    <None Include="emitterShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="emitterShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="GeometryPass.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="DrawShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="DrawShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="DrawShader.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="DebugShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="DebugShader.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="DebugShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="ParticleDrop.vert">
+      <Filter>GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>
