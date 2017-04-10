@@ -17,7 +17,6 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-
 	LevelEditor l;
 	MenuSystem m;
 	glDepthFunc(GL_LESS);
