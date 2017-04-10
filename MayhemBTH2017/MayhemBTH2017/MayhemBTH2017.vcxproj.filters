@@ -64,6 +64,9 @@
     <Filter Include="Engine\Menu">
       <UniqueIdentifier>{15bbf7ad-3aa4-415a-8294-f8c0e338a052}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Animation">
+      <UniqueIdentifier>{a12d8684-8b61-46a4-a109-9743b483e6b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -176,6 +179,10 @@
     <ClCompile Include="AntiAliasing.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="JointSkeleton.cpp">
+      <Filter>Engine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Joint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -291,6 +298,10 @@
     <ClInclude Include="AntiAliasing.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="JointSkeleton.h">
+      <Filter>Engine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Joint.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">
