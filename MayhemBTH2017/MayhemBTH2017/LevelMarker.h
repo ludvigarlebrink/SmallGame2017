@@ -30,9 +30,15 @@ public:
 	LevelMarker();
 	virtual ~LevelMarker();
 
-	void SetMarkerMode();
+	//::.. MODIFY FUNCTIONS ..:://
 	void MoveUp(float speed);
 	void MoveRight(float speed);
+
+	//::.. SET FUNCTIONS ..:://
+	void SetMarkerMode(uint32_t markerMode);
+
+	//::.. GET FUNCTIONS ..:://
+	uint32_t GetMarkerMode();
 
 	void Update();
 	void Render();
@@ -49,7 +55,6 @@ private:
 	Camera				m_camera;
 	Mesh				m_mesh;
 
-	Timer				m_timer;
 	TextureImporter		m_textureTemp;
 	Texture				m_texture;
 
