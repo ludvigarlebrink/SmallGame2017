@@ -52,6 +52,7 @@ void BigInit()
 
 void Terminate()
 {
+	g_timeManager.ShutDown();		// 6.
 	g_inputManager.ShutDown();		// 5.
 	g_stateManager.ShutDown();		// 4.
 	g_videoManager.ShutDown();		// 3.
