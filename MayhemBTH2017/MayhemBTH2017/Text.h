@@ -18,7 +18,7 @@ public:
 	void Render();
 
 private:
-	Vertex verts[6];
+	Vertex3D verts[6];
 	Mesh m_mesh;
 };
 

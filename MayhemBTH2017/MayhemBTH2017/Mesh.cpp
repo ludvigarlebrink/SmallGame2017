@@ -4,7 +4,7 @@
 
 //::.. CONSTRUCTORS ..:://
 Mesh::Mesh()
-	: m_isLoaded(false), m_drawCount(0)
+	: m_isLoaded(false), m_drawCount(0), m_renderMode(GL_TRIANGLES)
 {
 
 }
@@ -15,8 +15,7 @@ Mesh::~Mesh()
 }
 
 
-//::.. INITIALIZERS ..:://
-bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts)
+bool Mesh::LoadMesh(Vertex2D * vertices, uint64_t numVerts)
 {
 	if (m_isLoaded)
 	{
@@ -24,7 +23,7 @@ bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts)
 	}
 
 	m_drawCount = numVerts;
-	m_vertices = vertices;
+	m_vertices2D = vertices;
 
 	// Generate VAO.
 	glGenVertexArrays(1, &m_vao);
@@ -43,20 +42,63 @@ bool Mesh::LoadMesh(Vertex * vertices, uint64_t numVerts)
 	glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
 
 	// Copy data to the gpu.
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * numVerts, vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex2D) * numVerts, vertices, GL_STATIC_DRAW);
 
 	uint64_t offset = 0;
 
 	// Position.
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(offset));
-	offset += sizeof(glm::vec3);
-
-	// Normal.
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(offset));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), BUFFER_OFFSET(offset));
 	offset += sizeof(glm::vec3);
 
 	// Texture Coordinates.
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(offset));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), BUFFER_OFFSET(offset));
+
+	// Unbind
+	glBindVertexArray(0);
+}
+
+//::.. INITIALIZERS ..:://
+bool Mesh::LoadMesh(Vertex3D * vertices, uint64_t numVerts)
+{
+	if (m_isLoaded)
+	{
+		return false;
+	}
+
+	m_drawCount = numVerts;
+	m_vertices3D = vertices;
+
+	// Generate VAO.
+	glGenVertexArrays(1, &m_vao);
+
+	// Bind VAO.
+	glBindVertexArray(m_vao);
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
+	glEnableVertexAttribArray(3);
+
+	// Generate buffers.
+	glGenBuffers(1, &m_buffer);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
+
+	// Copy data to the gpu.
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex3D) * numVerts, vertices, GL_STATIC_DRAW);
+
+	uint64_t offset = 0;
+
+	// Position.
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex3D), BUFFER_OFFSET(offset));
+	offset += sizeof(glm::vec3);
+
+	// Normal.
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex3D), BUFFER_OFFSET(offset));
+	offset += sizeof(glm::vec3);
+
+	// Texture Coordinates.
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex3D), BUFFER_OFFSET(offset));
 
 	// Unbind
 	glBindVertexArray(0);
@@ -84,7 +126,7 @@ bool Mesh::FreeMesh()
 bool Mesh::Render()
 {
 	glBindVertexArray(m_vao);
-	glDrawArrays(GL_TRIANGLES, 0, m_drawCount);
+	glDrawArrays(m_renderMode, 0, m_drawCount);
 	glBindVertexArray(0);
 	return true;
 }
@@ -96,8 +138,14 @@ bool Mesh::GetIsLoaded()
 	return m_isLoaded;
 }
 
+
+void Mesh::SetRenderMode(GLenum renderMode)
+{
+	m_renderMode = renderMode;
+}
+
 void Mesh::Update()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * m_drawCount, m_vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex3D) * m_drawCount, m_vertices3D, GL_STATIC_DRAW);
 }
