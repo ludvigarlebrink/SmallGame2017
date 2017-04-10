@@ -176,6 +176,12 @@
     <ClCompile Include="AntiAliasing.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="MeshQuad.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadShader.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -289,6 +295,12 @@
       <Filter>Engine\GUI</Filter>
     </ClInclude>
     <ClInclude Include="AntiAliasing.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshQuad.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadShader.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

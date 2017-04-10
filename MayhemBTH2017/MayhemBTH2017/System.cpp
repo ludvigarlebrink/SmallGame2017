@@ -22,15 +22,17 @@ void System::Run()
 	MenuSystem m;
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
-
+	AntiAliasing msaa;
+	MeshQuad quad;
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
 	while (isRunning)
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
-		
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
+		msaa.Reset();
+
 		m_inputManager->Update();
 
 		switch (m_stateManager->GetCurrentState())
@@ -51,6 +53,11 @@ void System::Run()
 		default:
 			break;
 		}
+
+		msaa.Update();
+		quad.Render();
+		msaa.Bind();
+		quad.Draw();
 
 		m_inputManager->Reset();
 

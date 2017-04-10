@@ -7,6 +7,10 @@
 #include "TimeManager.h"
 #include "StateManager.h"
 
+#include "AntiAliasing.h"
+#include "MeshQuad.h"
+
+
 class System
 {
 public:
