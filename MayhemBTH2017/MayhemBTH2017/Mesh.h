@@ -43,7 +43,7 @@ public:
 	//::.. INITIALIZERS ..:://
 	bool LoadMesh(Vertex2D * vertices, uint64_t numVerts);
 	bool LoadMesh(Vertex3D * vertices, uint64_t numVerts);
-	bool LoadMesh(Vertex3DBlendAnimation * vertices, uint64_t numVerts);
+//	bool LoadMesh(Vertex3DBlendAnimation * vertices, uint64_t numVerts);
 	bool FreeMesh();
 
 	//::.. RENDER ..:://

@@ -63,6 +63,7 @@ public:
 	bool GetButtonUp(size_t button);
 	float GetAxisDirection(size_t button);
 	size_t GetNumButtons();
+	size_t GetNumAxis();
 
 private:
 	//::.. HELP FUNCTIONS ..:://
