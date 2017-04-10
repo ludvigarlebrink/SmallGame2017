@@ -29,39 +29,7 @@ void Level::Render(Camera camera)
 }
 
 
-//::.. SET FUNCTIONS ..:://
-void Level::SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID)
-{
-	m_grid[posX][posY].textureID = textureID;
-}
-
-void Level::SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied)
-{
-	m_grid[posX][posY].isOccupied = isOccupied;
-}
-
-void Level::SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint)
-{
-	m_grid[posX][posY].isSpawnPoint = isSpawnPoint;
-}
-
-
-//::.. GET FUNCTIONS ..:://
-bool Level::GetIsOccupied(uint32_t posX, uint32_t posY)
-{
-	return m_grid[posX][posY].isOccupied;
-}
-
-bool Level::GetIsSpawnPoint(uint32_t posX, uint32_t posY)
-{
-	return m_grid[posX][posY].isSpawnPoint;
-}
-
-uint32_t Level::GetTextureID(uint32_t posX, uint32_t posY)
-{
-	return m_grid[posX][posY].textureID;
-}
-
+//::.. MODIFY FUNCTIONS ..:://
 void Level::AddBlock(uint32_t posX, uint32_t posY)
 {
 	if (!m_grid[posX][posY].isOccupied)
@@ -92,6 +60,40 @@ void Level::AddSpawnPoint(uint32_t posX, uint32_t posY)
 	{
 		SetSpawnPoint(posX, posY, !GetIsSpawnPoint(posX, posY));
 	}
+}
+
+
+//::.. GET FUNCTIONS ..:://
+bool Level::GetIsOccupied(uint32_t posX, uint32_t posY)
+{
+	return m_grid[posX][posY].isOccupied;
+}
+
+bool Level::GetIsSpawnPoint(uint32_t posX, uint32_t posY)
+{
+	return m_grid[posX][posY].isSpawnPoint;
+}
+
+uint32_t Level::GetTextureID(uint32_t posX, uint32_t posY)
+{
+	return m_grid[posX][posY].textureID;
+}
+
+
+//::.. SET FUNCTIONS ..:://
+void Level::SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID)
+{
+	m_grid[posX][posY].textureID = textureID;
+}
+
+void Level::SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied)
+{
+	m_grid[posX][posY].isOccupied = isOccupied;
+}
+
+void Level::SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint)
+{
+	m_grid[posX][posY].isSpawnPoint = isSpawnPoint;
 }
 
 

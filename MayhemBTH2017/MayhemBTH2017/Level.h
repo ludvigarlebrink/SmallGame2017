@@ -5,6 +5,7 @@
 #include "AShader.h"
 #include "Camera.h"
 #include "Mesh.h"
+#include "box2d.h"
 
 
 #include <glm.hpp>
@@ -21,33 +22,30 @@ public:
 
 	struct Block
 	{
-		uint32_t	textureID; // 4 bytes
-		bool		isOccupied; // 1 byte
-		bool		isSpawnPoint; // 1 byte
+		uint32_t	textureID; // 4 bytes.
+		bool		isOccupied; // 1 byte.
+		bool		isSpawnPoint; // 1 byte.
 	};
-
+	
 	Level();
 	virtual ~Level();
-
+	
 	void Render(Camera camera);
-
-	//::.. SET FUNCTIONS ..:://
-	void SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID);
-	void SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied);
-	void SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint);
-	//set grid
-
-	//::.. GET FUNCTIONS ..:://
-	bool GetIsOccupied(uint32_t posX, uint32_t posY);
-	bool GetIsSpawnPoint(uint32_t posX, uint32_t posY);
-	uint32_t GetTextureID(uint32_t posX, uint32_t posY);
-	//get grid
 
 	//::.. MODIFY FUNCTIONS ..:://
 	void AddBlock(uint32_t posX, uint32_t posY);
 	void RemoveBlock(uint32_t posX, uint32_t posY);
 	void AddSpawnPoint(uint32_t posX, uint32_t posY);
 
+	//::.. SET FUNCTIONS ..:://
+	void SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID);
+	void SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied);
+	void SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint);
+
+	//::.. GET FUNCTIONS ..:://
+	bool GetIsOccupied(uint32_t posX, uint32_t posY);
+	bool GetIsSpawnPoint(uint32_t posX, uint32_t posY);
+	uint32_t GetTextureID(uint32_t posX, uint32_t posY);
 
 	void Clear();
 
