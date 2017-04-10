@@ -68,7 +68,6 @@ private:
 
 	GLenum		m_renderMode;
 
-
 };
 
 

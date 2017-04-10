@@ -37,6 +37,7 @@ LevelMarker::LevelMarker()
 
 	m_transform.SetPosition(0.0f, 0.0f, 0.0f);
 	m_mesh.LoadMesh(verts, 6);
+	
 }
 
 

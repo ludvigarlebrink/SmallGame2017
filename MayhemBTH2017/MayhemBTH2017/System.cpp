@@ -1,6 +1,6 @@
 #include "System.h"
 
-
+#include "MeshImporter.h"
 #include "MenuSystem.h"
 
 System::System()
@@ -20,6 +20,7 @@ void System::Run()
 
 	LevelEditor l;
 	MenuSystem m;
+	MeshImporter meshImport;
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
@@ -32,7 +33,6 @@ void System::Run()
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 		
 		m_inputManager->Update();
-
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
