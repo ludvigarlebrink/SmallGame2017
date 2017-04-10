@@ -10,12 +10,28 @@
 #define BUFFER_OFFSET(i) ((char *)nullptr + (i))
 
 
-struct Vertex
+struct Vertex2D
+{
+	glm::vec3 position;
+	glm::vec2 texCoords;
+};
+
+
+struct Vertex3D
 {
 	glm::vec3 position;
 	glm::vec3 normal;
 	glm::vec3 texCoordsAlpha;
 };
+
+
+struct Vertex3DBlendAnimation
+{
+	glm::vec3 position;
+	glm::vec3 normal;
+	glm::vec3 texCoordsAlpha;
+};
+
 
 class Mesh
 {
@@ -25,7 +41,9 @@ public:
 	virtual ~Mesh();
 
 	//::.. INITIALIZERS ..:://
-	bool LoadMesh(Vertex* vertices, uint64_t numVerts);
+	bool LoadMesh(Vertex2D * vertices, uint64_t numVerts);
+	bool LoadMesh(Vertex3D * vertices, uint64_t numVerts);
+	bool LoadMesh(Vertex3DBlendAnimation * vertices, uint64_t numVerts);
 	bool FreeMesh();
 
 	//::.. RENDER ..:://
@@ -34,6 +52,9 @@ public:
 	//::.. GET FUNCTIONS ..:://
 	bool GetIsLoaded();
 
+	//::.. SET FUNCTIONS ..:://
+
+
 	void Update();
 
 private:
@@ -41,7 +62,11 @@ private:
 	uint64_t	m_drawCount;
 	GLuint		m_vao;
 	GLuint		m_buffer;
-	Vertex *	m_vertices;
+
+	Vertex3D *	m_vertices;
+
+
+
 };
 
 
