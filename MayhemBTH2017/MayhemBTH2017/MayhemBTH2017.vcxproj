@@ -130,6 +130,8 @@
   <ItemGroup>
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="AMenu.cpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationController.cpp" />
     <ClCompile Include="AntiAliasing.cpp" />
     <ClCompile Include="ARenderable.cpp" />
     <ClCompile Include="AResource.cpp" />
@@ -142,6 +144,7 @@
     </ClCompile>
     <ClCompile Include="Joint.cpp" />
     <ClCompile Include="JointSkeleton.cpp" />
+    <ClCompile Include="KeyFrame.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelExporter.cpp" />
@@ -175,6 +178,8 @@
     <ClInclude Include="AAllocator.h" />
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="AMenu.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimationController.h" />
     <ClInclude Include="AntiAliasing.h" />
     <ClInclude Include="ARenderable.h" />
     <ClInclude Include="AResource.h" />
@@ -187,6 +192,7 @@
     </ClInclude>
     <ClInclude Include="Joint.h" />
     <ClInclude Include="JointSkeleton.h" />
+    <ClInclude Include="KeyFrame.h" />
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelExporter.h" />
