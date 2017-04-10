@@ -140,6 +140,8 @@
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Joint.cpp" />
+    <ClCompile Include="JointSkeleton.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelExporter.cpp" />
@@ -183,6 +185,8 @@
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Joint.h" />
+    <ClInclude Include="JointSkeleton.h" />
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelExporter.h" />
