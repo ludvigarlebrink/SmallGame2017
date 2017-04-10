@@ -52,9 +52,6 @@
     <Filter Include="Engine\Resources\Exporters">
       <UniqueIdentifier>{bb95d1ce-612f-4a0b-855d-d0b3b35d4ce6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GUI">
-      <UniqueIdentifier>{1edf8cbe-d56e-411d-8219-9d50b4417e28}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\HID">
       <UniqueIdentifier>{eb8a49cc-da3b-46e0-8859-c79e7642fe15}</UniqueIdentifier>
     </Filter>
@@ -64,8 +61,11 @@
     <Filter Include="Engine\Menu">
       <UniqueIdentifier>{15bbf7ad-3aa4-415a-8294-f8c0e338a052}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Animation">
+    <Filter Include="Engine\Rendering\Animation">
       <UniqueIdentifier>{a12d8684-8b61-46a4-a109-9743b483e6b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Rendering\GUI">
+      <UniqueIdentifier>{1edf8cbe-d56e-411d-8219-9d50b4417e28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +165,7 @@
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="Text.cpp">
-      <Filter>Engine\GUI</Filter>
+      <Filter>Engine\Rendering\GUI</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
       <Filter>Engine\Menu</Filter>
@@ -174,15 +174,26 @@
       <Filter>Engine\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
-      <Filter>Engine\GUI</Filter>
+      <Filter>Engine\Rendering\GUI</Filter>
     </ClCompile>
     <ClCompile Include="AntiAliasing.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="JointSkeleton.cpp">
-      <Filter>Engine\Animation</Filter>
+      <Filter>Engine\Rendering\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Joint.cpp" />
+    <ClCompile Include="Joint.cpp">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyFrame.cpp">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationController.cpp">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationClip.cpp">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -284,7 +295,7 @@
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="Text.h">
-      <Filter>Engine\GUI</Filter>
+      <Filter>Engine\Rendering\GUI</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
       <Filter>Engine\Menu</Filter>
@@ -293,15 +304,26 @@
       <Filter>Engine\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Engine\GUI</Filter>
+      <Filter>Engine\Rendering\GUI</Filter>
     </ClInclude>
     <ClInclude Include="AntiAliasing.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="JointSkeleton.h">
-      <Filter>Engine\Animation</Filter>
+      <Filter>Engine\Rendering\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Joint.h" />
+    <ClInclude Include="Joint.h">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyFrame.h">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationController.h">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationClip.h">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">
