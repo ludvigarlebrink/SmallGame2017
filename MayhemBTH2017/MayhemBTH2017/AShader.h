@@ -30,7 +30,6 @@ public:
 	void Release();
 	void Bind();
 	virtual void Update(Transform& transform, Camera& camera);
-	void TempUpdateAlpha(GLfloat a);
 
 	//::.. PROTECTED FUNCTIONS ..:://
 	virtual void AddAttributeLocation();

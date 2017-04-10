@@ -1,5 +1,4 @@
 #include "AShader.h"
-#include "AShader.h"
 
 
 
@@ -49,9 +48,11 @@ void AShader::Init(const std::string& filename, bool hasGeomShader, bool particl
 	glAttachShader(m_programID, m_shader[VERTEX_SHADER]);
 	Debug(m_shader[VERTEX_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
 	//Attach geo
-	glAttachShader(m_programID, m_shader[GEOMETRY_SHADER]);
-	Debug(m_shader[GEOMETRY_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
-	
+	if (hasGeomShader)
+	{
+		glAttachShader(m_programID, m_shader[GEOMETRY_SHADER]);
+		Debug(m_shader[GEOMETRY_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+	}
 	AddAttributeLocation();
 
 	if (particles) {

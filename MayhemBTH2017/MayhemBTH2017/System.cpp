@@ -41,6 +41,7 @@ void System::Run()
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
+			glDisable(GL_BLEND);
 			l.Update();
 			break;
 		case GameState::GAME:
