@@ -5,16 +5,16 @@
 LevelEditor::LevelEditor()
 	: m_currentPosX(0), m_currentPosY(0)
 {
-	m_camera.SetRotation(0.0f, -0.0f);
-	m_camera.SetPosition(glm::vec3(((SIZE_X / 2) - 0.5f), ((SIZE_Y / 2) + 0.5f), -60));
+	m_mode = NORMAL;
+
+
+	m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
 	m_input = InputManager::Get();
 	m_green.Init("DebugGreen", false);
 
-	m_texture = texImp.Import(".\\Assets\\Textures\\stone.jpg");
+	m_texture = m_textureTemp.Import(".\\Assets\\Textures\\stone.jpg");
 
 	Vertex verts[6];
-
-	float scaler = 1.0f;
 
 	m_timer.SetTimer(0.1f, true, true);
 
@@ -45,6 +45,8 @@ LevelEditor::LevelEditor()
 	m_transform.SetPosition(0.0f, 0.0f, 0.0f);
 	m_mesh.LoadMesh(verts, 6);
 
+	std::cout << round(3.6f) << std::endl;
+
 }
 
 LevelEditor::~LevelEditor()
@@ -55,7 +57,7 @@ LevelEditor::~LevelEditor()
 
 //::.. UPDATE FUNCTIONS ..:://
 void LevelEditor::Update()
-{	
+{
 	if (m_timer.Update())
 	{
 		AxisMove();
@@ -64,7 +66,7 @@ void LevelEditor::Update()
 	ButtonInput();
 	m_texture.Bind();
 	RenderSelector();
-	
+
 	m_level.Render(m_camera);
 }
 
@@ -93,16 +95,18 @@ void LevelEditor::ButtonInput()
 	{
 		m_savedPosX = m_currentPosX;
 		m_savedPosY = m_currentPosY;
+		m_mode = ADD;
 	}
 
-	if (m_input->GetButtonUp(CONTROLLER_BUTTON_A))
+	if (m_input->GetButtonUp(CONTROLLER_BUTTON_A) && m_mode)
 	{
+		m_mode = NORMAL;
 
 		uint32_t startX;
 		uint32_t startY;
 		uint32_t endX;
 		uint32_t endY;
-		
+
 		if (m_currentPosX > m_savedPosX)
 		{
 			startX = m_savedPosX;
@@ -113,7 +117,7 @@ void LevelEditor::ButtonInput()
 			startX = m_currentPosX;
 			endX = m_savedPosX;
 		}
-		
+
 		if (m_currentPosY > m_savedPosY)
 		{
 			startY = m_savedPosY;
@@ -134,9 +138,29 @@ void LevelEditor::ButtonInput()
 		}
 	}
 
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_X))
+	{
+		m_savedPosX = m_currentPosX;
+		m_savedPosY = m_currentPosY;
+		m_mode = REMOVE;
+	}
+
+	if (m_input->GetButtonUp(CONTROLLER_BUTTON_X))
+	{
+		m_mode = NORMAL;
+	}
+
 	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_X))
 	{
-		m_level.RemoveBlock(m_currentPosX, m_currentPosY);
+		if (m_level.GetIsOccupied(m_currentPosX, m_currentPosY))
+			m_level.RemoveBlock(m_currentPosX, m_currentPosY);
+	}
+
+	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_X))
+	{
+		if (m_level.GetIsOccupied(m_currentPosX, m_currentPosY))
+			m_level.RemoveBlock(m_currentPosX, m_currentPosY);
+
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
@@ -146,7 +170,15 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
 	{
+		Reset();
 		m_levelImporter.ImportLevel(m_level);
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
+	{
+		Reset();
+		StateManager * state = StateManager::Get();
+		state->SetCurrentState(GameState::MAIN_MENU);
 	}
 }
 
@@ -175,10 +207,7 @@ void LevelEditor::RenderSelector()
 {
 	m_green.Bind();
 
-	Transform tran;
-	
-
-	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_A))
+	if (m_mode == ADD || m_mode == REMOVE)
 	{
 		uint32_t startX;
 		uint32_t startY;
@@ -207,22 +236,61 @@ void LevelEditor::RenderSelector()
 			endY = m_savedPosY;
 		}
 
-		for (size_t x = startX; x <= endX; x++)
+
+		uint32_t sizeX = endX - startX + 1;
+		uint32_t sizeY = endY - startY + 1;
+
+		float offsetX;
+		float offsetY;
+
+		if (sizeX % 2 == 0)
 		{
-			for (size_t y = startY; y <= endY; y++)
-			{
-				tran.SetPosition(x, y, -2.001f);
-				m_green.Update(tran, m_camera);
-				m_mesh.Render();
-			}
+			offsetX = (startX + (sizeX / 2)) - 0.5f;
 		}
+		else
+		{
+			offsetX = (startX + (sizeX / 2));
+		}
+
+		if (sizeY % 2 == 0)
+		{
+			offsetY = (startY + (sizeY / 2)) - 0.5f;
+		}
+		else
+		{
+			offsetY = (startY + (sizeY / 2));
+		}
+
+
+		m_transform.SetScale(sizeX, sizeY, 1.0f);
+		m_transform.SetPosition(offsetX, offsetY, -2.001f);
+		m_green.Update(m_transform, m_camera);
+		m_green.TempUpdateAlpha(1.0f);
+		m_mesh.Render();
 	}
 	else
 	{
+		m_transform.SetScale(1.0f, 1.0f, 1.0f);
 		m_transform.SetPosition(m_currentPosX, m_currentPosY, -2.001f);
 		m_green.Update(m_transform, m_camera);
+		m_green.TempUpdateAlpha(1.0f);
 		m_mesh.Render();
 	}
 
+}
+
+void LevelEditor::Reset()
+{
+
+
+	for (size_t x = 1; x < SIZE_X; x++)
+	{
+		for (size_t y = 1; y < SIZE_Y; y++)
+		{
+			if (m_level.GetIsOccupied(x, y))
+				m_level.RemoveBlock(x, y);
+
+		}
+	}
 }
 

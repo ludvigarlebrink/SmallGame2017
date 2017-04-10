@@ -13,19 +13,19 @@ AShader::AShader(const std::string& filename, bool hasGeomShader)
 	Init(filename, hasGeomShader);
 }
 
-AShader:: ~AShader() 
+AShader:: ~AShader()
 {
 	Release();
 }
 
 //::..GET FUNCTIONS..:://
-GLuint AShader::GetProgramID() 
+GLuint AShader::GetProgramID()
 {
 	return m_programID;
 }
 
 //::..HELPER FUNCTIONS..:://
-void AShader::Init(const std::string& filename, bool hasGeomShader) 
+void AShader::Init(const std::string& filename, bool hasGeomShader)
 {
 	m_programID = glCreateProgram();
 
@@ -52,7 +52,7 @@ void AShader::Init(const std::string& filename, bool hasGeomShader)
 }
 
 
-void AShader::Release() 
+void AShader::Release()
 {
 	// OBS DOESNT WORK YET
 	for (unsigned int i = 0; i < NR_SHADERS; i++) {
@@ -78,6 +78,11 @@ void AShader::Update(Transform& transform, Camera& camera)
 	glUniform1i(m_uniforms[DIFFUSE_MAP], 0);
 }
 
+void AShader::TempUpdateAlpha(GLfloat a)
+{
+	glUniform1f(m_uniforms[ALPHA], a);
+}
+
 void AShader::AddAttributeLocation()
 {
 	// These are three attributes are set for all shaders.
@@ -91,13 +96,14 @@ void AShader::AddUniforms()
 	m_uniforms[M] = glGetUniformLocation(m_programID, "M");
 	m_uniforms[V] = glGetUniformLocation(m_programID, "V");
 	m_uniforms[P] = glGetUniformLocation(m_programID, "P");
+	m_uniforms[ALPHA] = glGetUniformLocation(m_programID, "Alpha");
 	m_uniforms[DIFFUSE_MAP] = glGetUniformLocation(m_programID, "DiffuseMap");
 }
 
 
 
 
-GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType) 
+GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
 {
 
 	GLuint shader = glCreateShader(shaderType);
@@ -119,7 +125,7 @@ GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
 	return shader;
 }
 
-std::string AShader::LoadShader(const std::string& filename) 
+std::string AShader::LoadShader(const std::string& filename)
 {
 	std::ifstream in(filename.c_str());
 
@@ -138,7 +144,7 @@ std::string AShader::LoadShader(const std::string& filename)
 	return output;
 }
 
-void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg) 
+void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg)
 {
 
 	GLint errorCheck = 0;
@@ -153,7 +159,7 @@ void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::strin
 		glGetShaderiv(shader, flag, &errorCheck);
 	}
 
-	if (errorCheck == GL_FALSE) 
+	if (errorCheck == GL_FALSE)
 	{
 		if (isProgram)
 		{

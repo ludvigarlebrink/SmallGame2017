@@ -2,7 +2,7 @@
 #define __LEVELEDITORLEVEL_H__
 
 #include "Transform.h"
-#include "DebugShaderTech.h"
+#include "AShader.h"
 #include "Camera.h"
 #include "Mesh.h"
 
@@ -15,6 +15,8 @@ class Level
 {
 public:
 	const static int SIZE_X = 84;
+
+
 	const static int SIZE_Y = 48;
 
 	struct Block
@@ -41,10 +43,15 @@ public:
 	uint32_t GetTextureID(uint32_t posX, uint32_t posY);
 	//get grid
 
-	//::.. ADD FUNCTIONS ..:://
+	//::.. MODIFY FUNCTIONS ..:://
 	void AddBlock(uint32_t posX, uint32_t posY);
 	void RemoveBlock(uint32_t posX, uint32_t posY);
 	void AddSpawnPoint(uint32_t posX, uint32_t posY);
+
+
+	void Clear();
+
+	void UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
@@ -52,18 +59,9 @@ private:
 	void InitGrid();
 	void InitMesh();
 
-	void UpdateIsOccupied(uint32_t posX, uint32_t posY, bool isOccupied);
-
 
 private:
-	struct MeshObjects
-	{
-		Transform transform;
-		Mesh mesh;
-	};
-
 	Block		m_grid[SIZE_X][SIZE_Y];
-	MeshObjects m_meshObjects[SIZE_X][SIZE_Y];
 
 	Mesh		m_mesh;
 	Vertex *	m_vertices;
