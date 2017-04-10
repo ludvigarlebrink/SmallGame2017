@@ -34,7 +34,7 @@ public:
 	void MoveUp(float speed);
 	void MoveRight(float speed);
 
-	//::.. SET FUNCTIONS ..:://
+	//::.. SET FUNCTIONS ..::// //
 	void SetMarkerMode(uint32_t markerMode);
 
 	//::.. GET FUNCTIONS ..:://
