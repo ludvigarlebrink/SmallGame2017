@@ -18,7 +18,7 @@ void LevelExporter::Export(Level & level)
 	//TextureID: 4 bytes, isOccupised: 1 byte, isSpawn: 1 byte
 	//In file: (hex) 20 means false, 01 means true for bool
 	//In file: (binary) 00 means false, 01 means true
-	std::ofstream m_fileName("ExportTestLOL.mrlevel", std::ios::binary); //REPLACE WITH FILENAME
+	std::ofstream m_fileName(".\\Assets\\Levels\\ExportTestLOL.mrlevel", std::ios::binary); //REPLACE WITH FILENAME
 
 
 	uint32_t textureID[nrOfBlocks] = { 0 };

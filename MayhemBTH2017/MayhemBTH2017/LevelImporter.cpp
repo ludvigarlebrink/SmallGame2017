@@ -17,7 +17,7 @@ void LevelImporter::ImportLevel(Level & level)
 {
 	const int nrOfBlocks = level.SIZE_X * level.SIZE_Y;
 
-	std::ifstream m_fileName("ExportTestLOL.mrlevel", std::ios::binary); //REPLACE WITH FILENAME
+	std::ifstream m_fileName(".\\Assets\\Levels\\ExportTestLOL.mrlevel", std::ios::binary); //REPLACE WITH FILENAME
 
 	uint32_t textureID[nrOfBlocks] = { 0 };
 	bool isOccupied[nrOfBlocks] = { 0 };
