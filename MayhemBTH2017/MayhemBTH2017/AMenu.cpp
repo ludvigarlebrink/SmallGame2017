@@ -8,7 +8,7 @@ AMenu::AMenu()
 	// Do nothing...
 	m_stateManager = StateManager::Get();
 	m_currentSelection = 0;
-	m_shader.Init("DebugGreen", false);
+	m_shader.Init("DebugGreen", false, false);
 }
 
 
@@ -42,19 +42,16 @@ void AMenu::Render()
 		
 		if (m_button[i]->isActive)
 		{
-			m_shader.TempUpdateAlpha(1.0f);
 			m_button[i]->texture->Bind();
 			m_button[i]->text->Render();
 		}
 		else
 		{
-			m_shader.TempUpdateAlpha(0.4f);
 			m_button[i]->texture->Bind();
 			m_button[i]->text->Render();
 		}
 	}
 
-	m_shader.TempUpdateAlpha(1.0f);
 }
 
 void AMenu::GoForward()

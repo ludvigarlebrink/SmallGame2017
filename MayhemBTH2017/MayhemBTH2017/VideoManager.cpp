@@ -61,7 +61,6 @@ SDL_Window* VideoManager::GetWindow()const
 	return m_window;
 }
 
-
 #ifdef _DEBUG
 
 static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei lenght, const GLchar* message, const void* userParam)
@@ -72,6 +71,9 @@ static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint i
 }
 
 #endif
+
+
+
 
 //::.. HELPER FUNCTIONS ..:://
 void VideoManager::Init()

@@ -100,7 +100,7 @@ void Level::SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint)
 //::.. HELP FUNCTIONS ..:://
 void Level::Init()
 {
-	m_debugShader.Init("DebugShader", false);
+	m_debugShader.Init("DebugShader", false, 0);
 	InitGrid();
 	InitMesh();
 }

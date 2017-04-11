@@ -8,9 +8,9 @@ AShader::AShader()
 {
 }
 
-AShader::AShader(const std::string& filename, bool hasGeomShader)
+AShader::AShader(const std::string& filename, bool hasGeomShader, bool particles)
 {
-	Init(filename, hasGeomShader);
+	Init(filename, hasGeomShader, particles);
 }
 
 AShader:: ~AShader()
@@ -24,8 +24,12 @@ GLuint AShader::GetProgramID()
 	return m_programID;
 }
 
+GLuint AShader::GetTextureID(){
+	return this->m_textureID;
+}
+
 //::..HELPER FUNCTIONS..:://
-void AShader::Init(const std::string& filename, bool hasGeomShader)
+void AShader::Init(const std::string& filename, bool hasGeomShader, bool particles)
 {
 	m_programID = glCreateProgram();
 
@@ -33,14 +37,36 @@ void AShader::Init(const std::string& filename, bool hasGeomShader)
 
 	// Create shaders.
 	m_shader[VERTEX_SHADER] = CreateShader(LoadShader(filename + ".vert"), GL_VERTEX_SHADER);
-	m_shader[FRAGMENT_SHADER] = CreateShader(LoadShader(filename + ".frag"), GL_FRAGMENT_SHADER);
 
+	if (hasGeomShader)
+		m_shader[GEOMETRY_SHADER] = CreateShader(LoadShader(filename + ".geom"), GL_GEOMETRY_SHADER);
+
+	if (!particles) {
+		//if particles, only use a vertex shader
+		m_shader[FRAGMENT_SHADER] = CreateShader(LoadShader(filename + ".frag"), GL_FRAGMENT_SHADER);
+
+		glAttachShader(m_programID, m_shader[FRAGMENT_SHADER]);
+		Debug(m_shader[FRAGMENT_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+	}
+	
+	//Attach vertex
 	glAttachShader(m_programID, m_shader[VERTEX_SHADER]);
 	Debug(m_shader[VERTEX_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
-	glAttachShader(m_programID, m_shader[FRAGMENT_SHADER]);
-	Debug(m_shader[FRAGMENT_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
-
+	//Attach geo
+	glAttachShader(m_programID, m_shader[GEOMETRY_SHADER]);
+	Debug(m_shader[GEOMETRY_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+	
 	AddAttributeLocation();
+
+	if (particles) {
+		std::cout << "Particles transform feedback active" << std::endl;
+		//Names of ouput from vertex shader
+		const char* varyings[5] = { "outPos", "outDir", "outCol", "outLife", "outSize"};
+		glTransformFeedbackVaryings(m_programID, 5, varyings, GL_INTERLEAVED_ATTRIBS);
+		
+
+
+	}
 
 	glLinkProgram(m_programID);
 	Debug(m_programID, GL_LINK_STATUS, true, "Error: Linking failed: ");
@@ -74,17 +100,13 @@ void AShader::Update(Transform& transform, Camera& camera)
 	glUniformMatrix4fv(m_uniforms[M], 1, GL_FALSE, &transform.GetModelMatrix()[0][0]);
 	glUniformMatrix4fv(m_uniforms[V], 1, GL_FALSE, &camera.GetView()[0][0]);
 	glUniformMatrix4fv(m_uniforms[P], 1, GL_FALSE, &camera.GetProjection()[0][0]);
-
 	glUniform1i(m_uniforms[DIFFUSE_MAP], 0);
-}
 
-void AShader::TempUpdateAlpha(GLfloat a)
-{
-	glUniform1f(m_uniforms[ALPHA], a);
 }
 
 void AShader::AddAttributeLocation()
 {
+	std::cout << "ASHADERS" << std::endl;
 	// These are three attributes are set for all shaders.
 	glBindAttribLocation(m_programID, 0, "Position");
 	glBindAttribLocation(m_programID, 1, "Normal");
@@ -93,14 +115,12 @@ void AShader::AddAttributeLocation()
 
 void AShader::AddUniforms()
 {
-	m_uniforms[M] = glGetUniformLocation(m_programID, "M");
-	m_uniforms[V] = glGetUniformLocation(m_programID, "V");
-	m_uniforms[P] = glGetUniformLocation(m_programID, "P");
-	m_uniforms[ALPHA] = glGetUniformLocation(m_programID, "Alpha");
-	m_uniforms[DIFFUSE_MAP] = glGetUniformLocation(m_programID, "DiffuseMap");
+	m_uniforms[0] = glGetUniformLocation(m_programID, "M");
+	m_uniforms[1] = glGetUniformLocation(m_programID, "V");
+	m_uniforms[2] = glGetUniformLocation(m_programID, "P");
+	m_uniforms[DIFFUSE_MAP]= glGetUniformLocation(m_programID, "DiffuseMap");
+
 }
-
-
 
 
 GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
