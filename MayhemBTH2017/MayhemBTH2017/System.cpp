@@ -4,6 +4,7 @@
 #include "MenuSystem.h"
 #include "Mesh.h"
 #include "MeshImporter.h"
+#include "ParticleSystem.h"
 
 System::System()
 {
@@ -26,14 +27,14 @@ void System::Run()
 
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
-
+	ParticleSystem p("GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 100);
 
 	MeshImporter meshImp;
 	Mesh mesh = meshImp.Import();
 	Transform transform;
 	Camera camera;
 	AShader shader;
-	shader.Init("DebugShader", false);
+	shader.Init("DebugShader", false, 0);
 
 	while (isRunning)
 	{
@@ -51,6 +52,8 @@ void System::Run()
 			
 			shader.Bind();
 			shader.Update(transform, camera);
+
+			p.UpdateParticles();
 			mesh.Render();
 
 			m.Update();

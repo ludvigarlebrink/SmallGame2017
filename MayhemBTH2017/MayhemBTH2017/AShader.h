@@ -35,6 +35,7 @@ public:
 	//::.. PROTECTED FUNCTIONS ..:://
 	virtual void AddAttributeLocation();
 	virtual void AddUniforms();
+	void TempUpdateAlpha(GLfloat a);
 
 private:
 	//::.. HELP FUNCTIONS ..:://

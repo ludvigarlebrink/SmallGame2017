@@ -28,6 +28,10 @@ GLuint AShader::GetTextureID(){
 	return this->m_textureID;
 }
 
+void AShader::TempUpdateAlpha(GLfloat a)
+{
+	glUniform1f(m_uniforms[ALPHA], a);
+}
 //::..HELPER FUNCTIONS..:://
 void AShader::Init(const std::string& filename, bool hasGeomShader, bool particles)
 {
