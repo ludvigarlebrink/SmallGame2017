@@ -8,9 +8,8 @@
 #include "TextureImporter.h"
 #include "LevelExporter.h"
 #include "LevelImporter.h"
-#include "StateManager.h"
 #include "LevelMarker.h"
-
+#include "StateManager.h"
 
 #include <glm.hpp>
 #include <cstdint>
@@ -36,16 +35,16 @@ private:
 	void Reset();
 
 private:
-
-	InputManager *		m_input;	
+	InputManager *		m_input;
+	StateManager *		m_stateManager;
 
 	Level				m_level;
 	LevelExporter		m_levelExporter;
 	LevelImporter		m_levelImporter;
 	LevelMarker			m_levelMarker;
+
 	Camera				m_camera;
 	Timer				m_timer;
-
 };
 
 #endif // __LEVELEDITOR_H__

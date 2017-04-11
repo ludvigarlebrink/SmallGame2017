@@ -7,6 +7,7 @@ LevelEditor::LevelEditor()
 
 	m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
 	m_input = InputManager::Get();
+	m_stateManager = StateManager::Get();
 
 	m_timer.SetTimer(0.1f, true, true);
 }
@@ -71,6 +72,19 @@ void LevelEditor::ButtonInput()
 		}
 	}
 
+	if (m_input->GetButtonUp(CONTROLLER_BUTTON_X) && m_levelMarker.GetMarkerMode())
+	{
+		m_levelMarker.SetMarkerMode(NORMAL);
+
+		for (size_t x = m_levelMarker.GetStartX(); x <= m_levelMarker.GetEndX(); x++)
+		{
+			for (size_t y = m_levelMarker.GetStartY(); y <= m_levelMarker.GetEndY(); y++)
+			{
+				m_level.RemoveBlock(x, y);
+			}
+		}
+	}
+
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_X))
 	{
@@ -82,14 +96,6 @@ void LevelEditor::ButtonInput()
 	if (m_input->GetButtonUp(CONTROLLER_BUTTON_X))
 	{
 		m_levelMarker.SetMarkerMode(NORMAL);
-	}
-
-
-	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_X))
-	{
-		if (m_level.GetIsOccupied(m_levelMarker.GetCurrentPosX(), m_levelMarker.GetCurrentPosY()))
-			m_level.RemoveBlock(m_levelMarker.GetCurrentPosX(), m_levelMarker.GetCurrentPosY());
-
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
