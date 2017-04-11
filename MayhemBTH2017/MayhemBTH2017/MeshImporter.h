@@ -20,14 +20,11 @@ public:
 	MeshImporter();
 	virtual ~MeshImporter();
 
-	void ImportFromFile();
-
+	Mesh& Import();
 
 private:
-	Assimp::Importer importer;
-	const aiScene * scene = NULL;
-	Mesh m_mesh;
-	
+	Assimp::Importer	m_importer;
+	Mesh				m_mesh;
 };
 
 
