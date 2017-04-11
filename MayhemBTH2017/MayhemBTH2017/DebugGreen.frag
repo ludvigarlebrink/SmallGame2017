@@ -14,7 +14,7 @@ void main()
 {
 	vec4 col = texture2D(DiffuseMap, TexCoords1.xy);
 	
-	FragColor = vec4(0.0, 1.0, 0.0, 1.0);
-	
+	//FragColor = vec4(col.xyz, 1.0);
+	FragColor=vec4(0.0, 1.0, 0.0, 1.0);
 
 }

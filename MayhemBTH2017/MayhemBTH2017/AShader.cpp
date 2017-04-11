@@ -105,6 +105,7 @@ void AShader::Update(Transform& transform, Camera& camera)
 	glUniformMatrix4fv(m_uniforms[V], 1, GL_FALSE, &camera.GetView()[0][0]);
 	glUniformMatrix4fv(m_uniforms[P], 1, GL_FALSE, &camera.GetProjection()[0][0]);
 	glUniform1i(m_uniforms[DIFFUSE_MAP], 0);
+	glUniform1i(m_uniforms[ALPHA], 1);
 
 }
 

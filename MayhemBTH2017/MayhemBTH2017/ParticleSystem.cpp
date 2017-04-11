@@ -100,6 +100,8 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 	tmpTransform = tpm;
 
 }
+
+ParticleSystem::ParticleSystem(){}
 glm::vec3 ParticleSystem::GetRandomDir() {
 
 	return glm::vec3((rand() % (0, 1000 + 1000)) - 1000, (rand() % (0, 1000 + 1000)) - 1000, (rand() % (0, 1000 + 1000)) - 1000);

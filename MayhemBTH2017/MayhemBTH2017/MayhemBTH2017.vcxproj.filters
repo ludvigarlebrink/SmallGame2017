@@ -369,5 +369,11 @@
     <None Include="DrawShader.geom" />
     <None Include="DrawShader.vert" />
     <None Include="GeometryPass.vert" />
+    <None Include="ToonShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="ToonShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

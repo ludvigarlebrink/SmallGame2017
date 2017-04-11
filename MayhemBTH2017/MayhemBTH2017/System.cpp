@@ -28,10 +28,9 @@ void System::Run()
 
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
-	ParticleSystem p("GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 100);
+	
 
-	MeshImporter meshImp;
-	Mesh mesh = meshImp.Import();
+
 	Transform transform;
 	Camera camera;
 	Game game;
@@ -51,25 +50,40 @@ void System::Run()
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
-			
+
 			lvl.Render(camera);
 
 			break;
-		case GameState::MAIN_MENU:			
+		case GameState::MAIN_MENU:
+
 			shader.Bind();
 			shader.Update(transform, camera);
-			mesh.Render();
+
 			m.Update();
+
+			game.Render();
+
 			break;
 		case GameState::LEVEL_EDITOR:
+
 			l.Update();
+
 			break;
+
 		case GameState::GAME:
+
+			camera.SetPosition(glm::vec3(((84 / 2)), ((48 /2)), -51.2f));
+			shader.Bind();
+			shader.Update(transform, camera);
 			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+			transform.SetPosition(42.0, 24.0, -0.0);
+
+			
+			//Draw scene
 			game.Update(camera);
-			shaderGreen.Bind();
-			shaderGreen.Update(transform, camera);
-			game.Render();
+		
+
+
 			break;
 		case GameState::EXIT:
 			isRunning = false;
