@@ -7,7 +7,8 @@ Game::Game()
 	LevelImporter imp;
 	imp.ImportLevel(m_level);
 
-	for (int i = 0; i < 6; i++) {
+	int i = 0;
+
 		m_vertices[i].position = glm::vec3(0.5f, 0.5f, 2.0f);
 		m_vertices[i].normal = glm::vec3(0.0f, 1.0f, 0.0f);
 		m_vertices[i].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -31,7 +32,6 @@ Game::Game()
 		m_vertices[i + 5].position = glm::vec3(0.5f, 0.5f, -2.0f);
 		m_vertices[i + 5].normal = glm::vec3(0.0f, 1.0f, 0.0f);
 		m_vertices[i + 5].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
-	}
 
 }
 

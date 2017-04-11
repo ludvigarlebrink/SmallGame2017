@@ -200,6 +200,7 @@
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="ShadowShader.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Collider2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -337,6 +338,7 @@
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="ShadowShader.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Collider2D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">
