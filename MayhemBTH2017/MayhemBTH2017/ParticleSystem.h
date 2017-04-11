@@ -18,7 +18,7 @@ class ParticleSystem : public AShader
 {
 public:
 	//::..CONSTRUCTORS..:://
-	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf);
+	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size,  const int nrOf);
 	ParticleSystem();
 	void UpdateParticles();
 

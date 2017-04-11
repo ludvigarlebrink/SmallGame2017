@@ -20,6 +20,7 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
+	ParticleSystem part("GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec4(1.0, 0.5, 0.5, 0.8), 1.5f, 3000);
 	LevelEditor l;
 	Level lvl;
 	MenuSystem m;
@@ -38,6 +39,9 @@ void System::Run()
 	AShader shaderGreen;
 	shader.Init("DebugShader", false, 0);
 	shaderGreen.Init("DebugGreen", false, 0);
+	TextureImporter teximp;
+	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
+
 
 	while (isRunning)
 	{
@@ -50,7 +54,7 @@ void System::Run()
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
-
+			
 			lvl.Render(camera);
 
 			break;
@@ -70,20 +74,27 @@ void System::Run()
 
 			break;
 
-		case GameState::GAME:
+		case GameState::GAME: {
 
-			camera.SetPosition(glm::vec3(((84 / 2)), ((48 /2)), -51.2f));
+			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 			shader.Bind();
 			shader.Update(transform, camera);
 			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 			transform.SetPosition(42.0, 24.0, -0.0);
 
-			
+
 			//Draw scene
 			game.Update(camera);
-		
-
-
+			part.Bind();
+			part.UpdateParticles();
+			texture.Bind();
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glDepthMask(GL_FALSE);
+			part.RenderTransformed(1);
+			glDisable(GL_BLEND);
+			glDepthMask(TRUE);
+		}
 			break;
 		case GameState::EXIT:
 			isRunning = false;

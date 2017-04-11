@@ -19,22 +19,25 @@ out float outSize;
 void main()
 {
 	if(outLife<10.0f){
+
 	outPos=inPos+0.06f*normalize(inDir);
-	outCol.a=inCol.a-outLife;
-	outCol.x=inCol.x;
-	outCol.y=inCol.y;
-	outCol.z=inCol.z;
+	outCol=inCol;
+	outCol.a=inCol.a-0.005f;
 	outDir=inDir;
 	outLife=inLife+0.05f;
-	outSize=inSize;
+
+	
 	}
 
-
 	if(outLife>10.0f){
-		outPos=inPos;
+		outPos=vec3(0.0, 0.0, 0.0);
+		outCol.a=1.0;
 		outLife=0.0f;
 	}
 
+
+
+	outSize=inSize;
 
 }
 
