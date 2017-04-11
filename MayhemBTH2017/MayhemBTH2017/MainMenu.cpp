@@ -4,7 +4,7 @@
 
 MainMenu::MainMenu()
 {
-	AddChild(GameState::LEVEL_EDITOR, "Play");
+	AddChild(GameState::GAME, "Play");
 	AddChild(GameState::LEVEL_EDITOR, "Create");
 	AddChild(GameState::LEVEL_EDITOR, "Options");
 	AddChild(GameState::LEVEL_EDITOR, "Exit");

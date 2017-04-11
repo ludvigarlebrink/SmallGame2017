@@ -199,7 +199,7 @@
     <ClCompile Include="QuadShader.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="ShadowShader.cpp" />
-    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -336,7 +336,7 @@
     <ClInclude Include="QuadShader.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="ShadowShader.h" />
-    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">

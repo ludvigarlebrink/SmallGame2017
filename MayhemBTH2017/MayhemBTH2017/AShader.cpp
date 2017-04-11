@@ -123,6 +123,7 @@ void AShader::AddUniforms()
 	m_uniforms[1] = glGetUniformLocation(m_programID, "V");
 	m_uniforms[2] = glGetUniformLocation(m_programID, "P");
 	m_uniforms[DIFFUSE_MAP]= glGetUniformLocation(m_programID, "DiffuseMap");
+	m_uniforms[ALPHA] = glGetUniformLocation(m_programID, "Alpha");
 
 }
 

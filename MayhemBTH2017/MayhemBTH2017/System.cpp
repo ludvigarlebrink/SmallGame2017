@@ -5,7 +5,7 @@
 #include "Mesh.h"
 #include "MeshImporter.h"
 #include "ParticleSystem.h"
-
+#include "Game.h"
 System::System()
 {
 	Init();
@@ -21,6 +21,7 @@ System::~System()
 void System::Run()
 {
 	LevelEditor l;
+	Level lvl;
 	MenuSystem m;
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
@@ -33,6 +34,7 @@ void System::Run()
 	Mesh mesh = meshImp.Import();
 	Transform transform;
 	Camera camera;
+	Game game;
 	AShader shader;
 	shader.Init("DebugShader", false, 0);
 
@@ -47,9 +49,11 @@ void System::Run()
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
-			break;
-		case GameState::MAIN_MENU:
 			
+			lvl.Render(camera);
+
+			break;
+		case GameState::MAIN_MENU:			
 			shader.Bind();
 			shader.Update(transform, camera);
 			mesh.Render();
@@ -59,6 +63,8 @@ void System::Run()
 			l.Update();
 			break;
 		case GameState::GAME:
+			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+			game.Update(camera);
 			break;
 		case GameState::EXIT:
 			isRunning = false;
