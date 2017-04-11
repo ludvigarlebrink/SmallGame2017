@@ -52,10 +52,7 @@ void System::Run()
 			
 			shader.Bind();
 			shader.Update(transform, camera);
-
-			p.UpdateParticles();
 			mesh.Render();
-
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:

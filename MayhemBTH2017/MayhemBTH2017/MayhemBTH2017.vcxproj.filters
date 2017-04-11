@@ -19,9 +19,6 @@
     <Filter Include="Engine\Misc">
       <UniqueIdentifier>{ab1c212f-a1b1-4430-921f-512d59900304}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{75c15395-003c-47e1-81f0-98299159eca3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Resources">
       <UniqueIdentifier>{4bd8f9dc-2971-4ad8-a0d2-9ab5782c3b55}</UniqueIdentifier>
     </Filter>
@@ -197,6 +194,12 @@
     <ClCompile Include="AShader.cpp">
       <Filter>Engine\Rendering\Shading</Filter>
     </ClCompile>
+    <ClCompile Include="MeshQuad.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="QuadShader.cpp" />
+    <ClCompile Include="ShadowMap.cpp" />
+    <ClCompile Include="ShadowShader.cpp" />
+    <ClCompile Include="GameManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -327,6 +330,13 @@
     <ClInclude Include="AShader.h">
       <Filter>Engine\Rendering\Shading</Filter>
     </ClInclude>
+    <ClInclude Include="MeshQuad.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="QuadShader.h" />
+    <ClInclude Include="ShadowMap.h" />
+    <ClInclude Include="ShadowShader.h" />
+    <ClInclude Include="GameManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">
@@ -353,5 +363,11 @@
     <None Include="DebugGreen.vert">
       <Filter>GLSL</Filter>
     </None>
+    <None Include="Assets\GLSL\ShadowPass.frag" />
+    <None Include="Assets\GLSL\ShadowShader.vert" />
+    <None Include="DrawShader.frag" />
+    <None Include="DrawShader.geom" />
+    <None Include="DrawShader.vert" />
+    <None Include="GeometryPass.vert" />
   </ItemGroup>
 </Project>
