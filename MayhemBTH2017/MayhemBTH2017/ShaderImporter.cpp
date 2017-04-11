@@ -13,18 +13,20 @@ ShaderImporter::~ShaderImporter()
 	// Do nothing...
 }
 
-String& ShaderImporter::LoadShader(const String & filepath)
+Shader& ShaderImporter::LoadShader(char* filepath)
 {
-	std::ifstream in(filepath.GetAsCStr());
+	std::ifstream in(filepath);
 
-	String output;
+	std::string output;
 	std::string line;
 
 	while (in.good())
 	{
 		std::getline(in, line);
-		output.Append(line);
+		output.append(line);
 	}
 
-	return output;
+//	return output;
+	return Shader();
+
 }

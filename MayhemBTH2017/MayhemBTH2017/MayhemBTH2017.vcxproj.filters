@@ -28,9 +28,6 @@
     <Filter Include="Engine\Resources\ResourceTypes">
       <UniqueIdentifier>{71900585-ce90-4ce1-8bdb-02b9edd77a9c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Resources\ResourceCaches">
-      <UniqueIdentifier>{1dccb4f0-6f6b-4902-ab72-d82d797de79d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Resources\Importers">
       <UniqueIdentifier>{a68479e9-0ab3-4a9a-9d0b-9b2dcd747a00}</UniqueIdentifier>
     </Filter>
@@ -87,20 +84,11 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="TextureCache.cpp">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshCache.cpp">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClCompile>
     <ClCompile Include="StackPool.cpp">
       <Filter>Engine\Memory\Allocators</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderCache.cpp">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
     </ClCompile>
     <ClCompile Include="MeshImporter.cpp">
       <Filter>Engine\Resources\Importers</Filter>
@@ -143,9 +131,6 @@
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Engine\HID</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -197,6 +182,12 @@
     <ClCompile Include="AShader.cpp">
       <Filter>Engine\Rendering\Shading</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -214,20 +205,11 @@
     <ClInclude Include="Mesh.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="TextureCache.h">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshCache.h">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClInclude>
     <ClInclude Include="StackPool.h">
       <Filter>Engine\Memory\Allocators</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderCache.h">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
     </ClInclude>
     <ClInclude Include="MeshImporter.h">
       <Filter>Engine\Resources\Importers</Filter>
@@ -273,9 +255,6 @@
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Engine\HID</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
@@ -326,6 +305,12 @@
     </ClInclude>
     <ClInclude Include="AShader.h">
       <Filter>Engine\Rendering\Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

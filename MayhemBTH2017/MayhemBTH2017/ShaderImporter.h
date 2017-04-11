@@ -2,8 +2,9 @@
 #define __SHADERIMPORTER_H__
 
 
-#include "String.h"
+#include "Shader.h"
 
+#include <map>
 #include <fstream>
 #include <string>
 
@@ -13,7 +14,7 @@ public:
 	ShaderImporter();
 	virtual ~ShaderImporter();
 
-	String& LoadShader(const String &filepath);
+	Shader& LoadShader(char* filepath);
 
 private:
 
