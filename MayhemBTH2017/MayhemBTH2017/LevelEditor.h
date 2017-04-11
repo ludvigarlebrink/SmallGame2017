@@ -8,6 +8,8 @@
 #include "TextureImporter.h"
 #include "LevelExporter.h"
 #include "LevelImporter.h"
+#include "LevelMarker.h"
+#include "StateManager.h"
 
 #include <glm.hpp>
 #include <cstdint>
@@ -30,28 +32,19 @@ private:
 	//::.. HELP FUNCTIONS ..:://
 	void AxisMove();
 	void ButtonInput();
-	void ClampPos();
-	void RenderSelector();
+	void Reset();
 
 private:
 	InputManager *		m_input;
+	StateManager *		m_stateManager;
 
 	Level				m_level;
 	LevelExporter		m_levelExporter;
 	LevelImporter		m_levelImporter;
+	LevelMarker			m_levelMarker;
 
-	AShader				m_green;
-	uint32_t			m_currentPosX;
-	uint32_t			m_currentPosY;
-	uint32_t			m_savedPosX;
-	uint32_t			m_savedPosY;
-	Transform			m_transform;
 	Camera				m_camera;
-	Mesh				m_mesh;
-
 	Timer				m_timer;
-	TextureImporter		texImp;
-	Texture				m_texture;
 };
 
 #endif // __LEVELEDITOR_H__

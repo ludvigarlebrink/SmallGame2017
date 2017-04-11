@@ -20,7 +20,6 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	ResourceManager& Get();
-	Mesh& GetMesh(const String& filepath);
 	//Texture& GetTexture(const String& filepath);
 	void GetShader();
 	void GetSkeleton();
