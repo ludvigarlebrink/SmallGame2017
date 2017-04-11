@@ -86,12 +86,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\User\Source\Repos\SmallGame2017\MayhemBTH2017\MayhemBTH2017\Include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>.\Lib\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -117,7 +117,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\User\Source\Repos\SmallGame2017\MayhemBTH2017\MayhemBTH2017\Include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -130,6 +130,8 @@
   <ItemGroup>
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="AMenu.cpp" />
+    <ClCompile Include="AnimationClip.cpp" />
+    <ClCompile Include="AnimationController.cpp" />
     <ClCompile Include="AntiAliasing.cpp" />
     <ClCompile Include="ARenderable.cpp" />
     <ClCompile Include="AResource.cpp" />
@@ -140,6 +142,9 @@
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Joint.cpp" />
+    <ClCompile Include="JointSkeleton.cpp" />
+    <ClCompile Include="KeyFrame.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelExporter.cpp" />
@@ -173,6 +178,8 @@
     <ClInclude Include="AAllocator.h" />
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="AMenu.h" />
+    <ClInclude Include="AnimationClip.h" />
+    <ClInclude Include="AnimationController.h" />
     <ClInclude Include="AntiAliasing.h" />
     <ClInclude Include="ARenderable.h" />
     <ClInclude Include="AResource.h" />
@@ -183,6 +190,9 @@
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Joint.h" />
+    <ClInclude Include="JointSkeleton.h" />
+    <ClInclude Include="KeyFrame.h" />
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelExporter.h" />

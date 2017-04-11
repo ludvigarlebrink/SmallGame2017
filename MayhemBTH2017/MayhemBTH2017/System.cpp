@@ -2,6 +2,8 @@
 
 
 #include "MenuSystem.h"
+#include "Mesh.h"
+#include "MeshImporter.h"
 
 System::System()
 {
@@ -25,11 +27,20 @@ void System::Run()
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
+
+	MeshImporter meshImp;
+	Mesh mesh = meshImp.Import();
+	Transform transform;
+	Camera camera;
+	AShader shader;
+	shader.Init("DebugShader", false);
+
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
-		
+
+
 		m_inputManager->Update();
 
 		switch (m_stateManager->GetCurrentState())
@@ -37,6 +48,11 @@ void System::Run()
 		case GameState::START:
 			break;
 		case GameState::MAIN_MENU:
+			
+			shader.Bind();
+			shader.Update(transform, camera);
+			mesh.Render();
+
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:

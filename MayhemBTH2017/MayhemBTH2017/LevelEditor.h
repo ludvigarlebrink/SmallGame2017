@@ -9,6 +9,7 @@
 #include "LevelExporter.h"
 #include "LevelImporter.h"
 #include "StateManager.h"
+#include "LevelMarker.h"
 
 
 #include <glm.hpp>
@@ -32,39 +33,19 @@ private:
 	//::.. HELP FUNCTIONS ..:://
 	void AxisMove();
 	void ButtonInput();
-	void ClampPos();
-	void RenderSelector();
 	void Reset();
 
 private:
-	enum MarkerMode
-	{
-		NORMAL = 0,
-		ADD,
-		REMOVE
-	};
 
 	InputManager *		m_input;	
 
 	Level				m_level;
 	LevelExporter		m_levelExporter;
 	LevelImporter		m_levelImporter;
-
-	// MARKER
-	AShader				m_green;
-	uint32_t			m_currentPosX;
-	uint32_t			m_currentPosY;
-	uint32_t			m_savedPosX;
-	uint32_t			m_savedPosY;
-	Transform			m_transform;
+	LevelMarker			m_levelMarker;
 	Camera				m_camera;
-	Mesh				m_mesh;
-
 	Timer				m_timer;
-	TextureImporter		m_textureTemp;
-	Texture				m_texture;
 
-	uint32_t			m_mode;
 };
 
 #endif // __LEVELEDITOR_H__

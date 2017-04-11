@@ -24,12 +24,12 @@ struct Vertex3D
 	glm::vec3 texCoordsAlpha;
 };
 
-
-struct Vertex3DBlendAnimation
+struct Vertex3DSkelAnimation
 {
-	glm::vec3 position;
-	glm::vec3 normal;
-	glm::vec3 texCoordsAlpha;
+	Vertex3D	vertex;
+	glm::ivec4	jointIDs;
+	glm::vec4	weights;
+
 };
 
 
@@ -67,7 +67,6 @@ private:
 	Vertex3D *	m_vertices3D;
 
 	GLenum		m_renderMode;
-
 
 };
 

@@ -64,6 +64,12 @@
     <Filter Include="Engine\Menu">
       <UniqueIdentifier>{15bbf7ad-3aa4-415a-8294-f8c0e338a052}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Rendering\Animation">
+      <UniqueIdentifier>{27082aa4-886d-48f4-b2b1-e42b27046c87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Rendering\Shading">
+      <UniqueIdentifier>{3fd8737e-78fc-47b1-a603-2ce5284d23b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -129,9 +135,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="AShader.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Engine\HID</Filter>
     </ClCompile>
@@ -175,6 +178,24 @@
     </ClCompile>
     <ClCompile Include="AntiAliasing.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationClip.cpp">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationController.cpp">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyFrame.cpp">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Joint.cpp">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="JointSkeleton.cpp">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AShader.cpp">
+      <Filter>Engine\Rendering\Shading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,9 +262,6 @@
     <ClInclude Include="LevelEditor.h">
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
-    <ClInclude Include="AShader.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
@@ -290,6 +308,24 @@
     </ClInclude>
     <ClInclude Include="AntiAliasing.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationClip.h">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationController.h">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyFrame.h">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Joint.h">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="JointSkeleton.h">
+      <Filter>Engine\Rendering\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AShader.h">
+      <Filter>Engine\Rendering\Shading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
