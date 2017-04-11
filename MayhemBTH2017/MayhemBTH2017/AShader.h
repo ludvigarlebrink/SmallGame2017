@@ -56,6 +56,7 @@ private:
 		M,
 		V,
 		P,
+		ALPHA,
 		DIFFUSE_MAP,
 		NR_UNIFORMS
 	};

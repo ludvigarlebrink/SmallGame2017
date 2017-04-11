@@ -52,8 +52,17 @@
     <Filter Include="Engine\Resources\Exporters">
       <UniqueIdentifier>{bb95d1ce-612f-4a0b-855d-d0b3b35d4ce6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Level Editor">
+    <Filter Include="Engine\GUI">
+      <UniqueIdentifier>{1edf8cbe-d56e-411d-8219-9d50b4417e28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\HID">
+      <UniqueIdentifier>{eb8a49cc-da3b-46e0-8859-c79e7642fe15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\LevelEditor">
       <UniqueIdentifier>{17b46d9f-af33-4e8d-a0f5-2051a451e687}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Menu">
+      <UniqueIdentifier>{15bbf7ad-3aa4-415a-8294-f8c0e338a052}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +108,6 @@
     <ClCompile Include="System.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="AGameObject.cpp">
       <Filter>Engine\GameObjects</Filter>
     </ClCompile>
@@ -117,40 +123,68 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="DebugShaderTech.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="LevelEditor.cpp">
-      <Filter>Engine\Level Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="AShader.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="StateManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="AntiAliasing.cpp" />
-    <ClCompile Include="Level.cpp" />
-    <ClCompile Include="LevelExporter.cpp" />
-    <ClCompile Include="LevelImporter.cpp" />
-    <ClCompile Include="MeshQuad.cpp" />
-    <ClCompile Include="QuadShader.cpp" />
-    <ClCompile Include="TextureImporter.cpp" />
-    <ClCompile Include="TimeManager.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="ParticleSystem.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="AShader.cpp">
+      <Filter>Engine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Engine\HID</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Engine\HID</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="LevelExporter.cpp">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelImporter.cpp">
+      <Filter>Engine\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="AMenu.cpp">
+      <Filter>Engine\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureImporter.cpp">
+      <Filter>Engine\Resources\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelMarker.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Engine\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Engine\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuSystem.cpp">
+      <Filter>Engine\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AntiAliasing.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshQuad.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadShader.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMap.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="ShadowShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -158,9 +192,6 @@
     </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Engine\Memory\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="GLTexture.h">
-      <Filter>Engine\Misc</Filter>
     </ClInclude>
     <ClInclude Include="String.h">
       <Filter>Engine\Memory\Containers</Filter>
@@ -198,9 +229,6 @@
     <ClInclude Include="System.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClInclude>
     <ClInclude Include="AGameObject.h">
       <Filter>Engine\GameObjects</Filter>
     </ClInclude>
@@ -219,49 +247,71 @@
     <ClInclude Include="Transform.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="DebugShaderTech.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI.h" />
-    <ClInclude Include="GUIQuad.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="LevelEditor.h">
-      <Filter>Engine\Level Editor</Filter>
+      <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="AShader.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\HID</Filter>
     </ClInclude>
     <ClInclude Include="StateManager.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="AntiAliasing.h" />
-    <ClInclude Include="Level.h" />
-    <ClInclude Include="LevelExporter.h" />
-    <ClInclude Include="LevelImporter.h" />
-    <ClInclude Include="MeshQuad.h" />
-    <ClInclude Include="QuadShader.h" />
-    <ClInclude Include="TextureImporter.h" />
+    <ClInclude Include="InputManager.h">
+      <Filter>Engine\HID</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="Particle.h">
-      <Filter>Engine\Rendering</Filter>
+    <ClInclude Include="LevelExporter.h">
+      <Filter>Engine\Resources\Exporters</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleSystem.h">
-      <Filter>Engine\Rendering</Filter>
+    <ClInclude Include="LevelImporter.h">
+      <Filter>Engine\Resources\Importers</Filter>
     </ClInclude>
+    <ClInclude Include="AMenu.h">
+      <Filter>Engine\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureImporter.h">
+      <Filter>Engine\Resources\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelMarker.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Engine\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Engine\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuSystem.h">
+      <Filter>Engine\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiAliasing.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshQuad.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadShader.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMap.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ShadowShader.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="leo.frag" />
-    <None Include="leo.geom" />
-    <None Include="leo.vert" />
     <None Include="DebugShader.frag">
       <Filter>GLSL</Filter>
     </None>
@@ -271,27 +321,29 @@
     <None Include="DebugShader.vert">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="BlurrShader.frag" />
-    <None Include="BlurrShader.geom" />
-    <None Include="BlurrShader.vert" />
-    <None Include="DebugGreen.frag" />
-    <None Include="DebugGreen.vert" />
-    <None Include="QuadShader.frag" />
-    <None Include="QuadShader.geom" />
-    <None Include="QuadShader.vert" />
-    <None Include="SharpnelShader.frag" />
-    <None Include="SharpnelShader.geom" />
-    <None Include="SharpnelShader.vert" />
-    <None Include="DrawShader.frag">
+    <None Include="leo.frag">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="DrawShader.geom">
+    <None Include="leo.geom">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="DrawShader.vert">
+    <None Include="leo.vert">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="GeometryPass.vert">
+    <None Include="DebugGreen.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="DebugGreen.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="DrawShader.frag" />
+    <None Include="DrawShader.geom" />
+    <None Include="DrawShader.vert" />
+    <None Include="GeometryPass.vert" />
+    <None Include="Assets\GLSL\ShadowShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ShadowPass.frag">
       <Filter>GLSL</Filter>
     </None>
   </ItemGroup>

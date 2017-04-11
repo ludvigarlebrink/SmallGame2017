@@ -4,6 +4,7 @@
 //::.. DUMMY CONSTRUCTORS ..:://
 AntiAliasing::AntiAliasing()
 {
+	this->Init();
 }
 
 

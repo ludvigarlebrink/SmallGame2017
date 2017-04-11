@@ -16,7 +16,7 @@ ResourceManager	g_resourceManager;
 VideoManager	g_videoManager;
 StateManager	g_stateManager;
 InputManager	g_inputManager;
-TimeManager		g_timerManager;
+TimeManager		g_timeManager;
 
 
 void BigInit();
@@ -48,7 +48,7 @@ void BigInit()
 	g_videoManager.StartUp();		// 3.
 	g_stateManager.StartUp();		// 4.
 	g_inputManager.StartUp();		// 5.
-	g_timerManager.StartUp();		// 6.
+	g_timeManager.StartUp();		// 6.
 }
 
 void Terminate()

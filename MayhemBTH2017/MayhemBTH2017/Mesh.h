@@ -27,11 +27,9 @@ public:
 	//::.. INITIALIZERS ..:://
 	bool LoadMesh(Vertex* vertices, uint64_t numVerts);
 	bool FreeMesh();
-	bool LoadQuad();
 
 	//::.. RENDER ..:://
 	bool Render();
-	bool RenderQuad();
 
 	//::.. GET FUNCTIONS ..:://
 	bool GetIsLoaded();
@@ -44,9 +42,6 @@ private:
 	GLuint		m_vao;
 	GLuint		m_buffer;
 	Vertex *	m_vertices;
-
-	GLuint m_quadVAO;
-	GLuint m_quadVBO;
 };
 
 
