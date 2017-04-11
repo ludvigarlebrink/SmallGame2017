@@ -46,9 +46,6 @@
     <Filter Include="Engine\Core\Managers">
       <UniqueIdentifier>{9cb0e605-dc82-4c34-bae1-a4503b77de27}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GLSL">
-      <UniqueIdentifier>{47f1e50b-2c7a-4653-8b3e-19da930ebafb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Resources\Exporters">
       <UniqueIdentifier>{bb95d1ce-612f-4a0b-855d-d0b3b35d4ce6}</UniqueIdentifier>
     </Filter>
@@ -69,6 +66,12 @@
     </Filter>
     <Filter Include="Engine\Rendering\Shading">
       <UniqueIdentifier>{3fd8737e-78fc-47b1-a603-2ce5284d23b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{c963d22f-41c5-4c08-9da6-d04773a9bcb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\GLSL">
+      <UniqueIdentifier>{dba1b46a-eb2b-4f28-8938-e7e6ce2e9e84}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -176,9 +179,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Engine\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="AntiAliasing.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="AnimationClip.cpp">
       <Filter>Engine\Rendering\Animation</Filter>
     </ClCompile>
@@ -195,6 +195,12 @@
       <Filter>Engine\Rendering\Animation</Filter>
     </ClCompile>
     <ClCompile Include="AShader.cpp">
+      <Filter>Engine\Rendering\Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="TempShader.cpp">
+      <Filter>Engine\Rendering\Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="AntiAliasing.cpp">
       <Filter>Engine\Rendering\Shading</Filter>
     </ClCompile>
   </ItemGroup>
@@ -306,9 +312,6 @@
     <ClInclude Include="Button.h">
       <Filter>Engine\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="AntiAliasing.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationClip.h">
       <Filter>Engine\Rendering\Animation</Filter>
     </ClInclude>
@@ -327,31 +330,67 @@
     <ClInclude Include="AShader.h">
       <Filter>Engine\Rendering\Shading</Filter>
     </ClInclude>
+    <ClInclude Include="TempShader.h">
+      <Filter>Engine\Rendering\Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiAliasing.h">
+      <Filter>Engine\Rendering\Shading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DebugShader.frag">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\BlurrShader.frag">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="DebugShader.geom">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\BlurrShader.geom">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="DebugShader.vert">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\BlurrShader.vert">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="leo.frag">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\DebugGreen.frag">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="leo.geom">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\DebugGreen.vert">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="leo.vert">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\DebugShader.frag">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="DebugGreen.frag">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\DebugShader.vert">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="DebugGreen.vert">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\MainShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\MainShader.geom">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\MainShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\QuadShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\QuadShader.geom">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\QuadShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SharpnelShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SharpnelShader.geom">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SharpnelShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SkeletalAnimation.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SkeletalAnimation.frag">
+      <Filter>Assets\GLSL</Filter>
     </None>
   </ItemGroup>
 </Project>

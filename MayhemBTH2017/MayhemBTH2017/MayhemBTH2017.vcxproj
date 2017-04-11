@@ -161,6 +161,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShaderCache.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
+    <ClCompile Include="TempShader.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="StackPool.cpp" />
     <ClCompile Include="StateManager.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderCache.h" />
     <ClInclude Include="ShaderImporter.h" />
+    <ClInclude Include="TempShader.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="StackPool.h" />
     <ClInclude Include="StateManager.h" />
@@ -223,14 +225,24 @@
     <ClInclude Include="VideoManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DebugGreen.frag" />
-    <None Include="DebugGreen.vert" />
-    <None Include="DebugShader.frag" />
-    <None Include="DebugShader.geom" />
-    <None Include="DebugShader.vert" />
-    <None Include="leo.frag" />
-    <None Include="leo.geom" />
-    <None Include="leo.vert" />
+    <None Include="Assets\GLSL\BlurrShader.frag" />
+    <None Include="Assets\GLSL\BlurrShader.geom" />
+    <None Include="Assets\GLSL\BlurrShader.vert" />
+    <None Include="Assets\GLSL\DebugGreen.frag" />
+    <None Include="Assets\GLSL\DebugGreen.vert" />
+    <None Include="Assets\GLSL\DebugShader.frag" />
+    <None Include="Assets\GLSL\DebugShader.vert" />
+    <None Include="Assets\GLSL\MainShader.frag" />
+    <None Include="Assets\GLSL\MainShader.geom" />
+    <None Include="Assets\GLSL\MainShader.vert" />
+    <None Include="Assets\GLSL\QuadShader.frag" />
+    <None Include="Assets\GLSL\QuadShader.geom" />
+    <None Include="Assets\GLSL\QuadShader.vert" />
+    <None Include="Assets\GLSL\SharpnelShader.frag" />
+    <None Include="Assets\GLSL\SharpnelShader.geom" />
+    <None Include="Assets\GLSL\SharpnelShader.vert" />
+    <None Include="Assets\GLSL\SkeletalAnimation.frag" />
+    <None Include="Assets\GLSL\SkeletalAnimation.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

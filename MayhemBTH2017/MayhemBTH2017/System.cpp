@@ -1,6 +1,6 @@
 #include "System.h"
 
-
+#include "TempShader.h"
 #include "MenuSystem.h"
 #include "Mesh.h"
 #include "MeshImporter.h"
@@ -33,9 +33,10 @@ void System::Run()
 	Mesh mesh = meshImp.Import();
 	Transform transform;
 	Camera camera;
-	AShader shader;
-	shader.Init("DebugShader", false);
-
+	TempShader shader;
+	JointSkeleton skel = meshImp.GetSkeleton();
+	shader.Init(".\\Assets\\GLSL\\SkeletalAnimation", false);
+	float counter = 0;
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -51,7 +52,9 @@ void System::Run()
 		case GameState::MAIN_MENU:
 			
 			shader.Bind();
-			shader.Update(transform, camera);
+			transform.SetRotation(0.0f, counter, 0.0f);
+			transform.SetScale(1.0f, 1.0f, 1.0f);
+			shader.Update(transform, camera, skel);
 			mesh.Render();
 
 			m.Update();
@@ -73,6 +76,8 @@ void System::Run()
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
+
+		counter += m_timeManager->GetDeltaTime();
 	}
 }
 

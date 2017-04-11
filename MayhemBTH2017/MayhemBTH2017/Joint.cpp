@@ -20,4 +20,5 @@ uint32_t Joint::GetParentID()
 
 void Joint::SetParentID(uint32_t parentID)
 {
+	m_parentID = parentID;
 }

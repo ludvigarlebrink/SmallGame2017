@@ -1,10 +1,10 @@
-#ifndef __ASHADER_H__
-#define __ASHADER_H__
+#ifndef __TEMPSHADER_H__
+#define __TEMPSHADER_H__
 
 
 #include "Transform.h"
 #include "Camera.h"
-
+#include "JointSkeleton.h"
 
 #include <glew.h>
 #include <SDL.h>
@@ -14,13 +14,13 @@
 #include <string>
 
 
-class AShader 
+class TempShader 
 {
 public:
 	//::.. CONSTRUCTORS ..:://
-	AShader();
-	AShader(const std::string& filename, bool hasGeomShader);
-	virtual ~AShader();											//Destructor
+	TempShader();
+	TempShader(const std::string& filename, bool hasGeomShader);
+	virtual ~TempShader();											//Destructor
 
 	//::.. GET FUNCTIONS ..:://
 	GLuint GetProgramID();
@@ -29,8 +29,7 @@ public:
 	void Init(const std::string& filename, bool hasGeomShader);
 	void Release();
 	void Bind();
-	virtual void Update(Transform& transform, Camera& camera);
-	void TempUpdateAlpha(GLfloat a);
+	virtual void Update(Transform& transform, Camera& camera, JointSkeleton& skel);
 
 	//::.. PROTECTED FUNCTIONS ..:://
 	virtual void AddAttributeLocation();
@@ -55,8 +54,7 @@ private:
 		M,
 		V,
 		P,
-		ALPHA,
-		DIFFUSE_MAP,
+		JOINTS,
 		NR_UNIFORMS
 	};
 

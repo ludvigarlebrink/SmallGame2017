@@ -222,8 +222,8 @@ void Level::InitMesh()
 	}
 
 
-	m_mesh.LoadMesh(m_vertices, length);
-	m_mesh2.LoadMesh(m_vertices2, length2);
+	m_mesh.Load(m_vertices, length);
+	m_mesh2.Load(m_vertices2, length2);
 }
 
 void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied)

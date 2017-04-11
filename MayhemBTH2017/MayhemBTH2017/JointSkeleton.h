@@ -6,7 +6,7 @@
 
 
 #include <vector>
-
+#include <glm.hpp>
 
 class JointSkeleton
 {
@@ -15,9 +15,12 @@ public:
 	virtual ~JointSkeleton();
 
 	void AddJoint(Joint joint);
+	void AddMatTemp(glm::mat4 hej);
+	glm::mat4* GetMat();
 
 private:
 	std::vector<Joint>	m_joints;
+	std::vector<glm::mat4> matTemp;
 };
 
 

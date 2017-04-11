@@ -41,7 +41,7 @@ void Text::Init()
 	verts[5].normal = glm::vec3(0.0f, 0.0f, 1.0f);
 	verts[5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 1.0f);
 
-	m_mesh.LoadMesh(verts, 6);
+	m_mesh.Load(verts, 6);
 }
 
 void Text::Render()
