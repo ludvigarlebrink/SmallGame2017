@@ -5,16 +5,20 @@
 #include "LevelEditor.h"
 #include "Mesh.h"
 
+
 class Game
 {
 public:
 	Game();
 	virtual ~Game();
+	void Update(Camera cam);
+	void Render();
+private:
 private:
 	Mesh m_player;
 	Level m_level;
+	Vertex3D m_vertices[6];
 public:
-	void Update(Camera cam);
 private:
 public:
 

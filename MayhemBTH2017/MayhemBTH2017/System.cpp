@@ -36,7 +36,9 @@ void System::Run()
 	Camera camera;
 	Game game;
 	AShader shader;
+	AShader shaderGreen;
 	shader.Init("DebugShader", false, 0);
+	shaderGreen.Init("DebugGreen", false, 0);
 
 	while (isRunning)
 	{
@@ -65,6 +67,9 @@ void System::Run()
 		case GameState::GAME:
 			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 			game.Update(camera);
+			shaderGreen.Bind();
+			shaderGreen.Update(transform, camera);
+			game.Render();
 			break;
 		case GameState::EXIT:
 			isRunning = false;
