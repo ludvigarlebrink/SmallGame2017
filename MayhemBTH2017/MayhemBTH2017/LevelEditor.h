@@ -37,8 +37,7 @@ private:
 
 private:
 
-	InputManager *		m_input;	
-
+	InputManager *		m_input;
 	Level				m_level;
 	LevelExporter		m_levelExporter;
 	LevelImporter		m_levelImporter;
