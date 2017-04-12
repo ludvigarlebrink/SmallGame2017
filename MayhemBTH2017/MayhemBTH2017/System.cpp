@@ -6,6 +6,9 @@
 #include "MeshImporter.h"
 #include "ParticleSystem.h"
 #include "Game.h"
+
+#include "GamePhysics.h"
+
 System::System()
 {
 	Init();
@@ -30,7 +33,9 @@ void System::Run()
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 	
+	GamePhysics physics;
 
+	physics.EnterWorld();
 
 	Transform transform;
 	Camera camera;
@@ -51,57 +56,59 @@ void System::Run()
 
 		m_inputManager->Update();
 
-		switch (m_stateManager->GetCurrentState())
-		{
-		case GameState::START:
-			
-			lvl.Render(camera);
+		physics.Update();
 
-			break;
-		case GameState::MAIN_MENU:
+		//switch (m_stateManager->GetCurrentState())
+		//{
+		//case GameState::START:
+		//	
+		//	lvl.Render(camera);
 
-			shader.Bind();
-			shader.Update(transform, camera);
+		//	break;
+		//case GameState::MAIN_MENU:
 
-			m.Update();
+		//	shader.Bind();
+		//	shader.Update(transform, camera);
 
-			game.Render();
+		//	m.Update();
 
-			break;
-		case GameState::LEVEL_EDITOR:
+		//	game.Render();
 
-			l.Update();
+		//	break;
+		//case GameState::LEVEL_EDITOR:
 
-			break;
+		//	l.Update();
 
-		case GameState::GAME: {
+		//	break;
 
-			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-			shader.Bind();
-			shader.Update(transform, camera);
-			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-			transform.SetPosition(42.0, 24.0, -0.0);
+		//case GameState::GAME: {
+
+		//	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+		//	shader.Bind();
+		//	shader.Update(transform, camera);
+		//	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+		//	transform.SetPosition(42.0, 24.0, -0.0);
 
 
-			//Draw scene
-			game.Update(camera);
-			part.Bind();
-			part.UpdateParticles();
-			texture.Bind();
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glDepthMask(GL_FALSE);
-			part.RenderTransformed(1);
-			glDisable(GL_BLEND);
-			glDepthMask(TRUE);
-		}
-			break;
-		case GameState::EXIT:
-			isRunning = false;
-			break;
-		default:
-			break;
-		}
+		//	//Draw scene
+		//	game.Update(camera);
+		//	part.Bind();
+		//	part.UpdateParticles();
+		//	texture.Bind();
+		//	glEnable(GL_BLEND);
+		//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		//	glDepthMask(GL_FALSE);
+		//	part.RenderTransformed(1);
+		//	glDisable(GL_BLEND);
+		//	glDepthMask(TRUE);
+		//}
+		//	break;
+		//case GameState::EXIT:
+		//	isRunning = false;
+		//	break;
+		//default:
+		//	break;
+		//}
 
 		m_inputManager->Reset();
 
