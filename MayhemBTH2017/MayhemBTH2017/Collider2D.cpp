@@ -60,50 +60,35 @@ void Collider2D::CreateBoundingBoxes() {
 					blocksInRow += 1;
 
 				}
-				std::cout << blocksInRow << std::endl;
+	
 				
 				offset = (blocksInRow);
-				std::cout << offset << std::endl;
+				
 
 				//From current X, check next cells until next cell is empty in order to decide lenght of bounding box.
-				m_vertices[i].position = glm::vec3((x + 0.4)+offset, (y + 0.4), -2.0f * scaler);
+				m_vertices[i].position = glm::vec3((x + 0.5)+offset, (y + 0.5), -2.0f * scaler);
 				m_vertices[i].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-				m_vertices[i + 1].position = glm::vec3((x + 0.4)+offset, (y - 0.4), -2.0f * scaler);
+				m_vertices[i + 1].position = glm::vec3((x + 0.5)+offset, (y - 0.5), -2.0f * scaler);
 				m_vertices[i + 1].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i + 1].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-				m_vertices[i + 2].position = glm::vec3((x - 0.4), (y + 0.4), -2.0f * scaler);
+				m_vertices[i + 2].position = glm::vec3((x - 0.5), (y + 0.5), -2.0f * scaler);
 				m_vertices[i + 2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i + 2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-				m_vertices[i + 3].position = glm::vec3((x - 0.4), (y + 0.4), -2.0f * scaler);
+				m_vertices[i + 3].position = glm::vec3((x - 0.5), (y + 0.5), -2.0f * scaler);
 				m_vertices[i + 3].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i + 3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-				m_vertices[i + 4].position = glm::vec3((x + 0.4)+offset, (y - 0.4), -2.0f * scaler);
+				m_vertices[i + 4].position = glm::vec3((x + 0.5)+offset, (y - 0.5), -2.0f * scaler);
 				m_vertices[i + 4].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i + 4].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-				m_vertices[i + 5].position = glm::vec3((x - 0.4), (y - 0.4f), -2.0f * scaler);
+				m_vertices[i + 5].position = glm::vec3((x - 0.5), (y - 0.5), -2.0f * scaler);
 				m_vertices[i + 5].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i + 5].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
-
-
-				//m_vertices[i + 0].position.x += offset;
-				//m_vertices[i + 1].position.x += offset;
-				//m_vertices[i + 2].position.x += offset;
-				//m_vertices[i + 3].position.x += offset;
-				//m_vertices[i + 4].position.x += offset;
-				//m_vertices[i + 5].position.x += offset;
-
-	/*			m_vertices[i + 0].position.x *= offset;
-				m_vertices[i + 1].position.x *= offset;
-				m_vertices[i + 2].position.x *= offset;
-				m_vertices[i + 3].position.x *= offset;
-				m_vertices[i + 4].position.x *= offset;
-				m_vertices[i + 5].position.x *= offset;*/
 
 
 				x += blocksInRow;
