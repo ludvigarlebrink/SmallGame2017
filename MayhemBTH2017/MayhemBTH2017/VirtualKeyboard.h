@@ -2,6 +2,7 @@
 #define __VIRTUALKEYBOARD_H__
 
 
+#include "GUIImage.h"
 #include "Text.h"
 #include "Vector.h"
 #include "InputManager.h"
@@ -21,17 +22,18 @@ public:
 	void Update();
 	void Render();
 
-	const std::string& GetString() const;
+	//::.. GET FUNCTIONS ..:://
+	const char* GetString() const;
 
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
 	void Input();
 
-	void SwitchLayout(int t);
+	void SwitchLayout(int layout);
 
 private:
-	enum
+	enum InputLayout
 	{
 		QWERTY = 0,
 		ALPHABET
@@ -47,10 +49,12 @@ private:
 
 	int32_t m_pos;
 
-	uint32_t m_nSize;
-	uint32_t m_hSize;
+	int32_t m_nSize;
+	int32_t m_hSize;
 
-	int m_s;
+	int m_currentLayout;
+
+	GUIImage gui;
 
 };
 

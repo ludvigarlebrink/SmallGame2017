@@ -67,8 +67,8 @@ void Text::Render()
 {
 	SDL_Color color;
 	color.r = 255;
-	color.g = 234;
-	color.b = 150;
+	color.g = 255;
+	color.b = 255;
 	color.a = 0;
 
 	if (strlen(m_text) > 0)
@@ -197,7 +197,7 @@ void Text::TextToTexture(std::string message, SDL_Color color, int x, int y, int
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	TTF_Font * font = TTF_OpenFont(".\\Assets\\Fonts\\Snap.ttf", m_size);
+	TTF_Font * font = TTF_OpenFont(".\\Assets\\Fonts\\KenyanCoffee.ttf", m_size);
 
 	// OUTLINE
 	SDL_Color black = { 0x00, 0x00, 0x00 };
@@ -227,19 +227,22 @@ void Text::TextToTexture(std::string message, SDL_Color color, int x, int y, int
 		glTexCoord2f(0, 1); 
 		glVertex2f(
 			static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth)),
-			y - ((sFont->h / 2) - halfHeight));
+			static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight)));
 
 		glTexCoord2f(1, 1); 
-		glVertex2f(static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth)),
-			y - ((sFont->h / 2) - halfHeight));
+		glVertex2f(
+			static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth)),
+			static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight)));
 
 		glTexCoord2f(1, 0); 
-		glVertex2f(static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth)),
-			y + ((sFont->h / 2) + halfHeight));
+		glVertex2f(
+			static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth)),
+			static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight)));
 
 		glTexCoord2f(0, 0); 
-		glVertex2f(static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth)),
-			y + ((sFont->h / 2) + halfHeight));
+		glVertex2f(
+			static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth)),
+			static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight)));
 	}
 	glEnd();
 
@@ -255,4 +258,5 @@ void Text::TextToTexture(std::string message, SDL_Color color, int x, int y, int
 	glDeleteTextures(1, &texture);
 	TTF_CloseFont(font);
 	SDL_FreeSurface(sFont);
+	SDL_FreeSurface(sOutline);
 }

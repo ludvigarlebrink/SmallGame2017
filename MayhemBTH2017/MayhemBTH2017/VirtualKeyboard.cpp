@@ -4,8 +4,8 @@
 
 VirtualKeyboard::VirtualKeyboard()
 {
-	m_nSize = 40;
-	m_hSize = 60;
+	m_nSize = 60;
+	m_hSize = 72;
 
 	Init();
 	m_pos = 0;
@@ -20,13 +20,26 @@ VirtualKeyboard::~VirtualKeyboard()
 
 void VirtualKeyboard::Render()
 {
+
+
 	Input();
+	gui.Render();
 	for (size_t i = 0; i < NUM_CHARS; i++)
 	{
-		m_chars[i].Render();
+		if (i != m_pos)
+		{
+			m_chars[i].Render();
+		}
 	}
-	m_s = ALPHABET;
+
+	m_chars[m_pos].Render();
+
 	m_inputText.Render();
+}
+
+const char * VirtualKeyboard::GetString() const
+{
+	return nullptr;
 }
 
 void VirtualKeyboard::Init()
@@ -34,6 +47,7 @@ void VirtualKeyboard::Init()
 	m_input = InputManager::Get();
 
 	SwitchLayout(ALPHABET);
+	m_currentLayout = ALPHABET;
 }
 
 void VirtualKeyboard::Input()
@@ -78,7 +92,6 @@ void VirtualKeyboard::Input()
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 	{
 		m_inputString.append(m_chars[m_pos].GetText());
-	//	const char * c = m_inputString.c_str();
 		m_inputText.SetText(m_inputString.c_str());
 	}
 
@@ -89,7 +102,6 @@ void VirtualKeyboard::Input()
 			m_inputString.pop_back();
 			m_inputText.SetText(m_inputString.c_str());
 		}
-		//	const char * c = m_inputString.c_str();
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
@@ -100,24 +112,24 @@ void VirtualKeyboard::Input()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_RB))
 	{
-		if (m_s == QWERTY)
+		if (m_currentLayout == QWERTY)
 		{
 			SwitchLayout(ALPHABET);
-			m_s = ALPHABET;
+			m_currentLayout = ALPHABET;
 		}
-		else if (m_s == ALPHABET)
+		else if (m_currentLayout == ALPHABET)
 		{
 			SwitchLayout(QWERTY);
-			m_s = ALPHABET;
+			m_currentLayout = QWERTY;
 
 		}
 	}
 }
 
 
-void VirtualKeyboard::SwitchLayout(int t)
+void VirtualKeyboard::SwitchLayout(int layout)
 {
-	char * alphabet[40] = 
+	char * alphabet[NUM_CHARS] =
 	{
 		"A", "B", "C", "D", "E", "F", "G", "1", "2", "3",	// 10. 
 		"H", "I", "J", "K", "L", "M", "N", "4", "5", "6",
@@ -125,7 +137,7 @@ void VirtualKeyboard::SwitchLayout(int t)
 		"V", "W", "X", "Y", "Z", ",", ".", "-", "0", "?" 
 	};
 	
-	char * qwerty[40] = 
+	char * qwerty[NUM_CHARS] =
 	{
 		"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",	// 10. 
 		"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -134,13 +146,13 @@ void VirtualKeyboard::SwitchLayout(int t)
 	};
 	
 	
-	for (size_t i = 0; i < 40; i++)
+	for (size_t i = 0; i < NUM_CHARS; i++)
 	{
-		if (t == ALPHABET)
+		if (layout == ALPHABET)
 		{
 			m_chars[i].SetText(alphabet[i]);
 		}
-		else
+		else if (layout == QWERTY)
 		{
 			m_chars[i].SetText(qwerty[i]);
 		}
@@ -149,19 +161,19 @@ void VirtualKeyboard::SwitchLayout(int t)
 
 		if (i < 10)
 		{
-			m_chars[i].SetPositon(i * 40 - (5 * 40), 0);
+			m_chars[i].SetPositon(i * m_nSize - (4.5f * m_nSize) , 0);
 		}
 		else if (i >= 10 && i < 20)
 		{
-			m_chars[i].SetPositon(i * 40 - (10 * 40) - (5 * 40), -40);
+			m_chars[i].SetPositon(i * m_nSize - (9.5f * m_nSize) - (5 * m_nSize), -m_nSize);
 		}
 		else if (i >= 20 && i < 30)
 		{
-			m_chars[i].SetPositon(i * 40 - (20 * 40) - (5 * 40), -80);
+			m_chars[i].SetPositon(i * m_nSize - (19.5f * m_nSize) - (5 * m_nSize), -m_nSize * 2);
 		}
 		else
 		{
-			m_chars[i].SetPositon(i * 40 - (30 * 40) - (5 * 40), -120);
+			m_chars[i].SetPositon(i * m_nSize - (29.5f * m_nSize) - (5 * m_nSize), -m_nSize * 3);
 		}
 	}
 	

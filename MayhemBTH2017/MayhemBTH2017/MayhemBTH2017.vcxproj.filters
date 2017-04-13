@@ -212,6 +212,9 @@
       <Filter>Engine\Resources\Handlers</Filter>
     </ClCompile>
     <ClCompile Include="VirtualKeyboard.cpp" />
+    <ClCompile Include="GUIImage.cpp">
+      <Filter>Engine\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -357,6 +360,9 @@
       <Filter>Engine\Resources\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="VirtualKeyboard.h" />
+    <ClInclude Include="GUIImage.h">
+      <Filter>Engine\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
