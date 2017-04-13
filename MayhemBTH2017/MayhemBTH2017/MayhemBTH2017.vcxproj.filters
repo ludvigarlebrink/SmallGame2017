@@ -28,12 +28,6 @@
     <Filter Include="Engine\Resources\ResourceTypes">
       <UniqueIdentifier>{71900585-ce90-4ce1-8bdb-02b9edd77a9c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Resources\ResourceCaches">
-      <UniqueIdentifier>{1dccb4f0-6f6b-4902-ab72-d82d797de79d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Resources\Importers">
-      <UniqueIdentifier>{a68479e9-0ab3-4a9a-9d0b-9b2dcd747a00}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\GameObjects">
       <UniqueIdentifier>{52dc7d03-1780-48d4-8855-e9c60e23901b}</UniqueIdentifier>
     </Filter>
@@ -73,6 +67,9 @@
     <Filter Include="Assets\GLSL">
       <UniqueIdentifier>{dba1b46a-eb2b-4f28-8938-e7e6ce2e9e84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Resources\Handlers">
+      <UniqueIdentifier>{a68479e9-0ab3-4a9a-9d0b-9b2dcd747a00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -84,17 +81,8 @@
     <ClCompile Include="String.cpp">
       <Filter>Engine\Memory\Containers</Filter>
     </ClCompile>
-    <ClCompile Include="AResource.cpp">
-      <Filter>Engine\Resources</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureCache.cpp">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshCache.cpp">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
     </ClCompile>
     <ClCompile Include="StackPool.cpp">
       <Filter>Engine\Memory\Allocators</Filter>
@@ -102,14 +90,11 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderCache.cpp">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClCompile>
     <ClCompile Include="MeshImporter.cpp">
-      <Filter>Engine\Resources\Importers</Filter>
+      <Filter>Engine\Resources\Handlers</Filter>
     </ClCompile>
     <ClCompile Include="ShaderImporter.cpp">
-      <Filter>Engine\Resources\Importers</Filter>
+      <Filter>Engine\Resources\Handlers</Filter>
     </ClCompile>
     <ClCompile Include="MemoryManager.cpp">
       <Filter>Engine\Memory</Filter>
@@ -125,9 +110,6 @@
     </ClCompile>
     <ClCompile Include="ARenderable.cpp">
       <Filter>Engine\GameObjects\Renderable</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Engine\Rendering</Filter>
@@ -147,22 +129,11 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Engine\HID</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeManager.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="LevelExporter.cpp">
-      <Filter>Engine\Resources\Exporters</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelImporter.cpp">
-      <Filter>Engine\Resources\Importers</Filter>
-    </ClCompile>
     <ClCompile Include="AMenu.cpp">
       <Filter>Engine\Menu</Filter>
     </ClCompile>
     <ClCompile Include="TextureImporter.cpp">
-      <Filter>Engine\Resources\Importers</Filter>
+      <Filter>Engine\Resources\Handlers</Filter>
     </ClCompile>
     <ClCompile Include="LevelMarker.cpp">
       <Filter>Engine\LevelEditor</Filter>
@@ -203,6 +174,44 @@
     <ClCompile Include="AntiAliasing.cpp">
       <Filter>Engine\Rendering\Shading</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Engine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaylistImporter.cpp">
+      <Filter>Engine\Resources\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="Playlist.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaylistExporter.cpp">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaylistEditor.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceImporter.cpp">
+      <Filter>Engine\Resources\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceExporter.cpp">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="LevelHandler.cpp">
+      <Filter>Engine\Resources\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="VirtualKeyboard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -214,17 +223,8 @@
     <ClInclude Include="String.h">
       <Filter>Engine\Memory\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="AResource.h">
-      <Filter>Engine\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureCache.h">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshCache.h">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
     </ClInclude>
     <ClInclude Include="StackPool.h">
       <Filter>Engine\Memory\Allocators</Filter>
@@ -232,14 +232,11 @@
     <ClInclude Include="Texture.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderCache.h">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClInclude>
     <ClInclude Include="MeshImporter.h">
-      <Filter>Engine\Resources\Importers</Filter>
+      <Filter>Engine\Resources\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="ShaderImporter.h">
-      <Filter>Engine\Resources\Importers</Filter>
+      <Filter>Engine\Resources\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="MemoryManager.h">
       <Filter>Engine\Memory</Filter>
@@ -259,9 +256,6 @@
     <ClInclude Include="ARenderable.h">
       <Filter>Engine\GameObjects\Renderable</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Engine\Core\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
@@ -280,22 +274,11 @@
     <ClInclude Include="InputManager.h">
       <Filter>Engine\HID</Filter>
     </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeManager.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="LevelExporter.h">
-      <Filter>Engine\Resources\Exporters</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelImporter.h">
-      <Filter>Engine\Resources\Importers</Filter>
-    </ClInclude>
     <ClInclude Include="AMenu.h">
       <Filter>Engine\Menu</Filter>
     </ClInclude>
     <ClInclude Include="TextureImporter.h">
-      <Filter>Engine\Resources\Importers</Filter>
+      <Filter>Engine\Resources\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="LevelMarker.h">
       <Filter>Engine\LevelEditor</Filter>
@@ -336,6 +319,44 @@
     <ClInclude Include="AntiAliasing.h">
       <Filter>Engine\Rendering\Shading</Filter>
     </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Engine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaylistImporter.h">
+      <Filter>Engine\Resources\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Playlist.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaylistExporter.h">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaylistEditor.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceImporter.h">
+      <Filter>Engine\Resources\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceExporter.h">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="LevelHandler.h">
+      <Filter>Engine\Resources\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualKeyboard.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -391,6 +412,12 @@
     </None>
     <None Include="Assets\GLSL\SkeletalAnimation.frag">
       <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\Levels\ExportTestLOL.mrlevel">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Levels\Register.mrlevelreg">
+      <Filter>Assets</Filter>
     </None>
   </ItemGroup>
 </Project>

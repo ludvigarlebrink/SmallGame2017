@@ -100,13 +100,14 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
 	{
-		m_levelExporter.Export(m_level);
+		m_levelHandler.Export(m_level);
+		m_levelHandler.ExportRegister();
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
 	{
 		Reset();
-		m_levelImporter.ImportLevel(m_level);
+		m_levelHandler.Import(m_level);
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))

@@ -21,7 +21,12 @@ public:
 
 	void Init();
 
-
+private:
+	//::.. HELP FUNCTIONS ..:://
+	void InitMainMenu();
+	void InitPlayMenu();
+	void InitCreateMenu();
+	void InitOptionsMenu();
 
 private:
 	AMenu *			m_rootMenu;

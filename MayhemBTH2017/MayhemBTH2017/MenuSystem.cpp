@@ -52,3 +52,19 @@ void MenuSystem::Reset()
 void MenuSystem::Init()
 {
 }
+
+void MenuSystem::InitMainMenu()
+{
+}
+
+void MenuSystem::InitPlayMenu()
+{
+}
+
+void MenuSystem::InitCreateMenu()
+{
+}
+
+void MenuSystem::InitOptionsMenu()
+{
+}

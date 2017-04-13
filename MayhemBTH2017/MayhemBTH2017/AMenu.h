@@ -65,7 +65,7 @@ private:
 	std::vector<GameState>	m_gameState;
 	std::vector<uint32_t>	m_index;
 	std::vector<uint32_t>	m_type;
-	int				m_currentSelection;
+	int						m_currentSelection;
 	uint32_t				m_activeSubMenu;
 
 	StateManager *			m_stateManager;

@@ -4,7 +4,7 @@
 
 MeshImporter::MeshImporter()
 {
-	mBoneFinalTf.resize(4);
+	mBoneFinalTf.resize(6);
 }
 
 
@@ -18,7 +18,7 @@ Mesh& MeshImporter::Import()
 	Assimp::Importer	m_importer;
 
 
-	const aiScene * scene = m_importer.ReadFile(".\\Assets\\Sprites\\hej4.fbx", aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
+	const aiScene * scene = m_importer.ReadFile(".\\Assets\\Sprites\\hej5.fbx", aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
 
 	if (scene == NULL)
 	{
@@ -264,23 +264,29 @@ Mesh& MeshImporter::Import()
 
 
 	InitAnimation(scene->mRootNode, scene->mAnimations[0]);
-	UpdateFrameTfs(1);
 
-	
 
-	m_jointSkeleton.AddMatTemp(mBoneFinalTf[0]);
-	m_jointSkeleton.AddMatTemp(mBoneFinalTf[1]);
-	m_jointSkeleton.AddMatTemp(mBoneFinalTf[2]);
-	m_jointSkeleton.AddMatTemp(mBoneFinalTf[3]);
+
+//	UpdateFrameTfs(1);
 
 
 	m_mesh.Load(&vert[0], vert.size());
+
+
+	UpdateFrameTfs(1);
 
 	return m_mesh;
 }
 
 JointSkeleton & MeshImporter::GetSkeleton()
 {
+	m_jointSkeleton.AddMatTemp(mBoneFinalTf[0],
+		mBoneFinalTf[1],
+		mBoneFinalTf[2],
+		mBoneFinalTf[3]
+	);
+
+
 	return m_jointSkeleton;
 }
 
@@ -339,6 +345,7 @@ const std::vector<glm::mat4> MeshImporter::GetTfs()
 void MeshImporter::ReadNodeHeirarchy(int frameIdx, const aiNode * pNode, const glm::mat4 & parTf)
 {
 	std::string nodeName(pNode->mName.data);
+	std::cout << nodeName << std::endl; 
 	if (mBoneIdx.find(nodeName) == mBoneIdx.end())
 		return;
 
@@ -346,6 +353,9 @@ void MeshImporter::ReadNodeHeirarchy(int frameIdx, const aiNode * pNode, const g
 
 	const aiNodeAnim* pAnim = mBoneAnim[boneIdx];
 	aiVectorKey& sc = pAnim->mScalingKeys[frameIdx % pAnim->mNumScalingKeys];
+
+	std::cout << frameIdx << std::endl;
+	
 	aiMatrix4x4 matScale;
 	aiMatrix4x4::Scaling(sc.mValue, matScale);
 
@@ -366,7 +376,7 @@ void MeshImporter::ReadNodeHeirarchy(int frameIdx, const aiNode * pNode, const g
 	mBoneFinalTf[boneIdx] = finalTf;
 
 	// Print out info
-	//    cout << nodeName << endl;
+	std::cout << nodeName << std::endl;
 	//    pprintMat4x4(finalTf);
 	// pprintScQtTr(sc.mValue, qt.mValue, tr.mValue);
 	//    pprintMat16(nodeTf);

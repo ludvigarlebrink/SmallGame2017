@@ -86,12 +86,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Include\FREETYPE;.\include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>.\Lib\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp.lib;glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;freetype271.lib;freetype271MT.lib;freeglut.lib;glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,12 +129,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AGameObject.cpp" />
-    <ClCompile Include="AMenu.cpp" />
+    <ClCompile Include="AMenu.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="AnimationClip.cpp" />
     <ClCompile Include="AnimationController.cpp" />
     <ClCompile Include="AntiAliasing.cpp" />
     <ClCompile Include="ARenderable.cpp" />
-    <ClCompile Include="AResource.cpp" />
     <ClCompile Include="AShader.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -147,16 +148,26 @@
     <ClCompile Include="KeyFrame.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="Level.cpp" />
-    <ClCompile Include="LevelExporter.cpp" />
-    <ClCompile Include="LevelImporter.cpp" />
+    <ClCompile Include="LevelHandler.cpp" />
     <ClCompile Include="LevelMarker.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MainMenu.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="MemoryManager.cpp" />
-    <ClCompile Include="MenuSystem.cpp" />
+    <ClCompile Include="MenuSystem.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshImporter.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="Playlist.cpp" />
+    <ClCompile Include="PlaylistEditor.cpp" />
+    <ClCompile Include="PlaylistExporter.cpp" />
+    <ClCompile Include="PlaylistImporter.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourceExporter.cpp" />
+    <ClCompile Include="ResourceImporter.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
@@ -172,16 +183,18 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="VideoManager.cpp" />
+    <ClCompile Include="VirtualKeyboard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AAllocator.h" />
     <ClInclude Include="AGameObject.h" />
-    <ClInclude Include="AMenu.h" />
+    <ClInclude Include="AMenu.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="AnimationClip.h" />
     <ClInclude Include="AnimationController.h" />
     <ClInclude Include="AntiAliasing.h" />
     <ClInclude Include="ARenderable.h" />
-    <ClInclude Include="AResource.h" />
     <ClInclude Include="AShader.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
@@ -194,15 +207,25 @@
     <ClInclude Include="KeyFrame.h" />
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="Level.h" />
-    <ClInclude Include="LevelExporter.h" />
-    <ClInclude Include="LevelImporter.h" />
+    <ClInclude Include="LevelHandler.h" />
     <ClInclude Include="LevelMarker.h" />
-    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MainMenu.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="MemoryManager.h" />
-    <ClInclude Include="MenuSystem.h" />
+    <ClInclude Include="MenuSystem.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshImporter.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="Playlist.h" />
+    <ClInclude Include="PlaylistEditor.h" />
+    <ClInclude Include="PlaylistExporter.h" />
+    <ClInclude Include="PlaylistImporter.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceExporter.h" />
+    <ClInclude Include="ResourceImporter.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderImporter.h" />
@@ -219,6 +242,7 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoManager.h" />
+    <ClInclude Include="VirtualKeyboard.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag" />
@@ -239,6 +263,8 @@
     <None Include="Assets\GLSL\SharpnelShader.vert" />
     <None Include="Assets\GLSL\SkeletalAnimation.frag" />
     <None Include="Assets\GLSL\SkeletalAnimation.vert" />
+    <None Include="Assets\Levels\ExportTestLOL.mrlevel" />
+    <None Include="Assets\Levels\Register.mrlevelreg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

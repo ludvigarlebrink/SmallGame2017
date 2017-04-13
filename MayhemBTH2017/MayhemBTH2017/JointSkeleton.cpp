@@ -4,6 +4,7 @@
 
 JointSkeleton::JointSkeleton()
 {
+	matTemp.resize(4);
 }
 
 
@@ -16,9 +17,14 @@ void JointSkeleton::AddJoint(Joint joint)
 	m_joints.push_back(joint);
 }
 
-void JointSkeleton::AddMatTemp(glm::mat4 hej)
+void JointSkeleton::AddMatTemp(glm::mat4 hej1, glm::mat4 hej2, glm::mat4 hej3, glm::mat4 hej4)
 {
-	matTemp.push_back(hej);
+	matTemp[0] = hej1;
+	matTemp[1] = hej2;
+	matTemp[2] = hej3;
+	matTemp[3] = hej4;
+
+
 }
 
 glm::mat4* JointSkeleton::GetMat()

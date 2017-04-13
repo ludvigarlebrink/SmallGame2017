@@ -22,6 +22,7 @@ void ResourceManager::StartUp()
 {
 	if (m_instance == nullptr)
 	{
+		m_instance = this;
 		Init();
 	}
 }
@@ -44,9 +45,9 @@ ResourceManager& ResourceManager::Get()
 //	return tex;
 //}
 
-void ResourceManager::GetShader()
+void ResourceManager::GetShader(const char* name)
 {
-	// RETURN SHADER
+
 }
 
 void ResourceManager::GetSkeleton()
@@ -61,7 +62,6 @@ void ResourceManager::GetAnimation()
 
 void ResourceManager::Init()
 {
-	m_instance = this;
 
 	// INIT STUFF
 }

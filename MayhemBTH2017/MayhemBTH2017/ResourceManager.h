@@ -6,6 +6,9 @@
 #include "Texture.h"
 #include "String.h"
 
+// Resource importers.
+#include "ShaderImporter.h"
+
 
 class ResourceManager
 {
@@ -21,7 +24,7 @@ public:
 	//::.. GET FUNCTIONS ..:://
 	ResourceManager& Get();
 	//Texture& GetTexture(const String& filepath);
-	void GetShader();
+	void GetShader(const char* name);
 	void GetSkeleton();
 	void GetAnimation();
 

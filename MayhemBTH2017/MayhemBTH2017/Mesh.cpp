@@ -33,10 +33,9 @@ bool Mesh::Load(Vertex2D * vertices, uint64_t numVerts)
 	// Bind VAO.
 	glBindVertexArray(m_vao);
 
+	// Enable attributes.
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
-	glEnableVertexAttribArray(3);
 
 	// Generate buffers.
 	glGenBuffers(1, &m_buffer);

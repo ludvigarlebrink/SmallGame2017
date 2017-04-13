@@ -25,36 +25,23 @@ void AMenu::Render()
 		m_subMenu[m_activeSubMenu]->Render();
 	}
 
-	// FIX THIS :D
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	Camera camera;
 
-	m_shader.Bind();
-	camera.SetPosition(glm::vec3(0.0f, 0.0f, -11.0f));
-	m_transform.SetScale(5.0f, 5.0f, 1.0f);
-	m_shader.Update(m_transform, camera);
-
-	for (uint32_t i = 0; i < m_button.size(); i++)
+	for (int i = 0; i < m_button.size(); i++)
 	{
-		m_transform.SetPosition(glm::vec3(0.0f, -(1.0f * i), -0.1f * i));
-		m_shader.Update(m_transform, camera);
-		
 		if (m_button[i]->isActive)
 		{
-			m_shader.TempUpdateAlpha(1.0f);
-			m_button[i]->texture->Bind();
+			m_button[i]->text->SetSize(40);
+			m_button[i]->text->SetPositon(0, -i * 40);
 			m_button[i]->text->Render();
 		}
 		else
 		{
-			m_shader.TempUpdateAlpha(0.4f);
-			m_button[i]->texture->Bind();
+			m_button[i]->text->SetSize(30);
+			m_button[i]->text->SetPositon(0, -i * 40);
 			m_button[i]->text->Render();
 		}
 	}
 
-	m_shader.TempUpdateAlpha(1.0f);
 }
 
 void AMenu::GoForward()
@@ -94,6 +81,7 @@ void AMenu::GoBack()
 	m_parent->SetIsActive(true);
 	m_isActive = false;
 }
+
 
 //::.. MODIFY FUNCTIONS ..:://
 void AMenu::MoveUp()
@@ -171,7 +159,6 @@ void AMenu::AddChild(AMenu *subMenu, char* title)
 
 	Button * button = new Button;
 	Text * text = new Text;
-	text->Init();
 	button->text = text;
 	if (m_button.size() == 0)
 	{
@@ -199,7 +186,6 @@ void AMenu::AddChild(GameState gameState, char* title)
 
 	Button * button = new Button;
 	Text * text = new Text;
-	text->Init();
 	button->texture = texture;
 	button->text = text;
 

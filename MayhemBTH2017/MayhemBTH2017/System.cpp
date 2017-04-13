@@ -1,9 +1,11 @@
 #include "System.h"
 
 #include "TempShader.h"
-#include "MenuSystem.h"
 #include "Mesh.h"
 #include "MeshImporter.h"
+#include "MenuSystem.h"
+#include "Text.h"
+#include "VirtualKeyboard.h"
 
 System::System()
 {
@@ -28,49 +30,45 @@ void System::Run()
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
-
+	Text text;
 	MeshImporter meshImp;
 	Mesh mesh = meshImp.Import();
 	Transform transform;
 	Camera camera;
 	TempShader shader;
-	JointSkeleton skel = meshImp.GetSkeleton();
+	JointSkeleton skel;;
+	VirtualKeyboard vk;
+	int count = 1;
 	shader.Init(".\\Assets\\GLSL\\SkeletalAnimation", false);
+	m.Init();
 	float counter = 0;
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
-
-
+	
 		m_inputManager->Update();
-
+	
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
 			break;
 		case GameState::MAIN_MENU:
-			
-			shader.Bind();
-			transform.SetRotation(0.0f, counter, 0.0f);
-			transform.SetScale(1.0f, 1.0f, 1.0f);
-			shader.Update(transform, camera, skel);
-			mesh.Render();
-
-			m.Update();
+	//		m.Update();
 			break;
-		case GameState::LEVEL_EDITOR:
-			l.Update();
-			break;
-		case GameState::GAME:
-			break;
-		case GameState::EXIT:
-			isRunning = false;
-			break;
+	//	case GameState::LEVEL_EDITOR:
+	//		l.Update();
+	//		break;
+	//	case GameState::GAME:
+	//		break;
+	//	case GameState::EXIT:
+	//		isRunning = false;
+	//		break;
 		default:
 			break;
 		}
-
+	
+		vk.Render();
 		m_inputManager->Reset();
 
 		// Switch between back and front buffer.

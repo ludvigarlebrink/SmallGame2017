@@ -6,10 +6,10 @@
 #include "Level.h"
 #include "Timer.h"
 #include "TextureImporter.h"
-#include "LevelExporter.h"
-#include "LevelImporter.h"
+#include "LevelHandler.h"
 #include "LevelMarker.h"
 #include "StateManager.h"
+
 
 #include <glm.hpp>
 #include <cstdint>
@@ -39,8 +39,7 @@ private:
 	StateManager *		m_stateManager;
 
 	Level				m_level;
-	LevelExporter		m_levelExporter;
-	LevelImporter		m_levelImporter;
+	LevelHandler		m_levelHandler;
 	LevelMarker			m_levelMarker;
 
 	Camera				m_camera;

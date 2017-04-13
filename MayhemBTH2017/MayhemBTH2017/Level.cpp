@@ -5,6 +5,7 @@
 Level::Level()
 {
 	Init();
+	m_name = "New_Level";
 }
 
 
@@ -80,6 +81,11 @@ uint32_t Level::GetTextureID(uint32_t posX, uint32_t posY)
 	return m_grid[posX][posY].textureID;
 }
 
+const std::string & Level::GetName()
+{
+	return m_name;
+}
+
 
 //::.. SET FUNCTIONS ..:://
 void Level::SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID)
@@ -95,6 +101,11 @@ void Level::SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied)
 void Level::SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint)
 {
 	m_grid[posX][posY].isSpawnPoint = isSpawnPoint;
+}
+
+void Level::SetName(const std::string & name)
+{
+	m_name = name;
 }
 
 
