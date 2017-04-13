@@ -203,6 +203,7 @@
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="GamePhysics.cpp" />
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -343,6 +344,7 @@
     <ClInclude Include="Collider2D.h" />
     <ClInclude Include="GamePhysics.h" />
     <ClInclude Include="Box.h" />
+    <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">

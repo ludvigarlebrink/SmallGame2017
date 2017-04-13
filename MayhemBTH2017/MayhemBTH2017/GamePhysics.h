@@ -1,6 +1,5 @@
-#ifndef __GAMEPHYSICS_H__
-#define __GAMEPHYSICS_H__
-
+#pragma once
+#include <Box2D\Box2D.h>
 #include "Box.h"
 
 class GamePhysics
@@ -9,14 +8,17 @@ public:
 	GamePhysics();
 	virtual ~GamePhysics();
 
-	void EnterWorld();
+	void enterWorld();
 
-	void Update();
+	void update();
+
 
 private:
 	std::unique_ptr<b2World> m_world;
-	Box newBox;
+	Box m_newBox;
+	Box m_newBox2;
+
+
+
 };
 
-
-#endif // !__GAMEPHYSICS_H__

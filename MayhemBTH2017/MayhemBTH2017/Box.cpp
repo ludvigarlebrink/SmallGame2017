@@ -4,7 +4,6 @@
 
 Box::Box()
 {
-	m_shader = new AShader("leo", false, false);
 }
 
 
@@ -12,9 +11,14 @@ Box::~Box()
 {
 }
 
-void Box::Init(b2World * world, const glm::vec2 & pos, const glm::vec2 & dim)
+void Box::init(b2World * world, const glm::vec2 & pos, const glm::vec2 & scale)
 {
-	this->m_dim = dim;
+	this->m_scale = scale;
+
+	this->sprite;
+
+	this->sprite.Init("leo", false, false);
+
 
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
@@ -22,68 +26,35 @@ void Box::Init(b2World * world, const glm::vec2 & pos, const glm::vec2 & dim)
 
 	this->body = world->CreateBody(&bodyDef);
 
-	b2PolygonShape boxshape;
-
-	boxshape.SetAsBox(dim.x / 2.0f, dim.y / 2.0f);
+	b2PolygonShape boxShape;
+	boxShape.SetAsBox(scale.x / 2, scale.y / 2);
 
 	b2FixtureDef fixtureDef;
-
-	fixtureDef.shape = &boxshape;
-	fixtureDef.density = 1.0f;
+	fixtureDef.shape = &boxShape;
+	fixtureDef.density = 0.4f;
 	fixtureDef.friction = 0.3f;
+	fixtureDef.restitution = 0.7f;
 
 	this->fixture = this->body->CreateFixture(&fixtureDef);
 
-	this->verts[0] = glm::vec2(this->body->GetPosition().x, this->body->GetPosition().y);
-
-	this->verts[1] = glm::vec2(this->body->GetPosition().x + dim.x, this->body->GetPosition().y);
-
-	this->verts[2] = glm::vec2(this->body->GetPosition().x, this->body->GetPosition().y + dim.y);
-
-	this->verts[3] = glm::vec2(this->body->GetPosition().x + dim.x, this->body->GetPosition().y + dim.y);
-
-	glGenBuffers(1, &bufferID);
-	glBindBuffer(GL_ARRAY_BUFFER, bufferID);
-	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->verts[0]), &this->verts, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
+	this->sprite.createSprite(pos, scale);
 
 }
 
-b2Body * Box::GetBody()
+void Box::setTexture(const std::string & filePath)
 {
-	return this->body;
-}
-
-b2Fixture * Box::GetFixture()
-{
-	return this->fixture;
+	this->sprite.setTexture(filePath);
 }
 
 void Box::draw()
 {
-	m_shader->Bind();
+	//this->body->ApplyForce(b2Vec2(0.2f, 0.1f), b2Vec2(0.1f, 0.1f), true);
 
-	glBindBuffer(GL_ARRAY_BUFFER, this->bufferID);
-
-	glEnableVertexAttribArray(0);
-
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), 0);
-
-
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	this->sprite.draw();
 }
 
-void Box::update(glm::vec2 pos)
+void Box::updateSprite(glm::vec2 pos, glm::vec2 scale)
 {
-	this->verts[0] = glm::vec2(this->body->GetPosition().x, this->body->GetPosition().y);
-
-	this->verts[1] = glm::vec2(this->body->GetPosition().x + this->m_dim.x, this->body->GetPosition().y);
-
-	this->verts[2] = glm::vec2(this->body->GetPosition().x, this->body->GetPosition().y + this->m_dim.y);
-
-	this->verts[3] = glm::vec2(this->body->GetPosition().x + this->m_dim.x, this->body->GetPosition().y + this->m_dim.y);
+	this->sprite.update(pos, scale);
 }
+

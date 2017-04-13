@@ -35,7 +35,7 @@ void System::Run()
 	
 	GamePhysics physics;
 
-	physics.EnterWorld();
+	physics.enterWorld();
 
 	Transform transform;
 	Camera camera;
@@ -56,7 +56,7 @@ void System::Run()
 
 		m_inputManager->Update();
 
-		physics.Update();
+		physics.update();
 
 		//switch (m_stateManager->GetCurrentState())
 		//{
