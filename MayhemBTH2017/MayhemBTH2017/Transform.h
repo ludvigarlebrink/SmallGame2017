@@ -28,6 +28,9 @@ public:
 	void SetPosition(float x, float y, float z);	// Set position
 	void SetRotation(glm::vec3 rot);				// Set rotation.
 	void SetRotation(float x, float y, float z);	// Set rotation.
+	void SetPositionX(float x);
+	void SetPositionY(float y);
+	void SetPositionZ(float z);
 	void SetScale(glm::vec3 scale);					// Set scale.
 	void SetScale(float x, float y, float z);		// Set scale.
 

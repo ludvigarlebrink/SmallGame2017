@@ -29,11 +29,13 @@ void Game::Update(Camera cam){
 
 	m_level.Render(cam);
 	//Left stick
+
+	tran.SetPositionZ(-1.5);
 	if (m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTY) != 0.0f || m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f)
 	{
 
+		tran.SetPositionX(tran.GetPosition().x - 15.0f * m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*time->GetDeltaTime());
 
-		tran.SetPosition(tran.GetPosition().x - 10.0f * m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*time->GetDeltaTime() , 24.0, 0.0);
 		
 	}
 
@@ -41,8 +43,15 @@ void Game::Update(Camera cam){
 	if (m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTY) != 0.0f || m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) != 0.0f)
 	{
 
-		tran.SetPosition(tran.GetPosition().x - 0.6*m_input->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*	time->GetDeltaTime(), 24.0, 0.0);
+
+		tran.SetPositionX(tran.GetPosition().x - 15.0f * m_input->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*time->GetDeltaTime());
 	}
+
+	if (tran.GetPosition().y > 2.5f) {
+		pos += pow(0.2f, 2.0f);
+		tran.SetPositionY(18 - pos);
+	}
+	
 
 	m_toonShader.Bind();
 

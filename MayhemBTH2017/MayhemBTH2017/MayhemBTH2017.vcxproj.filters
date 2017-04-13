@@ -350,15 +350,6 @@
     <None Include="DebugShader.vert">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="leo.frag">
-      <Filter>GLSL</Filter>
-    </None>
-    <None Include="leo.geom">
-      <Filter>GLSL</Filter>
-    </None>
-    <None Include="leo.vert">
-      <Filter>GLSL</Filter>
-    </None>
     <None Include="DebugGreen.frag">
       <Filter>GLSL</Filter>
     </None>
@@ -375,6 +366,12 @@
       <Filter>GLSL</Filter>
     </None>
     <None Include="ToonShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="ColliderShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="ColliderShader.frag">
       <Filter>GLSL</Filter>
     </None>
   </ItemGroup>

@@ -144,7 +144,7 @@ void Level::InitMesh()
 
 			m_vertices[i + 2].position = glm::vec3((x - 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i + 2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-			m_vertices[i + 2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, -2.0f);
+			m_vertices[i + 2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
 			m_vertices[i + 3].position = glm::vec3((x - 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i + 3].normal = glm::vec3(0.0f, 0.0f, -1.0f);

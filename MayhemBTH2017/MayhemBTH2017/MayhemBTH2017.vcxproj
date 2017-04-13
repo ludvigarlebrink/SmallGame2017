@@ -240,6 +240,8 @@
   <ItemGroup>
     <None Include="Assets\GLSL\ShadowPass.frag" />
     <None Include="Assets\GLSL\ShadowShader.vert" />
+    <None Include="ColliderShader.frag" />
+    <None Include="ColliderShader.vert" />
     <None Include="DebugGreen.frag" />
     <None Include="DebugGreen.vert" />
     <None Include="DebugShader.frag" />
@@ -249,9 +251,6 @@
     <None Include="DrawShader.geom" />
     <None Include="DrawShader.vert" />
     <None Include="GeometryPass.vert" />
-    <None Include="leo.frag" />
-    <None Include="leo.geom" />
-    <None Include="leo.vert" />
     <None Include="ToonShader.frag" />
     <None Include="ToonShader.vert" />
   </ItemGroup>

@@ -6,6 +6,8 @@
 #include "MeshImporter.h"
 #include "ParticleSystem.h"
 #include "Game.h"
+#include "Collider2D.h"
+
 System::System()
 {
 	Init();
@@ -20,7 +22,7 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-	ParticleSystem part("GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec4(1.0, 0.5, 0.5, 0.8), 1.5f, 3000);
+	ParticleSystem part("GeometryPass", glm::vec3(0.0, 0.0, -5.0), glm::vec4(0.0, 0.5, 51.0, 1.0), 0.5f, 3000);
 	LevelEditor l;
 	Level lvl;
 	MenuSystem m;
@@ -41,6 +43,8 @@ void System::Run()
 	shaderGreen.Init("DebugGreen", false, 0);
 	TextureImporter teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
+	Collider2D collider;
+	collider.CreateBoundingBoxes();
 
 
 	while (isRunning)
@@ -54,7 +58,6 @@ void System::Run()
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
-			
 			lvl.Render(camera);
 
 			break;
@@ -62,10 +65,9 @@ void System::Run()
 
 			shader.Bind();
 			shader.Update(transform, camera);
-
 			m.Update();
-
 			game.Render();
+		
 
 			break;
 		case GameState::LEVEL_EDITOR:
@@ -75,16 +77,26 @@ void System::Run()
 			break;
 
 		case GameState::GAME: {
+			
+
 
 			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 			shader.Bind();
 			shader.Update(transform, camera);
-			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-			transform.SetPosition(42.0, 24.0, -0.0);
+
 
 
 			//Draw scene
+		
+
+			//transparent bounding boxes
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glEnable(GL_BLEND);
+			collider.DrawCollider(camera);
 			game.Update(camera);
+			glDisable(GL_BLEND);
+			//
+		
 			part.Bind();
 			part.UpdateParticles();
 			texture.Bind();
@@ -94,6 +106,9 @@ void System::Run()
 			part.RenderTransformed(1);
 			glDisable(GL_BLEND);
 			glDepthMask(TRUE);
+
+			glUseProgram(0);
+			
 		}
 			break;
 		case GameState::EXIT:
