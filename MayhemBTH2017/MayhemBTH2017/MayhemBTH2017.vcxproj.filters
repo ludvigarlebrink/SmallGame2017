@@ -43,9 +43,6 @@
     <Filter Include="Engine\Resources\Exporters">
       <UniqueIdentifier>{bb95d1ce-612f-4a0b-855d-d0b3b35d4ce6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GUI">
-      <UniqueIdentifier>{1edf8cbe-d56e-411d-8219-9d50b4417e28}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\HID">
       <UniqueIdentifier>{eb8a49cc-da3b-46e0-8859-c79e7642fe15}</UniqueIdentifier>
     </Filter>
@@ -69,6 +66,9 @@
     </Filter>
     <Filter Include="Engine\Resources\Handlers">
       <UniqueIdentifier>{a68479e9-0ab3-4a9a-9d0b-9b2dcd747a00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI">
+      <UniqueIdentifier>{1edf8cbe-d56e-411d-8219-9d50b4417e28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +138,6 @@
     <ClCompile Include="LevelMarker.cpp">
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Engine\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="MainMenu.cpp">
       <Filter>Engine\Menu</Filter>
     </ClCompile>
@@ -148,7 +145,7 @@
       <Filter>Engine\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
-      <Filter>Engine\GUI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClCompile>
     <ClCompile Include="AnimationClip.cpp">
       <Filter>Engine\Rendering\Animation</Filter>
@@ -212,8 +209,17 @@
       <Filter>Engine\Resources\Handlers</Filter>
     </ClCompile>
     <ClCompile Include="VirtualKeyboard.cpp" />
-    <ClCompile Include="GUIImage.cpp">
-      <Filter>Engine\GUI</Filter>
+    <ClCompile Include="UIText.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIImage.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UITextField.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UISlider.cpp">
+      <Filter>Engine\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -286,9 +292,6 @@
     <ClInclude Include="LevelMarker.h">
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Engine\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="MainMenu.h">
       <Filter>Engine\Menu</Filter>
     </ClInclude>
@@ -296,7 +299,7 @@
       <Filter>Engine\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Engine\GUI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClInclude>
     <ClInclude Include="AnimationClip.h">
       <Filter>Engine\Rendering\Animation</Filter>
@@ -360,8 +363,17 @@
       <Filter>Engine\Resources\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="VirtualKeyboard.h" />
-    <ClInclude Include="GUIImage.h">
-      <Filter>Engine\GUI</Filter>
+    <ClInclude Include="UIText.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIImage.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UITextField.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UISlider.h">
+      <Filter>Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

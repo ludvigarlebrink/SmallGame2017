@@ -1,5 +1,5 @@
-#ifndef __TEXT_H__
-#define __TEXT_H__
+#ifndef __UITEXT_H__
+#define __UITEXT_H__
 
 
 #include "Mesh.h"
@@ -12,16 +12,20 @@
 #include <string>
 
 
-class Text
+class UIText
 {
 public:
 	enum Pivot
 	{
 		CENTER = 0,
+		TOP,
+		BOTTOM,
+		LEFT,
+		RIGHT,
 		TOP_LEFT,
 		TOP_RIGHT,
 		BOTTOM_LEFT,
-		BOOTOM_RIGHT
+		BOTTOM_RIGHT
 	};
 
 	enum Compontent
@@ -32,14 +36,14 @@ public:
 	};
 
 	//::.. CONSTRUCTORS ..:://
-	Text();						// Default constructor.
-	Text(const Text& object);	// Copy constructor.
-	virtual ~Text();			// Destructor.
+	UIText();						// Default constructor.
+	UIText(const UIText& object);	// Copy constructor.
+	virtual ~UIText();			// Destructor.
 
 	//::.. OPERATOR OVERLOADING ..:://
-	void operator=(const Text& object);
+	void operator=(const UIText& object);
 	void operator=(const char* text);
-	bool operator==(const Text& object);
+	bool operator==(const UIText& object);
 	bool operator==(const char* text);
 
 	//::.. UPDATE FUNCTIONS .:://
@@ -73,7 +77,7 @@ public:
 private:
 	//::.. HELP FUNCTIONS .:://
 	void TextToTexture(std::string message, SDL_Color color, int x, int y, int size);
-	void Copy(const Text& object);
+	void Copy(const UIText& object);
 
 private:
 	GLuint stringTex = 0;
@@ -95,4 +99,4 @@ private:
 };
 
 
-#endif // __TEXT_H__
+#endif // ! __UITEXT_H__

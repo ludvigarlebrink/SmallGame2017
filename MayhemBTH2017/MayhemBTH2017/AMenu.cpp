@@ -158,7 +158,7 @@ void AMenu::AddChild(AMenu *subMenu, char* title)
 	m_type.push_back(SUBMENU);
 
 	Button * button = new Button;
-	Text * text = new Text;
+	UIText * text = new UIText;
 	button->text = text;
 	if (m_button.size() == 0)
 	{
@@ -185,7 +185,7 @@ void AMenu::AddChild(GameState gameState, char* title)
 	*texture = textImp.Import(tmp.c_str());;
 
 	Button * button = new Button;
-	Text * text = new Text;
+	UIText * text = new UIText;
 	button->texture = texture;
 	button->text = text;
 

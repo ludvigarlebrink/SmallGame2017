@@ -4,7 +4,7 @@
 #include "Mesh.h"
 #include "MeshImporter.h"
 #include "MenuSystem.h"
-#include "Text.h"
+#include "UIText.h"
 #include "VirtualKeyboard.h"
 
 System::System()
@@ -30,7 +30,7 @@ void System::Run()
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
-	Text text;
+	UIText text;
 	MeshImporter meshImp;
 	Mesh mesh = meshImp.Import();
 	Transform transform;

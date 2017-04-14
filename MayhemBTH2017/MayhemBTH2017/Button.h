@@ -5,7 +5,7 @@
 #include "Transform.h"
 #include "TextureImporter.h"
 #include "Texture.h"
-#include "Text.h"
+#include "UIText.h"
 
 
 class Button

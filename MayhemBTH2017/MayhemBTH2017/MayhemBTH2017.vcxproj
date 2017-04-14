@@ -140,7 +140,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
-    <ClCompile Include="GUIImage.cpp" />
+    <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -173,7 +173,8 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
     <ClCompile Include="TempShader.cpp" />
-    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="UISlider.cpp" />
+    <ClCompile Include="UIText.cpp" />
     <ClCompile Include="StackPool.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="String.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UITextField.cpp" />
     <ClCompile Include="VideoManager.cpp" />
     <ClCompile Include="VirtualKeyboard.cpp" />
   </ItemGroup>
@@ -200,7 +202,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DefaultAllocator.h" />
-    <ClInclude Include="GUIImage.h" />
+    <ClInclude Include="UIImage.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -232,7 +234,8 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderImporter.h" />
     <ClInclude Include="TempShader.h" />
-    <ClInclude Include="Text.h" />
+    <ClInclude Include="UISlider.h" />
+    <ClInclude Include="UIText.h" />
     <ClInclude Include="StackPool.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="String.h" />
@@ -242,6 +245,7 @@
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="UITextField.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoManager.h" />
     <ClInclude Include="VirtualKeyboard.h" />

@@ -23,7 +23,10 @@ void VirtualKeyboard::Render()
 
 
 	Input();
-	gui.Render();
+	m_fill.Render();
+	m_background.Render();
+	m_textField.Render();
+	m_title.Render();
 	for (size_t i = 0; i < NUM_CHARS; i++)
 	{
 		if (i != m_pos)
@@ -32,19 +35,50 @@ void VirtualKeyboard::Render()
 		}
 	}
 
-	m_chars[m_pos].Render();
+	for (size_t i = 0; i < NUM_HELP; i++)
+	{
+		m_help[i].Render();
+	}
 
-	m_inputText.Render();
+	m_chars[m_pos].Render();
 }
+
 
 const char * VirtualKeyboard::GetString() const
 {
 	return nullptr;
 }
 
+
 void VirtualKeyboard::Init()
 {
 	m_input = InputManager::Get();
+	VideoManager * vm = VideoManager::Get();
+
+	// THE BACKGROUND
+	m_fill.SetSize(vm->GetWidth(), vm->GetHeight());
+	m_fill.SetColor(0, 0, 0, 150);
+
+	m_background.SetColor(50, 50, 50);
+	m_background.SetSize(600, 460);
+
+	m_title.SetText("LEVEL NAME:");
+	m_title.SetSize(90);
+	m_title.SetPositon(0, 160);
+
+	m_help[0].SetText("A SELECT");
+	m_help[1].SetText("B BACK");
+	m_help[2].SetText("X BACKSPACE");
+	m_help[3].SetText("Y SPACE");
+	m_help[4].SetText("RB SWITCH LAYOUT");
+	m_help[5].SetText("S DONE");
+
+	for (size_t i = 0; i < NUM_HELP; i++)
+	{
+		m_help[i].SetPivot(UIText::LEFT);
+		m_help[i].SetPositon(320, i * -40);
+	}
+
 
 	SwitchLayout(ALPHABET);
 	m_currentLayout = ALPHABET;
@@ -92,7 +126,7 @@ void VirtualKeyboard::Input()
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 	{
 		m_inputString.append(m_chars[m_pos].GetText());
-		m_inputText.SetText(m_inputString.c_str());
+		m_textField.SetText(m_inputString.c_str());
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_X))
@@ -100,14 +134,14 @@ void VirtualKeyboard::Input()
 		if (m_inputString.length() > 0)
 		{
 			m_inputString.pop_back();
-			m_inputText.SetText(m_inputString.c_str());
+			m_textField.SetText(m_inputString.c_str());
 		}
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
 	{
 		m_inputString.append(" ");
-		m_inputText.SetText(m_inputString.c_str());
+		m_textField.SetText(m_inputString.c_str());
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_RB))
@@ -176,6 +210,4 @@ void VirtualKeyboard::SwitchLayout(int layout)
 			m_chars[i].SetPositon(i * m_nSize - (29.5f * m_nSize) - (5 * m_nSize), -m_nSize * 3);
 		}
 	}
-	
-	m_inputText.SetPositon(0, 60);
 }

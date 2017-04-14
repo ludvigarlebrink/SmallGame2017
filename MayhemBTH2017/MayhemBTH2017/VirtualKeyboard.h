@@ -2,10 +2,13 @@
 #define __VIRTUALKEYBOARD_H__
 
 
-#include "GUIImage.h"
-#include "Text.h"
+#include "UIImage.h"
+#include "UIText.h"
+#include "UITextField.h"
 #include "Vector.h"
 #include "InputManager.h"
+#include "VideoManager.h"
+
 
 #include <string>
 
@@ -40,12 +43,15 @@ private:
 	};
 
 	static const int NUM_CHARS = 40;
+	static const int NUM_HELP = 6;
+
 
 	InputManager * m_input;
 
 	std::string m_inputString;
-	Text m_chars[NUM_CHARS];
-	Text m_inputText;
+	UIText m_chars[NUM_CHARS];
+	UIText m_title;
+	UIText m_help[NUM_HELP];
 
 	int32_t m_pos;
 
@@ -54,7 +60,9 @@ private:
 
 	int m_currentLayout;
 
-	GUIImage gui;
+	UIImage		m_fill;
+	UIImage		m_background;
+	UITextField m_textField;
 
 };
 

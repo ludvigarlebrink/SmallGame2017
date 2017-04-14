@@ -6,7 +6,7 @@
 #include "AShader.h"
 #include "Texture.h"
 #include "TextureImporter.h"
-#include "Text.h"
+#include "UIText.h"
 
 #include <iostream>
 #include <vector>
@@ -51,7 +51,7 @@ private:
 
 	struct Button
 	{
-		Text * text;
+		UIText * text;
 		Texture * texture;
 		bool isActive;
 	};
