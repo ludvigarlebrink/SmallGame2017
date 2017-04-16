@@ -4,11 +4,8 @@
 
 MenuSystem::MenuSystem()
 {
-	m_inputManager = InputManager::Get();
-	m_stateManager = StateManager::Get();
-	m_rootMenu = new MainMenu;
-	m_rootMenu->SetIsActive(true);
-	m_rootMenu->SetParent(nullptr);
+	Init();
+	
 }
 
 
@@ -44,27 +41,49 @@ void MenuSystem::Update()
 
 void MenuSystem::Reset()
 {
-	m_rootMenu->SetIsActive(true);
-	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
+//	m_rootMenu->SetIsActive(true);
+//	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	
 }
 
 void MenuSystem::Init()
 {
+	m_inputManager = InputManager::Get();
+	m_stateManager = StateManager::Get();
+
+	m_rootMenu = new Menu;
+	m_rootMenu->SetIsActive(true);
+	m_rootMenu->SetParent(nullptr);
+
+	InitPlayMenu(m_rootMenu->AddChild( "Play"));
+	
+	m_rootMenu->AddChild(GameState::GAME, "Create");
+	m_rootMenu->AddChild(GameState::GAME, "Options");
+	m_rootMenu->AddChild(GameState::GAME, "Credits");
+	m_rootMenu->AddChild(GameState::GAME, "Exit");
 }
 
 void MenuSystem::InitMainMenu()
 {
+	InitPlayMenu(m_rootMenu->AddChild("Play"));
+
+	m_rootMenu->AddChild(GameState::GAME, "Create");
+	m_rootMenu->AddChild(GameState::GAME, "Options");
+	m_rootMenu->AddChild(GameState::GAME, "Credits");
+	m_rootMenu->AddChild(GameState::GAME, "Exit");
 }
 
-void MenuSystem::InitPlayMenu()
+void MenuSystem::InitPlayMenu(Menu* menu)
+{
+	menu->AddChild(GameState::GAME, "Create");
+	menu->AddChild(GameState::GAME, "Create");
+	menu->AddChild(GameState::GAME, "Create");
+}
+
+void MenuSystem::InitCreateMenu(Menu* menu)
 {
 }
 
-void MenuSystem::InitCreateMenu()
-{
-}
-
-void MenuSystem::InitOptionsMenu()
+void MenuSystem::InitOptionsMenu(Menu* menu)
 {
 }

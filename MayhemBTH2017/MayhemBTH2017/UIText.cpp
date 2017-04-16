@@ -179,12 +179,14 @@ void UIText::SetOutlineColor()
 //::.. HELP FUNCTIONS ..:://
 void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, int size)
 {
+	glUseProgram(0);
+
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glLoadIdentity();
 
 	// m_Width and m_Height is the resolution of window.
-	gluOrtho2D(0, m_Width, 0, m_Height);
+	glOrtho(0, m_Width, 0, m_Height, -1, 1);
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();

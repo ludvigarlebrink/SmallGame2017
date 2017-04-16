@@ -91,7 +91,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>.\Lib\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp.lib;freeglut.lib;glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,7 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AGameObject.cpp" />
-    <ClCompile Include="AMenu.cpp">
+    <ClCompile Include="Menu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="AnimationClip.cpp" />
@@ -137,7 +137,6 @@
     <ClCompile Include="AntiAliasing.cpp" />
     <ClCompile Include="ARenderable.cpp" />
     <ClCompile Include="AShader.cpp" />
-    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="UIImage.cpp" />
@@ -152,9 +151,6 @@
     <ClCompile Include="LevelHandler.cpp" />
     <ClCompile Include="LevelMarker.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainMenu.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="MenuSystem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -191,7 +187,7 @@
   <ItemGroup>
     <ClInclude Include="AAllocator.h" />
     <ClInclude Include="AGameObject.h" />
-    <ClInclude Include="AMenu.h">
+    <ClInclude Include="Menu.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="AnimationClip.h" />
@@ -199,7 +195,6 @@
     <ClInclude Include="AntiAliasing.h" />
     <ClInclude Include="ARenderable.h" />
     <ClInclude Include="AShader.h" />
-    <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="UIImage.h" />
@@ -213,9 +208,6 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelHandler.h" />
     <ClInclude Include="LevelMarker.h" />
-    <ClInclude Include="MainMenu.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="MenuSystem.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

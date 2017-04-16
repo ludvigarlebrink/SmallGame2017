@@ -4,18 +4,19 @@
 
 UITextField::UITextField()
 {
-	m_text.SetText("HEJ JAG AR 40 AR");
+	m_text.SetText("");
 	
 	m_background.SetColor(0, 0, 0, 50);
-	m_background.SetSize(568, 48);
+	m_background.SetSize(568, 52);
 	
-	m_field.SetColor(172, 172, 172);
-	m_field.SetSize(560, 40);
+	m_field.SetColor(220, 220, 220);
+	m_field.SetSize(560, 44);
 
 	m_posX = 0;
 	m_posY = 60;
 
-	m_text.SetPositon(m_posX, m_posY);
+	m_text.SetPivot(UIText::LEFT);
+	m_text.SetPositon(m_posX - (560 / 2) + 4, m_posY);
 	m_background.SetPositon(m_posX, m_posY);
 	m_field.SetPositon(m_posX, m_posY);
 }
@@ -38,4 +39,10 @@ void UITextField::Render()
 void UITextField::SetText(const char * text)
 {
 	m_text.SetText(text);
+}
+
+
+void UITextField::SetPos(int32_t x, int32_t y)
+{
+
 }

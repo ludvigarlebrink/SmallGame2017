@@ -129,23 +129,14 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Engine\HID</Filter>
     </ClCompile>
-    <ClCompile Include="AMenu.cpp">
-      <Filter>Engine\Menu</Filter>
-    </ClCompile>
     <ClCompile Include="TextureImporter.cpp">
       <Filter>Engine\Resources\Handlers</Filter>
     </ClCompile>
     <ClCompile Include="LevelMarker.cpp">
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>Engine\Menu</Filter>
-    </ClCompile>
     <ClCompile Include="MenuSystem.cpp">
       <Filter>Engine\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Engine\UI</Filter>
     </ClCompile>
     <ClCompile Include="AnimationClip.cpp">
       <Filter>Engine\Rendering\Animation</Filter>
@@ -221,6 +212,9 @@
     <ClCompile Include="UISlider.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Engine\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -283,23 +277,14 @@
     <ClInclude Include="InputManager.h">
       <Filter>Engine\HID</Filter>
     </ClInclude>
-    <ClInclude Include="AMenu.h">
-      <Filter>Engine\Menu</Filter>
-    </ClInclude>
     <ClInclude Include="TextureImporter.h">
       <Filter>Engine\Resources\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="LevelMarker.h">
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>Engine\Menu</Filter>
-    </ClInclude>
     <ClInclude Include="MenuSystem.h">
       <Filter>Engine\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Engine\UI</Filter>
     </ClInclude>
     <ClInclude Include="AnimationClip.h">
       <Filter>Engine\Rendering\Animation</Filter>
@@ -374,6 +359,9 @@
     </ClInclude>
     <ClInclude Include="UISlider.h">
       <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Engine\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

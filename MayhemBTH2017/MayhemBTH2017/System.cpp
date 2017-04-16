@@ -30,9 +30,6 @@ void System::Run()
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
-	UIText text;
-	MeshImporter meshImp;
-	Mesh mesh = meshImp.Import();
 	Transform transform;
 	Camera camera;
 	TempShader shader;
@@ -48,17 +45,21 @@ void System::Run()
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 	
 		m_inputManager->Update();
-	
+
+
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
 			break;
 		case GameState::MAIN_MENU:
-	//		m.Update();
+			m.Update();
 			break;
-	//	case GameState::LEVEL_EDITOR:
-	//		l.Update();
-	//		break;
+		case GameState::LEVEL_EDITOR:
+//			l.Update();
+
+//			vk.Render();
+
+			break;
 	//	case GameState::GAME:
 	//		break;
 	//	case GameState::EXIT:
@@ -67,8 +68,7 @@ void System::Run()
 		default:
 			break;
 		}
-	
-		vk.Render();
+//		vk.Render();
 		m_inputManager->Reset();
 
 		// Switch between back and front buffer.

@@ -8,7 +8,6 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include <glut.h>
 #include <cstring>
 #include <string>
 
@@ -30,8 +29,6 @@ public:
 	void SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
 	void SetAlpha(float alpha);
 	void SetAlpha(uint8_t alpha);
-
-
 
 private:
 	VideoManager * m_videoManager;

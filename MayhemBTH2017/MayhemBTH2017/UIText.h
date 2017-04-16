@@ -5,7 +5,6 @@
 #include "Mesh.h"
 #include "SDL.h"
 #include "SDL_ttf.h"
-#include "glut.h"
 
 
 #include <cstring>

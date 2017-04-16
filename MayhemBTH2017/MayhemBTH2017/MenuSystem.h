@@ -2,8 +2,7 @@
 #define __MENUSYSTEM_H__
 
 
-#include "AMenu.h"
-#include "MainMenu.h"
+#include "Menu.h"
 #include "InputManager.h"
 #include "StateManager.h"
 
@@ -24,12 +23,12 @@ public:
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void InitMainMenu();
-	void InitPlayMenu();
-	void InitCreateMenu();
-	void InitOptionsMenu();
+	void InitPlayMenu(Menu* menu);
+	void InitCreateMenu(Menu* menu);
+	void InitOptionsMenu(Menu* menu);
 
 private:
-	AMenu *			m_rootMenu;
+	Menu *			m_rootMenu;
 	InputManager *	m_inputManager;
 	StateManager *	m_stateManager;
 

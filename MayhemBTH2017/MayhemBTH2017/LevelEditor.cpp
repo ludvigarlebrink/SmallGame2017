@@ -26,7 +26,7 @@ void LevelEditor::Update()
 		AxisMove();
 	}
 	ButtonInput();
-	m_levelMarker.Update(m_camera);
+//	m_levelMarker.Update(m_camera);
 
 	m_level.Render(m_camera);
 }

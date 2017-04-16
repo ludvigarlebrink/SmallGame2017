@@ -33,12 +33,14 @@ UIImage::~UIImage()
 
 void UIImage::Render()
 {
+	glUseProgram(0);
+
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glLoadIdentity();
 
 	// m_Width and m_Height is the resolution of window.
-	gluOrtho2D(0, m_windowWidth, 0, m_windowHeight);
+	glOrtho(0, m_windowWidth, 0, m_windowHeight, -1, 1);
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
@@ -150,6 +152,7 @@ void UIImage::SetAlpha(float alpha)
 {
 	m_color.a = static_cast<uint8_t>(alpha * 255);
 }
+
 
 void UIImage::SetAlpha(uint8_t alpha)
 {

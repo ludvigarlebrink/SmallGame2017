@@ -18,6 +18,8 @@ public:
 
 	void Render();
 
+	//::.. GET FUNCTIONS ..:://
+
 	//::.. SET FUNCTIONS ..:://
 	void SetText(const char* text);
 	void SetPos(int32_t x, int32_t y);

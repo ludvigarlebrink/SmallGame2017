@@ -28,6 +28,9 @@ public:
 	//::.. GET FUNCTIONS ..:://
 	const char* GetString() const;
 
+	//::.. SET FUNCTIONS ..:://
+	void SetTitle() const;
+
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
@@ -60,9 +63,10 @@ private:
 
 	int m_currentLayout;
 
-	UIImage		m_fill;
-	UIImage		m_background;
-	UITextField m_textField;
+	UIImage			m_fill;
+	UIImage			m_background;
+	UIImage			m_background2;
+	UITextField		m_textField;
 
 };
 
