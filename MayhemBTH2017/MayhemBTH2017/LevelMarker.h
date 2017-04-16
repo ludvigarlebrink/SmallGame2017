@@ -6,7 +6,7 @@
 #include "Transform.h"
 #include "AShader.h"
 #include "Timer.h"
-#include "TextureImporter.h"
+#include "TextureHandler.h"
 #include "Texture.h"
 #include "Mesh.h"
 
@@ -91,7 +91,7 @@ private:
 	Transform			m_transform;
 	Mesh				m_mesh;
 
-	TextureImporter		m_textureTemp;
+	TextureHandler		m_textureTemp;
 	Texture				m_texture;
 
 	uint32_t			m_mode;

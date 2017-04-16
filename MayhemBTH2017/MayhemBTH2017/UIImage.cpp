@@ -23,6 +23,10 @@ UIImage::UIImage()
 	m_sizeX = 600;
 	m_sizeY = 500;
 
+
+	m_showTexture = true;
+	TextureHandler imp;
+	m_texture = imp.Import(".\\Assets\\Sprites\\MainMenu.png");
 }
 
 
@@ -71,19 +75,26 @@ void UIImage::Render()
 	bmask = 0x00ff0000;
 	amask = 0xff000000;
 #endif
-
-	// OUTLINE
-	SDL_Color black = { 233, 100, 240 };
-	SDL_Surface * surface = SDL_CreateRGBSurface(0, m_sizeX, m_sizeY, 32, rmask, gmask, bmask, amask);
-	SDL_FillRect(surface, NULL, SDL_MapRGBA(surface->format, m_color.r, m_color.g, m_color.b, m_color.a));
-
+	
 	int x = m_posX;
 	int y = m_posY;
+	
+	SDL_Surface * surface = nullptr;
 
+	if (m_showTexture)
+	{
+		m_texture.Bind();
+	}
+	else
+	{
+		surface = SDL_CreateRGBSurface(0, m_sizeX, m_sizeY, 32, rmask, gmask, bmask, amask);
+		SDL_FillRect(surface, NULL, SDL_MapRGBA(surface->format, m_color.r, m_color.g, m_color.b, m_color.a));
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, surface->pixels);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, surface->pixels);
+	}
+
 
 
 	float halfHeight = m_windowHeight / 2;
@@ -93,23 +104,23 @@ void UIImage::Render()
 	{
 		glTexCoord2f(0, 1);
 		glVertex2f(
-			static_cast<GLfloat>(x - ((surface->w / 2) - halfWidth)),
-			static_cast<GLfloat>(y - ((surface->h / 2) - halfHeight)));
+			static_cast<GLfloat>(x - ((m_sizeX / 2) - halfWidth)),
+			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
 
 		glTexCoord2f(1, 1);
 		glVertex2f(
-			static_cast<GLfloat>(x + ((surface->w / 2) + halfWidth)),
-			static_cast<GLfloat>(y - ((surface->h / 2) - halfHeight)));
+			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
+			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
 
 		glTexCoord2f(1, 0);
 		glVertex2f(
-			static_cast<GLfloat>(x + ((surface->w / 2) + halfWidth)),
-			static_cast<GLfloat>(y + ((surface->h / 2) + halfHeight)));
+			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
+			static_cast<GLfloat>(y + ((m_sizeY / 2) + halfHeight)));
 
 		glTexCoord2f(0, 0);
 		glVertex2f(
-			static_cast<GLfloat>(x - ((surface->w / 2) - halfWidth)),
-			static_cast<GLfloat>(y + ((surface->h / 2) + halfHeight)));
+			static_cast<GLfloat>(x - ((m_sizeX / 2) - halfWidth)),
+			static_cast<GLfloat>(y + ((m_sizeY / 2) + halfHeight)));
 	}
 	glEnd();
 
@@ -126,6 +137,8 @@ void UIImage::Render()
 	SDL_FreeSurface(surface);
 }
 
+
+//::.. SET FUNCTIONS ..:://
 void UIImage::SetPositon(int32_t x, int32_t y)
 {
 	m_posX = x;
@@ -157,4 +170,10 @@ void UIImage::SetAlpha(float alpha)
 void UIImage::SetAlpha(uint8_t alpha)
 {
 	m_color.a = alpha;
+}
+
+void UIImage::SetTexture(const char * filepath)
+{
+	TextureHandler imp;
+	m_texture = imp.Import(filepath);
 }

@@ -1,18 +1,18 @@
-#include "TextureImporter.h"
+#include "TextureHandler.h"
 #include <stb_image.h>
 
 
 #include <iostream>
 
-TextureImporter::TextureImporter()
+TextureHandler::TextureHandler()
 {
 }
 
-TextureImporter::~TextureImporter()
+TextureHandler::~TextureHandler()
 {
 }
 
-Texture& TextureImporter::Import(const char * filepath)
+Texture& TextureHandler::Import(const char * filepath)
 {
 	int width, height, numComponents;
 	unsigned char* imageData = stbi_load(filepath, &width, &height, &numComponents, STBI_rgb_alpha);

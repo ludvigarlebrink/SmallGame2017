@@ -4,11 +4,12 @@
 
 UIText::UIText()
 {
-
+	// FIX! DEBUG! PUT THIS SOMEWHERE ELSE :)
 	TTF_Init();
 	m_text = "";
 	m_size = 40;
 	m_pivot = 0;
+	m_font = ".\\Assets\\Fonts\\Snap.ttf";
 }
 
 
@@ -74,7 +75,7 @@ void UIText::Render()
 
 	if (strlen(m_text) > 0)
 	{
-		TextToTexture(m_text, color, m_posX, m_posY, 70);
+		TextToTexture(m_text, m_color, m_posX, m_posY, 70);
 	}
 }
 
@@ -132,27 +133,12 @@ void UIText::SetSize(int size)
 }
 
 
-void UIText::SetColor(float r, float g, float b, float a)
-{
-	m_color.r = static_cast<uint8_t>(r * 255);
-	m_color.g = static_cast<uint8_t>(g * 255);
-	m_color.b = static_cast<uint8_t>(b * 255);
-	m_color.a = static_cast<uint8_t>(a * 255);
-}
-
-
 void UIText::SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
 	m_color.r = r;
 	m_color.g = g;
 	m_color.b = b;
 	m_color.a = a;
-}
-
-
-void UIText::SetAlpha(float alpha)
-{
-	m_color.a = static_cast<uint8_t>(alpha * 255);
 }
 
 
@@ -165,6 +151,11 @@ void UIText::SetAlpha(uint8_t alpha)
 void UIText::SetPivot(uint32_t pivot)
 {
 	m_pivot = pivot;
+}
+
+void UIText::SetFont(const char * filepath)
+{
+	m_font = filepath;
 }
 
 void UIText::SetOutlineSize()
@@ -200,7 +191,7 @@ void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, i
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	TTF_Font * font = TTF_OpenFont(".\\Assets\\Fonts\\KenyanCoffee.ttf", m_size);
+	TTF_Font * font = TTF_OpenFont(m_font, m_size);
 
 	// OUTLINE
 	SDL_Color black = { 0x00, 0x00, 0x00 };

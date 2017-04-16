@@ -5,7 +5,7 @@
 #include "Menu.h"
 #include "InputManager.h"
 #include "StateManager.h"
-
+#include "UIImage.h"
 #include <vector>
 
 
@@ -22,16 +22,18 @@ public:
 
 private:
 	//::.. HELP FUNCTIONS ..:://
-	void InitMainMenu();
+	void InitMainMenu(Menu* menu);
 	void InitPlayMenu(Menu* menu);
 	void InitCreateMenu(Menu* menu);
 	void InitOptionsMenu(Menu* menu);
+
+	void Input();
 
 private:
 	Menu *			m_rootMenu;
 	InputManager *	m_inputManager;
 	StateManager *	m_stateManager;
-
+	UIImage			m_background;
 
 };
 

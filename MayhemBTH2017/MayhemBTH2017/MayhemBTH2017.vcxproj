@@ -139,6 +139,8 @@
     <ClCompile Include="AShader.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
+    <ClCompile Include="MenuCredits.cpp" />
+    <ClCompile Include="MenuVideo.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -176,7 +178,7 @@
     <ClCompile Include="String.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="TextureImporter.cpp" />
+    <ClCompile Include="TextureHandler.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -197,6 +199,8 @@
     <ClInclude Include="AShader.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DefaultAllocator.h" />
+    <ClInclude Include="MenuCredits.h" />
+    <ClInclude Include="MenuVideo.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -233,7 +237,7 @@
     <ClInclude Include="String.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="TextureImporter.h" />
+    <ClInclude Include="TextureHandler.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />

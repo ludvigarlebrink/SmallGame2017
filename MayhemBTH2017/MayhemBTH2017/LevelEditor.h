@@ -5,7 +5,7 @@
 #include "InputManager.h"
 #include "Level.h"
 #include "Timer.h"
-#include "TextureImporter.h"
+#include "TextureHandler.h"
 #include "LevelHandler.h"
 #include "LevelMarker.h"
 #include "StateManager.h"

@@ -62,11 +62,10 @@ public:
 	void SetText(const char* text);
 	void SetPositon(int x, int y);
 	void SetSize(int size);
-	void SetColor(float r, float g, float b, float a);
 	void SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-	void SetAlpha(float alpha);
 	void SetAlpha(uint8_t alpha);
 	void SetPivot(uint32_t pivot);
+	void SetFont(const char* filepath);
 
 	void SetOutlineSize();
 	void SetOutlineColor();
@@ -83,6 +82,7 @@ private:
 	GLuint tex;
 
 	const char* m_text;
+	const char* m_font;
 	SDL_Color m_color;
 	int m_Width = 1280;
 	int m_Height = 720;

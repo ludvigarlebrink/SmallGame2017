@@ -4,7 +4,8 @@
 
 #include "VideoManager.h"
 #include "Mesh.h"
-
+#include "TextureHandler.h"
+#include "Texture.h"
 
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -29,6 +30,7 @@ public:
 	void SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
 	void SetAlpha(float alpha);
 	void SetAlpha(uint8_t alpha);
+	void SetTexture(const char* filepath);
 
 private:
 	VideoManager * m_videoManager;
@@ -43,6 +45,8 @@ private:
 	int32_t m_posY;
 
 	SDL_Color m_color;
+	Texture m_texture;
+	bool	m_showTexture;
 };
 
 

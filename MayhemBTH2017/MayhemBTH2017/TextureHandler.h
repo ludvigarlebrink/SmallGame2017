@@ -1,5 +1,5 @@
-#ifndef __TEXTUREIMPORTER_H__
-#define __TEXTUREIMPORTER_H__
+#ifndef __TEXTUREHANDLER_H__
+#define __TEXTUREHANDLER_H__
 
 #define STB_IMAGE_IMPLEMENTATION
 
@@ -10,11 +10,11 @@
 #include <glew.h>
 
 
-class TextureImporter
+class TextureHandler
 {
 public:
-	TextureImporter();
-	virtual ~TextureImporter();
+	TextureHandler();
+	virtual ~TextureHandler();
 
 	Texture& Import(const char* filepath);
 };
