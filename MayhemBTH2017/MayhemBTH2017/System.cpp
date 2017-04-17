@@ -5,7 +5,7 @@
 #include "MeshImporter.h"
 #include "MenuSystem.h"
 #include "UIText.h"
-#include "VirtualKeyboard.h"
+
 
 System::System()
 {
@@ -55,20 +55,18 @@ void System::Run()
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
-//			l.Update();
-
-//			vk.Render();
-
+			l.Update();
 			break;
-	//	case GameState::GAME:
-	//		break;
-	//	case GameState::EXIT:
-	//		isRunning = false;
-	//		break;
+		case GameState::GAME:
+			break;
+		case GameState::EXIT:
+			isRunning = false;
+			break;
 		default:
 			break;
 		}
-//		vk.Render();
+
+
 		m_inputManager->Reset();
 
 		// Switch between back and front buffer.

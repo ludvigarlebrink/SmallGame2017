@@ -21,14 +21,31 @@ LevelEditor::~LevelEditor()
 //::.. UPDATE FUNCTIONS ..:://
 void LevelEditor::Update()
 {
-	if (m_timer.Update())
+	switch (m_state)
 	{
-		AxisMove();
-	}
-	ButtonInput();
-//	m_levelMarker.Update(m_camera);
+	case EDIT:
+		if (m_timer.Update())
+		{
+			AxisMove();
+		}
 
-	m_level.Render(m_camera);
+		ButtonInput();
+
+		m_levelMarker.Update(m_camera);
+
+		m_level.Render(m_camera);
+		break;
+	case MENU:
+		break;
+	case SAVE:
+		m_level.Render(m_camera);
+
+		m_vk.Render();
+
+		break;
+	default:
+		break;
+	}
 }
 
 
@@ -112,9 +129,10 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
-		Reset();
-		StateManager * state = StateManager::Get();
-		state->SetCurrentState(GameState::MAIN_MENU);
+	//	Reset();
+	//	StateManager * state = StateManager::Get();
+	//	state->SetCurrentState(GameState::MAIN_MENU);
+		m_state = SAVE;
 	}
 }
 

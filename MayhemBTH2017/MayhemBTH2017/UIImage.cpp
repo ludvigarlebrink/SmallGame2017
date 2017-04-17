@@ -24,7 +24,7 @@ UIImage::UIImage()
 	m_sizeY = 500;
 
 
-	m_showTexture = true;
+	m_showTexture = false;
 	TextureHandler imp;
 	m_texture = imp.Import(".\\Assets\\Sprites\\MainMenu.png");
 }
@@ -176,4 +176,5 @@ void UIImage::SetTexture(const char * filepath)
 {
 	TextureHandler imp;
 	m_texture = imp.Import(filepath);
+	m_showTexture = true;
 }

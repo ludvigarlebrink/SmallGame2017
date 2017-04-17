@@ -171,6 +171,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
     <ClCompile Include="TempShader.cpp" />
+    <ClCompile Include="UIPauseMenu.cpp" />
     <ClCompile Include="UISlider.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="StackPool.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderImporter.h" />
     <ClInclude Include="TempShader.h" />
+    <ClInclude Include="UIPauseMenu.h" />
     <ClInclude Include="UISlider.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="StackPool.h" />

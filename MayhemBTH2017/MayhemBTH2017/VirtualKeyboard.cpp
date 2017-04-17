@@ -72,7 +72,9 @@ void VirtualKeyboard::Init()
 	m_title.SetText("LEVEL NAME");
 	m_title.SetSize(80);
 	m_title.SetPositon(-280, 145);
+	m_title.SetFont(".\\Assets\\Fonts\\steelfish.ttf");
 	m_title.SetPivot(UIText::LEFT);
+	m_title.SetColor(255, 255, 255, 255);
 
 	m_help[0].SetText("A SELECT");
 	m_help[1].SetText("B BACK");
@@ -85,6 +87,8 @@ void VirtualKeyboard::Init()
 	{
 		m_help[i].SetPivot(UIText::LEFT);
 		m_help[i].SetPositon(320, (i * -40) + 20 );
+		m_help[i].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
+		m_help[i].SetColor(255, 255, 255, 255);
 	}
 
 
@@ -217,6 +221,9 @@ void VirtualKeyboard::SwitchLayout(int layout)
 		{
 			m_chars[i].SetPositon(i * m_nSize - (29.5f * m_nSize) - (5 * m_nSize), -m_nSize * 3);
 		}
+
+		m_chars[i].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
+		m_chars[i].SetColor(255, 255, 255, 255);
 	}
 
 	m_chars[m_pos].SetSize(m_hSize);

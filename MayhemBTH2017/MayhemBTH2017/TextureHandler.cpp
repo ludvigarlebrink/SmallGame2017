@@ -19,8 +19,6 @@ Texture& TextureHandler::Import(const char * filepath)
 	unsigned char length = sizeof(imageData) / sizeof(*imageData);
 	GLuint * imageData2 = (GLuint*)malloc(sizeof(GLuint) * length);
 
-	std::cout << length << std::endl;
-
 //	for (size_t i = 0; i < length; i++)
 //	{
 //		imageData2[i] = static_cast<GLuint>(imageData[i]);
@@ -31,6 +29,7 @@ Texture& TextureHandler::Import(const char * filepath)
 	Texture texture;
 
 	texture.LoadTexture((GLuint*)imageData, width, height, numComponents);
+	stbi_image_free(imageData);
 
 	return texture;
 }

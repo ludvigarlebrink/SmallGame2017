@@ -41,12 +41,12 @@ void MenuSystem::Init()
 	// Init the background.
 	m_background.SetSize(640, 640);
 	m_background.SetPositon(20, 0);
+	m_background.SetTexture(".\\Assets\\Sprites\\MainMenu.png");
 }
 
 void MenuSystem::InitMainMenu(Menu* menu)
 {
 	InitPlayMenu(menu->AddChild("Play"));
-
 	InitCreateMenu(menu->AddChild("Create"));
 	InitOptionsMenu(menu->AddChild("Options"));
 	InitCreateMenu(menu->AddChild("Credits"));
@@ -62,7 +62,7 @@ void MenuSystem::InitPlayMenu(Menu* menu)
 
 void MenuSystem::InitCreateMenu(Menu* menu)
 {
-	menu->AddChild(GameState::GAME, "Level");
+	menu->AddChild(GameState::LEVEL_EDITOR, "Level");
 	menu->AddChild(GameState::GAME, "Playlist");
 }
 

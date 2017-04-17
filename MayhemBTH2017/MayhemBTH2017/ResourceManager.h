@@ -34,9 +34,6 @@ private:
 
 private:
 	static ResourceManager * m_instance;
-
-	//::.. MEMORY POOLS ..:://
-
 };
 
 
