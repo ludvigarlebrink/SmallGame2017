@@ -2,10 +2,12 @@
 #define __MENUSYSTEM_H__
 
 
-#include "Menu.h"
 #include "InputManager.h"
 #include "StateManager.h"
 #include "UIImage.h"
+#include "Menu.h"
+#include "Timer.h"
+
 #include <vector>
 
 
@@ -27,7 +29,8 @@ private:
 	void InitCreateMenu(Menu* menu);
 	void InitOptionsMenu(Menu* menu);
 
-	void Input();
+	void HandleInput();
+	void Render();
 
 private:
 	VideoManager *	m_videoManager;
@@ -36,7 +39,12 @@ private:
 
 	Menu *			m_rootMenu;
 	UIImage			m_background;
-	UIImage			m_paperBackground;
+	UIImage			m_paperOpen;
+	UIImage			m_paperClosed1;
+	UIImage			m_paperClosed2;
+
+	bool			m_changeMenu;
+	Timer			m_timer;
 };
 
 

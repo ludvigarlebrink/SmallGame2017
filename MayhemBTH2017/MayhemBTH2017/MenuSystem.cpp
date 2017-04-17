@@ -16,10 +16,9 @@ MenuSystem::~MenuSystem()
 
 void MenuSystem::Update()
 {
-	Input();
-	m_background.Render();
-	m_paperBackground.Render();
-	m_rootMenu->Render();
+	// First handle input.
+	HandleInput();
+	Render();
 }
 
 void MenuSystem::Reset()
@@ -34,6 +33,8 @@ void MenuSystem::Init()
 	m_inputManager = InputManager::Get();
 	m_stateManager = StateManager::Get();
 
+	m_changeMenu = false;
+
 	m_rootMenu = new Menu;
 	m_rootMenu->SetIsActive(true);
 	m_rootMenu->SetParent(nullptr);
@@ -44,9 +45,17 @@ void MenuSystem::Init()
 	m_background.SetSize(m_videoManager->GetWidth(), m_videoManager->GetHeight());
 	m_background.SetTexture(".\\Assets\\Sprites\\MenuConcept.png");
 
-	m_paperBackground.SetSize(640, 640);
-	m_paperBackground.SetPositon(20, 0);
-	m_paperBackground.SetTexture(".\\Assets\\Sprites\\MainMenu.png");
+	m_paperOpen.SetSize(640, 640);
+	m_paperOpen.SetPositon(20, 0);
+	m_paperOpen.SetTexture(".\\Assets\\Sprites\\MainMenu.png");
+
+	m_paperClosed1.SetSize(640, 640);
+	m_paperClosed1.SetPositon(20, 0);
+	m_paperClosed1.SetTexture(".\\Assets\\Sprites\\ClosedMenu1.png");
+
+	m_paperClosed2.SetSize(640, 640);
+	m_paperClosed2.SetPositon(20, 0);
+	m_paperClosed2.SetTexture(".\\Assets\\Sprites\\ClosedMenu2.png");
 }
 
 void MenuSystem::InitMainMenu(Menu* menu)
@@ -62,28 +71,28 @@ void MenuSystem::InitMainMenu(Menu* menu)
 void MenuSystem::InitPlayMenu(Menu* menu)
 {
 	menu->SetTitle("PLAY");
-	menu->AddChild(GameState::GAME, "Quick Match");
-	menu->AddChild(GameState::GAME, "Random Playlist");
-	menu->AddChild(GameState::GAME, "Select Playlist");
+	menu->AddChild(GameState::MAIN_MENU, "Quick Match");
+	menu->AddChild(GameState::MAIN_MENU, "Random Playlist");
+	menu->AddChild(GameState::MAIN_MENU, "Select Playlist");
 }
 
 void MenuSystem::InitCreateMenu(Menu* menu)
 {
 	menu->SetTitle("CREATE");
 	menu->AddChild(GameState::LEVEL_EDITOR, "Level");
-	menu->AddChild(GameState::GAME, "Playlist");
+	menu->AddChild(GameState::MAIN_MENU, "Playlist");
 }
 
 void MenuSystem::InitOptionsMenu(Menu* menu)
 {
 	menu->SetTitle("OPTIONS");
-	menu->AddChild(GameState::GAME, "Video");
-	menu->AddChild(GameState::GAME, "Sound");
-	menu->AddChild(GameState::GAME, "Game");
-	menu->AddChild(GameState::GAME, "Controlls");
+	menu->AddChild(GameState::MAIN_MENU, "Video");
+	menu->AddChild(GameState::MAIN_MENU, "Sound");
+	menu->AddChild(GameState::MAIN_MENU, "Game");
+	menu->AddChild(GameState::MAIN_MENU, "Controlls");
 }
 
-void MenuSystem::Input()
+void MenuSystem::HandleInput()
 {
 	if (m_inputManager->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
 	{
@@ -97,10 +106,38 @@ void MenuSystem::Input()
 	if (m_inputManager->GetButtonDown(CONTROLLER_BUTTON_A))
 	{
 		m_rootMenu->GoForward();
+		m_changeMenu = true;
+		m_timer.SetTimer(0.5f, true);
 	}
 
 	if (m_inputManager->GetButtonDown(CONTROLLER_BUTTON_B))
 	{
 		m_rootMenu->GoBack();
+		m_changeMenu = true;
+		m_timer.SetTimer(0.5f, true);
+	}
+}
+
+void MenuSystem::Render()
+{
+	m_background.Render();
+
+	if (m_changeMenu)
+	{
+		if (m_timer.GetElapsed() < 0.1f || m_timer.GetElapsed() > 0.4f)
+		{
+			m_paperClosed1.Render();
+		}
+		else
+		{
+			m_paperClosed2.Render();
+		}
+
+		m_changeMenu = !m_timer.Update();
+	}
+	else
+	{
+		m_paperOpen.Render();
+		m_rootMenu->Render();
 	}
 }
