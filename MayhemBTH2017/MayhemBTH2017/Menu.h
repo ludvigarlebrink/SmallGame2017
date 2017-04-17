@@ -70,7 +70,10 @@ private:
 	int32_t					m_activeSubMenu;
 	UIImage					m_selection;
 
+	bool					m_isScalning;
+
 	StateManager *			m_stateManager;
+	TimeManager	*			m_timeManager;
 };
 
 

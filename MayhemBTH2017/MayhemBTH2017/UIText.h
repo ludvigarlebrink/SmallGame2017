@@ -54,14 +54,17 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	const char* GetText() const;
-	int GetPosX() const;
-	int GetPosY() const;
-	int GetSize() const;
+	int32_t GetPosX() const;
+	int32_t GetPosY() const;
+	int32_t GetSize() const;
+	float GetScale() const;
+
 
 	//::.. SET FUNCTIONS ..:://
 	void SetText(const char* text);
 	void SetPositon(int x, int y);
 	void SetSize(int size);
+	void SetScale(float scale);
 	void SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
 	void SetAlpha(uint8_t alpha);
 	void SetPivot(uint32_t pivot);
@@ -83,12 +86,14 @@ private:
 
 	const char* m_text;
 	const char* m_font;
-	SDL_Color m_color;
-	int m_Width = 1280;
-	int m_Height = 720;
-	int m_posX;
-	int m_posY;
-	int m_size;
+
+	SDL_Color	m_color;
+	int32_t		m_width = 1280;
+	int32_t		m_height = 720;
+	int32_t		m_posX;
+	int32_t		m_posY;
+	int32_t		m_size;
+	float		m_scale;
 
 	uint32_t m_pivot;
 

@@ -221,7 +221,9 @@
     <ClCompile Include="MenuCredits.cpp">
       <Filter>Engine\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="UIPauseMenu.cpp" />
+    <ClCompile Include="UIPauseMenu.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -376,7 +378,9 @@
     <ClInclude Include="MenuCredits.h">
       <Filter>Engine\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="UIPauseMenu.h" />
+    <ClInclude Include="UIPauseMenu.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

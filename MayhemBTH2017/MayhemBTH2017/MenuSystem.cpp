@@ -18,6 +18,7 @@ void MenuSystem::Update()
 {
 	Input();
 	m_background.Render();
+	m_paperBackground.Render();
 	m_rootMenu->Render();
 }
 
@@ -29,6 +30,7 @@ void MenuSystem::Reset()
 
 void MenuSystem::Init()
 {
+	m_videoManager = VideoManager::Get();
 	m_inputManager = InputManager::Get();
 	m_stateManager = StateManager::Get();
 
@@ -39,13 +41,17 @@ void MenuSystem::Init()
 	InitMainMenu(m_rootMenu);
 
 	// Init the background.
-	m_background.SetSize(640, 640);
-	m_background.SetPositon(20, 0);
-	m_background.SetTexture(".\\Assets\\Sprites\\MainMenu.png");
+	m_background.SetSize(m_videoManager->GetWidth(), m_videoManager->GetHeight());
+	m_background.SetTexture(".\\Assets\\Sprites\\MenuConcept.png");
+
+	m_paperBackground.SetSize(640, 640);
+	m_paperBackground.SetPositon(20, 0);
+	m_paperBackground.SetTexture(".\\Assets\\Sprites\\MainMenu.png");
 }
 
 void MenuSystem::InitMainMenu(Menu* menu)
 {
+	menu->SetTitle("MAIN MENU");
 	InitPlayMenu(menu->AddChild("Play"));
 	InitCreateMenu(menu->AddChild("Create"));
 	InitOptionsMenu(menu->AddChild("Options"));
@@ -55,6 +61,7 @@ void MenuSystem::InitMainMenu(Menu* menu)
 
 void MenuSystem::InitPlayMenu(Menu* menu)
 {
+	menu->SetTitle("PLAY");
 	menu->AddChild(GameState::GAME, "Quick Match");
 	menu->AddChild(GameState::GAME, "Random Playlist");
 	menu->AddChild(GameState::GAME, "Select Playlist");
@@ -62,12 +69,14 @@ void MenuSystem::InitPlayMenu(Menu* menu)
 
 void MenuSystem::InitCreateMenu(Menu* menu)
 {
+	menu->SetTitle("CREATE");
 	menu->AddChild(GameState::LEVEL_EDITOR, "Level");
 	menu->AddChild(GameState::GAME, "Playlist");
 }
 
 void MenuSystem::InitOptionsMenu(Menu* menu)
 {
+	menu->SetTitle("OPTIONS");
 	menu->AddChild(GameState::GAME, "Video");
 	menu->AddChild(GameState::GAME, "Sound");
 	menu->AddChild(GameState::GAME, "Game");

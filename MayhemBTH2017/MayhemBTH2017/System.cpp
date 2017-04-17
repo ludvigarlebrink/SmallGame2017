@@ -39,6 +39,7 @@ void System::Run()
 	shader.Init(".\\Assets\\GLSL\\SkeletalAnimation", false);
 	m.Init();
 	float counter = 0;
+	
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

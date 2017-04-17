@@ -30,11 +30,13 @@ private:
 	void Input();
 
 private:
-	Menu *			m_rootMenu;
+	VideoManager *	m_videoManager;
 	InputManager *	m_inputManager;
 	StateManager *	m_stateManager;
-	UIImage			m_background;
 
+	Menu *			m_rootMenu;
+	UIImage			m_background;
+	UIImage			m_paperBackground;
 };
 
 

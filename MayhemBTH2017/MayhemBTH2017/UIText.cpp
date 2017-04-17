@@ -10,6 +10,7 @@ UIText::UIText()
 	m_size = 40;
 	m_pivot = 0;
 	m_font = ".\\Assets\\Fonts\\Snap.ttf";
+	m_scale = 1.0f;
 }
 
 
@@ -75,7 +76,7 @@ void UIText::Render()
 
 	if (strlen(m_text) > 0)
 	{
-		TextToTexture(m_text, m_color, m_posX, m_posY, 70);
+		TextToTexture(m_text, m_color, m_posX, m_posY, m_size);
 	}
 }
 
@@ -114,6 +115,11 @@ int UIText::GetSize() const
 	return m_size;
 }
 
+float UIText::GetScale() const
+{
+	return m_scale;
+}
+
 
 //::.. SET FUNCTIONS ..:://
 void UIText::SetText(const char* text)
@@ -130,6 +136,11 @@ void UIText::SetPositon(int x, int y)
 void UIText::SetSize(int size)
 {
 	m_size = size;
+}
+
+void UIText::SetScale(float scale)
+{
+	m_scale = scale;
 }
 
 
@@ -177,7 +188,7 @@ void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, i
 	glLoadIdentity();
 
 	// m_Width and m_Height is the resolution of window.
-	glOrtho(0, m_Width, 0, m_Height, -1, 1);
+	glOrtho(0, m_width, 0, m_height, -1, 1);
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
@@ -191,7 +202,7 @@ void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, i
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	TTF_Font * font = TTF_OpenFont(m_font, m_size);
+	TTF_Font * font = TTF_OpenFont(m_font, m_size * m_scale);
 
 	// OUTLINE
 	SDL_Color black = { 0x00, 0x00, 0x00 };
@@ -213,8 +224,8 @@ void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, i
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, sOutline->w, sOutline->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, sOutline->pixels);
 
 
-	float halfHeight = m_Height / 2;
-	float halfWidth = m_Width / 2;
+	float halfHeight = m_height / 2;
+	float halfWidth = m_width / 2;
 
 	GLfloat offsetNegX = 0;
 	GLfloat offsetPosX = 0;
@@ -294,7 +305,6 @@ void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, i
 
 		break;
 	}
-
 
 	glBegin(GL_QUADS);
 	{

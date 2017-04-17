@@ -5,8 +5,9 @@
 Menu::Menu()
 	: m_isActive(false)
 {
-	// Do nothing...
 	m_stateManager = StateManager::Get();
+	m_timeManager = TimeManager::Get();
+
 	m_currentSelection = 0;
 	m_selection.SetTexture(".\\Assets\\Sprites\\Selection.png");
 	m_selection.SetSize(336 * 0.8f, 78 * 0.8f);
@@ -15,7 +16,8 @@ Menu::Menu()
 	m_title.SetSize(FONT_SIZE + 12);
 	m_title.SetPositon(0, 170);
 	m_title.SetColor(229, 122, 16, 255);
-	m_title.SetText("MAIN MENU");
+
+	m_isScalning = true;
 }
 
 
@@ -33,23 +35,54 @@ void Menu::Render()
 		return;
 	}
 
-	m_selection.Render();
+	// Render the title.
 	m_title.Render();
 
 	for (int i = 0; i < m_button.size(); i++)
 	{
 		if (m_button[i]->isSelected)
 		{
+			// Set the position of the marker.
 			m_selection.SetPositon(0, (-i * (FONT_SIZE + 16)) + 70);
+			m_selection.Render();	
+			
+			m_button[i]->text->SetPositon(0, (-i * (FONT_SIZE + 16)) + 70);
+
+			if (m_isScalning)
+			{
+				m_button[i]->text->SetScale(m_button[i]->text->GetScale() + (m_timeManager->GetDeltaTime() * 3));
+
+				// Switch.
+				if (m_button[i]->text->GetScale() > 1.3f)
+				{
+					m_button[i]->text->SetScale(1.3f);
+					m_isScalning = false;
+				}
+			}
+			else
+			{
+				m_button[i]->text->SetScale(m_button[i]->text->GetScale() - (m_timeManager->GetDeltaTime() * 3));
+
+				if (m_button[i]->text->GetScale() < 1.0f)
+				{
+					m_button[i]->text->SetScale(1.0f);
+					m_isScalning = true;
+				}
+			}
+
+			m_button[i]->text->Render();
 		}
-
-		m_button[i]->text->SetSize(FONT_SIZE);
-		m_button[i]->text->SetPositon(0, (-i * (FONT_SIZE + 16)) + 70);
-		m_button[i]->text->Render();
+		else
+		{
+			m_button[i]->text->SetPositon(0, (-i * (FONT_SIZE + 16)) + 70);
+			m_button[i]->text->SetScale(1.0f);
+			m_button[i]->text->Render();
+		}
 	}
-
 }
 
+
+//::.. MODIFY FUNCTIONS ..:://
 void Menu::GoForward()
 {
 	if (!m_isActive)
@@ -60,11 +93,9 @@ void Menu::GoForward()
 
 	if (m_button[m_currentSelection]->type == SUBMENU)
 	{
-
 		m_activeSubMenu = m_currentSelection;
-		m_button[m_activeSubMenu]->subMenu->SetIsActive(true);
+		m_button[m_activeSubMenu]->subMenu->m_isActive = true;
 		m_isActive = false;
-
 	}
 	else if (m_button[m_currentSelection]->type == GAMESTATE)
 	{
@@ -91,7 +122,6 @@ void Menu::GoBack()
 }
 
 
-//::.. MODIFY FUNCTIONS ..:://
 void Menu::MoveUp()
 {
 	if (!m_isActive)
@@ -120,7 +150,6 @@ void Menu::MoveDown()
 		return;
 	}
 
-	// TEMP
 	m_button[m_currentSelection]->isSelected = false;
 
 	++m_currentSelection;
@@ -161,8 +190,6 @@ void Menu::SetTitle(const char * title)
 	m_title.SetText(title);
 }
 
-
-//::.. PROTECTED FUNCTIONS ..:://
 Menu* Menu::AddChild(char* title)
 {
 	Button * button = new Button;
