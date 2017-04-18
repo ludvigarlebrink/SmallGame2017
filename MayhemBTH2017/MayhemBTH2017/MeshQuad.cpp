@@ -67,6 +67,7 @@ bool MeshQuad::Render()
 
 void MeshQuad::Draw()
 {
+
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glBindVertexArray(0);
 }

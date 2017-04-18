@@ -185,6 +185,7 @@ bool Mesh::Free()
 //::.. RENDER ..:://
 bool Mesh::Render()
 {
+
 	glBindVertexArray(m_vao);
 	glDrawArrays(m_renderMode, 0, m_drawCount);
 	glBindVertexArray(0);
