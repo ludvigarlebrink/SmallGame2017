@@ -167,6 +167,7 @@
     <ClCompile Include="MeshImporter.cpp" />
     <ClCompile Include="MeshQuad.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="QuadShader.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="MeshQuad.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="QuadShader.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -252,6 +254,9 @@
     <ClInclude Include="VideoManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\GLSL\leo.frag" />
+    <None Include="Assets\GLSL\leo.geom" />
+    <None Include="Assets\GLSL\leo.vert" />
     <None Include="Assets\GLSL\ShadowPass.frag" />
     <None Include="Assets\GLSL\ShadowShader.vert" />
     <None Include="ColliderShader.frag" />
@@ -265,6 +270,8 @@
     <None Include="DrawShader.geom" />
     <None Include="DrawShader.vert" />
     <None Include="GeometryPass.vert" />
+    <None Include="PlayerShader.frag" />
+    <None Include="PlayerShader.vert" />
     <None Include="ToonShader.frag" />
     <None Include="ToonShader.vert" />
   </ItemGroup>

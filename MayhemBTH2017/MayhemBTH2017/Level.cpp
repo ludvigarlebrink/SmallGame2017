@@ -66,6 +66,7 @@ void Level::AddSpawnPoint(uint32_t posX, uint32_t posY)
 //::.. GET FUNCTIONS ..:://
 bool Level::GetIsOccupied(uint32_t posX, uint32_t posY)
 {
+
 	return m_grid[posX][posY].isOccupied;
 }
 

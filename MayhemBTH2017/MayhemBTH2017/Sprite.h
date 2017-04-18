@@ -30,7 +30,7 @@ public:
 
 	void sendColor();
 
-	bool hovered();
+
 
 	void setTexture(const std::string& filePath);
 
@@ -46,7 +46,6 @@ private:
 	void setColorLoc();
 	void setTexLoc();
 	GUIQuad		quad;
-	glm::vec4	BB;
 	GLuint		vbo_ID;
 	GLuint		colorLoc;
 	GLuint		texLoc;

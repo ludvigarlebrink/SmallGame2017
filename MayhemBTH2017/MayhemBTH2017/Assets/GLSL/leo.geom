@@ -1,6 +1,6 @@
 #version 420
 layout(triangles) in;
-layout(trinagle_strip, max_vertices = 3) out;
+layout(triangle_strip, max_vertices = 3) out;
 
 void createGeom()
 {

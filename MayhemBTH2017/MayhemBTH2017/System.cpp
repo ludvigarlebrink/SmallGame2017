@@ -32,7 +32,7 @@ void System::Run()
 
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
-	
+
 	GamePhysics physics;
 
 	physics.enterWorld();
@@ -42,10 +42,15 @@ void System::Run()
 	Game game;
 	AShader shader;
 	AShader shaderGreen;
+	AShader ColliderShader;
 	shader.Init("DebugShader", false, 0);
 	shaderGreen.Init("DebugGreen", false, 0);
+	ColliderShader.Init("ColliderShader", false, 0);
 	TextureImporter teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
+	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+
+
 
 
 	while (isRunning)
@@ -53,10 +58,15 @@ void System::Run()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 
-
 		m_inputManager->Update();
 
-		physics.update();
+		ColliderShader.Bind();
+		ColliderShader.Update(transform, camera);
+
+		physics.Update(transform);
+		physics.Render(transform, camera);
+
+
 
 		//switch (m_stateManager->GetCurrentState())
 		//{
@@ -83,11 +93,11 @@ void System::Run()
 
 		//case GameState::GAME: {
 
-		//	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-		//	shader.Bind();
-		//	shader.Update(transform, camera);
-		//	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-		//	transform.SetPosition(42.0, 24.0, -0.0);
+			//camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+			//shader.Bind();
+			//shader.Update(transform, camera);
+			//camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+			//transform.SetPosition(42.0, 24.0, -0.0);
 
 
 		//	//Draw scene
