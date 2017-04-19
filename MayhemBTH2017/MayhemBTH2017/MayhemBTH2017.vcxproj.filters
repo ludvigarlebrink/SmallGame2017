@@ -132,9 +132,6 @@
     <ClCompile Include="AntiAliasing.cpp">
       <Filter>Engine\Rendering\Shading</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Engine\Resources</Filter>
     </ClCompile>
@@ -218,7 +215,7 @@
     <ClCompile Include="AnimClip.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderProg.cpp">
+    <ClCompile Include="ShaderManager.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
@@ -294,9 +291,6 @@
     </ClInclude>
     <ClInclude Include="AntiAliasing.h">
       <Filter>Engine\Rendering\Shading</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Resources</Filter>
@@ -384,7 +378,7 @@
     <ClInclude Include="AnimUtil.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderProg.h">
+    <ClInclude Include="ShaderManager.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">

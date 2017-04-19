@@ -59,7 +59,7 @@ Mesh * Prefab::GetMesh() const
 	return m_mesh;
 }
 
-ShaderProg * Prefab::GetShaderProg() const
+ShaderManager * Prefab::GetShaderProg() const
 {
 	return m_shaderProg;
 }
