@@ -188,9 +188,6 @@
     <ClCompile Include="UIPauseMenu.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderHandler.cpp">
-      <Filter>Engine\Resources\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Prefab.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
@@ -341,9 +338,6 @@
     </ClInclude>
     <ClInclude Include="UIPauseMenu.h">
       <Filter>Engine\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderHandler.h">
-      <Filter>Engine\Resources\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Prefab.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>

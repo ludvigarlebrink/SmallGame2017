@@ -175,7 +175,6 @@
     <ClCompile Include="ResourceExporter.cpp" />
     <ClCompile Include="ResourceImporter.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="ShaderHandler.cpp" />
     <ClCompile Include="UIPauseMenu.cpp" />
     <ClCompile Include="UISlider.cpp" />
     <ClCompile Include="UIText.cpp" />
@@ -241,7 +240,6 @@
     <ClInclude Include="ResourceExporter.h" />
     <ClInclude Include="ResourceImporter.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="ShaderHandler.h" />
     <ClInclude Include="UIPauseMenu.h" />
     <ClInclude Include="UISlider.h" />
     <ClInclude Include="UIText.h" />

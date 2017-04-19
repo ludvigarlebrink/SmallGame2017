@@ -5,7 +5,7 @@
 #include "Transform.h"
 #include "Mesh.h"
 #include "AnimController.h"
-#include "ShaderProg.h"
+#include "ShaderManager.h"
 #include "Camera.h"
 
 

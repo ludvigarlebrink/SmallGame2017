@@ -25,13 +25,9 @@ void Prefab::Render(const Camera & cam)
 	if (m_animController != nullptr)
 	{
 		m_animController->Update();
-		m_shaderProg->UpdateAnim();
-		m_shaderProg->Bind();
 	}
 	else if (m_shaderProg != nullptr)
 	{ 
-		m_shaderProg->Update();
-		m_shaderProg->Bind();
 	}
 
 	if (m_mesh != nullptr)
