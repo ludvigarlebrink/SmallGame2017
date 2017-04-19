@@ -221,6 +221,9 @@
     <ClCompile Include="ShaderProg.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
+    <ClCompile Include="ImportTester.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
