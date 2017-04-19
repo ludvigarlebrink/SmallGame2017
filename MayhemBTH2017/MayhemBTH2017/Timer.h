@@ -11,10 +11,17 @@ public:
 	Timer();
 	virtual ~Timer();
 
-	void SetTimer(float time, bool start = false, bool resetWhenDonw = false);
-	void StartTimer();
-	void Reset();
 	bool Update();
+	
+	//::.. GET FUNCTIONS ..:://
+	float GetElapsed();
+
+	//::.. SET FUNCTIONS ..:://
+	void SetTimer(float time, bool start = false, bool resetWhenDone = false);
+	void StartTimer(float time);
+	void StartTimer();
+
+	void Reset();
 	bool HasElapsed();
 
 private:

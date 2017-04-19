@@ -5,6 +5,7 @@
 Level::Level()
 {
 	Init();
+	m_name = "New_Level";
 }
 
 
@@ -38,8 +39,9 @@ void Level::AddBlock(uint32_t posX, uint32_t posY)
 	}
 
 	UpdateBlocks(posX, posY, true);
-	m_mesh.Update();
-	m_mesh2.Update();
+	m_mesh.Update(); //Front quad
+	m_mesh2.Update(); //Z-quad
+
 }
 
 void Level::RemoveBlock(uint32_t posX, uint32_t posY)
@@ -50,8 +52,8 @@ void Level::RemoveBlock(uint32_t posX, uint32_t posY)
 	}
 
 	UpdateBlocks(posX, posY, false);
-	m_mesh.Update();
-	m_mesh2.Update();
+	m_mesh.Update(); //Front quad
+	m_mesh2.Update(); //Z-quad
 }
 
 void Level::AddSpawnPoint(uint32_t posX, uint32_t posY)
@@ -79,6 +81,11 @@ uint32_t Level::GetTextureID(uint32_t posX, uint32_t posY)
 	return m_grid[posX][posY].textureID;
 }
 
+const std::string & Level::GetName()
+{
+	return m_name;
+}
+
 
 //::.. SET FUNCTIONS ..:://
 void Level::SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID)
@@ -96,11 +103,16 @@ void Level::SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint)
 	m_grid[posX][posY].isSpawnPoint = isSpawnPoint;
 }
 
+void Level::SetName(const std::string & name)
+{
+	m_name = name;
+}
+
 
 //::.. HELP FUNCTIONS ..:://
 void Level::Init()
 {
-	m_debugShader.Init("DebugShader", false);
+	m_debugShader.Init("DebugShader", false, 0);
 	InitGrid();
 	InitMesh();
 }
@@ -144,7 +156,7 @@ void Level::InitMesh()
 
 			m_vertices[i + 2].position = glm::vec3((x - 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i + 2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-			m_vertices[i + 2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, -2.0f);
+			m_vertices[i + 2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
 			m_vertices[i + 3].position = glm::vec3((x - 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i + 3].normal = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -195,7 +207,7 @@ void Level::InitMesh()
 			// Quad 3.
 			m_vertices2[i + 6].position = glm::vec3(x + 0.5f, y + 0.5f, 2.0f);
 			m_vertices2[i + 6].normal = glm::vec3(1.0f, 0.0f, 0.0f);
-			m_vertices2[i + 6].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
+			m_vertices2[i + 6].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
 
 			m_vertices2[i + 7].position = glm::vec3(x + 0.5f, y - 0.5f, -2.0f);
 			m_vertices2[i + 7].normal = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -222,8 +234,8 @@ void Level::InitMesh()
 	}
 
 
-	m_mesh.LoadMesh(m_vertices, length);
-	m_mesh2.LoadMesh(m_vertices2, length2);
+	m_mesh.Load(m_vertices, length);
+	m_mesh2.Load(m_vertices2, length2);
 }
 
 void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied)
@@ -264,6 +276,7 @@ void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied)
 
 	if (pos < 0)
 	{
+		std::cout << "RETURN!" << std::endl;
 		return;
 	}
 
@@ -282,6 +295,8 @@ void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied)
 	}
 
 	pos = (posY - SIZE_Y + (posX * SIZE_Y)) * 12;
+	
+
 
 	for (size_t i = 6; i < 12; i++)
 	{
@@ -296,4 +311,5 @@ void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied)
 				m_vertices2[pos + i].texCoordsAlpha.y, 0.0f);
 		}
 	}
+
 }

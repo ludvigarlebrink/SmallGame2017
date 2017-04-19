@@ -22,6 +22,7 @@ void ResourceManager::StartUp()
 {
 	if (m_instance == nullptr)
 	{
+		m_instance = this;
 		Init();
 	}
 }
@@ -38,20 +39,15 @@ ResourceManager& ResourceManager::Get()
 	return *m_instance;
 }
 
-Mesh& ResourceManager::GetMesh(const String& filepath)
-{
-	return m_meshCache.GetMesh(filepath);
-}
-
 //Texture& ResourceManager::GetTexture(const String& filepath)
 //{
 //	Texture tex;
 //	return tex;
 //}
 
-void ResourceManager::GetShader()
+void ResourceManager::GetShader(const char* name)
 {
-	// RETURN SHADER
+
 }
 
 void ResourceManager::GetSkeleton()
@@ -66,7 +62,6 @@ void ResourceManager::GetAnimation()
 
 void ResourceManager::Init()
 {
-	m_instance = this;
 
 	// INIT STUFF
 }

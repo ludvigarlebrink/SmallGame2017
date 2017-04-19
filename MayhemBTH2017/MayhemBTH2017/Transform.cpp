@@ -71,11 +71,23 @@ void Transform::SetPosition(glm::vec3 pos)
 void Transform::SetPosition(float x, float y, float z)
 {
 	m_position = glm::vec3(x, y, z);
+	
 }
 
+void Transform::SetPositionX(float x) {
+	m_position.x = x;
+}
+
+void Transform::SetPositionY(float y) {
+	m_position.y = y;
+}
 void Transform::SetRotation(glm::vec3 rot)
 {
 	m_rotation = rot;
+}
+
+void Transform::SetPositionZ(float z) {
+	m_position.z = z;
 }
 
 void Transform::SetRotation(float x, float y, float z)

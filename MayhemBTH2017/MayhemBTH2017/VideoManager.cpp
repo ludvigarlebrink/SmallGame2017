@@ -16,7 +16,7 @@ VideoManager::~VideoManager()
 }
 
 
-//::.. FAKE FUNCTIONS ..:://
+//::.. FAKE CONSTRUCTORS ..:://
 void VideoManager::StartUp()
 {
 	if (m_instance == nullptr)
@@ -46,15 +46,18 @@ bool VideoManager::GetIsClosed()const
 	return m_isClosed;
 }
 
-int VideoManager::GetScreenHeight()const
+
+int VideoManager::GetHeight()const
 {
-	return m_screenHeight;
+	return m_height;
 }
 
-int VideoManager::GetScreenWidth()const
+
+int VideoManager::GetWidth()const
 {
-	return m_screenWidth;
+	return m_width;
 }
+
 
 SDL_Window* VideoManager::GetWindow()const
 {
@@ -73,7 +76,7 @@ static void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint i
 
 #endif
 
-//::.. HELPER FUNCTIONS ..:://
+//::.. HELP FUNCTIONS ..:://
 void VideoManager::Init()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -90,8 +93,11 @@ void VideoManager::Init()
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
+	m_width = 1280;
+	m_height = 720;
+
 	m_window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		1280, 720, SDL_WINDOW_OPENGL);
+		m_width, m_height, SDL_WINDOW_OPENGL);
 
 //	SDL_SetWindowFullscreen(m_window, SDL_WINDOW_FULLSCREEN);
 
@@ -105,7 +111,7 @@ void VideoManager::Init()
 
 	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 	glEnable(GL_DEBUG_OUTPUT);
-	glDebugMessageCallback(openglCallbackFunction, nullptr);
+//	glDebugMessageCallback(openglCallbackFunction, nullptr);
 	glDebugMessageControl(
 		GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
 
@@ -128,13 +134,13 @@ void VideoManager::SetIsClosed(bool x)
 	m_isClosed = x;
 }
 
-void VideoManager::SetScreenHeight(int x)
+void VideoManager::SetHeight(int x)
 {
-	m_screenHeight = x;
+	m_height = x;
 }
 
-void VideoManager::SetScreenWidth(int x)
+void VideoManager::SetWidth(int x)
 {
-	m_screenWidth = x;
+	m_width = x;
 }
 

@@ -26,8 +26,10 @@ struct Vertex3D
 
 struct Vertex3DSkelAnimation
 {
-	Vertex3D	vertex;
-	glm::ivec4	jointIDs;
+	glm::vec3	position;
+	glm::vec3	normal;
+	glm::vec3	texCoordsAlpha;
+	glm::vec4	jointIDs;
 	glm::vec4	weights;
 
 };
@@ -41,10 +43,10 @@ public:
 	virtual ~Mesh();
 
 	//::.. INITIALIZERS ..:://
-	bool LoadMesh(Vertex2D * vertices, uint64_t numVerts);
-	bool LoadMesh(Vertex3D * vertices, uint64_t numVerts);
-//	bool LoadMesh(Vertex3DBlendAnimation * vertices, uint64_t numVerts);
-	bool FreeMesh();
+	bool Load(Vertex2D * vertices, uint64_t numVerts);
+	bool Load(Vertex3D * vertices, uint64_t numVerts);
+	bool Load(Vertex3DSkelAnimation * vertices, uint64_t numVerts);
+	bool Free();
 
 	//::.. RENDER ..:://
 	bool Render();
@@ -63,8 +65,9 @@ private:
 	GLuint		m_vao;
 	GLuint		m_buffer;
 
-	Vertex2D *	m_vertices2D;
-	Vertex3D *	m_vertices3D;
+	Vertex2D *				m_vertices2D;
+	Vertex3D *				m_vertices3D;
+	Vertex3DSkelAnimation *	m_vertices3DSkelAnimation;
 
 	GLenum		m_renderMode;
 

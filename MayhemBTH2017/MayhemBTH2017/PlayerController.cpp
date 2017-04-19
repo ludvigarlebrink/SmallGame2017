@@ -152,8 +152,8 @@ void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEven
 		break;
 
 	case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
-		m_button[CONTROLLER_BUTTON_RIGHTSHOULDER].isDown = true;
-		m_button[CONTROLLER_BUTTON_RIGHTSHOULDER].isHeld = true;
+		m_button[CONTROLLER_BUTTON_RB].isDown = true;
+		m_button[CONTROLLER_BUTTON_RB].isHeld = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_DPAD_UP:
@@ -219,8 +219,8 @@ void PlayerController::ButtonUp(const SDL_ControllerButtonEvent controllerEvent)
 		break;
 
 	case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
-		m_button[CONTROLLER_BUTTON_RIGHTSHOULDER].isUp = true;
-		m_button[CONTROLLER_BUTTON_RIGHTSHOULDER].isHeld = false;
+		m_button[CONTROLLER_BUTTON_RB].isUp = true;
+		m_button[CONTROLLER_BUTTON_RB].isHeld = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_DPAD_UP:

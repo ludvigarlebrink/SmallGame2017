@@ -86,12 +86,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Include\MRSDK;.\include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>.\Lib\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp.lib;glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;Box2D.lib;glew32.lib;glew32s.lib;MRSDK.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -117,120 +117,171 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>.\Lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;Box2D.lib;glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AGameObject.cpp" />
-    <ClCompile Include="AMenu.cpp" />
-    <ClCompile Include="AnimationClip.cpp" />
-    <ClCompile Include="AnimationController.cpp" />
+    <ClCompile Include="AnimClip.cpp" />
+    <ClCompile Include="AnimController.cpp" />
+    <ClCompile Include="AnimSkeleton.cpp" />
+    <ClCompile Include="Box.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="AntiAliasing.cpp" />
     <ClCompile Include="ARenderable.cpp" />
-    <ClCompile Include="AResource.cpp" />
     <ClCompile Include="AShader.cpp" />
-    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
+    <ClCompile Include="MenuCredits.cpp" />
+    <ClCompile Include="MenuVideo.cpp" />
+    <ClCompile Include="Prefab.cpp" />
+    <ClCompile Include="PrefabManager.cpp" />
+    <ClCompile Include="ShaderProg.cpp" />
+    <ClCompile Include="Sprite.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Joint.cpp" />
-    <ClCompile Include="JointSkeleton.cpp" />
-    <ClCompile Include="KeyFrame.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="Level.cpp" />
-    <ClCompile Include="LevelExporter.cpp" />
-    <ClCompile Include="LevelImporter.cpp" />
+    <ClCompile Include="LevelHandler.cpp" />
     <ClCompile Include="LevelMarker.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
-    <ClCompile Include="MenuSystem.cpp" />
+    <ClCompile Include="MenuSystem.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MeshCache.cpp" />
-    <ClCompile Include="MeshImporter.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="Playlist.cpp" />
+    <ClCompile Include="PlaylistEditor.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourceExporter.cpp" />
+    <ClCompile Include="ResourceImporter.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="ShaderCache.cpp" />
-    <ClCompile Include="ShaderImporter.cpp" />
-    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderHandler.cpp" />
+    <ClCompile Include="UIPauseMenu.cpp" />
+    <ClCompile Include="UISlider.cpp" />
+    <ClCompile Include="UIText.cpp" />
     <ClCompile Include="StackPool.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="TextureCache.cpp" />
-    <ClCompile Include="TextureImporter.cpp" />
+    <ClCompile Include="TextureHandler.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UITextField.cpp" />
     <ClCompile Include="VideoManager.cpp" />
+    <ClCompile Include="VirtualKeyboard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AAllocator.h" />
     <ClInclude Include="AGameObject.h" />
-    <ClInclude Include="AMenu.h" />
-    <ClInclude Include="AnimationClip.h" />
-    <ClInclude Include="AnimationController.h" />
+    <ClInclude Include="AnimClip.h" />
+    <ClInclude Include="AnimController.h" />
+    <ClInclude Include="AnimSkeleton.h" />
+    <ClInclude Include="AnimUtil.h" />
+    <ClInclude Include="Box.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="AntiAliasing.h" />
     <ClInclude Include="ARenderable.h" />
-    <ClInclude Include="AResource.h" />
     <ClInclude Include="AShader.h" />
-    <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DefaultAllocator.h" />
+    <ClInclude Include="MenuCredits.h" />
+    <ClInclude Include="MenuVideo.h" />
+    <ClInclude Include="Prefab.h" />
+    <ClInclude Include="PrefabManager.h" />
+    <ClInclude Include="ShaderProg.h" />
+    <ClInclude Include="Sprite.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="UIImage.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Joint.h" />
-    <ClInclude Include="JointSkeleton.h" />
-    <ClInclude Include="KeyFrame.h" />
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="Level.h" />
-    <ClInclude Include="LevelExporter.h" />
-    <ClInclude Include="LevelImporter.h" />
+    <ClInclude Include="LevelHandler.h" />
     <ClInclude Include="LevelMarker.h" />
-    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MemoryManager.h" />
-    <ClInclude Include="MenuSystem.h" />
+    <ClInclude Include="MenuSystem.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MeshCache.h" />
-    <ClInclude Include="MeshImporter.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="Playlist.h" />
+    <ClInclude Include="PlaylistEditor.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceExporter.h" />
+    <ClInclude Include="ResourceImporter.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="ShaderCache.h" />
-    <ClInclude Include="ShaderImporter.h" />
-    <ClInclude Include="Text.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderHandler.h" />
+    <ClInclude Include="UIPauseMenu.h" />
+    <ClInclude Include="UISlider.h" />
+    <ClInclude Include="UIText.h" />
     <ClInclude Include="StackPool.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="TextureCache.h" />
-    <ClInclude Include="TextureImporter.h" />
+    <ClInclude Include="TextureHandler.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="UITextField.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoManager.h" />
+    <ClInclude Include="VirtualKeyboard.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DebugGreen.frag" />
-    <None Include="DebugGreen.vert" />
-    <None Include="DebugShader.frag" />
-    <None Include="DebugShader.geom" />
-    <None Include="DebugShader.vert" />
-    <None Include="leo.frag" />
-    <None Include="leo.geom" />
-    <None Include="leo.vert" />
+    <None Include="Assets\GLSL\BlurrShader.frag" />
+    <None Include="Assets\GLSL\BlurrShader.geom" />
+    <None Include="Assets\GLSL\BlurrShader.vert" />
+    <None Include="Assets\GLSL\DebugGreen.frag" />
+    <None Include="Assets\GLSL\DebugGreen.vert" />
+    <None Include="Assets\GLSL\DebugShader.frag" />
+    <None Include="Assets\GLSL\DebugShader.vert" />
+    <None Include="Assets\GLSL\MainShader.frag" />
+    <None Include="Assets\GLSL\MainShader.geom" />
+    <None Include="Assets\GLSL\MainShader.vert" />
+    <None Include="Assets\GLSL\QuadShader.frag" />
+    <None Include="Assets\GLSL\QuadShader.geom" />
+    <None Include="Assets\GLSL\QuadShader.vert" />
+    <None Include="Assets\GLSL\SharpnelShader.frag" />
+    <None Include="Assets\GLSL\SharpnelShader.geom" />
+    <None Include="Assets\GLSL\SharpnelShader.vert" />
+    <None Include="Assets\GLSL\SkeletalAnimation.frag" />
+    <None Include="Assets\GLSL\SkeletalAnimation.vert" />
+    <None Include="Assets\Levels\ExportTestLOL.mrlevel" />
+    <None Include="Assets\Levels\Register.mrlevelreg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

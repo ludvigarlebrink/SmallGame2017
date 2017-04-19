@@ -1,5 +1,5 @@
-#ifndef __SHADER_H__
-#define __SHADER_H__
+#ifndef __ASHADER_H__
+#define __ASHADER_H__
 
 
 #include "Transform.h"
@@ -19,22 +19,23 @@ class AShader
 public:
 	//::.. CONSTRUCTORS ..:://
 	AShader();
-	AShader(const std::string& filename, bool hasGeomShader);
-	virtual ~AShader();											//Destructor
+	AShader(const std::string& filename, bool hasGeomShader, bool particles);
+	virtual ~AShader();															//Destructor
 
 	//::.. GET FUNCTIONS ..:://
 	GLuint GetProgramID();
+	GLuint GetTextureID();
 
 	//::.. MODIFY FUNCTIONS ..:://
-	void Init(const std::string& filename, bool hasGeomShader);
+	void Init(const std::string& filename, bool hasGeomShader, bool particles);
 	void Release();
 	void Bind();
 	virtual void Update(Transform& transform, Camera& camera);
-	void TempUpdateAlpha(GLfloat a);
 
 	//::.. PROTECTED FUNCTIONS ..:://
 	virtual void AddAttributeLocation();
 	virtual void AddUniforms();
+	void TempUpdateAlpha(GLfloat a);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
@@ -46,6 +47,7 @@ private:
 	enum Shader
 	{
 		VERTEX_SHADER = 0,
+		GEOMETRY_SHADER,
 		FRAGMENT_SHADER,
 		NR_SHADERS
 	};
@@ -65,6 +67,7 @@ private:
 	GLuint m_programID;
 	GLuint m_shader[NR_SHADERS];
 	GLuint m_uniforms[NR_UNIFORMS];
+	GLuint m_textureID;
 };
 
 #endif

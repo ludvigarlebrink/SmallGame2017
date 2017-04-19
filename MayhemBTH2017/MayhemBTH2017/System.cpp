@@ -1,9 +1,8 @@
 #include "System.h"
 
-
-#include "MenuSystem.h"
 #include "Mesh.h"
-#include "MeshImporter.h"
+#include "MenuSystem.h"
+#include "UIText.h"
 
 System::System()
 {
@@ -19,6 +18,7 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
+
 	LevelEditor l;
 	MenuSystem m;
 	glDepthFunc(GL_LESS);
@@ -27,32 +27,26 @@ void System::Run()
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
-
-	MeshImporter meshImp;
-	Mesh mesh = meshImp.Import();
 	Transform transform;
 	Camera camera;
-	AShader shader;
-	shader.Init("DebugShader", false);
-
+	VirtualKeyboard vk;
+	int count = 1;
+	m.Init();
+	float counter = 0;
+	
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
-
-
+	
 		m_inputManager->Update();
+
 
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
 			break;
 		case GameState::MAIN_MENU:
-			
-			shader.Bind();
-			shader.Update(transform, camera);
-			mesh.Render();
-
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
@@ -67,13 +61,17 @@ void System::Run()
 			break;
 		}
 
+
 		m_inputManager->Reset();
 
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
+
+		counter += m_timeManager->GetDeltaTime();
 	}
 }
+
 
 void System::Init()
 {

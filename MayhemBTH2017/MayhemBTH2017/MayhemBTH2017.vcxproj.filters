@@ -28,12 +28,6 @@
     <Filter Include="Engine\Resources\ResourceTypes">
       <UniqueIdentifier>{71900585-ce90-4ce1-8bdb-02b9edd77a9c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Resources\ResourceCaches">
-      <UniqueIdentifier>{1dccb4f0-6f6b-4902-ab72-d82d797de79d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Resources\Importers">
-      <UniqueIdentifier>{a68479e9-0ab3-4a9a-9d0b-9b2dcd747a00}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\GameObjects">
       <UniqueIdentifier>{52dc7d03-1780-48d4-8855-e9c60e23901b}</UniqueIdentifier>
     </Filter>
@@ -46,14 +40,8 @@
     <Filter Include="Engine\Core\Managers">
       <UniqueIdentifier>{9cb0e605-dc82-4c34-bae1-a4503b77de27}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GLSL">
-      <UniqueIdentifier>{47f1e50b-2c7a-4653-8b3e-19da930ebafb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Resources\Exporters">
       <UniqueIdentifier>{bb95d1ce-612f-4a0b-855d-d0b3b35d4ce6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\GUI">
-      <UniqueIdentifier>{1edf8cbe-d56e-411d-8219-9d50b4417e28}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\HID">
       <UniqueIdentifier>{eb8a49cc-da3b-46e0-8859-c79e7642fe15}</UniqueIdentifier>
@@ -64,11 +52,20 @@
     <Filter Include="Engine\Menu">
       <UniqueIdentifier>{15bbf7ad-3aa4-415a-8294-f8c0e338a052}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Rendering\Animation">
-      <UniqueIdentifier>{27082aa4-886d-48f4-b2b1-e42b27046c87}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Rendering\Shading">
       <UniqueIdentifier>{3fd8737e-78fc-47b1-a603-2ce5284d23b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{c963d22f-41c5-4c08-9da6-d04773a9bcb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\GLSL">
+      <UniqueIdentifier>{dba1b46a-eb2b-4f28-8938-e7e6ce2e9e84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI">
+      <UniqueIdentifier>{1edf8cbe-d56e-411d-8219-9d50b4417e28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resources\Managers">
+      <UniqueIdentifier>{a68479e9-0ab3-4a9a-9d0b-9b2dcd747a00}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -81,32 +78,14 @@
     <ClCompile Include="String.cpp">
       <Filter>Engine\Memory\Containers</Filter>
     </ClCompile>
-    <ClCompile Include="AResource.cpp">
-      <Filter>Engine\Resources</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureCache.cpp">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshCache.cpp">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
     </ClCompile>
     <ClCompile Include="StackPool.cpp">
       <Filter>Engine\Memory\Allocators</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderCache.cpp">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshImporter.cpp">
-      <Filter>Engine\Resources\Importers</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderImporter.cpp">
-      <Filter>Engine\Resources\Importers</Filter>
     </ClCompile>
     <ClCompile Include="MemoryManager.cpp">
       <Filter>Engine\Memory</Filter>
@@ -122,9 +101,6 @@
     </ClCompile>
     <ClCompile Include="ARenderable.cpp">
       <Filter>Engine\GameObjects\Renderable</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Engine\Rendering</Filter>
@@ -144,58 +120,106 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Engine\HID</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeManager.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="LevelExporter.cpp">
-      <Filter>Engine\Resources\Exporters</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelImporter.cpp">
-      <Filter>Engine\Resources\Importers</Filter>
-    </ClCompile>
-    <ClCompile Include="AMenu.cpp">
-      <Filter>Engine\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureImporter.cpp">
-      <Filter>Engine\Resources\Importers</Filter>
-    </ClCompile>
     <ClCompile Include="LevelMarker.cpp">
       <Filter>Engine\LevelEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Engine\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>Engine\Menu</Filter>
     </ClCompile>
     <ClCompile Include="MenuSystem.cpp">
       <Filter>Engine\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Engine\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="AntiAliasing.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationClip.cpp">
-      <Filter>Engine\Rendering\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationController.cpp">
-      <Filter>Engine\Rendering\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyFrame.cpp">
-      <Filter>Engine\Rendering\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Joint.cpp">
-      <Filter>Engine\Rendering\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="JointSkeleton.cpp">
-      <Filter>Engine\Rendering\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="AShader.cpp">
       <Filter>Engine\Rendering\Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="AntiAliasing.cpp">
+      <Filter>Engine\Rendering\Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Engine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Playlist.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaylistEditor.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceImporter.cpp">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceExporter.cpp">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="LevelHandler.cpp">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="VirtualKeyboard.cpp" />
+    <ClCompile Include="UIText.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIImage.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UITextField.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UISlider.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Engine\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureHandler.cpp">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuVideo.cpp">
+      <Filter>Engine\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuCredits.cpp">
+      <Filter>Engine\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="UIPauseMenu.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderHandler.cpp">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Prefab.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="PrefabManager.cpp">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimController.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimSkeleton.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimClip.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderProg.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -208,32 +232,14 @@
     <ClInclude Include="String.h">
       <Filter>Engine\Memory\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="AResource.h">
-      <Filter>Engine\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureCache.h">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshCache.h">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
     </ClInclude>
     <ClInclude Include="StackPool.h">
       <Filter>Engine\Memory\Allocators</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderCache.h">
-      <Filter>Engine\Resources\ResourceCaches</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshImporter.h">
-      <Filter>Engine\Resources\Importers</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderImporter.h">
-      <Filter>Engine\Resources\Importers</Filter>
     </ClInclude>
     <ClInclude Include="MemoryManager.h">
       <Filter>Engine\Memory</Filter>
@@ -253,9 +259,6 @@
     <ClInclude Include="ARenderable.h">
       <Filter>Engine\GameObjects\Renderable</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Engine\Core\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
@@ -274,84 +277,171 @@
     <ClInclude Include="InputManager.h">
       <Filter>Engine\HID</Filter>
     </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeManager.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="LevelExporter.h">
-      <Filter>Engine\Resources\Exporters</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelImporter.h">
-      <Filter>Engine\Resources\Importers</Filter>
-    </ClInclude>
-    <ClInclude Include="AMenu.h">
-      <Filter>Engine\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureImporter.h">
-      <Filter>Engine\Resources\Importers</Filter>
-    </ClInclude>
     <ClInclude Include="LevelMarker.h">
       <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Engine\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>Engine\Menu</Filter>
     </ClInclude>
     <ClInclude Include="MenuSystem.h">
       <Filter>Engine\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Engine\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="AntiAliasing.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationClip.h">
-      <Filter>Engine\Rendering\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationController.h">
-      <Filter>Engine\Rendering\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyFrame.h">
-      <Filter>Engine\Rendering\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Joint.h">
-      <Filter>Engine\Rendering\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="JointSkeleton.h">
-      <Filter>Engine\Rendering\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="AShader.h">
       <Filter>Engine\Rendering\Shading</Filter>
     </ClInclude>
+    <ClInclude Include="AntiAliasing.h">
+      <Filter>Engine\Rendering\Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Engine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Playlist.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaylistEditor.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceImporter.h">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceExporter.h">
+      <Filter>Engine\Resources\Exporters</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="LevelHandler.h">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualKeyboard.h" />
+    <ClInclude Include="UIText.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIImage.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UITextField.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UISlider.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Engine\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureHandler.h">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuVideo.h">
+      <Filter>Engine\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuCredits.h">
+      <Filter>Engine\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="UIPauseMenu.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderHandler.h">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefab.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="PrefabManager.h">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimController.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimSkeleton.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimClip.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimUtil.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderProg.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DebugShader.frag">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\BlurrShader.frag">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="DebugShader.geom">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\BlurrShader.geom">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="DebugShader.vert">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\BlurrShader.vert">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="leo.frag">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\DebugGreen.frag">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="leo.geom">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\DebugGreen.vert">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="leo.vert">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\DebugShader.frag">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="DebugGreen.frag">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\DebugShader.vert">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="DebugGreen.vert">
-      <Filter>GLSL</Filter>
+    <None Include="Assets\GLSL\MainShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\MainShader.geom">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\MainShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\QuadShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\QuadShader.geom">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\QuadShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SharpnelShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SharpnelShader.geom">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SharpnelShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SkeletalAnimation.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SkeletalAnimation.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\Levels\ExportTestLOL.mrlevel">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Levels\Register.mrlevelreg">
+      <Filter>Assets</Filter>
     </None>
   </ItemGroup>
 </Project>

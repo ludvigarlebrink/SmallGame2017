@@ -26,15 +26,15 @@ public:
 	//::.. GET FUNCTIONS ..:://
 	static VideoManager* Get();
 	bool GetIsClosed()const;
-	int GetScreenHeight()const;
-	int GetScreenWidth()const;
+	int GetHeight()const;
+	int GetWidth()const;
 	SDL_Window* GetWindow()const;
 	void Swap();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetIsClosed(bool x);
-	void SetScreenHeight(int x);
-	void SetScreenWidth(int x);
+	void SetHeight(int x);
+	void SetWidth(int x);
 
 private:
 	//::.. HELPER FUNCTIONS ..:://
@@ -51,8 +51,8 @@ private:
 	bool		m_isFullScreen;
 
 	bool m_isClosed;
-	int m_screenHeight;
-	int m_screenWidth;
+	int m_height;
+	int m_width;
 	SDL_GLContext m_glContext;
 };
 
