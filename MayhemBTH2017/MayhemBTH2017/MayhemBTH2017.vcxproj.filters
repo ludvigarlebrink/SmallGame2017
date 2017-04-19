@@ -221,6 +221,7 @@
     <ClCompile Include="AnimClip.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderProg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -381,6 +382,7 @@
     <ClInclude Include="AnimUtil.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderProg.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

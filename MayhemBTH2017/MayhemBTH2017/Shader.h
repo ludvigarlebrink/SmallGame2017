@@ -15,9 +15,10 @@ public:
 
 	void Load(const char* file);
 	void Free();
+	void Bind();
+	void Update();
 
 	bool GetIsCompiled();
-
 	
 
 	//Shader& Get();
