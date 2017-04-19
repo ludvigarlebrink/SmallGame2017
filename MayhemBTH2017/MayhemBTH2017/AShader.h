@@ -20,7 +20,7 @@ public:
 	//::.. CONSTRUCTORS ..:://
 	AShader();
 	AShader(const std::string& filename, bool hasGeomShader, bool particles);
-	virtual ~AShader();											//Destructor
+	virtual ~AShader();															//Destructor
 
 	//::.. GET FUNCTIONS ..:://
 	GLuint GetProgramID();

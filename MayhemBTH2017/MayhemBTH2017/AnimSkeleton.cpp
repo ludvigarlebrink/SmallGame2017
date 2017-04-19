@@ -13,20 +13,34 @@ AnimSkeleton::~AnimSkeleton()
 {
 }
 
-void AnimSkeleton::Update()
+void AnimSkeleton::Update(KeyFrame * kf)
 {
+	m_skel[0].parentID = m_skel[0].parentID;
+	m_skinnedTx[0] = m_skel[0].globalTx * m_skel[0].invBindPose;
+
+	for (uint32_t i = 1; i < m_numJoints; i++)
+	{
+		Joint &j = m_skel[i];
+		j.globalTx = m_skel[j.parentID].globalTx * kf->localTx[i];
+		m_skinnedTx[i] = j.globalTx * j.invBindPose;
+	}
 }
 
+
+//::.. GET FUNCTIONS ..:://
 uint32_t AnimSkeleton::GetNumJoints()
 {
 	return m_numJoints;
 }
+
 
 Joint * AnimSkeleton::GetJointAt(int32_t index)
 {
 	return &m_skel[index];
 }
 
+
+//::.. SET FUNCTIONS ..:://
 void AnimSkeleton::SetSkeleton(uint32_t * parentID, glm::mat4 * localTx, 
 	uint32_t numJoints)
 {
@@ -51,18 +65,5 @@ void AnimSkeleton::SetSkeleton(uint32_t * parentID, glm::mat4 * localTx,
 		Joint &j		= m_skel[i];
 		j.globalTx		= m_skel[j.parentID].globalTx * j.localTx;
 		j.invBindPose	= glm::inverse(j.globalTx);
-	}
-}
-
-void AnimSkeleton::Update(KeyFrame * kf)
-{
-	m_skel[0].parentID	= m_skel[0].parentID;
-	m_skinnedTx[0]		= m_skel[0].globalTx * m_skel[0].invBindPose;
-
-	for (uint32_t i = 1; i < m_numJoints; i++)
-	{
-		Joint &j		= m_skel[i];
-		j.globalTx		= m_skel[j.parentID].globalTx * kf->localTx[i];
-		m_skinnedTx[i]	= j.globalTx * j.invBindPose;
 	}
 }

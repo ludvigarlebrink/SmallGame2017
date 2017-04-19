@@ -9,16 +9,20 @@
 class Shader
 {
 public:
+	enum ShaderType
+	{
+		VERT_STATIC_SHADER = 0,
+		VERT_ANIM_SHADER,
+		FRAG_TOON_SHADER
+	};
+
+
 	Shader();
 	Shader(const Shader& object);	// Copy constructor.
 	virtual ~Shader();
 
 	void Load(const char* file);
 	void Free();
-	void Bind();
-	void Update();
-
-	bool GetIsCompiled();
 	
 
 	//Shader& Get();

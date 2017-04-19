@@ -3,6 +3,10 @@
 
 
 #include "Transform.h"
+#include "Mesh.h"
+#include "AnimController.h"
+#include "ShaderProg.h"
+#include "Camera.h"
 
 
 class Prefab
@@ -11,10 +15,34 @@ public:
 	Prefab();
 	virtual ~Prefab();
 
-	const char * GetName();
+	void Update();
+	void Render(const Camera& cam);
+
+	//::.. GET FUNCTIONS ..:://
+	const char * GetName() const;
+	const Transform& GetTransform() const;
+	Mesh * GetMesh() const;
+	ShaderProg * GetShaderProg() const;
+	AnimController * GetAnimController() const;
+
+	//::.. SET FUNCTIONS ..:://
+	void SetName(const char * name);
+	void SetTransform(const Transform& transform);
+	void SetMesh(Mesh * mesh);
+	void SetAnimController(AnimController * animController);
 
 private:
-	Transform m_transform;
+	//::.. HELP FUNCTIONS ..:://
+	void Init();
+
+private:
+	const char *		m_name;
+	Transform			m_transform;
+
+	Mesh *				m_mesh;
+	ShaderProg *		m_shaderProg;
+	AnimController *	m_animController;
+
 };
 
 

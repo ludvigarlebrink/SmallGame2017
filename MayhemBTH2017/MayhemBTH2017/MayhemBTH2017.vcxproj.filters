@@ -194,9 +194,6 @@
     <ClCompile Include="ShaderHandler.cpp">
       <Filter>Engine\Resources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderProgramHandler.cpp">
-      <Filter>Engine\Resources\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Prefab.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
@@ -221,7 +218,9 @@
     <ClCompile Include="AnimClip.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderProg.cpp" />
+    <ClCompile Include="ShaderProg.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -352,9 +351,6 @@
     <ClInclude Include="ShaderHandler.h">
       <Filter>Engine\Resources\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderProgramHandler.h">
-      <Filter>Engine\Resources\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Prefab.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
@@ -382,7 +378,9 @@
     <ClInclude Include="AnimUtil.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderProg.h" />
+    <ClInclude Include="ShaderProg.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

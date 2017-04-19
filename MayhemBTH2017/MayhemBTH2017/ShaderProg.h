@@ -6,28 +6,24 @@
 class ShaderProg
 {
 public:
-
-
+	//::.. CONSTRUCTORS ..:://
 	ShaderProg();
 	virtual ~ShaderProg();
 
-	void SetShaders(const Shader* vert, const Shader* geom, const Shader* frag);
+	void SetShaders(const Shader* shader1, uint32_t numShader);
 	void InitShaders();
 	void Bind();
 	void Update();
+	void UpdateAnim();
 
 private:
-	enum ShaderTypes
-	{
-		VERT = 1,
-		GEOM = 2,
-		FRAG = 4
-	};
+
+
 
 	Shader* m_vert, m_geom, m_frag;
 
 	uint32_t m_numShader;
-	uint32_t m_shaderProfile;
+	uint32_t m_numUniforms;
 
 };
 

@@ -17,7 +17,7 @@ public:
 	AnimSkeleton();
 	virtual ~AnimSkeleton();
 
-	void Update();
+	void Update(KeyFrame * kf);
 
 	//::.. GET FUNCTIONS ..:://
 	uint32_t GetNumJoints();
@@ -26,7 +26,6 @@ public:
 	//::.. SET FUNCTIONS ..:://
 	void SetSkeleton(uint32_t * parentID, glm::mat4 * localTx,
 		uint32_t numJoints);
-	void Update(KeyFrame * kf);
 
 private:
 

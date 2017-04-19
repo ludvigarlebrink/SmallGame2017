@@ -151,7 +151,6 @@
     <ClCompile Include="Prefab.cpp" />
     <ClCompile Include="PrefabManager.cpp" />
     <ClCompile Include="ShaderProg.cpp" />
-    <ClCompile Include="ShaderProgramHandler.cpp" />
     <ClCompile Include="Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -220,7 +219,6 @@
     <ClInclude Include="Prefab.h" />
     <ClInclude Include="PrefabManager.h" />
     <ClInclude Include="ShaderProg.h" />
-    <ClInclude Include="ShaderProgramHandler.h" />
     <ClInclude Include="Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
