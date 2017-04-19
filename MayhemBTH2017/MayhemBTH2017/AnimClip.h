@@ -1,4 +1,4 @@
-#ifndef __ANINCLIP_H__
+#ifndef __ANIMCLIP_H__
 #define __ANIMCLIP_H__
 
 
