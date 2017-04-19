@@ -1,8 +1,8 @@
 #ifndef __LEVELHANDLER_H__
 #define __LEVELHANDLER_H__
 
-#include "Level.h"
 
+#include "Level.h"
 
 
 #include <fstream>
@@ -20,6 +20,8 @@ public:
 	bool ImportRegister();
 	bool ExportRegister();
 
+	
+
 	//::.. MODIFY FUNCTIONS ..:://
 	bool AddToRegister(Level * level);
 	bool RemoveFromRegister(const char* name);
@@ -34,14 +36,14 @@ private:
 	struct LevelRegister
 	{
 		bool			isLoaded;
-		std::string		filename;
+		std::string		name;
 		Level*			level;
 	};
 
-	bool						m_noneIsLoaded;
-	bool						m_regHasChanged;
-	std::vector<LevelRegister>	m_register;
-	uint32_t					m_loaded;
+	bool								m_noneIsLoaded;
+	bool								m_regHasChanged;
+	std::vector<LevelRegister>			m_register;
+	uint32_t							m_loaded;
 		
 };
 

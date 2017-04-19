@@ -75,7 +75,7 @@ void MenuSystem::InitMainMenu(Menu* menu)
 void MenuSystem::InitPlayMenu(Menu* menu)
 {
 	menu->SetTitle("PLAY");
-	menu->AddChild(GameState::MAIN_MENU, "Quick Match");
+	menu->AddChild(GameState::GAME, "Quick Match");
 	menu->AddChild(GameState::MAIN_MENU, "Random Playlist");
 	menu->AddChild(GameState::MAIN_MENU, "Select Playlist");
 }

@@ -1,11 +1,8 @@
 #include "System.h"
 
-#include "TempShader.h"
 #include "Mesh.h"
-#include "MeshImporter.h"
 #include "MenuSystem.h"
 #include "UIText.h"
-
 
 System::System()
 {
@@ -32,11 +29,8 @@ void System::Run()
 
 	Transform transform;
 	Camera camera;
-	TempShader shader;
-	JointSkeleton skel;;
 	VirtualKeyboard vk;
 	int count = 1;
-	shader.Init(".\\Assets\\GLSL\\SkeletalAnimation", false);
 	m.Init();
 	float counter = 0;
 	
@@ -77,6 +71,7 @@ void System::Run()
 		counter += m_timeManager->GetDeltaTime();
 	}
 }
+
 
 void System::Init()
 {

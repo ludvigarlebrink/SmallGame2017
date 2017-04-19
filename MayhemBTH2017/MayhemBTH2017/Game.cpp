@@ -10,9 +10,9 @@ Game::Game()
 
 	//Init toon shader for player
 	m_toonShader.Init("ToonShader", 0, 0);
-	LevelImporter imp;
+	LevelHandler imp;
 	m_input = InputManager::Get();
-	imp.ImportLevel(m_level);
+	imp.Import(m_level);
 	m_player = meshImp.Import();
 
 	tran.SetPosition(42.0, 24.0, -0.0); //middle scren

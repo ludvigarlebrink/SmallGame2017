@@ -56,7 +56,7 @@ void LevelHandler::Export(Level & level)
 {
 	LevelRegister newRegister;
 	newRegister.isLoaded = true;
-	newRegister.filename = level.GetName();
+	newRegister.name = level.GetName();
 	newRegister.level = nullptr;
 	m_register.push_back(newRegister);
 
@@ -129,15 +129,15 @@ bool LevelHandler::ImportRegister()
 	for (uint32_t i = 0; i < numLevels; i++)
 	{
 		// Size of the file string.
-		uint32_t stringSize = static_cast<uint32_t>(m_register[i].filename.size());
+		uint32_t stringSize = static_cast<uint32_t>(m_register[i].name.size());
 		file.read(reinterpret_cast<char*>(&stringSize), sizeof(uint32_t));
 
 		// The acual string.
-		const char * string = m_register[i].filename.c_str();
+		const char * string = m_register[i].name.c_str();
 		file.read(reinterpret_cast<char*>(&string), sizeof(char) * stringSize);
 
 		// Add to the register.
-		m_register[i].filename = string;
+		m_register[i].name = string;
 		m_register[i].level = nullptr;
 	}
 
@@ -171,7 +171,7 @@ bool LevelHandler::ExportRegister()
 	for (uint32_t i = 0; i < numLevels; i++)
 	{
 		// Size of the file string.
-		uint32_t stringSize = static_cast<uint32_t>(m_register[i].filename.length());
+		uint32_t stringSize = static_cast<uint32_t>(m_register[i].name.length());
 
 		std::cout << stringSize << std::endl;
 		file.write(reinterpret_cast<char*>(&stringSize), sizeof(uint32_t));
@@ -179,7 +179,7 @@ bool LevelHandler::ExportRegister()
 		// Loop through the string and store each char in the file.
 		for (uint32_t j = 0; j < stringSize; j++)
 		{
-			char c = m_register[i].filename[j];
+			char c = m_register[i].name[j];
 			file.write(reinterpret_cast<char*>(&c), sizeof(char));
 		}
 	}

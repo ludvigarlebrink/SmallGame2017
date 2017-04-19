@@ -1,8 +1,6 @@
 #ifndef __LEVELMARKER_H__
 #define __LEVELMARKER_H__
 
-#include "Box2D.h"
-
 #include "Transform.h"
 #include "AShader.h"
 #include "Timer.h"

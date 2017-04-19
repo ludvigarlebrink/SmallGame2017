@@ -1,5 +1,4 @@
 #include "AShader.h"
-#include "AShader.h"
 
 
 
@@ -24,14 +23,18 @@ GLuint AShader::GetProgramID()
 	return m_programID;
 }
 
+
 GLuint AShader::GetTextureID(){
 	return this->m_textureID;
 }
+
 
 void AShader::TempUpdateAlpha(GLfloat a)
 {
 	glUniform1f(m_uniforms[ALPHA], a);
 }
+
+
 //::..HELPER FUNCTIONS..:://
 void AShader::Init(const std::string& filename, bool hasGeomShader, bool particles)
 {
@@ -57,8 +60,12 @@ void AShader::Init(const std::string& filename, bool hasGeomShader, bool particl
 	glAttachShader(m_programID, m_shader[VERTEX_SHADER]);
 	Debug(m_shader[VERTEX_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
 	//Attach geo
-	glAttachShader(m_programID, m_shader[GEOMETRY_SHADER]);
-	Debug(m_shader[GEOMETRY_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+	if (hasGeomShader)
+	{
+		glAttachShader(m_programID, m_shader[GEOMETRY_SHADER]);
+		Debug(m_shader[GEOMETRY_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+
+	}
 	
 	AddAttributeLocation();
 

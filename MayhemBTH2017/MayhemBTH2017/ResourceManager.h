@@ -7,7 +7,7 @@
 #include "String.h"
 
 // Resource importers.
-#include "ShaderImporter.h"
+#include "ShaderHandler.h"
 
 
 class ResourceManager

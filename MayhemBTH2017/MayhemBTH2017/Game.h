@@ -4,7 +4,7 @@
 #include "Level.h"
 #include "LevelEditor.h"
 #include "Mesh.h"
-#include "MeshImporter.h"
+#include "MeshManager.h"
 #include "AShader.h"
 #include "TimeManager.h"
 #include "ParticleSystem.h"
@@ -19,7 +19,7 @@ public:
 	glm::vec3 GetPlayerPos();
 private:
 private:
-	MeshImporter meshImp;
+	MeshManager meshImp;
 	TimeManager * time;
 	ParticleSystem m_particles;
 

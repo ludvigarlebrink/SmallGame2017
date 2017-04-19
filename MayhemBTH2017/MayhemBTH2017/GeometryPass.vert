@@ -18,26 +18,36 @@ out float outSize;
 
 void main()
 {
-	if(outLife<10.0f){
 
-	outPos=inPos+0.06f*normalize(inDir);
-	outCol=inCol;
-	outCol.a=inCol.a-0.005f;
-	outDir=inDir;
-	outLife=inLife+0.05f;
+    int seed=gl_VertexID;
+    if(outLife<10.0f){
 
-	
-	}
+    outPos=inPos+0.04*(normalize(inDir));
 
-	if(outLife>10.0f){
-		outPos=vec3(0.0, 0.0, 0.0);
-		outCol.a=1.0;
-		outLife=0.0f;
-	}
+    outPos.z=0.0;
+    outCol=inCol;
+    outCol.a=inCol.a-0.001f;
 
 
+    outDir=inDir;
+    outLife=inLife+0.05f;
+    outSize=inSize+4f;
 
-	outSize=inSize;
+
+    }
+
+    if(outLife>30.0f){
+        outPos=vec3(0.0, 15.0, 0.0);
+        outCol.a=1.0;
+
+
+
+        outCol.b=0.5;
+        outLife=0.0f;
+    }
+
+
+
+    outSize=inSize;
 
 }
-

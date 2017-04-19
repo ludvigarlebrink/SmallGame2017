@@ -17,6 +17,8 @@ Menu::Menu()
 	m_title.SetPositon(0, 170);
 	m_title.SetColor(229, 122, 16, 255);
 
+
+
 	m_isScalning = true;
 }
 
