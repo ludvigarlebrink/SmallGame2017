@@ -22,7 +22,7 @@ public:
 	const char * GetName() const;
 	const Transform& GetTransform() const;
 	Mesh * GetMesh() const;
-	ShaderProg * GetShaderProg() const;
+	ShaderManager * GetShaderProg() const;
 	AnimController * GetAnimController() const;
 
 	//::.. SET FUNCTIONS ..:://
@@ -40,7 +40,7 @@ private:
 	Transform			m_transform;
 
 	Mesh *				m_mesh;
-	ShaderProg *		m_shaderProg;
+	ShaderManager *		m_shaderProg;
 	AnimController *	m_animController;
 
 };
