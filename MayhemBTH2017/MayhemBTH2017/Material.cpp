@@ -7,9 +7,9 @@ Material::Material()
 	m_normalMapName = "NoNormalMapName";
 }
 
-Material::Material(const char * textureName, const char * filepath)
+Material::Material(const char* shaderName)
 {
-	SetTexture(textureName, filepath);
+	m_shader = shaderName;
 }
 
 Material::~Material()
@@ -20,22 +20,32 @@ void Material::SetTexture(const char * textureName, const char * filepath)
 {
 	m_textureName = textureName;
 
-	TextureManager::Get().AddTexture(m_textureName, filepath);
+	TextureManager::AddTexture(m_textureName, filepath);
 }
 
 void Material::SetNormalMap(const char * textureName, const char * filepath)
 {
 	m_normalMapName = textureName;
 
-	TextureManager::Get().AddTexture(m_normalMapName, filepath);
+	TextureManager::AddTexture(m_normalMapName, filepath);
 }
 
 GLuint Material::GetTextureID()
 {
-	return TextureManager::Get().GetTextureID(m_textureName);
+	return TextureManager::GetTextureID(m_textureName);
 }
 
 GLuint Material::GetNormalMapID()
 {
-	return TextureManager::Get().GetTextureID(m_normalMapName);
+	return TextureManager::GetTextureID(m_normalMapName);
+}
+
+GLuint Material::GetProgramID()
+{
+	if (ShaderManager::GetProgram(m_shader) != 0)
+	{
+		return ShaderManager::GetProgram(m_shader);
+	}
+
+	return 0;
 }
