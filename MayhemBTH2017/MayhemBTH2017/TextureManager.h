@@ -35,7 +35,7 @@ public:
 	static GLuint GetTextureID(const char * name);
 
 private:
-	static std::map<const char *, Texture> m_textureArray;
+	static std::map<std::string, Texture> m_textureArray;
 	static TextureManager * m_instance;
 
 

@@ -1,5 +1,6 @@
 #include "TextureManager.h"
 
+std::map<std::string, TextureManager::Texture> TextureManager::m_textureArray = { {"none", Texture() } };
 TextureManager * TextureManager::m_instance = nullptr;
 
 TextureManager::TextureManager()
@@ -21,7 +22,7 @@ void TextureManager::StartUp()
 
 void TextureManager::Shutdown()
 {
-	std::map<const char *, Texture>::iterator it;
+	std::map<std::string, Texture>::iterator it;
 
 	for (it = m_textureArray.begin(); it != m_textureArray.end(); it++)
 	{
@@ -83,7 +84,7 @@ void TextureManager::FreeTexture(const char * name)
 
 void TextureManager::DeleteTextureFromMap(const char * name)
 {
-	std::map<const char *, Texture>::iterator it;
+	std::map<std::string, Texture>::iterator it;
 	it = m_textureArray.find(name);
 	m_textureArray.erase(it);
 }
