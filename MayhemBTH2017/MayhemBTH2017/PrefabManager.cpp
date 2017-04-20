@@ -48,4 +48,10 @@ bool PrefabManager::Destroy(Prefab * prefab)
 //::.. HELP FUNCTIONS ..:://
 void PrefabManager::Load()
 {
+
+}
+
+void PrefabManager::Copy()
+{
+
 }

@@ -1,6 +1,6 @@
 #ifndef __MATERIAL_H__
 #define __MATERIAL_H__
-#include "ShaderProg.h"
+#include "ShaderManager.h"
 #include "Texture.h"
 #include "SDL.h"
 
@@ -14,8 +14,8 @@ public:
 	void SetMaterial(const char * filepath);
 
 private:
-	ShaderProg	m_shaderProg;
-	Texture		m_texture;
+	ShaderManager	m_shaderProg;
+	Texture			m_texture;
 
 };
 
