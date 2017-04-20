@@ -25,7 +25,8 @@ public:
 	virtual ~ShaderManager();
 
 	//::.. 
-	static GLuint CreateAndAttachShaders(const char* name1, uint32_t shaderType1,
+	static GLuint CreateAndAttachShaders(
+		const char* name1, uint32_t shaderType1,
 		const char* name2, uint32_t shaderType2,
 		const char* name3, uint32_t shaderType3);
 
@@ -50,4 +51,4 @@ private:
 
 };
 
-#endif // ! __SHADERPROG_H__
+#endif // ! __SHADERMANAGER_H__

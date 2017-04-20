@@ -215,11 +215,10 @@
     <ClCompile Include="ShaderManager.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Engine\Core\Managers</Filter>
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="ImportTester.cpp">
+      <Filter>Engine\Resources\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -375,12 +374,8 @@
     <ClInclude Include="ShaderManager.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Engine\Core\Managers</Filter>
-    </ClInclude>
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -441,6 +436,9 @@
       <Filter>Assets</Filter>
     </None>
     <None Include="Assets\Levels\Register.mrlevelreg">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
     </None>
   </ItemGroup>
