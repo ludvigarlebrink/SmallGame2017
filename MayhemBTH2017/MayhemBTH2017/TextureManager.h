@@ -9,18 +9,35 @@
 class TextureManager
 {
 public:
-	//::..Constructor, Destructor..:://
+	struct Texture
+	{
+		GLuint ID;
+		GLuint width;
+		GLuint height;
+		GLuint numComponents;
+	};
+
+	//::.. CONSTRUCTORS ..:://
 	TextureManager();
 	virtual ~TextureManager();
 
-	GLuint GetTextureID(std::string name);
+	void StartUp();
+	void Shutdown();
 
-	void AddTexture(std::string name, const char* filepath);
+	//::.. OTHER FUNCTIONS ..:://
+	static void AddTexture(const char * name, const char* filepath);
+	static void FreeTexture(GLuint id);
+	static void FreeTexture(const char * name);
+	static void DeleteTextureFromMap(const char * name);
 
-
+	//::.. GET FUNCTIONS ..:://
+	static TextureManager Get();
+	static Texture GetTexture(const char * name);
+	static GLuint GetTextureID(const char * name);
 
 private:
-	std::map<std::string, GLuint> m_textureIDArray;
+	static std::map<std::string, Texture> m_textureArray;
+	static TextureManager * m_instance;
 
 
 };

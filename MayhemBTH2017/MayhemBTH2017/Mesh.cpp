@@ -83,6 +83,7 @@ bool Mesh::Load(Vertex3D * vertices, uint64_t numVerts)
 	// Generate buffers.
 	glGenBuffers(1, &m_buffer);
 
+
 	glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
 
 	// Copy data to the gpu.

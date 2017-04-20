@@ -2,8 +2,16 @@
 #define __MRMATHANDLER_H__
 
 
+#include <MrUtility.h>
 #include <fstream>
 #include <glm.hpp>
+
+
+#if DLLEXPORT
+#define DLL __declspec(dllexport)
+#else
+#define DLL __declspec(dllimport)
+#endif
 
 
 namespace mr
@@ -30,26 +38,26 @@ namespace mr
 	{
 	public:
 		//::.. CONSTRUCTORS ..:://
-		__declspec(dllexport) MrMatHandler();
-		__declspec(dllexport) virtual ~MrMatHandler();
+		DLL MrMatHandler();
+		DLL virtual ~MrMatHandler();
 
 		//::.. IMPORT/EXPORT ..:://
-		__declspec(dllexport) bool Import(const char * filepath);
-		__declspec(dllexport) bool Export(const char * filepath);
+		DLL bool Import(const char * filepath);
+		DLL bool Export(const char * filepath);
 
-		__declspec(dllexport) void Free();
+		DLL void Free();
 
 		//::.. GET FUNCTIONS ..:://
-		__declspec(dllexport) uint32_t GetNumTextures() const;
-		__declspec(dllexport) MrTexture * GetTextures() const;
+		DLL uint32_t GetNumTextures() const;
+		DLL MrTexture * GetTextures() const;
 
 		//::.. SET FUNCTIONS ..:://
-		__declspec(dllexport) void SetNumTextures(uint32_t numTextures);
-		__declspec(dllexport) void SetTextures(MrTexture * m_textures);
+		DLL void SetNumTextures(uint32_t numTextures);
+		DLL void SetTextures(MrTexture * m_textures);
 
 	private:
 		//::.. HELP FUNCTIONS ..:://
-		__declspec(dllexport) void Init();
+		DLL void Init();
 
 	private:
 		bool		m_isLoaded;

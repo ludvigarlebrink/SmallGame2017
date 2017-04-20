@@ -1,6 +1,7 @@
 #include "PrefabManager.h"
 
-
+#include "AnimClip.h"
+#include <iostream>
 
 uint32_t PrefabManager::numPrefabs = 0;
 Prefab * PrefabManager::prefabs = nullptr;
@@ -30,12 +31,40 @@ Prefab * PrefabManager::Instantiate(const char * name)
 
 	}
 
-	const char* filepath = ".\\Assets\\Prefabs\\Test.mr";
+	const char* filepath = ".\\Assets\\Prefabs\\T.mr";
 
-//	m_handler->Import(filepath);
-	mr::MrHandler handler;
-//	handler.GetSkelHandlers()->
 
+	glm::vec3 * test;
+
+	mr::MrMeshHandler meshHandler;
+	meshHandler.Import(filepath);
+
+	test = meshHandler.GetPositions();
+
+
+	std::cout << test[0].x << " " << test[0].y << " " << test[0].z << std::endl;
+
+	Vertex3D * verts = new Vertex3D[meshHandler.GetNumVerts()];
+
+	for (uint32_t i = 0; i < meshHandler.GetNumVerts(); i++)
+	{
+		verts[i].position = meshHandler.GetPositions()[i];
+		verts[i].normal = meshHandler.GetNormals()[i];
+		verts[i].texCoordsAlpha = glm::vec3(meshHandler.GetTexCoords()[i], 1.0f);
+	}
+
+
+
+
+	Mesh * mesh = new Mesh;
+
+	mesh->Load(verts, meshHandler.GetNumVerts());
+
+	Prefab * pre = new Prefab;
+
+	pre->SetMesh(mesh);
+
+	getchar();
 	return nullptr;
 }
 
@@ -48,4 +77,10 @@ bool PrefabManager::Destroy(Prefab * prefab)
 //::.. HELP FUNCTIONS ..:://
 void PrefabManager::Load()
 {
+
+}
+
+void PrefabManager::Copy()
+{
+
 }

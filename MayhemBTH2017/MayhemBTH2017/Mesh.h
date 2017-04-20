@@ -22,6 +22,11 @@ struct Vertex3D
 	glm::vec3 position;
 	glm::vec3 normal;
 	glm::vec3 texCoordsAlpha;
+	//fy fan..... det är ytterst pinsamt att det saknas grejer här.. 
+	//Tangents och bitangents är viktiga bitar i varje program. 
+	//Många implementationer kräver dessa två viktiga bitar av data.
+	//Normalmap och massa andra implementationer kommer nu behöva räkna ut denna data på CPU'n
+	//Om Bill Gates vore död skulle han vända sig i graven!
 };
 
 struct Vertex3DSkelAnimation
