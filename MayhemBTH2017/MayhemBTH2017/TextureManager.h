@@ -31,6 +31,7 @@ public:
 	static void DeleteTextureFromMap(const char * name);
 
 	//::.. GET FUNCTIONS ..:://
+	static TextureManager Get();
 	static Texture GetTexture(const char * name);
 	static GLuint GetTextureID(const char * name);
 

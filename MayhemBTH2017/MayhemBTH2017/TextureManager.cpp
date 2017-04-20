@@ -2,6 +2,9 @@
 
 TextureManager * TextureManager::m_instance = nullptr;
 
+std::map<const char *, TextureManager::Texture> m_textureArray;
+
+
 TextureManager::TextureManager()
 {
 }
@@ -27,6 +30,11 @@ void TextureManager::Shutdown()
 	{
 		TextureManager::FreeTexture(it->second.ID);
 	}
+}
+
+TextureManager TextureManager::Get()
+{
+	return *m_instance;
 }
 
 TextureManager::Texture TextureManager::GetTexture(const char * name)
