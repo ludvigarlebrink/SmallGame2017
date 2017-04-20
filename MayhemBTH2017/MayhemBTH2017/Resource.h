@@ -5,7 +5,6 @@
 #include "Level.h"
 #include "Mesh.h"
 #include "Playlist.h"
-#include "Shader.h"
 #include "Texture.h"
 
 #include <map>

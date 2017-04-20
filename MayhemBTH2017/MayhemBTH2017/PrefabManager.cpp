@@ -1,6 +1,7 @@
 #include "PrefabManager.h"
 
 #include "AnimClip.h"
+#include <iostream>
 
 uint32_t PrefabManager::numPrefabs = 0;
 Prefab * PrefabManager::prefabs = nullptr;
@@ -19,7 +20,7 @@ PrefabManager::~PrefabManager()
 	// Do nothing...
 }
 
-Prefab * PrefabManager::Instantiate(const char * name)
+Prefab * PrefabManager::Instantiate(const char * name, MeshInfo t)
 {
 	// Check cache first
 	// Temp file path
@@ -30,22 +31,23 @@ Prefab * PrefabManager::Instantiate(const char * name)
 
 	}
 
-	const char* filepath = ".\\Assets\\Prefabs\\Test.mr";
+	const char* filepath = ".\\Assets\\Prefabs\\T.mr";
 
-//	m_handler->Import(filepath);
 	mr::MrHandler handler;
-//	handler.GetSkelHandlers()->
 
-	//handler.Import(filepath);
-	glm::vec3 test;
+	glm::vec3 * test;
 
 	mr::MrMeshHandler meshHandler;
 	meshHandler.Import(filepath);
-	//test = meshHandler.GetPositions();
+
+	test = meshHandler.GetPositions();
+
+	t.numVerts = meshHandler.GetNumVerts();
+	t.vertPos = meshHandler.GetPositions();
 
 
+	std::cout << test[0].x << " " << test[0].y<< " " << test[0].z << std::endl;
 
-	mr::MrAnimHandler * anim = handler.GetAnimHandlers();
 
 	//KeyFrame key;
 	//key.localTx = anim[0].GetKeyFramedJoints()->matrix;

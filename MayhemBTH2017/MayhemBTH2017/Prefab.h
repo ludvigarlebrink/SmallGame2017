@@ -5,9 +5,19 @@
 #include "Transform.h"
 #include "Mesh.h"
 #include "AnimController.h"
-#include "ShaderProg.h"
 #include "Camera.h"
+struct MeshInfo
+{
+	int numVerts;
+	glm::vec3 * vertPos;
+	glm::vec2 * texCoords;
+	glm::vec3 vertNormals;
+	glm::vec3 vertTangetns;
+	glm::vec3 vertBiTangents;
+	glm::vec4 vertSkinWeights;
 
+
+};
 
 class Prefab
 {
@@ -22,7 +32,6 @@ public:
 	const char * GetName() const;
 	const Transform& GetTransform() const;
 	Mesh * GetMesh() const;
-	ShaderManager * GetShaderProg() const;
 	AnimController * GetAnimController() const;
 
 	//::.. SET FUNCTIONS ..:://
@@ -40,9 +49,10 @@ private:
 	Transform			m_transform;
 
 	Mesh *				m_mesh;
-	ShaderManager *		m_shaderProg;
 	AnimController *	m_animController;
 
+
+	MeshInfo * meshInfo;
 };
 
 

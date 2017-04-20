@@ -50,4 +50,4 @@ private:
 
 };
 
-#endif // ! __SHADERPROG_H__
+#endif // ! __SHADERMANAGER_H__

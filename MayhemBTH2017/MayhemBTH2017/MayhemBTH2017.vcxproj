@@ -283,6 +283,7 @@
     <None Include="Assets\GLSL\SkeletalAnimation.vert" />
     <None Include="Assets\Levels\ExportTestLOL.mrlevel" />
     <None Include="Assets\Levels\Register.mrlevelreg" />
+    <None Include="Assets\Prefabs\T.mr" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

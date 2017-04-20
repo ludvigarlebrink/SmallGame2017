@@ -440,5 +440,8 @@
     <None Include="Assets\Levels\Register.mrlevelreg">
       <Filter>Assets</Filter>
     </None>
+    <None Include="Assets\Prefabs\T.mr">
+      <Filter>Assets</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -8,6 +8,8 @@
 #include <MrHandler.h>
 
 
+
+
 class PrefabManager
 {
 public:
@@ -16,7 +18,7 @@ public:
 	PrefabManager();
 	virtual ~PrefabManager();
 
-	static Prefab * Instantiate(const char * name);
+	static Prefab * Instantiate(const char * name, MeshInfo t);
 
 	static bool Destroy(Prefab * prefab);
 
@@ -27,6 +29,9 @@ private:
 private:
 	static uint32_t numPrefabs;
 	static Prefab * prefabs;
+
+
+
 };
 
 
