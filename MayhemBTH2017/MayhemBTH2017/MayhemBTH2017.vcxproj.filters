@@ -188,9 +188,6 @@
     <ClCompile Include="UIPauseMenu.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderHandler.cpp">
-      <Filter>Engine\Resources\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Prefab.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
@@ -218,8 +215,11 @@
     <ClCompile Include="ShaderManager.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="ImportTester.cpp">
-      <Filter>Engine</Filter>
+    <ClCompile Include="Material.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Engine\Core\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -345,9 +345,6 @@
     <ClInclude Include="UIPauseMenu.h">
       <Filter>Engine\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderHandler.h">
-      <Filter>Engine\Resources\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Prefab.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
@@ -377,6 +374,12 @@
     </ClInclude>
     <ClInclude Include="ShaderManager.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Engine\Core\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -438,9 +441,6 @@
       <Filter>Assets</Filter>
     </None>
     <None Include="Assets\Levels\Register.mrlevelreg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
     </None>
   </ItemGroup>
