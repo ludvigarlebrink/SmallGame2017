@@ -15,6 +15,6 @@ void Material::SetMaterial(const char * filepath)
 {
 	SDL_Surface* img = SDL_LoadBMP(filepath);
 
-	m_texture.LoadTexture(img, img->)
+//	m_texture.LoadTexture(img, img->)
 
 }

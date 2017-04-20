@@ -18,7 +18,7 @@ public:
 	PrefabManager();
 	virtual ~PrefabManager();
 
-	static Prefab * Instantiate(const char * name, MeshInfo t);
+	static Prefab * Instantiate(const char * name);
 
 	static bool Destroy(Prefab * prefab);
 

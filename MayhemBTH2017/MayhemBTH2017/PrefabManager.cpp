@@ -20,7 +20,7 @@ PrefabManager::~PrefabManager()
 	// Do nothing...
 }
 
-Prefab * PrefabManager::Instantiate(const char * name, MeshInfo t)
+Prefab * PrefabManager::Instantiate(const char * name)
 {
 	// Check cache first
 	// Temp file path
@@ -33,7 +33,6 @@ Prefab * PrefabManager::Instantiate(const char * name, MeshInfo t)
 
 	const char* filepath = ".\\Assets\\Prefabs\\T.mr";
 
-	mr::MrHandler handler;
 
 	glm::vec3 * test;
 
@@ -42,21 +41,30 @@ Prefab * PrefabManager::Instantiate(const char * name, MeshInfo t)
 
 	test = meshHandler.GetPositions();
 
-	t.numVerts = meshHandler.GetNumVerts();
-	t.vertPos = meshHandler.GetPositions();
+
+	std::cout << test[0].x << " " << test[0].y << " " << test[0].z << std::endl;
+
+	Vertex3D * verts = new Vertex3D[meshHandler.GetNumVerts()];
+
+	for (uint32_t i = 0; i < meshHandler.GetNumVerts(); i++)
+	{
+		verts[i].position = meshHandler.GetPositions()[i];
+		verts[i].normal = meshHandler.GetNormals()[i];
+		verts[i].texCoordsAlpha = glm::vec3(meshHandler.GetTexCoords()[i], 1.0f);
+	}
 
 
-	std::cout << test[0].x << " " << test[0].y<< " " << test[0].z << std::endl;
 
 
-	//KeyFrame key;
-	//key.localTx = anim[0].GetKeyFramedJoints()->matrix;
-	//Prefab pre;
-	//Mesh mesh;
-	//pre.SetMesh(mesh);
+	Mesh * mesh = new Mesh;
 
+	mesh->Load(verts, meshHandler.GetNumVerts());
 
+	Prefab * pre = new Prefab;
 
+	pre->SetMesh(mesh);
+
+	getchar();
 	return nullptr;
 }
 
