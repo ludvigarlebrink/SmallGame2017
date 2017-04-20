@@ -22,7 +22,6 @@ public:
 	const char * GetName() const;
 	const Transform& GetTransform() const;
 	Mesh * GetMesh() const;
-	ShaderManager * GetShaderProg() const;
 	AnimController * GetAnimController() const;
 
 	//::.. SET FUNCTIONS ..:://

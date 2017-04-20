@@ -26,9 +26,7 @@ void Prefab::Render(const Camera & cam)
 	{
 		m_animController->Update();
 	}
-	else if (m_shaderProg != nullptr)
-	{ 
-	}
+
 
 	if (m_mesh != nullptr)
 	{
@@ -55,10 +53,12 @@ Mesh * Prefab::GetMesh() const
 	return m_mesh;
 }
 
+
 ShaderManager * Prefab::GetShaderProg() const
 {
 	return m_shaderProg;
 }
+
 
 AnimController * Prefab::GetAnimController() const
 {
