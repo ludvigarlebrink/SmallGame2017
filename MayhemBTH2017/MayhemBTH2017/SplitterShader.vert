@@ -22,15 +22,12 @@ void main()
 	int seed=gl_VertexID;
 	if(outLife<10.0f){
 
-	outPos=inPos+0.00001*(normalize(inDir));
+	outPos=inPos-0.000001/normalize(inDir);
 
 	outPos.z=0.0;
 	outCol=inCol;
-	outCol.a=inCol.a-0.001f;
-	outCol.r-=0.001f;
-	outCol.g+=0.006f;
-	outCol.b+=0.006f;
-
+	outCol.a=inCol.a-0.01f;
+	outCol.rgb-=0.006f;
 	
 	outDir=inDir;
 	outLife=inLife+0.05f;
@@ -40,12 +37,10 @@ void main()
 	}
 
 	if(outLife>30.0f){
-		outPos=vec3(0.0, 15.0, 0.0);
+		outPos=vec3(0.0, 20.0, 0.0);
 		outCol.a=1.0;
-		outCol.r=1.0;
-		outCol.g=0.0;
-		outCol.b+0.0f;
-
+		outCol.r=0.5;
+		outCol.b=0.5;
 		outLife=0.0f;
 	}
 

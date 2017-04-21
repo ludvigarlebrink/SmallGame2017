@@ -20,10 +20,10 @@ public:
 	//::..CONSTRUCTORS..:://
 	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size,  const int nrOf);
 	ParticleSystem();
-	void UpdateParticles();
 
 	//Destructor
 	virtual ~ParticleSystem();
+	void UpdateParticles();
 	void RenderTransformed(GLuint textureID);
 
 	//::..HELPER FUNCTIONS..:://
