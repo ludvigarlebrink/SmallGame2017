@@ -24,7 +24,7 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 
 	//for nr of particles in parameter, fill with info
 
-	for (uint64_t i = 0; i < nrOf; i++) {
+	for (uint32_t i = 0; i < nrOf; i++) {
 
 		particle[i].position = pos;
 		particle[i].direction =(GetRandomDir());

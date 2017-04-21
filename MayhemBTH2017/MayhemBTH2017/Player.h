@@ -23,6 +23,7 @@ private:
 	Transform m_transf;
 	Camera m_cam;
 	AShader m_shader;
+	AShader m_toonShader;
 
 };
 
