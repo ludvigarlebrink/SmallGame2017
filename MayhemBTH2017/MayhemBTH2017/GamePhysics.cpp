@@ -12,7 +12,6 @@ GamePhysics::~GamePhysics()
 }
 
 void GamePhysics::enterWorld()
-
 {
 
 	//Get deltatime
