@@ -17,7 +17,7 @@ void AProjectile::Init(b2World * world, bool startUp, int index)
 
 	if (startUp)
 	{
-
+		m_world = world;
 		Box boxTemp[10];
 		m_counter = 0;
 
@@ -25,15 +25,15 @@ void AProjectile::Init(b2World * world, bool startUp, int index)
 
 		for (int i = 0; i < 10; i++)
 		{
-			boxTemp[i].initDynamic(world, glm::vec2(0.0, 0.0), glm::vec2(0.5, 0.5));
+			boxTemp[i].initDynamic(m_world, glm::vec2(0.0, 0.0), glm::vec2(0.5, 0.5));
 			m_projectiles.push_back(boxTemp[i]);
 		}
 	}
 	else if(!startUp)
 	{
 		Box boxTemp;
-		boxTemp.initDynamic(world, glm::vec2(0.0, 0.0), glm::vec2(0.5, 0.5));
-		m_projectiles[index] = boxTemp;
+		boxTemp.initDynamic(m_world, glm::vec2(0.0, 0.0), glm::vec2(0.5, 0.5));
+		m_projectiles[0] = boxTemp;
 	}
 
 
@@ -55,7 +55,7 @@ void AProjectile::Fire(float rate)
 		}
 		else if(m_counter == 10)
 		{
-			// here we should put back first shot at the origin
+			Init(m_world, false, m_counter);
 		}
 	}
 }

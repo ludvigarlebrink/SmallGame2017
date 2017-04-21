@@ -22,6 +22,7 @@ private:
 	std::vector<Box> m_projectiles;
 	unsigned int	 m_counter;
 	float			 m_time;
+	b2World*		 m_world;
 
 };
 
