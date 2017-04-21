@@ -3,6 +3,7 @@
 #include "Mesh.h"
 #include "MenuSystem.h"
 #include "UIText.h"
+#include "Prefab.h"
 
 System::System()
 {
@@ -40,6 +41,8 @@ void System::Run()
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 	
 		m_inputManager->Update();
+
+
 
 
 		switch (m_stateManager->GetCurrentState())
