@@ -20,8 +20,6 @@ VirtualKeyboard::~VirtualKeyboard()
 
 void VirtualKeyboard::Render()
 {
-
-
 	Input();
 	m_fill.Render();
 	m_background.Render();

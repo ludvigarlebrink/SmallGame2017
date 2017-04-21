@@ -20,8 +20,8 @@ LevelEditorGUI::LevelEditorGUI()
 	m_blockMenu.SetPosition(m_closedMenu.GetPosX(), m_closedMenu.GetPosY() - 315);
 
 	m_menuClosed = true;
-	m_nSize = 80;
-	m_hSize = 120;
+	m_nSize = 50;
+	m_hSize = 70;
 	m_pos = 0;
 
 	m_blockArray[0].SetTexture(".\\Assets\\Sprites\\BlueButton.png");
@@ -29,14 +29,14 @@ LevelEditorGUI::LevelEditorGUI()
 	m_blockArray[2].SetTexture(".\\Assets\\Sprites\\YellowButton.png");
 	m_blockArray[3].SetTexture(".\\Assets\\Sprites\\CrossHairButton.png");
 	
-	m_blockArray[0].SetPosition(-50, 50);
-	m_blockArray[1].SetPosition(50, 50);
-	m_blockArray[2].SetPosition(-50, -50);
-	m_blockArray[3].SetPosition(50, -50);
+	m_blockArray[0].SetPosition(-575, 175);
+	m_blockArray[1].SetPosition(-500, 175);
+	m_blockArray[2].SetPosition(-575, 100);
+	m_blockArray[3].SetPosition(-500, 100);
 
-	for (int i = 0; i < NUM_SELECTIONS; i++)
+	for (int i = 0; i < NUM_BLOCKS; i++)
 	{
-		m_blockArray[i].SetSize(80, 80);
+		m_blockArray[i].SetSize(m_nSize, m_nSize);
 	}
 
 	m_blockArray[m_pos].SetSize(m_hSize, m_hSize);
@@ -67,11 +67,11 @@ void LevelEditorGUI::Render()
 	else
 	{
 		Input();
-		for (int i = 0; i < NUM_SELECTIONS; i++)
+		m_blockMenu.Render();
+		for (int i = 0; i < NUM_BLOCKS; i++)
 		{
 			m_blockArray[i].Render();
 		}
-		m_blockMenu.Render();
 
 	}
 }
@@ -80,7 +80,7 @@ void LevelEditorGUI::Input()
 {
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
 	{
-		if (m_pos - 1 >= 0 )
+		if (m_pos - 2 >= 0)
 		{
 			m_blockArray[m_pos].SetSize(m_nSize, m_nSize);
 			m_pos -= 2;
@@ -89,7 +89,7 @@ void LevelEditorGUI::Input()
 	}
 	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
 	{
-		if (m_pos + 1 < NUM_SELECTIONS)
+		if (m_pos + 2 < NUM_BLOCKS)
 		{
 			m_blockArray[m_pos].SetSize(m_nSize, m_nSize);
 			m_pos += 2;
@@ -107,7 +107,7 @@ void LevelEditorGUI::Input()
 	}
 	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_RIGHT))
 	{
-		if (m_pos + 1 < NUM_SELECTIONS)
+		if (m_pos + 1 < NUM_BLOCKS)
 		{
 			m_blockArray[m_pos].SetSize(m_nSize, m_nSize);
 			++m_pos;
