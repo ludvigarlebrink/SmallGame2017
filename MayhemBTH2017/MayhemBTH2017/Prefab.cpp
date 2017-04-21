@@ -4,7 +4,7 @@
 
 Prefab::Prefab()
 {
-
+	Init();
 }
 
 
@@ -13,19 +13,21 @@ Prefab::~Prefab()
 
 }
 
-
 void Prefab::Update()
 {
-
+	if (m_animController != nullptr)
+	{
+		m_animController->Update();
+	}
 }
 
 
 void Prefab::Render(const Camera & cam)
 {
-	if (m_animController != nullptr)
-	{
-		m_animController->Update();
 
+	if (m_material != nullptr)
+	{
+		m_material->Bind();
 	}
 
 	if (m_mesh != nullptr)
@@ -84,10 +86,21 @@ void Prefab::SetAnimController(AnimController * animController)
 	m_animController = animController;
 }
 
+void Prefab::SetShaderProgram(const char * programName)
+{
+	m_shaderProg = programName;
+}
+
+void Prefab::SetMaterial(Material * material)
+{
+	m_material = material;
+}
 
 //::.. HELP FUNCTIONS ..:://
 void Prefab::Init()
 {
 	m_mesh				= nullptr;
+	m_shaderProg		= nullptr;
 	m_animController	= nullptr;
+	m_material			= nullptr;
 }

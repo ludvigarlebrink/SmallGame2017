@@ -6,18 +6,9 @@
 #include "Mesh.h"
 #include "AnimController.h"
 #include "Camera.h"
-struct MeshInfo
-{
-	int numVerts;
-	glm::vec3 * vertPos;
-	glm::vec2 * texCoords;
-	glm::vec3 vertNormals;
-	glm::vec3 vertTangetns;
-	glm::vec3 vertBiTangents;
-	glm::vec4 vertSkinWeights;
+#include "ShaderManager.h"
+#include "Material.h"
 
-
-};
 
 class Prefab
 {
@@ -39,6 +30,8 @@ public:
 	void SetTransform(const Transform& transform);
 	void SetMesh(Mesh * mesh);
 	void SetAnimController(AnimController * animController);
+	void SetShaderProgram(const char * programName);
+	void SetMaterial(Material * material);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
@@ -47,12 +40,11 @@ private:
 private:
 	const char *		m_name;
 	Transform			m_transform;
-
 	Mesh *				m_mesh;
+	const char *		m_shaderProg;
 	AnimController *	m_animController;
+	Material*			m_material;
 
-
-	MeshInfo * meshInfo;
 };
 
 

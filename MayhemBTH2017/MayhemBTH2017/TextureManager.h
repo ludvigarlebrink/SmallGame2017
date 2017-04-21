@@ -31,11 +31,12 @@ public:
 	static void DeleteTextureFromMap(const char * name);
 
 	//::.. GET FUNCTIONS ..:://
+	static TextureManager Get();
 	static Texture GetTexture(const char * name);
 	static GLuint GetTextureID(const char * name);
 
 private:
-	static std::map<const char *, Texture> m_textureArray;
+	static std::map<std::string, Texture> m_textureArray;
 	static TextureManager * m_instance;
 
 
