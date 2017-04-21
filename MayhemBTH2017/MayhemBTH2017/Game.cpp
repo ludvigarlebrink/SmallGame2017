@@ -55,10 +55,6 @@ void Game::Update(Camera cam){
 	}
 	
 
-	m_toonShader.Bind();
-
-	m_toonShader.Update(tran, cam);
-	m_player.Render();
 
 }
 

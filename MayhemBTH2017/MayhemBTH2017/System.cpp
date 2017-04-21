@@ -23,7 +23,7 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-	ParticleSystem part("GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec4(1.0, 0.5, 0.5, 0.8), 1.5f, 3000);
+	ParticleSystem part("GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec4(0.1, 0.1, 0.1, 0.8), 10.5f, 10);
 	LevelEditor l;
 	Level lvl;
 	MenuSystem m;
@@ -77,12 +77,12 @@ void System::Run()
 		//	break;
 		//case GameState::MAIN_MENU:
 
-		//	shader.Bind();
-		//	shader.Update(transform, camera);
+			//shader.Bind();
+			//shader.Update(transform, camera);
 
-		//	m.Update();
+			//m.Update();
 
-		//	game.Render();
+			//game.Render();
 
 		//	break;
 		//case GameState::LEVEL_EDITOR:
@@ -93,24 +93,24 @@ void System::Run()
 
 		//case GameState::GAME: {
 
-			//camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-			//shader.Bind();
-			//shader.Update(transform, camera);
-			//camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-			//transform.SetPosition(42.0, 24.0, -0.0);
+			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+			shader.Bind();
+			shader.Update(transform, camera);
+			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+			transform.SetPosition(42.0, 24.0, -0.0);
 
 
-		//	//Draw scene
-		//	game.Update(camera);
-		//	part.Bind();
-		//	part.UpdateParticles();
-		//	texture.Bind();
-		//	glEnable(GL_BLEND);
-		//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		//	glDepthMask(GL_FALSE);
-		//	part.RenderTransformed(1);
-		//	glDisable(GL_BLEND);
-		//	glDepthMask(TRUE);
+			//Draw scene
+			game.Update(camera);
+			part.Bind();
+			part.UpdateParticles();
+			texture.Bind();
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glDepthMask(GL_FALSE);
+			part.RenderTransformed(1);
+			glDisable(GL_BLEND);
+			glDepthMask(TRUE);
 		//}
 		//	break;
 		//case GameState::EXIT:

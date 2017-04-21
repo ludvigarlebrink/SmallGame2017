@@ -34,7 +34,7 @@ void Collider2D::DrawCollider(Camera camera)
 	Transform transf;
 	transf.SetPosition(42.0, 24.0, -0.0);
 	m_shader.Update(transf, camera);
-	m_mesh.Render();
+	//m_mesh.Render();
 
 }
 
@@ -43,19 +43,19 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 
 	m_imp.ImportLevel(m_level);
 
-	const uint64_t length = SIZE_X * SIZE_Y * 6;
+	const uint32_t length = SIZE_X * SIZE_Y * 6;
 	m_vertices = (Vertex2D*)malloc(sizeof(Vertex2D) * length);
-	uint64_t i = 0;
+	uint32_t i = 0;
 	float scaler = 1.0f;
 	GLuint blocksInRow = 0.0;
 	GLfloat offset = 0.0f;
 	GLfloat blockScale = 0.4;
 
 	//IF pos(X,Y) IS OCCUPIED BY BLOCK, FILL WITH BOUNDING BOX
-	for (uint64_t y = 1; y < SIZE_Y; y++)
+	for (uint32_t y = 1; y < SIZE_Y; y++)
 
 	{
-		for (uint64_t x = 1; x < SIZE_X; x++)
+		for (uint32_t x = 1; x < SIZE_X; x++)
 		{
 
 			if (m_level.GetIsOccupied(x, y)) {
@@ -88,6 +88,8 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 				tempY = y;
 				GLfloat scale = 0.5f;
 				test.initStatic(world, glm::vec2((tempX), (tempY)), glm::vec2(offset, scale));
+				test.getFixture()->SetRestitution(0.0); //floor bounciness
+				test.getFixture()->SetFriction(1.0); //floor friction
 
 				test.getFixture()->SetFriction(5.0);
 				test.getFixture()->SetRestitution(0.0);

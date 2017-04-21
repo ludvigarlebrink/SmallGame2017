@@ -19,12 +19,16 @@ private:
 	Box m_newBox;
 	Box m_newBox2;
 	Player m_player;
+
 	TimeManager* m_time;
+	GLfloat m_jumpTimer=0.0f;
+	bool m_isMidAir;
 	GLfloat m_tempX;
 	GLfloat m_tempY;
 	GLfloat m_scaleX;
 	GLfloat m_scaleY;
 	Sprite m_playerSprite;
+	Sprite m_bazookaSprite;
 	Transform m_transform;
 	Collider2D m_collision;
 

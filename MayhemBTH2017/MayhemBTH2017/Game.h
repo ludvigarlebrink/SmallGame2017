@@ -32,6 +32,7 @@ private:
 	Mesh m_player;
 	Level m_level;
 	Vertex3D m_vertices[6];
+	
 	bool m_playerCollision[84][48];
 public:
 
