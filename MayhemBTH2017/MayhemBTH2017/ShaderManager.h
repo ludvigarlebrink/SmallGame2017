@@ -4,9 +4,10 @@
 
 #include <glew.h>
 #include <cstdint>
+#include <fstream>
+#include <string>
 
-
-#include <vector>
+#include <map>
 
 
 class ShaderManager
@@ -17,37 +18,37 @@ public:
 		NONE,
 		VERT_SHADER,
 		GEOM_SHADER,
-		FRAG_SHADER
+		FRAG_SHADER,
+		NUM_SHADERS
 	};
 
 	//::.. CONSTRUCTORS ..:://
 	ShaderManager();
 	virtual ~ShaderManager();
 
-	//::.. 
-	static GLuint CreateAndAttachShaders(
-		const char* name1, uint32_t shaderType1,
-		const char* name2, uint32_t shaderType2,
-		const char* name3, uint32_t shaderType3);
+	void StartUp();
 
+	//::.. 
+	static GLuint CreateAndAttachShaders(std::string programName, std::string * shaders, uint32_t * shaderTypes, uint32_t numShaders);
 	static GLuint LinkAndValidate();
 
+	static void Bind(const char* programName);
 
 
 	//::.. GET FUNCTIONS ..:://
-	static void GetProgram(const char * name);
+	static GLuint GetProgram(const char * name);
 private:
-	GLuint Search(const char* name1);
+	static GLuint SetShader(std::string shader, uint32_t shaderType);
+
+	static std::string LoadShader(const std::string& filename);
+
+	static GLuint CreateShader(const std::string& textfile, GLenum shaderType);
+
 
 private:
-	struct Program
-	{
-		bool			isLoaded;
-		const char *	name;
-		GLuint			program;
-	};
+	static ShaderManager * m_instance;
 
-	std::vector<Program> m_programs;
+	static std::map<std::string, GLuint> m_programs;
 
 };
 
