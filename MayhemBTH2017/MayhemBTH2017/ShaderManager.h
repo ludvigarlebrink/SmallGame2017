@@ -32,6 +32,8 @@ public:
 	static GLuint CreateAndAttachShaders(std::string programName, std::string * shaders, uint32_t * shaderTypes, uint32_t numShaders);
 	static GLuint LinkAndValidate();
 
+	static void Bind(const char* programName);
+
 
 	//::.. GET FUNCTIONS ..:://
 	static GLuint GetProgram(const char * name);

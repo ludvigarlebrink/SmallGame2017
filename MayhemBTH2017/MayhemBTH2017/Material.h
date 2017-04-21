@@ -11,7 +11,7 @@ class Material
 public:
 	//::.. CONSTRUCTORS ..:://
 	Material();
-	Material(const char * shaderName);
+	Material(std::string programName, std::string * shaders, uint32_t * shaderTypes, uint32_t numShaders);
 	virtual ~Material();
 
 
@@ -31,7 +31,9 @@ public:
 private:
 	const char * m_textureName;
 	const char * m_normalMapName;
-	const char * m_shader;
+	std::string  m_shaderName;
+	GLuint		 m_textureID;
+
 };
 
 #endif // !__MATERIAL_H__

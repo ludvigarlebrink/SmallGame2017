@@ -34,9 +34,12 @@ GLuint ShaderManager::CreateAndAttachShaders(std::string programName, std::strin
 	for (uint32_t i = 0; i < numShaders; i++)
 	{
 		shader[i] = SetShader(shaders[i], shaderTypes[i]);
-
 		glAttachShader(m_programs[programName], shader[i]);
 	}
+
+	glLinkProgram(m_programs[programName]);
+
+	glValidateProgram(m_programs[programName]);
 	
 	return 0;
 }
@@ -45,6 +48,11 @@ GLuint ShaderManager::LinkAndValidate()
 {
 
 	return false;
+}
+
+void ShaderManager::Bind(const char * programName)
+{
+	glUseProgram(ShaderManager::GetProgram(programName));
 }
 
 
