@@ -2,7 +2,6 @@
 #define __LEVELEDITOR_H__
 
 
-#include "InputManager.h"
 #include "Level.h"
 #include "Timer.h"
 #include "TextureHandler.h"
