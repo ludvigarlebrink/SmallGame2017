@@ -89,6 +89,10 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 				GLfloat scale = 0.5f;
 				test.initStatic(world, glm::vec2((tempX), (tempY)), glm::vec2(offset, scale));
 
+				test.getFixture()->SetFriction(5.0);
+				test.getFixture()->SetRestitution(0.0);
+
+
 				m_boxes.push_back(test);
 
 				x += blocksInRow;

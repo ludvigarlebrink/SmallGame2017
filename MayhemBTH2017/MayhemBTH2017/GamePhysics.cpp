@@ -30,6 +30,7 @@ void GamePhysics::enterWorld()
 	b2MassData* playerMass;
 	m_player.GetBox().getFixture()->SetDensity(1.0);
 	m_player.GetBox().getFixture()->SetFriction(0.3);
+	m_player.GetBox().getFixture()->SetRestitution(0.2);
 
 
 }
@@ -43,8 +44,6 @@ void GamePhysics::Update(Transform transform)
 	m_tempY = m_player.GetBox().getBody()->GetPosition().y - (m_player.GetBox().getScale().y / 2);
 	m_scaleX = m_player.GetBox().getScale().x;
 	m_scaleY = m_player.GetBox().getScale().y;
-
-	
 
 
 	m_playerSprite.update(glm::vec2(m_tempX, m_tempY), glm::vec2(m_scaleX, m_scaleY));
@@ -61,7 +60,6 @@ void GamePhysics::Update(Transform transform)
 		m_player.GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-600)*m_time->GetDeltaTime(), 0));
 
 		transform.SetPosition(glm::vec3(-2.0f, 0.0, 0.0));
-
 
 	}
 
