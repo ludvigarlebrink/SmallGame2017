@@ -205,6 +205,7 @@
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="AProjectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -347,6 +348,7 @@
     <ClInclude Include="Box.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="AProjectile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">
