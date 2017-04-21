@@ -33,9 +33,7 @@ bool Mesh::LoadMesh(Vertex2D * vertices, uint64_t numVerts)
 	glBindVertexArray(m_vao);
 
 	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
-	glEnableVertexAttribArray(3);
+
 
 	// Generate buffers.
 	glGenBuffers(1, &m_buffer);
@@ -48,11 +46,10 @@ bool Mesh::LoadMesh(Vertex2D * vertices, uint64_t numVerts)
 	uint64_t offset = 0;
 
 	// Position.
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), BUFFER_OFFSET(offset));
-	offset += sizeof(glm::vec3);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), BUFFER_OFFSET(offset));
 
-	// Texture Coordinates.
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), BUFFER_OFFSET(offset));
+
+
 
 	// Unbind
 	glBindVertexArray(0);
@@ -128,6 +125,9 @@ bool Mesh::Render()
 {
 
 	glBindVertexArray(m_vao);
+
+
+
 	glDrawArrays(m_renderMode, 0, m_drawCount);
 	glBindVertexArray(0);
 	return true;

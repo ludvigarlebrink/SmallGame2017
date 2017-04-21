@@ -24,11 +24,6 @@ void Sprite::createSprite(glm::vec2 pos, glm::vec2 scale)
 
 	scale = 1.0f * scale;
 
-	this->BB.x = (pos.x);
-	this->BB.y = (pos.y);
-	this->BB.z = ((pos.x) + (scale.x));
-	this->BB.w = ((pos.y) + (scale.y));
-
 	this->quad.vertArr[0].position = glm::vec2((pos.x ), pos.y );
 	this->quad.vertArr[1].position = glm::vec2((pos.x ) + (scale.x ), pos.y );
 	this->quad.vertArr[2].position = glm::vec2((pos.x ), (pos.y ) + (scale.y ));
@@ -48,10 +43,10 @@ void Sprite::createSprite(glm::vec2 pos, glm::vec2 scale)
 	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->quad.vertArr[0]), &this->quad.vertArr, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(2);
+	//glEnableVertexAttribArray(2);
 
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(GUIVertex), 0);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(GUIVertex), (void*)(2 * sizeof(float)));
+	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(GUIVertex), (void*)(2 * sizeof(float)));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -67,26 +62,7 @@ void Sprite::sendColor()
 	glUniform3f(this->colorLoc, this->quad.color.x, this->quad.color.y, this->quad.color.z);
 }
 
-bool Sprite::hovered() {
-	int temp_mouse_x = 0;
-	int temp_mouse_y = 0;
 
-	SDL_GetMouseState(&temp_mouse_x, &temp_mouse_y);
-
-	float mouse_x = ((float)temp_mouse_x) / (1600.0f);
-	float mouse_y = ((float)temp_mouse_y) / (800.0f);
-
-	if (mouse_x > this->BB.x && mouse_y > this->BB.y
-		&& mouse_x < this->BB.x + this->BB.z
-		&& mouse_y < this->BB.y + this->BB.w)
-	{
-		return true;
-	}
-	else 
-	{
-		return false;
-	}
-}
 
 void Sprite::setTexture(const std::string& filePath)
 {
@@ -179,9 +155,8 @@ void Sprite::sendTexture()
 
 void Sprite::draw()
 {
-	glEnable(GL_TEXTURE_2D);
-	Bind();
-
+	
+	
 	sendColor();
 
 	sendTexture();
@@ -193,9 +168,8 @@ void Sprite::draw()
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	glUseProgram(0);
 
-	glDisable(GL_TEXTURE_2D);
+
 
 }
 

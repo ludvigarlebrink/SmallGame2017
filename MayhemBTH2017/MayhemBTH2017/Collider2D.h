@@ -6,12 +6,13 @@
 #include "AShader.h"
 #include <glm.hpp>
 #include <box2d.h>
-
+#include <vector>
 #include <glew.h>
 #include "Level.h"
 #include "Mesh.h"
 #include "LevelImporter.h"
-
+#include "Box.h"
+#include "Sprite.h"
 
 class Collider2D
 {
@@ -21,14 +22,16 @@ public:
 	Collider2D();
 	virtual ~Collider2D();
 	void SetBoxCollider(glm::vec2 min, glm::vec2 max);
-	void CreateBoundingBoxes();
+	void CreateBoundingBoxes(b2World* world);
 	void DrawCollider(Camera camera);
 	void ImportLevel(Level level);
-	bool GetPlayerCollision(int x, int y);
+	void CreatePlayerBoundingBox(b2World* world);
+
+	std::vector<Box> GetBoxes();
+
 private:
-	bool m_playerCollision[SIZE_X][SIZE_Y];
 	GLuint		m_grid[SIZE_X][SIZE_Y];
-	Vertex3D*	m_vertices;
+	Vertex2D*	m_vertices;
 	Mesh		m_mesh;
 	glm::vec2	m_min;
 	glm::vec2	m_max;
@@ -41,6 +44,10 @@ private:
 	Transform	m_transform;
 	Camera		m_camera;
 	Level		m_level;
+
+	std::vector<Box>	m_boxes;
+
+
 };
 
 #endif // !_COLLIDER2D_H__

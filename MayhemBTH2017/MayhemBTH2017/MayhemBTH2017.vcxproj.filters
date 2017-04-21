@@ -204,7 +204,7 @@
     <ClCompile Include="GamePhysics.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="ParticleEmitter.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -346,7 +346,7 @@
     <ClInclude Include="GamePhysics.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="ParticleEmitter.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">
@@ -369,6 +369,7 @@
     <None Include="DrawShader.frag" />
     <None Include="DrawShader.geom" />
     <None Include="DrawShader.vert" />
+    <None Include="GeometryPass.vert" />
     <None Include="ToonShader.vert">
       <Filter>GLSL</Filter>
     </None>
@@ -381,10 +382,19 @@
     <None Include="ColliderShader.frag">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="SplitterShader.vert">
+    <None Include="Assets\GLSL\leo.frag">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="GeometryPass.vert">
+    <None Include="Assets\GLSL\leo.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\leo.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="PlayerShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="PlayerShader.frag">
       <Filter>GLSL</Filter>
     </None>
   </ItemGroup>
