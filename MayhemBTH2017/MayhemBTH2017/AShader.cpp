@@ -24,7 +24,7 @@ GLuint AShader::GetProgramID()
 	return m_programID;
 }
 
-GLuint AShader::GetTextureID(){
+GLuint AShader::GetTextureID() {
 	return this->m_textureID;
 }
 
@@ -52,22 +52,23 @@ void AShader::Init(const std::string& filename, bool hasGeomShader, bool particl
 		glAttachShader(m_programID, m_shader[FRAGMENT_SHADER]);
 		Debug(m_shader[FRAGMENT_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
 	}
-	
+
 	//Attach vertex
 	glAttachShader(m_programID, m_shader[VERTEX_SHADER]);
 	Debug(m_shader[VERTEX_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
 	//Attach geo
-	glAttachShader(m_programID, m_shader[GEOMETRY_SHADER]);
-	Debug(m_shader[GEOMETRY_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
-	
+	if (hasGeomShader) {
+		glAttachShader(m_programID, m_shader[GEOMETRY_SHADER]);
+		Debug(m_shader[GEOMETRY_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+	}
 	AddAttributeLocation();
 
 	if (particles) {
 		std::cout << "Particles transform feedback active" << std::endl;
 		//Names of ouput from vertex shader
-		const char* varyings[5] = { "outPos", "outDir", "outCol", "outLife", "outSize"};
+		const char* varyings[5] = { "outPos", "outDir", "outCol", "outLife", "outSize" };
 		glTransformFeedbackVaryings(m_programID, 5, varyings, GL_INTERLEAVED_ATTRIBS);
-		
+
 
 
 	}
@@ -111,7 +112,7 @@ void AShader::Update(Transform& transform, Camera& camera)
 
 void AShader::AddAttributeLocation()
 {
-	std::cout << "ASHADERS" << std::endl;
+
 	// These are three attributes are set for all shaders.
 	glBindAttribLocation(m_programID, 0, "Position");
 	glBindAttribLocation(m_programID, 1, "Normal");
@@ -123,7 +124,7 @@ void AShader::AddUniforms()
 	m_uniforms[0] = glGetUniformLocation(m_programID, "M");
 	m_uniforms[1] = glGetUniformLocation(m_programID, "V");
 	m_uniforms[2] = glGetUniformLocation(m_programID, "P");
-	m_uniforms[DIFFUSE_MAP]= glGetUniformLocation(m_programID, "DiffuseMap");
+	m_uniforms[DIFFUSE_MAP] = glGetUniformLocation(m_programID, "DiffuseMap");
 	m_uniforms[ALPHA] = glGetUniformLocation(m_programID, "Alpha");
 
 }

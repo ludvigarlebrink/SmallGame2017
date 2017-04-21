@@ -16,7 +16,7 @@ void main()
 	vec3 ambient = vec3(0.2f);
 	
 	float i = abs(dot(Normal1, lightDir));
-	vec3 rgb = vec3(0.0f, 1.0, 0);
+	vec3 rgb = vec3(0.0f, 1.0, 1.0f);
 	FragColor = vec4((rgb * i) + ambient, 0.5);
 	
 

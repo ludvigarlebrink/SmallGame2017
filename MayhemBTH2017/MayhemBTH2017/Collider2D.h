@@ -12,6 +12,7 @@
 #include "Mesh.h"
 #include "LevelImporter.h"
 
+
 class Collider2D
 {
 public:
@@ -23,8 +24,9 @@ public:
 	void CreateBoundingBoxes();
 	void DrawCollider(Camera camera);
 	void ImportLevel(Level level);
-
+	bool GetPlayerCollision(int x, int y);
 private:
+	bool m_playerCollision[SIZE_X][SIZE_Y];
 	GLuint		m_grid[SIZE_X][SIZE_Y];
 	Vertex3D*	m_vertices;
 	Mesh		m_mesh;

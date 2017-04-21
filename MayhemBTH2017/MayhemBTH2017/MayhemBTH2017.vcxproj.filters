@@ -204,6 +204,7 @@
     <ClCompile Include="GamePhysics.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="ParticleEmitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -345,6 +346,7 @@
     <ClInclude Include="GamePhysics.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="ParticleEmitter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugShader.frag">
@@ -367,7 +369,6 @@
     <None Include="DrawShader.frag" />
     <None Include="DrawShader.geom" />
     <None Include="DrawShader.vert" />
-    <None Include="GeometryPass.vert" />
     <None Include="ToonShader.vert">
       <Filter>GLSL</Filter>
     </None>
@@ -378,6 +379,12 @@
       <Filter>GLSL</Filter>
     </None>
     <None Include="ColliderShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="SplitterShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="GeometryPass.vert">
       <Filter>GLSL</Filter>
     </None>
   </ItemGroup>

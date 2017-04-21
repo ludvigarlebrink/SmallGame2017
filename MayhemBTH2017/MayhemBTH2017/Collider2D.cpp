@@ -35,61 +35,86 @@ void Collider2D::DrawCollider(Camera camera)
 
 void Collider2D::CreateBoundingBoxes() {
 
-
 	m_imp.ImportLevel(m_level);
-
-	const uint64_t length = SIZE_X * SIZE_Y * 6;
+	const uint32_t length = SIZE_X * SIZE_Y * 6;
 	m_vertices = (Vertex3D*)malloc(sizeof(Vertex3D) * length);
-	uint64_t i = 0;
+	uint32_t i = 0;
 	float scaler = 1.0f;
 	GLuint blocksInRow = 0.0;
 	GLfloat offset = 0.0f;
 
 	//IF pos(X,Y) IS OCCUPIED BY BLOCK, FILL WITH BOUNDING BOX
-	for (uint64_t y = 1; y < SIZE_Y; y++)
+	for (uint32_t y = 1; y < SIZE_Y; y++)
 
 	{
 
-
-		for (uint64_t x = 0; x < SIZE_X; x++)
+		for (uint32_t x = 1; x < SIZE_X; x++)
 		{
 
 			if (m_level.GetIsOccupied(x, y)) {
+
 				for (int index = x + 1; m_level.GetIsOccupied(index, y); index++) {
 
 					blocksInRow += 1;
 
 				}
 	
-				
 				offset = (blocksInRow);
-				
 
 				//From current X, check next cells until next cell is empty in order to decide lenght of bounding box.
-				m_vertices[i].position = glm::vec3((x + 0.5)+offset, (y + 0.5), -2.0f * scaler);
+				m_vertices[i].position = glm::vec3((x + 0.4)+offset, (y + 0.4), -2.0f * scaler);
 				m_vertices[i].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-				m_vertices[i + 1].position = glm::vec3((x + 0.5)+offset, (y - 0.5), -2.0f * scaler);
+				m_vertices[i + 1].position = glm::vec3((x + 0.4)+offset, (y - 0.4), -2.0f * scaler);
 				m_vertices[i + 1].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i + 1].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-				m_vertices[i + 2].position = glm::vec3((x - 0.5), (y + 0.5), -2.0f * scaler);
+				m_vertices[i + 2].position = glm::vec3((x - 0.4), (y + 0.4), -2.0f * scaler);
 				m_vertices[i + 2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i + 2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-				m_vertices[i + 3].position = glm::vec3((x - 0.5), (y + 0.5), -2.0f * scaler);
+				m_vertices[i + 3].position = glm::vec3((x - 0.4), (y + 0.4), -2.0f * scaler);
 				m_vertices[i + 3].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i + 3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-				m_vertices[i + 4].position = glm::vec3((x + 0.5)+offset, (y - 0.5), -2.0f * scaler);
+				m_vertices[i + 4].position = glm::vec3((x + 0.4)+offset, (y - 0.4), -2.0f * scaler);
 				m_vertices[i + 4].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i + 4].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 
-				m_vertices[i + 5].position = glm::vec3((x - 0.5), (y - 0.5), -2.0f * scaler);
+				m_vertices[i + 5].position = glm::vec3((x - 0.4), (y - 0.4), -2.0f * scaler);
 				m_vertices[i + 5].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 				m_vertices[i + 5].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
+				
+				
+				//////////////////////////////
+				//a static body
+				b2Vec2 gravity(0, -9.8);
+				bool doSleep = true;
+				b2World* m_world = new b2World(gravity);
+				b2BodyDef myBodyDef;
+				myBodyDef.type = b2_staticBody;
+				myBodyDef.position.Set(0, 0);
+				b2Body* staticBody = m_world->CreateBody(&myBodyDef);
 
+				//shape definition
+				b2PolygonShape polygonShape;
+
+				//fixture definition
+				b2FixtureDef myFixtureDef;
+				myFixtureDef.shape = &polygonShape;
+
+				//add four walls to the static body
+				polygonShape.SetAsBox((x + 0.5) + offset, 1, b2Vec2(0, 0), 0);//ground
+				staticBody->CreateFixture(&myFixtureDef);
+				polygonShape.SetAsBox(20, 1, b2Vec2(0, 40), 0);//ceiling
+				staticBody->CreateFixture(&myFixtureDef);
+				polygonShape.SetAsBox(1, 20, b2Vec2(-20, 20), 0);//left wall
+				staticBody->CreateFixture(&myFixtureDef);
+				polygonShape.SetAsBox(1, 20, b2Vec2(20, 20), 0);//right wall
+				staticBody->CreateFixture(&myFixtureDef);
+
+				///////////////////////////////////////////////////
 
 				x += blocksInRow;
 				blocksInRow = 0;

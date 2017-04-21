@@ -166,6 +166,7 @@
     <ClCompile Include="MeshCache.cpp" />
     <ClCompile Include="MeshImporter.cpp" />
     <ClCompile Include="MeshQuad.cpp" />
+    <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="QuadShader.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="MeshImporter.h" />
     <ClInclude Include="MeshQuad.h" />
     <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleEmitter.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="QuadShader.h" />
@@ -265,6 +267,7 @@
     <None Include="DrawShader.geom" />
     <None Include="DrawShader.vert" />
     <None Include="GeometryPass.vert" />
+    <None Include="SplitterShader.vert" />
     <None Include="ToonShader.frag" />
     <None Include="ToonShader.vert" />
   </ItemGroup>
