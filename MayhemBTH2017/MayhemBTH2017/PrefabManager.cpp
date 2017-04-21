@@ -6,7 +6,7 @@
 uint32_t PrefabManager::numPrefabs = 0;
 Prefab * PrefabManager::prefabs = nullptr;
 
-
+//::.. DUMMY CONSTRUCTORS ..:://
 PrefabManager::PrefabManager()
 {
 	// Do nothing...
@@ -31,18 +31,12 @@ Prefab * PrefabManager::Instantiate(const char * name)
 
 	}
 
-	const char* filepath = ".\\Assets\\Prefabs\\T.mr";
+	const char* filepath = ".\\Assets\\Prefabs\\New.mr";
 
-
-	glm::vec3 * test;
+	//temp for mrHandler
 
 	mr::MrMeshHandler meshHandler;
 	meshHandler.Import(filepath);
-
-	test = meshHandler.GetPositions();
-
-
-	std::cout << test[0].x << " " << test[0].y << " " << test[0].z << std::endl;
 
 	Vertex3D * verts = new Vertex3D[meshHandler.GetNumVerts()];
 
@@ -53,18 +47,12 @@ Prefab * PrefabManager::Instantiate(const char * name)
 		verts[i].texCoordsAlpha = glm::vec3(meshHandler.GetTexCoords()[i], 1.0f);
 	}
 
-
-
-
 	Mesh * mesh = new Mesh;
-
 	mesh->Load(verts, meshHandler.GetNumVerts());
 
 	Prefab * pre = new Prefab;
-
 	pre->SetMesh(mesh);
 
-	getchar();
 	return nullptr;
 }
 

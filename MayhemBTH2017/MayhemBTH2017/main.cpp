@@ -5,6 +5,9 @@
 #include "InputManager.h"
 #include "TimeManager.h"
 
+//temp
+#include "PrefabManager.h"
+
 
 #include "System.h"
 
@@ -59,6 +62,8 @@ void BigInit()
 	g_stateManager.StartUp();		// 4.
 	g_inputManager.StartUp();		// 5.
 	g_timeManager.StartUp();		// 6.
+	PrefabManager g_prefabManager;
+	g_prefabManager.Instantiate("sss");
 }
 
 void Terminate()

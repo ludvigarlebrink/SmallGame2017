@@ -15,6 +15,7 @@ class PrefabManager
 public:
 	static const uint32_t POOL_SIZE = 32;
 
+	//::.. DUMMY CONSTRUCTORS ..:://
 	PrefabManager();
 	virtual ~PrefabManager();
 

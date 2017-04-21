@@ -89,7 +89,7 @@ private:
 	Transform			m_transform;
 	Mesh				m_mesh;
 
-	TextureHandler		m_textureTemp;
+	//TextureHandler		m_textureTemp;
 	Texture				m_texture;
 
 	uint32_t			m_mode;
