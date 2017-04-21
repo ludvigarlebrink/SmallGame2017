@@ -65,13 +65,13 @@ void VirtualKeyboard::Init()
 	m_background.SetSize(600, 440);
 
 	m_background2.SetColor(150, 150, 150);
-	m_background2.SetPositon(0, -80);
+	m_background2.SetPosition(0, -80);
 	m_background2.SetSize(600, 280);
 
 
 	m_title.SetText("LEVEL NAME");
 	m_title.SetSize(80);
-	m_title.SetPositon(-280, 145);
+	m_title.SetPosition(-280, 145);
 	m_title.SetFont(".\\Assets\\Fonts\\steelfish.ttf");
 	m_title.SetPivot(UIText::LEFT);
 	m_title.SetColor(255, 255, 255, 255);
@@ -86,7 +86,7 @@ void VirtualKeyboard::Init()
 	for (size_t i = 0; i < NUM_HELP; i++)
 	{
 		m_help[i].SetPivot(UIText::LEFT);
-		m_help[i].SetPositon(320, (i * -40) + 20 );
+		m_help[i].SetPosition(320, (i * -40) + 20 );
 		m_help[i].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
 		m_help[i].SetColor(255, 255, 255, 255);
 	}
@@ -207,19 +207,19 @@ void VirtualKeyboard::SwitchLayout(int layout)
 
 		if (i < 10)
 		{
-			m_chars[i].SetPositon(i * m_nSize - (4.5f * m_nSize) , 0);
+			m_chars[i].SetPosition(i * m_nSize - (4.5f * m_nSize) , 0);
 		}
 		else if (i >= 10 && i < 20)
 		{
-			m_chars[i].SetPositon(i * m_nSize - (9.5f * m_nSize) - (5 * m_nSize), -m_nSize);
+			m_chars[i].SetPosition(i * m_nSize - (9.5f * m_nSize) - (5 * m_nSize), -m_nSize);
 		}
 		else if (i >= 20 && i < 30)
 		{
-			m_chars[i].SetPositon(i * m_nSize - (19.5f * m_nSize) - (5 * m_nSize), -m_nSize * 2);
+			m_chars[i].SetPosition(i * m_nSize - (19.5f * m_nSize) - (5 * m_nSize), -m_nSize * 2);
 		}
 		else
 		{
-			m_chars[i].SetPositon(i * m_nSize - (29.5f * m_nSize) - (5 * m_nSize), -m_nSize * 3);
+			m_chars[i].SetPosition(i * m_nSize - (29.5f * m_nSize) - (5 * m_nSize), -m_nSize * 3);
 		}
 
 		m_chars[i].SetFont(".\\Assets\\Fonts\\steelfish.ttf");

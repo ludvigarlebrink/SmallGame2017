@@ -14,7 +14,7 @@ Menu::Menu()
 	
 	// Init title.
 	m_title.SetSize(FONT_SIZE + 12);
-	m_title.SetPositon(0, 170);
+	m_title.SetPosition(0, 170);
 	m_title.SetColor(229, 122, 16, 255);
 
 
@@ -45,10 +45,10 @@ void Menu::Render()
 		if (m_button[i]->isSelected)
 		{
 			// Set the position of the marker.
-			m_selection.SetPositon(0, (-i * (FONT_SIZE + 16)) + 70);
+			m_selection.SetPosition(0, (-i * (FONT_SIZE + 16)) + 70);
 			m_selection.Render();	
 			
-			m_button[i]->text->SetPositon(0, (-i * (FONT_SIZE + 16)) + 70);
+			m_button[i]->text->SetPosition(0, (-i * (FONT_SIZE + 16)) + 70);
 
 			if (m_isScalning)
 			{
@@ -76,7 +76,7 @@ void Menu::Render()
 		}
 		else
 		{
-			m_button[i]->text->SetPositon(0, (-i * (FONT_SIZE + 16)) + 70);
+			m_button[i]->text->SetPosition(0, (-i * (FONT_SIZE + 16)) + 70);
 			m_button[i]->text->SetScale(1.0f);
 			m_button[i]->text->Render();
 		}

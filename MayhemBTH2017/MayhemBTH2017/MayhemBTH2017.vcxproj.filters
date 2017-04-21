@@ -217,9 +217,7 @@
     </ClCompile>
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="ImportTester.cpp">
-      <Filter>Engine\Resources\Managers</Filter>
-    </ClCompile>
+    <ClCompile Include="LevelEditorGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -376,6 +374,7 @@
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="LevelEditorGUI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

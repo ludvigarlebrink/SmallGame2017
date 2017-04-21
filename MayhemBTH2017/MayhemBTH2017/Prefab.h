@@ -6,18 +6,6 @@
 #include "Mesh.h"
 #include "AnimController.h"
 #include "Camera.h"
-struct MeshInfo
-{
-	int numVerts;
-	glm::vec3 * vertPos;
-	glm::vec2 * texCoords;
-	glm::vec3 vertNormals;
-	glm::vec3 vertTangetns;
-	glm::vec3 vertBiTangents;
-	glm::vec4 vertSkinWeights;
-
-
-};
 
 class Prefab
 {
@@ -50,9 +38,6 @@ private:
 
 	Mesh *				m_mesh;
 	AnimController *	m_animController;
-
-
-	MeshInfo * meshInfo;
 };
 
 
