@@ -444,5 +444,15 @@
     <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
     </None>
+    <None Include="Assets\Prefabs\super.mr">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Animations\super%40animation.mranim">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Skeletons\super.mrskel">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Meshes\super.mrmesh" />
   </ItemGroup>
 </Project>

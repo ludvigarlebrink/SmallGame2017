@@ -4,7 +4,7 @@
 
 AnimController::AnimController()
 {
-	m_clips = new AnimClip[MAX_CLIPS];
+//	m_clips = new AnimClip[MAX_CLIPS];
 }
 
 
@@ -12,9 +12,12 @@ AnimController::~AnimController()
 {
 }
 
-void AnimController::Update()
+void AnimController::Update(GLuint locations)
 {
+	m_clips[m_currClip]->Update();
+	m_skel->Update(m_clips[m_currClip]->GetCurrentKeyFrame());
 
+	glUniformMatrix4fv(locations, m_skel->GetNumJoints(), GL_FALSE, &m_skel->GetSkinnedTx()[0][0][0]);
 }
 
 bool AnimController::SwitchAnim(const char * anim)
@@ -27,9 +30,9 @@ bool AnimController::SwitchAnim(const char * anim)
 
 bool AnimController::SwitchAnimAt(uint32_t index)
 {
-	m_clips[m_curClip].Stop();
+	m_clips[m_currClip]->Stop();
 
-	m_curClip = index;
+	m_currClip = index;
 
 	return false;
 }
@@ -37,7 +40,7 @@ bool AnimController::SwitchAnimAt(uint32_t index)
 
 void AnimController::AddAnimation(AnimClip * clip)
 {
-
+	m_clips.push_back(clip);
 }
 
 

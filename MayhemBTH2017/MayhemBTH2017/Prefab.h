@@ -17,7 +17,9 @@ public:
 	virtual ~Prefab();
 
 	void Update();
-	void Render(const Camera& cam);
+	void Render(Camera& cam);
+
+	void Init();
 
 	//::.. GET FUNCTIONS ..:://
 	const char * GetName() const;
@@ -34,17 +36,23 @@ public:
 	void SetMaterial(Material * material);
 
 private:
-	//::.. HELP FUNCTIONS ..:://
-	void Init();
+	enum Uniforms
+	{
+		M,
+		V,
+		P,
+		JOINTS,
+		NR_UNIFORMS
+	};
 
-private:
 	const char *		m_name;
 	Transform			m_transform;
 	Mesh *				m_mesh;
 	const char *		m_shaderProg;
 	AnimController *	m_animController;
 	Material*			m_material;
-
+	GLuint				m_shaderProgram;
+	GLuint				m_uniforms[NR_UNIFORMS];
 };
 
 
