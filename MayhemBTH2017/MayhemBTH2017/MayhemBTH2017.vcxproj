@@ -133,6 +133,7 @@
     <ClCompile Include="AnimationClip.cpp" />
     <ClCompile Include="AnimationController.cpp" />
     <ClCompile Include="AntiAliasing.cpp" />
+    <ClCompile Include="AProjectile.cpp" />
     <ClCompile Include="ARenderable.cpp" />
     <ClCompile Include="AResource.cpp" />
     <ClCompile Include="AShader.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="AnimationClip.h" />
     <ClInclude Include="AnimationController.h" />
     <ClInclude Include="AntiAliasing.h" />
+    <ClInclude Include="AProjectile.h" />
     <ClInclude Include="ARenderable.h" />
     <ClInclude Include="AResource.h" />
     <ClInclude Include="AShader.h" />

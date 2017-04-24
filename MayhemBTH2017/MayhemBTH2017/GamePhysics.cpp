@@ -1,4 +1,5 @@
 #include "GamePhysics.h"
+#include "AProjectile.h"
 #include "Game.h"
 
 
@@ -13,7 +14,6 @@ GamePhysics::~GamePhysics()
 }
 
 void GamePhysics::enterWorld()
-
 {
 
 	//Get deltatime
@@ -23,7 +23,6 @@ void GamePhysics::enterWorld()
 	m_world = std::make_unique<b2World>(gravity);
 
 	m_collision.CreateBoundingBoxes(m_world.get());
-
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 	//PLAYER
