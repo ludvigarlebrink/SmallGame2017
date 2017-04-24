@@ -54,12 +54,6 @@ Mesh * Prefab::GetMesh() const
 }
 
 
-ShaderManager * Prefab::GetShaderProg() const
-{
-	return m_shaderProg;
-}
-
-
 AnimController * Prefab::GetAnimController() const
 {
 	return m_animController;
@@ -97,4 +91,10 @@ void Prefab::Init()
 	m_mesh				= nullptr;
 	m_shaderProg		= nullptr;
 	m_animController	= nullptr;
+}
+
+void Prefab::UpdateAnimations()
+{
+	m_animController->Update();
+	// TODO FIX ANIMATIONS
 }

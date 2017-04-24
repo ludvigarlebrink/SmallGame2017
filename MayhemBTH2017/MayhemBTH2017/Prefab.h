@@ -5,7 +5,7 @@
 #include "Transform.h"
 #include "Mesh.h"
 #include "AnimController.h"
-#include "ShaderManager.h"
+#include "Material.h"
 #include "Camera.h"
 
 
@@ -33,6 +33,8 @@ public:
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
+	void UpdateAnimations();
+
 
 private:
 	const char *		m_name;
@@ -41,7 +43,6 @@ private:
 	Mesh *				m_mesh;
 	ShaderManager *		m_shaderProg;
 	AnimController *	m_animController;
-
 };
 
 

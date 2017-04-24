@@ -217,9 +217,6 @@
     </ClCompile>
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="ImportTester.cpp">
-      <Filter>Engine\Resources\Managers</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
