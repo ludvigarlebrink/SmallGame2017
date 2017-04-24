@@ -8,10 +8,7 @@
 
 #include "System.h"
 
-#include "Resource.h"
-#include "ResourceExporter.h"
-
-
+#pragma comment(lib, "MRSDK.lib")
 
 // Global singleton managers.
 MemoryManager	g_memoryManager;
@@ -30,13 +27,6 @@ int main(int argc, char *argv[])
 {
 	// Init all singleton managers.
 	BigInit();
-
-	// TEMP REMOVE
-	Resource * res = new Resource;
-	ResourceExporter resex;
-	resex.Export(res);
-
-
 
 	// Create the main system.
 	System system;

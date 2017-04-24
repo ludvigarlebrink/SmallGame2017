@@ -1,11 +1,15 @@
 #include "AnimSkeleton.h"
 
 
+#include <iostream>
+#include <iomanip>
+#include "TimeManager.h"
 
 AnimSkeleton::AnimSkeleton()
 {
 	m_numJoints = 0;
 	m_skel = nullptr;
+	m_counter = 0.0f;
 }
 
 
@@ -15,14 +19,38 @@ AnimSkeleton::~AnimSkeleton()
 
 void AnimSkeleton::Update(KeyFrame * kf)
 {
-	m_skel[0].parentID = m_skel[0].parentID;
+	m_skel[0].globalTx = m_skel[0].localTx;
 	m_skinnedTx[0] = m_skel[0].globalTx * m_skel[0].invBindPose;
+	
+	m_counter += TimeManager::Get()->GetDeltaTime();
 
 	for (uint32_t i = 1; i < m_numJoints; i++)
 	{
-		Joint &j = m_skel[i];
-		j.globalTx = m_skel[j.parentID].globalTx * kf->localTx[i];
-		m_skinnedTx[i] = j.globalTx * j.invBindPose;
+
+		m_skel[i].globalTx = m_skel[m_skel[i].parentID].globalTx * kf->localTx[i];
+		m_skinnedTx[i] = m_skel[i].globalTx * m_skel[i].invBindPose;
+
+
+
+	//		for (int j = 0; j < 4; j++)
+	//		{
+	//			for (int n = 0; n < 4; n++)
+	//			{
+	//
+	//				std::cout << std::fixed << std::setprecision(2) << m_skinnedTx[i][j][n] << "\t";
+	//			}
+	//
+	//			std::cout << std::endl;
+	//		}
+	//		// REMOVE
+//	//		getchar();
+	//		std::cout << std::endl;
+	//
+	//	//	std::cout << "ID:\t" << skelHandler->GetIDs()[i] << std::endl;
+	//		//std::cout << "PAR ID:\t" << skelHandler->GetParentIDs()[i] << std::endl;
+	//
+//	//		std::cout << std::endl;
+	//		std::cout << std::endl;
 	}
 }
 
@@ -37,6 +65,11 @@ uint32_t AnimSkeleton::GetNumJoints()
 Joint * AnimSkeleton::GetJointAt(int32_t index)
 {
 	return &m_skel[index];
+}
+
+glm::mat4 * AnimSkeleton::GetSkinnedTx()
+{
+	return m_skinnedTx;
 }
 
 
@@ -62,8 +95,20 @@ void AnimSkeleton::SetSkeleton(uint32_t * parentID, glm::mat4 * localTx,
 
 	for (uint32_t i = 1; i < m_numJoints; i++)
 	{
-		Joint &j		= m_skel[i];
-		j.globalTx		= m_skel[j.parentID].globalTx * j.localTx;
-		j.invBindPose	= glm::inverse(j.globalTx);
+		m_skel[i].globalTx		= m_skel[m_skel[i].parentID].globalTx *  m_skel[i].localTx;
+		m_skel[i].invBindPose	= glm::inverse(m_skel[i].globalTx);
 	}
+}
+
+glm::mat4 AnimSkeleton::ReadHierarchy(uint32_t node)
+{
+	if (m_skel[node].parentID == 0)
+	{
+		m_skel[0].globalTx = m_skel[0].localTx;
+		m_skinnedTx[0] = m_skel[0].globalTx * m_skel[0].invBindPose;
+		return m_skinnedTx[0];
+	}
+	
+	
+
 }

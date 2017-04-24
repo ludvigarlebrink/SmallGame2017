@@ -1,9 +1,12 @@
 #include "AnimClip.h"
 
 
+#include <iostream>
+
 
 AnimClip::AnimClip()
 {
+	m_timer.StartTimer(0.5f);
 }
 
 
@@ -26,7 +29,15 @@ void AnimClip::Stop()
 
 void AnimClip::Update()
 {
-	int32_t m_curKeyI = static_cast<int32_t>(m_curKey);
+
+	m_currKeyI++; // = //static_cast<int32_t>(m_currKey);
+	if (m_currKeyI > 110)
+	{
+		m_currKeyI = 1;
+	}
+
+	std::cout << m_currKeyI << std::endl;
+	//m_curKey++;
 }
 
 
@@ -45,7 +56,7 @@ bool AnimClip::GetIsPlaying() const
 
 KeyFrame * AnimClip::GetCurrentKeyFrame() const
 {
-	return &m_keys[m_curKeyI];
+	return &m_keys[m_currKeyI];
 }
 
 
@@ -71,6 +82,8 @@ int32_t AnimClip::GetLastKey()
 void AnimClip::SetAnimation(KeyFrame * keyFrames,
 	int32_t firstKey, int32_t lastKey)
 {
+	m_currKey = 0;
+	m_currKeyI = 0;
 	m_keys = keyFrames;
 	m_firstKey = lastKey;
 	m_numKeys = m_lastKey - m_firstKey;
