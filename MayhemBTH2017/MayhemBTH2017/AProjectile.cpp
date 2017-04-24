@@ -11,56 +11,31 @@ AProjectile::~AProjectile()
 {
 }
 
-void AProjectile::Init(b2World * world, bool startUp, int index)
+void AProjectile::Init(b2World * world, glm::vec2 originalPos)
 {
 	
+	m_world = world;
 
-	if (startUp)
-	{
-		m_world = world;
-		Box boxTemp[10];
-		m_counter = 0;
-
-		m_time = 0;
-
-		for (int i = 0; i < 10; i++)
-		{
-			boxTemp[i].initDynamic(m_world, glm::vec2(0.0, 0.0), glm::vec2(10, 10));
-			m_projectiles.push_back(boxTemp[i]);
-		}
-	}
-	else if(!startUp)
-	{
-		Box boxTemp;
-		boxTemp.initDynamic(m_world, glm::vec2(0.0, 0.0), glm::vec2(10, 10));
-		m_projectiles[0] = boxTemp;
-	}
-
-
+	m_box.initDynamic(world, originalPos, glm::vec2(2, 2));
 	
 }
 
-void AProjectile::Fire(float rate)
+Box AProjectile::FireTimer(float rate, glm::vec2 originalPos)
 {
 	m_time += TimeManager::Get()->GetDeltaTime();
-	
-	if (m_time >= rate)
-	{
-		if (m_counter < 10)
-		{
-			m_projectiles[m_counter].getBody()->ApplyForce(b2Vec2(700, 300), m_projectiles[m_counter].getBody()->GetWorldCenter(), true);
 
-			m_time = 0.0f;
-			m_counter++;
-		}
-		else if(m_counter == 10)
-		{
-			Init(m_world, false, m_counter);
-		}
+	if (m_time >= rate) {
+		
+		Init(m_world, originalPos);
+		m_time = 0;
 	}
+
+	return m_box;
 }
 
-std::vector<Box> AProjectile::GetProjectileBoxes()
+
+Box AProjectile::GetBox()
 {
-	return m_projectiles;
+	return m_box;
 }
+

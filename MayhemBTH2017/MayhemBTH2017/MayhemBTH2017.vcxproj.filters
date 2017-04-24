@@ -206,6 +206,7 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="AProjectile.cpp" />
+    <ClCompile Include="BasicGun.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -349,6 +350,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="AProjectile.h" />
+    <ClInclude Include="BasicGun.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\ShadowPass.frag" />
