@@ -20,13 +20,13 @@ AnimSkeleton::~AnimSkeleton()
 void AnimSkeleton::Update(KeyFrame * kf)
 {
 	m_skel[0].globalTx = m_skel[0].localTx;
-	m_skinnedTx[0] = m_skel[0].globalTx * m_skel[0].invBindPose;
+	m_skinnedTx[0] = m_skel[0].invBindPose * m_skel[0].globalTx;
 	
 	m_counter += TimeManager::Get()->GetDeltaTime();
 
 	for (uint32_t i = 1; i < m_numJoints; i++)
 	{
-		m_skel[i].globalTx = m_skel[m_skel[i].parentID].globalTx * kf->localTx[i];
+		m_skel[i].globalTx = kf->localTx[i] * m_skel[m_skel[i].parentID].globalTx;
 		m_skinnedTx[i] = m_skel[i].invBindPose * m_skel[i].globalTx;
 	//
 	//
@@ -86,7 +86,7 @@ void AnimSkeleton::SetSkeleton(uint32_t * parentID, glm::mat4 * localTx,
 
 	for (uint32_t i = 1; i < m_numJoints; i++)
 	{
-		m_skel[i].globalTx		= m_skel[m_skel[i].parentID].globalTx * m_skel[i].localTx;
+		m_skel[i].globalTx		= m_skel[i].localTx * m_skel[m_skel[i].parentID].globalTx;
 		m_skel[i].invBindPose	= glm::inverse(m_skel[i].globalTx);
 	}
 }
