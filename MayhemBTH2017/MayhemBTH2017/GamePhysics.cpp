@@ -1,6 +1,8 @@
 #include "GamePhysics.h"
-
+#include "AProjectile.h"
 #include "Game.h"
+
+
 
 
 GamePhysics::GamePhysics()
@@ -16,7 +18,7 @@ void GamePhysics::enterWorld()
 
 	//Get deltatime
 	m_time = TimeManager::Get();
-	b2Vec2 gravity(0.0f, -0.8f);
+	b2Vec2 gravity(0.0f, -2.8f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
@@ -28,12 +30,11 @@ void GamePhysics::enterWorld()
 	m_playerSprite.createSprite(glm::vec2(0, 0), glm::vec2(1.0, 1.0));
 
 	m_player.GetBox().getFixture()->SetDensity(1.0);
-	m_player.GetBox().getFixture()->SetFriction(1.0);
+	m_player.GetBox().getFixture()->SetFriction(0.5);
 	m_player.GetBox().getFixture()->SetRestitution(0.0);
+	m_player.GetBox().getBody()->SetLinearDamping(0);
 
-	m_proj.Init(m_world.get(), true, 0);
 
-	m_firesprites[0].createSprite(glm::vec2(0.0, 0.0), glm::vec2(10, 10));
 
 }
 
@@ -58,17 +59,8 @@ void GamePhysics::Update(Transform transform)
 	m_tempX = m_player.GetBox().getBody()->GetPosition().x - (m_player.GetBox().getScale().x / 2);
 	m_tempY = m_player.GetBox().getBody()->GetPosition().y - (m_player.GetBox().getScale().y / 2);
 
-	
-	m_proj.Fire(4.0f);
-
-	float tempx = m_proj.GetProjectileBoxes()[0].getBody()->GetPosition().x - (m_proj.GetProjectileBoxes()[0].getScale().x /2);
-	float tempy = m_proj.GetProjectileBoxes()[0].getBody()->GetPosition().y - (m_proj.GetProjectileBoxes()[0].getScale().y / 2);
-	float scalex = m_proj.GetProjectileBoxes()[0].getScale().x;
-	float scaley = m_proj.GetProjectileBoxes()[0].getScale().y;
-
-	m_firesprites[0].update(glm::vec2(tempx, tempy), glm::vec2(scalex, scaley));
-
 	//friction
+
 
 	m_player.GetBox().getFixture()->SetFriction(0.5);
 
@@ -76,7 +68,7 @@ void GamePhysics::Update(Transform transform)
 
 	m_playerSprite.update(glm::vec2(m_tempX, m_tempY), glm::vec2(m_scaleX, m_scaleY));
 
-	
+
 
 	m_world->Step(1.0f / 60.0f, 6, 2);
 	b2Vec2 maxVel(-1990.01, 0);
@@ -87,38 +79,47 @@ void GamePhysics::Update(Transform transform)
 	void* bodyUserData = m_player.GetBox().getFixture()->GetBody()->GetUserData();
 
 	//LEFT MOVEMENT
-	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTY) != 0.0f || InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f)
+	GLfloat leftVelocity = m_player.GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX);
+	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTY) != 0.0f || InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f &&leftVelocity>-5)
 	{
+		std::cout << leftVelocity << std::endl;
 		if (m_isMidAir) {
-			m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-20)*m_time->GetDeltaTime(), 0), m_player.GetBox().getBody()->GetWorldCenter(), 1);
+
+			m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-5)*m_time->GetDeltaTime(), 0), m_player.GetBox().getBody()->GetWorldCenter(), 1);
+
 		}
-		if (!m_isMidAir) {
-			m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-40)*m_time->GetDeltaTime(), 0), m_player.GetBox().getBody()->GetWorldCenter(), 1);
+		if (!m_isMidAir &&InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) == 0.0f) {
+		
+			m_player.GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-800)*m_time->GetDeltaTime(), 0));
 		}
 
 
 	}
 
+	GLfloat rightVelocity = m_player.GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX);
 
 	//RIGHT MOVEMENT
-	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTY) != 0.0f || InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) != 0.0f)
+	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTY) != 0.0f || InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) != 0.0f &&rightVelocity > -5)
 	{
 
+
 		if (m_isMidAir) {
-			m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*(-20)*m_time->GetDeltaTime(), 0), m_player.GetBox().getBody()->GetWorldCenter(), 1);
+		
+			m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*(-5)*m_time->GetDeltaTime(), 0), m_player.GetBox().getBody()->GetWorldCenter(), 1);
 		}
-		if (!m_isMidAir) {
-			m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*(-40)*m_time->GetDeltaTime(), 0), m_player.GetBox().getBody()->GetWorldCenter(), 1);
+		if (!m_isMidAir &&InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) == 0.0f) {
+		
+			m_player.GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*(-800)*m_time->GetDeltaTime(), 0));
 		}
 	}
 
 
-	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f)
+	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f &&leftVelocity>-5 && rightVelocity > -5)
 	{
 		std::cout << "JUMP" << std::endl;
-	
+
 		if (!m_isMidAir) {
-			m_player.GetBox().getBody()->ApplyForce(b2Vec2(0, 180.5), m_player.GetBox().getBody()->GetWorldCenter(), 1);
+			m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(0, 10.5), m_player.GetBox().getBody()->GetWorldCenter(), 1);
 			//m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(0, impulse), m_player.GetBox().getBody()->GetWorldCenter(), 1);
 		}
 	}
@@ -138,6 +139,7 @@ glm::vec3 GamePhysics::GetPosition() {
 
 void GamePhysics::Render(Transform &transform, Camera camera) {
 
+
 	m_transform.SetPosition(glm::vec3(m_tempX, m_tempY, 0));
 	transform.SetPosition(glm::vec3(m_tempX, m_tempY, 0));
 
@@ -145,7 +147,4 @@ void GamePhysics::Render(Transform &transform, Camera camera) {
 	//m_playerSprite.draw();
 
 	m_player.Render(transform, camera);
-
-	m_firesprites[0].draw();
-
 }

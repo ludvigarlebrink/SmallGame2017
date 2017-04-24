@@ -5,7 +5,7 @@
 ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf)
 
 {
-	m_drawShader.Init("DrawShader", 1, 0); //Shade for drawing the transformed particles
+	m_drawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0); //Shade for drawing the transformed particles
 
 
 

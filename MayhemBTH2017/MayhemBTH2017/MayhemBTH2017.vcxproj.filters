@@ -351,37 +351,54 @@
     <ClInclude Include="AProjectile.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DebugShader.frag">
-      <Filter>GLSL</Filter>
-    </None>
-    <None Include="DebugShader.geom">
-      <Filter>GLSL</Filter>
-    </None>
-    <None Include="DebugShader.vert">
-      <Filter>GLSL</Filter>
-    </None>
-    <None Include="DebugGreen.frag">
-      <Filter>GLSL</Filter>
-    </None>
-    <None Include="DebugGreen.vert">
-      <Filter>GLSL</Filter>
-    </None>
     <None Include="Assets\GLSL\ShadowPass.frag" />
     <None Include="Assets\GLSL\ShadowShader.vert" />
     <None Include="DrawShader.frag" />
     <None Include="DrawShader.geom" />
     <None Include="DrawShader.vert" />
-    <None Include="GeometryPass.vert" />
-    <None Include="ToonShader.vert">
+    <None Include="Assets\GLSL\BlurrShader.frag">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="ToonShader.frag">
+    <None Include="Assets\GLSL\BlurrShader.geom">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="ColliderShader.vert">
+    <None Include="Assets\GLSL\BlurrShader.vert">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="ColliderShader.frag">
+    <None Include="Assets\GLSL\ColliderShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ColliderShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\DebugGreen.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\DebugGreen.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\DebugShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\DebugShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\DrawShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\DrawShader.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\DrawShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\emitterShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\emitterShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\GeometryPass.vert">
       <Filter>GLSL</Filter>
     </None>
     <None Include="Assets\GLSL\leo.frag">
@@ -393,10 +410,58 @@
     <None Include="Assets\GLSL\leo.vert">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="PlayerShader.vert">
+    <None Include="Assets\GLSL\MainShader.frag">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="PlayerShader.frag">
+    <None Include="Assets\GLSL\MainShader.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\MainShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ParticleDrop.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ParticleExplosion.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\PlayerShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\PlayerShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\QuadShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\QuadShader.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\QuadShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ShadowShader.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SharpnelShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SharpnelShader.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SharpnelShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SplitterShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ToonShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ToonShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ParticleSparks.vert">
       <Filter>GLSL</Filter>
     </None>
   </ItemGroup>

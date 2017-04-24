@@ -23,7 +23,10 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-	ParticleSystem part("GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec4(0.1, 0.1, 0.1, 0.8), 10.5f, 10);
+	ParticleSystem part(".\\Assets\\GLSL\\GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec4(0.1, 0.1, 1.0, 0.0), 15.1f, 30);
+	ParticleSystem part2(".\\Assets\\GLSL\\ParticleExplosion", glm::vec3(0.0, 0.0, 0.0), glm::vec4(0.5, 0.5, 0.0, 0.4), 5.1f, 100);
+	ParticleSystem part3(".\\Assets\\GLSL\\ParticleSparks", glm::vec3(1.0, 1.0, 0.0), glm::vec4(1.1, 1.1, 0.0, 0.8),0.3f, 10000);
+
 	LevelEditor l;
 	Level lvl;
 	MenuSystem m;
@@ -43,9 +46,9 @@ void System::Run()
 	AShader shader;
 	AShader shaderGreen;
 	AShader ColliderShader;
-	shader.Init("DebugShader", false, 0);
-	shaderGreen.Init("DebugGreen", false, 0);
-	ColliderShader.Init("ColliderShader", false, 0);
+	shader.Init(".\\Assets\\GLSL\\DebugShader", false, 0);
+	shaderGreen.Init(".\\Assets\\GLSL\\DebugGreen", false, 0);
+	ColliderShader.Init(".\\Assets\\GLSL\\ColliderShader", false, 0);
 	TextureImporter teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
@@ -101,6 +104,8 @@ void System::Run()
 
 
 			//Draw scene
+
+			//part1
 			game.Update(camera);
 			part.Bind();
 			part.UpdateParticles();
@@ -111,6 +116,30 @@ void System::Run()
 			part.RenderTransformed(1);
 			glDisable(GL_BLEND);
 			glDepthMask(TRUE);
+		
+			
+			//part2
+			part2.Bind();
+			part2.UpdateParticles();
+			texture.Bind();
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glDepthMask(GL_FALSE);
+			part2.RenderTransformed(1);
+			glDisable(GL_BLEND);
+			glDepthMask(TRUE);
+			//part2
+			part3.Bind();
+			part3.UpdateParticles();
+			texture.Bind();
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glDepthMask(GL_FALSE);
+			part3.RenderTransformed(1);
+			glDisable(GL_BLEND);
+			glDepthMask(TRUE);
+
+
 		//}
 		//	break;
 		//case GameState::EXIT:

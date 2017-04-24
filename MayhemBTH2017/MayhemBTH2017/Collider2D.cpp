@@ -91,8 +91,6 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 				test.getFixture()->SetRestitution(0.0); //floor bounciness
 				test.getFixture()->SetFriction(1.0); //floor friction
 
-				test.getFixture()->SetFriction(5.0);
-				test.getFixture()->SetRestitution(0.0);
 
 
 				m_boxes.push_back(test);

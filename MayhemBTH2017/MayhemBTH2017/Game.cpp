@@ -9,7 +9,7 @@ Game::Game()
 	
 
 	//Init toon shader for player
-	m_toonShader.Init("ToonShader", 0, 0);
+	m_toonShader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 	LevelImporter imp;
 	m_input = InputManager::Get();
 
