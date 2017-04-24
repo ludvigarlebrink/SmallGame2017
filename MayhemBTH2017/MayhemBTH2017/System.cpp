@@ -21,20 +21,20 @@ System::~System()
 void System::Run()
 {
 
-//	LevelEditor l;
-//	MenuSystem m;
+	LevelEditor l;
+	MenuSystem m;
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
-//
-//	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
+
+	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
-//
-//	Transform transform;
-//	Camera camera;
-//	VirtualKeyboard vk;
-//	int count = 1;
-//	m.Init();
-//	float counter = 0;
+
+	Transform transform;
+	Camera camera;
+	VirtualKeyboard vk;
+	int count = 1;
+	m.Init();
+	float counter = 0;
 
 	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
@@ -48,24 +48,24 @@ void System::Run()
 		pre->Render(cam);
 
 
-	//	switch (m_stateManager->GetCurrentState())
-	//	{
-	//	case GameState::START:
-	//		break;
-	//	case GameState::MAIN_MENU:
-	//		m.Update();
-	//		break;
-	//	case GameState::LEVEL_EDITOR:
-	//		l.Update();
-	//		break;
-	//	case GameState::GAME:
-	//		break;
-	//	case GameState::EXIT:
-	//		isRunning = false;
-	//		break;
-	//	default:
-	//		break;
-	//	}
+		switch (m_stateManager->GetCurrentState())
+		{
+		case GameState::START:
+			break;
+		case GameState::MAIN_MENU:
+			m.Update();
+			break;
+		case GameState::LEVEL_EDITOR:
+			l.Update();
+			break;
+		case GameState::GAME:
+			break;
+		case GameState::EXIT:
+			isRunning = false;
+			break;
+		default:
+			break;
+		}
 
 
 		m_inputManager->Reset();

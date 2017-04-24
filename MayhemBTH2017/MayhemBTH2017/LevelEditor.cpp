@@ -39,7 +39,6 @@ void LevelEditor::Update()
 		break;
 	case SAVE:
 		ButtonInput();
-		m_levelGUI.Render();
 		m_level.Render(m_camera);
 		m_vk.Render();
 
@@ -103,7 +102,6 @@ void LevelEditor::ButtonInput()
 		}
 	}
 
-
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_X))
 	{
 		m_levelMarker.SetSavedPosX(m_levelMarker.GetCurrentPosX());
@@ -148,8 +146,7 @@ void LevelEditor::ButtonInput()
 			{
 				m_levelGUI.SetState(BLOCK_MENU);
 			}
-
-			else if (m_levelGUI.GetState() != CLOSED_MENU)
+			else
 			{
 				m_levelGUI.SetState(CLOSED_MENU);
 			}

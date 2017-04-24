@@ -2,7 +2,9 @@
 #define __LEVELEDITORGUI_H__
 
 #include "UIImage.h"
+#include "UIText.h"
 #include "InputManager.h"
+#include <fstream>
 
 enum GUI
 {
@@ -47,12 +49,18 @@ private:
 	UIImage m_propArray[NUM_PROPS];
 	UIImage m_backgroundArray[NUM_BACKGROUNDS];
 
+	UIText m_text;
+
 	InputManager*	m_input;
 
 	uint32_t m_nSize;
 	uint32_t m_hSize;
 	int32_t m_state;
 	int32_t m_pos;
+
+	std::ifstream m_texFile;
+	std::string m_line;
+	uint32_t m_index;
 
 };
 

@@ -36,7 +36,7 @@ void AnimClip::Update()
 		m_currKeyI = 1;
 	}
 
-	std::cout << m_currKeyI << std::endl;
+	//std::cout << m_currKeyI << std::endl;
 	//m_curKey++;
 }
 
