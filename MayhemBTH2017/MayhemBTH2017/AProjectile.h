@@ -17,6 +17,8 @@ public:
 
 	void Fire(float rate);
 
+	std::vector<Box> GetProjectileBoxes();
+
 
 private:
 	std::vector<Box> m_projectiles;

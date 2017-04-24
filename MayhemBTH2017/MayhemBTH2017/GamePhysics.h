@@ -1,9 +1,13 @@
-#pragma once
+#ifndef __GAMEPHYSICS_H__
+#define __GAMEPHYSICS_H__
+
+#include "AProjectile.h"
 #include <Box2D\Box2D.h>
 #include "Box.h"
 #include "Collider2D.h"
 #include "Player.h"
 #include "TimeManager.h"
+
 class GamePhysics
 {
 public:
@@ -31,8 +35,11 @@ private:
 	Sprite m_bazookaSprite;
 	Transform m_transform;
 	Collider2D m_collision;
+	AProjectile m_proj;
+	Sprite		m_firesprites[10];
 
 
 
 };
 
+#endif // !__GAMEPHYSICS_H__

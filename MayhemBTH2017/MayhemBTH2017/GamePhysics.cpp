@@ -1,8 +1,6 @@
 #include "GamePhysics.h"
-#include "AProjectile.h"
+
 #include "Game.h"
-
-
 
 
 GamePhysics::GamePhysics()
@@ -33,7 +31,9 @@ void GamePhysics::enterWorld()
 	m_player.GetBox().getFixture()->SetFriction(1.0);
 	m_player.GetBox().getFixture()->SetRestitution(0.0);
 
+	m_proj.Init(m_world.get(), true, 0);
 
+	m_firesprites[0].createSprite(glm::vec2(0.0, 0.0), glm::vec2(10, 10));
 
 }
 
@@ -58,9 +58,18 @@ void GamePhysics::Update(Transform transform)
 	m_tempX = m_player.GetBox().getBody()->GetPosition().x - (m_player.GetBox().getScale().x / 2);
 	m_tempY = m_player.GetBox().getBody()->GetPosition().y - (m_player.GetBox().getScale().y / 2);
 
+	
+	m_proj.Fire(4.0f);
+
+	float tempx = m_proj.GetProjectileBoxes()[0].getBody()->GetPosition().x - (m_proj.GetProjectileBoxes()[0].getScale().x /2);
+	float tempy = m_proj.GetProjectileBoxes()[0].getBody()->GetPosition().y - (m_proj.GetProjectileBoxes()[0].getScale().y / 2);
+	float scalex = m_proj.GetProjectileBoxes()[0].getScale().x;
+	float scaley = m_proj.GetProjectileBoxes()[0].getScale().y;
+
+	m_firesprites[0].update(glm::vec2(tempx, tempy), glm::vec2(scalex, scaley));
+
 	//friction
-	
-	
+
 	m_player.GetBox().getFixture()->SetFriction(0.5);
 
 
@@ -129,7 +138,6 @@ glm::vec3 GamePhysics::GetPosition() {
 
 void GamePhysics::Render(Transform &transform, Camera camera) {
 
-
 	m_transform.SetPosition(glm::vec3(m_tempX, m_tempY, 0));
 	transform.SetPosition(glm::vec3(m_tempX, m_tempY, 0));
 
@@ -137,4 +145,7 @@ void GamePhysics::Render(Transform &transform, Camera camera) {
 	//m_playerSprite.draw();
 
 	m_player.Render(transform, camera);
+
+	m_firesprites[0].draw();
+
 }

@@ -18,6 +18,8 @@ Sprite::~Sprite()
 
 void Sprite::createSprite(glm::vec2 pos, glm::vec2 scale)
 {
+
+
 	this->setColorLoc();
 
 	this->setTexLoc();
@@ -155,7 +157,6 @@ void Sprite::sendTexture()
 
 void Sprite::draw()
 {
-	
 	
 	sendColor();
 
