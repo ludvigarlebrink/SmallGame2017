@@ -5,6 +5,9 @@
 #include "AnimClip.h"
 #include "AnimSkeleton.h"
 
+#include <glew.h>
+#include <vector>
+
 
 class AnimController
 {
@@ -14,7 +17,7 @@ public:
 	AnimController();
 	virtual ~AnimController();
 
-	void Update();
+	void Update(GLuint locations);
 
 	bool SwitchAnim(const char * anim);
 	bool SwitchAnimAt(uint32_t index);
@@ -25,11 +28,11 @@ public:
 	void SetSkeleton(AnimSkeleton * skel);
 
 private:
-	uint32_t	m_numClips;
-	uint32_t	m_curClip;
-	AnimClip *	m_clips;
+	uint32_t				m_numClips;
+	uint32_t				m_currClip;
+	std::vector<AnimClip *>	m_clips;
 
-	AnimSkeleton * m_skel;
+	AnimSkeleton *			m_skel;
 
 
 };

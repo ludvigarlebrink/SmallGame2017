@@ -12,7 +12,7 @@ uniform mat4 M;
 uniform mat4 V;
 uniform mat4 P;
 
-uniform mat4 Joints[4];
+uniform mat4 Joints[16];
 
 void main()
 {

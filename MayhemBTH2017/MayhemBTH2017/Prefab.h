@@ -5,8 +5,9 @@
 #include "Transform.h"
 #include "Mesh.h"
 #include "AnimController.h"
-#include "Material.h"
 #include "Camera.h"
+#include "ShaderManager.h"
+#include "Material.h"
 
 
 class Prefab
@@ -16,7 +17,9 @@ public:
 	virtual ~Prefab();
 
 	void Update();
-	void Render(const Camera& cam);
+	void Render(Camera& cam);
+
+	void Init();
 
 	//::.. GET FUNCTIONS ..:://
 	const char * GetName() const;
@@ -29,20 +32,27 @@ public:
 	void SetTransform(const Transform& transform);
 	void SetMesh(Mesh * mesh);
 	void SetAnimController(AnimController * animController);
+	void SetShaderProgram(const char * programName);
+	void SetMaterial(Material * material);
 
 private:
-	//::.. HELP FUNCTIONS ..:://
-	void Init();
-	void UpdateAnimations();
+	enum Uniforms
+	{
+		M,
+		V,
+		P,
+		JOINTS,
+		NR_UNIFORMS
+	};
 
-
-private:
 	const char *		m_name;
 	Transform			m_transform;
-
 	Mesh *				m_mesh;
-	ShaderManager *		m_shaderProg;
+	const char *		m_shaderProg;
 	AnimController *	m_animController;
+	Material*			m_material;
+	GLuint				m_shaderProgram;
+	GLuint				m_uniforms[NR_UNIFORMS];
 };
 
 

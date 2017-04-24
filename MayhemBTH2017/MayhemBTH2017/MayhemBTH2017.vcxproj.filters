@@ -217,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="LevelEditorGUI.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -373,6 +376,9 @@
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="LevelEditorGUI.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -438,5 +444,15 @@
     <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
     </None>
+    <None Include="Assets\Prefabs\super.mr">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Animations\super%40animation.mranim">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Skeletons\super.mrskel">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Meshes\super.mrmesh" />
   </ItemGroup>
 </Project>

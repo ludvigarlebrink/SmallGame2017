@@ -138,7 +138,7 @@ bool Mesh::Load(Vertex3DSkelAnimation * vertices, uint64_t numVerts)
 	glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
 
 	// Copy data to the gpu.
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex3DSkelAnimation) * numVerts, vertices, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex3DSkelAnimation) * numVerts, vertices, GL_STATIC_DRAW);
 
 	uint64_t offset = 0;
 
@@ -188,7 +188,7 @@ bool Mesh::Render()
 {
 
 	glBindVertexArray(m_vao);
-	glDrawArrays(m_renderMode, 0, m_drawCount);
+	glDrawArrays(GL_TRIANGLES, 0, m_drawCount);
 	glBindVertexArray(0);
 	return true;
 }
