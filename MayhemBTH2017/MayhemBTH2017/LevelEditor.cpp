@@ -130,9 +130,6 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
-		//	Reset();
-		//	StateManager * state = StateManager::Get();
-		//	state->SetCurrentState(GameState::MAIN_MENU);
 		if (m_state == SAVE)
 		{
 			m_state = EDIT;
@@ -147,14 +144,14 @@ void LevelEditor::ButtonInput()
 	{
 		if (m_state != SAVE)
 		{
-			if (m_levelGUI.GetMenuClosed() == false)
+			if (m_levelGUI.GetState() == CLOSED_MENU)
 			{
-				m_levelGUI.SetMenuClosed(true);
+				m_levelGUI.SetState(BLOCK_MENU);
 			}
 
-			else if (m_levelGUI.GetMenuClosed() == true)
+			else if (m_levelGUI.GetState() != CLOSED_MENU)
 			{
-				m_levelGUI.SetMenuClosed(false);
+				m_levelGUI.SetState(CLOSED_MENU);
 			}
 		}
 	}

@@ -19,7 +19,6 @@ LevelEditorGUI::LevelEditorGUI()
 	m_blockMenu.SetSize(m_closedMenu.GetSizeX(), 650);
 	m_blockMenu.SetPosition(m_closedMenu.GetPosX(), m_closedMenu.GetPosY() - 315);
 
-	m_menuClosed = true;
 	m_nSize = 50;
 	m_hSize = 70;
 	m_pos = 0;
@@ -28,7 +27,7 @@ LevelEditorGUI::LevelEditorGUI()
 	m_blockArray[1].SetTexture(".\\Assets\\Sprites\\GreenButton.png");
 	m_blockArray[2].SetTexture(".\\Assets\\Sprites\\YellowButton.png");
 	m_blockArray[3].SetTexture(".\\Assets\\Sprites\\CrossHairButton.png");
-	
+
 	m_blockArray[0].SetPosition(-575, 175);
 	m_blockArray[1].SetPosition(-500, 175);
 	m_blockArray[2].SetPosition(-575, 100);
@@ -40,6 +39,7 @@ LevelEditorGUI::LevelEditorGUI()
 	}
 
 	m_blockArray[m_pos].SetSize(m_hSize, m_hSize);
+	m_state = CLOSED_MENU;
 }
 
 
@@ -48,33 +48,53 @@ LevelEditorGUI::~LevelEditorGUI()
 	// Do nothing...
 }
 
-bool LevelEditorGUI::GetMenuClosed()
+int32_t LevelEditorGUI::GetState()
 {
-	return m_menuClosed;
+	return m_state;
 }
 
-void LevelEditorGUI::SetMenuClosed(bool value)
+void LevelEditorGUI::SetState(int32_t state)
 {
-	m_menuClosed = value;
+	m_state = state;
 }
 
 void LevelEditorGUI::Render()
 {
-	if (m_menuClosed == true)
+	switch (m_state)
 	{
+	case CLOSED_MENU:
 		m_closedMenu.Render();
-	}
-	else
-	{
+		break;
+
+	case BLOCK_MENU:
 		Input();
 		m_blockMenu.Render();
-		for (int i = 0; i < NUM_BLOCKS; i++)
-		{
-			m_blockArray[i].Render();
-		}
+		RenderArray(m_blockArray, NUM_BLOCKS);
+		break;
 
+	case PROP_MENU:
+		Input();
+		m_blockMenu.Render();
+		//RenderArray(m_propArray, NUM_PROPS);
+		break;
+
+	case BACKGROUND_MENU:
+		Input();
+		m_blockMenu.Render();
+		// Do background menu
+		break;
+	}
+
+}
+
+void LevelEditorGUI::RenderArray(UIImage menu_array[], int num_array)
+{
+	for (int i = 0; i < num_array; i++)
+	{
+		menu_array[i].Render();
 	}
 }
+
 
 void LevelEditorGUI::Input()
 {
@@ -112,6 +132,22 @@ void LevelEditorGUI::Input()
 			m_blockArray[m_pos].SetSize(m_nSize, m_nSize);
 			++m_pos;
 			m_blockArray[m_pos].SetSize(m_hSize, m_hSize);
+		}
+	}
+
+	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_RB))
+	{
+		if (m_state + 1 <= 3)
+		{
+			m_state++;
+		}
+	}
+
+	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTSHOULDER))
+	{
+		if (m_state - 1 != CLOSED_MENU)
+		{
+			m_state--;
 		}
 	}
 }

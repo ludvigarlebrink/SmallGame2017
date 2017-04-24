@@ -4,6 +4,15 @@
 #include "UIImage.h"
 #include "InputManager.h"
 
+enum GUI
+{
+	CLOSED_MENU = 0,
+	BLOCK_MENU,
+	PROP_MENU,
+	BACKGROUND_MENU,
+	NUM_MENUS
+};
+
 class LevelEditorGUI
 {
 public:
@@ -11,13 +20,14 @@ public:
 	virtual ~LevelEditorGUI();
 
 	//::.. GET FUNCTIONS ..:://
-	bool GetMenuClosed();
+	int32_t GetState();
 
 	//::.. SET FUNCTIONS ..:://
-	void SetMenuClosed(bool value);
+	void SetState(int32_t state);
 
 	//::.. UPDATE FUNCTIONS ..:://
 	void Render();
+	void RenderArray(UIImage menu_array[], int num_array);
 
 private:
 
@@ -25,21 +35,24 @@ private:
 
 private:
 
+
 	static const int NUM_BLOCKS = 4;
 	static const int NUM_PROPS = 4;
+	static const int NUM_BACKGROUNDS = 4;
 
 	UIImage m_closedMenu; // Merge these two menus, change texture
 	UIImage m_blockMenu;
+
 	UIImage m_blockArray[NUM_BLOCKS];
 	UIImage m_propArray[NUM_PROPS];
+	UIImage m_backgroundArray[NUM_BACKGROUNDS];
 
 	InputManager*	m_input;
 
 	uint32_t m_nSize;
 	uint32_t m_hSize;
+	int32_t m_state;
 	int32_t m_pos;
-
-	bool m_menuClosed;
 
 };
 
