@@ -103,8 +103,8 @@ Prefab * PrefabManager::Instantiate(const char * name)
 		vert[i].texCoordsAlpha = glm::vec3(meshHandler->GetTexCoords()[i], 1);
 
 		// FIX WRONG ORDER
-		vert[i].jointIDs = meshHandler->GetSkinWeights()[i];
-		vert[i].weights = meshHandler->GetJointIDs()[i];
+		vert[i].jointIDs = meshHandler->GetJointIDs()[i];
+		vert[i].weights = meshHandler->GetSkinWeights()[i];
 	}
 
 	mesh->Load(vert, numVerts);
@@ -132,8 +132,6 @@ Prefab * PrefabManager::Instantiate(const char * name)
 
 	for (uint32_t i = 0; i < animHandler->GetNumKeyFrames(); i++)
 	{
-		int b = sizeof(animHandler->GetKeyFrames()[i].matrix) / sizeof(glm::mat4);
-
 		key[i].localTx = new glm::mat4[skelHandler->GetNumJoints()];
 
 		for (uint32_t j = 0; j < skelHandler->GetNumJoints(); j++)

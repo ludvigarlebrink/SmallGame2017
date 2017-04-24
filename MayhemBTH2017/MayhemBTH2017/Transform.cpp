@@ -126,9 +126,9 @@ glm::mat4 Transform::GetModelMatrix()
 {
 	glm::mat4 posMat = glm::translate(m_position);
 
-	glm::mat4 xRot = glm::rotate(m_rotation.x, glm::vec3(1.0, 0.0, 0.0));
-	glm::mat4 yRot = glm::rotate(m_rotation.y, glm::vec3(0.0, 1.0, 0.0));
-	glm::mat4 zRot = glm::rotate(m_rotation.z, glm::vec3(0.0, 0.0, 1.0));
+	glm::mat4 xRot = glm::rotate(glm::radians(m_rotation.x), glm::vec3(1.0, 0.0, 0.0));
+	glm::mat4 yRot = glm::rotate(glm::radians(m_rotation.y), glm::vec3(0.0, 1.0, 0.0));
+	glm::mat4 zRot = glm::rotate(glm::radians(m_rotation.z), glm::vec3(0.0, 0.0, 1.0));
 
 	glm::mat4 rotMat = zRot * yRot * xRot;
 

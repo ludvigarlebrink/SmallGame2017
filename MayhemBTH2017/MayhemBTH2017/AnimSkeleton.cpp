@@ -26,31 +26,22 @@ void AnimSkeleton::Update(KeyFrame * kf)
 
 	for (uint32_t i = 1; i < m_numJoints; i++)
 	{
-
 		m_skel[i].globalTx = m_skel[m_skel[i].parentID].globalTx * kf->localTx[i];
-		m_skinnedTx[i] = m_skel[i].globalTx * m_skel[i].invBindPose;
-
-
-
-	//		for (int j = 0; j < 4; j++)
+		m_skinnedTx[i] = m_skel[i].invBindPose * m_skel[i].globalTx;
+	//
+	//
+	//	for (int j = 0; j < 4; j++)
+	//	{
+	//		for (int n = 0; n < 4; n++)
 	//		{
-	//			for (int n = 0; n < 4; n++)
-	//			{
 	//
-	//				std::cout << std::fixed << std::setprecision(2) << m_skinnedTx[i][j][n] << "\t";
-	//			}
-	//
-	//			std::cout << std::endl;
+	//			std::cout << std::fixed << std::setprecision(4) << kf->localTx[i][j][n] << "\t\t";
 	//		}
-	//		// REMOVE
-//	//		getchar();
-	//		std::cout << std::endl;
 	//
-	//	//	std::cout << "ID:\t" << skelHandler->GetIDs()[i] << std::endl;
-	//		//std::cout << "PAR ID:\t" << skelHandler->GetParentIDs()[i] << std::endl;
-	//
-//	//		std::cout << std::endl;
 	//		std::cout << std::endl;
+	//	}
+		// REMOVE
+	//	getchar();
 	}
 }
 
@@ -95,20 +86,20 @@ void AnimSkeleton::SetSkeleton(uint32_t * parentID, glm::mat4 * localTx,
 
 	for (uint32_t i = 1; i < m_numJoints; i++)
 	{
-		m_skel[i].globalTx		= m_skel[m_skel[i].parentID].globalTx *  m_skel[i].localTx;
+		m_skel[i].globalTx		= m_skel[m_skel[i].parentID].globalTx * m_skel[i].localTx;
 		m_skel[i].invBindPose	= glm::inverse(m_skel[i].globalTx);
 	}
 }
 
-glm::mat4 AnimSkeleton::ReadHierarchy(uint32_t node)
+glm::mat4 AnimSkeleton::ReadHierarchy(uint32_t n, glm::mat4 kf)
 {
-	if (m_skel[node].parentID == 0)
+	if (m_skel[n].parentID == 0)
 	{
 		m_skel[0].globalTx = m_skel[0].localTx;
-		m_skinnedTx[0] = m_skel[0].globalTx * m_skel[0].invBindPose;
-		return m_skinnedTx[0];
+		return m_skel[0].globalTx * m_skel[0].invBindPose;
 	}
 	
-	
-
+	m_skel[n].globalTx = m_skel[m_skel[n].parentID].globalTx * kf;
+	glm::mat4 global = m_skel[n].globalTx * m_skel[n].invBindPose;
+	return global * ReadHierarchy(m_skel[n].parentID, kf);
 }

@@ -29,7 +29,7 @@ public:
 		uint32_t numJoints);
 
 private:
-	glm::mat4 ReadHierarchy(uint32_t node);
+	glm::mat4 ReadHierarchy(uint32_t n, glm::mat4 kf);
 
 private:
 	uint32_t	m_numJoints;

@@ -37,6 +37,8 @@ void Prefab::Init()
 {
 	m_transform.SetScale(glm::vec3(1, 1, 1));
 	m_transform.SetPosition(glm::vec3(0.0f, 0.0f, 11.0f));
+	m_transform.SetRotation(glm::vec3(0.0f, 180.0f, 0.0f));
+
 
 	std::string * shaders = new std::string[2];
 	uint32_t * types = new uint32_t[2];
