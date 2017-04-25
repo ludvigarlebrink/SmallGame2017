@@ -37,10 +37,6 @@ void Player::Update() {
 		m_isMidAir = false;
 	}
 
-	m_jumpTimer += 0.02f;
-	if (m_jumpTimer > 10.0f) {
-		m_jumpTimer = 10.0f;
-	}
 
 	//controller input///////////////////////////////////////////
 

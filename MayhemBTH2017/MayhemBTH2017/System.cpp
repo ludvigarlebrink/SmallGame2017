@@ -63,9 +63,6 @@ void System::Run()
 
 		m_inputManager->Update();
 
-		ColliderShader.Bind();
-		ColliderShader.Update(transform, camera);
-
 		physics.Update(transform);
 		physics.Render(transform, camera);
 

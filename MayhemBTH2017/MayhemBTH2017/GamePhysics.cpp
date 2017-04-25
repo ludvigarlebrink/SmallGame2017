@@ -85,5 +85,5 @@ void GamePhysics::Render(Transform &transform, Camera camera) {
 	m_collision.DrawCollider(camera);
 	m_playerSprite.draw();
 
-	//m_player.Render(transform, camera);
+	m_player.Render(transform, camera);
 }
