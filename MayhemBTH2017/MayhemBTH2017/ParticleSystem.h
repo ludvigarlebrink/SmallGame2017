@@ -13,20 +13,18 @@
 #include "Mesh.h"
 #include "ParticleTransform.h"
 #include "Particle.h"
-#include "String.h"
 
 class ParticleSystem : public AShader
 {
 public:
 	//::..CONSTRUCTORS..:://
-	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size,  const int nrOf, GLfloat lifetime);
+	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size,  const int nrOf);
 	ParticleSystem();
 
 	//Destructor
 	virtual ~ParticleSystem();
 	void UpdateParticles();
 	void RenderTransformed(GLuint textureID);
-	void Emitt();
 
 	//::..HELPER FUNCTIONS..:://
 
@@ -42,8 +40,8 @@ private:
 	glm::vec3 GetRandomDir();
 
 private:
-	
-	Particle m_particle[10000];
+	Particle m_part[1];
+
 
 	uint64_t PARTICLE_COUNT;
 	AShader	m_pShader;
@@ -63,10 +61,8 @@ private:
 	GLuint m_velocityID;
 	GLuint m_timeAliveID;
 	GLuint m_timerID;
-	const char* m_shaderName;
 	uint32_t m_offset = 0;
-	GLfloat m_lifetime;
-	GLfloat m_timerCounter = 0.0;
+	GLfloat m_timer = 0.0f;
 	Transform tmpTransform;
 	GLuint m_drawVAO;
 	GLuint testVAO;
