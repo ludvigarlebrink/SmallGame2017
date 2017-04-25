@@ -6,6 +6,7 @@ Level::Level()
 {
 	Init();
 	m_name = "New_Level";
+	m_input = InputManager::Get();
 }
 
 
@@ -25,7 +26,31 @@ void Level::Render(Camera camera)
 
 	m_debugShader.Update(tran, camera);
 
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
+	{
+
+		m_uv.x = (32 * 3) / 512.0;
+		m_uv.y = 0.0 / 512.0;
+		m_uv.z = 32 / 512.0;
+		m_uv.w = 32 / 512.0;
+		std::cout << "pressed" << std::endl;
+	}
+
+	//Left stick
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
+	{
+		m_uv.x = 0.0/ 512.0;
+		m_uv.y = 0.0 / 512.0;
+		m_uv.z = 512.0 / 512.0;
+		m_uv.w = 512.0 / 512.0;
+
+	}
+
+	m_debugShader.SendTexture(0, "t", m_uv);
+
 	m_mesh.Render();
+
 	m_mesh2.Render();
 }
 
@@ -112,7 +137,8 @@ void Level::SetName(const std::string & name)
 //::.. HELP FUNCTIONS ..:://
 void Level::Init()
 {
-	m_debugShader.Init("DebugShader", false, 0);
+	//m_debugShader.Init("DebugShader", false, 0);
+	m_debugShader.Init(".\\Assets\\GLSL\\LevelShader", false, false);
 	InitGrid();
 	InitMesh();
 }
@@ -148,11 +174,11 @@ void Level::InitMesh()
 			// Quad 1.
 			m_vertices[i].position = glm::vec3((x + 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-			m_vertices[i].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices[i].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
 
 			m_vertices[i + 1].position = glm::vec3((x + 0.5f), (y - 0.5f), -2.0f * scaler);
 			m_vertices[i + 1].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-			m_vertices[i + 1].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices[i + 1].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
 
 			m_vertices[i + 2].position = glm::vec3((x - 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i + 2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -164,12 +190,13 @@ void Level::InitMesh()
 
 			m_vertices[i + 4].position = glm::vec3((x + 0.5f), (y - 0.5f), -2.0f * scaler);
 			m_vertices[i + 4].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-			m_vertices[i + 4].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices[i + 4].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
 
 			m_vertices[i + 5].position = glm::vec3((x - 0.5f), (y - 0.5f), -2.0f * scaler);
 			m_vertices[i + 5].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-			m_vertices[i + 5].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices[i + 5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 0.0f);
 			i += 6;
+		
 		}
 	}
 
@@ -182,11 +209,11 @@ void Level::InitMesh()
 			// Quad 2.
 			m_vertices2[i].position = glm::vec3(x + 0.5f, y + 0.5f, 2.0f);
 			m_vertices2[i].normal = glm::vec3(0.0f, 1.0f, 0.0f);
-			m_vertices2[i].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices2[i].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
 
 			m_vertices2[i + 1].position = glm::vec3(x + 0.5f, y + 0.5f, -2.0f);
 			m_vertices2[i + 1].normal = glm::vec3(0.0f, 1.0f, 0.0f);
-			m_vertices2[i + 1].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices2[i + 1].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
 
 			m_vertices2[i + 2].position = glm::vec3(x - 0.5f, y + 0.5f, -2.0f);
 			m_vertices2[i + 2].normal = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -198,16 +225,16 @@ void Level::InitMesh()
 
 			m_vertices2[i + 4].position = glm::vec3(x + 0.5f, y + 0.5f, 2.0f);
 			m_vertices2[i + 4].normal = glm::vec3(0.0f, 1.0f, 0.0f);
-			m_vertices2[i + 4].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices2[i + 4].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
 
 			m_vertices2[i + 5].position = glm::vec3(x - 0.5f, y + 0.5f, -2.0f);
 			m_vertices2[i + 5].normal = glm::vec3(0.0f, 1.0f, 0.0f);
-			m_vertices2[i + 5].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			m_vertices2[i + 5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 0.0f);
 
 			// Quad 3.
 			m_vertices2[i + 6].position = glm::vec3(x + 0.5f, y + 0.5f, 2.0f);
 			m_vertices2[i + 6].normal = glm::vec3(1.0f, 0.0f, 0.0f);
-			m_vertices2[i + 6].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+			m_vertices2[i + 6].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
 
 			m_vertices2[i + 7].position = glm::vec3(x + 0.5f, y - 0.5f, -2.0f);
 			m_vertices2[i + 7].normal = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -215,11 +242,11 @@ void Level::InitMesh()
 
 			m_vertices2[i + 8].position = glm::vec3(x + 0.5f, y + 0.5f, -2.0f);
 			m_vertices2[i + 8].normal = glm::vec3(1.0f, 0.0f, 0.0f);
-			m_vertices2[i + 8].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+			m_vertices2[i + 8].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
 			m_vertices2[i + 9].position = glm::vec3(x + 0.5f, y + 0.5f, 2.0f);
 			m_vertices2[i + 9].normal = glm::vec3(1.0f, 0.0f, 0.0f);
-			m_vertices2[i + 9].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+			m_vertices2[i + 9].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
 			m_vertices2[i + 10].position = glm::vec3(x + 0.5f, y - 0.5f, 2.0f);
 			m_vertices2[i + 10].normal = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -227,7 +254,7 @@ void Level::InitMesh()
 
 			m_vertices2[i + 11].position = glm::vec3(x + 0.5f, y - 0.5f, -2.0f);
 			m_vertices2[i + 11].normal = glm::vec3(1.0f, 0.0f, 0.0f);
-			m_vertices2[i + 11].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+			m_vertices2[i + 11].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 0.0f);
 
 			i += 12;
 		}
@@ -240,6 +267,10 @@ void Level::InitMesh()
 
 void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied)
 {
+
+
+	
+
 	uint64_t pos = (posY + (posX * SIZE_Y)) * 6;
 	for (size_t i = 0; i < 6; i++)
 	{

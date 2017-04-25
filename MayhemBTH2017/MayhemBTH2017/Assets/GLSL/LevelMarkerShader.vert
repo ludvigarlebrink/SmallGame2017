@@ -14,12 +14,9 @@ uniform float Alpha;
 void main()
 {
 
-		if(TexCoords.z > 0.01f)
-	{
-		mat4 PV = P * V;
-		mat4 MVP = PV * M;
-		gl_Position = MVP * vec4(Position, 1.0f);
-	}
+	mat4 PV = P * V;
+	mat4 MVP = PV * M;
+	gl_Position = MVP * vec4(Position, 1.0);
 
 	TexCoords1 = TexCoords;
 }

@@ -9,7 +9,7 @@ LevelMarker::LevelMarker()
 	m_input = InputManager::Get();
 	//Temp väntar på en fungerande Handler...........!!!!!!!!!!!!!!!!
 	m_mode = NORMAL;
-	m_levelShader.Init(".\\Assets\\GLSL\\LevelShader", false, false);
+	m_levelShader.Init(".\\Assets\\GLSL\\LevelMarkerShader", false, false);
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\MegaMap.jpg");
 		
 	
@@ -186,14 +186,14 @@ void LevelMarker::Update(Camera & camera)
 //::.. UPDATE FUNCTIONS ..:://
 void LevelMarker::Render(Camera & camera)
 {
-	
+	//temp stuff-------------------------------
 	m_megaTexture.Bind(0);
 
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
 	{
 
-		m_uv.x = (32 * 0 )/ 512.0;
+		m_uv.x = (32 * 3 )/ 512.0;
 		m_uv.y = 0.0 / 512.0;
 		m_uv.z =  32/ 512.0;
 		m_uv.w = 32 / 512.0;
@@ -213,6 +213,9 @@ void LevelMarker::Render(Camera & camera)
 	m_levelShader.SendTexture(0, "t", m_uv);
 
 	m_levelShader.Bind();
+
+
+	//temp stuff-------------------------------END
 
 	if (m_mode == ADD_BLOCK || m_mode == REMOVE_BLOCK)
 	{
