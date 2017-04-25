@@ -35,16 +35,15 @@ void Prefab::Render(Camera & cam)
 //::.. HELP FUNCTIONS ..:://
 void Prefab::Init()
 {
-	m_transform.SetScale(glm::vec3(1, 1, 1));
-	m_transform.SetPosition(glm::vec3(0.0f, 0.0f, 11.0f));
-	m_transform.SetRotation(glm::vec3(0.0f, 180.0f, 0.0f));
-
+	m_transform.SetScale(glm::vec3(4.0f, 4.0f, 4.0f));
+	m_transform.SetPosition(glm::vec3(0.0f, 0.0f, 15.0f));
+	m_transform.SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
 
 	std::string * shaders = new std::string[2];
 	uint32_t * types = new uint32_t[2];
 	
 	shaders[0] = ".\\Assets\\GLSL\\SkeletalAnimation.vert";
-	shaders[1] = ".\\Assets\\GLSL\\SkeletalAnimation.frag";
+	shaders[1] = ".\\Assets\\GLSL\\ToonShader.frag";
 
 	types[0] = ShaderManager::VERT_SHADER;
 	types[1] = ShaderManager::FRAG_SHADER;

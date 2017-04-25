@@ -141,7 +141,7 @@ Prefab * PrefabManager::Instantiate(const char * name)
 	}
 
 	animClip->SetName("SUPER");
-	animClip->SetAnimation(key, 1, 120);
+	animClip->SetAnimation(key, 1, 59);
 
 	animContrl->AddAnimation(animClip);
 

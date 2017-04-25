@@ -19,15 +19,15 @@ AnimSkeleton::~AnimSkeleton()
 
 void AnimSkeleton::Update(KeyFrame * kf)
 {
-	m_skel[0].globalTx = m_skel[0].localTx;
-	m_skinnedTx[0] = m_skel[0].invBindPose * m_skel[0].globalTx;
+	m_skel[0].globalTx = kf->localTx[0];
+	m_skinnedTx[0] = m_skel[0].globalTx * m_skel[0].invBindPose;
 	
 	m_counter += TimeManager::Get()->GetDeltaTime();
 
 	for (uint32_t i = 1; i < m_numJoints; i++)
 	{
-		m_skel[i].globalTx = kf->localTx[i] * m_skel[m_skel[i].parentID].globalTx;
-		m_skinnedTx[i] = m_skel[i].invBindPose * m_skel[i].globalTx;
+		m_skel[i].globalTx = m_skel[m_skel[i].parentID].globalTx * kf->localTx[i];
+		m_skinnedTx[i] = m_skel[i].globalTx * m_skel[i].invBindPose;
 	//
 	//
 	//	for (int j = 0; j < 4; j++)
@@ -100,6 +100,6 @@ glm::mat4 AnimSkeleton::ReadHierarchy(uint32_t n, glm::mat4 kf)
 	}
 	
 	m_skel[n].globalTx = m_skel[m_skel[n].parentID].globalTx * kf;
-	glm::mat4 global = m_skel[n].globalTx * m_skel[n].invBindPose;
+	glm::mat4 global = m_skel[n].invBindPose * m_skel[n].globalTx;
 	return global * ReadHierarchy(m_skel[n].parentID, kf);
 }

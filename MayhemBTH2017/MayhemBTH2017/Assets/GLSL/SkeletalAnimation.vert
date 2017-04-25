@@ -12,7 +12,7 @@ uniform mat4 M;
 uniform mat4 V;
 uniform mat4 P;
 
-uniform mat4 Joints[16];
+uniform mat4 Joints[22];
 
 void main()
 {
@@ -20,7 +20,7 @@ void main()
 	vec4 newNormal;
 	int index;
 
-	vec4 normalizedJointWeight = normalize(JointWeight);
+	vec4 normalizedJointWeight = JointWeight;
 
 	// Joint 1
 	index = int(JointIndex.x);
