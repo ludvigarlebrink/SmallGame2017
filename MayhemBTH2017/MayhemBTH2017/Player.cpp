@@ -43,10 +43,6 @@ void Player::Update() {
 		m_isMidAir = false;
 	}
 
-	m_jumpTimer += 0.02f;
-	if (m_jumpTimer > 10.0f) {
-		m_jumpTimer = 10.0f;
-	}
 
 	//controller input///////////////////////////////////////////
 
@@ -111,8 +107,6 @@ void Player::Render(Transform transform, Camera camera) {
 	m_shader.Bind();
 	m_shader.Update(transform, camera);
 	m_playerMesh.Render();
-
-	glUseProgram(0);
 
 }
 

@@ -1,7 +1,7 @@
 #ifndef __GAMEPHYSICS_H__
 #define __GAMEPHYSICS_H__
 
-#include "BasicGun.h"
+#include "AProjectile.h"
 #include <Box2D\Box2D.h>
 #include "Box.h"
 #include "Collider2D.h"
@@ -42,8 +42,9 @@ private:
 	Sprite m_powerUpSprite;
 	Transform m_transform;
 	Collider2D m_collision;
-	AProjectile m_proj;
 	Sprite		m_firesprites[10];
+	BasicGun	m_gun;
+	Sprite		m_shot;
 
 
 
