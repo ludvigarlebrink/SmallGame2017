@@ -341,7 +341,6 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="QuadShader.h" />
     <ClInclude Include="ShadowMap.h" />
-    <ClInclude Include="ShadowShader.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Collider2D.h" />
     <ClInclude Include="GamePhysics.h" />
@@ -351,11 +350,6 @@
     <ClInclude Include="AProjectile.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\GLSL\ShadowPass.frag" />
-    <None Include="Assets\GLSL\ShadowShader.vert" />
-    <None Include="DrawShader.frag" />
-    <None Include="DrawShader.geom" />
-    <None Include="DrawShader.vert" />
     <None Include="Assets\GLSL\BlurrShader.frag">
       <Filter>GLSL</Filter>
     </None>
@@ -407,9 +401,6 @@
     <None Include="Assets\GLSL\leo.geom">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="Assets\GLSL\leo.vert">
-      <Filter>GLSL</Filter>
-    </None>
     <None Include="Assets\GLSL\MainShader.frag">
       <Filter>GLSL</Filter>
     </None>
@@ -440,7 +431,13 @@
     <None Include="Assets\GLSL\QuadShader.vert">
       <Filter>GLSL</Filter>
     </None>
+    <None Include="Assets\GLSL\ShadowPass.frag">
+      <Filter>GLSL</Filter>
+    </None>
     <None Include="Assets\GLSL\ShadowShader.geom">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ShadowShader.vert">
       <Filter>GLSL</Filter>
     </None>
     <None Include="Assets\GLSL\SharpnelShader.frag">
@@ -455,13 +452,7 @@
     <None Include="Assets\GLSL\SplitterShader.vert">
       <Filter>GLSL</Filter>
     </None>
-    <None Include="Assets\GLSL\ToonShader.frag">
-      <Filter>GLSL</Filter>
-    </None>
     <None Include="Assets\GLSL\ToonShader.vert">
-      <Filter>GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\ParticleSparks.vert">
       <Filter>GLSL</Filter>
     </None>
   </ItemGroup>

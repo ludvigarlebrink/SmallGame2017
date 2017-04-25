@@ -239,7 +239,6 @@
     <ClInclude Include="ShaderCache.h" />
     <ClInclude Include="ShaderImporter.h" />
     <ClInclude Include="ShadowMap.h" />
-    <ClInclude Include="ShadowShader.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="StackPool.h" />
@@ -273,13 +272,11 @@
     <None Include="Assets\GLSL\GeometryPass.vert" />
     <None Include="Assets\GLSL\leo.frag" />
     <None Include="Assets\GLSL\leo.geom" />
-    <None Include="Assets\GLSL\leo.vert" />
     <None Include="Assets\GLSL\MainShader.frag" />
     <None Include="Assets\GLSL\MainShader.geom" />
     <None Include="Assets\GLSL\MainShader.vert" />
     <None Include="Assets\GLSL\ParticleDrop.vert" />
     <None Include="Assets\GLSL\ParticleExplosion.vert" />
-    <None Include="Assets\GLSL\ParticleSparks.vert" />
     <None Include="Assets\GLSL\PlayerShader.frag" />
     <None Include="Assets\GLSL\PlayerShader.vert" />
     <None Include="Assets\GLSL\QuadShader.frag" />
@@ -292,11 +289,7 @@
     <None Include="Assets\GLSL\SharpnelShader.geom" />
     <None Include="Assets\GLSL\SharpnelShader.vert" />
     <None Include="Assets\GLSL\SplitterShader.vert" />
-    <None Include="Assets\GLSL\ToonShader.frag" />
     <None Include="Assets\GLSL\ToonShader.vert" />
-    <None Include="DrawShader.frag" />
-    <None Include="DrawShader.geom" />
-    <None Include="DrawShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

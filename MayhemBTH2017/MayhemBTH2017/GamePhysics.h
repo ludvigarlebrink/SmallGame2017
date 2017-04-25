@@ -18,7 +18,9 @@ private:
 	std::unique_ptr<b2World> m_world;
 	Box m_newBox;
 	Box m_newBox2;
+	Box m_boxPowerUp;
 	Player m_player;
+	
 
 	TimeManager* m_time;
 	GLfloat m_jumpTimer=0.0f;
@@ -28,9 +30,10 @@ private:
 	GLfloat m_scaleX;
 	GLfloat m_scaleY;
 	Sprite m_playerSprite;
-	Sprite m_bazookaSprite;
+	Sprite m_powerUp;
 	Transform m_transform;
 	Collider2D m_collision;
+	AShader m_colShader;
 
 
 

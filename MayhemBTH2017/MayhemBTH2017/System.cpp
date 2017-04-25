@@ -23,9 +23,9 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-	ParticleSystem part(".\\Assets\\GLSL\\GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec4(0.1, 0.1, 1.0, 0.0), 15.1f, 30);
-	ParticleSystem part2(".\\Assets\\GLSL\\ParticleExplosion", glm::vec3(0.0, 0.0, 0.0), glm::vec4(0.5, 0.5, 0.0, 0.4), 5.1f, 100);
-	ParticleSystem part3(".\\Assets\\GLSL\\ParticleSparks", glm::vec3(1.0, 1.0, 0.0), glm::vec4(1.1, 1.1, 0.0, 0.8),0.3f, 10000);
+	ParticleSystem part(".\\Assets\\GLSL\\GeometryPass", glm::vec3(0.0, 0.0, 0.0), glm::vec4(0.1, 0.1, 1.0, 0.0), 15.1f, 30, 5.0f);
+	ParticleSystem part2(".\\Assets\\GLSL\\ParticleExplosion", glm::vec3(0.0, 0.0, 0.0), glm::vec4(0.5, 0.5, 0.0, 0.4), 5.1f, 100, 15.0f);
+	ParticleSystem part3(".\\Assets\\GLSL\\ParticleSparks", glm::vec3(1.0, 1.0, 0.0), glm::vec4(1.1, 1.1, 0.0, 0.8),0.3f, 10000, 18.0f);
 
 	LevelEditor l;
 	Level lvl;
@@ -38,7 +38,6 @@ void System::Run()
 
 	GamePhysics physics;
 
-	physics.enterWorld();
 
 	Transform transform;
 	Camera camera;
@@ -49,6 +48,9 @@ void System::Run()
 	shader.Init(".\\Assets\\GLSL\\DebugShader", false, 0);
 	shaderGreen.Init(".\\Assets\\GLSL\\DebugGreen", false, 0);
 	ColliderShader.Init(".\\Assets\\GLSL\\ColliderShader", false, 0);
+	
+	
+	physics.enterWorld();
 	TextureImporter teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
@@ -63,11 +65,6 @@ void System::Run()
 
 		m_inputManager->Update();
 
-		ColliderShader.Bind();
-		ColliderShader.Update(transform, camera);
-
-		physics.Update(transform);
-		physics.Render(transform, camera);
 
 
 
@@ -96,17 +93,22 @@ void System::Run()
 
 		//case GameState::GAME: {
 
-			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-			shader.Bind();
-			shader.Update(transform, camera);
+	
+
 			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 			transform.SetPosition(42.0, 24.0, -0.0);
+	
+			ColliderShader.Bind();
+			ColliderShader.Update(transform, camera);
+			physics.Update(transform);
+	
+			physics.Render(transform, camera);
+			game.Update(camera);
 
 
 			//Draw scene
 
 			//part1
-			game.Update(camera);
 			part.Bind();
 			part.UpdateParticles();
 			texture.Bind();
