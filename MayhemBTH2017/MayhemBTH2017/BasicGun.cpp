@@ -2,6 +2,10 @@
 
 
 
+BasicGun::BasicGun()
+{
+}
+
 BasicGun::BasicGun(b2World* world, glm::vec2 pos)
 {
 	Init(world, pos);

@@ -30,6 +30,8 @@ void GamePhysics::enterWorld()
 	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", false, false);
 	m_playerSprite.createSprite(glm::vec2(0, 0), glm::vec2(1.0, 1.0));
 
+	//m_shot.createSprite(glm::vec2(0, 0), glm::vec2(1.0, 1.0));
+
 	m_player.GetBox().getFixture()->SetDensity(1.0);
 	m_player.GetBox().getFixture()->SetFriction(0.5);
 	m_player.GetBox().getFixture()->SetRestitution(0.0);
@@ -42,8 +44,6 @@ void GamePhysics::enterWorld()
 void GamePhysics::Update(Transform transform)
 {
 
-
-
 	//Check if player is in air 
 
 
@@ -53,6 +53,7 @@ void GamePhysics::Update(Transform transform)
 	m_tempY = m_player.GetBox().getBody()->GetPosition().y - (m_player.GetBox().getScale().y / 2);
 
 	//friction
+
 
 	m_player.GetBox().getFixture()->SetFriction(0.5);
 
@@ -78,6 +79,7 @@ glm::vec3 GamePhysics::GetPosition() {
 }
 
 void GamePhysics::Render(Transform &transform, Camera camera) {
+
 
 	m_transform.SetPosition(glm::vec3(m_tempX, m_tempY, 0));
 	transform.SetPosition(glm::vec3(m_tempX, m_tempY, 0));

@@ -8,6 +8,7 @@
 class BasicGun: public AProjectile
 {
 public:
+	BasicGun();
 	BasicGun(b2World* world, glm::vec2 pos);
 	virtual ~BasicGun();
 

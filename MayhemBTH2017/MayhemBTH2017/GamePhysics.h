@@ -35,8 +35,9 @@ private:
 	Sprite m_bazookaSprite;
 	Transform m_transform;
 	Collider2D m_collision;
-	AProjectile m_proj;
 	Sprite		m_firesprites[10];
+	BasicGun	m_gun;
+	Sprite		m_shot;
 
 
 
