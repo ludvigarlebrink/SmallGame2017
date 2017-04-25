@@ -63,9 +63,6 @@ void System::Run()
 
 		m_inputManager->Update();
 
-		ColliderShader.Bind();
-		ColliderShader.Update(transform, camera);
-
 		physics.Update(transform);
 		physics.Render(transform, camera);
 
@@ -107,8 +104,8 @@ void System::Run()
 
 			//part1
 			game.Update(camera);
-			//part.Bind();
-			//part.UpdateParticles();
+			part.Bind();
+			part.UpdateParticles();
 			texture.Bind();
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -119,8 +116,8 @@ void System::Run()
 		
 			
 			//part2
-			//part2.Bind();
-			//part2.UpdateParticles();
+			part2.Bind();
+			part2.UpdateParticles();
 			texture.Bind();
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -129,8 +126,8 @@ void System::Run()
 			glDisable(GL_BLEND);
 			glDepthMask(TRUE);
 			//part2
-			//part3.Bind();
-			//part3.UpdateParticles();
+			part3.Bind();
+			part3.UpdateParticles();
 			texture.Bind();
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

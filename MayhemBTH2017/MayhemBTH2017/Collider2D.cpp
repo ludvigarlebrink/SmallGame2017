@@ -4,7 +4,7 @@
 
 Collider2D::Collider2D()
 {
-	m_shader.Init("ColliderShader", false, false);
+
 }
 
 
@@ -34,7 +34,8 @@ void Collider2D::DrawCollider(Camera camera)
 	Transform transf;
 	transf.SetPosition(42.0, 24.0, -0.0);
 	m_shader.Update(transf, camera);
-	//m_mesh.Render();
+	m_mesh.Render();
+	glUseProgram(0);
 
 }
 
@@ -81,19 +82,20 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 				m_vertices[i + 5].position = glm::vec2((x - blockScale), (y - blockScale));
 
 
-				Box test;
+				Box gameFloor;
 
 				GLint tempX, tempY;
 				tempX = x;
 				tempY = y;
 				GLfloat scale = 0.5f;
-				test.initStatic(world, glm::vec2((tempX), (tempY)), glm::vec2(offset, scale));
-				test.getFixture()->SetRestitution(0.0); //floor bounciness
-				test.getFixture()->SetFriction(1.0); //floor friction
+				gameFloor.initStatic(world, glm::vec2((tempX-0.5), (tempY-0.5)), glm::vec2(offset+0.84, scale+0.42));
+				gameFloor.getFixture()->SetRestitution(0.0); //floor bounciness
+				gameFloor.getFixture()->SetFriction(1.0); //floor friction
+				gameFloor.getBody()->ResetMassData();
 
 
 
-				m_boxes.push_back(test);
+				m_boxes.push_back(gameFloor);
 
 				x += blocksInRow;
 				blocksInRow = 0;
@@ -118,10 +120,5 @@ void Collider2D::CreatePlayerBoundingBox(b2World* world) {
 	
 	m_boxes.push_back(tempBox);
 
-
-
-	//Player player;
-	//glm::vec2=player.GetPosition();
-	//test.initStatic(world, glm::vec2((tempX), (tempY)), glm::vec2(offset / 99, scale));
 
 }

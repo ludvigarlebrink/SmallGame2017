@@ -26,7 +26,7 @@ void GamePhysics::enterWorld()
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 	//PLAYER
-	m_player.Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 3.0));
+	m_player.Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 2.0));
 	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", false, false);
 	m_playerSprite.createSprite(glm::vec2(0, 0), glm::vec2(1.0, 1.0));
 
@@ -87,5 +87,5 @@ void GamePhysics::Render(Transform &transform, Camera camera) {
 	m_collision.DrawCollider(camera);
 	m_playerSprite.draw();
 
-	//m_player.Render(transform, camera);
+	m_player.Render(transform, camera);
 }

@@ -8,7 +8,7 @@ AMenu::AMenu()
 	// Do nothing...
 	m_stateManager = StateManager::Get();
 	m_currentSelection = 0;
-	m_shader.Init("DebugGreen", false, false);
+	m_shader.Init(".\\Assets\\GLSL\\DebugGreen", false, false);
 }
 
 

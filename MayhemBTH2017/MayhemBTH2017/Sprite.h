@@ -15,6 +15,7 @@ struct GUIQuad
 	glm::vec3 color;
 	GLuint texture_ID;
 
+
 };
 
 class Sprite : public AShader
@@ -47,6 +48,7 @@ private:
 	void setTexLoc();
 	GUIQuad		quad;
 	GLuint		vbo_ID;
+	GLuint		m_vao;
 	GLuint		colorLoc;
 	GLuint		texLoc;
 	GLuint		hoverTexID;

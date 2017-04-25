@@ -1,7 +1,7 @@
 #ifndef __GAMEPHYSICS_H__
 #define __GAMEPHYSICS_H__
 
-#include "BasicGun.h"
+#include "AProjectile.h"
 #include <Box2D\Box2D.h>
 #include "Box.h"
 #include "Collider2D.h"
