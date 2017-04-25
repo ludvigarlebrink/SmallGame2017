@@ -104,7 +104,5 @@ void Player::Render(Transform transform, Camera camera) {
 
 	m_playerMesh.Render();
 
-	glUseProgram(0);
-
 }
 
