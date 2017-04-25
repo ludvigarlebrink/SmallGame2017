@@ -3,10 +3,10 @@
 in vec3 Normal1;
 
 out vec4 FragColor;
-vec4 lightColor=vec4(1.0, 1.0, 0.0, 1.0);
 
 void main()
 {
+	vec3 lightColor = vec3(1.0, 1.0, 0.0);
 	vec3 col1 = vec3(0.0, 0.3, 0.0);
 	vec3 col2 = vec3(0.0, 0.5, 0.0);
 	vec3 col3 = vec3(0.0, 0.7, 0.0);

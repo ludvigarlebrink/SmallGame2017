@@ -153,7 +153,7 @@ Prefab * PrefabManager::Instantiate(const char * name)
 	
 	prefab->SetName("HEJ");
 
-	prefab->Init();
+	prefab->Create();
 
 	std::cout << "DONE!" << std::endl;
 
