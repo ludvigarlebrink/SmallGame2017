@@ -466,5 +466,11 @@
     <None Include="Assets\GLSL\ParticleSparks.vert">
       <Filter>GLSL</Filter>
     </None>
+    <None Include="PowerUpShader.vert">
+      <Filter>GLSL</Filter>
+    </None>
+    <None Include="PowerUpShader.frag">
+      <Filter>GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

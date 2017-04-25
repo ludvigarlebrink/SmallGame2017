@@ -22,17 +22,24 @@ private:
 	std::unique_ptr<b2World> m_world;
 	Box m_newBox;
 	Box m_newBox2;
+	Box m_powerUpBox;
 	Player m_player;
 
 	TimeManager* m_time;
 	GLfloat m_jumpTimer=0.0f;
 	bool m_isMidAir;
-	GLfloat m_tempX;
-	GLfloat m_tempY;
-	GLfloat m_scaleX;
-	GLfloat m_scaleY;
+	GLfloat m_playerScaleX;
+	GLfloat m_playerScaleY;
+	GLfloat m_playerPosX;
+	GLfloat m_playerPosY;
+
+	GLfloat m_powerUpScaleX;
+	GLfloat m_powerUpScaleY;
+	GLfloat m_powerUpPosX;
+	GLfloat m_powerUpPosY;
+
 	Sprite m_playerSprite;
-	Sprite m_bazookaSprite;
+	Sprite m_powerUpSprite;
 	Transform m_transform;
 	Collider2D m_collision;
 	AProjectile m_proj;

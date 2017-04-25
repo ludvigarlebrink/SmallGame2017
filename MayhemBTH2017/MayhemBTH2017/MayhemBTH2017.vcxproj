@@ -299,6 +299,8 @@
     <None Include="DrawShader.frag" />
     <None Include="DrawShader.geom" />
     <None Include="DrawShader.vert" />
+    <None Include="PowerUpShader.frag" />
+    <None Include="PowerUpShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

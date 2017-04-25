@@ -26,6 +26,12 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	//Load player shader
 	m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
+	GetBox().getFixture()->SetDensity(1.0);
+	GetBox().getFixture()->SetFriction(1.0);
+	GetBox().getFixture()->SetRestitution(0.0);
+	GetBox().getBody()->SetLinearDamping(0.2);
+
+
 }
 
 void Player::Update() {
@@ -46,17 +52,17 @@ void Player::Update() {
 
 	//LEFT MOVEMENT
 	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX);
-	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTY) != 0.0f || InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f &&leftVelocity>-5)
+	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f &&leftVelocity>-5)
 	{
 		std::cout << leftVelocity << std::endl;
 		if (m_isMidAir) {
 
-			GetBox().getBody()->ApplyLinearImpulse(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-5)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 
 		}
-		if (!m_isMidAir &&InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) == 0.0f) {
+		if (!m_isMidAir && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) == 0.0f) {
 
-			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-800)*TimeManager::Get()->GetDeltaTime(), 0));
+			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-350)*TimeManager::Get()->GetDeltaTime(), 0));
 		}
 
 
@@ -65,17 +71,17 @@ void Player::Update() {
 	GLfloat rightVelocity = GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX);
 
 	//RIGHT MOVEMENT
-	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTY) != 0.0f || InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) != 0.0f &&rightVelocity > -5)
+	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) != 0.0f &&rightVelocity > -5)
 	{
 
 
 		if (m_isMidAir) {
 
-			GetBox().getBody()->ApplyLinearImpulse(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*(-5)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 		}
 		if (!m_isMidAir &&InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) == 0.0f) {
 
-			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*(-800)*TimeManager::Get()->GetDeltaTime(), 0));
+			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*(-350)*TimeManager::Get()->GetDeltaTime(), 0));
 		}
 	}
 
@@ -85,7 +91,7 @@ void Player::Update() {
 		std::cout << "JUMP" << std::endl;
 
 		if (!m_isMidAir) {
-			GetBox().getBody()->ApplyLinearImpulse(b2Vec2(0, 10.5), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 700.0), GetBox().getBody()->GetWorldCenter(), 1);
 			//m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(0, impulse), m_player.GetBox().getBody()->GetWorldCenter(), 1);
 		}
 	}
@@ -104,8 +110,6 @@ void Player::Render(Transform transform, Camera camera) {
 	
 	m_shader.Bind();
 	m_shader.Update(transform, camera);
-
-
 	m_playerMesh.Render();
 
 	glUseProgram(0);
