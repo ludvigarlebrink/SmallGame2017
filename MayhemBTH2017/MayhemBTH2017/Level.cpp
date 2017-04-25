@@ -26,6 +26,7 @@ void Level::Render(Camera camera)
 
 	m_mesh.Render();
 	m_mesh2.Render();
+	glUseProgram(0);
 }
 
 

@@ -26,7 +26,7 @@ void GamePhysics::enterWorld()
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 	//PLAYER
-	m_player.Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 3.0));
+	m_player.Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 2.0));
 	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", false, false);
 	m_playerSprite.createSprite(glm::vec2(0, 0), glm::vec2(1.0, 1.0));
 
@@ -42,8 +42,6 @@ void GamePhysics::enterWorld()
 void GamePhysics::Update(Transform transform)
 {
 
-
-
 	//Check if player is in air 
 
 
@@ -53,6 +51,7 @@ void GamePhysics::Update(Transform transform)
 	m_tempY = m_player.GetBox().getBody()->GetPosition().y - (m_player.GetBox().getScale().y / 2);
 
 	//friction
+
 
 	m_player.GetBox().getFixture()->SetFriction(0.5);
 
@@ -79,11 +78,12 @@ glm::vec3 GamePhysics::GetPosition() {
 
 void GamePhysics::Render(Transform &transform, Camera camera) {
 
+
 	m_transform.SetPosition(glm::vec3(m_tempX, m_tempY, 0));
 	transform.SetPosition(glm::vec3(m_tempX, m_tempY, 0));
 
 	m_collision.DrawCollider(camera);
 	m_playerSprite.draw();
 
-	//m_player.Render(transform, camera);
+	m_player.Render(transform, camera);
 }

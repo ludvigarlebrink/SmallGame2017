@@ -18,7 +18,7 @@ Mesh& MeshImporter::Import()
 	Assimp::Importer	m_importer;
 
 
-	const aiScene * scene = m_importer.ReadFile(".\\Assets\\Sprites\\hej2.fbx", aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
+	const aiScene * scene = m_importer.ReadFile(".\\Assets\\Sprites\\testman.fbx", aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
 
 	if (scene == NULL)
 	{
