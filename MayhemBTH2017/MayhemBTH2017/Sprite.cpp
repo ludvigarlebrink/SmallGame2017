@@ -19,7 +19,6 @@ Sprite::~Sprite()
 void Sprite::createSprite(glm::vec2 pos, glm::vec2 scale)
 {
 
-	glGenVertexArrays(1, &m_vao);
 
 	this->setColorLoc();
 
@@ -42,7 +41,6 @@ void Sprite::createSprite(glm::vec2 pos, glm::vec2 scale)
 		glGenBuffers(1, &this->vbo_ID);
 	}
 
-	glBindVertexArray(m_vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_ID);
 	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->quad.vertArr[0]), &this->quad.vertArr, GL_STATIC_DRAW);
 
@@ -53,7 +51,7 @@ void Sprite::createSprite(glm::vec2 pos, glm::vec2 scale)
 	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(GUIVertex), (void*)(2 * sizeof(float)));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+
 }
 
 void Sprite::setColor(glm::vec3 color)
@@ -159,13 +157,10 @@ void Sprite::sendTexture()
 
 void Sprite::draw()
 {
-	
-	
 	sendColor();
 
 	sendTexture();
 
-	glBindVertexArray(m_vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_ID);
 	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->quad.vertArr[0]), &this->quad.vertArr, GL_STATIC_DRAW);
 

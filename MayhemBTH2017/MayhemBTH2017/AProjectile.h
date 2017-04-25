@@ -13,15 +13,17 @@ public:
 	AProjectile();
 	virtual ~AProjectile();
 
-	void Init(b2World * world, bool startUp, int index);
+	void Init(b2World * world, glm::vec2 originalPosY);
 
-	void Fire(float rate);
+	Box FireTimer(float rate, glm::vec2 originalPos);
+
+	Box GetBox();
 
 
 private:
-	std::vector<Box> m_projectiles;
+	Box				 m_box;
 	unsigned int	 m_counter;
-	float			 m_time;
+	float			 m_time=0;
 	b2World*		 m_world;
 
 };

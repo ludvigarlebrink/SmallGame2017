@@ -1,9 +1,13 @@
-#pragma once
+#ifndef __GAMEPHYSICS_H__
+#define __GAMEPHYSICS_H__
+
+#include "AProjectile.h"
 #include <Box2D\Box2D.h>
 #include "Box.h"
 #include "Collider2D.h"
 #include "Player.h"
 #include "TimeManager.h"
+
 class GamePhysics
 {
 public:
@@ -18,9 +22,7 @@ private:
 	std::unique_ptr<b2World> m_world;
 	Box m_newBox;
 	Box m_newBox2;
-	Box m_boxPowerUp;
 	Player m_player;
-	
 
 	TimeManager* m_time;
 	GLfloat m_jumpTimer=0.0f;
@@ -30,12 +32,14 @@ private:
 	GLfloat m_scaleX;
 	GLfloat m_scaleY;
 	Sprite m_playerSprite;
-	Sprite m_powerUp;
+	Sprite m_bazookaSprite;
 	Transform m_transform;
 	Collider2D m_collision;
-	AShader m_colShader;
+	AProjectile m_proj;
+	Sprite		m_firesprites[10];
 
 
 
 };
 
+#endif // !__GAMEPHYSICS_H__
