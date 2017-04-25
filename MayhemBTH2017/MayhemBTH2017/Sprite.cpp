@@ -157,7 +157,6 @@ void Sprite::sendTexture()
 
 void Sprite::draw()
 {
-	
 	sendColor();
 
 	sendTexture();

@@ -4,6 +4,8 @@
 #include "MeshImporter.h"
 #include "Box.h"
 #include "AShader.h"
+#include "InputManager.h"
+#include "TimeManager.h"
 
 class Player
 {
@@ -24,6 +26,8 @@ private:
 	Camera m_cam;
 	AShader m_shader;
 	AShader m_toonShader;
+	bool	m_isMidAir;
+	float	m_jumpTimer;
 
 };
 
