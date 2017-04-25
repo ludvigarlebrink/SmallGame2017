@@ -1,0 +1,16 @@
+.\\Assets\\Sprites\\ClosedMenu1.png
+STOP
+.\\Assets\\Sprites\\MainMenu.png
+STOP
+.\\Assets\\Sprites\\FButton.png
+.\\Assets\\Sprites\\fourButton.png
+.\\Assets\\Sprites\\StartButton.png
+.\\Assets\\Sprites\\greyButton.png
+STOP
+.\\Assets\\Sprites\\BlueButton.png
+.\\Assets\\Sprites\\GreenButton.png
+.\\Assets\\Sprites\\YellowButton.png
+.\\Assets\\Sprites\\CrossHairButton.png
+STOP
+.\\Assets\\Sprites\\MenuConcept.png
+STOP

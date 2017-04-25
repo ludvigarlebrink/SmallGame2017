@@ -142,13 +142,13 @@ void LevelEditor::ButtonInput()
 	{
 		if (m_state != SAVE)
 		{
-			if (m_levelGUI.GetState() == CLOSED_MENU)
+			if (m_levelGUI.GetState() == GUI_CLOSED)
 			{
-				m_levelGUI.SetState(BLOCK_MENU);
+				m_levelGUI.SetState(GUI_BLOCK);
 			}
 			else
 			{
-				m_levelGUI.SetState(CLOSED_MENU);
+				m_levelGUI.SetState(GUI_CLOSED);
 			}
 		}
 	}
