@@ -2,7 +2,6 @@
 STOP
 .\\Assets\\Sprites\\MainMenu.png
 STOP
-.\\Assets\\Sprites\\FButton.png
 .\\Assets\\Sprites\\fourButton.png
 .\\Assets\\Sprites\\StartButton.png
 .\\Assets\\Sprites\\greyButton.png

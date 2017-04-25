@@ -10,7 +10,7 @@
 struct GUI
 {
 	UIText m_text;
-	uint32_t m_numIcons = 0;
+	int32_t m_numIcons = 0;
 	std::vector<UIImage> m_icons;
 };
 
@@ -59,6 +59,7 @@ private:
 	int32_t m_columns;
 	int32_t m_offsetX;
 	int32_t m_offsetY;
+	int32_t m_offsetMother;
 
 	std::ifstream m_texFile;
 	std::string m_line;

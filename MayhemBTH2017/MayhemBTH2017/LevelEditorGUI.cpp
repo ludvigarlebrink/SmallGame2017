@@ -70,12 +70,9 @@ void LevelEditorGUI::RenderIcons(size_t gui)
 
 void LevelEditorGUI::Init()
 {
-
-	//x = -575
-	//y = 175
-
 	m_offsetX = 50;
 	m_offsetY = 50;
+	m_offsetMother = 2;
 
 	m_rows = 0;
 	m_columns = 0;
@@ -116,8 +113,6 @@ void LevelEditorGUI::Init()
 	}
 
 	// Init textures
-	// TODO - Fix a proper SetPosition alghoritm, don't want to hardcorde them everytime we add a new GUIState
-	// SetPosition is temporary hardcoded
 	m_texFile.open(".\\Assets\\Sprites\\GUITextures.txt");
 	for (int i = 0; i < GUI_NUM; i++)
 	{
@@ -146,140 +141,76 @@ void LevelEditorGUI::Init()
 		{
 			m_gui[guiIndex].m_icons[iconIndex].SetSize(m_nSize, m_nSize);
 			m_gui[guiIndex].m_icons.at(iconIndex).SetPosition(m_rows, m_columns);
-			
+
 			m_rows += m_offsetX;
-			if (m_rows == m_offsetX * 2)
+			if (m_rows == m_offsetX * m_offsetMother)
 			{
-				m_columns += 50;
+				m_columns -= 50;
 				m_rows = 0;
 			}
-
-			std::cout << m_gui[guiIndex].m_icons.at(iconIndex).GetPosX() << " , " << m_gui[guiIndex].m_icons.at(iconIndex).GetPosY() << std::endl;
 		}
 	}
 
+	m_gui[GUI_BLOCK].m_icons.at(m_pos).SetSize(m_hSize, m_hSize);
 }
 
 void LevelEditorGUI::Input()
 {
-	//if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
-	//{
-	//	switch (m_state)
-	//	{
-	//	case GUI_BLOCK:
-	//		if (m_pos - 2 >= 0)
-	//		{
-	//			m_blockArray[m_pos].SetSize(m_nSize, m_nSize);
-	//			m_pos -= 2;
-	//			m_blockArray[m_pos].SetSize(m_hSize, m_hSize);
-	//		}
-	//		break;
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
+	{
+		if (m_pos - m_offsetMother >= 0)
+		{
+			m_gui[m_state].m_icons.at(m_pos).SetSize(m_nSize, m_nSize);
+			m_pos -= m_offsetMother;
+			m_gui[m_state].m_icons.at(m_pos).SetSize(m_hSize, m_hSize);
+		}
+	}
+	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
+	{
 
-	//	case GUI_PROP:
-	//		if (m_pos - 2 >= 0)
-	//		{
-	//			m_propArray[m_pos].SetSize(m_nSize, m_nSize);
-	//			m_pos -= 2;
-	//			m_propArray[m_pos].SetSize(m_hSize, m_hSize);
-	//		}
-	//		break;
-	//	}
+		if (m_pos + m_offsetMother < m_gui[m_state].m_numIcons)
+		{
+			m_gui[m_state].m_icons.at(m_pos).SetSize(m_nSize, m_nSize);
+			m_pos += m_offsetMother;
+			m_gui[m_state].m_icons.at(m_pos).SetSize(m_hSize, m_hSize);
+		}
 
-	//}
-	//else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
-	//{
+	}
+	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_LEFT))
+	{
 
-	//	switch (m_state)
-	//	{
-	//	case GUI_BLOCK:
-	//		if (m_pos + 2 < NUM_BLOCKS)
-	//		{
-	//			m_blockArray[m_pos].SetSize(m_nSize, m_nSize);
-	//			m_pos += 2;
-	//			m_blockArray[m_pos].SetSize(m_hSize, m_hSize);
-	//		}
-	//		break;
+		if (m_pos - 1 >= 0)
+		{
+			m_gui[m_state].m_icons.at(m_pos).SetSize(m_nSize, m_nSize);
+			--m_pos;
+			m_gui[m_state].m_icons.at(m_pos).SetSize(m_hSize, m_hSize);
+		}
+	}
+	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_RIGHT))
+	{
+		if (m_pos + 1 < m_gui[m_state].m_numIcons)
+		{
+			m_gui[m_state].m_icons.at(m_pos).SetSize(m_nSize, m_nSize);
+			++m_pos;
+			m_gui[m_state].m_icons.at(m_pos).SetSize(m_hSize, m_hSize);
+		}
+	}
 
-	//	case GUI_PROP:
-	//		if (m_pos + 2 < NUM_PROPS)
-	//		{
-	//			m_propArray[m_pos].SetSize(m_nSize, m_nSize);
-	//			m_pos += 2;
-	//			m_propArray[m_pos].SetSize(m_hSize, m_hSize);
-	//		}
-	//		break;
-	//	}
-
-	//}
-	//else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_LEFT))
-	//{
-
-	//	switch (m_state)
-	//	{
-	//	case GUI_BLOCK:
-	//		if (m_pos - 1 >= 0)
-	//		{
-	//			m_gui[m_pos].SetSize(m_nSize, m_nSize);
-	//			--m_pos;
-	//			m_blockArray[m_pos].SetSize(m_hSize, m_hSize);
-	//		}
-	//		break;
-
-	//	case GUI_PROP:
-	//		if (m_pos - 1 >= 0)
-	//		{
-	//			m_propArray[m_pos].SetSize(m_nSize, m_nSize);
-	//			--m_pos;
-	//			m_propArray[m_pos].SetSize(m_hSize, m_hSize);
-	//		}
-	//		break;
-	//	}
-	//}
-	//else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_RIGHT))
-	//{
-	//	switch (m_state)
-	//	{
-	//	case GUI_BLOCK:
-	//		if (m_pos + 1 < NUM_BLOCKS)
-	//		{
-	//			m_blockArray[m_pos].SetSize(m_nSize, m_nSize);
-	//			++m_pos;
-	//			m_blockArray[m_pos].SetSize(m_hSize, m_hSize);
-	//		}
-	//		break;
-
-	//	case GUI_PROP:
-	//		if (m_pos + 1 < NUM_PROPS)
-	//		{
-	//			m_propArray[m_pos].SetSize(m_nSize, m_nSize);
-	//			++m_pos;
-	//			m_propArray[m_pos].SetSize(m_hSize, m_hSize);
-	//		}
-	//		break;
-	//	}
-	//}
-
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_RB))
+	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_RB))
 	{
 		if (m_state + 2 <= GUI_NUM)
 		{
+			for (int i = 0; i < m_gui[m_state].m_numIcons; i++)
+			{
+				m_gui[m_state].m_icons.at(m_pos).SetSize(m_nSize, m_nSize);
+			}
+
 			m_state++;
-
-			for (int i = 0; i < NUM_BLOCKS; i++)
+			if (m_pos >= m_gui[m_state].m_numIcons)
 			{
-				if (i != m_pos)
-					m_blockArray[i].SetSize(m_nSize, m_nSize);
-				else
-					m_blockArray[i].SetSize(m_hSize, m_hSize);
+				m_pos = 0;
 			}
-
-			for (int i = 0; i < NUM_PROPS; i++)
-			{
-				if (i != m_pos)
-					m_propArray[i].SetSize(m_nSize, m_nSize);
-				else
-					m_propArray[i].SetSize(m_hSize, m_hSize);
-			}
+			m_gui[m_state].m_icons.at(m_pos).SetSize(m_hSize, m_hSize);
 		}
 	}
 
@@ -287,23 +218,18 @@ void LevelEditorGUI::Input()
 	{
 		if (m_state - 2 > GUI_CLOSED || m_state - 1 != GUI_OPEN)
 		{
-			m_state--;
 
-			/*for (int i = 0; i < GUI_NUM; i++)
+			for (int i = 0; i < m_gui[m_state].m_numIcons; i++)
 			{
-				if (i != m_pos)
-					m_blockArray[i].SetSize(m_nSize, m_nSize);
-				else
-					m_blockArray[i].SetSize(m_hSize, m_hSize);
+				m_gui[m_state].m_icons.at(m_pos).SetSize(m_nSize, m_nSize);
 			}
 
-			for (int i = 0; i < NUM_PROPS; i++)
+			m_state--;
+			if (m_pos >= m_gui[m_state].m_numIcons)
 			{
-				if (i != m_pos)
-					m_propArray[i].SetSize(m_nSize, m_nSize);
-				else
-					m_propArray[i].SetSize(m_hSize, m_hSize);
-			}*/
+				m_pos = 0;
+			}
+			m_gui[m_state].m_icons.at(m_pos).SetSize(m_hSize, m_hSize);
 		}
 	}
 }
