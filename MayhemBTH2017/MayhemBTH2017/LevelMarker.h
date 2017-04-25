@@ -5,13 +5,17 @@
 #include "AShader.h"
 #include "Timer.h"
 #include "TextureHandler.h"
+#include "TextureManager.h"
 #include "Texture.h"
 #include "Mesh.h"
+#include "InputManager.h"
 
 
 #include <cstdint>
 #include <math.h>
 #include <glm.hpp>
+
+
 
 enum MarkerMode
 {
@@ -73,9 +77,12 @@ private:
 	void ClampPos();
 
 private:
+	glm::vec4			m_uv;
+	Texture				m_megaTexture;
+
 	glm::vec2			m_position;
 
-	AShader				m_green;
+	AShader				m_levelShader;
 	uint32_t			m_currentPosX;
 	uint32_t			m_currentPosY;
 	uint32_t			m_savedPosX;
@@ -89,7 +96,10 @@ private:
 	Transform			m_transform;
 	Mesh				m_mesh;
 
-	//TextureHandler		m_textureTemp;
+	InputManager *		m_input;
+
+	TextureHandler		m_textureTemp;
+	TextureManager		m_textureManager;
 	Texture				m_texture;
 
 	uint32_t			m_mode;

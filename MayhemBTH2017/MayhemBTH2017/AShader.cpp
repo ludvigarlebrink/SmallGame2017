@@ -135,6 +135,17 @@ void AShader::AddUniforms()
 
 }
 
+void AShader::SendTexture(GLuint id, const GLchar* name, glm::vec4 UV)
+{
+	this->Bind();
+	glUniform1i(glGetUniformLocation(m_programID, name), id);
+	GLuint locUV = glGetUniformLocation(m_programID, "selectedUV");
+	glUniform4f(locUV, UV.x, UV.y, UV.z, UV.w);
+	
+
+
+}
+
 
 GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
 {

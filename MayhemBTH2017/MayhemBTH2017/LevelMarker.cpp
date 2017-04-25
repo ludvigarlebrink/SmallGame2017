@@ -5,35 +5,44 @@
 LevelMarker::LevelMarker()
 	: m_currentPosX(0), m_currentPosY(0)
 {
+
+	m_input = InputManager::Get();
+	//Temp väntar på en fungerande Handler...........!!!!!!!!!!!!!!!!
 	m_mode = NORMAL;
-	///m_texture = m_textureTemp.Import(".\\Assets\\Textures\\stone.jpg");
-	m_green.Init("DebugGreen", false, false);
+	m_levelShader.Init(".\\Assets\\GLSL\\LevelShader", false, false);
+	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\MegaMap.jpg");
+		
+	
+
+
 
 	Vertex3D verts[6];
 
-	verts[0].position = glm::vec3(0.5f, 0.5f, 0.0f);
-	verts[0].normal = glm::vec3(0.5f, 0.5f, 0.0f);
-	verts[0].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 1.0f);
+
+	verts[0].position = glm::vec3(-0.5f, -0.5f, 0.0f);
+	verts[0].normal = glm::vec3(1.0f, 1.0f, 0.0f);
+	verts[0].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	verts[1].position = glm::vec3(0.5f, -0.5f, 0.0f);
 	verts[1].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[1].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 1.0f);
+	verts[1].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
 
 	verts[2].position = glm::vec3(-0.5f, 0.5f, 0.0f);
 	verts[2].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
+	verts[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+
 
 	verts[3].position = glm::vec3(-0.5f, 0.5f, 0.0f);
 	verts[3].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
+	verts[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
 	verts[4].position = glm::vec3(0.5f, -0.5f, 0.0f);
 	verts[4].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[4].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 1.0f);
+	verts[4].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
 
-	verts[5].position = glm::vec3(-0.5f, -0.5f, 0.0f);
-	verts[5].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 1.0f);
+	verts[5].position = glm::vec3(0.5f, 0.5f, 0.0f);
+	verts[5].normal = glm::vec3(0.5f, 0.5f, 0.0f);
+	verts[5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 0.0f);
 
 	m_transform.SetPosition(0.0f, 0.0f, 0.0f);
 	m_mesh.Load(verts, 6);
@@ -177,8 +186,33 @@ void LevelMarker::Update(Camera & camera)
 //::.. UPDATE FUNCTIONS ..:://
 void LevelMarker::Render(Camera & camera)
 {
-	m_texture.Bind();
-	m_green.Bind();
+	
+	m_megaTexture.Bind(0);
+
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
+	{
+
+		m_uv.x = (32 * 0 )/ 512.0;
+		m_uv.y = 0.0 / 512.0;
+		m_uv.z =  32/ 512.0;
+		m_uv.w = 32 / 512.0;
+
+	}
+	
+	//Left stick
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
+	{
+		m_uv.x = 64 / 512.0;
+		m_uv.y = 0.0 / 512.0;
+		m_uv.z = 32 / 512.0;
+		m_uv.w = 32 / 512.0;
+		
+	}
+
+	m_levelShader.SendTexture(0, "t", m_uv);
+
+	m_levelShader.Bind();
 
 	if (m_mode == ADD_BLOCK || m_mode == REMOVE_BLOCK)
 	{
@@ -233,16 +267,16 @@ void LevelMarker::Render(Camera & camera)
 
 		m_transform.SetScale(sizeX, sizeY, 1.0f);
 		m_transform.SetPosition(offsetX, offsetY, -2.001f);
-		m_green.Update(m_transform, camera);
-		m_green.TempUpdateAlpha(1.0f);
+		m_levelShader.Update(m_transform, camera);
+		m_levelShader.TempUpdateAlpha(1.0f);
 		m_mesh.Render();
 	}
 	else
 	{
 		m_transform.SetScale(1.0f, 1.0f, 1.0f);
 		m_transform.SetPosition(m_currentPosX, m_currentPosY, -2.001f);
-		m_green.Update(m_transform, camera);
-		m_green.TempUpdateAlpha(1.0f);
+		m_levelShader.Update(m_transform, camera);
+		m_levelShader.TempUpdateAlpha(1.0f);
 		m_mesh.Render();
 	}
 }

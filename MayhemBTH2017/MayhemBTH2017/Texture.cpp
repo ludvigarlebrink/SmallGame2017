@@ -25,12 +25,14 @@ void Texture::LoadTexture(GLuint * textureData, GLsizei width, GLsizei height, G
 	
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width,
 		height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData);
+
+
 }
 
-void Texture::Bind()
+void Texture::Bind(unsigned int unit)
 {
 
-	glActiveTexture(GL_TEXTURE0);
+	glActiveTexture(GL_TEXTURE0 + unit);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
 
@@ -47,3 +49,9 @@ GLuint Texture::GetWidth()const
 	return m_width;
 
 }
+
+GLuint Texture::GetTexture() const
+{
+	return m_texture;
+}
+

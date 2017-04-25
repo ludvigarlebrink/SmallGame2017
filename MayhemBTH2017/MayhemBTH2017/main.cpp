@@ -4,6 +4,7 @@
 #include "StateManager.h"
 #include "InputManager.h"
 #include "TimeManager.h"
+#include "TextureManager.h"
 
 //temp
 #include "PrefabManager.h"
@@ -23,6 +24,9 @@ VideoManager	g_videoManager;
 StateManager	g_stateManager;
 InputManager	g_inputManager;
 TimeManager		g_timeManager;
+TextureManager	g_textureManager;
+
+
 
 
 void BigInit();
@@ -38,7 +42,6 @@ int main(int argc, char *argv[])
 	Resource * res = new Resource;
 	ResourceExporter resex;
 	resex.Export(res);
-
 
 
 	// Create the main system.
@@ -62,12 +65,12 @@ void BigInit()
 	g_stateManager.StartUp();		// 4.
 	g_inputManager.StartUp();		// 5.
 	g_timeManager.StartUp();		// 6.
-	PrefabManager g_prefabManager;
-	g_prefabManager.Instantiate("sss");
+	g_textureManager.StartUp();		//7
 }
 
 void Terminate()
 {
+	g_textureManager.Shutdown();		//7
 	g_timeManager.ShutDown();		// 6.
 	g_inputManager.ShutDown();		// 5.
 	g_stateManager.ShutDown();		// 4.

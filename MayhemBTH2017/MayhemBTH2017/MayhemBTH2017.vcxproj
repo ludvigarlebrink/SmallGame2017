@@ -280,8 +280,9 @@
     <None Include="Assets\GLSL\BlurrShader.vert" />
     <None Include="Assets\GLSL\DebugGreen.frag" />
     <None Include="Assets\GLSL\DebugGreen.vert" />
-    <None Include="Assets\GLSL\DebugShader.frag" />
     <None Include="Assets\GLSL\DebugShader.vert" />
+    <None Include="Assets\GLSL\LevelShader.frag" />
+    <None Include="Assets\GLSL\LevelShader.vert" />
     <None Include="Assets\GLSL\MainShader.frag" />
     <None Include="Assets\GLSL\MainShader.geom" />
     <None Include="Assets\GLSL\MainShader.vert" />
@@ -296,6 +297,7 @@
     <None Include="Assets\Levels\ExportTestLOL.mrlevel" />
     <None Include="Assets\Levels\Register.mrlevelreg" />
     <None Include="Assets\Prefabs\T.mr" />
+    <None Include="DebugShader.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
