@@ -11,14 +11,11 @@ public:
 	BasicGun(b2World* world, glm::vec2 pos);
 	virtual ~BasicGun();
 
-	Box UpdateProjectile(b2Vec2 forceDir, glm::vec2 pos);
-
-	glm::vec2 UpdatePos(b2Vec2 forceDir, glm::vec2 pos);
-
-	glm::vec2 UpdateScale(b2Vec2 forceDir, glm::vec2 pos);
+	Box Fire(b2Vec2 forceDir, glm::vec2 pos);
 
 
 private:
+	Box UpdateProjectile(b2Vec2 forceDir, glm::vec2 pos);
 	
 
 };
