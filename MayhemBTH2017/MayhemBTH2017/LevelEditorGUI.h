@@ -5,14 +5,23 @@
 #include "UIText.h"
 #include "InputManager.h"
 #include <fstream>
+#include <vector>
 
-enum GUI
+struct GUI
 {
-	CLOSED_MENU = 0,
-	BLOCK_MENU,
-	PROP_MENU,
-	BACKGROUND_MENU,
-	NUM_MENUS
+	UIText m_text;
+	int32_t m_numIcons = 0;
+	std::vector<UIImage> m_icons;
+};
+
+enum GUIState
+{
+	GUI_CLOSED = 0,
+	GUI_OPEN,
+	GUI_BLOCK,
+	GUI_PROP,
+	GUI_BACKGROUND,
+	GUI_NUM
 };
 
 class LevelEditorGUI
@@ -29,28 +38,16 @@ public:
 
 	//::.. UPDATE FUNCTIONS ..:://
 	void Render();
-	void RenderArray(UIImage menu_array[], int num_array);
+	void RenderIcons(size_t gui);
 
 private:
 
+	void Init();
 	void Input();
 
 private:
 
-
-	static const int NUM_BLOCKS = 4;
-	static const int NUM_PROPS = 4;
-	static const int NUM_BACKGROUNDS = 4;
-
-	UIImage m_closedMenu; // Merge these two menus, change texture
-	UIImage m_blockMenu;
-
-	UIImage m_blockArray[NUM_BLOCKS];
-	UIImage m_propArray[NUM_PROPS];
-	UIImage m_backgroundArray[NUM_BACKGROUNDS];
-
-	UIText m_text;
-
+	GUI		m_gui[GUI_NUM];
 	InputManager*	m_input;
 
 	uint32_t m_nSize;
@@ -58,10 +55,14 @@ private:
 	int32_t m_state;
 	int32_t m_pos;
 
+	int32_t	m_rows;
+	int32_t m_columns;
+	int32_t m_offsetX;
+	int32_t m_offsetY;
+	int32_t m_offsetMother;
+
 	std::ifstream m_texFile;
 	std::string m_line;
-	uint32_t m_index;
-
 };
 
 #endif
