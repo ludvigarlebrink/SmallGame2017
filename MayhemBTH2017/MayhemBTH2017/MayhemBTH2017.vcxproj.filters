@@ -220,6 +220,15 @@
     <ClCompile Include="LevelEditorGUI.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="GamePhysics.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider2D.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
