@@ -120,6 +120,7 @@ void MenuSystem::HandleInput()
 		m_changeMenu = true;
 		m_timer.SetTimer(0.5f, true);
 	}
+
 }
 
 void MenuSystem::Render()
