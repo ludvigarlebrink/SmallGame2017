@@ -8,7 +8,7 @@
 
 #include "System.h"
 
-
+#pragma comment(lib, "MRSDK.lib")
 
 // Global singleton managers.
 MemoryManager	g_memoryManager;

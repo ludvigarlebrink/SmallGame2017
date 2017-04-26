@@ -1,14 +1,16 @@
 #ifndef __LEVELEDITORLEVEL_H__
 #define __LEVELEDITORLEVEL_H__
 
+
 #include "Transform.h"
 #include "AShader.h"
 #include "Camera.h"
 #include "Mesh.h"
-#include "box2d.h"
+
 
 #include <glm.hpp>
 #include <cstdint>
+#include <string>
 
 
 class Level
@@ -34,15 +36,17 @@ public:
 	void RemoveBlock(uint32_t posX, uint32_t posY);
 	void AddSpawnPoint(uint32_t posX, uint32_t posY);
 
-	//::.. SET FUNCTIONS ..:://
-	void SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID);
-	void SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied);
-	void SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint);
-
 	//::.. GET FUNCTIONS ..:://
 	bool GetIsOccupied(uint32_t posX, uint32_t posY);
 	bool GetIsSpawnPoint(uint32_t posX, uint32_t posY);
 	uint32_t GetTextureID(uint32_t posX, uint32_t posY);
+	const std::string& GetName();
+
+	//::.. SET FUNCTIONS ..:://
+	void SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID);
+	void SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied);
+	void SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint);
+	void SetName(const std::string& name);
 
 	void Clear();
 
@@ -57,6 +61,8 @@ private:
 
 private:
 	Block		m_grid[SIZE_X][SIZE_Y];
+	
+	std::string	m_name;
 
 	Mesh		m_mesh;
 	Vertex3D *	m_vertices;
@@ -71,4 +77,4 @@ private:
 };
 
 
-#endif // __LEVELEDITORLEVEL_H__
+#endif // !__LEVELEDITORLEVEL_H__

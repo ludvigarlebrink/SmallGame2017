@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __SPRITE_H__
+#define __SPRITE_H__
+
 #include "AShader.h"
 #include <glm\glm.hpp>
 #include <SDL2\SDL.h>
@@ -27,15 +29,15 @@ public:
 
 	void createSprite(glm::vec2 pos, glm::vec2 scale);
 
-	void setColor(glm::vec3 color);
 
 	void sendColor();
 
 
 
+	//::.. SET FUNCTIONS ..:://
 	void setTexture(const std::string& filePath);
-
 	void setTexture2(const std::string& filePath2);
+	void setColor(glm::vec3 color);
 
 	void sendTexture();
 
@@ -55,3 +57,5 @@ private:
 
 };
 
+
+#endif // ! __SPRITE_H__

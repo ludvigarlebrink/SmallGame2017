@@ -4,7 +4,7 @@
 #include "Level.h"
 #include "LevelEditor.h"
 #include "Mesh.h"
-#include "MeshImporter.h"
+#include "MeshManager.h"
 #include "AShader.h"
 #include "TimeManager.h"
 #include "ParticleSystem.h"
@@ -20,7 +20,7 @@ public:
 	void SetPlayerCollision(bool* collision);
 private:
 private:
-	MeshImporter meshImp;
+	MeshManager meshImp;
 	TimeManager * time;
 	ParticleSystem m_particles;
 	Collider2D collider;

@@ -1,5 +1,5 @@
-#ifndef __SHADER_H__
-#define __SHADER_H__
+#ifndef __ASHADER_H__
+#define __ASHADER_H__
 
 
 #include "Transform.h"
@@ -20,7 +20,7 @@ public:
 	//::.. CONSTRUCTORS ..:://
 	AShader();
 	AShader(const std::string& filename, bool hasGeomShader, bool particles);
-	virtual ~AShader();											//Destructor
+	virtual ~AShader();															//Destructor
 
 	//::.. GET FUNCTIONS ..:://
 	GLuint GetProgramID();

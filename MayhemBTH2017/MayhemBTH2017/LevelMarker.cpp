@@ -7,7 +7,7 @@ LevelMarker::LevelMarker()
 {
 	m_mode = NORMAL;
 	m_texture = m_textureTemp.Import(".\\Assets\\Textures\\stone.jpg");
-	m_green.Init(".\\Assets\\GLSL\\DebugGreen", false, 0);
+	m_green.Init("DebugGreen", false, false);
 
 	Vertex3D verts[6];
 
@@ -36,8 +36,8 @@ LevelMarker::LevelMarker()
 	verts[5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 1.0f);
 
 	m_transform.SetPosition(0.0f, 0.0f, 0.0f);
-	m_mesh.LoadMesh(verts, 6);
-
+	m_mesh.Load(verts, 6);
+	
 }
 
 

@@ -7,6 +7,7 @@ LevelEditor::LevelEditor()
 
 	m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
 	m_input = InputManager::Get();
+	m_stateManager = StateManager::Get();
 
 	m_timer.SetTimer(0.1f, true, true);
 }
@@ -20,14 +21,31 @@ LevelEditor::~LevelEditor()
 //::.. UPDATE FUNCTIONS ..:://
 void LevelEditor::Update()
 {
-	if (m_timer.Update())
+	switch (m_state)
 	{
-		AxisMove();
-	}
-	ButtonInput();
-	m_levelMarker.Update(m_camera);
+	case EDIT:
+		if (m_timer.Update())
+		{
+			AxisMove();
+		}
 
-	m_level.Render(m_camera);
+		ButtonInput();
+
+		m_levelMarker.Update(m_camera);
+		m_level.Render(m_camera);
+		m_levelGUI.Render();
+		break;
+	case MENU:
+		break;
+	case SAVE:
+		ButtonInput();
+		m_level.Render(m_camera);
+		m_vk.Render();
+
+		break;
+	default:
+		break;
+	}
 }
 
 
@@ -71,6 +89,18 @@ void LevelEditor::ButtonInput()
 		}
 	}
 
+	if (m_input->GetButtonUp(CONTROLLER_BUTTON_X) && m_levelMarker.GetMarkerMode())
+	{
+		m_levelMarker.SetMarkerMode(NORMAL);
+
+		for (size_t x = m_levelMarker.GetStartX(); x <= m_levelMarker.GetEndX(); x++)
+		{
+			for (size_t y = m_levelMarker.GetStartY(); y <= m_levelMarker.GetEndY(); y++)
+			{
+				m_level.RemoveBlock(x, y);
+			}
+		}
+	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_X))
 	{
@@ -84,30 +114,43 @@ void LevelEditor::ButtonInput()
 		m_levelMarker.SetMarkerMode(NORMAL);
 	}
 
-
-	if (m_input->GetButtonHeld(CONTROLLER_BUTTON_X))
-	{
-		if (m_level.GetIsOccupied(m_levelMarker.GetCurrentPosX(), m_levelMarker.GetCurrentPosY()))
-			m_level.RemoveBlock(m_levelMarker.GetCurrentPosX(), m_levelMarker.GetCurrentPosY());
-
-	}
-
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
 	{
-		m_levelExporter.Export(m_level);
+		m_levelHandler.Export(m_level);
+		m_levelHandler.ExportRegister();
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
 	{
 		Reset();
-		m_levelImporter.ImportLevel(m_level);
+		m_levelHandler.Import(m_level);
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
-		Reset();
-		StateManager * state = StateManager::Get();
-		state->SetCurrentState(GameState::MAIN_MENU);
+		if (m_state == SAVE)
+		{
+			m_state = EDIT;
+		}
+		else
+		{
+			m_state = SAVE;
+		}
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_BACK))
+	{
+		if (m_state != SAVE)
+		{
+			if (m_levelGUI.GetState() == GUI_CLOSED)
+			{
+				m_levelGUI.SetState(GUI_BLOCK);
+			}
+			else
+			{
+				m_levelGUI.SetState(GUI_CLOSED);
+			}
+		}
 	}
 }
 
