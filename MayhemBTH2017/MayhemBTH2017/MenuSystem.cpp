@@ -50,15 +50,15 @@ void MenuSystem::Init()
 	m_background.SetTexture(".\\Assets\\Sprites\\MenuConcept.png");
 
 	m_paperOpen.SetSize(640, 640);
-	m_paperOpen.SetPositon(20, 0);
+	m_paperOpen.SetPosition(20, 0);
 	m_paperOpen.SetTexture(".\\Assets\\Sprites\\MainMenu.png");
 
 	m_paperClosed1.SetSize(640, 640);
-	m_paperClosed1.SetPositon(20, 0);
+	m_paperClosed1.SetPosition(20, 0);
 	m_paperClosed1.SetTexture(".\\Assets\\Sprites\\ClosedMenu1.png");
 
 	m_paperClosed2.SetSize(640, 640);
-	m_paperClosed2.SetPositon(20, 0);
+	m_paperClosed2.SetPosition(20, 0);
 	m_paperClosed2.SetTexture(".\\Assets\\Sprites\\ClosedMenu2.png");
 }
 

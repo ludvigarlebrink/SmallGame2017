@@ -1,8 +1,9 @@
-#ifndef __ANINCLIP_H__
+#ifndef __ANIMCLIP_H__
 #define __ANIMCLIP_H__
 
 
 #include "AnimUtil.h"
+#include "Timer.h"
 
 
 #include <glm.hpp>
@@ -37,13 +38,15 @@ private:
 	const char *	m_name;
 
 	bool			m_isPlaying;
-	float			m_curKey;
-	int32_t			m_curKeyI;
+	float			m_currKey;
+	int32_t			m_currKeyI;
 
 	uint32_t		m_numKeys;
 	int32_t			m_firstKey;
 	int32_t			m_lastKey;
 	KeyFrame *		m_keys;
+
+	Timer			m_timer;
 
 };
 

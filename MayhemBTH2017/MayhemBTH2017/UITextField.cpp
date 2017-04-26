@@ -16,11 +16,11 @@ UITextField::UITextField()
 	m_posY = 60;
 
 	m_text.SetPivot(UIText::LEFT);
-	m_text.SetPositon(m_posX - (560 / 2) + 4, m_posY);
+	m_text.SetPosition(m_posX - (560 / 2) + 12, m_posY);
 	m_text.SetColor(255, 255, 255);
 	m_text.SetFont(".\\Assets\\Fonts\\steelfish.ttf");
-	m_background.SetPositon(m_posX, m_posY);
-	m_field.SetPositon(m_posX, m_posY);
+	m_background.SetPosition(m_posX, m_posY);
+	m_field.SetPosition(m_posX, m_posY);
 }
 
 

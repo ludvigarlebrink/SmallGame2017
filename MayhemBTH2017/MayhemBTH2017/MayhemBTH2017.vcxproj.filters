@@ -132,9 +132,6 @@
     <ClCompile Include="AntiAliasing.cpp">
       <Filter>Engine\Rendering\Shading</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Engine\Resources</Filter>
     </ClCompile>
@@ -191,9 +188,6 @@
     <ClCompile Include="UIPauseMenu.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderHandler.cpp">
-      <Filter>Engine\Resources\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Prefab.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
@@ -218,8 +212,13 @@
     <ClCompile Include="AnimClip.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderProg.cpp">
+    <ClCompile Include="ShaderManager.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="LevelEditorGUI.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,9 +288,6 @@
     <ClInclude Include="AntiAliasing.h">
       <Filter>Engine\Rendering\Shading</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Resources</Filter>
     </ClInclude>
@@ -348,9 +344,6 @@
     <ClInclude Include="UIPauseMenu.h">
       <Filter>Engine\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderHandler.h">
-      <Filter>Engine\Resources\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Prefab.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
@@ -378,8 +371,13 @@
     <ClInclude Include="AnimUtil.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderProg.h">
+    <ClInclude Include="ShaderManager.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="LevelEditorGUI.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -443,5 +441,18 @@
     <None Include="Assets\Levels\Register.mrlevelreg">
       <Filter>Assets</Filter>
     </None>
+    <None Include="Assets\Prefabs\T.mr">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Prefabs\super.mr">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Animations\super%40animation.mranim">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Skeletons\super.mrskel">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Meshes\super.mrmesh" />
   </ItemGroup>
 </Project>

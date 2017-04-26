@@ -2,7 +2,6 @@
 #define __LEVELEDITOR_H__
 
 
-#include "InputManager.h"
 #include "Level.h"
 #include "Timer.h"
 #include "TextureHandler.h"
@@ -10,6 +9,7 @@
 #include "LevelMarker.h"
 #include "StateManager.h"
 #include "VirtualKeyboard.h"
+#include "LevelEditorGUI.h"
 
 
 #include <glm.hpp>
@@ -51,6 +51,7 @@ private:
 	Level				m_level;
 	LevelHandler		m_levelHandler;
 	LevelMarker			m_levelMarker;
+	LevelEditorGUI		m_levelGUI;
 
 	Camera				m_camera;
 	Timer				m_timer;

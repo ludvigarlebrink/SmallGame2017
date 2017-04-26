@@ -252,8 +252,8 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 	switch (controllerEvent.axis)
 	{
 
-		//Left Stick
-		//Horizonal
+		// Left Stick
+		// Horizonal
 	case SDL_CONTROLLER_AXIS_LEFTX:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
@@ -274,7 +274,7 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 			m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = 0.0f;
 		}
 		break;
-		//Vetical
+		// Vetical
 	case SDL_CONTROLLER_AXIS_LEFTY:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
@@ -297,8 +297,8 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 		break;
 
 
-		//Right stick
-		//Horizontal
+		// Right stick
+		// Horizontal
 	case SDL_CONTROLLER_AXIS_RIGHTX:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
@@ -319,7 +319,7 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 			m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = 0.0f;
 		}
 		break;
-
+		// Vetical
 	case SDL_CONTROLLER_AXIS_RIGHTY:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{

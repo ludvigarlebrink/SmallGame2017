@@ -91,7 +91,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>.\Lib\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp.lib;Box2D.lib;glew32.lib;glew32s.lib;MRSDK.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Box2D.lib;glew32.lib;glew32s.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -138,6 +138,8 @@
     <ClCompile Include="Game.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="LevelEditorGUI.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Menu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -148,12 +150,17 @@
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="MenuCredits.cpp" />
     <ClCompile Include="MenuVideo.cpp" />
-    <ClCompile Include="Prefab.cpp" />
-    <ClCompile Include="PrefabManager.cpp" />
-    <ClCompile Include="ShaderProg.cpp" />
+    <ClCompile Include="Prefab.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="PrefabManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -162,7 +169,9 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelHandler.cpp" />
     <ClCompile Include="LevelMarker.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="MenuSystem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -175,8 +184,6 @@
     <ClCompile Include="ResourceExporter.cpp" />
     <ClCompile Include="ResourceImporter.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="ShaderHandler.cpp" />
     <ClCompile Include="UIPauseMenu.cpp" />
     <ClCompile Include="UISlider.cpp" />
     <ClCompile Include="UIText.cpp" />
@@ -206,6 +213,8 @@
     <ClInclude Include="Game.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="LevelEditorGUI.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Menu.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -216,12 +225,17 @@
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="MenuCredits.h" />
     <ClInclude Include="MenuVideo.h" />
-    <ClInclude Include="Prefab.h" />
-    <ClInclude Include="PrefabManager.h" />
-    <ClInclude Include="ShaderProg.h" />
+    <ClInclude Include="Prefab.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="PrefabManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -242,8 +256,6 @@
     <ClInclude Include="ResourceExporter.h" />
     <ClInclude Include="ResourceImporter.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="ShaderHandler.h" />
     <ClInclude Include="UIPauseMenu.h" />
     <ClInclude Include="UISlider.h" />
     <ClInclude Include="UIText.h" />
@@ -262,6 +274,7 @@
     <ClInclude Include="VirtualKeyboard.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Animations\super%40animation.mranim" />
     <None Include="Assets\GLSL\BlurrShader.frag" />
     <None Include="Assets\GLSL\BlurrShader.geom" />
     <None Include="Assets\GLSL\BlurrShader.vert" />
@@ -282,6 +295,10 @@
     <None Include="Assets\GLSL\SkeletalAnimation.vert" />
     <None Include="Assets\Levels\ExportTestLOL.mrlevel" />
     <None Include="Assets\Levels\Register.mrlevelreg" />
+    <None Include="Assets\Meshes\super.mrmesh" />
+    <None Include="Assets\Prefabs\super.mr" />
+    <None Include="Assets\Prefabs\T.mr" />
+    <None Include="Assets\Skeletons\super.mrskel" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

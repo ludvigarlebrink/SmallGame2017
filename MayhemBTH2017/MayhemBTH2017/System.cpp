@@ -3,6 +3,8 @@
 #include "Mesh.h"
 #include "MenuSystem.h"
 #include "UIText.h"
+#include "Prefab.h"
+#include "PrefabManager.h"
 
 System::System()
 {
@@ -33,7 +35,9 @@ void System::Run()
 	int count = 1;
 	m.Init();
 	float counter = 0;
-	
+
+	Prefab * pre = PrefabManager::Instantiate("");
+	Camera cam;
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -41,25 +45,27 @@ void System::Run()
 	
 		m_inputManager->Update();
 
+		pre->Render(cam);
 
-		switch (m_stateManager->GetCurrentState())
-		{
-		case GameState::START:
-			break;
-		case GameState::MAIN_MENU:
-			m.Update();
-			break;
-		case GameState::LEVEL_EDITOR:
-			l.Update();
-			break;
-		case GameState::GAME:
-			break;
-		case GameState::EXIT:
-			isRunning = false;
-			break;
-		default:
-			break;
-		}
+
+	//	switch (m_stateManager->GetCurrentState())
+	//	{
+	//	case GameState::START:
+	//		break;
+	//	case GameState::MAIN_MENU:
+	//		m.Update();
+	//		break;
+	//	case GameState::LEVEL_EDITOR:
+	//		l.Update();
+	//		break;
+	//	case GameState::GAME:
+	//		break;
+	//	case GameState::EXIT:
+	//		isRunning = false;
+	//		break;
+	//	default:
+	//		break;
+	//	}
 
 
 		m_inputManager->Reset();
@@ -67,8 +73,8 @@ void System::Run()
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
-
-		counter += m_timeManager->GetDeltaTime();
+		SDL_Delay(10);
+	//	counter += m_timeManager->GetDeltaTime();
 	}
 }
 

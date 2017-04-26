@@ -5,6 +5,7 @@
 Prefab::Prefab()
 {
 
+//	Init();
 }
 
 
@@ -13,33 +14,61 @@ Prefab::~Prefab()
 
 }
 
-
 void Prefab::Update()
 {
-
 }
 
 
-void Prefab::Render(const Camera & cam)
+void Prefab::Render(Camera & cam)
 {
-	if (m_animController != nullptr)
-	{
-		m_animController->Update();
-		m_shaderProg->UpdateAnim();
-		m_shaderProg->Bind();
-	}
-	else if (m_shaderProg != nullptr)
-	{ 
-		m_shaderProg->Update();
-		m_shaderProg->Bind();
-	}
+	glUseProgram(m_shaderProgram);
 
-	if (m_mesh != nullptr)
-	{
-		m_mesh->Render();
-	}
+	glUniformMatrix4fv(m_uniforms[M], 1, GL_FALSE, &m_transform.GetModelMatrix()[0][0]);
+	glUniformMatrix4fv(m_uniforms[V], 1, GL_FALSE, &cam.GetView()[0][0]);
+	glUniformMatrix4fv(m_uniforms[P], 1, GL_FALSE, &cam.GetProjection()[0][0]);
+	
+	m_animController->Update(m_uniforms[JOINTS]);
+
+	m_mesh->Render();
 }
 
+//::.. HELP FUNCTIONS ..:://
+void Prefab::Create()
+{
+	m_transform.SetScale(glm::vec3(4.0f, 4.0f, 4.0f));
+	m_transform.SetPosition(glm::vec3(0.0f, 0.0f, 15.0f));
+	m_transform.SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
+
+	std::string * shaders = new std::string[2];
+	uint32_t * types = new uint32_t[2];
+	
+	shaders[0] = ".\\Assets\\GLSL\\SkeletalAnimation.vert";
+	shaders[1] = ".\\Assets\\GLSL\\ToonShader.frag";
+
+	types[0] = ShaderManager::VERT_SHADER;
+	types[1] = ShaderManager::FRAG_SHADER;
+
+	m_shaderProgram = ShaderManager::CreateAndAttachShaders("AnimToon", shaders, types, 2);
+
+	delete[] shaders;
+	delete[] types;
+
+	glBindAttribLocation(m_shaderProgram, 0, "Position");
+	glBindAttribLocation(m_shaderProgram, 1, "Normal");
+	glBindAttribLocation(m_shaderProgram, 2, "TexCoordsAlpha");
+	glBindAttribLocation(m_shaderProgram, 3, "JointIndex");
+	glBindAttribLocation(m_shaderProgram, 4, "JointWeight");
+
+	ShaderManager::LinkAndValidate("AnimToon");
+
+	m_uniforms[M] = glGetUniformLocation(m_shaderProgram, "M");
+	m_uniforms[V] = glGetUniformLocation(m_shaderProgram, "V");
+	m_uniforms[P] = glGetUniformLocation(m_shaderProgram, "P");
+	m_uniforms[JOINTS] = glGetUniformLocation(m_shaderProgram, "Joints");
+
+
+
+}
 
 //::.. GET FUNCTIONS ..:://
 const char * Prefab::GetName() const
@@ -59,10 +88,6 @@ Mesh * Prefab::GetMesh() const
 	return m_mesh;
 }
 
-ShaderProg * Prefab::GetShaderProg() const
-{
-	return m_shaderProg;
-}
 
 AnimController * Prefab::GetAnimController() const
 {
@@ -95,10 +120,20 @@ void Prefab::SetAnimController(AnimController * animController)
 }
 
 
+void Prefab::SetShaderProgram(const char * programName)
+{
+	m_shaderProg = programName;
+}
+
+
+void Prefab::SetMaterial(Material * material)
+{
+	m_material = material;
+}
+
+
 //::.. HELP FUNCTIONS ..:://
 void Prefab::Init()
 {
-	m_mesh				= nullptr;
-	m_shaderProg		= nullptr;
-	m_animController	= nullptr;
+
 }

@@ -13,29 +13,7 @@ ShaderHandler::~ShaderHandler()
 	// Do nothing...
 }
 
-Shader & ShaderHandler::Get(const char * filepath)
-{
-	return Shader();
-}
 
-//::.. HELP FUNCTIONS ..:://
-Shader& ShaderHandler::Import(const char* filepath)
-{
-	std::ifstream in(filepath);
-
-	std::string output;
-	std::string line;
-
-	while (in.good())
-	{
-		std::getline(in, line);
-		output.append(line);
-	}
-
-	//	return output;
-	return Shader();
-
-}
 
 
 void ShaderHandler::CreateShader(GLuint shader, GLuint flag, bool isProgram, const std::string & errorMsg)

@@ -1,36 +1,43 @@
 #ifndef __TEXTUREMANAGER_H__
 #define __TEXTUREMANAGER_H__
 
-#include "Textures.h"
-#include "ImageLoader.h"
-#include <string.h>
+#include <SDL.h>
+#include <map>
+#include <GL\glew.h>
+
 
 class TextureManager
 {
 public:
-	//::.. DUMMY CONSTRUCTORS ..:://
+	struct Texture
+	{
+		GLuint ID;
+		GLuint width;
+		GLuint height;
+		GLuint numComponents;
+	};
+
+	//::.. CONSTRUCTORS ..:://
 	TextureManager();
 	virtual ~TextureManager();
 
-	//::.. FAKE FUNCTIONS ..:://
 	void StartUp();
-	void ShutDown();
+	void Shutdown();
+
+	//::.. OTHER FUNCTIONS ..:://
+	static void AddTexture(const char * name, const char* filepath);
+	static void FreeTexture(GLuint id);
+	static void FreeTexture(const char * name);
+	static void DeleteTextureFromMap(const char * name);
 
 	//::.. GET FUNCTIONS ..:://
-	static TextureManager* Get();
-
-	//::.. SET FUNCTIONS ..:://
-
-	//::.. HELPER FUNCTIONS ..:://
-	void AddTexture(GLuint id, const std::string& filePath);
-	void bindTexture(GLuint id);
+	static TextureManager Get();
+	static Texture GetTexture(const char * name);
+	static GLuint GetTextureID(const char * name);
 
 private:
-	void Init();
-private:
+	static std::map<std::string, Texture> m_textureArray;
 	static TextureManager * m_instance;
-	//Textures m_texture;
-	//ImageLoader m_imageLoader;
 
 
 };
