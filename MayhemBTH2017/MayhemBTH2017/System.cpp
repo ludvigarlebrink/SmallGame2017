@@ -63,7 +63,7 @@ void System::Run()
 		case GameState::LEVEL_EDITOR:
 			l.Update();
 			break;
-		//case GameState::GAME:
+		case GameState::GAME:
 
 			physics.Update();
 			physics.Render(camera);

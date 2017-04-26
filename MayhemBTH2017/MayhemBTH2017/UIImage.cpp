@@ -107,12 +107,12 @@ void UIImage::Render()
 			static_cast<GLfloat>(x - ((m_sizeX / 2) - halfWidth)),
 			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
 
-		glTexCoord2f(0.5, 1);
+		glTexCoord2f(1, 1);
 		glVertex2f(
 			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
 			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
 
-		glTexCoord2f(0.5, 0);
+		glTexCoord2f(1, 0);
 		glVertex2f(
 			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
 			static_cast<GLfloat>(y + ((m_sizeY / 2) + halfHeight)));

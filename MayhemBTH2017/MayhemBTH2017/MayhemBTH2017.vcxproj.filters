@@ -227,8 +227,10 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -382,17 +384,10 @@
     <ClInclude Include="Box.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="GamePhysics.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider2D.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="Projectile.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -458,80 +453,5 @@
     <None Include="Assets\GLSL\LevelShader.frag" />
     <None Include="Assets\GLSL\LevelShader.vert" />
     <None Include="DebugShader.frag" />
-    <None Include="Assets\GLSL\ColliderShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\ColliderShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\DebugShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\DrawShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\DrawShader.geom">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\DrawShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\emitterShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\emitterShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\GeometryPass.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\leo.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\leo.geom">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\LevelMarkerShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\LevelMarkerShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\ParticleDrop.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\ParticleExplosion.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\PlayerShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\PowerUpShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\PowerUpShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\ShadowPass.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\ShadowShader.geom">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\ShadowShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\SplitterShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\ToonShader">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\ToonShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\ToonShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
   </ItemGroup>
 </Project>
