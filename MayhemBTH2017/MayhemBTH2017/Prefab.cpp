@@ -46,7 +46,7 @@ void Prefab::Create()
 		return;
 	}
 
-	m_localTx.SetScale(glm::vec3(4.0f, 4.0f, 4.0f));
+	m_localTx.SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_localTx.SetPosition(glm::vec3(0.0f, 0.0f, 15.0f));
 	m_localTx.SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
 
