@@ -36,7 +36,7 @@ void System::Run()
 	Camera camera;
 	VirtualKeyboard vk;
 	int count = 1;
-
+	Prefab * pre = PrefabManager::Instantiate("Player");
 	m.Init();
 	float counter = 0;
 
@@ -49,7 +49,7 @@ void System::Run()
 	
 		m_inputManager->Update();
 
-		//pre->Render(cam);
+		pre->Render(cam);
 
 
 		switch (m_stateManager->GetCurrentState())
@@ -57,7 +57,7 @@ void System::Run()
 		case GameState::START:
 			break;
 		case GameState::MAIN_MENU:
-			m.Update();
+//			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
 			l.Update();
@@ -72,7 +72,7 @@ void System::Run()
 		}
 
 		// Debug
-		while (SDL_PollEvent(&m_event) != 0)
+		while (SDL_PollEvent(&m_event))
 			if(m_event.type == SDL_KEYDOWN)
 				m_stateManager->SetCurrentState(GameState::EXIT);		
 
