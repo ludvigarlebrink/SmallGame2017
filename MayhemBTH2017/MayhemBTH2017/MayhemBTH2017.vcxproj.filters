@@ -194,12 +194,6 @@
     <ClCompile Include="PrefabManager.cpp">
       <Filter>Engine\Resources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -219,6 +213,18 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="LevelEditorGUI.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePhysics.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -350,12 +356,6 @@
     <ClInclude Include="PrefabManager.h">
       <Filter>Engine\Resources\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -378,6 +378,18 @@
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="LevelEditorGUI.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePhysics.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

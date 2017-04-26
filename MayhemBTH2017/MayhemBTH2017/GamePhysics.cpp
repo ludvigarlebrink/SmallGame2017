@@ -1,4 +1,7 @@
 #include "GamePhysics.h"
+#include "AProjectile.h"
+#include "Game.h"
+
 
 
 
@@ -12,55 +15,107 @@ GamePhysics::~GamePhysics()
 
 void GamePhysics::enterWorld()
 {
-	b2Vec2 gravity(0.0f, -9.81f);
+
+	//Get deltatime
+	m_time = TimeManager::Get();
+	b2Vec2 gravity(0.0f, -1.8f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
-	b2BodyDef groundBodyDef;
+	m_collision.CreateBoundingBoxes(m_world.get());
 
-	groundBodyDef.position.Set(0.0f, -10.0f);
+	//Set spawn position of player AND SIZE OF SPRITE BOX
 
-	b2Body* groundBody = m_world->CreateBody(&groundBodyDef);
+	//PLAYER
+	m_player.Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0,2.0));
+	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", false, false);
+	m_playerSprite.createSprite(glm::vec2(0, 0), glm::vec2(2.0, 2.0));
 
-	b2PolygonShape groundBox;
 
-	groundBox.SetAsBox(10.0f, 9.0f);
+	///////////////////////////////////////////////////////////////////
 
-	groundBody->CreateFixture(&groundBox, 0.0f);
+	//Power up
 
-	m_newBox.init(m_world.get(), glm::vec2(0.0, 1.0), glm::vec2(0.1, 0.2));
+	m_powerUpBox.initDynamic(m_world.get(), glm::vec2(42,24), glm::vec2(2.0,2.0));
+	m_powerUpSprite.Init(".\\Assets\\GLSL\\PowerUpShader", false, false);
+	m_powerUpSprite.createSprite(glm::vec2(0, 0), glm::vec2(2.0, 2.0));
 
-	m_newBox.setTexture("MARBLES.BMP");
+	m_powerUpBox.getFixture()->SetDensity(1.0);
+	m_powerUpBox.getFixture()->SetFriction(1.0);
+	m_powerUpBox.getFixture()->SetRestitution(0.0);
+	m_powerUpBox.getBody()->SetLinearDamping(0.2);
+	///////////////////////////////////////////////////////////////////
 
-	m_newBox2.init(m_world.get(), glm::vec2(-0.5, 1.0), glm::vec2(0.1, 0.2));
 
-	m_newBox2.setTexture("MARBLES.BMP");
+	//FIXTURES FOR COLLISIONS
+
+	//player fixture is of type PLAYER
+	m_player.SetCategoryBits(CATEGORY_PLAYER);
+	m_player.SetMaskBits(CATEGORY_POWERUP);
+
+	//powerup fixture is of type POWERUP
+	powerUpFixture.filter.categoryBits = CATEGORY_POWERUP;
+	powerUpFixture.filter.maskBits = CATEGORY_PLAYER;
 
 }
 
-void GamePhysics::update()
+void GamePhysics::Update(Transform transform)
 {
+
+	//Update player bounding box sprite position to the position of the player mesh
+	m_playerScaleX = m_player.GetBox().getScale().x;
+	m_playerScaleY = m_player.GetBox().getScale().y;
+	m_playerPosX = m_player.GetBox().getBody()->GetPosition().x - (m_player.GetBox().getScale().x / 2);
+	m_playerPosY = m_player.GetBox().getBody()->GetPosition().y - (m_player.GetBox().getScale().y / 2);
+
+	m_playerSprite.update(glm::vec2(m_playerPosX +0.42, m_playerPosY + 0.24), glm::vec2(m_playerScaleX- 0.84, m_playerScaleY - 0.48));
+
+	//Update powerUp bounding box sprite position to the position of the player mesh
+	m_powerUpScaleX = m_powerUpBox.getScale().x;
+	m_powerUpScaleY = m_powerUpBox.getScale().y;
+	m_powerUpPosX = m_powerUpBox.getBody()->GetPosition().x - (m_player.GetBox().getScale().x / 2);
+	m_powerUpPosY = m_powerUpBox.getBody()->GetPosition().y - (m_player.GetBox().getScale().y / 2);
+
+	m_powerUpSprite.update(glm::vec2(m_powerUpPosX-0.42, m_powerUpPosY + 0.24), glm::vec2(m_powerUpScaleX+0.84, m_powerUpScaleY - 0.48));
+
+	if (!(m_player.GetCategoryBits() & powerUpFixture.filter.maskBits) != 0 && (powerUpFixture.filter.categoryBits & m_player.GetMaskBits()) != 0) {
+		std::cout << "touching" << std::endl;
+	}
+
 
 	m_world->Step(1.0f / 60.0f, 6, 2);
 
-	glm::vec4 destRect;
-	destRect.x = m_newBox.getBody()->GetPosition().x;
-	destRect.y = m_newBox.getBody()->GetPosition().y;
-	destRect.z = m_newBox.getScale().x;
-	destRect.w = m_newBox.getScale().y;
 
-	m_newBox.updateSprite(glm::vec2(destRect.x, destRect.y), glm::vec2(destRect.z, destRect.w));
 
-	m_newBox.draw();
+	m_player.Update();
 
-	glm::vec4 destRect2;
-	destRect2.x = m_newBox2.getBody()->GetPosition().x;
-	destRect2.y = m_newBox2.getBody()->GetPosition().y;
-	destRect2.z = m_newBox2.getScale().x;
-	destRect2.w = m_newBox2.getScale().y;
+	m_world->Step(1.0f / 60.0f, 6, 2);
 
-	m_newBox2.updateSprite(glm::vec2(destRect2.x, destRect2.y), glm::vec2(destRect2.z, destRect2.w));
+}
 
-	m_newBox2.draw();
+glm::vec3 GamePhysics::GetPosition() {
 
+	return m_transform.GetPosition();
+
+}
+
+void GamePhysics::Render(Transform &transform, Camera camera) {
+
+	m_transform.SetPosition(glm::vec3(m_playerPosX, m_playerPosY, 0));
+	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+
+	m_collision.DrawCollider(camera);
+
+	//player sprite
+	m_playerSprite.Bind();
+	m_playerSprite.Update(transform, camera);
+	m_playerSprite.draw();
+
+	glUseProgram(0);
+
+	m_powerUpSprite.Bind();
+	m_powerUpSprite.Update(transform, camera);
+	m_powerUpSprite.draw();
+
+	//m_player.Render(transform, camera);
 }
