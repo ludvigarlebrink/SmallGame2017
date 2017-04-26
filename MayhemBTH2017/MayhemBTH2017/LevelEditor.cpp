@@ -69,6 +69,19 @@ void LevelEditor::AxisMove()
 
 void LevelEditor::ButtonInput()
 {
+	float u = 1;
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
+	{
+		u = 1;
+		std::cout << u << std::endl;
+	}
+
+	//Left stick
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
+	{
+		u = 0;
+		std::cout << u << std::endl;
+	}
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 	{
 		m_levelMarker.SetSavedPosX(m_levelMarker.GetCurrentPosX());
@@ -84,7 +97,7 @@ void LevelEditor::ButtonInput()
 		{
 			for (size_t y = m_levelMarker.GetStartY(); y <= m_levelMarker.GetEndY(); y++)
 			{
-				m_level.AddBlock(x, y);
+				m_level.AddBlock(x, y, u);
 			}
 		}
 	}

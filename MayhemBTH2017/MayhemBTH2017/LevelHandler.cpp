@@ -42,7 +42,7 @@ void LevelHandler::Import(Level & level)
 			level.SetSpawnPoint(x, y, isSpawn[i]);
 
 			if(isOccupied[i])
-				level.AddBlock(x, y);
+				level.AddBlock(x, y, 0);
 
 			i++;
 		}

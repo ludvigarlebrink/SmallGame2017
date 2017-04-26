@@ -31,6 +31,7 @@ public:
 	void Release();
 	void Bind();
 	virtual void Update(Transform& transform, Camera& camera);
+	void SendTexture(GLuint id, const GLchar* name, glm::vec4 UV);
 
 	//::.. PROTECTED FUNCTIONS ..:://
 	virtual void AddAttributeLocation();

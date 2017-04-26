@@ -7,7 +7,7 @@ MeshQuad::MeshQuad()
 	m_camera.SetRotation(0.0f, -0.0f);
 	m_camera.SetPosition(glm::vec3(((SIZE_X / 2) - 0.5f), ((SIZE_Y / 2) + 0.5f), -60));
 	LoadMesh();
-	quadShader.Init("QuadShader", false);
+	quadShader.Init(".\\Assets\\GLSL\\QuadShader", false);
 }
 
 

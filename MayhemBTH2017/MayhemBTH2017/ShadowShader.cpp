@@ -16,7 +16,7 @@ ShadowShader::~ShadowShader()
 
 void ShadowShader::Init()
 {
-	m_shader.Init("//TEMP//", false, false);
+	m_shader.Init(".\\Assets\\GLSL\\TEMP", false, false);
 	glm::mat4 lightProjection, lightView;
 	GLfloat nearPlane = 1.0f, farPlane = 75.5f;
 	lightProjection = glm::ortho(8.0f, 8.0f, -30.0f, 30.0f, nearPlane, farPlane);

@@ -30,6 +30,8 @@ void Prefab::Render(Camera & cam)
 	m_animController->Update(m_uniforms[JOINTS]);
 
 	m_mesh->Render();
+
+	glUseProgram(0);
 }
 
 //::.. HELP FUNCTIONS ..:://
