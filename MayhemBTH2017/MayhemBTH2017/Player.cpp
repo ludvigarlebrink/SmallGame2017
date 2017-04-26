@@ -22,10 +22,13 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	m_boundingBox.initDynamic(world, pos, scale);
 	
 	//Load player MESH
-	m_playerMesh = m_meshImp.Import();
+
+	m_playerPrefab = PrefabManager::Instantiate("Player");
+	
+
 
 	//Load player shader
-	m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
+	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
 	GetBox().getFixture()->SetDensity(1.0);
 	GetBox().getFixture()->SetFriction(1.0);
@@ -48,7 +51,10 @@ void Player::Update() {
 
 	//controller input///////////////////////////////////////////
 
-	//LEFT MOVEMENT
+
+
+		
+		//LEFT MOVEMENT
 	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX);
 	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f &&leftVelocity>-5)
 	{
@@ -103,12 +109,10 @@ void Player::Update() {
 
 }
 
-//::..RENDER..:://
-void Player::Render(Transform transform, Camera camera) {
+//::.. RENDER ..:://
+void Player::Render(Camera camera) {
 	
-	m_shader.Bind();
-	m_shader.Update(transform, camera);
-	m_playerMesh.Render();
+	m_playerPrefab->Render(camera);
 
 }
 Box Player::GetBox()
@@ -118,7 +122,7 @@ Box Player::GetBox()
 
 
 
-//::..SETTERS..:://
+//::.. SET FUNCTIONS ..:://
 void Player::SetCategoryBits(short CATEGORY){
 
 	m_fixture.filter.categoryBits = CATEGORY;
@@ -129,7 +133,7 @@ void Player::SetMaskBits(short MASK) {
 
 }
 
-//::..GETTERS..:://
+//::.. GET FUNCTIONS ..:://
 uint16 Player::GetCategoryBits(){
 	return m_fixture.filter.categoryBits;
 }
