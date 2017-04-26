@@ -5,7 +5,7 @@
 ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf)
 
 {
-	m_drawShader.Init("DrawShader", 1, 0); //Shade for drawing the transformed particles
+	m_drawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0); //Shade for drawing the transformed particles
 
 
 
@@ -24,7 +24,7 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 
 	//for nr of particles in parameter, fill with info
 
-	for (uint64_t i = 0; i < nrOf; i++) {
+	for (uint32_t i = 0; i < nrOf; i++) {
 
 		particle[i].position = pos;
 		particle[i].direction =(GetRandomDir());

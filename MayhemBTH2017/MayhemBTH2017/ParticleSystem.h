@@ -20,10 +20,10 @@ public:
 	//::..CONSTRUCTORS..:://
 	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size,  const int nrOf);
 	ParticleSystem();
-	void UpdateParticles();
 
 	//Destructor
 	virtual ~ParticleSystem();
+	void UpdateParticles();
 	void RenderTransformed(GLuint textureID);
 
 	//::..HELPER FUNCTIONS..:://
@@ -61,7 +61,7 @@ private:
 	GLuint m_velocityID;
 	GLuint m_timeAliveID;
 	GLuint m_timerID;
-	uint64_t m_offset = 0;
+	uint32_t m_offset = 0;
 	GLfloat m_timer = 0.0f;
 	Transform tmpTransform;
 	GLuint m_drawVAO;
@@ -70,7 +70,7 @@ private:
 	GLfloat info[6];
 	GLuint particlePosID, particleDirID, particleColorID, particleVelocityID, particleTimeAliveID;
 	GLuint inPosID, inDirID, inColID, inTimeID, inSizeID;
-	uint64_t offset;
+	uint32_t offset;
 
 };
 

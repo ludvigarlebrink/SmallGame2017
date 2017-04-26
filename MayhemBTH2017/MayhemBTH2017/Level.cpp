@@ -27,6 +27,7 @@ void Level::Render(Camera camera)
 
 	m_mesh.Render();
 	m_mesh2.Render();
+	glUseProgram(0);
 }
 
 
@@ -68,6 +69,7 @@ void Level::AddSpawnPoint(uint32_t posX, uint32_t posY)
 //::.. GET FUNCTIONS ..:://
 bool Level::GetIsOccupied(uint32_t posX, uint32_t posY)
 {
+
 	return m_grid[posX][posY].isOccupied;
 }
 
@@ -112,7 +114,7 @@ void Level::SetName(const std::string & name)
 //::.. HELP FUNCTIONS ..:://
 void Level::Init()
 {
-	m_debugShader.Init("DebugShader", false, 0);
+	m_debugShader.Init(".\\Assets\\GLSL\\DebugShader", false, 0);
 	InitGrid();
 	InitMesh();
 }

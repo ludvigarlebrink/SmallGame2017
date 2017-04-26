@@ -8,7 +8,7 @@
 #include "AShader.h"
 #include "TimeManager.h"
 #include "ParticleSystem.h"
-
+#include "Collider2D.h"
 class Game
 {
 public:
@@ -17,12 +17,13 @@ public:
 	void Update(Camera cam);
 	void Render();
 	glm::vec3 GetPlayerPos();
+	void SetPlayerCollision(bool* collision);
 private:
 private:
 	MeshManager meshImp;
 	TimeManager * time;
 	ParticleSystem m_particles;
-
+	Collider2D collider;
 	Transform tran;
 	GLfloat pos = 0;
 	InputManager* m_input;
@@ -31,7 +32,10 @@ private:
 	Mesh m_player;
 	Level m_level;
 	Vertex3D m_vertices[6];
+	
+	bool m_playerCollision[84][48];
 public:
+
 private:
 public:
 

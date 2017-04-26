@@ -12,7 +12,7 @@ uniform mat4 P;
 
 void main()
 {
-	if(TexCoordsAlpha.z > 0.01f)
+	if(TexCoordsAlpha.z > 0.001f)
 	{
 		mat4 PV = P * V;
 		mat4 MVP = PV * M;

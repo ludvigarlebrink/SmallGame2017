@@ -17,6 +17,7 @@ struct GUIQuad
 	glm::vec3 color;
 	GLuint texture_ID;
 
+
 };
 
 class Sprite : public AShader
@@ -31,7 +32,7 @@ public:
 
 	void sendColor();
 
-	bool hovered();
+
 
 	//::.. SET FUNCTIONS ..:://
 	void setTexture(const std::string& filePath);
@@ -48,8 +49,8 @@ private:
 	void setColorLoc();
 	void setTexLoc();
 	GUIQuad		quad;
-	glm::vec4	BB;
 	GLuint		vbo_ID;
+	GLuint		m_vao;
 	GLuint		colorLoc;
 	GLuint		texLoc;
 	GLuint		hoverTexID;
