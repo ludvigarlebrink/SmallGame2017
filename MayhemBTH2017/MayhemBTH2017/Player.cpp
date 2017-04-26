@@ -19,14 +19,20 @@ Player::~Player()
 void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 {
 	//Initiate the players bounding box
-	m_boundingBox.initDynamic(world, pos, scale);
+
+
+
 
 	//Load player MESH
 
 	m_playerPrefab = PrefabManager::Instantiate("Player");
+	m_playerPrefab->SetScale(glm::vec3(1.6));
 
+	m_boundingBox.initDynamic(world, pos, glm::vec2(m_playerPrefab->GetScale().x, m_playerPrefab->GetScale().y));
 
-
+	//sprite for size of bouding box
+	m_playerSprite.createSprite(glm::vec2(0), glm::vec2(20));
+	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
@@ -58,7 +64,7 @@ void Player::Update() {
 	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX);
 	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f &&leftVelocity > -5)
 	{
-
+		m_playerPrefab->SetRotation(0, 90*InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
 		if (m_isMidAir) {
 
 			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
@@ -74,20 +80,7 @@ void Player::Update() {
 
 	GLfloat rightVelocity = GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX);
 
-	//RIGHT MOVEMENT
-	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX) != 0.0f &&rightVelocity > -5)
-	{
 
-
-		if (m_isMidAir) {
-
-			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
-		}
-		if (!m_isMidAir &&InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) == 0.0f) {
-
-			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*(-350)*TimeManager::Get()->GetDeltaTime(), 0));
-		}
-	}
 
 
 	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f &&leftVelocity > -5 && rightVelocity > -5)
@@ -96,15 +89,20 @@ void Player::Update() {
 		if (!m_isMidAir) {
 			m_jumpTimer += 0.2f;
 			std::cout << m_jumpTimer << std::endl;
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 500.0), GetBox().getBody()->GetWorldCenter(), 1);
-			if (m_jumpTimer > 1.0f) {
-				GetBox().getBody()->ApplyForce(b2Vec2(0, 500.0), GetBox().getBody()->GetWorldCenter(), 1);
-			}
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 800.0), GetBox().getBody()->GetWorldCenter(), 1);
+			
 			//m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(0, impulse), m_player.GetBox().getBody()->GetWorldCenter(), 1);
 		}
 	}
-	m_playerPrefab->SetPosition(glm::vec3(GetBox().getBody()->GetPosition().x, GetBox().getBody()->GetPosition().y, 1));
 
+	GLfloat xPos = GetBox().getBody()->GetPosition().x;
+	GLfloat yPos = GetBox().getBody()->GetPosition().y;
+	GLfloat xScale = GetBox().getScale().x;
+	GLfloat yScale = GetBox().getScale().y;
+
+	m_playerPrefab->SetPosition(glm::vec3(xPos, yPos, 0));
+	
+	m_playerSprite.update(glm::vec2(xPos-(m_playerPrefab->GetScale().x /2), yPos-(m_playerPrefab->GetScale().y /2)), glm::vec2(m_playerPrefab->GetScale().x, m_playerPrefab->GetScale().y+4));
 
 	//////////////////////////////////////////////////////////
 	m_jumpTimer = 0.0f;
@@ -114,7 +112,12 @@ void Player::Update() {
 //::.. RENDER ..:://
 void Player::Render(Camera camera) {
 
+	Transform transform;
+	m_playerSprite.Bind();
+	m_playerSprite.Update(transform, camera);
+	m_playerSprite.draw();
 	m_playerPrefab->Render(camera);
+
 
 }
 Box Player::GetBox()
