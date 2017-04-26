@@ -2,7 +2,7 @@
 
 //::..CONSTRUCTORS..:://
 Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale) {
-	
+
 	Init(world, pos, scale);
 }
 
@@ -20,11 +20,11 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 {
 	//Initiate the players bounding box
 	m_boundingBox.initDynamic(world, pos, scale);
-	
+
 	//Load player MESH
 
 	m_playerPrefab = PrefabManager::Instantiate("Player");
-	
+
 
 
 	//Load player shader
@@ -36,7 +36,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	GetBox().getBody()->SetLinearDamping(0.2);
 
 	//Set fixture 
-	
+
 }
 
 void Player::Update() {
@@ -53,12 +53,12 @@ void Player::Update() {
 
 
 
-		
-		//LEFT MOVEMENT
+
+	//LEFT MOVEMENT
 	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX);
-	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f &&leftVelocity>-5)
+	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f &&leftVelocity > -5)
 	{
-	
+
 		if (m_isMidAir) {
 
 			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
@@ -88,11 +88,10 @@ void Player::Update() {
 			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX)*(-350)*TimeManager::Get()->GetDeltaTime(), 0));
 		}
 	}
-	
 
-	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f &&leftVelocity>-5 && rightVelocity > -5)
+
+	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f &&leftVelocity > -5 && rightVelocity > -5)
 	{
-	
 
 		if (!m_isMidAir) {
 			m_jumpTimer += 0.2f;
@@ -104,6 +103,9 @@ void Player::Update() {
 			//m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(0, impulse), m_player.GetBox().getBody()->GetWorldCenter(), 1);
 		}
 	}
+	m_playerPrefab->SetPosition(glm::vec3(GetBox().getBody()->GetPosition().x, GetBox().getBody()->GetPosition().y, 1));
+
+
 	//////////////////////////////////////////////////////////
 	m_jumpTimer = 0.0f;
 
@@ -111,7 +113,7 @@ void Player::Update() {
 
 //::.. RENDER ..:://
 void Player::Render(Camera camera) {
-	
+
 	m_playerPrefab->Render(camera);
 
 }
@@ -123,7 +125,7 @@ Box Player::GetBox()
 
 
 //::.. SET FUNCTIONS ..:://
-void Player::SetCategoryBits(short CATEGORY){
+void Player::SetCategoryBits(short CATEGORY) {
 
 	m_fixture.filter.categoryBits = CATEGORY;
 }
@@ -134,7 +136,7 @@ void Player::SetMaskBits(short MASK) {
 }
 
 //::.. GET FUNCTIONS ..:://
-uint16 Player::GetCategoryBits(){
+uint16 Player::GetCategoryBits() {
 	return m_fixture.filter.categoryBits;
 }
 
