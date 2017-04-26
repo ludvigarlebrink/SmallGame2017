@@ -17,10 +17,10 @@ public:
 
 	void initStatic(b2World* world, const glm::vec2& pos, const glm::vec2& scale);
 
-	b2Body* getBody() { return this->body; }
-	b2Fixture* getFixture() { return this->fixture; }
+	b2Body* getBody();
+	b2Fixture* getFixture();
 
-	glm::vec2 getScale() { return this->m_scale; }
+	glm::vec2 getScale();
 
 private:
 	b2Body* body = nullptr;
