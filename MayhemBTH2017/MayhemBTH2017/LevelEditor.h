@@ -44,6 +44,8 @@ private:
 		SAVE
 	};
 
+	glm::vec2				m_u = glm::vec2(0,0);
+
 	InputManager *		m_input;
 	StateManager *		m_stateManager;
 

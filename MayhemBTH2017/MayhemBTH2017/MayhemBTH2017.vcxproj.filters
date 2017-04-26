@@ -194,9 +194,6 @@
     <ClCompile Include="PrefabManager.cpp">
       <Filter>Engine\Resources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -217,8 +214,11 @@
     </ClCompile>
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="ImportTester.cpp">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClCompile>
     <ClCompile Include="LevelEditorGUI.cpp">
-      <Filter>Engine\LevelEditor</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -350,9 +350,6 @@
     <ClInclude Include="PrefabManager.h">
       <Filter>Engine\Resources\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -376,9 +373,6 @@
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="LevelEditorGUI.h">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -394,9 +388,6 @@
       <Filter>Assets\GLSL</Filter>
     </None>
     <None Include="Assets\GLSL\DebugGreen.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\DebugShader.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
     <None Include="Assets\GLSL\DebugShader.vert">
@@ -444,15 +435,14 @@
     <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
     </None>
-    <None Include="Assets\Prefabs\super.mr">
-      <Filter>Assets</Filter>
+    <None Include="DebugShader.frag">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\Animations\super%40animation.mranim">
-      <Filter>Assets</Filter>
+    <None Include="Assets\GLSL\LevelShader.frag">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\Skeletons\super.mrskel">
-      <Filter>Assets</Filter>
+    <None Include="Assets\GLSL\LevelShader.vert">
+      <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\Meshes\super.mrmesh" />
   </ItemGroup>
 </Project>
