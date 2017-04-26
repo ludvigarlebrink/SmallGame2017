@@ -35,6 +35,7 @@ private:
 private:
 	Box m_boundingBox;
 	Prefab * m_playerPrefab;
+	Sprite m_playerSprite;
 	Transform m_transf;
 	Camera m_cam;
 	AShader m_shader;

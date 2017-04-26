@@ -207,6 +207,21 @@ const char * Prefab::GetName() const
 	return m_name;
 }
 
+const glm::vec3 Prefab::GetRotation()
+{
+	return m_localTx.GetRotation();
+}
+
+const glm::vec3 Prefab::GetScale()
+{
+	return m_localTx.GetScale();
+}
+
+const glm::vec3 Prefab::GetPosition()
+{
+	return m_localTx.GetPosition();
+}
+
 
 const Transform & Prefab::GetTransform() const
 {

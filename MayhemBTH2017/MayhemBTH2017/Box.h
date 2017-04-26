@@ -22,6 +22,8 @@ public:
 
 	glm::vec2 getScale() { return this->m_scale; }
 
+
+
 private:
 	b2Body* body = nullptr;
 	b2Fixture* fixture;

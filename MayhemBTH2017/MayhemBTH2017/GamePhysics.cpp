@@ -17,7 +17,7 @@ void GamePhysics::enterWorld()
 
 	//Get deltatime
 	m_time = TimeManager::Get();
-	b2Vec2 gravity(0.0f, -1.8f);
+	b2Vec2 gravity(0.0f, -9.8f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
