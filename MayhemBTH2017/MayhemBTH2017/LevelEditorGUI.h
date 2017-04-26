@@ -9,8 +9,10 @@
 
 struct GUI
 {
-	UIText m_text;
-	int32_t m_numIcons = 0;
+	UIText		m_text;
+	int32_t		m_numIcons = 0;
+	glm::vec4	m_iconUV;
+	UIImage		m_icon;
 	std::vector<UIImage> m_icons;
 };
 
