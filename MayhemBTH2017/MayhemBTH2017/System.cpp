@@ -43,8 +43,6 @@ void System::Run()
 	GamePhysics physics;
 	physics.enterWorld();
 
-
-
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -76,7 +74,6 @@ void System::Run()
 		default:
 			break;
 		}
-
 
 		m_inputManager->Reset();
 
