@@ -6,6 +6,7 @@
 #include "AShader.h"
 #include "Camera.h"
 #include "Mesh.h"
+#include "InputManager.h"
 
 
 #include <glm.hpp>
@@ -32,7 +33,7 @@ public:
 	void Render(Camera camera);
 
 	//::.. MODIFY FUNCTIONS ..:://
-	void AddBlock(uint32_t posX, uint32_t posY);
+	void AddBlock(uint32_t posX, uint32_t posY, float u);
 	void RemoveBlock(uint32_t posX, uint32_t posY);
 	void AddSpawnPoint(uint32_t posX, uint32_t posY);
 
@@ -50,7 +51,7 @@ public:
 
 	void Clear();
 
-	void UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied);
+	void UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, float u);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
@@ -74,6 +75,10 @@ private:
 
 	uint32_t	m_nrOfSpawnPoints;
 	uint32_t	m_nrOfBlocks;
+
+	InputManager *		m_input;
+	glm::vec4			m_uv;
+	float				m_uvTest;
 };
 
 

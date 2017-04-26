@@ -4,11 +4,18 @@
 #include "StateManager.h"
 #include "InputManager.h"
 #include "TimeManager.h"
+#include "TextureManager.h"
+
+//temp
+#include "PrefabManager.h"
 
 
 #include "System.h"
 
-#pragma comment(lib, "MRSDK.lib")
+#include "Resource.h"
+#include "ResourceExporter.h"
+
+
 
 // Global singleton managers.
 MemoryManager	g_memoryManager;
@@ -17,6 +24,9 @@ VideoManager	g_videoManager;
 StateManager	g_stateManager;
 InputManager	g_inputManager;
 TimeManager		g_timeManager;
+TextureManager	g_textureManager;
+
+
 
 
 void BigInit();
@@ -27,6 +37,12 @@ int main(int argc, char *argv[])
 {
 	// Init all singleton managers.
 	BigInit();
+
+	// TEMP REMOVE
+	Resource * res = new Resource;
+	ResourceExporter resex;
+	resex.Export(res);
+
 
 	// Create the main system.
 	System system;
@@ -49,10 +65,12 @@ void BigInit()
 	g_stateManager.StartUp();		// 4.
 	g_inputManager.StartUp();		// 5.
 	g_timeManager.StartUp();		// 6.
+	g_textureManager.StartUp();		//7
 }
 
 void Terminate()
 {
+	g_textureManager.Shutdown();		//7
 	g_timeManager.ShutDown();		// 6.
 	g_inputManager.ShutDown();		// 5.
 	g_stateManager.ShutDown();		// 4.

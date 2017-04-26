@@ -112,7 +112,7 @@ void VideoManager::Init()
 
 	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 	glEnable(GL_DEBUG_OUTPUT);
-//	glDebugMessageCallback(openglCallbackFunction, nullptr);
+	glDebugMessageCallback(openglCallbackFunction, nullptr);
 	glDebugMessageControl(
 		GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
 

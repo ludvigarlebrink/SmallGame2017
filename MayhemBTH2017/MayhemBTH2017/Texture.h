@@ -17,8 +17,9 @@ public:
 	//::.. GET FUNCTIONS ..:://
 	uint32_t GetHeight() const;
 	uint32_t GetWidth() const;
+	GLuint GetTexture()const;
 
-	void Bind();
+	void Bind(unsigned int unit);
 
 private:
 	GLuint m_texture;
