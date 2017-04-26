@@ -26,7 +26,7 @@ UIImage::UIImage()
 
 	m_showTexture = false;
 	TextureHandler imp;
-	m_texture = imp.Import(".\\Assets\\Sprites\\MainMenu.png");
+	//m_texture = imp.Import(".\\Assets\\Sprites\\MainMenu.png");
 }
 
 
@@ -198,4 +198,9 @@ void UIImage::SetTexture(const char * filepath)
 	TextureHandler imp;
 	m_texture = imp.Import(filepath);
 	m_showTexture = true;
+}
+
+void UIImage::SetUV(const char * filepath, glm::vec4 uv)
+{
+	
 }

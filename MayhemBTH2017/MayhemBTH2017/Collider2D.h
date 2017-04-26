@@ -10,7 +10,7 @@
 #include <glew.h>
 #include "Level.h"
 #include "Mesh.h"
-#include "LevelImporter.h"
+#include "LevelHandler.h"
 #include "Box.h"
 #include "Sprite.h"
 
@@ -40,7 +40,7 @@ private:
 	GLuint		m_bufferID;
 	GLuint		m_vao;
 	AShader		m_shader;
-	LevelImporter m_imp;
+	LevelHandler m_imp;
 	Transform	m_transform;
 	Camera		m_camera;
 	Level		m_level;

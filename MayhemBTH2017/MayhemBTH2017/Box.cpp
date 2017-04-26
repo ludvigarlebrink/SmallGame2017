@@ -55,3 +55,17 @@ void Box::initStatic(b2World * world, const glm::vec2 & pos, const glm::vec2 & s
 	this->fixture = this->body->CreateFixture(&fixtureDef);
 }
 
+b2Body * Box::getBody()
+{
+	return this->body;
+}
+
+b2Fixture * Box::getFixture()
+{
+	return this->fixture;
+}
+
+glm::vec2 Box::getScale()
+{
+	return this->m_scale;
+}

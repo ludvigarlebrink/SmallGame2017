@@ -35,6 +35,7 @@ public:
 	void SetAlpha(float alpha);
 	void SetAlpha(uint8_t alpha);
 	void SetTexture(const char* filepath);
+	void SetUV(const char* filepath, glm::vec4 uv);
 
 private:
 	VideoManager * m_videoManager;
@@ -47,6 +48,8 @@ private:
 
 	int32_t m_posX;
 	int32_t m_posY;
+
+	glm::vec4 m_texUV;
 
 	SDL_Color m_color;
 	Texture m_texture;

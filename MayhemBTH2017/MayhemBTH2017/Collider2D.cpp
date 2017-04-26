@@ -31,21 +31,23 @@ std::vector<Box> Collider2D::GetBoxes()
 }
 void Collider2D::DrawCollider(Camera camera)
 {
+
 	Transform transf;
 	transf.SetPosition(42.0, 24.0, -0.0);
 	m_shader.Update(transf, camera);
 	m_mesh.Render();
 	glUseProgram(0);
-
+	m_level.Render(camera);
 }
 
 void Collider2D::CreateBoundingBoxes(b2World* world) {
 
 
-	m_imp.ImportLevel(m_level);
+	m_imp.Import(m_level);
 
 	const uint32_t length = SIZE_X * SIZE_Y * 6;
 	m_vertices = (Vertex2D*)malloc(sizeof(Vertex2D) * length);
+	
 	uint32_t i = 0;
 	float scaler = 1.0f;
 	GLuint blocksInRow = 0.0;
@@ -104,7 +106,7 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 		}
 	}
 
-	m_mesh.LoadMesh(m_vertices, length);
+	m_mesh.Load(m_vertices, length);
 
 
 }

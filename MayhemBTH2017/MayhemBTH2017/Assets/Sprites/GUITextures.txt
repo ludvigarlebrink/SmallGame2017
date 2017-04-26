@@ -2,14 +2,9 @@
 STOP
 .\\Assets\\Sprites\\MainMenu.png
 STOP
-.\\Assets\\Sprites\\fourButton.png
-.\\Assets\\Sprites\\StartButton.png
-.\\Assets\\Sprites\\greyButton.png
+.\\Assets\\Sprites\\TexturePack.png
 STOP
-.\\Assets\\Sprites\\BlueButton.png
-.\\Assets\\Sprites\\GreenButton.png
-.\\Assets\\Sprites\\YellowButton.png
-.\\Assets\\Sprites\\CrossHairButton.png
+.\\Assets\\Sprites\\TexturePack.png
 STOP
-.\\Assets\\Sprites\\MenuConcept.png
+.\\Assets\\Sprites\\TexturePack.png
 STOP

@@ -4,8 +4,8 @@
 
 LevelEditorGUI::LevelEditorGUI()
 {
-	//	m_width = 1280;
-	//	m_height = 720;
+	//	m_width = 1920;
+	//	m_height = 1080;
 
 	m_input = InputManager::Get();
 
@@ -124,7 +124,9 @@ void LevelEditorGUI::Init()
 			}
 
 			UIImage temp;
+			//m_gui[i].m_iconUV = glm::vec4()
 			temp.SetTexture(m_line.c_str());
+			//temp.SetUV(m_line.c_str(), glm::vec4())
 			m_gui[i].m_icons.push_back(temp);
 			m_gui[i].m_numIcons++;
 		}

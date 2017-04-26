@@ -133,11 +133,10 @@
     <ClCompile Include="AnimController.cpp" />
     <ClCompile Include="AnimSkeleton.cpp" />
     <ClCompile Include="Box.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Collider2D.cpp" />
+    <ClCompile Include="GamePhysics.cpp" />
     <ClCompile Include="ImportTester.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -153,15 +152,17 @@
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="MenuCredits.cpp" />
     <ClCompile Include="MenuVideo.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prefab.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="PrefabManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sprite.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UIImage.cpp" />
@@ -202,6 +203,7 @@
     <ClCompile Include="UITextField.cpp" />
     <ClCompile Include="VideoManager.cpp" />
     <ClCompile Include="VirtualKeyboard.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AAllocator.h" />
@@ -211,10 +213,7 @@
     <ClInclude Include="AnimSkeleton.h" />
     <ClInclude Include="AnimUtil.h" />
     <ClInclude Include="Box.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="Menu.h">
@@ -233,9 +232,10 @@
     <ClInclude Include="PrefabManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sprite.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UIImage.h" />
@@ -274,6 +274,7 @@
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoManager.h" />
     <ClInclude Include="VirtualKeyboard.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag" />
