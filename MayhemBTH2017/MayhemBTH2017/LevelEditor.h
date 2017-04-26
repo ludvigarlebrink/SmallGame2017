@@ -4,7 +4,7 @@
 
 #include "Level.h"
 #include "Timer.h"
-#include "TextureHandler.h"
+//#include "TextureHandler.h"
 #include "LevelHandler.h"
 #include "LevelMarker.h"
 #include "StateManager.h"
@@ -14,6 +14,7 @@
 
 #include <glm.hpp>
 #include <cstdint>
+
 
 
 class LevelEditor
