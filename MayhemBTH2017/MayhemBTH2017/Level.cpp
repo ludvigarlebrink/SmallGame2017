@@ -56,13 +56,13 @@ void Level::Render(Camera camera)
 
 
 //::.. MODIFY FUNCTIONS ..:://
-void Level::AddBlock(uint32_t posX, uint32_t posY, float u)
+void Level::AddBlock(uint32_t posX, uint32_t posY, glm::vec2 uv)
 {
 	if (!m_grid[posX][posY].isOccupied)
 	{
 		SetOccupied(posX, posY, true);
 	}
-	UpdateBlocks(posX, posY, true, u);
+	UpdateBlocks(posX, posY, true, uv);
 	m_mesh.Update(); //Front quad
 	m_mesh2.Update(); //Z-quad
 
@@ -75,7 +75,7 @@ void Level::RemoveBlock(uint32_t posX, uint32_t posY)
 		SetOccupied(posX, posY, false);
 	}
 
-	UpdateBlocks(posX, posY, false, 0);
+	UpdateBlocks(posX, posY, false, glm::vec2(0,0));
 	m_mesh.Update(); //Front quad
 	m_mesh2.Update(); //Z-quad
 }
@@ -264,65 +264,71 @@ void Level::InitMesh()
 	m_mesh2.Load(m_vertices2, length2);
 }
 
-void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, float u)
+void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, glm::vec2 uv)
 {
-	float x = u;
-
+	float x = uv.x;
+	float y = uv.y;
 
 
 	uint64_t pos = (posY + (posX * SIZE_Y)) * 6;
-	/*for (size_t i = 0; i < 6; i++)
-	{
-		if (isOccupied)
-		{
-			m_vertices[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
-				m_vertices[pos + i].texCoordsAlpha.y, 1.0f);
-			m_vertices[pos + i].texCoordsAlpha = glm::vec3((32*0)/512,(32*0)/512, 1.0f);
-
-		}
-		else
-		{
-			m_vertices[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
-				m_vertices[pos + i].texCoordsAlpha.y, 0.0f);
-			m_vertices[pos + i].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
-		}*/
+	//::.. FRONT ..:://
 		for (size_t i = 0; i < 1; i++)
 		{
 			if (isOccupied)
-			{/*
-				m_vertices[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
-					m_vertices[pos + i].texCoordsAlpha.y, 1.0f);*/
-				m_vertices[pos + i].texCoordsAlpha = glm::vec3((32.0 * x) / 512.0, (32.0 * x+1) / 512, 1.0f);
-				m_vertices[pos + i +1].texCoordsAlpha = glm::vec3((32.0 * x) / 512.0, (32.0 * x) / 512, 1.0f);
-				m_vertices[pos + i+2].texCoordsAlpha = glm::vec3((32.0 * x+1) / 512.0, (32.0 * x) / 512, 1.0f);
-				//m_vertices[pos + i+3].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
-				std::cout << "UV: " << x << std::endl;
-			
-
+			{
+				m_vertices[pos + i].texCoordsAlpha =	 glm::vec3(((32.0 * (x + 0) )/512), ((32.0 * (y + 1))/512), 1.0f);
+				m_vertices[pos + (i+1)].texCoordsAlpha = glm::vec3(((32.0 * (x + 0) )/512), ((32.0 * (y + 0))/512), 1.0f);
+				m_vertices[pos + (i+2)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1) )/512), ((32.0 * (y + 1))/512), 1.0f);
+				m_vertices[pos + (i+3)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1) )/512), ((32.0 * (y + 1))/512), 1.0f);
+				m_vertices[pos + (i+4)].texCoordsAlpha = glm::vec3(((32.0 * (x + 0) )/512), ((32.0 * (y + 0))/512), 1.0f);
+				m_vertices[pos + (i+5)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1) )/512), ((32.0 * (y + 0))/512), 1.0f);
 			}
 			else
 			{
-				m_vertices[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
-					m_vertices[pos + i].texCoordsAlpha.y, 0.0f);
-				//m_vertices[pos + i].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
+				
+				m_vertices[pos + i].texCoordsAlpha =	   glm::vec3(((32.0 * x + 0) / 512), ((32.0 * y + 1)/512), 0.0f);
+				m_vertices[pos + (i + 1)].texCoordsAlpha = glm::vec3(((32.0 * x + 0) / 512), ((32.0 * y + 0)/512), 0.0f);
+				m_vertices[pos + (i + 2)].texCoordsAlpha = glm::vec3(((32.0 * x + 1) / 512), ((32.0 * y + 1)/512), 0.0f);
+				m_vertices[pos + (i + 3)].texCoordsAlpha = glm::vec3(((32.0 * x + 1) / 512), ((32.0 * y + 1)/512), 0.0f);
+				m_vertices[pos + (i + 4)].texCoordsAlpha = glm::vec3(((32.0 * x + 1) / 512), ((32.0 * y + 0)/512), 0.0f);
+				m_vertices[pos + (i + 5)].texCoordsAlpha = glm::vec3(((32.0 * x + 0) / 512), ((32.0 * y + 0)/512), 0.0f);
 			}
 	}
 
 	pos = (posY + (posX * SIZE_Y)) * 12;
-
-	for (size_t i = 0; i < 12; i++)
+	//::.. TOP ..:://
+	for (size_t i = 0; i < 1; i++)
 	{
 		if (isOccupied)
 		{
-			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
-				m_vertices2[pos + i].texCoordsAlpha.y, 1.0f);
-			//m_vertices2[pos + i].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 1)) / 512), 1.0f);
+			m_vertices2[pos + (i + 1)].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+			m_vertices2[pos + (i + 2)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 1)) / 512), 1.0f);
+			m_vertices2[pos + (i + 3)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 1)) / 512), 1.0f);
+			m_vertices2[pos + (i + 4)].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+			m_vertices2[pos + (i + 5)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+			m_vertices2[pos + (i + 6)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+			m_vertices2[pos + (i + 7)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+			m_vertices2[pos + (i + 8)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+			m_vertices2[pos + (i + 9)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+			m_vertices2[pos + (i + 10)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+			m_vertices2[pos + (i + 11)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+			
 		}
 		else
 		{
-			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
-				m_vertices2[pos + i].texCoordsAlpha.y, 0.0f);
-			//m_vertices2[pos + i].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 1)) / 512), 0.0f);
+			m_vertices2[pos + (i + 1)].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
+			m_vertices2[pos + (i + 2)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 1)) / 512), 0.0f);
+			m_vertices2[pos + (i + 3)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 1)) / 512), 0.0f);
+			m_vertices2[pos + (i + 4)].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
+			m_vertices2[pos + (i + 5)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
+			m_vertices2[pos + (i + 6)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
+			m_vertices2[pos + (i + 7)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
+			m_vertices2[pos + (i + 8)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
+			m_vertices2[pos + (i + 9)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
+			m_vertices2[pos + (i + 10)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
+			m_vertices2[pos + (i + 11)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
 		}
 	}
 
@@ -335,17 +341,26 @@ void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, float u)
 		return;
 	}
 
-	for (size_t i = 0; i < 6; i++)
+	for (size_t i = 0; i < 1; i++)
 	{
+		//::.. BOTTOM ..:://
 		if (isOccupied)
 		{
-			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
-				m_vertices2[pos + i].texCoordsAlpha.y, 1.0f);
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 1)) / 512), 1.0f);
+			m_vertices2[pos + (i + 1)].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+			m_vertices2[pos + (i + 2)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 1)) / 512), 1.0f);
+			m_vertices2[pos + (i + 3)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 1)) / 512), 1.0f);
+			m_vertices2[pos + (i + 4)].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+			m_vertices2[pos + (i + 5)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
 		}
 		else
 		{
-			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
-				m_vertices2[pos + i].texCoordsAlpha.y, 0.0f);
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 1)) / 512), 0.0f);
+			m_vertices2[pos + (i + 1)].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
+			m_vertices2[pos + (i + 2)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 1)) / 512), 0.0f);
+			m_vertices2[pos + (i + 3)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 1)) / 512), 0.0f);
+			m_vertices2[pos + (i + 4)].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
+			m_vertices2[pos + (i + 5)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 0.0f);
 		}
 	}
 
@@ -357,13 +372,31 @@ void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, float u)
 	{
 		if (isOccupied)
 		{
-			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
-				m_vertices2[pos + i].texCoordsAlpha.y, 1.0f);
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 1)) / 512), 1.0f);
 		}
 		else
 		{
-			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
-				m_vertices2[pos + i].texCoordsAlpha.y, 0.0f);
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 1)) / 512), 0.0f);
+		}
+	}
+	pos = (posY - (SIZE_Y) + (posX * SIZE_Y)) * 12;
+
+
+
+
+	pos = (posY + (posX * SIZE_Y)) * 12;
+
+
+
+	for (size_t i = 6; i < 12; i++)
+	{
+		if (isOccupied)
+		{
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 1)) / 512), 1.0f);
+		}
+		else
+		{
+			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(((32.0 * (x + 0)) / 512), ((32.0 * (y + 1)) / 512), 0.0f);
 		}
 	}
 
