@@ -1,7 +1,6 @@
 #ifndef __GAMEPHYSICS_H__
 #define __GAMEPHYSICS_H__
 
-#include "AProjectile.h"
 #include <Box2D\Box2D.h>
 #include "Box.h"
 #include "Collider2D.h"
@@ -11,11 +10,12 @@
 class GamePhysics
 {
 public:
+
 	GamePhysics();
 	virtual ~GamePhysics();
 	void enterWorld();
-	void Update(Transform transform);
-	void Render(Transform &transform, Camera camera);
+	void Update();
+	void Render(Camera camera);
 	glm::vec3 GetPosition();
 
 private:

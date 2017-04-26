@@ -80,6 +80,8 @@ private:
 	SDL_Event				m_event;
 	SDL_GameController*		m_controller;
 
+	
+
 };
 
 #endif

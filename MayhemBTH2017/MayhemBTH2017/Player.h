@@ -1,7 +1,7 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
-#include "MeshImporter.h"
+#include "PrefabManager.h"
 #include "Box.h"
 #include "AShader.h"
 #include "InputManager.h"
@@ -19,7 +19,7 @@ public:
 	void Init(b2World* world, glm::vec2 pos, glm::vec2 scale);
 	
 	//::..RENDER..:://
-	void Render(Transform transform, Camera camera);
+	void Render(Camera camera);
 	void Update();
 
 	//::..SETTERS..:://
@@ -34,8 +34,8 @@ public:
 private:
 private:
 	Box m_boundingBox;
-	Mesh m_playerMesh;
-	MeshImporter m_meshImp;
+	Prefab * m_playerPrefab;
+	Sprite m_playerSprite;
 	Transform m_transf;
 	Camera m_cam;
 	AShader m_shader;

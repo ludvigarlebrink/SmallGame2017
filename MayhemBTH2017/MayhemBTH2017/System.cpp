@@ -5,6 +5,7 @@
 #include "UIText.h"
 #include "Prefab.h"
 #include "PrefabManager.h"
+#include "GamePhysics.h"
 
 System::System()
 {
@@ -31,14 +32,17 @@ void System::Run()
 
 	Transform transform;
 	Camera camera;
+	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 	VirtualKeyboard vk;
 	int count = 1;
-
 	m.Init();
 	float counter = 0;
 
-	//Prefab * pre = PrefabManager::Instantiate("");
+	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
+	GamePhysics physics;
+	physics.enterWorld();
+
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -46,7 +50,7 @@ void System::Run()
 	
 		m_inputManager->Update();
 
-		//pre->Render(cam);
+	//	pre->Render(cam);
 
 
 		switch (m_stateManager->GetCurrentState())
@@ -59,7 +63,10 @@ void System::Run()
 		case GameState::LEVEL_EDITOR:
 			l.Update();
 			break;
-		case GameState::GAME:
+		//case GameState::GAME:
+
+			physics.Update();
+			physics.Render(camera);
 			break;
 		case GameState::EXIT:
 			isRunning = false;
@@ -67,7 +74,6 @@ void System::Run()
 		default:
 			break;
 		}
-
 
 		m_inputManager->Reset();
 
