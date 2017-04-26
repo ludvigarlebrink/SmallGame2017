@@ -41,7 +41,7 @@ void System::Run()
 	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
 	GamePhysics physics;
-	physics.enterWorld();
+	physics.EnterWorld();
 
 	while (isRunning)
 	{

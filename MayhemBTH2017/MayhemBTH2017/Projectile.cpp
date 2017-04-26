@@ -4,6 +4,8 @@
 
 Projectile::Projectile()
 {
+	m_time = 0.0;
+	m_rotationUpdate = 0.0f;
 }
 
 
@@ -24,9 +26,34 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_fireRate = fireRate;
 }
 
+void Projectile::SetLife(int life)
+{
+	m_life = life;
+}
+
+void Projectile::AddForce(b2Vec2 force)
+{
+	m_box.getBody()->ApplyForce(force, m_box.getBody()->GetWorldCenter(), true);
+}
+
+int Projectile::GetLife()
+{
+	return m_life;
+}
+
+
 void Projectile::Update()
 {
+	m_rotationUpdate += 1.0f;
 	glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
 
 	m_prefab->SetPosition(position);
+	m_prefab->SetRotation(0, m_rotationUpdate * 7, 0);
+	if (m_rotationUpdate > 360)
+		m_rotationUpdate = 0;
+}
+
+void Projectile::Render(Camera camera)
+{
+	m_prefab->Render(camera);
 }
