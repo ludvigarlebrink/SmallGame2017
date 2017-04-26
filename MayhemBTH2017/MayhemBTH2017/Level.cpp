@@ -40,10 +40,10 @@ void Level::Render(Camera camera)
 	//Left stick
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
 	{
-		m_uv.x = 0.0/ 512.0;
+		m_uv.x = 32.0/ 512.0;
 		m_uv.y = 0.0 / 512.0;
-		m_uv.z = 512.0 / 512.0;
-		m_uv.w = 512.0 / 512.0;
+		m_uv.z = 32.0 / 512.0;
+		m_uv.w = 32.0 / 512.0;
 
 	}
 
@@ -267,8 +267,11 @@ void Level::InitMesh()
 
 void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied)
 {
-
-
+	int x = 0;
+	int y = 0;
+	float u = (32 * x) / 512;
+	float v = (32 * y) / 512;
+	
 	
 
 	uint64_t pos = (posY + (posX * SIZE_Y)) * 6;
@@ -278,11 +281,14 @@ void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied)
 		{
 			m_vertices[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
 				m_vertices[pos + i].texCoordsAlpha.y, 1.0f);
+			//m_vertices[pos + i].texCoordsAlpha = glm::vec3((32*0)/512,(32*0)/512, 1.0f);
+
 		}
 		else
 		{
 			m_vertices[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
 				m_vertices[pos + i].texCoordsAlpha.y, 0.0f);
+			//m_vertices[pos + i].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
 		}
 	}
 
@@ -294,11 +300,13 @@ void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied)
 		{
 			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
 				m_vertices2[pos + i].texCoordsAlpha.y, 1.0f);
+			//m_vertices2[pos + i].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
 		}
 		else
 		{
 			m_vertices2[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
 				m_vertices2[pos + i].texCoordsAlpha.y, 0.0f);
+			//m_vertices2[pos + i].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
 		}
 	}
 
