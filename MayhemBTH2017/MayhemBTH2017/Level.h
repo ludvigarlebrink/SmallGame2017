@@ -33,7 +33,7 @@ public:
 	void Render(Camera camera);
 
 	//::.. MODIFY FUNCTIONS ..:://
-	void AddBlock(uint32_t posX, uint32_t posY);
+	void AddBlock(uint32_t posX, uint32_t posY, float u);
 	void RemoveBlock(uint32_t posX, uint32_t posY);
 	void AddSpawnPoint(uint32_t posX, uint32_t posY);
 
@@ -51,7 +51,7 @@ public:
 
 	void Clear();
 
-	void UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied);
+	void UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, float u);
 
 private:
 	//::.. HELP FUNCTIONS ..:://

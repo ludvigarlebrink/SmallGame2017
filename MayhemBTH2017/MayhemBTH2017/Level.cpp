@@ -30,23 +30,23 @@ void Level::Render(Camera camera)
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
 	{
 
-		m_uv.x = (32 * 3) / 512.0;
+	/*	m_uv.x = (32 * 3) / 512.0;
 		m_uv.y = 0.0 / 512.0;
 		m_uv.z = 32 / 512.0;
-		m_uv.w = 32 / 512.0;
-		std::cout << "pressed" << std::endl;
+		m_uv.w = 32 / 512.0;*/
+		//std::cout << "pressed" << std::endl;
 	}
 
 	//Left stick
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
 	{
+
+	}
+
 		m_uv.x = 32.0/ 512.0;
 		m_uv.y = 0.0 / 512.0;
 		m_uv.z = 32.0 / 512.0;
 		m_uv.w = 32.0 / 512.0;
-
-	}
-
 	m_debugShader.SendTexture(0, "t", m_uv);
 
 	m_mesh.Render();
@@ -56,14 +56,13 @@ void Level::Render(Camera camera)
 
 
 //::.. MODIFY FUNCTIONS ..:://
-void Level::AddBlock(uint32_t posX, uint32_t posY)
+void Level::AddBlock(uint32_t posX, uint32_t posY, float u)
 {
 	if (!m_grid[posX][posY].isOccupied)
 	{
 		SetOccupied(posX, posY, true);
 	}
-
-	UpdateBlocks(posX, posY, true);
+	UpdateBlocks(posX, posY, true, u);
 	m_mesh.Update(); //Front quad
 	m_mesh2.Update(); //Z-quad
 
@@ -76,7 +75,7 @@ void Level::RemoveBlock(uint32_t posX, uint32_t posY)
 		SetOccupied(posX, posY, false);
 	}
 
-	UpdateBlocks(posX, posY, false);
+	UpdateBlocks(posX, posY, false, 0);
 	m_mesh.Update(); //Front quad
 	m_mesh2.Update(); //Z-quad
 }
@@ -265,31 +264,48 @@ void Level::InitMesh()
 	m_mesh2.Load(m_vertices2, length2);
 }
 
-void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied)
+void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, float u)
 {
-	int x = 0;
-	int y = 0;
-	float u = (32 * x) / 512;
-	float v = (32 * y) / 512;
-	
-	
+	float x = u;
+
+
 
 	uint64_t pos = (posY + (posX * SIZE_Y)) * 6;
-	for (size_t i = 0; i < 6; i++)
+	/*for (size_t i = 0; i < 6; i++)
 	{
 		if (isOccupied)
 		{
 			m_vertices[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
 				m_vertices[pos + i].texCoordsAlpha.y, 1.0f);
-			//m_vertices[pos + i].texCoordsAlpha = glm::vec3((32*0)/512,(32*0)/512, 1.0f);
+			m_vertices[pos + i].texCoordsAlpha = glm::vec3((32*0)/512,(32*0)/512, 1.0f);
 
 		}
 		else
 		{
 			m_vertices[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
 				m_vertices[pos + i].texCoordsAlpha.y, 0.0f);
-			//m_vertices[pos + i].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
-		}
+			m_vertices[pos + i].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
+		}*/
+		for (size_t i = 0; i < 1; i++)
+		{
+			if (isOccupied)
+			{/*
+				m_vertices[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
+					m_vertices[pos + i].texCoordsAlpha.y, 1.0f);*/
+				m_vertices[pos + i].texCoordsAlpha = glm::vec3((32.0 * x) / 512.0, (32.0 * x+1) / 512, 1.0f);
+				m_vertices[pos + i +1].texCoordsAlpha = glm::vec3((32.0 * x) / 512.0, (32.0 * x) / 512, 1.0f);
+				m_vertices[pos + i+2].texCoordsAlpha = glm::vec3((32.0 * x+1) / 512.0, (32.0 * x) / 512, 1.0f);
+				//m_vertices[pos + i+3].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
+				std::cout << "UV: " << x << std::endl;
+			
+
+			}
+			else
+			{
+				m_vertices[pos + i].texCoordsAlpha = glm::vec3(m_vertices[i].texCoordsAlpha.x,
+					m_vertices[pos + i].texCoordsAlpha.y, 0.0f);
+				//m_vertices[pos + i].texCoordsAlpha = glm::vec3((32 * 0) / 512, (32 * 0) / 512, 1.0f);
+			}
 	}
 
 	pos = (posY + (posX * SIZE_Y)) * 12;
