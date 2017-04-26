@@ -6,6 +6,7 @@
 #include "AShader.h"
 #include "Camera.h"
 #include "Mesh.h"
+#include "InputManager.h"
 
 
 #include <glm.hpp>
@@ -74,6 +75,10 @@ private:
 
 	uint32_t	m_nrOfSpawnPoints;
 	uint32_t	m_nrOfBlocks;
+
+	InputManager *		m_input;
+	glm::vec4			m_uv;
+	float				m_uvTest;
 };
 
 

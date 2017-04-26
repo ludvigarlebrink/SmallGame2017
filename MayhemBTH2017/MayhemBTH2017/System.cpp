@@ -33,10 +33,11 @@ void System::Run()
 	Camera camera;
 	VirtualKeyboard vk;
 	int count = 1;
+
 	m.Init();
 	float counter = 0;
 
-	Prefab * pre = PrefabManager::Instantiate("");
+	//Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
 	while (isRunning)
 	{
@@ -45,7 +46,7 @@ void System::Run()
 	
 		m_inputManager->Update();
 
-		pre->Render(cam);
+		//pre->Render(cam);
 
 
 	//	switch (m_stateManager->GetCurrentState())

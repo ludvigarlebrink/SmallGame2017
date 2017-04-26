@@ -45,7 +45,7 @@ TextureManager::Texture TextureManager::GetTexture(const char * name)
 
 GLuint TextureManager::GetTextureID(const char * name)
 {
-	return m_textureArray.at(name).ID;
+	return m_textureArray[name].ID;
 }
 
 void TextureManager::AddTexture(const char * name, const char* filepath)
@@ -69,7 +69,7 @@ void TextureManager::AddTexture(const char * name, const char* filepath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w,
-		img->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
+		img->h, 0, GL_BGR, GL_UNSIGNED_BYTE, img->pixels);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 

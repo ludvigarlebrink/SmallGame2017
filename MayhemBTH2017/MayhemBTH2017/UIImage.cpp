@@ -83,7 +83,7 @@ void UIImage::Render()
 
 	if (m_showTexture)
 	{
-		m_texture.Bind();
+		m_texture.Bind(0);
 	}
 	else
 	{
