@@ -14,6 +14,7 @@ System::System()
 
 System::~System()
 {
+	// Do nothing...
 }
 
 
@@ -28,6 +29,8 @@ void System::Run()
 
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
+
+	SDL_Event m_event; 	// Debug
 
 	Transform transform;
 	Camera camera;
@@ -66,6 +69,11 @@ void System::Run()
 		default:
 			break;
 		}
+
+		// Debug
+		while (SDL_PollEvent(&m_event) != 0)
+			if(m_event.type == SDL_KEYDOWN)
+				m_stateManager->SetCurrentState(GameState::EXIT);		
 
 
 		m_inputManager->Reset();
