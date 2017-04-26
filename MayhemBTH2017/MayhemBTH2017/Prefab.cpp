@@ -33,7 +33,7 @@ void Prefab::Render(Camera & cam)
 }
 
 //::.. HELP FUNCTIONS ..:://
-void Prefab::Init()
+void Prefab::Create()
 {
 	m_transform.SetScale(glm::vec3(4.0f, 4.0f, 4.0f));
 	m_transform.SetPosition(glm::vec3(0.0f, 0.0f, 15.0f));
@@ -49,6 +49,9 @@ void Prefab::Init()
 	types[1] = ShaderManager::FRAG_SHADER;
 
 	m_shaderProgram = ShaderManager::CreateAndAttachShaders("AnimToon", shaders, types, 2);
+
+	delete[] shaders;
+	delete[] types;
 
 	glBindAttribLocation(m_shaderProgram, 0, "Position");
 	glBindAttribLocation(m_shaderProgram, 1, "Normal");
@@ -116,12 +119,21 @@ void Prefab::SetAnimController(AnimController * animController)
 	m_animController = animController;
 }
 
+
 void Prefab::SetShaderProgram(const char * programName)
 {
 	m_shaderProg = programName;
 }
 
+
 void Prefab::SetMaterial(Material * material)
 {
 	m_material = material;
+}
+
+
+//::.. HELP FUNCTIONS ..:://
+void Prefab::Init()
+{
+
 }

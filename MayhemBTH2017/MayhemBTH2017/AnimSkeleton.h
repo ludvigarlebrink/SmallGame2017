@@ -35,7 +35,7 @@ private:
 	uint32_t	m_numJoints;
 	Joint *		m_skel;
 	glm::mat4 *	m_skinnedTx;
-	float			m_counter;
+	float		m_counter;
 	
 };
 
