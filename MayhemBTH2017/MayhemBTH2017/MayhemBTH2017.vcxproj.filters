@@ -218,7 +218,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="LevelEditorGUI.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -377,7 +377,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="LevelEditorGUI.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
