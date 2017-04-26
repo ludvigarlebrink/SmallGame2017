@@ -21,11 +21,15 @@ public:
 
 	void Render();
 
+
 	//::.. GET FUNCTIONS ..:://
-	
+	int32_t GetSizeX();
+	int32_t GetSizeY();
+	int32_t GetPosX();
+	int32_t GetPosY();
 
 	//::.. SET FUNCTIONS ..:://
-	void SetPositon(int32_t x, int32_t y);
+	void SetPosition(int32_t x, int32_t y);
 	void SetSize(int32_t x, int32_t y);
 	void SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
 	void SetAlpha(float alpha);

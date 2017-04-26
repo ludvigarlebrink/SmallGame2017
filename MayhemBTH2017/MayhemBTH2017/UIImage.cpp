@@ -83,7 +83,7 @@ void UIImage::Render()
 
 	if (m_showTexture)
 	{
-		m_texture.Bind(0);
+		m_texture.Bind();
 	}
 	else
 	{
@@ -137,9 +137,30 @@ void UIImage::Render()
 	SDL_FreeSurface(surface);
 }
 
+//::.. GET FUNCTIONS ..:://
+int32_t UIImage::GetSizeX()
+{
+	return m_sizeX;
+}
+
+int32_t UIImage::GetSizeY()
+{
+	return m_sizeY;
+}
+
+int32_t UIImage::GetPosX()
+{
+	return m_posX;
+}
+
+int32_t UIImage::GetPosY()
+{
+	return m_posY;
+}
+
 
 //::.. SET FUNCTIONS ..:://
-void UIImage::SetPositon(int32_t x, int32_t y)
+void UIImage::SetPosition(int32_t x, int32_t y)
 {
 	m_posX = x;
 	m_posY = y;

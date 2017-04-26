@@ -127,7 +127,7 @@ void UIText::SetText(const char* text)
 	m_text = text;
 }
 
-void UIText::SetPositon(int x, int y)
+void UIText::SetPosition(int x, int y)
 {
 	m_posX = x;
 	m_posY = y;

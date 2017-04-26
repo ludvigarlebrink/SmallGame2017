@@ -4,6 +4,7 @@
 #include "MenuSystem.h"
 #include "UIText.h"
 #include "Prefab.h"
+#include "PrefabManager.h"
 
 System::System()
 {
@@ -34,7 +35,9 @@ void System::Run()
 	int count = 1;
 	m.Init();
 	float counter = 0;
-	
+
+	Prefab * pre = PrefabManager::Instantiate("");
+	Camera cam;
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -42,7 +45,7 @@ void System::Run()
 	
 		m_inputManager->Update();
 
-
+		pre->Render(cam);
 
 
 		switch (m_stateManager->GetCurrentState())
@@ -70,8 +73,8 @@ void System::Run()
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
-
-		counter += m_timeManager->GetDeltaTime();
+		SDL_Delay(30);
+	//	counter += m_timeManager->GetDeltaTime();
 	}
 }
 

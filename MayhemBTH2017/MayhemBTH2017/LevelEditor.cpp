@@ -32,14 +32,14 @@ void LevelEditor::Update()
 		ButtonInput();
 
 		m_levelMarker.Update(m_camera);
-
 		m_level.Render(m_camera);
+		m_levelGUI.Render();
 		break;
 	case MENU:
 		break;
 	case SAVE:
+		ButtonInput();
 		m_level.Render(m_camera);
-
 		m_vk.Render();
 
 		break;
@@ -102,7 +102,6 @@ void LevelEditor::ButtonInput()
 		}
 	}
 
-
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_X))
 	{
 		m_levelMarker.SetSavedPosX(m_levelMarker.GetCurrentPosX());
@@ -129,10 +128,29 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
-	//	Reset();
-	//	StateManager * state = StateManager::Get();
-	//	state->SetCurrentState(GameState::MAIN_MENU);
-		m_state = SAVE;
+		if (m_state == SAVE)
+		{
+			m_state = EDIT;
+		}
+		else
+		{
+			m_state = SAVE;
+		}
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_BACK))
+	{
+		if (m_state != SAVE)
+		{
+			if (m_levelGUI.GetState() == GUI_CLOSED)
+			{
+				m_levelGUI.SetState(GUI_BLOCK);
+			}
+			else
+			{
+				m_levelGUI.SetState(GUI_CLOSED);
+			}
+		}
 	}
 }
 
