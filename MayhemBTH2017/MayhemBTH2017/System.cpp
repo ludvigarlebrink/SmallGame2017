@@ -30,8 +30,6 @@ void System::Run()
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
-	SDL_Event m_event; 	// Debug
-
 	Transform transform;
 	Camera camera;
 	VirtualKeyboard vk;
@@ -46,11 +44,10 @@ void System::Run()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
-	
+
 		m_inputManager->Update();
 
 		//pre->Render(cam);
-
 
 		switch (m_stateManager->GetCurrentState())
 		{
@@ -71,18 +68,15 @@ void System::Run()
 			break;
 		}
 
-		// Debug
-		while (SDL_PollEvent(&m_event) != 0)
-			if(m_event.type == SDL_KEYDOWN)
-				m_stateManager->SetCurrentState(GameState::EXIT);		
-
-
 		m_inputManager->Reset();
 
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
 		SDL_Delay(10);
+
+
+
 	//	counter += m_timeManager->GetDeltaTime();
 	}
 }

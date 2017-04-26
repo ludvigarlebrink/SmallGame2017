@@ -4,7 +4,7 @@
 #include "Level.h"
 #include "LevelEditor.h"
 #include "Mesh.h"
-#include "MeshManager.h"
+#include "PrefabManager.h"
 #include "AShader.h"
 #include "TimeManager.h"
 #include "ParticleSystem.h"
@@ -20,7 +20,7 @@ public:
 	void SetPlayerCollision(bool* collision);
 private:
 private:
-	MeshManager meshImp;
+	PrefabManager meshImp;
 	TimeManager * time;
 	ParticleSystem m_particles;
 	Collider2D collider;
@@ -29,7 +29,7 @@ private:
 	InputManager* m_input;
 	int posX = 42;
 	AShader m_toonShader;
-	Mesh m_player;
+	Prefab* m_player;
 	Level m_level;
 	Vertex3D m_vertices[6];
 	
