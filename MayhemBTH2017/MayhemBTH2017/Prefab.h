@@ -38,6 +38,9 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	const char * GetName() const;
+	const glm::vec3 GetRotation();
+	const glm::vec3 GetScale();
+	const glm::vec3 GetPosition();
 	const Transform& GetTransform() const;
 	Mesh * GetMesh() const;
 	AnimController * GetAnimController() const;
