@@ -26,7 +26,7 @@ UIImage::UIImage()
 
 	m_showTexture = false;
 	TextureHandler imp;
-	m_texture = imp.Import(".\\Assets\\Sprites\\MainMenu.png");
+	//m_texture = imp.Import(".\\Assets\\Sprites\\MainMenu.png");
 }
 
 
@@ -107,12 +107,12 @@ void UIImage::Render()
 			static_cast<GLfloat>(x - ((m_sizeX / 2) - halfWidth)),
 			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
 
-		glTexCoord2f(1, 1);
+		glTexCoord2f(0.5, 1);
 		glVertex2f(
 			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
 			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
 
-		glTexCoord2f(1, 0);
+		glTexCoord2f(0.5, 0);
 		glVertex2f(
 			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
 			static_cast<GLfloat>(y + ((m_sizeY / 2) + halfHeight)));
@@ -198,4 +198,9 @@ void UIImage::SetTexture(const char * filepath)
 	TextureHandler imp;
 	m_texture = imp.Import(filepath);
 	m_showTexture = true;
+}
+
+void UIImage::SetUV(const char * filepath, glm::vec4 uv)
+{
+	
 }
