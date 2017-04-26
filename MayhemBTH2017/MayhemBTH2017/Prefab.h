@@ -13,6 +13,12 @@
 class Prefab
 {
 public:
+	enum Space
+	{
+		SPACE_LOCAL = 0,
+		SPACE_GLOBAL
+	};
+
 	Prefab();
 	virtual ~Prefab();
 
@@ -20,6 +26,15 @@ public:
 	void Render(Camera& cam);
 
 	void Create();
+	void Free();
+
+	//::.. MODIFY FUNCTIONS ..:://
+	void Move(glm::vec3 pos, uint32_t space = SPACE_LOCAL);
+	void Move(float x, float y, float z, uint32_t space = SPACE_LOCAL);
+	void Rotate(glm::vec3 rot, uint32_t space = SPACE_LOCAL);
+	void Rotate(float x, float y, float z, uint32_t space = SPACE_LOCAL);
+	void Scale(glm::vec3 scale, uint32_t space = SPACE_LOCAL);
+	void Scale(float x, float y, float z, uint32_t space = SPACE_LOCAL);
 
 	//::.. GET FUNCTIONS ..:://
 	const char * GetName() const;
@@ -29,7 +44,13 @@ public:
 
 	//::.. SET FUNCTIONS ..:://
 	void SetName(const char * name);
-	void SetTransform(const Transform& transform);
+	void SetTransform(const Transform& transform, uint32_t space = SPACE_LOCAL);
+	void SetPosition(glm::vec3 pos, uint32_t space = SPACE_LOCAL);
+	void SetPosition(float x, float y, float z, uint32_t space = SPACE_LOCAL);
+	void SetRotation(glm::vec3 rot, uint32_t space = SPACE_LOCAL);
+	void SetRotation(float x, float y, float z, uint32_t space = SPACE_LOCAL);
+	void SetScale(glm::vec3 scale, uint32_t space = SPACE_LOCAL);
+	void SetScale(float x, float y, float z, uint32_t space = SPACE_LOCAL);
 	void SetMesh(Mesh * mesh);
 	void SetAnimController(AnimController * animController);
 	void SetShaderProgram(const char * programName);
@@ -52,12 +73,17 @@ private:
 	};
 
 	bool				m_hasBeenCreated;
+	bool				m_isEnabled;
+
 	const char *		m_name;
-	Transform			m_transform;
+	
+	Transform			m_localTx;
+	Transform			m_globalTx;
+
 	Mesh *				m_mesh;
 	const char *		m_shaderProg;
 	AnimController *	m_animController;
-	Material*			m_material;
+	Material *			m_material;
 	GLuint				m_shaderProgram;
 	GLuint				m_uniforms[NR_UNIFORMS];
 };
