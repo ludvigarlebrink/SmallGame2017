@@ -19,7 +19,7 @@ public:
 	void Update();
 	void Render(Camera& cam);
 
-	void Init();
+	void Create();
 
 	//::.. GET FUNCTIONS ..:://
 	const char * GetName() const;
@@ -36,15 +36,22 @@ public:
 	void SetMaterial(Material * material);
 
 private:
+	//::.. HELP FUNCTIONS ..:://
+	void Init();
+
+private:
 	enum Uniforms
 	{
 		M,
 		V,
 		P,
 		JOINTS,
+		ALBEDO_MAP,
+		NORMAL_MAP,
 		NR_UNIFORMS
 	};
 
+	bool				m_hasBeenCreated;
 	const char *		m_name;
 	Transform			m_transform;
 	Mesh *				m_mesh;

@@ -48,24 +48,24 @@ void System::Run()
 		pre->Render(cam);
 
 
-		switch (m_stateManager->GetCurrentState())
-		{
-		case GameState::START:
-			break;
-		case GameState::MAIN_MENU:
-			m.Update();
-			break;
-		case GameState::LEVEL_EDITOR:
-			l.Update();
-			break;
-		case GameState::GAME:
-			break;
-		case GameState::EXIT:
-			isRunning = false;
-			break;
-		default:
-			break;
-		}
+	//	switch (m_stateManager->GetCurrentState())
+	//	{
+	//	case GameState::START:
+	//		break;
+	//	case GameState::MAIN_MENU:
+	//		m.Update();
+	//		break;
+	//	case GameState::LEVEL_EDITOR:
+	//		l.Update();
+	//		break;
+	//	case GameState::GAME:
+	//		break;
+	//	case GameState::EXIT:
+	//		isRunning = false;
+	//		break;
+	//	default:
+	//		break;
+	//	}
 
 
 		m_inputManager->Reset();
