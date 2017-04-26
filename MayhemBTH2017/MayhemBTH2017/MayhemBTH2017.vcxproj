@@ -133,7 +133,6 @@
     <ClCompile Include="AnimController.cpp" />
     <ClCompile Include="AnimSkeleton.cpp" />
     <ClCompile Include="Box.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GamePhysics.cpp" />
     <ClCompile Include="LevelEditorGUI.cpp" />
     <ClCompile Include="Material.cpp" />
@@ -206,7 +205,6 @@
     <ClInclude Include="AnimSkeleton.h" />
     <ClInclude Include="AnimUtil.h" />
     <ClInclude Include="Box.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="GamePhysics.h" />
     <ClInclude Include="LevelEditorGUI.h" />
     <ClInclude Include="Material.h" />

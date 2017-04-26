@@ -22,7 +22,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	m_boundingBox.initDynamic(world, pos, scale);
 	
 	//Load player MESH
-	m_playerMesh = m_meshImp.Import();
+
+	m_playerPrefab = PrefabManager::Instantiate("hej2");
+
 
 	//Load player shader
 	m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
@@ -108,7 +110,7 @@ void Player::Render(Transform transform, Camera camera) {
 	
 	m_shader.Bind();
 	m_shader.Update(transform, camera);
-	m_playerMesh.Render();
+	m_playerPrefab->Render(camera);
 
 }
 Box Player::GetBox()

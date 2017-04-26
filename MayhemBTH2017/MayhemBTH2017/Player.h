@@ -1,7 +1,7 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
-#include "MeshImporter.h"
+#include "PrefabManager.h"
 #include "Box.h"
 #include "AShader.h"
 #include "InputManager.h"
@@ -35,7 +35,7 @@ private:
 private:
 	Box m_boundingBox;
 	Mesh m_playerMesh;
-	MeshImporter m_meshImp;
+	Prefab * m_playerPrefab;
 	Transform m_transf;
 	Camera m_cam;
 	AShader m_shader;

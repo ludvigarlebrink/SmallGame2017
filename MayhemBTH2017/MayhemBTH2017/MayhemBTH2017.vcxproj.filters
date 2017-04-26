@@ -217,9 +217,6 @@
     <ClCompile Include="Box.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="GamePhysics.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -380,9 +377,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="GamePhysics.h">

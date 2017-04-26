@@ -10,6 +10,7 @@
 class GamePhysics
 {
 public:
+
 	GamePhysics();
 	virtual ~GamePhysics();
 	void enterWorld();
