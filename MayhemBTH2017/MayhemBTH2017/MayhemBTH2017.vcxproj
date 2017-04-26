@@ -135,9 +135,8 @@
     <ClCompile Include="Box.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Collider2D.cpp" />
+    <ClCompile Include="GamePhysics.cpp" />
     <ClCompile Include="ImportTester.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -153,11 +152,12 @@
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="MenuCredits.cpp" />
     <ClCompile Include="MenuVideo.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prefab.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="PrefabManager.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sprite.cpp">
@@ -213,9 +213,8 @@
     <ClInclude Include="Box.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="Collider2D.h" />
+    <ClInclude Include="GamePhysics.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Menu.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -227,11 +226,12 @@
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="MenuCredits.h" />
     <ClInclude Include="MenuVideo.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Prefab.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="PrefabManager.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sprite.h">
