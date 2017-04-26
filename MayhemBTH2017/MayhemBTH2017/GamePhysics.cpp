@@ -18,7 +18,7 @@ void GamePhysics::enterWorld()
 
 	//Get deltatime
 	m_time = TimeManager::Get();
-	b2Vec2 gravity(0.0f, -2.8f);
+	b2Vec2 gravity(0.0f, -1.8f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
@@ -27,22 +27,35 @@ void GamePhysics::enterWorld()
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
 	//PLAYER
-	m_player.Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 3.0));
+	m_player.Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0,2.0));
 	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", false, false);
-	m_playerSprite.createSprite(glm::vec2(0, 0), glm::vec2(1.0, 1.0));
+	m_playerSprite.createSprite(glm::vec2(0, 0), glm::vec2(2.0, 2.0));
+
+
 	///////////////////////////////////////////////////////////////////
 
 	//Power up
 
-	m_powerUpBox.initDynamic(m_world.get(), glm::vec2(42,24), glm::vec2(2.0, 3.0));
+	m_powerUpBox.initDynamic(m_world.get(), glm::vec2(42,24), glm::vec2(2.0,2.0));
 	m_powerUpSprite.Init(".\\Assets\\GLSL\\PowerUpShader", false, false);
-	m_powerUpSprite.createSprite(glm::vec2(0, 0), glm::vec2(1.0, 1.0));
+	m_powerUpSprite.createSprite(glm::vec2(0, 0), glm::vec2(2.0, 2.0));
 
 	m_powerUpBox.getFixture()->SetDensity(1.0);
 	m_powerUpBox.getFixture()->SetFriction(1.0);
 	m_powerUpBox.getFixture()->SetRestitution(0.0);
 	m_powerUpBox.getBody()->SetLinearDamping(0.2);
 	///////////////////////////////////////////////////////////////////
+
+
+	//FIXTURES FOR COLLISIONS
+
+	//player fixture is of type PLAYER
+	m_player.SetCategoryBits(CATEGORY_PLAYER);
+	m_player.SetMaskBits(CATEGORY_POWERUP);
+
+	//powerup fixture is of type POWERUP
+	powerUpFixture.filter.categoryBits = CATEGORY_POWERUP;
+	powerUpFixture.filter.maskBits = CATEGORY_PLAYER;
 
 }
 
@@ -65,7 +78,9 @@ void GamePhysics::Update(Transform transform)
 
 	m_powerUpSprite.update(glm::vec2(m_powerUpPosX-0.42, m_powerUpPosY + 0.24), glm::vec2(m_powerUpScaleX+0.84, m_powerUpScaleY - 0.48));
 
-
+	if (!(m_player.GetCategoryBits() & powerUpFixture.filter.maskBits) != 0 && (powerUpFixture.filter.categoryBits & m_player.GetMaskBits()) != 0) {
+		std::cout << "touching" << std::endl;
+	}
 
 
 	m_world->Step(1.0f / 60.0f, 6, 2);

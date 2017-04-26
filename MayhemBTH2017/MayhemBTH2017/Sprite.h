@@ -52,6 +52,6 @@ private:
 	GLuint		colorLoc;
 	GLuint		texLoc;
 	GLuint		hoverTexID;
-	GLuint		m_vao;
+
 };
 

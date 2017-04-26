@@ -69,83 +69,80 @@ void System::Run()
 
 
 
-		//switch (m_stateManager->GetCurrentState())
-		//{
-		//case GameState::START:
-		//	
-		//	lvl.Render(camera);
-
-		//	break;
-		//case GameState::MAIN_MENU:
-
-			//shader.Bind();
-			//shader.Update(transform, camera);
-
-			//m.Update();
-
-			//game.Render();
-
-		//	break;
-		//case GameState::LEVEL_EDITOR:
-
-		//	l.Update();
-
-		//	break;
-
-		//case GameState::GAME: {
-
-			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+		switch (m_stateManager->GetCurrentState())
+		{
+		case GameState::START:
 			shader.Bind();
 			shader.Update(transform, camera);
+			lvl.Render(camera);
+
+			break;
+		case GameState::MAIN_MENU:
+
+			shader.Bind();
+			shader.Update(transform, camera);
+
+			m.Update();
+
+		
+			break;
+		case GameState::LEVEL_EDITOR:
+
+			l.Update();
+
+			break;
+
+		case GameState::GAME: {
+
 			camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 			transform.SetPosition(42.0, 24.0, -0.0);
-
-
-			//Draw scene
-
-			//part1
 			game.Update(camera);
+
+
+
+		//	Draw scene
+			//part1
 			//part.Bind();
 			//part.UpdateParticles();
-			texture.Bind();
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glDepthMask(GL_FALSE);
-			part.RenderTransformed(1);
-			glDisable(GL_BLEND);
-			glDepthMask(TRUE);
+			//texture.Bind();
+			//glEnable(GL_BLEND);
+			//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			//glDepthMask(GL_FALSE);
+			//part.RenderTransformed(1);
+			//glDisable(GL_BLEND);
+			//glDepthMask(TRUE);
 		
-			
-			//part2
-			//part2.Bind();
-			//part2.UpdateParticles();
-			texture.Bind();
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glDepthMask(GL_FALSE);
-			part2.RenderTransformed(1);
-			glDisable(GL_BLEND);
-			glDepthMask(TRUE);
-			//part2
-			//part3.Bind();
-			//part3.UpdateParticles();
-			texture.Bind();
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glDepthMask(GL_FALSE);
-			part3.RenderTransformed(1);
-			glDisable(GL_BLEND);
-			glDepthMask(TRUE);
+			//
+			////part2
+			////part2.Bind();
+			////part2.UpdateParticles();
+			//texture.Bind();
+			//glEnable(GL_BLEND);
+			//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			//glDepthMask(GL_FALSE);
+			//part2.RenderTransformed(1);
+			//glDisable(GL_BLEND);
+			//glDepthMask(TRUE);
+			////part2
+			////part3.Bind();
+			////part3.UpdateParticles();
+			//texture.Bind();
+			//glEnable(GL_BLEND);
+			//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			//glDepthMask(GL_FALSE);
+			//part3.RenderTransformed(1);
+			//glDisable(GL_BLEND);
+			//glDepthMask(TRUE);
 
 
-		//}
-		//	break;
-		//case GameState::EXIT:
-		//	isRunning = false;
-		//	break;
-		//default:
-		//	break;
-		//}
+		}
+			break;
+		case GameState::EXIT:
+			isRunning = false;
+			break;
+		default:
+			break;
+		}
 
 		m_inputManager->Reset();
 

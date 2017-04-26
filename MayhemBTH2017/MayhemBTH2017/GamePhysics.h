@@ -43,9 +43,12 @@ private:
 	Transform m_transform;
 	Collider2D m_collision;
 	Sprite		m_firesprites[10];
-	BasicGun	m_gun;
+	short CATEGORY_PLAYER = 0x0001;  // 0000000000000001 in binary
+	short CATEGORY_MONSTER = 0x0002; // 0000000000000010 in binary
+	short CATEGORY_POWERUP = 0x0004; // 0000000000000100 in binary
 	Sprite		m_shot;
-
+	//Temporary
+	b2FixtureDef powerUpFixture;
 
 
 };
