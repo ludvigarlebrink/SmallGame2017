@@ -14,8 +14,8 @@ public:
 	GamePhysics();
 	virtual ~GamePhysics();
 	void enterWorld();
-	void Update(Transform transform);
-	void Render(Transform &transform, Camera camera);
+	void Update();
+	void Render(Camera camera);
 	glm::vec3 GetPosition();
 
 private:

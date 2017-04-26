@@ -48,8 +48,8 @@ bool Mesh::Load(Vertex2D * vertices, uint64_t numVerts)
 	uint64_t offset = 0;
 
 	// Position.
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), BUFFER_OFFSET(offset));
-	offset += sizeof(glm::vec3);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), BUFFER_OFFSET(offset));
+	offset += sizeof(glm::vec2);
 
 	// Texture Coordinates.
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), BUFFER_OFFSET(offset));

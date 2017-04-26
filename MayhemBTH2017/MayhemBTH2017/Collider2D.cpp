@@ -42,10 +42,11 @@ void Collider2D::DrawCollider(Camera camera)
 void Collider2D::CreateBoundingBoxes(b2World* world) {
 
 
-	m_imp.ImportLevel(m_level);
+	m_imp.Import(m_level);
 
 	const uint32_t length = SIZE_X * SIZE_Y * 6;
 	m_vertices = (Vertex2D*)malloc(sizeof(Vertex2D) * length);
+	
 	uint32_t i = 0;
 	float scaler = 1.0f;
 	GLuint blocksInRow = 0.0;
@@ -104,7 +105,7 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 		}
 	}
 
-	m_mesh.LoadMesh(m_vertices, length);
+	//m_mesh.Load(m_vertices, length);
 
 
 }

@@ -32,6 +32,7 @@ void System::Run()
 
 	Transform transform;
 	Camera camera;
+	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 	VirtualKeyboard vk;
 	int count = 1;
 	m.Init();
@@ -65,7 +66,9 @@ void System::Run()
 			l.Update();
 			break;
 		case GameState::GAME:
-			
+
+			physics.Update();
+			physics.Render(camera);
 			break;
 		case GameState::EXIT:
 			isRunning = false;

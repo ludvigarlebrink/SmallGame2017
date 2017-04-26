@@ -19,7 +19,7 @@ public:
 	void Init(b2World* world, glm::vec2 pos, glm::vec2 scale);
 	
 	//::..RENDER..:://
-	void Render(Transform transform, Camera camera);
+	void Render(Camera camera);
 	void Update();
 
 	//::..SETTERS..:://
@@ -34,7 +34,6 @@ public:
 private:
 private:
 	Box m_boundingBox;
-	Mesh m_playerMesh;
 	Prefab * m_playerPrefab;
 	Transform m_transf;
 	Camera m_cam;

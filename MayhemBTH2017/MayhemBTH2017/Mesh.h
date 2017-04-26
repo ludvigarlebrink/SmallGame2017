@@ -12,7 +12,7 @@
 
 struct Vertex2D
 {
-	glm::vec3 position;
+	glm::vec2 position;
 	glm::vec2 texCoords;
 };
 
