@@ -10,7 +10,7 @@ LevelMarker::LevelMarker()
 	//Temp väntar på en fungerande Handler...........!!!!!!!!!!!!!!!!
 	m_mode = NORMAL;
 	m_levelShader.Init(".\\Assets\\GLSL\\LevelMarkerShader", false, false);
-	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\MegaMap.jpg");
+	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
 		
 	
 
