@@ -19,8 +19,9 @@ public:
 	UIImage();
 	virtual ~UIImage();
 
+	//::.. UPDATE FUNCTIONS ..:://
 	void Render();
-	void RenderWithUV();
+	void RenderWithUV(glm::vec2 uv);
 
 
 	//::.. GET FUNCTIONS ..:://

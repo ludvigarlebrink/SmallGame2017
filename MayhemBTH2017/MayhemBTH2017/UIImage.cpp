@@ -138,7 +138,7 @@ void UIImage::Render()
 	SDL_FreeSurface(surface);
 }
 
-void UIImage::RenderWithUV()
+void UIImage::RenderWithUV(glm::vec2 uv)
 {
 	glUseProgram(0);
 
@@ -198,34 +198,29 @@ void UIImage::RenderWithUV()
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, surface->pixels);
 	}
 
-	float u = 16;
-	float v = 16;
-
 	float halfHeight = m_windowHeight / 2;
 	float halfWidth = m_windowWidth / 2;
 
 	glBegin(GL_QUADS);
 	{
 
-
-		glTexCoord2f(((32.0 * (u + 0)) / 512), -((32.0 * (v + 1)) / 512));
+		glTexCoord2f((32.0 * (uv.x + 0) / 512), (32.0 * (uv.y + 0) / 512));
 		glVertex2f(
 			static_cast<GLfloat>(x - ((m_sizeX / 2) - halfWidth)),
 			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
 
-		glTexCoord2f(((32.0 * (u + 1)) / 512), -((32.0 * (v + 1)) / 512));
-
+		glTexCoord2f((32.0 * (uv.x + 1) / 512), (32.0 * (uv.y + 0) / 512));
 		glVertex2f(
 			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
 			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
 
-		glTexCoord2f(((32.0 * (u + 1)) / 512), -((32.0 * (v + 0)) / 512));
+		glTexCoord2f((32.0 * (uv.x + 1) / 512), -(32.0 * (uv.y + 1) / 512));
 
 		glVertex2f(
 			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
 			static_cast<GLfloat>(y + ((m_sizeY / 2) + halfHeight)));
 
-		glTexCoord2f(((32.0 * (u + 0)) / 512), -((32.0 * (v + 0)) / 512));
+		glTexCoord2f((32.0 * (uv.x + 0) / 512), -(32.0 * (uv.y + 1) / 512));
 
 		glVertex2f(
 			static_cast<GLfloat>(x - ((m_sizeX / 2) - halfWidth)),

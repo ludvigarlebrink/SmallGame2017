@@ -11,10 +11,6 @@ LevelMarker::LevelMarker()
 	m_mode = NORMAL;
 	m_levelShader.Init(".\\Assets\\GLSL\\LevelMarkerShader", false, false);
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
-		
-	
-
-
 
 	Vertex3D verts[6];
 

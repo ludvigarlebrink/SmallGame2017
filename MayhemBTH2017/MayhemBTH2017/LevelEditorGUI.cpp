@@ -51,7 +51,6 @@ void LevelEditorGUI::Render()
 		RenderIcons(GUI_BACKGROUND);
 		break;
 	}
-
 }
 
 void LevelEditorGUI::RenderIcons(size_t gui)
@@ -62,7 +61,7 @@ void LevelEditorGUI::RenderIcons(size_t gui)
 
 	for (int i = 0; i < m_gui[gui].m_numIcons; i++)
 	{
-		m_gui[gui].m_icons.at(i).RenderWithUV();
+		m_gui[gui].m_icons.at(i).RenderWithUV(glm::vec2(0.0f, 0.0f));
 	}
 	m_gui[gui].m_text.Render();
 }
@@ -72,7 +71,7 @@ void LevelEditorGUI::Init()
 {
 	m_offsetX = 50;
 	m_offsetY = 50;
-	m_offsetMother = 2;
+	m_offsetMother = 16;
 
 	m_rows = 0;
 	m_columns = 0;
@@ -179,7 +178,6 @@ void LevelEditorGUI::Input()
 	}
 	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_LEFT))
 	{
-
 		if (m_pos - 1 >= 0)
 		{
 			m_gui[m_state].m_icons.at(m_pos).SetSize(m_nSize, m_nSize);
