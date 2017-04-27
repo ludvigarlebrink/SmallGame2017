@@ -47,7 +47,7 @@ void Prefab::Create()
 	}
 
 	m_localTx.SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
-	m_localTx.SetPosition(glm::vec3(0.0f, 0.0f, 15.0f));
+	m_localTx.SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	m_localTx.SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
 
 	std::string * shaders = new std::string[2];
@@ -229,10 +229,7 @@ const Transform & Prefab::GetTransform() const
 }
 
 
-Mesh * Prefab::GetMesh() const
-{
-	return m_mesh;
-}
+
 
 
 AnimController * Prefab::GetAnimController() const
@@ -240,6 +237,11 @@ AnimController * Prefab::GetAnimController() const
 	return m_animController;
 }
 
+
+Mesh* Prefab::GetMesh() const {
+
+	return m_mesh;
+}
 
 //::.. SET FUNCTIONS ..:://
 void Prefab::SetName(const char * name)

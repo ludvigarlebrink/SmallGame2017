@@ -21,13 +21,18 @@ public:
 	b2Fixture* getFixture() { return this->fixture; }
 
 	glm::vec2 getScale() { return this->m_scale; }
+	void SetCategoryBits(short CATEGORY);
+	void SetMaskBits(short MASK);
+	uint16 GetCategoryBits();
+	uint16 GetMaskBits();
+
 
 
 
 private:
 	b2Body* body = nullptr;
 	b2Fixture* fixture;
-
+	b2FixtureDef m_fixtureDef;
 	glm::vec2 m_scale;
 
 };

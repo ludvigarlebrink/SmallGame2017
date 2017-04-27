@@ -26,6 +26,8 @@ public:
 	void DrawCollider(Camera camera);
 	void ImportLevel(Level level);
 	void CreatePlayerBoundingBox(b2World* world);
+	uint16 GetMaskBits();
+	uint16 GetCategoryBits();
 
 	std::vector<Box> GetBoxes();
 
@@ -44,7 +46,10 @@ private:
 	Transform	m_transform;
 	Camera		m_camera;
 	Level		m_level;
-
+	short CATEGORY_PLAYER = 0x0001;  // 0000000000000001 in binary
+	short CATEGORY_MONSTER = 0x0002; // 0000000000000010 in binary
+	short CATEGORY_POWERUP = 0x0004; // 0000000000000100 in binary
+	Box m_gameFloor;
 	std::vector<Box>	m_boxes;
 
 

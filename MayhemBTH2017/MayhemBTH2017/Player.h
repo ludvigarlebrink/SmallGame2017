@@ -41,7 +41,7 @@ private:
 	AShader m_shader;
 	AShader m_toonShader;
 	bool	m_isMidAir;
-	float	m_jumpTimer = 0.0f;
+	bool m_doubleJump;
 	b2FixtureDef m_fixture;
 
 };

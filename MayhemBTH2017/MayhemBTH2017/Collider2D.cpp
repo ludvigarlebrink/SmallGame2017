@@ -90,11 +90,14 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 				tempX = x;
 				tempY = y;
 				GLfloat scale = 0.5f;
+
 				gameFloor.initStatic(world, glm::vec2((tempX-0.5), (tempY-0.5)), glm::vec2(offset+0.84, scale+0.42));
 				gameFloor.getFixture()->SetRestitution(0.0); //floor bounciness
 				gameFloor.getFixture()->SetFriction(1.0); //floor friction
 				gameFloor.getBody()->ResetMassData();
 
+				gameFloor.SetCategoryBits(CATEGORY_POWERUP);
+				gameFloor.SetMaskBits(CATEGORY_PLAYER);
 
 
 				m_boxes.push_back(gameFloor);
@@ -102,13 +105,14 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 				x += blocksInRow;
 				blocksInRow = 0;
 				i += 6;
+
 			}
 		}
 	}
 
 	m_mesh.Load(m_vertices, length);
 
-
+	
 }
 
 void Collider2D::CreatePlayerBoundingBox(b2World* world) {
@@ -123,4 +127,12 @@ void Collider2D::CreatePlayerBoundingBox(b2World* world) {
 	m_boxes.push_back(tempBox);
 
 
+}
+
+uint16 Collider2D::GetMaskBits() {
+	return m_boxes.at(0).GetMaskBits();
+}
+
+uint16 Collider2D::GetCategoryBits() {
+	return m_boxes.at(0).GetCategoryBits();
 }

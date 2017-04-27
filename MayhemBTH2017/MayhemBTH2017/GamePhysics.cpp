@@ -17,11 +17,11 @@ void GamePhysics::enterWorld()
 
 	//Get deltatime
 	m_time = TimeManager::Get();
-	b2Vec2 gravity(0.0f, -9.8f);
+	b2Vec2 gravity(0.0f, -25.8f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
-	m_collision.CreateBoundingBoxes(m_world.get());
+	m_floorCollider.CreateBoundingBoxes(m_world.get());
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
@@ -41,6 +41,7 @@ void GamePhysics::enterWorld()
 	m_player.SetCategoryBits(CATEGORY_PLAYER);
 	m_player.SetMaskBits(CATEGORY_POWERUP);
 
+
 }
 
 void GamePhysics::Update()
@@ -48,7 +49,7 @@ void GamePhysics::Update()
 
 	//Update player bounding box sprite position to the position of the player mesh
 
-	if (!(m_player.GetCategoryBits() & powerUpFixture.filter.maskBits) != 0 && (powerUpFixture.filter.categoryBits & m_player.GetMaskBits()) != 0) {
+	if ((m_player.GetCategoryBits() & m_floorCollider.GetMaskBits()) != 0 && (m_floorCollider.GetCategoryBits() & m_player.GetMaskBits()) != 0) {
 		std::cout << "touching" << std::endl;
 	}
 
@@ -69,7 +70,7 @@ glm::vec3 GamePhysics::GetPosition() {
 
 void GamePhysics::Render(Camera camera) {
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-	m_collision.DrawCollider(camera);
+	m_floorCollider.DrawCollider(camera);
 
 	m_player.Render(camera);
 }
