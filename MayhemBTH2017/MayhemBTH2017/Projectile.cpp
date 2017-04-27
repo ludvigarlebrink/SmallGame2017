@@ -13,7 +13,7 @@ Projectile::~Projectile()
 {
 }
 
-void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, Prefab * prefab)
+void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp,  Prefab * prefab)
 {
 	m_prefab = prefab;
 
@@ -41,6 +41,15 @@ int Projectile::GetLife()
 	return m_life;
 }
 
+Prefab * Projectile::GetPrefab()
+{
+	return m_prefab;
+}
+
+Box Projectile::GetBox()
+{
+	return m_box;
+}
 
 void Projectile::Update()
 {
@@ -48,7 +57,7 @@ void Projectile::Update()
 	glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
 
 	m_prefab->SetPosition(position);
-	m_prefab->SetRotation(0, m_rotationUpdate * 7, 0);
+	m_prefab->SetRotation(0,0, m_rotationUpdate * 15);
 	if (m_rotationUpdate > 360)
 		m_rotationUpdate = 0;
 }

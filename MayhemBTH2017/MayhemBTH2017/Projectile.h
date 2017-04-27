@@ -16,7 +16,7 @@ public:
 	void InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 		float restitution, float friction,
 		float damping, float density,
-		float fireRate, Prefab * prefab);
+		float fireRate, bool startUp, Prefab * prefab);
 
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(int life);
@@ -24,6 +24,8 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	int GetLife();
+	Prefab* GetPrefab();
+	Box GetBox();
 
 	//::.. OTHER FUNCTIONS ..:://
 	void Update();

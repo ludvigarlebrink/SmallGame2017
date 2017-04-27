@@ -6,10 +6,12 @@
 
 GamePhysics::GamePhysics()
 {
+
 }
 
 GamePhysics::~GamePhysics()
 {
+
 }
 
 void GamePhysics::EnterWorld()
@@ -42,7 +44,7 @@ void GamePhysics::EnterWorld()
 
 	m_weapon = Weapon(gun, projectile);
 
-	m_weapon.SetProjectileType(0.99f, 1.0f, 0.0f, 0.01f, 5.0f);
+	m_weapon.SetProjectileType(0.3f, 1.0f, 0.0f, 0.01f, 5.0f, 10);
 
 	///////////////////////////////////////////////////////////////////
 
@@ -64,19 +66,21 @@ void GamePhysics::Update()
 		std::cout << "touching" << std::endl;
 	}
 
-	m_world->Step(1.0f / 60.0f, 6, 2);
+	m_world->Step(2.0f / 80.0f, 6, 2);
 	
 	m_player.Update();
 
-	m_weapon.Update(glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
+	m_weapon.Update(m_player.GetPrefab()->GetPosition() + glm::vec3(5, 5, 0), b2Vec2(1.0, 1.0));
 
-	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A))
+	if (InputManager::Get()->GetButtonHeld(CONTROLLER_BUTTON_Y))
 	{
-		m_weapon.Shoot(b2Vec2(1000, 1000), 0.1f, m_world.get());
+		if (m_weapon.FireRate(0.1f))
+		{
+			m_weapon.Shoot(b2Vec2(1000, 1000), m_world.get(), glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
+		}
 	}
-	
 
-	m_world->Step(1.0f / 60.0f, 6, 2);
+	m_world->Step(2.0f / 80.0f, 6, 2);
 
 }
 
