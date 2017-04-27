@@ -20,6 +20,7 @@ public:
 	virtual ~UIImage();
 
 	void Render();
+	void RenderWithUV();
 
 
 	//::.. GET FUNCTIONS ..:://
@@ -49,7 +50,7 @@ private:
 	int32_t m_posX;
 	int32_t m_posY;
 
-	glm::vec4 m_texUV;
+	
 
 	SDL_Color m_color;
 	Texture m_texture;

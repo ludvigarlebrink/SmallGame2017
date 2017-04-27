@@ -62,7 +62,7 @@ void LevelEditorGUI::RenderIcons(size_t gui)
 
 	for (int i = 0; i < m_gui[gui].m_numIcons; i++)
 	{
-		m_gui[gui].m_icons.at(i).Render();
+		m_gui[gui].m_icons.at(i).RenderWithUV();
 	}
 	m_gui[gui].m_text.Render();
 }
@@ -124,11 +124,10 @@ void LevelEditorGUI::Init()
 			}
 
 			UIImage temp;
-			//m_gui[i].m_iconUV = glm::vec4()
 			temp.SetTexture(m_line.c_str());
-			//temp.SetUV(m_line.c_str(), glm::vec4())
 			m_gui[i].m_icons.push_back(temp);
 			m_gui[i].m_numIcons++;
+			//m_gui[i].m_iconUV.push_back();
 		}
 	}
 	m_texFile.close();

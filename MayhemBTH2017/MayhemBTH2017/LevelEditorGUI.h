@@ -11,7 +11,7 @@ struct GUI
 {
 	UIText					m_text;
 	int32_t					m_numIcons = 0;
-	std::vector<glm::vec4>	m_iconUV;
+	glm::vec4				m_iconUV[16][16];
 	std::vector<UIImage>	m_icons;
 };
 
