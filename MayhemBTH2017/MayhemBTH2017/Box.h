@@ -17,17 +17,22 @@ public:
 
 	void initStatic(b2World* world, const glm::vec2& pos, const glm::vec2& scale);
 
-	b2Body* getBody();
-	b2Fixture* getFixture();
+	b2Body* getBody() { return this->body; }
+	b2Fixture* getFixture() { return this->fixture; }
 
-	glm::vec2 getScale();
+	glm::vec2 getScale() { return this->m_scale; }
+	void SetCategoryBits(short CATEGORY);
+	void SetMaskBits(short MASK);
+	uint16 GetCategoryBits();
+	uint16 GetMaskBits();
+
 
 
 
 private:
 	b2Body* body = nullptr;
 	b2Fixture* fixture;
-
+	b2FixtureDef m_fixtureDef;
 	glm::vec2 m_scale;
 
 };

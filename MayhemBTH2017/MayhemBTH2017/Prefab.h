@@ -62,6 +62,7 @@ public:
 	void SetShaderProgram(const char * programName);
 	void SetMaterial(Material * material);
 
+
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();

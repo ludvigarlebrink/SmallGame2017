@@ -17,11 +17,17 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 {
 	m_prefab = prefab;
 
+	b2Filter filter;
+	filter.categoryBits = PROJECTILE;
+	filter.maskBits = PLAYER|BOUNDARY;
+	
+
 	m_box.initDynamic(world, pos, scale);
 	m_box.getFixture()->SetRestitution(restitution);
 	m_box.getFixture()->SetFriction(friction);
 	m_box.getFixture()->SetDensity(density);
 	m_box.getBody()->SetLinearDamping(damping);
+	m_box.getFixture()->SetFilterData(filter);
 
 	m_fireRate = fireRate;
 }
@@ -50,6 +56,7 @@ Box Projectile::GetBox()
 {
 	return m_box;
 }
+
 
 void Projectile::Update()
 {
