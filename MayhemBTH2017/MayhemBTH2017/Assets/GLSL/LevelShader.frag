@@ -23,7 +23,7 @@ void main()
 	vec2 spriteUV = selectedUV.xy + (TexCoords1 * selectedUV.zw);
 
 
-	FragColor = texture2D(t, vec2(spriteUV.x,  -spriteUV.y));
-	//FragColor = texture2D(t, vec2(TexCoords1.x, -TexCoords1.y));
+	//FragColor = texture2D(t, vec2(spriteUV.x,  -spriteUV.y));
+	FragColor = texture2D(t, vec2(TexCoords1.x, -TexCoords1.y));
 	//FragColor = vec4(0.0,0.0,1.0,0.0);
 }
