@@ -2,31 +2,33 @@
 
 
 
+
+
 GamePhysics::GamePhysics()
 {
-}
 
+}
 
 GamePhysics::~GamePhysics()
 {
-}
 
+}
 
 void GamePhysics::EnterWorld()
 {
 
 	//Get deltatime
 	m_time = TimeManager::Get();
-	b2Vec2 gravity(0.0f, -25.8f);
+	b2Vec2 gravity(0.0f, -9.8f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
-	m_floorCollider.CreateBoundingBoxes(m_world.get());
+	m_collision.CreateBoundingBoxes(m_world.get());
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
 	//PLAYER
-	m_player.Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 2.0));
+	m_player.Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0,2.0));
 
 	///////////////////////////////////////////////////////////////////
 
@@ -42,50 +44,43 @@ void GamePhysics::EnterWorld()
 
 	m_weapon = Weapon(gun, projectile);
 
-	m_weapon.SetProjectileType(0.99f, 1.0f, 0.0f, 0.01f, 5.0f);
+	m_weapon.SetProjectileType(0.3f, 1.0f, 0.0f, 0.01f, 5.0f, 10);
 
 	///////////////////////////////////////////////////////////////////
-	
+
 
 	//FIXTURES FOR COLLISIONS
 
 	//player fixture is of type PLAYER
-
-
-	//gamefloor fixture
-
-
-
-	for (int i = 0; i < m_floorCollider.GetBoxes().size(); i++) {
-		std::cout << "mask " << m_player.GetBox().getFixture()->GetFilterData().maskBits << std::endl;
-		std::cout << "category " << m_floorCollider.GetBoxes().at(i).getFixture()->GetFilterData().categoryBits << std::endl;
-		
-	}
-
+	m_player.SetCategoryBits(CATEGORY_PLAYER);
+	m_player.SetMaskBits(CATEGORY_POWERUP);
 
 }
 
 void GamePhysics::Update()
 {
-	b2ContactFilter filter2; 
 
-		//Update player bounding box sprite position to the position of the player mesh
+	//Update player bounding box sprite position to the position of the player mesh
 
-		m_world->Step(1.0f / 60.0f, 6, 2);
+	if (!(m_player.GetCategoryBits() & powerUpFixture.filter.maskBits) != 0 && (powerUpFixture.filter.categoryBits & m_player.GetMaskBits()) != 0) {
+		std::cout << "touching" << std::endl;
+	}
 
-		m_player.Update();
-
+	m_world->Step(2.0f / 80.0f, 6, 2);
 	
+	m_player.Update();
 
-		m_weapon.Update(glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
+	m_weapon.Update(m_player.GetPrefab()->GetPosition() + glm::vec3(5, 5, 0), b2Vec2(1.0, 1.0));
 
-		if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A))
+	if (InputManager::Get()->GetButtonHeld(CONTROLLER_BUTTON_Y))
+	{
+		if (m_weapon.FireRate(0.1f))
 		{
-			m_weapon.Shoot(b2Vec2(1000, 1000), 0.1f, m_world.get());
+			m_weapon.Shoot(b2Vec2(1000, 1000), m_world.get(), glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
 		}
+	}
 
-
-		m_world->Step(1.0f / 60.0f, 6, 2);
+	m_world->Step(2.0f / 80.0f, 6, 2);
 
 }
 
@@ -97,7 +92,7 @@ glm::vec3 GamePhysics::GetPosition() {
 
 void GamePhysics::Render(Camera camera) {
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-	m_floorCollider.DrawCollider(camera);
+	m_collision.DrawCollider(camera);
 
 	m_player.Render(camera);
 

@@ -14,22 +14,19 @@ public:
 	virtual ~Weapon();
 
 	void SetProjectileType(float restitution, float friction, float damping,
-		float density, float fireRate);
-
-	void Update(glm::vec3 playerPos);
+		float density, float fireRate, int clearRate);
 
 	Projectile * ReuseLast();
-
 	void Render(Camera camera);
+	void Update(glm::vec3 playerPos, b2Vec2 force);
+	void DeleteProjectile();
 
 	//::.. SET FUNTIONS ..:://
-	void Shoot(b2Vec2 force, float rate, b2World * world);
+	void Shoot(b2Vec2 force, b2World * world, glm::vec3 playerPos);
 
 	//::.. GET FUNTIONS ..:://
 
 	bool FireRate(float rate);
-
-	bool ClearRate(float rate);
 
 private:
 	Prefab*					m_prefabGun;
@@ -43,6 +40,8 @@ private:
 	float m_fireRate;
 	float m_time;
 	float m_clearTime;
+	int	  m_projectileCounter;
+	int   m_clearRate;
 
 };
 
