@@ -41,7 +41,7 @@ void System::Run()
 	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
 	GamePhysics physics;
-	physics.enterWorld();
+	physics.EnterWorld();
 
 	while (isRunning)
 	{
@@ -63,7 +63,7 @@ void System::Run()
 		case GameState::LEVEL_EDITOR:
 			l.Update();
 			break;
-		//case GameState::GAME:
+		case GameState::GAME:
 
 			physics.Update();
 			physics.Render(camera);

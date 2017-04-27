@@ -194,6 +194,9 @@
     <ClCompile Include="PrefabManager.cpp">
       <Filter>Engine\Resources\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -214,21 +217,10 @@
     </ClCompile>
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="ImportTester.cpp">
-      <Filter>Engine\Resources\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="LevelEditorGUI.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="GamePhysics.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider2D.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
+    <ClCompile Include="ImportTester.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -359,6 +351,9 @@
     <ClInclude Include="PrefabManager.h">
       <Filter>Engine\Resources\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -444,14 +439,8 @@
     <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
     </None>
-    <None Include="DebugShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\LevelShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\LevelShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
+    <None Include="Assets\GLSL\LevelShader.frag" />
+    <None Include="Assets\GLSL\LevelShader.vert" />
+    <None Include="DebugShader.frag" />
   </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@ GamePhysics::~GamePhysics()
 {
 }
 
-void GamePhysics::enterWorld()
+void GamePhysics::EnterWorld()
 {
 
 	//Get deltatime
@@ -30,7 +30,19 @@ void GamePhysics::enterWorld()
 
 	///////////////////////////////////////////////////////////////////
 
-	//Power up
+	//Weapon
+
+	Prefab * gun = PrefabManager::Instantiate("Player");
+
+	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
+
+	Prefab * projectile = PrefabManager::Instantiate("Player");
+
+
+
+	m_weapon = Weapon(gun, projectile);
+
+	m_weapon.SetProjectileType(0.99f, 1.0f, 0.0f, 0.01f, 5.0f);
 
 	///////////////////////////////////////////////////////////////////
 
@@ -55,6 +67,13 @@ void GamePhysics::Update()
 	m_world->Step(1.0f / 60.0f, 6, 2);
 	
 	m_player.Update();
+
+	m_weapon.Update(glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
+
+	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A))
+	{
+		m_weapon.Shoot(b2Vec2(1000, 1000), 0.1f, m_world.get());
+	}
 	
 
 	m_world->Step(1.0f / 60.0f, 6, 2);
@@ -72,4 +91,7 @@ void GamePhysics::Render(Camera camera) {
 	m_collision.DrawCollider(camera);
 
 	m_player.Render(camera);
+
+	m_weapon.Render(camera);
+
 }

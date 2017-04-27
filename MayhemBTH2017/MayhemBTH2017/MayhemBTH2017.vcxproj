@@ -159,6 +159,7 @@
     <ClCompile Include="PrefabManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -202,6 +203,7 @@
     <ClCompile Include="UITextField.cpp" />
     <ClCompile Include="VideoManager.cpp" />
     <ClCompile Include="VirtualKeyboard.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AAllocator.h" />
@@ -230,6 +232,7 @@
     <ClInclude Include="PrefabManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -271,6 +274,7 @@
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoManager.h" />
     <ClInclude Include="VirtualKeyboard.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag" />

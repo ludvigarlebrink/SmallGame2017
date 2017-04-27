@@ -30,6 +30,7 @@ public:
 	uint16 GetCategoryBits();
 	uint16 GetMaskBits();
 	Box GetBox();
+	Prefab* GetPrefab();
 
 private:
 private:

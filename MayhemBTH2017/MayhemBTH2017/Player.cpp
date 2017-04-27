@@ -125,6 +125,11 @@ Box Player::GetBox()
 	return m_boundingBox;
 }
 
+Prefab* Player::GetPrefab()
+{
+	return m_playerPrefab;
+}
+
 
 
 //::.. SET FUNCTIONS ..:://
