@@ -3,7 +3,7 @@
 
 
 LevelMarker::LevelMarker()
-	: m_currentPosX(0), m_currentPosY(0)
+	: m_currentPosX(20), m_currentPosY(20)
 {
 
 	m_input = InputManager::Get();

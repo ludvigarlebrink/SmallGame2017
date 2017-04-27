@@ -231,7 +231,6 @@ void UIImage::RenderWithUV()
 			static_cast<GLfloat>(x - ((m_sizeX / 2) - halfWidth)),
 			static_cast<GLfloat>(y + ((m_sizeY / 2) + halfHeight)));
 
-
 	}
 	glEnd();
 
