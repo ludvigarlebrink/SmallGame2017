@@ -20,9 +20,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 {
 	//Initiate the players bounding box
 
-
-
-
 	//Load player MESH
 
 	m_playerPrefab = PrefabManager::Instantiate("Player");
@@ -117,7 +114,6 @@ void Player::Render(Camera camera) {
 	m_playerSprite.Update(transform, camera);
 	m_playerSprite.draw();
 	m_playerPrefab->Render(camera);
-
 
 }
 Box Player::GetBox()

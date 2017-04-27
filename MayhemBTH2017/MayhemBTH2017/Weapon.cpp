@@ -42,7 +42,7 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 
 void Weapon::DeleteProjectile()
 {
-	if (m_time > 10)
+	if (m_time > (float)m_clearRate)
 	{
 		for (int i = 0; i < m_projectiles.size(); i++)
 		{

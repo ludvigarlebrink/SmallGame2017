@@ -36,11 +36,13 @@ void GamePhysics::EnterWorld()
 
 	Prefab * gun = PrefabManager::Instantiate("Player");
 
+	gun->SetScale(glm::vec3(1, 1, 1));
+
 	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
 
 	Prefab * projectile = PrefabManager::Instantiate("Player");
 
-
+	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	m_weapon = Weapon(gun, projectile);
 
@@ -66,7 +68,7 @@ void GamePhysics::Update()
 		std::cout << "touching" << std::endl;
 	}
 
-	m_world->Step(2.0f / 80.0f, 6, 2);
+	m_world->Step(1.0f / 60.0f, 6, 2);
 	
 	m_player.Update();
 
@@ -80,7 +82,7 @@ void GamePhysics::Update()
 		}
 	}
 
-	m_world->Step(2.0f / 80.0f, 6, 2);
+	m_world->Step(1.0f / 60.0f, 6, 2);
 
 }
 
