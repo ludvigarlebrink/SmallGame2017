@@ -27,11 +27,14 @@ void Prefab::Render(Camera & cam)
 
 	glUseProgram(m_shaderProgram);
 
-	glUniformMatrix4fv(m_uniforms[M], 1, GL_FALSE, &m_localTx.GetModelMatrix()[0][0]);
+	glUniformMatrix4fv(m_uniforms[M], 1, GL_FALSE, &m_tx[SPACE_LOCAL].GetModelMatrix()[0][0]);
 	glUniformMatrix4fv(m_uniforms[V], 1, GL_FALSE, &cam.GetView()[0][0]);
 	glUniformMatrix4fv(m_uniforms[P], 1, GL_FALSE, &cam.GetProjection()[0][0]);
 	
-	m_animController->Update(m_uniforms[JOINTS]);
+	if (m_hasAnimation)
+	{
+		m_animController->Update(m_uniforms[JOINTS]);
+	}
 
 	m_mesh->Render();
 
@@ -46,9 +49,9 @@ void Prefab::Create()
 		return;
 	}
 
-	m_localTx.SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
-	m_localTx.SetPosition(glm::vec3(0.0f, 0.0f, 15.0f));
-	m_localTx.SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
+	m_tx[SPACE_LOCAL].SetScale(glm::vec3(4.0f, 4.0f, 4.0f));
+	m_tx[SPACE_LOCAL].SetPosition(glm::vec3(0.0f, 0.0f, 15.0f));
+	m_tx[SPACE_LOCAL].SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
 
 	std::string * shaders = new std::string[2];
 	uint32_t * types = new uint32_t[2];
@@ -70,6 +73,7 @@ void Prefab::Create()
 	if (m_animController != nullptr)
 	{
 		m_shaderProg = "AnimToon";
+		m_hasAnimation = true;
 	}
 	else
 	{
@@ -113,119 +117,80 @@ void Prefab::Free()
 //::.. MODIFY FUNCTIONS ..:://
 void Prefab::Move(glm::vec3 pos, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetPosition(glm::vec3(m_localTx.GetPosition().x + pos.x, 
-			m_localTx.GetPosition().y + pos.y, m_localTx.GetPosition().z + pos.z));
-	}
-	else
-	{
-		m_globalTx.SetPosition(glm::vec3(m_globalTx.GetPosition().x + pos.x,
-			m_globalTx.GetPosition().y + pos.y, m_globalTx.GetPosition().z + pos.z));
-	}
+	m_tx[space].SetPosition(glm::vec3(m_localTx.GetPosition().x + pos.x,
+		m_localTx.GetPosition().y + pos.y, m_localTx.GetPosition().z + pos.z));
 }
 
 
 void Prefab::Move(float x, float y, float z, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetPosition(glm::vec3(m_localTx.GetPosition().x + x,
-			m_localTx.GetPosition().y + y, m_localTx.GetPosition().z + z));
-	}
-	else
-	{
-		m_globalTx.SetPosition(glm::vec3(m_globalTx.GetPosition().x + x,
-			m_globalTx.GetPosition().y + y, m_globalTx.GetPosition().z + z));
-	}
+	m_tx[space].SetPosition(glm::vec3(m_localTx.GetPosition().x + x,
+		m_localTx.GetPosition().y + y, m_localTx.GetPosition().z + z));
 }
 
 
 void Prefab::Rotate(glm::vec3 rot, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetRotation(glm::vec3(m_localTx.GetRotation().x + rot.x,
-			m_localTx.GetRotation().y + rot.y, m_localTx.GetRotation().z + rot.z));
-	}
-	else
-	{
-		m_globalTx.SetRotation(glm::vec3(m_globalTx.GetRotation().x + rot.x,
-			m_globalTx.GetRotation().y + rot.y, m_globalTx.GetRotation().z + rot.z));
-	}
+	m_tx[space].SetRotation(glm::vec3(m_localTx.GetRotation().x + rot.x,
+		m_localTx.GetRotation().y + rot.y, m_localTx.GetRotation().z + rot.z));
 }
 
 
 void Prefab::Rotate(float x, float y, float z, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetRotation(glm::vec3(m_localTx.GetRotation().x + x,
-			m_localTx.GetRotation().y + y, m_localTx.GetRotation().z + z));
-	}
-	else
-	{
-		m_globalTx.SetRotation(glm::vec3(m_globalTx.GetRotation().x + x,
-			m_globalTx.GetRotation().y + y, m_globalTx.GetRotation().z + z));
-	}
+	m_tx[space].SetRotation(glm::vec3(m_localTx.GetRotation().x + x,
+		m_localTx.GetRotation().y + y, m_localTx.GetRotation().z + z));
 }
 
 
 void Prefab::Scale(glm::vec3 scale, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetScale(glm::vec3(m_localTx.GetScale().x + scale.x,
-			m_localTx.GetScale().y + scale.y, m_localTx.GetScale().z + scale.z));
-	}
-	else
-	{
-		m_globalTx.SetScale(glm::vec3(m_globalTx.GetScale().x + scale.x,
-			m_globalTx.GetScale().y + scale.y, m_globalTx.GetScale().z + scale.z));
-	}
+	m_tx[space].SetScale(glm::vec3(m_localTx.GetScale().x + scale.x,
+		m_localTx.GetScale().y + scale.y, m_localTx.GetScale().z + scale.z));
 }
 
 
 void Prefab::Scale(float x, float y, float z, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetScale(glm::vec3(m_localTx.GetScale().x + x,
+		m_tx[space].SetScale(glm::vec3(m_localTx.GetScale().x + x,
 			m_localTx.GetScale().y + y, m_localTx.GetScale().z + z));
-	}
-	else
-	{
-		m_globalTx.SetScale(glm::vec3(m_globalTx.GetScale().x + x,
-			m_globalTx.GetScale().y + y, m_globalTx.GetScale().z + z));
-	}
 }
 
 
 //::.. GET FUNCTIONS ..:://
+bool Prefab::GetIsEnabled() const
+{
+	return m_isEnabled;
+}
+
+
 const char * Prefab::GetName() const
 {
 	return m_name;
 }
 
-const glm::vec3 Prefab::GetRotation()
-{
-	return m_localTx.GetRotation();
-}
 
-const glm::vec3 Prefab::GetScale()
+const Transform & Prefab::GetTransform(uint32_t space) const
 {
-	return m_localTx.GetScale();
-}
-
-const glm::vec3 Prefab::GetPosition()
-{
-	return m_localTx.GetPosition();
+	return m_tx[space];
 }
 
 
-const Transform & Prefab::GetTransform() const
+glm::vec3 Prefab::GetPosition(uint32_t space) 
 {
-	return m_localTx;
+	return m_tx[space].GetPosition();
+}
+
+
+glm::vec3 Prefab::GetRotation(uint32_t space)
+{
+	return m_tx[space].GetRotation();
+}
+
+
+glm::vec3 Prefab::GetScale(uint32_t space)
+{
+	return m_tx[space].GetScale();
 }
 
 
@@ -242,6 +207,12 @@ AnimController * Prefab::GetAnimController() const
 
 
 //::.. SET FUNCTIONS ..:://
+void Prefab::SetIsEnabled(bool enabled)
+{
+	m_isEnabled = enabled;
+}
+
+
 void Prefab::SetName(const char * name)
 {
 	m_name = name;
@@ -250,92 +221,43 @@ void Prefab::SetName(const char * name)
 
 void Prefab::SetTransform(const Transform & transform, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx = transform;
-	}
-	else
-	{
-		m_globalTx = transform;
-	}
+	m_tx[space] = transform;
 }
 
 
 void Prefab::SetPosition(glm::vec3 pos, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetPosition(pos);
-	}
-	else
-	{
-		m_globalTx.SetPosition(pos);
-	}
+	m_tx[space].SetPosition(pos);
 }
 
 
 void Prefab::SetPosition(float x, float y, float z, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetPosition(x, y, z);
-	}
-	else
-	{
-		m_globalTx.SetPosition(x, y, z);
-	}
+	m_tx[space].SetPosition(x, y, z);
 }
 
 
 void Prefab::SetRotation(glm::vec3 rot, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetRotation(rot);
-	}
-	else
-	{
-		m_globalTx.SetRotation(rot);
-	}
+	m_tx[space].SetRotation(rot);
 }
 
 
 void Prefab::SetRotation(float x, float y, float z, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetRotation(x, y, z);
-	}
-	else
-	{
-		m_globalTx.SetRotation(x, y, z);
-	}
+	m_tx[space].SetRotation(x, y, z);
 }
 
 
 void Prefab::SetScale(glm::vec3 scale, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetScale(scale);
-	}
-	else
-	{
-		m_globalTx.SetScale(scale);
-	}
+	m_tx[space].SetScale(scale);
 }
 
 
 void Prefab::SetScale(float x, float y, float z, uint32_t space)
 {
-	if (space == SPACE_LOCAL)
-	{
-		m_localTx.SetScale(x, y, z);
-	}
-	else
-	{
-		m_globalTx.SetScale(x, y, z);
-	}
+	m_tx[space].SetScale(x, y, z);
 }
 
 
@@ -368,12 +290,13 @@ void Prefab::Init()
 {
 	m_hasBeenCreated	= false;
 	m_isEnabled			= true;
+	m_hasAnimation		= false;
 
 	m_mesh				= nullptr;
 	m_animController	= nullptr;
 	m_material			= nullptr;
 
-	for (uint32_t i = 0; i < NR_UNIFORMS; i++)
+	for (uint32_t i = 0; i < NUM_UNIFORMS; i++)
 	{
 		m_uniforms[i] = 0;
 	}

@@ -99,7 +99,7 @@ void VideoManager::Init()
 	m_window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		m_width, m_height, SDL_WINDOW_OPENGL);
 
-	SDL_SetWindowFullscreen(m_window, 0);
+	SDL_SetWindowFullscreen(m_window, SDL_WINDOW_FULLSCREEN);
 	SDL_ShowCursor(SDL_DISABLE);
 
 	m_glContext = SDL_GL_CreateContext(m_window);

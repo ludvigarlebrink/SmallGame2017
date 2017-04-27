@@ -45,14 +45,7 @@ Prefab * PrefabManager::Instantiate(const char * name)
 
 	MrSkelHandler * skelHandler = new MrSkelHandler;
 
-	if (skelHandler->Import(".\\Assets\\Skeletons\\super.mrskel"))
-	{
-		std::cout << "Skel Imported" << std::endl;
-	}
-	else
-	{
-		std::cout << "Skel FAIL" << std::endl;
-	}
+	skelHandler->Import(".\\Assets\\Skeletons\\super.mrskel");
 
 	MrAnimHandler * animHandler = new MrAnimHandler;
 

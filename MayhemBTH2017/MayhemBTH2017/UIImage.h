@@ -19,7 +19,9 @@ public:
 	UIImage();
 	virtual ~UIImage();
 
+	//::.. UPDATE FUNCTIONS ..:://
 	void Render();
+	void RenderWithUV(glm::vec2 uv);
 
 
 	//::.. GET FUNCTIONS ..:://
@@ -49,7 +51,7 @@ private:
 	int32_t m_posX;
 	int32_t m_posY;
 
-	glm::vec4 m_texUV;
+	
 
 	SDL_Color m_color;
 	Texture m_texture;
