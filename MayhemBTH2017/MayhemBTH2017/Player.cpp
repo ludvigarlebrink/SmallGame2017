@@ -30,7 +30,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 
 
 	//SET BOUNDING BOX SIZE 
-	m_boundingBox.initDynamic(world, pos, glm::vec2(m_playerPrefab->GetScale().x + 3, m_playerPrefab->GetScale().y*m_playerPrefab->GetMesh()->GetHeight()));
+	m_boundingBox.initDynamic(world, pos, glm::vec2(m_playerPrefab->GetScale().x + 1, m_playerPrefab->GetScale().y*m_playerPrefab->GetMesh()->GetHeight()));
 
 	//sprite for size of bouding box
 	m_playerSprite.createSprite(glm::vec2(0), glm::vec2(20));
@@ -42,6 +42,12 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	GetBox().getFixture()->SetFriction(1.0);
 	GetBox().getFixture()->SetRestitution(0.0);
 	GetBox().getBody()->SetLinearDamping(0.4);
+	
+	b2Filter filter;
+	filter.categoryBits = PLAYER;
+	filter.maskBits = BOUNDARY;
+	GetBox().getFixture()->SetFilterData(filter);
+
 
 	//Set fixture 
 

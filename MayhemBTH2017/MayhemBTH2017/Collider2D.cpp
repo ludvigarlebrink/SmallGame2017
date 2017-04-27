@@ -95,12 +95,16 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 				gameFloor.getFixture()->SetRestitution(0.0); //floor bounciness
 				gameFloor.getFixture()->SetFriction(1.0); //floor friction
 				gameFloor.getBody()->ResetMassData();
-
-				gameFloor.SetCategoryBits(CATEGORY_POWERUP);
-				gameFloor.SetMaskBits(CATEGORY_PLAYER);
-
+			
+				b2Filter filter;
+				filter.categoryBits = BOUNDARY;
+				filter.maskBits = PLAYER|PROJECTILE;
+				gameFloor.getFixture()->SetFilterData(filter);
+			
 
 				m_boxes.push_back(gameFloor);
+
+
 
 				x += blocksInRow;
 				blocksInRow = 0;
@@ -135,4 +139,13 @@ uint16 Collider2D::GetMaskBits() {
 
 uint16 Collider2D::GetCategoryBits() {
 	return m_boxes.at(0).GetCategoryBits();
+	std::cout << m_boxes.at(0).GetCategoryBits() << std::endl;
+}
+
+void Collider2D::SetMaskBits(uint16 MASK) {
+	
+}
+
+void Collider2D::SetCategoryBits(uint16 CATEGORY) {
+	
 }

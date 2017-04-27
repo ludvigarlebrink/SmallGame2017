@@ -31,6 +31,7 @@ public:
 
 
 
+
 private:
 	Prefab*		m_prefab;
 	Box			m_box;
@@ -38,6 +39,14 @@ private:
 	float		m_time;
 	int			m_life;
 	GLfloat m_rotationUpdate;
+	
+	enum _entityCategory {
+		BOUNDARY = 0x0001,
+		PLAYER = 0x0002,
+		PROJECTILE = 0x0004,
+		FRIENDLY_AIRCRAFT = 0x0008,
+		ENEMY_AIRCRAFT = 0x0010,
+	};
 
 };
 
