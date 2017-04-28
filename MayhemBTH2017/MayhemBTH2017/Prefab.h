@@ -61,6 +61,7 @@ public:
 	void SetAnimController(AnimController * animController);
 	void SetShaderProgram(const char * programName);
 	void SetMaterial(Material * material);
+	void SetAlbedoID(GLuint id);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
@@ -96,6 +97,7 @@ private:
 	Material *			m_material;
 	GLuint				m_shaderProgram;
 	GLuint				m_uniforms[NUM_UNIFORMS];
+	GLuint				m_albedoID;
 };
 
 

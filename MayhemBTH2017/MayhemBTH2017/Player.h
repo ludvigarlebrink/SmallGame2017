@@ -33,7 +33,6 @@ public:
 	Prefab* GetPrefab();
 
 private:
-private:
 	Box m_boundingBox;
 	Prefab * m_playerPrefab;
 	Sprite m_playerSprite;

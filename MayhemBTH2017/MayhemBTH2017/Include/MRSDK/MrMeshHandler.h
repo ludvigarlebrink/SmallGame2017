@@ -16,47 +16,52 @@
 class MrMeshHandler
 {
 public:
-	  MrMeshHandler();
-	  virtual ~MrMeshHandler();
+	//::.. CONSTRUCTORS ..:://
+	MrMeshHandler();
+	virtual ~MrMeshHandler();
 
 	//::.. IMPORT/EXPORT ..:://
-	  bool Import(const char* filepath);
-	  bool Export(const char* filepath);
+	bool Import(const char* filepath);
+	bool Export(const char* filepath);
 
-	  void Free();
+	void Free();
 
 	//::.. GET FUNCTIONS ..:://
-	  const char * GetName();
-	  uint32_t	GetNumVerts();
-	  glm::vec3 * GetPositions();
-	  glm::vec2 * GetTexCoords();
-	  glm::vec3 * GetNormals();
-	  glm::vec3 * GetTangents();
-	  glm::vec3 * GetBiTangents();
-	  glm::vec4 * GetSkinWeights();
-	  glm::vec4 * GetJointIDs();
+	const char * GetName();
+	uint32_t GetNumVerts();
+	bool GetHasSkinWeights();
+	glm::vec3 * GetPositions();
+	glm::vec2 * GetTexCoords();
+	glm::vec3 * GetNormals();
+	glm::vec3 * GetTangents();
+	glm::vec3 * GetBiTangents();
+	glm::vec4 * GetSkinWeights();
+	glm::vec4 * GetJointIDs();
 
 	//::.. SET FUNCTIONS ..:://
-	  void SetFileName(const char * fileName);
-	  void SetNumVerts(uint32_t numVerts);
-	  void SetPositions(glm::vec3 * pos);
-	  void SetTexCoords(glm::vec2 * tex);
-	  void SetNormals(glm::vec3 * nor);
-	  void SetTangents(glm::vec3 * tan);
-	  void SetBiTangents(glm::vec3 * bi);
-	  void SetSkinWeights(glm::vec4 * weights);
-	  void SetJointIDs(glm::vec4 * jointIDs);
+	void SetFileName(const char * fileName);
+	void SetNumVerts(uint32_t numVerts);
+	void SetHasSkinWeights(bool hasSkinWeights);
+	void SetPositions(glm::vec3 * pos);
+	void SetTexCoords(glm::vec2 * tex);
+	void SetNormals(glm::vec3 * nor);
+	void SetTangents(glm::vec3 * tan);
+	void SetBiTangents(glm::vec3 * bi);
+	void SetSkinWeights(glm::vec4 * weights);
+	void SetJointIDs(glm::vec4 * jointIDs);
 
 
 private:
 	//::.. HELP FUNCTIONS .:://
-	  void Init();
+	void Init();
 
 private:
 	bool			m_isLoaded;
 
 	const char *	m_fileName;
+
 	uint32_t		m_numVerts;
+	bool			m_hasSkinWeights;
 
 	glm::vec3 *		m_postions;
 	glm::vec2 *		m_texCoords;
@@ -110,43 +115,33 @@ inline bool MrMeshHandler::Import(const char * filepath)
 	m_skinWeights = new glm::vec4[m_numVerts];
 	m_jointIDs = new glm::vec4[m_numVerts];
 
-	for (uint32_t i = 0; i < m_numVerts; i++)
+
+	// Positions.
+	file.read(reinterpret_cast<char*>(m_postions), sizeof(glm::vec3) * m_numVerts);
+
+	// Texture coords.
+	file.read(reinterpret_cast<char*>(m_texCoords), sizeof(glm::vec2) * m_numVerts);
+
+	// Normals.
+	file.read(reinterpret_cast<char*>(m_normals), sizeof(glm::vec3) * m_numVerts);
+
+	// Tangents.
+	file.read(reinterpret_cast<char*>(m_tangents), sizeof(glm::vec3) * m_numVerts);
+
+	// Bitangents.
+	file.read(reinterpret_cast<char*>(m_bitangents), sizeof(glm::vec3) * m_numVerts);
+
+	// Has skin weights.
+	file.read(reinterpret_cast<char*>(&m_hasSkinWeights), sizeof(bool));
+
+	if (m_hasSkinWeights)
 	{
-		// Positions.
-		file.read(reinterpret_cast<char*>(&m_postions[i].x), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_postions[i].y), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_postions[i].z), sizeof(float));
-
-		// Texture coords.
-		file.read(reinterpret_cast<char*>(&m_texCoords[i].x), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_texCoords[i].y), sizeof(float));
-
-		// Normals.
-		file.read(reinterpret_cast<char*>(&m_normals[i].x), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_normals[i].y), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_normals[i].z), sizeof(float));
-
-		// Tangents.
-		file.read(reinterpret_cast<char*>(&m_tangents[i].x), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_tangents[i].y), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_tangents[i].z), sizeof(float));
-
-		// Bitangents.
-		file.read(reinterpret_cast<char*>(&m_bitangents[i].x), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_bitangents[i].y), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_bitangents[i].z), sizeof(float));
-
 		// Skin weights.
-		file.read(reinterpret_cast<char*>(&m_skinWeights[i].x), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_skinWeights[i].y), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_skinWeights[i].z), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_skinWeights[i].w), sizeof(float));
+		file.read(reinterpret_cast<char*>(m_skinWeights), sizeof(glm::vec4) * m_numVerts);
+
 
 		// Joint weights.
-		file.read(reinterpret_cast<char*>(&m_jointIDs[i].x), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_jointIDs[i].y), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_jointIDs[i].z), sizeof(float));
-		file.read(reinterpret_cast<char*>(&m_jointIDs[i].w), sizeof(float));
+		file.read(reinterpret_cast<char*>(m_jointIDs), sizeof(glm::vec4) * m_numVerts);
 	}
 
 	file.close();
@@ -173,45 +168,34 @@ inline bool MrMeshHandler::Export(const char* filepath)
 
 	file.write(reinterpret_cast<char*>(&m_numVerts), sizeof(uint32_t));
 
-	for (uint32_t i = 0; i < m_numVerts; i++)
+
+	// Positions.
+	file.write(reinterpret_cast<char*>(m_postions), sizeof(glm::vec3) * m_numVerts);
+
+	// Texture coords.
+	file.write(reinterpret_cast<char*>(m_texCoords), sizeof(glm::vec2) * m_numVerts);
+
+	// Normals.
+	file.write(reinterpret_cast<char*>(m_normals), sizeof(glm::vec3) * m_numVerts);
+
+	// Tangents.
+	file.write(reinterpret_cast<char*>(m_tangents), sizeof(glm::vec3) * m_numVerts);
+
+	// Bitangents.
+	file.write(reinterpret_cast<char*>(m_bitangents), sizeof(glm::vec3) * m_numVerts);
+
+	// Has skin weights.
+	file.write(reinterpret_cast<char*>(&m_hasSkinWeights), sizeof(bool));
+
+	if (m_hasSkinWeights)
 	{
-		// Positions.
-		file.write(reinterpret_cast<char*>(&m_postions[i].x), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_postions[i].y), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_postions[i].z), sizeof(float));
-
-
-		// Texture coords.
-		file.write(reinterpret_cast<char*>(&m_texCoords[i].x), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_texCoords[i].y), sizeof(float));
-
-		// Normals.
-		file.write(reinterpret_cast<char*>(&m_normals[i].x), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_normals[i].y), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_normals[i].z), sizeof(float));
-
-		// Tangents.
-		file.write(reinterpret_cast<char*>(&m_tangents[i].x), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_tangents[i].y), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_tangents[i].z), sizeof(float));
-
-		// Bitangents.
-		file.write(reinterpret_cast<char*>(&m_bitangents[i].x), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_bitangents[i].y), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_bitangents[i].z), sizeof(float));
-
 		// Skin weights.
-		file.write(reinterpret_cast<char*>(&m_skinWeights[i].x), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_skinWeights[i].y), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_skinWeights[i].z), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_skinWeights[i].w), sizeof(float));
+		file.write(reinterpret_cast<char*>(m_skinWeights), sizeof(glm::vec4) * m_numVerts);
 
 		// Joint weights.
-		file.write(reinterpret_cast<char*>(&m_jointIDs[i].x), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_jointIDs[i].y), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_jointIDs[i].z), sizeof(float));
-		file.write(reinterpret_cast<char*>(&m_jointIDs[i].w), sizeof(float));
+		file.write(reinterpret_cast<char*>(m_jointIDs), sizeof(glm::vec4) * m_numVerts);
 	}
+	
 
 	file.close();
 
@@ -248,6 +232,11 @@ inline const char * MrMeshHandler::GetName()
 inline uint32_t MrMeshHandler::GetNumVerts()
 {
 	return m_numVerts;
+}
+
+inline bool MrMeshHandler::GetHasSkinWeights()
+{
+	return m_hasSkinWeights;
 }
 
 
@@ -305,6 +294,11 @@ inline void MrMeshHandler::SetNumVerts(uint32_t numVerts)
 	m_numVerts = numVerts;
 }
 
+inline void MrMeshHandler::SetHasSkinWeights(bool hasSkinWeights)
+{
+	m_hasSkinWeights = hasSkinWeights;
+}
+
 
 inline void MrMeshHandler::SetPositions(glm::vec3 * pos)
 {
@@ -354,6 +348,7 @@ inline void MrMeshHandler::Init()
 	m_isLoaded = false;
 
 	m_numVerts = 0;
+	m_hasSkinWeights = true;
 
 	m_postions = nullptr;
 	m_texCoords = nullptr;

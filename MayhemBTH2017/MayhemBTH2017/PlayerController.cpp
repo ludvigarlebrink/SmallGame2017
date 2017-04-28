@@ -108,7 +108,7 @@ void PlayerController::Init()
 		m_button[i].isUp = false;
 	}
 
-	m_deadzone = 0.3f;
+	m_deadzone = 0.1f;
 }
 
 
@@ -261,12 +261,12 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 
 			if (m_axis[CONTROLLER_AXIS_LEFTX].axisDirection > m_deadzone)
 			{
-				m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = 1.0f;
+				m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = ScaleRange(controllerEvent.value);
 			}
 
 			if (m_axis[CONTROLLER_AXIS_LEFTX].axisDirection < -m_deadzone)
 			{
-				m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = -1.0f;
+				m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = ScaleRange(controllerEvent.value);
 			}
 		}
 		else
@@ -274,6 +274,7 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 			m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = 0.0f;
 		}
 		break;
+
 		// Vetical
 	case SDL_CONTROLLER_AXIS_LEFTY:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
@@ -282,12 +283,12 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 
 			if (m_axis[CONTROLLER_AXIS_LEFTY].axisDirection > m_deadzone)
 			{
-				m_axis[CONTROLLER_AXIS_LEFTY].axisDirection = 1.0f;
+				m_axis[CONTROLLER_AXIS_LEFTY].axisDirection = ScaleRange(controllerEvent.value);
 			}
 
 			if (m_axis[CONTROLLER_AXIS_LEFTY].axisDirection < -m_deadzone)
 			{
-				m_axis[CONTROLLER_AXIS_LEFTY].axisDirection = -1.0f;
+				m_axis[CONTROLLER_AXIS_LEFTY].axisDirection = ScaleRange(controllerEvent.value);
 			}
 		}
 		else
@@ -306,12 +307,12 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 
 			if (m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection > m_deadzone)
 			{
-				m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = 1.0f;
+				m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = ScaleRange(controllerEvent.value);
 			}
 
 			if (m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection < -m_deadzone)
 			{
-				m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = -1.0f;
+				m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = ScaleRange(controllerEvent.value);
 			}
 		}
 		else
@@ -319,6 +320,7 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 			m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = 0.0f;
 		}
 		break;
+
 		// Vetical
 	case SDL_CONTROLLER_AXIS_RIGHTY:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
@@ -327,12 +329,12 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 
 			if (m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection > m_deadzone)
 			{
-				m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection = 1.0f;
+				m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection = ScaleRange(controllerEvent.value);
 			}
 
 			if (m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection < -m_deadzone)
 			{
-				m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection = -1.0f;
+				m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection = ScaleRange(controllerEvent.value);
 			}
 		}
 		else

@@ -49,38 +49,9 @@ Prefab * PrefabManager::Instantiate(const char * name)
 
 	MrAnimHandler * animHandler = new MrAnimHandler;
 
-	if(animHandler->Import(".\\Assets\\Animations\\super@animation.mranim"))
-	{
-		std::cout << "Anim Imported" << std::endl;
-	}
-	else
-	{
-		std::cout << "Anim FAIL" << std::endl;
-	}
+	animHandler->Import(".\\Assets\\Animations\\Player@Run.mranim");
 
 
-	// DEBUG SKEL
-	for (size_t i = 0; i < skelHandler->GetNumJoints(); i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			for (int n = 0; n < 4; n++)
-			{
-
-				std::cout << std::fixed << std::setprecision(2) << skelHandler->GetMatrix()[i][j][n] << "\t";
-			}
-
-			std::cout << std::endl;
-		}
-
-		std::cout << std::endl;
-
-		std::cout << "ID:\t" << skelHandler->GetIDs()[i] << std::endl;
-		std::cout << "PAR ID:\t" << skelHandler->GetParentIDs()[i] << std::endl;
-
-		std::cout << std::endl;
-		std::cout << std::endl;
-	}
 
 	// Create the prefab.
 
@@ -93,7 +64,7 @@ Prefab * PrefabManager::Instantiate(const char * name)
 	{
 		vert[i].position = meshHandler->GetPositions()[i];
 		vert[i].normal = meshHandler->GetNormals()[i];
-		vert[i].texCoordsAlpha = glm::vec3(meshHandler->GetTexCoords()[i], 1);
+		vert[i].texCoordsAlpha = glm::vec3(meshHandler->GetTexCoords()[i].x, meshHandler->GetTexCoords()[i].y, 1);
 
 		// FIX WRONG ORDER
 		vert[i].jointIDs = meshHandler->GetJointIDs()[i];
@@ -121,15 +92,15 @@ Prefab * PrefabManager::Instantiate(const char * name)
 
 	// Set animations.
 	AnimClip * animClip = new AnimClip;
-	KeyFrame * key = new KeyFrame[animHandler->GetNumKeyFrames()];
+	KeyFrame * key = new KeyFrame[animHandler->GetNumKeyFramedJoints()];
 
-	for (uint32_t i = 0; i < animHandler->GetNumKeyFrames(); i++)
+	for (uint32_t i = 0; i < animHandler->GetNumKeyFramedJoints(); i++)
 	{
 		key[i].localTx = new glm::mat4[skelHandler->GetNumJoints()];
 
 		for (uint32_t j = 0; j < skelHandler->GetNumJoints(); j++)
 		{
-			key[i].localTx[j] = animHandler->GetKeyFrames()[i].matrix[j];
+			key[i].localTx[j] = animHandler->GetKeyFramedJoints()[j].matrix[i];
 		}
 	}
 
@@ -139,20 +110,49 @@ Prefab * PrefabManager::Instantiate(const char * name)
 	animContrl->AddAnimation(animClip);
 
 
+	// MATERIAL
+	MrMatHandler * test = new MrMatHandler;
+
+	delete meshHandler;
+	delete skelHandler;
+	delete animHandler;
+
+	//SPECAL 1
+	MrAnimHandler animHandler1;
+//	if (animHandler1.Import(".\\Assets\\Animations\\super@base.mranim"))
+	{
+//		std::cout << "YEYE Imported" << std::endl;
+//		//animHandler->Import(".\\Assets\\Animations\\super@up.mranim");
+//		//KeyFrame * keyUp = new KeyFrame;
+//		//uint32_t hej = skelHandler->GetNumJoints();
+//		//keyUp[0].localTx = new glm::mat4[skelHandler->GetNumJoints()];
+	}
+//	else
+//	{
+//		std::cout << "Anim FAIL" << std::endl;
+//	}
+
+
+	//	for (uint32_t i = 0; i < 1; i++)
+	//	{
+	//		keyUp[0].localTx[i] = animHandler1->GetKeyFramedJoints()[0].matrix[i];
+	//	}
+
+
 	Prefab * prefab = new Prefab;
 
 	prefab->SetMesh(mesh);
 	prefab->SetAnimController(animContrl);
-	
-	prefab->SetName("HEJ");
 
+	prefab->SetName("HEJ");
+	prefab->SetAlbedoID(TextureManager::AddTexture(nullptr));
 	prefab->Create();
 
 	std::cout << "DONE!" << std::endl;
 
-
 	return prefab;
 }
+
 
 bool PrefabManager::Destroy(Prefab * prefab)
 {
