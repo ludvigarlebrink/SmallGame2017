@@ -26,10 +26,16 @@ public:
 	void DrawCollider(Camera camera);
 	void ImportLevel(Level level);
 	void CreatePlayerBoundingBox(b2World* world);
+	uint16 GetMaskBits();
+	uint16 GetCategoryBits();
+	void SetMaskBits(uint16 MASK);
+	void SetCategoryBits(uint16 CATEGORY);
+	b2Filter* GetFilter();
 
 	std::vector<Box> GetBoxes();
 
 private:
+	b2Fixture* m_filter;
 	GLuint		m_grid[SIZE_X][SIZE_Y];
 	Vertex2D*	m_vertices;
 	Mesh		m_mesh;
@@ -44,9 +50,17 @@ private:
 	Transform	m_transform;
 	Camera		m_camera;
 	Level		m_level;
-
+	
+	Box m_gameFloor;
 	std::vector<Box>	m_boxes;
 
+	enum _entityCategory {
+		BOUNDARY = 0x0001,
+		PLAYER = 0x0002,
+		PROJECTILE = 0x0004,
+		FRIENDLY_AIRCRAFT = 0x0008,
+		ENEMY_AIRCRAFT = 0x0010,
+	};
 
 };
 

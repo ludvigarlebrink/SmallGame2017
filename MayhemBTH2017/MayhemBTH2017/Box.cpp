@@ -55,17 +55,24 @@ void Box::initStatic(b2World * world, const glm::vec2 & pos, const glm::vec2 & s
 	this->fixture = this->body->CreateFixture(&fixtureDef);
 }
 
-b2Body * Box::getBody()
+void Box::SetCategoryBits(short CATEGORY)
 {
-	return this->body;
+	m_fixtureDef.filter.categoryBits = CATEGORY;
 }
 
-b2Fixture * Box::getFixture()
+void Box::SetMaskBits(short MASK)
 {
-	return this->fixture;
+	m_fixtureDef.filter.maskBits = MASK;
 }
 
-glm::vec2 Box::getScale()
+uint16 Box::GetCategoryBits()
 {
-	return this->m_scale;
+	return m_fixtureDef.filter.categoryBits;
 }
+
+uint16 Box::GetMaskBits()
+{
+	return  m_fixtureDef.filter.maskBits;
+}
+
+

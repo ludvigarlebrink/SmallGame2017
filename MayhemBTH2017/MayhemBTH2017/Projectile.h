@@ -18,6 +18,8 @@ public:
 		float damping, float density,
 		float fireRate, bool startUp, Prefab * prefab);
 
+	void InitBullet(b2World * world, glm::vec2 spawnPos);
+
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(int life);
 	void AddForce(b2Vec2 force);
@@ -33,6 +35,7 @@ public:
 
 
 
+
 private:
 	Prefab*		m_prefab;
 	Box			m_box;
@@ -40,6 +43,17 @@ private:
 	float		m_time;
 	int			m_life;
 	GLfloat m_rotationUpdate;
+	Sprite m_bulletSprite;
+	GLfloat m_bulletScale;
+	bool m_isBullet;
+	
+	enum _entityCategory {
+		BOUNDARY = 0x0001,
+		PLAYER = 0x0002,
+		PROJECTILE = 0x0004,
+		FRIENDLY_AIRCRAFT = 0x0008,
+		ENEMY_AIRCRAFT = 0x0010,
+	};
 
 };
 
