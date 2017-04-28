@@ -23,7 +23,7 @@ void GamePhysics::EnterWorld()
 
 	m_world = std::make_unique<b2World>(gravity);
 
-	m_collision.CreateBoundingBoxes(m_world.get());
+	m_floorCollider.CreateBoundingBoxes(m_world.get());
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
@@ -54,8 +54,8 @@ void GamePhysics::EnterWorld()
 	//FIXTURES FOR COLLISIONS
 
 	//player fixture is of type PLAYER
-	m_player.SetCategoryBits(CATEGORY_PLAYER);
-	m_player.SetMaskBits(CATEGORY_POWERUP);
+	m_player.SetCategoryBits(PLAYER);
+	m_player.SetMaskBits(POWERUP);
 
 }
 
