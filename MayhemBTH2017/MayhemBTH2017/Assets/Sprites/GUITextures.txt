@@ -1,8 +1,8 @@
-.\\Assets\\Sprites\\ClosedMenu1.png
+.\\Assets\\Sprites\\textureMap.png
 STOP
 .\\Assets\\Sprites\\MainMenu.png
 STOP
-.\\Assets\\Sprites\\TexturePack.png
+.\\Assets\\Sprites\\textureMap.png
 STOP
 .\\Assets\\Sprites\\TexturePack.png
 STOP

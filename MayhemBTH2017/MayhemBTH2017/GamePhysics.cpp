@@ -6,10 +6,12 @@
 
 GamePhysics::GamePhysics()
 {
+
 }
 
 GamePhysics::~GamePhysics()
 {
+
 }
 
 void GamePhysics::EnterWorld()
@@ -21,7 +23,7 @@ void GamePhysics::EnterWorld()
 
 	m_world = std::make_unique<b2World>(gravity);
 
-	m_collision.CreateBoundingBoxes(m_world.get());
+	m_floorCollider.CreateBoundingBoxes(m_world.get());
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
@@ -34,15 +36,17 @@ void GamePhysics::EnterWorld()
 
 	Prefab * gun = PrefabManager::Instantiate("Player");
 
+	gun->SetScale(glm::vec3(1, 1, 1));
+
 	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
 
 	Prefab * projectile = PrefabManager::Instantiate("Player");
 
-
+	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	m_weapon = Weapon(gun, projectile);
 
-	m_weapon.SetProjectileType(0.99f, 1.0f, 0.0f, 0.01f, 5.0f);
+	m_weapon.SetProjectileType(0.3f, 1.0f, 0.0f, 0.01f, 5.0f, 10);
 
 	///////////////////////////////////////////////////////////////////
 
@@ -50,8 +54,8 @@ void GamePhysics::EnterWorld()
 	//FIXTURES FOR COLLISIONS
 
 	//player fixture is of type PLAYER
-	m_player.SetCategoryBits(CATEGORY_PLAYER);
-	m_player.SetMaskBits(CATEGORY_POWERUP);
+	m_player.SetCategoryBits(PLAYER);
+	m_player.SetMaskBits(POWERUP);
 
 }
 
@@ -68,13 +72,15 @@ void GamePhysics::Update()
 	
 	m_player.Update();
 
-	m_weapon.Update(glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
+	m_weapon.Update(m_player.GetPrefab()->GetPosition() + glm::vec3(5, 5, 0), b2Vec2(1.0, 1.0));
 
-	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A))
+	if (InputManager::Get()->GetButtonHeld(CONTROLLER_BUTTON_Y))
 	{
-		m_weapon.Shoot(b2Vec2(1000, 1000), 0.1f, m_world.get());
+		if (m_weapon.FireRate(0.1f))
+		{
+			m_weapon.Shoot(b2Vec2(1000, 1000), m_world.get(), glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
+		}
 	}
-	
 
 	m_world->Step(1.0f / 60.0f, 6, 2);
 
@@ -88,7 +94,7 @@ glm::vec3 GamePhysics::GetPosition() {
 
 void GamePhysics::Render(Camera camera) {
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-	m_collision.DrawCollider(camera);
+	m_floorCollider.DrawCollider(camera);
 
 	m_player.Render(camera);
 

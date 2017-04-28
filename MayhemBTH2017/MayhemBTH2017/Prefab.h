@@ -63,6 +63,7 @@ public:
 	void SetMaterial(Material * material);
 	void SetAlbedoID(GLuint id);
 
+
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
