@@ -94,7 +94,7 @@ glm::vec3 GamePhysics::GetPosition() {
 
 void GamePhysics::Render(Camera camera) {
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-	m_collision.DrawCollider(camera);
+	m_floorCollider.DrawCollider(camera);
 
 	m_player.Render(camera);
 
