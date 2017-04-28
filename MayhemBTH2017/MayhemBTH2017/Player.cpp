@@ -23,7 +23,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	//Load player MESH
 
 	m_playerPrefab = PrefabManager::Instantiate("Player");
-	m_playerPrefab->SetScale(glm::vec3(1.6));
+	m_playerPrefab->SetScale(glm::vec3(1.6)); //1.6
 
 	m_boundingBox.initDynamic(world, pos, glm::vec2(m_playerPrefab->GetScale().x, m_playerPrefab->GetScale().y));
 
