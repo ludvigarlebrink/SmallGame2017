@@ -33,9 +33,9 @@ public:
 
 private:
 	//::.. HELP FUNCTIONS ..:://
+	void Reset();
 	void AxisMove();
 	void ButtonInput();
-	void Reset();
 
 private:
 	enum State

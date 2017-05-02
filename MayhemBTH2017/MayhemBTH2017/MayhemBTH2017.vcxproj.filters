@@ -214,19 +214,35 @@
     </ClCompile>
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="ImportTester.cpp">
+      <Filter>Engine\Resources\Managers</Filter>
+    </ClCompile>
     <ClCompile Include="LevelEditorGUI.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePhysics.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider2D.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelTexture.cpp">
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="ImportTester.cpp" />
-    <ClCompile Include="Collider2D.cpp" />
-    <ClCompile Include="GamePhysics.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="Weapon.cpp" />
-    <ClCompile Include="LevelTexture.cpp" />
-    <ClCompile Include="PlayerPrefab.cpp" />
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerPrefab.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
     <ClCompile Include="ParticleSystem.cpp">
-      <Filter>Engine\GameObjects\Renderable</Filter>
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -381,10 +397,21 @@
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="Projectile.h" />
-    <ClInclude Include="Weapon.h" />
-    <ClInclude Include="LevelTexture.h" />
-    <ClInclude Include="PlayerPrefab.h" />
+    <ClInclude Include="LevelTexture.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPrefab.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -447,14 +474,28 @@
     <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
     </None>
-    <None Include="Assets\GLSL\LevelShader.frag" />
-    <None Include="Assets\GLSL\LevelShader.vert" />
-    <None Include="DebugShader.frag" />
-    <None Include="Assets\GLSL\LevelMarkerShader.frag" />
-    <None Include="Assets\GLSL\LevelMarkerShader.vert" />
-    <None Include="Assets\Levels\NewFormat.mrlevel" />
+    <None Include="DebugShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\LevelShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\LevelShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\Levels\NewFormat.mrlevel">
+      <Filter>Engine\LevelEditor</Filter>
+    </None>
+    <None Include="Assets\GLSL\LevelMarkerShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\LevelMarkerShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\Textures\TextureTestD.TGA" />
+    <Image Include="Assets\Textures\TextureTestD.TGA">
+      <Filter>Assets\GLSL</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -57,7 +57,6 @@ void LevelHandler::Import(Level & level, uint32_t id)
 
 	uint32_t i = 0;
 	
-	m_mapSize = sizeof(isOccupied) + sizeof(isSpawn) + sizeof(uv) + sizeof(uv2) + sizeof(rgb);
 	
 	std::ifstream file(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
 	file.ignore(sizeof(uint32_t));
@@ -65,13 +64,11 @@ void LevelHandler::Import(Level & level, uint32_t id)
 	{
 		file.ignore(m_size);
 	}
-	//file.ignore(headerSize);
-	//file.ignore(m_mapSize * id);
 	file.read(reinterpret_cast<char*>(isOccupied), sizeof(bool) * nrOfBlocks);
 	file.read(reinterpret_cast<char*>(isSpawn), sizeof(bool) * nrOfBlocks);
 	file.read(reinterpret_cast<char*>(uv), sizeof(glm::vec2) * nrOfBlocks);
-	file.read(reinterpret_cast<char*>(uv2), sizeof(uint32_t) * (nrOfBlocks * 12) * 2);
-	file.read(reinterpret_cast<char*>(rgb), sizeof(uint32_t) * (nrOfBlocks * 6) * 3);
+	//file.read(reinterpret_cast<char*>(uv2), sizeof(uint32_t) * (nrOfBlocks * 12) * 2);
+	//file.read(reinterpret_cast<char*>(rgb), sizeof(uint32_t) * (nrOfBlocks * 6) * 3);
 
 
 	for (size_t x = 1; x < level.SIZE_X; x++)
@@ -117,8 +114,6 @@ void LevelHandler::Export(Level & level)
 		m_names[i] = nameBuffer;
 	}
 	input.close();
-
-
 	const int nrOfBlocks = level.SIZE_X * level.SIZE_Y;
 	bool isOccupied[nrOfBlocks] = { 0 };
 	bool isSpawn[nrOfBlocks] = { 0 };
