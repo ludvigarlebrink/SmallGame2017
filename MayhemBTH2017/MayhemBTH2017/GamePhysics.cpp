@@ -96,6 +96,8 @@ void GamePhysics::Update()
 
 
 
+
+
 		m_player.Update();
 		m_weapon.Update(m_player.GetPrefab()->GetPosition() + glm::vec3(5, 5, 0), b2Vec2(1.0, 1.0));
 
