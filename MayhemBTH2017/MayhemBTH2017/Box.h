@@ -26,6 +26,8 @@ public:
 	uint16 GetCategoryBits();
 	uint16 GetMaskBits();
 
+	b2BodyDef GetBodyDef();
+	void SetBodyDef(b2World * world, const glm::vec2 & pos, const glm::vec2 & scale, b2BodyType type);
 
 
 
@@ -33,6 +35,7 @@ private:
 	b2Body* m_body = nullptr;
 	b2Fixture* m_fixture;
 	b2FixtureDef m_fixtureDef;
+	b2BodyDef m_bodyDef;
 	glm::vec2 m_scale;
 
 };
