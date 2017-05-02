@@ -49,6 +49,8 @@ private:
 	//Temporary
 	b2FixtureDef powerUpFixture;
 
+	b2ContactListener m_contactListener;
+
 	Weapon m_weapon;
 
 	enum _entityCategory {
