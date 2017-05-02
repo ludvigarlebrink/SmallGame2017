@@ -194,9 +194,6 @@
     <ClCompile Include="PrefabManager.cpp">
       <Filter>Engine\Resources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -221,6 +218,12 @@
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="ImportTester.cpp" />
+    <ClCompile Include="Collider2D.cpp" />
+    <ClCompile Include="GamePhysics.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="Contact.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -351,9 +354,6 @@
     <ClInclude Include="PrefabManager.h">
       <Filter>Engine\Resources\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -377,6 +377,9 @@
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="Weapon.h" />
+    <ClInclude Include="Contact.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

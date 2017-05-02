@@ -32,6 +32,8 @@ public:
 	Box GetBox();
 	Prefab* GetPrefab();
 	b2Fixture* GetFilter();
+	void StartContact();
+	void EndContact();
 
 private:
 private:
@@ -45,6 +47,7 @@ private:
 	AShader m_toonShader;
 	bool	m_isMidAir;
 	bool m_doubleJump;
+	bool m_contact;
 	b2FixtureDef m_fixture;
 
 	enum _entityCategory {

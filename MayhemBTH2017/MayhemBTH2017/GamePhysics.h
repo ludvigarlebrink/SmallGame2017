@@ -5,6 +5,7 @@
 #include "Collider2D.h"
 #include "Player.h"
 #include "Weapon.h"
+#include "Contact.h"
 
 
 class GamePhysics
