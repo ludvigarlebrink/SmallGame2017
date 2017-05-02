@@ -3,7 +3,8 @@
 
 
 #include "Projectile.h"
-
+#include "ParticleSystem.h"
+#include "String.h"
 
 class Weapon
 {
@@ -20,7 +21,7 @@ public:
 	void Render(Camera camera);
 	void Update(glm::vec3 playerPos, b2Vec2 force);
 	void DeleteProjectile();
-
+	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf);
 	//::.. SET FUNTIONS ..:://
 	void Shoot(b2Vec2 force, b2World * world, glm::vec3 playerPos);
 
@@ -32,7 +33,7 @@ private:
 	Prefab*					m_prefabGun;
 	Prefab*					m_prefabProjectile;
 	std::vector<Projectile*>m_projectiles;
-
+	ParticleSystem m_particles;
 	float m_restitution;
 	float m_friction; 
 	float m_damping;

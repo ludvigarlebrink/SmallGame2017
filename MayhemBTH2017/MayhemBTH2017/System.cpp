@@ -43,6 +43,9 @@ void System::Run()
 	GamePhysics physics;
 	physics.EnterWorld();
 
+	ParticleSystem p(".\\Assets\\GLSL\\GeometryPass", glm::vec3(0, 0, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
+	
+
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -52,28 +55,31 @@ void System::Run()
 
 	//	pre->Render(cam);
 
+		p.Bind();
+		p.Update(transform, camera);
+		p.UpdateParticles();
+		p.RenderTransformed(1);
+		//switch (m_stateManager->GetCurrentState())
+		//{
+		//case GameState::START:
+		//	break;
+		//case GameState::MAIN_MENU:
+		//	m.Update();
+		//	break;
+		//case GameState::LEVEL_EDITOR:
+		//	l.Update();
+		//	break;
+		//case GameState::GAME:
 
-		switch (m_stateManager->GetCurrentState())
-		{
-		case GameState::START:
-			break;
-		case GameState::MAIN_MENU:
-			m.Update();
-			break;
-		case GameState::LEVEL_EDITOR:
-			l.Update();
-			break;
-		case GameState::GAME:
-
-			physics.Update();
-			physics.Render(camera);
-			break;
-		case GameState::EXIT:
-			isRunning = false;
-			break;
-		default:
-			break;
-		}
+		//	physics.Update();
+		//	physics.Render(camera);
+		//	break;
+		//case GameState::EXIT:
+		//	isRunning = false;
+		//	break;
+		//default:
+		//	break;
+		//}
 
 		m_inputManager->Reset();
 

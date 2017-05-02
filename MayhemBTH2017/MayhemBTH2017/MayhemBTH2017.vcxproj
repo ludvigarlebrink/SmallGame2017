@@ -152,6 +152,7 @@
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="MenuCredits.cpp" />
     <ClCompile Include="MenuVideo.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prefab.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -226,6 +227,9 @@
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="MenuCredits.h" />
     <ClInclude Include="MenuVideo.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ParticleTransform.h" />
     <ClInclude Include="Prefab.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -283,11 +287,18 @@
     <None Include="Assets\GLSL\DebugGreen.frag" />
     <None Include="Assets\GLSL\DebugGreen.vert" />
     <None Include="Assets\GLSL\DebugShader.vert" />
+    <None Include="Assets\GLSL\DrawShader.frag" />
+    <None Include="Assets\GLSL\DrawShader.geom" />
+    <None Include="Assets\GLSL\DrawShader.vert" />
+    <None Include="Assets\GLSL\emitterShader.frag" />
+    <None Include="Assets\GLSL\emitterShader.vert" />
+    <None Include="Assets\GLSL\GeometryPass.vert" />
     <None Include="Assets\GLSL\LevelShader.frag" />
     <None Include="Assets\GLSL\LevelShader.vert" />
     <None Include="Assets\GLSL\MainShader.frag" />
     <None Include="Assets\GLSL\MainShader.geom" />
     <None Include="Assets\GLSL\MainShader.vert" />
+    <None Include="Assets\GLSL\ParticleExplosion.vert" />
     <None Include="Assets\GLSL\QuadShader.frag" />
     <None Include="Assets\GLSL\QuadShader.geom" />
     <None Include="Assets\GLSL\QuadShader.vert" />
@@ -296,6 +307,7 @@
     <None Include="Assets\GLSL\SharpnelShader.vert" />
     <None Include="Assets\GLSL\SkeletalAnimation.frag" />
     <None Include="Assets\GLSL\SkeletalAnimation.vert" />
+    <None Include="Assets\GLSL\SplitterShader.vert" />
     <None Include="Assets\Levels\ExportTestLOL.mrlevel" />
     <None Include="Assets\Levels\Register.mrlevelreg" />
     <None Include="Assets\Prefabs\T.mr" />

@@ -19,7 +19,7 @@ void GamePhysics::EnterWorld()
 
 	//Get deltatime
 	m_time = TimeManager::Get();
-	b2Vec2 gravity(0.0f, -9.8f);
+	b2Vec2 gravity(0.0f, -25.8f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
@@ -46,7 +46,9 @@ void GamePhysics::EnterWorld()
 
 	m_weapon = Weapon(gun, projectile);
 
-	m_weapon.SetProjectileType(0.3f, 1.0f, 0.0f, 0.01f, 5.0f, 10);
+	m_weapon.SetProjectileType(0.3f, 1.0f, 0.0f, 0.01f, 5.0f, 2);
+
+	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 500);
 
 	///////////////////////////////////////////////////////////////////
 
@@ -78,7 +80,7 @@ void GamePhysics::Update()
 			Projectile* proj = static_cast<Projectile*>(contact->GetFixtureB()->GetBody()->GetUserData());
 			if (proj != NULL)
 			{
-				std::cout << " den nuddar något som kanske nuddar något osv .." << std::endl;
+				//std::cout << " den nuddar något som kanske nuddar något osv .." << std::endl;
 			}
 		}
 		
@@ -87,7 +89,6 @@ void GamePhysics::Update()
 
 	
 	m_player.Update();
-
 	m_weapon.Update(m_player.GetPrefab()->GetPosition() + glm::vec3(5, 5, 0), b2Vec2(1.0, 1.0));
 
 	if (InputManager::Get()->GetButtonHeld(CONTROLLER_BUTTON_Y))

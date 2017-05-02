@@ -33,7 +33,7 @@ void LevelEditor::Update()
 
 		m_levelMarker.Update(m_camera);
 		m_level.Render(m_camera);
-		m_levelGUI.Render();
+	//	m_levelGUI.Render();
 		break;
 	case MENU:
 		break;
