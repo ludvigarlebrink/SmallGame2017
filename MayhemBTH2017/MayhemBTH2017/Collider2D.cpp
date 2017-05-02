@@ -91,7 +91,7 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 				tempY = y;
 				GLfloat scale = 0.5f;
 
-				gameFloor.initStatic(world, glm::vec2((tempX-0.5), (tempY-0.5)), glm::vec2(offset+0.84, scale+0.42));
+				gameFloor.InitStatic(world, glm::vec2((tempX-0.5), (tempY-0.5)), glm::vec2(offset+0.84, scale+0.42));
 				gameFloor.getFixture()->SetRestitution(0.0); //floor bounciness
 				gameFloor.getFixture()->SetFriction(1.0); //floor friction
 				gameFloor.getBody()->ResetMassData();
@@ -126,7 +126,7 @@ void Collider2D::CreatePlayerBoundingBox(b2World* world) {
 
 
 	//SIZE OF THE PLAYER BOUNDING BOXZ
-	tempBox.initDynamic(world, glm::vec2(42.0, 24.0), glm::vec2(0.5, 0.5));
+	tempBox.InitDynamic(world, glm::vec2(42.0, 24.0), glm::vec2(0.5, 0.5));
 	
 	m_boxes.push_back(tempBox);
 

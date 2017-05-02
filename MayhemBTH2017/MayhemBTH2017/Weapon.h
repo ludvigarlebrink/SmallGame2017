@@ -23,6 +23,7 @@ public:
 
 	//::.. SET FUNTIONS ..:://
 	void Shoot(b2Vec2 force, b2World * world, glm::vec3 playerPos);
+	void InitAllProjectiles(b2World * world);
 
 	//::.. GET FUNTIONS ..:://
 
