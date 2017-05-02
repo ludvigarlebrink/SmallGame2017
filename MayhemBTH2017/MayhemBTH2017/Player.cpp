@@ -38,9 +38,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
-	GetBox().getFixture()->SetDensity(1.0);
+	GetBox().getFixture()->SetDensity(0.5);
 	GetBox().getFixture()->SetFriction(1.0);
-	GetBox().getFixture()->SetRestitution(0.0);
+	GetBox().getFixture()->SetRestitution(0.5);
 	GetBox().getBody()->SetLinearDamping(0.4);
 	
 	b2Filter filter;

@@ -43,7 +43,7 @@ void Collider2D::DrawCollider(Camera camera)
 void Collider2D::CreateBoundingBoxes(b2World* world) {
 
 	m_contact = false;
-	m_imp.Import(m_level);
+	m_imp.Import(m_level, 0);
 
 	
 	const uint32_t length = SIZE_X * SIZE_Y * 6;
