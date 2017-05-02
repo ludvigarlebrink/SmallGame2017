@@ -69,7 +69,7 @@ void GamePhysics::Update()
 		std::cout << "touching" << std::endl;
 	}
 
-	m_world->Step(1.0f / 60.0f, 6, 2);
+	m_world->Step(1.0f / 5.0f, 6, 2);
 
 	for (b2Contact* contact = m_world->GetContactList(); contact; contact = contact->GetNext())
 	{
@@ -96,7 +96,7 @@ void GamePhysics::Update()
 		}
 	}
 
-	m_world->Step(1.0f / 60.0f, 6, 2);
+	m_world->Step(1.0f / 5.0f, 6, 2);
 
 }
 
