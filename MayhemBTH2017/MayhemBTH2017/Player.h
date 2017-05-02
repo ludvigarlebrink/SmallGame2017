@@ -6,6 +6,7 @@
 #include "AShader.h"
 #include "InputManager.h"
 #include "TimeManager.h"
+#include "PlayerPrefab.h"
 
 class Player
 {
@@ -32,12 +33,14 @@ public:
 	Box GetBox();
 	Prefab* GetPrefab();
 	b2Fixture* GetFilter();
+	void StartContact();
+	void EndContact();
 
 private:
 private:
 	b2Fixture* m_filter;
 	Box m_boundingBox;
-	Prefab * m_playerPrefab;
+	PlayerPrefab * m_playerPrefab;
 	Sprite m_playerSprite;
 	Transform m_transf;
 	Camera m_cam;
@@ -45,6 +48,7 @@ private:
 	AShader m_toonShader;
 	bool	m_isMidAir;
 	bool m_doubleJump;
+	bool m_contact;
 	b2FixtureDef m_fixture;
 
 	enum _entityCategory {

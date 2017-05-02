@@ -30,10 +30,10 @@ void AnimClip::Stop()
 void AnimClip::Update()
 {
 
-	m_currKeyI; // = //static_cast<int32_t>(m_currKey);
-	if (m_currKeyI > 59)
+	m_currKeyI++; // = //static_cast<int32_t>(m_currKey);
+	if (m_currKeyI > 29)
 	{
-		m_currKeyI = 1;
+		m_currKeyI = 0;
 	}
 }
 

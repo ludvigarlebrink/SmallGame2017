@@ -23,11 +23,13 @@ public:
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(int life);
 	void AddForce(b2Vec2 force);
+	void SetFired(bool fired);
 
 	//::.. GET FUNCTIONS ..:://
 	int GetLife();
 	Prefab* GetPrefab();
 	Box GetBox();
+	bool GetFired();
 
 	//::.. OTHER FUNCTIONS ..:://
 	void Update();
@@ -46,6 +48,7 @@ private:
 	Sprite m_bulletSprite;
 	GLfloat m_bulletScale;
 	bool m_isBullet;
+	bool m_fired;
 	
 	enum _entityCategory {
 		BOUNDARY = 0x0001,

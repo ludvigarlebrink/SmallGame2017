@@ -12,6 +12,7 @@
 #include <glm.hpp>
 #include <cstdint>
 #include <string>
+#include <vector>
 
 
 class Level
@@ -25,6 +26,7 @@ public:
 		uint32_t	textureID; // 4 bytes.
 		bool		isOccupied; // 1 byte.
 		bool		isSpawnPoint; // 1 byte.
+		glm::vec2	uvCoord;
 	};
 	
 	Level();
@@ -40,6 +42,7 @@ public:
 	//::.. GET FUNCTIONS ..:://
 	bool GetIsOccupied(uint32_t posX, uint32_t posY);
 	bool GetIsSpawnPoint(uint32_t posX, uint32_t posY);
+	glm::vec2 GetTempUV(uint32_t posX, uint32_t posY);
 	uint32_t GetTextureID(uint32_t posX, uint32_t posY);
 	const std::string& GetName();
 
@@ -47,6 +50,7 @@ public:
 	void SetTexture(uint32_t posX, uint32_t posY, uint32_t textureID);
 	void SetOccupied(uint32_t posX, uint32_t posY, bool isOccupied);
 	void SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint);
+	void setUv(uint32_t posX, uint32_t posY, glm::vec2 uv);
 	void SetName(const std::string& name);
 
 	void Clear();
@@ -78,7 +82,8 @@ private:
 
 	InputManager *		m_input;
 	glm::vec4			m_uv;
-	float				m_uvTest;
+
+
 };
 
 

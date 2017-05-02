@@ -108,7 +108,7 @@ void PlayerController::Init()
 		m_button[i].isUp = false;
 	}
 
-	m_deadzone = 0.3f;
+	m_deadzone = 0.01f;
 }
 
 

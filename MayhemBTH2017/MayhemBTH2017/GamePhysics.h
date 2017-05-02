@@ -5,6 +5,7 @@
 #include "Collider2D.h"
 #include "Player.h"
 #include "Weapon.h"
+#include "Contact.h"
 
 
 class GamePhysics
@@ -48,8 +49,6 @@ private:
 	Sprite		m_shot;
 	//Temporary
 	b2FixtureDef powerUpFixture;
-
-	b2ContactListener m_contactListener;
 
 	Weapon m_weapon;
 
