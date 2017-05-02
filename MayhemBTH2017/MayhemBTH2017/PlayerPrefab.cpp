@@ -21,7 +21,7 @@ PlayerPrefab::~PlayerPrefab()
 }
 
 
-void PlayerPrefab::Update(float x, float y)
+void PlayerPrefab::Update(float x, float y, float speed)
 {
 	m_x = x;
 	m_y = y;
@@ -29,6 +29,7 @@ void PlayerPrefab::Update(float x, float y)
 
 	AnimController * anim = m_player->GetAnimController();
 	AnimSkeleton * skel = anim->GetSkeleton();
+	anim->GetCurrentAnimClip()->SetSpeedModifier(speed * 4);
 
 	if (x > 0.3f)
 	{
@@ -79,9 +80,10 @@ void PlayerPrefab::Update(float x, float y)
 		}
 	}
 
-	skel->Update(m_kf, true, 1, 11);
+	skel->Update(m_kf, nullptr, 0, true, 1, 11);
 	anim->GetCurrentAnimClip()->Update();
-	skel->Update(anim->GetCurrentAnimClip()->GetCurrentKeyFrame(), false, 12);
+	skel->Update(anim->GetCurrentAnimClip()->GetCurrentKeyFrame(), 
+		anim->GetCurrentAnimClip()->GetPreviousKeyFrame(), anim->GetCurrentAnimClip()->GetInter(), false, 12);
 
 	Joint * hand = skel->GetJointAt(6);
 	m_weapon->SetPosition(glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]));
@@ -119,7 +121,6 @@ void PlayerPrefab::Init(Prefab * weapon)
 	m_weapon->SetScale(glm::vec3(1.3f));
 
 	m_player = PrefabManager::Instantiate("");
-
 	m_player->SetScale(glm::vec3(1.3f));
 
 	AnimController * anim = m_player->GetAnimController();

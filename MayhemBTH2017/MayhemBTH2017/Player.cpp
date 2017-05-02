@@ -110,7 +110,9 @@ void Player::Update() {
 		}
 	}
 
-	m_playerPrefab->Update(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX), InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTY));
+	m_playerPrefab->Update(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX), 
+		InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTY),
+		InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX));
 
 	//DOUBLE JUMP
 	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f && m_isMidAir) 

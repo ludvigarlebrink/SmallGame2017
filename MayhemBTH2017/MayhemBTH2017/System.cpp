@@ -95,6 +95,7 @@ void System::Run()
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
+		// SKÄLL UT ERIK OCH LUKAS IMORGON :D
 		SDL_Delay(10);
 		//	counter += m_timeManager->GetDeltaTime();
 	}

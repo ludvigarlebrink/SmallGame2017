@@ -30,7 +30,7 @@ public:
 	PlayerPrefab(Prefab * weapon);
 	virtual ~PlayerPrefab();
 
-	void Update(float x, float y);
+	void Update(float x, float y, float speed);
 	void Render(Camera& cam);
 
 	//::.. GET FUNCTIONS ..:://
