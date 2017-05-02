@@ -23,7 +23,6 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 
 
 	m_box.initDynamic(world, pos, scale);
-	m_box.getBody()->SetUserData(this);
 	m_box.getFixture()->SetRestitution(restitution);
 	m_box.getFixture()->SetFriction(friction);
 	m_box.getFixture()->SetDensity(density);
