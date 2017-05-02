@@ -53,6 +53,7 @@ void GamePhysics::EnterWorld()
 
 	//FIXTURES FOR COLLISIONS
 
+
 	//player fixture is of type PLAYER
 	m_player.SetCategoryBits(PLAYER);
 	m_player.SetMaskBits(POWERUP);
@@ -69,6 +70,21 @@ void GamePhysics::Update()
 	}
 
 	m_world->Step(1.0f / 60.0f, 6, 2);
+
+	for (b2Contact* contact = m_world->GetContactList(); contact; contact = contact->GetNext())
+	{
+		if (contact->IsTouching())
+		{
+			Projectile* proj = static_cast<Projectile*>(contact->GetFixtureB()->GetBody()->GetUserData());
+			if (proj != NULL)
+			{
+				std::cout << " den nuddar något som kanske nuddar något osv .." << std::endl;
+			}
+		}
+		
+	}
+
+
 	
 	m_player.Update();
 

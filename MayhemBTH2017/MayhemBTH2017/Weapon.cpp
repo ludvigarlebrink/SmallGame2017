@@ -12,6 +12,7 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile)
 	m_prefabProjectile = projectile;
 	m_time = 0;
 	m_clearTime = 0;
+	m_counter = 0;
 }
 
 Weapon::~Weapon()
@@ -37,6 +38,7 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 	m_time += TimeManager::Get()->GetDeltaTime();
 
 	DeleteProjectile();
+
 
 }
 

@@ -42,6 +42,7 @@ private:
 	float m_clearTime;
 	int	  m_projectileCounter;
 	int   m_clearRate;
+	unsigned int m_counter;
 
 };
 
