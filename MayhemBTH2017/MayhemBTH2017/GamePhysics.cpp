@@ -78,7 +78,7 @@ void GamePhysics::Update()
 			Projectile* proj = static_cast<Projectile*>(contact->GetFixtureB()->GetBody()->GetUserData());
 			if (proj != NULL)
 			{
-				std::cout << " den nuddar .." << std::endl;
+				//std::cout << " den nuddar .." << std::endl;
 			}
 		}
 		
@@ -96,7 +96,7 @@ void GamePhysics::Update()
 		}
 	}
 
-	//m_world->Step(1.0f / 60.0f, 6, 2);
+	m_world->Step(1.0f / 60.0f, 6, 2);
 
 }
 

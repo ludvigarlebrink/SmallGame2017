@@ -24,12 +24,13 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	m_contact = false;
 	//Load player MESH
 
-	m_playerPrefab = PrefabManager::Instantiate("Player");
-	m_playerPrefab->SetScale(glm::vec3(1.3));
+	m_playerPrefab = new PlayerPrefab();
+	
+	//m_playerPrefab->SetScale(glm::vec3(1.3));
 
 
 	//SET BOUNDING BOX SIZE 
-	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_playerPrefab->GetScale().x + 1, m_playerPrefab->GetScale().y*m_playerPrefab->GetMesh()->GetHeight()));
+	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_playerPrefab->GetPlayerPrefab()->GetScale().x + 1, m_playerPrefab->GetPlayerPrefab()->GetScale().y*m_playerPrefab->GetPlayerPrefab()->GetMesh()->GetHeight()));
 
 	//sprite for size of bouding box
 	m_playerSprite.createSprite(glm::vec2(0), glm::vec2(20));
@@ -76,7 +77,7 @@ void Player::Update() {
 	
 	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f &&leftVelocity > -5)
 	{
-		m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
+	//	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
 		if (m_isMidAir) {
 
 			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-400)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
@@ -89,6 +90,7 @@ void Player::Update() {
 
 
 	}
+
 
 
 
@@ -109,9 +111,11 @@ void Player::Update() {
 		}
 	}
 
+	m_playerPrefab->Update(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX), InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTY));
 
 	//DOUBLE JUMP
-	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f && m_isMidAir) {
+	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f && m_isMidAir) 
+	{
 		std::cout << "I JUMP TWICE HAHA" << std::endl;
 		m_doubleJump = false;
 		GetBox().getBody()->ApplyForce(b2Vec2(0, 1000), GetBox().getBody()->GetWorldCenter(), 1);
@@ -123,7 +127,7 @@ void Player::Update() {
 	GLfloat xScale = GetBox().getScale().x;
 	GLfloat yScale = GetBox().getScale().y;
 
-	m_playerPrefab->SetPosition(glm::vec3(xPos + 0.5, yPos + GetBox().getScale().y - 6, 0));
+	m_playerPrefab->GetPlayerPrefab()->SetPosition(glm::vec3(xPos + 0.5, yPos + GetBox().getScale().y - 6, 0));
 
 	m_playerSprite.update(glm::vec2(xPos - (GetBox().getScale().x / 2), yPos - (GetBox().getScale().y / 2)), glm::vec2(GetBox().getScale().x, GetBox().getScale().y));
 
@@ -151,7 +155,7 @@ Box Player::GetBox()
 
 Prefab* Player::GetPrefab()
 {
-	return m_playerPrefab;
+	return m_playerPrefab->GetPlayerPrefab();
 }
 
 

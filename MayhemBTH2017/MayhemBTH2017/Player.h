@@ -6,6 +6,7 @@
 #include "AShader.h"
 #include "InputManager.h"
 #include "TimeManager.h"
+#include "PlayerPrefab.h"
 
 class Player
 {
@@ -39,7 +40,7 @@ private:
 private:
 	b2Fixture* m_filter;
 	Box m_boundingBox;
-	Prefab * m_playerPrefab;
+	PlayerPrefab * m_playerPrefab;
 	Sprite m_playerSprite;
 	Transform m_transf;
 	Camera m_cam;
