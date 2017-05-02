@@ -219,11 +219,18 @@
     </ClCompile>
     <ClCompile Include="ImportTester.cpp" />
     <ClCompile Include="Collider2D.cpp" />
-    <ClCompile Include="GamePhysics.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="Weapon.cpp" />
-    <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="GamePhysics.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -377,9 +384,15 @@
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="Projectile.h" />
-    <ClInclude Include="Weapon.h" />
-    <ClInclude Include="Contact.h" />
+    <ClInclude Include="GamePhysics.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -445,5 +458,8 @@
     <None Include="Assets\GLSL\LevelShader.frag" />
     <None Include="Assets\GLSL\LevelShader.vert" />
     <None Include="DebugShader.frag" />
+    <None Include="Assets\GLSL\ToonShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

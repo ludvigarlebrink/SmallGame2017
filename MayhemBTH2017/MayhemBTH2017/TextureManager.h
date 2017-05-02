@@ -1,9 +1,11 @@
 #ifndef __TEXTUREMANAGER_H__
 #define __TEXTUREMANAGER_H__
 
+
+#include <MrMatHandler.h>
 #include <SDL.h>
 #include <map>
-#include <GL\glew.h>
+#include <glew.h>
 
 
 class TextureManager
@@ -24,8 +26,9 @@ public:
 	void StartUp();
 	void Shutdown();
 
-	//::.. OTHER FUNCTIONS ..:://
+	//::.. MODIFY FUNCTIONS ..:://
 	static void AddTexture(const char * name, const char* filepath);
+	static GLuint AddTexture(MrTexture * texture);
 	static void FreeTexture(GLuint id);
 	static void FreeTexture(const char * name);
 	static void DeleteTextureFromMap(const char * name);

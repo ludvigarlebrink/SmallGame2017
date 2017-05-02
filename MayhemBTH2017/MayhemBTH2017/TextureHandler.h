@@ -1,7 +1,6 @@
 #ifndef __TEXTUREHANDLER_H__
 #define __TEXTUREHANDLER_H__
 
-#define STB_IMAGE_IMPLEMENTATION
 
 #include "Texture.h"
 
