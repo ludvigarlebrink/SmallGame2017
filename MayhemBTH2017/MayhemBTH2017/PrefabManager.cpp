@@ -1,6 +1,7 @@
 #include "PrefabManager.h"
 
 #include <iostream>
+#include <string>
 #include <iomanip>
 
 uint32_t PrefabManager::numPrefabs = 0;
@@ -31,7 +32,7 @@ Prefab * PrefabManager::Instantiate(const char * name)
 
 	}
 
-	const char* filepath = ".\\Assets\\Prefabs\\super.mr";
+	const char* filepath = name;
 
 	//	m_handler->Import(filepath);
 	//	MrHandler * mrHandler = new MrHandler;

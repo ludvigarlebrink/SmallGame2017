@@ -4,10 +4,12 @@
 Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale) {
 
 	Init(world, pos, scale);
+	m_contact = false;
 }
 
 Player::Player()
 {
+
 
 }
 
@@ -19,7 +21,7 @@ Player::~Player()
 void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 {
 	//Initiate the players bounding box
-
+	m_contact = false;
 	//Load player MESH
 
 	m_playerPrefab = PrefabManager::Instantiate("Player");
@@ -45,6 +47,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	filter.maskBits = BOUNDARY;
 	GetBox().getFixture()->SetFilterData(filter);
 
+	GetBox().getBody()->SetUserData(this);
 
 	//Set fixture 
 
@@ -173,3 +176,10 @@ uint16 Player::GetMaskBits() {
 
 	return m_fixture.filter.maskBits;
 }
+
+//void Player::StartContact() {
+//	m_contact = true;
+//}
+//void Player::EndContact() {
+//	m_contact = false;
+//}

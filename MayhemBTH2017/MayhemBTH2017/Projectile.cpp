@@ -23,6 +23,7 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	
 
 	m_box.initDynamic(world, pos, scale);
+	m_box.getBody()->SetUserData(this);
 	m_box.getFixture()->SetRestitution(restitution);
 	m_box.getFixture()->SetFriction(friction);
 	m_box.getFixture()->SetDensity(density);
@@ -88,7 +89,7 @@ void Projectile::Update()
 
 	glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
 	
-	m_bulletSprite.update(glm::vec2(position.x, position.y), glm::vec2(m_bulletScale));
+	//m_bulletSprite.update(glm::vec2(position.x, position.y), glm::vec2(m_bulletScale));
 
 	m_prefab->SetPosition(position);
 	m_prefab->SetRotation(0,0, m_rotationUpdate * 15);
