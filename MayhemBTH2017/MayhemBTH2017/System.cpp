@@ -7,7 +7,6 @@
 #include "PrefabManager.h"
 #include "GamePhysics.h"
 
-
 System::System()
 {
 	Init();
@@ -22,6 +21,7 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
+
 	LevelEditor l;
 	MenuSystem m;
 	glDepthFunc(GL_LESS);
@@ -38,10 +38,15 @@ void System::Run()
 	m.Init();
 	float counter = 0;
 
-	Prefab * pre = PrefabManager::Instantiate("BajsPowerUp");
+
+	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
 	GamePhysics physics;
-	physics.EnterWorld();
+
+	ParticleSystem p(".\\Assets\\GLSL\\GeometryPass", glm::vec3(0, 0, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
+
+	TextureHandler teximp;
+	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
 	while (isRunning)
 	{
@@ -50,10 +55,22 @@ void System::Run()
 
 		m_inputManager->Update();
 
+		//	pre->Render(cam);
+
+
+		//p.UpdateParticles();
+		//texture.Bind(1);
+		//glEnable(GL_BLEND);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		//glDepthMask(GL_FALSE);
+		//p.RenderTransformed(1);
+		//glDisable(GL_BLEND);
+		//glDepthMask(TRUE);
 
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
+			
 			break;
 		case GameState::MAIN_MENU:
 			m.Update();
@@ -78,7 +95,7 @@ void System::Run()
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
-		SDL_Delay(40);
+		SDL_Delay(10);
 		//	counter += m_timeManager->GetDeltaTime();
 	}
 }
