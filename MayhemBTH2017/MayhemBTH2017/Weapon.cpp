@@ -84,10 +84,11 @@ Projectile * Weapon::ReuseLast()
 void Weapon::Render(Camera camera)
 {
 	Transform transform;
-	if (!(m_projectiles.empty())) {
-		m_projectiles[0]->GetBulletSprite().Bind();
-		m_projectiles[0]->GetBulletSprite().Update(transform, camera);
-	}
+	
+	m_projectiles[0]->GetBulletSprite().Bind();
+	m_projectiles[0]->GetBulletSprite().Update(transform, camera);
+	
+
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
 		m_projectiles[i]->Update();

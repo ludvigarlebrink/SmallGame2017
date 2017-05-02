@@ -39,17 +39,17 @@ void System::Run()
 
 	Prefab * pre = PrefabManager::Instantiate("BajsPowerUp");
 	Camera cam;
-//	GamePhysics physics;
-//	physics.EnterWorld();
+	GamePhysics physics;
+	physics.EnterWorld();
 
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
-	
+
 		m_inputManager->Update();
 
-		pre->Render(cam);
+		//pre->Render(cam);
 
 
 		switch (m_stateManager->GetCurrentState())
@@ -57,15 +57,15 @@ void System::Run()
 		case GameState::START:
 			break;
 		case GameState::MAIN_MENU:
-	//		m.Update();
+			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
-//			l.Update();
+			l.Update();
 			break;
 		case GameState::GAME:
 
-	//		physics.Update();
-	//		physics.Render(camera);
+			physics.Update();
+			physics.Render(camera);
 			break;
 		case GameState::EXIT:
 			isRunning = false;
@@ -80,7 +80,7 @@ void System::Run()
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
 		SDL_Delay(40);
-	//	counter += m_timeManager->GetDeltaTime();
+		//	counter += m_timeManager->GetDeltaTime();
 	}
 }
 

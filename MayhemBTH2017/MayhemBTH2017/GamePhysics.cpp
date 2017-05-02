@@ -72,13 +72,13 @@ void GamePhysics::Update()
 	
 	m_player.Update();
 
-	m_weapon.Update(m_player.GetPrefab()->GetPosition() + glm::vec3(5, 5, 0), b2Vec2(1.0, 1.0));
+	m_weapon.Update(m_player.GetPrefab()->GetPosition() + glm::vec3(5, 5, 0));
 
 	if (InputManager::Get()->GetButtonHeld(CONTROLLER_BUTTON_Y))
 	{
 		if (m_weapon.FireRate(0.1f))
 		{
-			m_weapon.Shoot(b2Vec2(1000, 1000), m_world.get(), glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
+			m_weapon.FireProjectile(b2Vec2(1000, 1000), m_world.get(), glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
 		}
 	}
 
