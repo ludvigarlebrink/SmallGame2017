@@ -19,7 +19,7 @@ void GamePhysics::EnterWorld()
 
 	//Get deltatime
 	m_time = TimeManager::Get();
-	b2Vec2 gravity(0.0f, -9.81f);
+	b2Vec2 gravity(0.0f, -1.81f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
@@ -79,7 +79,7 @@ void GamePhysics::Update()
 
 		}
 
-		m_world->Step(1.0f / 5.0f, 6, 2);
+		m_world->Step(1.0f / 10.0f, 6, 2);
 
 		for (b2Contact* contact = m_world->GetContactList(); contact; contact = contact->GetNext())
 		{
@@ -109,7 +109,7 @@ void GamePhysics::Update()
 			}
 		}
 
-		m_world->Step(1.0f / 5.0f, 6, 2); }
+		m_world->Step(1.0f / 10.0f, 6, 2); }
 		break;
 	case false:
 		std::cout << "LOADING" << std::endl;
