@@ -25,7 +25,11 @@ void Prefab::Render(Camera & cam)
 		return;
 	}
 
+
 	glUseProgram(m_shaderProgram);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_albedoID);
 
 	glUniformMatrix4fv(m_uniforms[M], 1, GL_FALSE, &m_tx[SPACE_LOCAL].GetModelMatrix()[0][0]);
 	glUniformMatrix4fv(m_uniforms[V], 1, GL_FALSE, &cam.GetView()[0][0]);
@@ -33,8 +37,10 @@ void Prefab::Render(Camera & cam)
 	
 	if (m_hasAnimation)
 	{
-		m_animController->Update(m_uniforms[JOINTS]);
+		m_animController->QuickUpdate(m_uniforms[JOINTS]);
 	}
+
+	glUniform1i(m_uniforms[ALBEDO_MAP], 0);
 
 	m_mesh->Render();
 
@@ -50,11 +56,12 @@ void Prefab::Create()
 	}
 
 	m_tx[SPACE_LOCAL].SetScale(glm::vec3(4.0f, 4.0f, 4.0f));
-	m_tx[SPACE_LOCAL].SetPosition(glm::vec3(0.0f, 0.0f, 15.0f));
+	m_tx[SPACE_LOCAL].SetPosition(glm::vec3(0.0f, 0.0f, 20.0f));
 	m_tx[SPACE_LOCAL].SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
 
-	std::string * shaders = new std::string[2];
-	uint32_t * types = new uint32_t[2];
+
+	std::string shaders[2];
+	uint32_t types[2];
 
 	if (m_animController != nullptr)
 	{
@@ -82,8 +89,6 @@ void Prefab::Create()
 
 	m_shaderProgram = ShaderManager::CreateAndAttachShaders(m_shaderProg, shaders, types, 2);
 
-	delete[] shaders;
-	delete[] types;
 
 	glBindAttribLocation(m_shaderProgram, 0, "Position");
 	glBindAttribLocation(m_shaderProgram, 1, "Normal");
@@ -105,6 +110,8 @@ void Prefab::Create()
 	{
 		m_uniforms[JOINTS] = glGetUniformLocation(m_shaderProgram, "Joints");
 	}
+
+	m_uniforms[ALBEDO_MAP] = glGetUniformLocation(m_shaderProgram, "AlbedoMap");
 
 	m_hasBeenCreated = true;
 }
@@ -282,6 +289,11 @@ void Prefab::SetShaderProgram(const char * programName)
 void Prefab::SetMaterial(Material * material)
 {
 	m_material = material;
+}
+
+void Prefab::SetAlbedoID(GLuint id)
+{
+	m_albedoID = id;
 }
 
 

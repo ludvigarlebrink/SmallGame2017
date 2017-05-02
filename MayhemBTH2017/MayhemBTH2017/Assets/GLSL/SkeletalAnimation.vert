@@ -7,6 +7,7 @@ layout(location = 3) in vec4 JointIndex;
 layout(location = 4) in vec4 JointWeight;
 
 out vec3 Normal1;
+out vec3 TexCoords1;
 
 uniform mat4 M;
 uniform mat4 V;
@@ -44,6 +45,7 @@ void main()
 
 	newNormal = normalize(newNormal);
 	Normal1 = newNormal.xyz;
+	TexCoords1 = TexCoordsAlpha;
 
 	gl_Position = P * V * M * vec4(newPos.xyz, 1.0);
 }

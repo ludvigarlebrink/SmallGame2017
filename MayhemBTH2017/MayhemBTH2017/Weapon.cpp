@@ -67,10 +67,10 @@ void Weapon::Render(Camera camera)
 		m_projectiles[i]->Update();
 		m_projectiles[i]->Render(camera);
 		glUseProgram(0);
-		m_prefabGun->Update();
-		m_prefabGun->Render(camera);
-		glUseProgram(0);
 	}
+	m_prefabGun->Update();
+	m_prefabGun->Render(camera);
+	glUseProgram(0);
 }
 
 void Weapon::Shoot(b2Vec2 force, b2World * world, glm::vec3 playerPos)

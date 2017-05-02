@@ -21,7 +21,6 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-
 	LevelEditor l;
 	MenuSystem m;
 	glDepthFunc(GL_LESS);
@@ -38,7 +37,7 @@ void System::Run()
 	m.Init();
 	float counter = 0;
 
-	Prefab * pre = PrefabManager::Instantiate("");
+	Prefab * pre = PrefabManager::Instantiate("BajsPowerUp");
 	Camera cam;
 	GamePhysics physics;
 	physics.EnterWorld();
@@ -47,10 +46,10 @@ void System::Run()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
-	
+
 		m_inputManager->Update();
 
-	//	pre->Render(cam);
+		//pre->Render(cam);
 
 
 		switch (m_stateManager->GetCurrentState())
@@ -80,8 +79,8 @@ void System::Run()
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
-		SDL_Delay(10);
-	//	counter += m_timeManager->GetDeltaTime();
+		SDL_Delay(40);
+		//	counter += m_timeManager->GetDeltaTime();
 	}
 }
 
