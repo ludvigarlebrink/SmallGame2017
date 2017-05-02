@@ -43,7 +43,7 @@ public:
 private:
 	static GLuint SetShader(std::string shader, uint32_t shaderType);
 	static std::string LoadShader(const std::string& filename);
-	static GLuint CreateShader(const std::string& textfile, GLenum shaderType);
+	static GLuint CreateShader(std::string& textfile, GLenum shaderType);
 	static void Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg);
 
 

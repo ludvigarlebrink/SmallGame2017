@@ -11,18 +11,20 @@ public:
 	//::.. CONSTRUCTORS/DESTRUCTOR ..:://
 	Weapon();
 	Weapon(Prefab * gun, Prefab * projectile);
+	Weapon(Prefab * gun);
 	virtual ~Weapon();
 
 	void SetProjectileType(float restitution, float friction, float damping,
-		float density, float fireRate, int clearRate);
-
+		float density, float fireRate, int life);
+	void Bullet();
 	Projectile * ReuseLast();
 	void Render(Camera camera);
-	void Update(glm::vec3 playerPos, b2Vec2 force);
+	void Update(glm::vec3 playerPos);
 	void DeleteProjectile();
 
 	//::.. SET FUNTIONS ..:://
-	void Shoot(b2Vec2 force, b2World * world, glm::vec3 playerPos);
+	void FireProjectile(b2Vec2 force, b2World * world, glm::vec3 playerPos);
+	void FireGun(b2Vec2 force, b2World * world);
 
 	//::.. GET FUNTIONS ..:://
 
@@ -33,16 +35,15 @@ private:
 	Prefab*					m_prefabProjectile;
 	std::vector<Projectile*>m_projectiles;
 
-	float m_restitution;
-	float m_friction; 
-	float m_damping;
-	float m_density; 
-	float m_fireRate;
-	float m_time;
-	float m_clearTime;
-	int	  m_projectileCounter;
-	int   m_clearRate;
-	unsigned int m_counter;
+	GLfloat m_restitution;
+	GLfloat m_friction; 
+	GLfloat m_damping;
+	GLfloat m_density; 
+	GLfloat m_fireRate;
+	GLfloat m_time;
+	GLfloat m_lifetime;
+	GLint	m_projectileCounter;
+	GLint	m_life;
 
 };
 

@@ -28,7 +28,10 @@ public:
 	int GetLife();
 	Prefab* GetPrefab();
 	Box GetBox();
-
+	Sprite GetBulletSprite();
+	void StartContact();
+	void EndContact();
+	bool IsBullet();
 	//::.. OTHER FUNCTIONS ..:://
 	void Update();
 	void Render(Camera camera);
@@ -45,6 +48,7 @@ private:
 	GLfloat m_rotationUpdate;
 	Sprite m_bulletSprite;
 	GLfloat m_bulletScale;
+	bool m_contact;
 	bool m_isBullet;
 	
 	enum _entityCategory {

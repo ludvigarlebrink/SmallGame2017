@@ -147,7 +147,9 @@
     </ClCompile>
     <ClCompile Include="AntiAliasing.cpp" />
     <ClCompile Include="ARenderable.cpp" />
-    <ClCompile Include="AShader.cpp" />
+    <ClCompile Include="AShader.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="MenuCredits.cpp" />
@@ -215,13 +217,16 @@
     <ClInclude Include="Box.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="GamePhysics.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Menu.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="AntiAliasing.h" />
     <ClInclude Include="ARenderable.h" />
-    <ClInclude Include="AShader.h" />
+    <ClInclude Include="AShader.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="MenuCredits.h" />
@@ -296,6 +301,7 @@
     <None Include="Assets\GLSL\SharpnelShader.vert" />
     <None Include="Assets\GLSL\SkeletalAnimation.frag" />
     <None Include="Assets\GLSL\SkeletalAnimation.vert" />
+    <None Include="Assets\GLSL\ToonShader.frag" />
     <None Include="Assets\Levels\ExportTestLOL.mrlevel" />
     <None Include="Assets\Levels\Register.mrlevelreg" />
     <None Include="Assets\Prefabs\T.mr" />

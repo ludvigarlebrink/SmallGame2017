@@ -31,6 +31,8 @@ public:
 	void SetMaskBits(uint16 MASK);
 	void SetCategoryBits(uint16 CATEGORY);
 	b2Filter* GetFilter();
+	void StartContact();
+	void EndContact();
 
 	std::vector<Box> GetBoxes();
 
@@ -50,7 +52,7 @@ private:
 	Transform	m_transform;
 	Camera		m_camera;
 	Level		m_level;
-	
+	bool m_contact;
 	Box m_gameFloor;
 	std::vector<Box>	m_boxes;
 

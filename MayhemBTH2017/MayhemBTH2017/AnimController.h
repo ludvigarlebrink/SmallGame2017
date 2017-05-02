@@ -33,6 +33,10 @@ private:
 	std::vector<AnimClip *>	m_clips;
 
 	AnimSkeleton *			m_skel;
+	KeyFrame *				m_keyUp;
+	KeyFrame *				m_keyBase;
+	KeyFrame *				m_keyDown;
+	KeyFrame *				m_keyDown2;
 
 
 };

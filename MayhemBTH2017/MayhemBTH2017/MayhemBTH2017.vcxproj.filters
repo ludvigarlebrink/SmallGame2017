@@ -194,9 +194,6 @@
     <ClCompile Include="PrefabManager.cpp">
       <Filter>Engine\Resources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -221,6 +218,19 @@
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="ImportTester.cpp" />
+    <ClCompile Include="Collider2D.cpp" />
+    <ClCompile Include="GamePhysics.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -351,9 +361,6 @@
     <ClInclude Include="PrefabManager.h">
       <Filter>Engine\Resources\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -377,6 +384,15 @@
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="GamePhysics.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -442,5 +458,8 @@
     <None Include="Assets\GLSL\LevelShader.frag" />
     <None Include="Assets\GLSL\LevelShader.vert" />
     <None Include="DebugShader.frag" />
+    <None Include="Assets\GLSL\ToonShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>
