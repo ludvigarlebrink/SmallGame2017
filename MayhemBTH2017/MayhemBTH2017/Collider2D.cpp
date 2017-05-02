@@ -38,19 +38,13 @@ void Collider2D::DrawCollider(Camera camera)
 	m_mesh.Render();
 	glUseProgram(0);
 	m_megaTexture.Bind(0);
-	m_shader.Bind();
-	m_shader.SendTexture(0, "t", m_uv);
 	m_level.Render(camera);
+	//m_shader.SendTexture(0, "t", m_uv);
 }
 
 void Collider2D::CreateBoundingBoxes(b2World* world) {
 
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
-	m_shader.Init(".\\Assets\\GLSL\\LevelShader", false, false);
-	m_uv.x = 32.0 / 512.0;
-	m_uv.y = 0.0 / 512.0;
-	m_uv.z = 0 / 512.0;
-	m_uv.w = 0 / 512.0;
 	m_contact = false;
 	m_imp.Import(m_level, 1);
 	
@@ -125,7 +119,7 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 		}
 	}
 
-	//m_mesh.Load(m_vertices, length);
+	m_mesh.Load(m_vertices, length);
 
 	
 }

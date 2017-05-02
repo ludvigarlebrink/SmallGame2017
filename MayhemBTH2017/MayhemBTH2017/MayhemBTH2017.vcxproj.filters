@@ -492,6 +492,12 @@
     <None Include="Assets\GLSL\LevelMarkerShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
+    <None Include="Assets\GLSL\GameLevelShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\GameLevelShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\TextureTestD.TGA">

@@ -60,9 +60,9 @@ void LevelHandler::Import(Level & level, uint32_t id)
 	
 	std::ifstream file(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
 	file.ignore(sizeof(uint32_t));
-	for (int i = 0; i < m_nrOfMaps[0]; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		file.ignore(m_size);
+		file.ignore(4);
 	}
 	file.read(reinterpret_cast<char*>(isOccupied), sizeof(bool) * nrOfBlocks);
 	file.read(reinterpret_cast<char*>(isSpawn), sizeof(bool) * nrOfBlocks);

@@ -289,6 +289,8 @@
     <None Include="Assets\GLSL\DebugGreen.frag" />
     <None Include="Assets\GLSL\DebugGreen.vert" />
     <None Include="Assets\GLSL\DebugShader.vert" />
+    <None Include="Assets\GLSL\GameLevelShader.frag" />
+    <None Include="Assets\GLSL\GameLevelShader.vert" />
     <None Include="Assets\GLSL\LevelMarkerShader.frag" />
     <None Include="Assets\GLSL\LevelMarkerShader.vert" />
     <None Include="Assets\GLSL\LevelShader.frag" />
