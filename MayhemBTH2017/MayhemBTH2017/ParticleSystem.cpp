@@ -203,12 +203,13 @@ void ParticleSystem::UpdateParticles() {
 	//glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(info), &info);
 	//std::cout << info[0] << ". " << info[1] << ", " << info[2] << ", " << info[3] << ", " << info[4] << ", " << info[5] << std::endl;
 
-	glUseProgram(m_drawShader.GetProgramID());
+	//glUseProgram(m_drawShader.GetProgramID());
 	
-	m_camera.SetRotation(0.0f, 0.0f);
-	m_camera.SetPosition(glm::vec3(((48 / 2) - 0.5f), ((54 / 2) + 0.5f), -60));
-	
-	m_drawShader.Update(tmpTransform, m_camera);
+	//m_camera.SetRotation(0.0f, 0.0f);
+	////m_camera.SetPosition(glm::vec3(((48 / 2) - 0.5f), ((54 / 2) + 0.5f), -60));
+	//m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+
+	//m_drawShader.Update(tmpTransform, m_camera);
 	
 	//Clear depth buffer for the particles
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

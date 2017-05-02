@@ -38,48 +38,57 @@ void System::Run()
 	m.Init();
 	float counter = 0;
 
+
 	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
 	GamePhysics physics;
-	physics.EnterWorld();
 
 	ParticleSystem p(".\\Assets\\GLSL\\GeometryPass", glm::vec3(0, 0, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
-	
+
+	TextureHandler teximp;
+	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
-	
+
 		m_inputManager->Update();
 
-	//	pre->Render(cam);
+		//	pre->Render(cam);
 
-		p.Bind();
-		p.Update(transform, camera);
-		p.UpdateParticles();
-		p.RenderTransformed(1);
-		//switch (m_stateManager->GetCurrentState())
-		//{
-		//case GameState::START:
-		//	break;
-		//case GameState::MAIN_MENU:
-		//	m.Update();
-		//	break;
-		//case GameState::LEVEL_EDITOR:
-		//	l.Update();
-		//	break;
-		//case GameState::GAME:
 
-		//	physics.Update();
-		//	physics.Render(camera);
-		//	break;
-		//case GameState::EXIT:
-		//	isRunning = false;
-		//	break;
-		//default:
-		//	break;
-		//}
+		//p.UpdateParticles();
+		//texture.Bind(1);
+		//glEnable(GL_BLEND);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		//glDepthMask(GL_FALSE);
+		//p.RenderTransformed(1);
+		//glDisable(GL_BLEND);
+		//glDepthMask(TRUE);
+
+		switch (m_stateManager->GetCurrentState())
+		{
+		case GameState::START:
+			
+			break;
+		case GameState::MAIN_MENU:
+			m.Update();
+			break;
+		case GameState::LEVEL_EDITOR:
+			l.Update();
+			break;
+		case GameState::GAME:
+
+			physics.Update();
+			physics.Render(camera);
+			break;
+		case GameState::EXIT:
+			isRunning = false;
+			break;
+		default:
+			break;
+		}
 
 		m_inputManager->Reset();
 
@@ -87,7 +96,7 @@ void System::Run()
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
 		SDL_Delay(10);
-	//	counter += m_timeManager->GetDeltaTime();
+		//	counter += m_timeManager->GetDeltaTime();
 	}
 }
 

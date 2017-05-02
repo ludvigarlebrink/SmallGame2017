@@ -29,6 +29,7 @@ private:
 	TimeManager* m_time;
 	GLfloat m_jumpTimer=0.0f;
 	bool m_isMidAir;
+	bool m_loadWorld;
 	GLfloat m_playerScaleX;
 	GLfloat m_playerScaleY;
 	GLfloat m_playerPosX;

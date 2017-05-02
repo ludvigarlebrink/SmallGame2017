@@ -12,6 +12,7 @@ public:
 	//::.. CONSTRUCTORS/DESTRUCTOR ..:://
 	Weapon();
 	Weapon(Prefab * gun, Prefab * projectile);
+	Weapon(Prefab * gun);
 	virtual ~Weapon();
 
 	void SetProjectileType(float restitution, float friction, float damping,
@@ -24,7 +25,7 @@ public:
 	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf);
 	//::.. SET FUNTIONS ..:://
 	void Shoot(b2Vec2 force, b2World * world, glm::vec3 playerPos);
-
+	void RenderParticles(Camera camera);
 	//::.. GET FUNTIONS ..:://
 
 	bool FireRate(float rate);
@@ -43,6 +44,7 @@ private:
 	float m_clearTime;
 	int	  m_projectileCounter;
 	int   m_clearRate;
+	bool m_isBullet;
 	unsigned int m_counter;
 
 };
