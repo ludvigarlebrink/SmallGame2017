@@ -25,6 +25,12 @@ void GamePhysics::EnterWorld()
 
 	m_floorCollider.CreateBoundingBoxes(m_world.get());
 
+	//at global scope
+	//m_contactListener;
+
+	//in FooTest constructor
+	//m_world->SetContactListener(&m_contactListener);
+
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
 	//PLAYER

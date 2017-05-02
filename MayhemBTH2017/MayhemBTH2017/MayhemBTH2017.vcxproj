@@ -153,6 +153,7 @@
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="MenuCredits.cpp" />
     <ClCompile Include="MenuVideo.cpp" />
+    <ClCompile Include="MyContactListener.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerPrefab.cpp" />
     <ClCompile Include="Prefab.cpp">
@@ -229,6 +230,7 @@
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="MenuCredits.h" />
     <ClInclude Include="MenuVideo.h" />
+    <ClInclude Include="MyContactListener.h" />
     <ClInclude Include="PlayerPrefab.h" />
     <ClInclude Include="Prefab.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

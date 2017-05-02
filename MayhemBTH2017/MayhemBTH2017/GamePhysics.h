@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Weapon.h"
 #include "Contact.h"
+#include "MyContactListener.h"
 
 
 class GamePhysics
@@ -48,6 +49,8 @@ private:
 	Sprite		m_shot;
 	//Temporary
 	b2FixtureDef powerUpFixture;
+
+	//MyContactListener m_contactListener;
 
 	Weapon m_weapon;
 

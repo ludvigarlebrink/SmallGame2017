@@ -241,6 +241,7 @@
     <ClCompile Include="PlayerPrefab.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="MyContactListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -406,6 +407,7 @@
     <ClInclude Include="PlayerPrefab.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="MyContactListener.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
