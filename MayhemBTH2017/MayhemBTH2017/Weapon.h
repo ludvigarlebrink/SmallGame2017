@@ -35,9 +35,9 @@ private:
 	std::vector<Projectile*>m_projectiles;
 
 	float m_restitution;
-	float m_friction; 
+	float m_friction;
 	float m_damping;
-	float m_density; 
+	float m_density;
 	float m_fireRate;
 	float m_time;
 	float m_clearTime;

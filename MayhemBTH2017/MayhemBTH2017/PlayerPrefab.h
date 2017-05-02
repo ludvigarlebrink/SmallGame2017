@@ -12,10 +12,17 @@
 class PlayerPrefab
 {
 public:
+	struct PlayerAnim
+	{
+		bool fullBody;
+	};
+
 	enum PlayerAnimState
 	{
-		WALK,
-		RUN,
+		RUN = 0,
+		AIR,
+		LAND,
+		DEATH_SHOTGUN,
 	};
 
 	//::.. CONSTRUCTORS ..:://
@@ -31,6 +38,7 @@ public:
 
 	//::.. SET FUNCTIONS ..:://
 	void SetWeapon(Prefab * weapon);
+	void SetAnimState(uint32_t playerAnimState);
 
 private:
 	void Init(Prefab * weapon);

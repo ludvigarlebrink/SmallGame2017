@@ -30,8 +30,18 @@ void PlayerPrefab::Update(float x, float y)
 	AnimController * anim = m_player->GetAnimController();
 	AnimSkeleton * skel = anim->GetSkeleton();
 
+	if (x > 0)
+	{
+		m_player->SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
+	}
+	else if( x < 0.3f)
+	{
+		m_player->SetRotation(glm::vec3(0.0f, -90.0f, 0.0f));
 
-	if (y < 0)
+	}
+
+
+	if (y < 0.3f)
 	{
 		for (uint32_t i = 0; i < skel->GetNumJoints(); i++)
 		{
@@ -102,6 +112,10 @@ void PlayerPrefab::SetWeapon(Prefab * weapon)
 	m_weapon = weapon;
 }
 
+void PlayerPrefab::SetAnimState(uint32_t playerAnimState)
+{
+}
+
 
 //::.. HELP FUNCTIONS ..:://
 void PlayerPrefab::Init(Prefab * weapon)
@@ -109,6 +123,8 @@ void PlayerPrefab::Init(Prefab * weapon)
 	m_weapon = weapon;
 
 	m_player = PrefabManager::Instantiate("");
+
+	m_player->SetScale(glm::vec3(1.3f));
 
 	AnimController * anim = m_player->GetAnimController();
 	AnimSkeleton * skel = anim->GetSkeleton();

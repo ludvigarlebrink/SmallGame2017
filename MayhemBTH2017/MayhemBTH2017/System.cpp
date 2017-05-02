@@ -7,6 +7,7 @@
 #include "PrefabManager.h"
 #include "GamePhysics.h"
 
+
 System::System()
 {
 	Init();
@@ -48,8 +49,6 @@ void System::Run()
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 
 		m_inputManager->Update();
-
-		//pre->Render(cam);
 
 
 		switch (m_stateManager->GetCurrentState())
