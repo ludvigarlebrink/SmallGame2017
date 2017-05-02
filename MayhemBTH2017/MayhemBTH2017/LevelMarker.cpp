@@ -187,25 +187,23 @@ void LevelMarker::Render(Camera & camera)
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
 	{
-
-		m_uv.x = (32 * 3 )/ 512.0;
-		m_uv.y = 0.0 / 512.0;
-		m_uv.z =  32/ 512.0;
-		m_uv.w = 32 / 512.0;
-
+		m_uv.x++;
 	}
 	
 	//Left stick
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
 	{
-		m_uv.x = 64 / 512.0;
-		m_uv.y = 0.0 / 512.0;
-		m_uv.z = 32 / 512.0;
-		m_uv.w = 32 / 512.0;
+		m_uv.x--;
 		
 	}
+	glm::vec4 markerLoc;
+	markerLoc.x = (32 * m_uv.x) / 512.0;
+	markerLoc.y = (32 * m_uv.y) / 512.0;
+	markerLoc.z = 32 / 512.0;
+	markerLoc.w = 32 / 512.0;
 
-	m_levelShader.SendTexture(0, "t", m_uv);
+
+	m_levelShader.SendTexture(0, "t", markerLoc);
 
 	m_levelShader.Bind();
 

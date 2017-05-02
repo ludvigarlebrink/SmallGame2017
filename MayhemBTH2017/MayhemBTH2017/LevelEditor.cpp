@@ -34,7 +34,7 @@ void LevelEditor::Update()
 		ButtonInput();
 		m_levelMarker.Update(m_camera);
 		m_level.Render(m_camera);
-		m_levelGUI.Render();
+		//m_levelGUI.Render();
 		break;
 	case MENU:
 		break;
@@ -93,7 +93,7 @@ void LevelEditor::ButtonInput()
 	//Left stick
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
 	{
-		m_u.x = 0;
+		m_u.x--;
 	}
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 	{

@@ -232,6 +232,15 @@
     <ClCompile Include="LevelTexture.cpp">
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerPrefab.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -388,6 +397,15 @@
     <ClInclude Include="LevelTexture.h">
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPrefab.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -461,6 +479,12 @@
     </None>
     <None Include="Assets\Levels\NewFormat.mrlevel">
       <Filter>Engine\LevelEditor</Filter>
+    </None>
+    <None Include="Assets\GLSL\LevelMarkerShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\LevelMarkerShader.vert">
+      <Filter>Assets\GLSL</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
