@@ -31,16 +31,15 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 
 	//SET BOUNDING BOX SIZE 
 	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_playerPrefab->GetPlayerPrefab()->GetScale().x + 1, m_playerPrefab->GetPlayerPrefab()->GetScale().y*m_playerPrefab->GetPlayerPrefab()->GetMesh()->GetHeight()));
-
 	//sprite for size of bouding box
 	m_playerSprite.createSprite(glm::vec2(0), glm::vec2(20));
 	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
-	GetBox().getFixture()->SetDensity(0.5);
+	GetBox().getFixture()->SetDensity(5.0);
 	GetBox().getFixture()->SetFriction(1.0);
-	GetBox().getFixture()->SetRestitution(0.5);
+	GetBox().getFixture()->SetRestitution(0.0);
 	GetBox().getBody()->SetLinearDamping(0.4);
 	
 	b2Filter filter;
@@ -80,12 +79,12 @@ void Player::Update() {
 	//	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
 		if (m_isMidAir) {
 
-			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-400)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-100)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 
 		}
 		if (!m_isMidAir ) {
 
-			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-800)*TimeManager::Get()->GetDeltaTime(), 0));
+			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-200)*TimeManager::Get()->GetDeltaTime(), 0));
 		}
 
 
@@ -102,7 +101,7 @@ void Player::Update() {
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 1200), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 100), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 	
 
@@ -118,7 +117,7 @@ void Player::Update() {
 	{
 		std::cout << "I JUMP TWICE HAHA" << std::endl;
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 1000), GetBox().getBody()->GetWorldCenter(), 1);
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 100), GetBox().getBody()->GetWorldCenter(), 1);
 
 	}
 

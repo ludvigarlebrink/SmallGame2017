@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Weapon.h"
 #include "Contact.h"
+#include "MyContactListener.h"
 
 
 class GamePhysics
@@ -30,6 +31,7 @@ private:
 	TimeManager* m_time;
 	GLfloat m_jumpTimer=0.0f;
 	bool m_isMidAir;
+	bool m_loadWorld;
 	GLfloat m_playerScaleX;
 	GLfloat m_playerScaleY;
 	GLfloat m_playerPosX;
@@ -48,6 +50,8 @@ private:
 	Sprite		m_shot;
 	//Temporary
 	b2FixtureDef powerUpFixture;
+
+	//MyContactListener m_contactListener;
 
 	Weapon m_weapon;
 
