@@ -242,6 +242,9 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="MyContactListener.cpp" />
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -408,6 +411,9 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="MyContactListener.h" />
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

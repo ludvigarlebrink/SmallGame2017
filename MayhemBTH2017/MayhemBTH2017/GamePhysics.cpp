@@ -51,11 +51,11 @@ void GamePhysics::EnterWorld()
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapon = Weapon(gun);
+	m_weapon = Weapon(gun, projectile);
 
 
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
-	m_weapon.SetProjectileType(0.3f, 1.0f, 0.0f, 0.01f, 5.0f, 2);
+	m_weapon.SetProjectileType(0.3f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
 
 
 	///////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ void GamePhysics::Update()
 
 		}
 
-		m_world->Step(1.0f / 60.0f, 6, 2);
+		m_world->Step(1.0f / 5.0f, 6, 2);
 
 		for (b2Contact* contact = m_world->GetContactList(); contact; contact = contact->GetNext())
 		{
@@ -101,13 +101,13 @@ void GamePhysics::Update()
 
 		if (InputManager::Get()->GetButtonHeld(CONTROLLER_BUTTON_Y))
 		{
-			if (m_weapon.FireRate(0.1f))
+			if (m_weapon.FireRate(0.2f))
 			{
 				m_weapon.Shoot(b2Vec2(1000, 1000), m_world.get(), glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
 			}
 		}
 
-		m_world->Step(1.0f / 60.0f, 6, 2); }
+		m_world->Step(1.0f / 5.0f, 6, 2); }
 		break;
 	case false:
 		std::cout << "LOADING" << std::endl;
@@ -115,10 +115,6 @@ void GamePhysics::Update()
 		break;
 		//Update player bounding box sprite position to the position of the player mesh
 	}
-
-
-
-
 }
 
 glm::vec3 GamePhysics::GetPosition() {
