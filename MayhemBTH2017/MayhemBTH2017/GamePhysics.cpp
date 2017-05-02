@@ -51,7 +51,7 @@ void GamePhysics::EnterWorld()
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapon = Weapon(gun);
+	m_weapon = Weapon(gun, projectile);
 
 
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
