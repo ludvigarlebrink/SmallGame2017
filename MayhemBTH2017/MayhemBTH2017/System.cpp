@@ -6,6 +6,7 @@
 #include "Prefab.h"
 #include "PrefabManager.h"
 #include "GamePhysics.h"
+#include "PlayerPrefab.h"
 
 System::System()
 {
@@ -37,10 +38,12 @@ void System::Run()
 	m.Init();
 	float counter = 0;
 
-	Prefab * pre = PrefabManager::Instantiate("BajsPowerUp");
+//	Prefab * pre = PrefabManager::Instantiate("BajsPowerUp");
 	Camera cam;
 //	GamePhysics physics;
 //	physics.EnterWorld();
+
+	PlayerPrefab * pre = new PlayerPrefab();
 
 	while (isRunning)
 	{
@@ -49,6 +52,7 @@ void System::Run()
 	
 		m_inputManager->Update();
 
+		pre->Update(0, 0);
 		pre->Render(cam);
 
 
@@ -79,7 +83,7 @@ void System::Run()
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
-		SDL_Delay(40);
+		SDL_Delay(20);
 	//	counter += m_timeManager->GetDeltaTime();
 	}
 }

@@ -31,7 +31,7 @@ void AnimClip::Update()
 {
 
 	m_currKeyI++; // = //static_cast<int32_t>(m_currKey);
-	if (m_currKeyI > 20)
+	if (m_currKeyI > 29)
 	{
 		m_currKeyI = 0;
 	}

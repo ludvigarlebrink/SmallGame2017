@@ -231,6 +231,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerPrefab.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -393,6 +394,7 @@
     <ClInclude Include="Projectile.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerPrefab.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

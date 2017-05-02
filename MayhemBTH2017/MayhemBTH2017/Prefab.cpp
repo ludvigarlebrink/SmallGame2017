@@ -37,7 +37,7 @@ void Prefab::Render(Camera & cam)
 	
 	if (m_hasAnimation)
 	{
-		m_animController->Update(m_uniforms[JOINTS]);
+		m_animController->QuickUpdate(m_uniforms[JOINTS]);
 	}
 
 	glUniform1i(m_uniforms[ALBEDO_MAP], 0);

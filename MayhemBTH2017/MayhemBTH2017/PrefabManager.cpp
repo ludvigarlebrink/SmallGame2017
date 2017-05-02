@@ -34,7 +34,7 @@ Prefab * PrefabManager::Instantiate(const char * name)
 	const char* filepath = ".\\Assets\\Prefabs\\super.mr";
 
 	//	m_handler->Import(filepath);
-//	MrHandler * mrHandler = new MrHandler;
+	//	MrHandler * mrHandler = new MrHandler;
 
 	MrMeshHandler * meshHandler = new MrMeshHandler;
 
@@ -92,13 +92,13 @@ Prefab * PrefabManager::Instantiate(const char * name)
 
 	// Set animations.
 	AnimClip * animClip = new AnimClip;
-	KeyFrame * key = new KeyFrame[animHandler->GetNumKeyFramedJoints()];
+	KeyFrame * key = new KeyFrame[30];
 
-	for (uint32_t i = 0; i < animHandler->GetNumKeyFramedJoints(); i++)
+	for (uint32_t i = 0; i < 30; i++)
 	{
-		key[i].localTx = new glm::mat4[skelHandler->GetNumJoints()];
+		key[i].localTx = new glm::mat4[animHandler->GetNumKeyFramedJoints()];
 
-		for (uint32_t j = 0; j < skelHandler->GetNumJoints(); j++)
+		for (uint32_t j = 0; j <  animHandler->GetNumKeyFramedJoints(); j++)
 		{
 			key[i].localTx[j] = animHandler->GetKeyFramedJoints()[j].matrix[i];
 		}
@@ -116,27 +116,6 @@ Prefab * PrefabManager::Instantiate(const char * name)
 	delete meshHandler;
 	delete skelHandler;
 	delete animHandler;
-
-	//SPECAL 1
-	MrAnimHandler animHandler1;
-//	if (animHandler1.Import(".\\Assets\\Animations\\super@base.mranim"))
-	{
-//		std::cout << "YEYE Imported" << std::endl;
-//		//animHandler->Import(".\\Assets\\Animations\\super@up.mranim");
-//		//KeyFrame * keyUp = new KeyFrame;
-//		//uint32_t hej = skelHandler->GetNumJoints();
-//		//keyUp[0].localTx = new glm::mat4[skelHandler->GetNumJoints()];
-	}
-//	else
-//	{
-//		std::cout << "Anim FAIL" << std::endl;
-//	}
-
-
-	//	for (uint32_t i = 0; i < 1; i++)
-	//	{
-	//		keyUp[0].localTx[i] = animHandler1->GetKeyFramedJoints()[0].matrix[i];
-	//	}
 
 
 	Prefab * prefab = new Prefab;

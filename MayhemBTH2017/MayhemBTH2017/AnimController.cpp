@@ -15,6 +15,11 @@ AnimController::~AnimController()
 {
 }
 
+void AnimController::QuickUpdate(GLuint locations)
+{
+	glUniformMatrix4fv(locations, m_skel->GetNumJoints(), GL_FALSE, &m_skel->GetSkinnedTx()[0][0][0]);
+}
+
 void AnimController::Update(GLuint locations)
 {
 	Transform transform;
@@ -69,19 +74,6 @@ void AnimController::Update(GLuint locations)
 	m_clips[m_currClip]->Update();
 
 	m_skel->Update(m_clips[m_currClip]->GetCurrentKeyFrame(), false, 12);
-//
-//
-
-//	m_skel->Update(m_clips[m_currClip]->GetCurrentKeyFrame(), false, 3, 3);
-//
-//	transform.SetRotation(glm::vec3(0.0f, angle - 90, -90.0f));
-//
-//	m_skel->SetJointRotation(transform, 4);
-//
-//	m_skel->Update(m_clips[m_currClip]->GetCurrentKeyFrame(), false, 5, 6);
-
-
-	
 
 	glUniformMatrix4fv(locations, m_skel->GetNumJoints(), GL_FALSE, &m_skel->GetSkinnedTx()[0][0][0]);
 }
@@ -107,6 +99,37 @@ bool AnimController::SwitchAnimAt(uint32_t index)
 void AnimController::AddAnimation(AnimClip * clip)
 {
 	m_clips.push_back(clip);
+}
+
+
+//::.. GET FUNCTIONS ..:://
+AnimSkeleton * AnimController::GetSkeleton() const
+{
+	return m_skel;
+}
+
+
+uint32_t AnimController::GetNumClips() const
+{
+	return m_clips.size();
+}
+
+
+uint32_t AnimController::GetCurrentClip() const
+{
+	return m_currClip;
+}
+
+
+AnimClip * AnimController::GetCurrentAnimClip() const
+{
+	return m_clips[m_currClip];
+}
+
+
+std::vector<AnimClip*> AnimController::GetClips() const
+{
+	return m_clips;
 }
 
 
