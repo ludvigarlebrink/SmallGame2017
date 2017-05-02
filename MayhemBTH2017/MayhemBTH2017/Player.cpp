@@ -31,7 +31,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 
 	//SET BOUNDING BOX SIZE 
 	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_playerPrefab->GetPlayerPrefab()->GetScale().x + 1, m_playerPrefab->GetPlayerPrefab()->GetScale().y*m_playerPrefab->GetPlayerPrefab()->GetMesh()->GetHeight()));
-
 	//sprite for size of bouding box
 	m_playerSprite.createSprite(glm::vec2(0), glm::vec2(20));
 	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
