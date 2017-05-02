@@ -140,10 +140,10 @@ void Player::Update() {
 void Player::Render(Camera camera) {
 
 	Transform transform;
-	m_playerSprite.Bind();
-	m_playerSprite.Update(transform, camera);
-	m_playerSprite.draw();
-	glUseProgram(0);
+	//m_playerSprite.Bind();
+	//m_playerSprite.Update(transform, camera);
+	//m_playerSprite.draw();
+//	glUseProgram(0);
 
 	m_playerPrefab->Render(camera);
 

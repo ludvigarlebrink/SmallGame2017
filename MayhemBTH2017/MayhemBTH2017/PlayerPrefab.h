@@ -56,6 +56,8 @@ private:
 
 	float		m_y;
 	float		m_x;
+
+	float		weapRotY = 0.0f;
 };
 
 
