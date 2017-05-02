@@ -42,8 +42,8 @@ void Collider2D::DrawCollider(Camera camera)
 
 void Collider2D::CreateBoundingBoxes(b2World* world) {
 
-
-	m_imp.Import(m_level);
+	uint32_t p = 1;
+	//m_imp.Import(m_level, p);
 
 	const uint32_t length = SIZE_X * SIZE_Y * 6;
 	m_vertices = (Vertex2D*)malloc(sizeof(Vertex2D) * length);

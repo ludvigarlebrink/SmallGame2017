@@ -10,6 +10,7 @@
 #include "StateManager.h"
 #include "VirtualKeyboard.h"
 #include "LevelEditorGUI.h"
+#include "LevelTexture.h"
 
 
 #include <glm.hpp>
@@ -59,6 +60,7 @@ private:
 	Camera				m_camera;
 	Timer				m_timer;
 	VirtualKeyboard		m_vk;
+	LevelTexture temp;
 };
 
 #endif // ! __LEVELEDITOR_H__

@@ -8,6 +8,7 @@ LevelEditor::LevelEditor()
 	m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
 	m_input = InputManager::Get();
 	m_stateManager = StateManager::Get();
+	m_levelHandler.Init();
 
 	m_timer.SetTimer(0.1f, true, true);
 }
@@ -21,6 +22,7 @@ LevelEditor::~LevelEditor()
 //::.. UPDATE FUNCTIONS ..:://
 void LevelEditor::Update()
 {
+
 	switch (m_state)
 	{
 	case EDIT:
@@ -30,7 +32,6 @@ void LevelEditor::Update()
 		}
 
 		ButtonInput();
-
 		m_levelMarker.Update(m_camera);
 		m_level.Render(m_camera);
 		m_levelGUI.Render();
@@ -38,10 +39,10 @@ void LevelEditor::Update()
 	case MENU:
 		break;
 	case SAVE:
+		
 		ButtonInput();
 		m_level.Render(m_camera);
-		m_vk.Render();
-
+		
 		break;
 	default:
 		break;
@@ -126,14 +127,19 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
 	{
+		std::cout << "Pressed B: " << std::endl;
 		m_levelHandler.Export(m_level);
 		m_levelHandler.ExportRegister();
+		// REMOVE
+		temp.SaveImage(".\\Assets\\Textures\\TextureTestE.TGA");
+
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
 	{
 		Reset();
-		m_levelHandler.Import(m_level);
+		uint32_t p = 1;
+		m_levelHandler.Import(m_level, p);
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
@@ -144,6 +150,7 @@ void LevelEditor::ButtonInput()
 		}
 		else
 		{
+			
 			m_state = SAVE;
 		}
 	}
