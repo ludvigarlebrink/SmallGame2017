@@ -21,7 +21,6 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-
 	LevelEditor l;
 	MenuSystem m;
 	glDepthFunc(GL_LESS);
@@ -38,10 +37,10 @@ void System::Run()
 	m.Init();
 	float counter = 0;
 
-	Prefab * pre = PrefabManager::Instantiate("");
+	Prefab * pre = PrefabManager::Instantiate("BajsPowerUp");
 	Camera cam;
-	GamePhysics physics;
-	physics.EnterWorld();
+//	GamePhysics physics;
+//	physics.EnterWorld();
 
 	while (isRunning)
 	{
@@ -50,7 +49,7 @@ void System::Run()
 	
 		m_inputManager->Update();
 
-	//	pre->Render(cam);
+		pre->Render(cam);
 
 
 		switch (m_stateManager->GetCurrentState())
@@ -58,15 +57,15 @@ void System::Run()
 		case GameState::START:
 			break;
 		case GameState::MAIN_MENU:
-			m.Update();
+	//		m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
-			l.Update();
+//			l.Update();
 			break;
 		case GameState::GAME:
 
-			physics.Update();
-			physics.Render(camera);
+	//		physics.Update();
+	//		physics.Render(camera);
 			break;
 		case GameState::EXIT:
 			isRunning = false;
@@ -80,7 +79,7 @@ void System::Run()
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
-		SDL_Delay(10);
+		SDL_Delay(40);
 	//	counter += m_timeManager->GetDeltaTime();
 	}
 }
