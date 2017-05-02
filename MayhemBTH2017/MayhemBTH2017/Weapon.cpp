@@ -127,11 +127,11 @@ void Weapon::Shoot(b2Vec2 force, b2World * world, glm::vec3 playerPos)
 	}
 	else if (m_projectiles.size() == m_clearRate)
 	{
-		if (m_projectileCounter <= m_clearRate)
+		if (m_projectileCounter >= m_clearRate)
 		{
 			m_projectileCounter = 0;
 		}
-		if (m_projectileCounter < m_clearRate)
+		if (m_projectileCounter <= m_clearRate)
 		{
 			//reuse projectile
 
@@ -150,7 +150,6 @@ void Weapon::Shoot(b2Vec2 force, b2World * world, glm::vec3 playerPos)
 
 			if (m_isBullet == true) {
 				m_projectiles[m_projectileCounter]->InitBullet(world, glm::vec2(m_prefabGun->GetPosition().x, m_prefabGun->GetPosition().y));
-				m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
 				m_projectiles[m_projectileCounter]->AddForce(force);
 
 				m_projectileCounter++;

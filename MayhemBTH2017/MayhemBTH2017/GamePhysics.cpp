@@ -19,7 +19,7 @@ void GamePhysics::EnterWorld()
 
 	//Get deltatime
 	m_time = TimeManager::Get();
-	b2Vec2 gravity(0.0f, -25.8f);
+	b2Vec2 gravity(0.0f, -9.81f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
@@ -51,7 +51,7 @@ void GamePhysics::EnterWorld()
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapon = Weapon(gun, projectile);
+	m_weapon = Weapon(gun);
 
 
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
