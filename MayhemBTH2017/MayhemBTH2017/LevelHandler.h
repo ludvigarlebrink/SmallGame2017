@@ -15,12 +15,13 @@ public:
 	virtual ~LevelHandler();
 
 	//::.. IMPORT/EXPORT ..:://
-	void Import(Level & level);
+	void Init();
+	void Import(Level & level, uint32_t id);
 	void Export(Level & level);
 	bool ImportRegister();
 	bool ExportRegister();
 
-	
+
 
 	//::.. MODIFY FUNCTIONS ..:://
 	bool AddToRegister(Level * level);
@@ -44,7 +45,12 @@ private:
 	bool								m_regHasChanged;
 	std::vector<LevelRegister>			m_register;
 	uint32_t							m_loaded;
-		
+
+private:
+	uint32_t							m_nrOfMaps[1];
+	std::string							m_names[3];
+	uint32_t							m_size;
+	uint32_t							m_mapSize;
 };
 
 #endif // ! __LEVELIMPORTER_H__

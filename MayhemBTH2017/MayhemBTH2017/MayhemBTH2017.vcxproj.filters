@@ -214,13 +214,23 @@
     </ClCompile>
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="LevelEditorGUI.cpp">
-      <Filter>Engine\LevelEditor</Filter>
+    <ClCompile Include="ImportTester.cpp">
+      <Filter>Engine\Resources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="ImportTester.cpp" />
-    <ClCompile Include="Collider2D.cpp" />
+    <ClCompile Include="LevelEditorGUI.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
     <ClCompile Include="GamePhysics.cpp">
-      <Filter>Game</Filter>
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider2D.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelTexture.cpp">
+      <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>Game</Filter>
@@ -228,10 +238,9 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="PlayerPrefab.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerPrefab.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -385,8 +394,8 @@
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="GamePhysics.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="LevelTexture.h">
+      <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>Game</Filter>
@@ -394,7 +403,9 @@
     <ClInclude Include="Projectile.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerPrefab.h" />
+    <ClInclude Include="PlayerPrefab.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -457,11 +468,28 @@
     <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
     </None>
-    <None Include="Assets\GLSL\LevelShader.frag" />
-    <None Include="Assets\GLSL\LevelShader.vert" />
-    <None Include="DebugShader.frag" />
-    <None Include="Assets\GLSL\ToonShader.frag">
+    <None Include="DebugShader.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
+    <None Include="Assets\GLSL\LevelShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\LevelShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\Levels\NewFormat.mrlevel">
+      <Filter>Engine\LevelEditor</Filter>
+    </None>
+    <None Include="Assets\GLSL\LevelMarkerShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\LevelMarkerShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\TextureTestD.TGA">
+      <Filter>Assets\GLSL</Filter>
+    </Image>
   </ItemGroup>
 </Project>
