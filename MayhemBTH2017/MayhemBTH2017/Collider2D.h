@@ -13,6 +13,8 @@
 #include "LevelHandler.h"
 #include "Box.h"
 #include "Sprite.h"
+#include "Texture.h"
+#include "TextureHandler.h"
 
 class Collider2D
 {
@@ -63,6 +65,10 @@ private:
 		FRIENDLY_AIRCRAFT = 0x0008,
 		ENEMY_AIRCRAFT = 0x0010,
 	};
+
+	Texture				m_megaTexture;
+	TextureHandler		m_textureTemp;
+	glm::vec4 m_uv;
 
 };
 

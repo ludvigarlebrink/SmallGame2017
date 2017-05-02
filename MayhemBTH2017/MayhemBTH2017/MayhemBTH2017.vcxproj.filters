@@ -241,6 +241,9 @@
     <ClCompile Include="PlayerPrefab.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -404,6 +407,9 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="PlayerPrefab.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

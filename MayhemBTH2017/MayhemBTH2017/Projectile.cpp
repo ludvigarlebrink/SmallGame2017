@@ -24,7 +24,7 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	filter.maskBits = PLAYER | BOUNDARY;
 
 
-	m_box.initDynamic(world, pos, scale);
+	//m_box.initDynamic(world, pos, scale);
 	m_box.getBody()->SetUserData(this);
 	m_box.getFixture()->SetRestitution(restitution);
 	m_box.getFixture()->SetFriction(friction);
@@ -43,7 +43,7 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 	m_bulletSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
 
 
-	m_box.initDynamic(world, spawnPos, glm::vec2(m_bulletScale));
+	//m_box.initDynamic(world, spawnPos, glm::vec2(m_bulletScale));
 	m_box.getFixture()->SetRestitution(0.0);
 	m_box.getFixture()->SetFriction(1.0);
 	m_box.getFixture()->SetDensity(1.0);
