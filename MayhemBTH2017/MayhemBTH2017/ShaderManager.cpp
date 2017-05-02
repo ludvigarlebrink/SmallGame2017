@@ -117,7 +117,7 @@ std::string ShaderManager::LoadShader(const std::string & filename)
 	return output;
 }
 
-GLuint ShaderManager::CreateShader(const std::string & textfile, GLenum shaderType)
+GLuint ShaderManager::CreateShader(std::string & textfile, GLenum shaderType)
 {
 
 	GLuint shader = glCreateShader(shaderType);

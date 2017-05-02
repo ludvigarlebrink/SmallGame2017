@@ -13,21 +13,26 @@ public:
 	Box();
 	virtual ~Box();
 
-	void initDynamic(b2World* world, const glm::vec2& pos, const glm::vec2& scale);
+	void InitDynamic(b2World* world, const glm::vec2& pos, const glm::vec2& scale);
 
-	void initStatic(b2World* world, const glm::vec2& pos, const glm::vec2& scale);
+	void InitStatic(b2World* world, const glm::vec2& pos, const glm::vec2& scale);
 
-	b2Body* getBody();
-	b2Fixture* getFixture();
+	b2Body* getBody() { return m_body; }
+	b2Fixture* getFixture() { return m_fixture; }
 
-	glm::vec2 getScale();
+	glm::vec2 getScale() { return m_scale; }
+	void SetCategoryBits(short CATEGORY);
+	void SetMaskBits(short MASK);
+	uint16 GetCategoryBits();
+	uint16 GetMaskBits();
+
 
 
 
 private:
-	b2Body* body = nullptr;
-	b2Fixture* fixture;
-
+	b2Body* m_body = nullptr;
+	b2Fixture* m_fixture;
+	b2FixtureDef m_fixtureDef;
 	glm::vec2 m_scale;
 
 };

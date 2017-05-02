@@ -16,7 +16,8 @@ public:
 	enum Space
 	{
 		SPACE_LOCAL = 0,
-		SPACE_GLOBAL
+		SPACE_GLOBAL,
+		NUM_SPACES
 	};
 
 	Prefab();
@@ -37,15 +38,17 @@ public:
 	void Scale(float x, float y, float z, uint32_t space = SPACE_LOCAL);
 
 	//::.. GET FUNCTIONS ..:://
+	bool GetIsEnabled() const;
 	const char * GetName() const;
-	const glm::vec3 GetRotation();
-	const glm::vec3 GetScale();
-	const glm::vec3 GetPosition();
-	const Transform& GetTransform() const;
+	const Transform& GetTransform(uint32_t space = SPACE_LOCAL) const;
+	glm::vec3 GetPosition(uint32_t space = SPACE_LOCAL);
+	glm::vec3 GetRotation(uint32_t space = SPACE_LOCAL);
+	glm::vec3 GetScale(uint32_t space = SPACE_LOCAL);
 	Mesh * GetMesh() const;
 	AnimController * GetAnimController() const;
 
 	//::.. SET FUNCTIONS ..:://
+	void SetIsEnabled(bool enabled);
 	void SetName(const char * name);
 	void SetTransform(const Transform& transform, uint32_t space = SPACE_LOCAL);
 	void SetPosition(glm::vec3 pos, uint32_t space = SPACE_LOCAL);
@@ -58,6 +61,8 @@ public:
 	void SetAnimController(AnimController * animController);
 	void SetShaderProgram(const char * programName);
 	void SetMaterial(Material * material);
+	void SetAlbedoID(GLuint id);
+
 
 private:
 	//::.. HELP FUNCTIONS ..:://
@@ -72,23 +77,28 @@ private:
 		JOINTS,
 		ALBEDO_MAP,
 		NORMAL_MAP,
-		NR_UNIFORMS
+		NUM_UNIFORMS
 	};
 
 	bool				m_hasBeenCreated;
 	bool				m_isEnabled;
+	bool				m_hasAnimation;
 
 	const char *		m_name;
 	
 	Transform			m_localTx;
 	Transform			m_globalTx;
 
+	//TODO
+	Transform			m_tx[NUM_SPACES];
+
 	Mesh *				m_mesh;
 	const char *		m_shaderProg;
 	AnimController *	m_animController;
 	Material *			m_material;
 	GLuint				m_shaderProgram;
-	GLuint				m_uniforms[NR_UNIFORMS];
+	GLuint				m_uniforms[NUM_UNIFORMS];
+	GLuint				m_albedoID;
 };
 
 

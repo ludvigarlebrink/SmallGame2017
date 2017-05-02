@@ -9,11 +9,10 @@
 
 struct GUI
 {
-	UIText		m_text;
-	int32_t		m_numIcons = 0;
-	glm::vec4	m_iconUV;
-	UIImage		m_icon;
-	std::vector<UIImage> m_icons;
+	UIText					m_text;
+	int32_t					m_numIcons = 0;
+	glm::vec2				m_iconUV[16][16];
+	std::vector<UIImage>	m_icons;
 };
 
 enum GUIState
