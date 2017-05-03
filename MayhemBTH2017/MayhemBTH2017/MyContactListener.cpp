@@ -17,10 +17,15 @@ void MyContactListener::BeginContact(b2Contact * contact)
 	b2Fixture * fa = contact->GetFixtureA();
 	b2Fixture * fb = contact->GetFixtureB();
 
-
-
 	if (fa == NULL || fb == NULL)
 		return;
+
+	void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+
+	if (bodyUserData)
+		static_cast<Player*>(bodyUserData)->StartContact();
+
+
 
 	std::cout << "Collision" << std::endl;
 
