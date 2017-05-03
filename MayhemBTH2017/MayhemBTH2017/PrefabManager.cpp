@@ -206,6 +206,7 @@ Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, const 
 		for (uint32_t i = 0; i < numAnim; i++)
 		{	
 			std::string animFilepath(".\\Assets\\Animations\\");
+			animFilepath.append(skel);
 			animFilepath.append(anim[i]);
 			animFilepath.append(".mranim");
 

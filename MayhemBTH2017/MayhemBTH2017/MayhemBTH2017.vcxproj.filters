@@ -217,9 +217,6 @@
     <ClCompile Include="ImportTester.cpp">
       <Filter>Engine\Resources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="LevelEditorGUI.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="GamePhysics.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -244,7 +241,13 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="PropManager.cpp" />
+    <ClCompile Include="LevelEditorPropPlacer.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEditorStateMachine.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="PropHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -413,7 +416,15 @@
     <ClInclude Include="ParticleSystem.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="PropManager.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="GamePhysics.h" />
+    <ClInclude Include="LevelEditorPropPlacer.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEditorStateMachine.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="PropHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -494,6 +505,12 @@
     <None Include="Assets\GLSL\LevelMarkerShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
+    <None Include="Assets\GLSL\BulletShader.frag" />
+    <None Include="Assets\GLSL\BulletShader.vert" />
+    <None Include="Assets\GLSL\ColliderShader.frag" />
+    <None Include="Assets\GLSL\ColliderShader.vert" />
+    <None Include="Assets\GLSL\DrawShader.frag" />
+    <None Include="Assets\GLSL\DrawShader.geom" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\TextureTestD.TGA">
