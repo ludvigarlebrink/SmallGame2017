@@ -2,6 +2,9 @@
 #define __PROJECTILE_H__
 
 #include "PrefabManager.h"
+#include "InputManager.h"
+#include "Texture.h"
+#include "TextureHandler.h"
 #include "Box.h"
 
 
@@ -35,15 +38,15 @@ public:
 	void Update();
 	void Render(Camera camera);
 
-
-
-
 private:
 	Prefab*		m_prefab;
 	Box			m_box;
 	float		m_fireRate;
 	float		m_time;
 	int			m_life;
+	TextureHandler m_texhandler;
+	Texture m_texture;
+
 	GLfloat m_rotationUpdate;
 	Sprite m_bulletSprite;
 	GLfloat m_bulletScale;

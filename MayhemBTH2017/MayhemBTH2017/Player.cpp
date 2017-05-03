@@ -154,9 +154,9 @@ Box Player::GetBox()
 	return m_boundingBox;
 }
 
-Prefab* Player::GetPrefab()
+PlayerPrefab* Player::GetPrefab()
 {
-	return m_playerPrefab->GetPlayerPrefab();
+	return m_playerPrefab;
 }
 
 
