@@ -153,7 +153,6 @@
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="MenuCredits.cpp" />
     <ClCompile Include="MenuVideo.cpp" />
-    <ClCompile Include="MyContactListener.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerPrefab.cpp" />
@@ -169,6 +168,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="thumbnail.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -245,6 +245,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="thumbnail.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -287,15 +288,11 @@
     <None Include="Assets\GLSL\BlurrShader.frag" />
     <None Include="Assets\GLSL\BlurrShader.geom" />
     <None Include="Assets\GLSL\BlurrShader.vert" />
-    <None Include="Assets\GLSL\BulletShader.frag" />
-    <None Include="Assets\GLSL\BulletShader.vert" />
-    <None Include="Assets\GLSL\ColliderShader.frag" />
-    <None Include="Assets\GLSL\ColliderShader.vert" />
     <None Include="Assets\GLSL\DebugGreen.frag" />
     <None Include="Assets\GLSL\DebugGreen.vert" />
     <None Include="Assets\GLSL\DebugShader.vert" />
-    <None Include="Assets\GLSL\DrawShader.frag" />
-    <None Include="Assets\GLSL\DrawShader.geom" />
+    <None Include="Assets\GLSL\GameLevelShader.frag" />
+    <None Include="Assets\GLSL\GameLevelShader.vert" />
     <None Include="Assets\GLSL\LevelMarkerShader.frag" />
     <None Include="Assets\GLSL\LevelMarkerShader.vert" />
     <None Include="Assets\GLSL\LevelShader.frag" />
@@ -318,7 +315,8 @@
     <None Include="DebugShader.frag" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\Textures\TextureTestD.TGA" />
+    <Image Include="Assets\Textures\TextureTestA.TGA" />
+    <Image Include="Assets\Textures\TextureTestB.TGA" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

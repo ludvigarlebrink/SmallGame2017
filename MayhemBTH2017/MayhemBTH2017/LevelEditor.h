@@ -9,7 +9,7 @@
 #include "LevelMarker.h"
 #include "StateManager.h"
 #include "VirtualKeyboard.h"
-#include "LevelEditorGUI.h"
+#include "LevelEditorStateMachine.h"
 #include "LevelTexture.h"
 
 
@@ -55,12 +55,14 @@ private:
 	Level				m_level;
 	LevelHandler		m_levelHandler;
 	LevelMarker			m_levelMarker;
-	LevelEditorGUI		m_levelGUI;
+	LevelEditorStateMachine		m_levelGUI;
 
 	Camera				m_camera;
 	Timer				m_timer;
 	VirtualKeyboard		m_vk;
-	LevelTexture temp;
+	//TEMP
+	LevelTexture		m_levelTexture;
+	VideoManager	*	m_videoManager;
 };
 
 #endif // ! __LEVELEDITOR_H__
