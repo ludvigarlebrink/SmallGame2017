@@ -24,7 +24,7 @@ public:
 	void DeleteProjectile();
 	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf);
 	//::.. SET FUNTIONS ..:://
-	void Shoot(b2Vec2 force, b2World * world, glm::vec3 pos);
+	void Shoot(GLfloat firePower, b2World * world, glm::vec3 pos);
 	void RenderParticles(Camera camera);
 	//::.. GET FUNTIONS ..:://
 
@@ -36,6 +36,7 @@ private:
 	std::vector<Projectile*>m_projectiles;
 	ParticleSystem m_particles;
 	float m_restitution;
+	glm::vec3 m_previousForce;
 	float m_friction; 
 	float m_damping;
 	float m_density; 
