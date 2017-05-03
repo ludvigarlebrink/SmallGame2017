@@ -78,9 +78,9 @@ void LevelEditorGUI::Init()
 	for (int i = 0; i < GUI_NUM; i++)
 	{
 		m_gui[i].m_text.SetSize(80);
-		m_gui[i].m_text.SetPosition(-530, 320);
+		m_gui[i].m_text.SetPosition(-430, 320);
 		m_gui[i].m_text.SetFont(".\\Assets\\Fonts\\steelfish.ttf");
-		m_gui[i].m_text.SetPivot(UIText::LEFT);
+		m_gui[i].m_text.SetPivot(UIText::CENTER);
 		m_gui[i].m_text.SetColor(255, 255, 255, 255);
 
 		switch (i)
@@ -116,8 +116,8 @@ void LevelEditorGUI::Init()
 		m_offsetMother = 3;
 		m_offsetCounter = 0;
 
-		m_rows = -530;
-		m_columns = 150;
+		m_rows = -480;
+		m_columns = 230;
 
 		for (int iconIndex = 0; iconIndex < m_gui[guiIndex].m_resolution; iconIndex++)
 		{
@@ -129,7 +129,7 @@ void LevelEditorGUI::Init()
 			if (m_offsetCounter == m_offsetMother)
 			{
 				m_columns -= 50;
-				m_rows = -530;
+				m_rows = -480;
 				m_offsetCounter = 0;
 			}
 
