@@ -52,21 +52,19 @@ void LevelHandler::Import(Level & level, uint32_t id)
 	bool isOccupied[nrOfBlocks] = { 0 };
 	bool isSpawn[nrOfBlocks] = { 0 };
 	glm::vec2 *uv = new glm::vec2[nrOfBlocks];
-	glm::vec2 *uv2 = new  glm::vec2[nrOfBlocks * (12 * 2)];
-	glm::vec3 *rgb = new glm::vec3[(nrOfBlocks * 6) * 3];
-
+	//glm::vec2 *uv2 = new  glm::vec2[nrOfBlocks * (12 * 2)];
+	//glm::vec3 *rgb = new glm::vec3[(nrOfBlocks * 6) * 3];
+	int nSize = m_width * m_height * 3;
+	m_dataBuffer = (char*)malloc(nSize * sizeof(char));
 	uint32_t i = 0;
 	
 	
 	std::ifstream file(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
-	file.ignore(sizeof(uint32_t));
-	for (int i = 0; i < 1; i++)
-	{
-		file.ignore(4);
-	}
+
 	file.read(reinterpret_cast<char*>(isOccupied), sizeof(bool) * nrOfBlocks);
 	file.read(reinterpret_cast<char*>(isSpawn), sizeof(bool) * nrOfBlocks);
 	file.read(reinterpret_cast<char*>(uv), sizeof(glm::vec2) * nrOfBlocks);
+	file.read(reinterpret_cast<char*>(m_dataBuffer), sizeof(GLubyte) * (level.SIZE_X * level.SIZE_Y));
 	//file.read(reinterpret_cast<char*>(uv2), sizeof(uint32_t) * (nrOfBlocks * 12) * 2);
 	//file.read(reinterpret_cast<char*>(rgb), sizeof(uint32_t) * (nrOfBlocks * 6) * 3);
 
@@ -100,20 +98,17 @@ void LevelHandler::Export(Level & level)
 	newRegister.level = nullptr;
 	m_register.push_back(newRegister);
 
+	glReadBuffer(GL_FRONT);
+	glPixelStorei(GL_PACK_ALIGNMENT, 1);
+
+	int nSize = m_width * m_height * 3;
+	char* tempPixelBuffer;
+	tempPixelBuffer = (char*)malloc(nSize * sizeof(char));
+
+	glReadPixels(0, 0, m_width, m_height, GL_BGR, GL_UNSIGNED_BYTE, tempPixelBuffer);
+
 	char* nameBuffer = new char[m_size];
-	std::ifstream input(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
-	//Read header!
-	//1. nr of maps
-	//2. map names
-	input.read(reinterpret_cast<char*>(m_nrOfMaps), sizeof(uint32_t));
-	std::cout << m_nrOfMaps[0] << std::endl;
-	for (int i = 0; i < m_nrOfMaps[0]; i++)
-	{
-		input.read(reinterpret_cast<char*>(nameBuffer), m_size);
-		nameBuffer[m_size] = '\0';
-		m_names[i] = nameBuffer;
-	}
-	input.close();
+	
 	const int nrOfBlocks = level.SIZE_X * level.SIZE_Y;
 	bool isOccupied[nrOfBlocks] = { 0 };
 	bool isSpawn[nrOfBlocks] = { 0 };
@@ -131,14 +126,11 @@ void LevelHandler::Export(Level & level)
 	}
 
 	std::ofstream output(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
-	output.write(reinterpret_cast<char*>(m_nrOfMaps), sizeof(uint32_t));
-	for (uint32_t x = 0; x < m_nrOfMaps[0]; x++)
-	{
-		output.write(reinterpret_cast<char*>(const_cast<char*>(&m_names[x].c_str()[0])), (m_size));
-	}
+
 	output.write(reinterpret_cast<char*>(isOccupied), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(isSpawn), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(uvCoords), sizeof(glm::vec2) * (level.SIZE_X * level.SIZE_Y));
+	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(GLubyte) * (level.SIZE_X * level.SIZE_Y));
 	output.close();
 
 }

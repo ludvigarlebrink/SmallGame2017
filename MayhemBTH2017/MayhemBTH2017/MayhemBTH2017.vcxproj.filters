@@ -244,6 +244,9 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="thumbnail.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -412,6 +415,9 @@
     <ClInclude Include="ParticleSystem.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="thumbnail.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -500,8 +506,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\Textures\TextureTestD.TGA">
-      <Filter>Assets\GLSL</Filter>
+    <Image Include="Assets\Textures\TextureTestA.TGA">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Textures\TextureTestB.TGA">
+      <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
 </Project>
