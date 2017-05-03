@@ -117,7 +117,6 @@ void Player::Update() {
 	//DOUBLE JUMP
 	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f && m_isMidAir) 
 	{
-		std::cout << "I JUMP TWICE HAHA" << std::endl;
 		m_doubleJump = false;
 		GetBox().getBody()->ApplyForce(b2Vec2(0, 400), GetBox().getBody()->GetWorldCenter(), 1);
 
@@ -144,7 +143,7 @@ void Player::Render(Camera camera) {
 	//m_playerSprite.Bind();
 	//m_playerSprite.Update(transform, camera);
 	//m_playerSprite.draw();
-//	glUseProgram(0);
+	//glUseProgram(0);
 
 	m_playerPrefab->Render(camera);
 

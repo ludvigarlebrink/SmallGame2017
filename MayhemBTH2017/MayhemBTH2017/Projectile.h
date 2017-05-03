@@ -21,7 +21,7 @@ public:
 		float damping, float density,
 		float fireRate, bool startUp, Prefab * prefab);
 
-	void InitBullet(b2World * world, glm::vec2 spawnPos);
+	void InitBullet(b2World * world, glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(int life);

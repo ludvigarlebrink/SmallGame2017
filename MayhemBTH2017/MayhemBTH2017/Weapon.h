@@ -24,7 +24,7 @@ public:
 	void DeleteProjectile();
 	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf);
 	//::.. SET FUNTIONS ..:://
-	void Shoot(b2Vec2 force, b2World * world, glm::vec3 playerPos);
+	void Shoot(b2Vec2 force, b2World * world, glm::vec3 pos);
 	void RenderParticles(Camera camera);
 	//::.. GET FUNTIONS ..:://
 
