@@ -55,11 +55,6 @@ void Prefab::Create()
 		return;
 	}
 
-	m_tx[SPACE_LOCAL].SetScale(glm::vec3(4.0f, 4.0f, 4.0f));
-	m_tx[SPACE_LOCAL].SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-	m_tx[SPACE_LOCAL].SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
-
-
 	std::string shaders[2];
 	uint32_t types[2];
 
