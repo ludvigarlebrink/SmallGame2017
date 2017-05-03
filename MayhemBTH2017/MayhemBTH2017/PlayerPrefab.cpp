@@ -89,6 +89,8 @@ void PlayerPrefab::Update(float x, float y, float speed)
 	Joint * hand = skel->GetJointAt(6);
 	m_weapon->SetPosition(glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]));
 	m_weapon->SetRotation(glm::vec3(y * -90, m_weapRotY, 0.0f));
+
+	m_projectileSpawnPoint = glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]);
 }
 
 
@@ -101,6 +103,11 @@ void PlayerPrefab::Render(Camera & cam)
 Prefab * PlayerPrefab::GetPlayerPrefab()
 {
 	return m_player;
+}
+
+glm::vec3 PlayerPrefab::GetProjectileSpawnPoint()
+{
+	return m_projectileSpawnPoint;
 }
 
 

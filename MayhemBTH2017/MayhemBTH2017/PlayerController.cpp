@@ -262,11 +262,11 @@ void PlayerController::GetAxis(const SDL_ControllerAxisEvent controllerEvent)
 	case SDL_CONTROLLER_AXIS_LEFTX:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_axis[CONTROLLER_AXIS_LEFTX].axisDeadzone = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_LEFT_X].axisDeadzone = ScaleRange(controllerEvent.value);
 		}
 		else
 		{
-			m_axis[CONTROLLER_AXIS_LEFTX].axisDeadzone = 0.0f;
+			m_axis[CONTROLLER_AXIS_LEFT_X].axisDeadzone = 0.0f;
 		}
 		break;
 
@@ -288,22 +288,22 @@ void PlayerController::GetAxis(const SDL_ControllerAxisEvent controllerEvent)
 	case SDL_CONTROLLER_AXIS_RIGHTX:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_axis[CONTROLLER_AXIS_RIGHTX].axisDeadzone = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_RIGHT_X].axisDeadzone = ScaleRange(controllerEvent.value);
 		}
 		else
 		{
-			m_axis[CONTROLLER_AXIS_RIGHTX].axisDeadzone = 0.0f;
+			m_axis[CONTROLLER_AXIS_RIGHT_X].axisDeadzone = 0.0f;
 		}
 		break;
 		// Vetical
 	case SDL_CONTROLLER_AXIS_RIGHTY:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_axis[CONTROLLER_AXIS_RIGHTY].axisDeadzone = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_RIGHT_Y].axisDeadzone = ScaleRange(controllerEvent.value);
 		}
 		else
 		{
-			m_axis[CONTROLLER_AXIS_RIGHTY].axisDeadzone = 0.0f;
+			m_axis[CONTROLLER_AXIS_RIGHT_Y].axisDeadzone = 0.0f;
 		}
 		break;
 
@@ -340,7 +340,7 @@ void PlayerController::GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent)
 		// Left Stick
 		// Horizonal
 	case SDL_CONTROLLER_AXIS_LEFTX:
-		m_axis[CONTROLLER_AXIS_LEFTX].axisRaw = ScaleRange(controllerEvent.value);
+		m_axis[CONTROLLER_AXIS_LEFT_X].axisRaw = ScaleRange(controllerEvent.value);
 		break;
 
 		// Vetical
@@ -351,11 +351,11 @@ void PlayerController::GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent)
 		// Right stick
 		// Horizontal
 	case SDL_CONTROLLER_AXIS_RIGHTX:
-		m_axis[CONTROLLER_AXIS_RIGHTX].axisRaw = ScaleRange(controllerEvent.value);
+		m_axis[CONTROLLER_AXIS_RIGHT_X].axisRaw = ScaleRange(controllerEvent.value);
 		break;
 		// Vetical
 	case SDL_CONTROLLER_AXIS_RIGHTY:
-		m_axis[CONTROLLER_AXIS_RIGHTY].axisRaw = ScaleRange(controllerEvent.value);
+		m_axis[CONTROLLER_AXIS_RIGHT_Y].axisRaw = ScaleRange(controllerEvent.value);
 		break;
 
 		// Left trigger
