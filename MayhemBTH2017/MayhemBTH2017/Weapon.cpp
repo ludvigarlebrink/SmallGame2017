@@ -90,7 +90,7 @@ void Weapon::Render(Camera camera)
 
 		m_projectiles[i]->Update();
 		m_projectiles[i]->Render(camera);
-		glUseProgram(0);
+
 	}
 	m_prefabGun->Update();
 	m_prefabGun->Render(camera);

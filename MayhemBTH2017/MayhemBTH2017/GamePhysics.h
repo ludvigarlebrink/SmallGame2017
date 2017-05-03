@@ -51,7 +51,7 @@ private:
 	//Temporary
 	b2FixtureDef powerUpFixture;
 
-	//MyContactListener m_contactListener;
+	MyContactListener m_contactListener;
 
 	Weapon m_weapon;
 

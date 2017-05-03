@@ -37,14 +37,14 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
-	GetBox().getFixture()->SetDensity(5.0);
+	GetBox().getFixture()->SetDensity(10.0);
 	GetBox().getFixture()->SetFriction(1.0);
 	GetBox().getFixture()->SetRestitution(0.0);
-	GetBox().getBody()->SetLinearDamping(0.4);
+	GetBox().getBody()->SetLinearDamping(0.2);
 	
 	b2Filter filter;
 	filter.categoryBits = PLAYER;
-	filter.maskBits = BOUNDARY;
+	filter.maskBits = BOUNDARY| PROJECTILE;
 	GetBox().getFixture()->SetFilterData(filter);
 
 	GetBox().getBody()->SetUserData(this);
@@ -101,7 +101,7 @@ void Player::Update() {
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 100), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 300), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 	
 
@@ -119,7 +119,7 @@ void Player::Update() {
 	{
 		std::cout << "I JUMP TWICE HAHA" << std::endl;
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 100), GetBox().getBody()->GetWorldCenter(), 1);
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 400), GetBox().getBody()->GetWorldCenter(), 1);
 
 	}
 
@@ -157,6 +157,16 @@ Box Player::GetBox()
 Prefab* Player::GetPrefab()
 {
 	return m_playerPrefab->GetPlayerPrefab();
+}
+
+void Player::StartContact()
+{
+	m_contact = true;
+}
+
+void Player::EndContact()
+{
+	m_contact = false;
 }
 
 

@@ -244,6 +244,9 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="MyContactListener.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">

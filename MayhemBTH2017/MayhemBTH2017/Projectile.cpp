@@ -41,6 +41,7 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 	m_bulletSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
 
 	m_box.InitDynamic(world, spawnPos, glm::vec2(m_bulletScale));
+	m_box.getBody()->SetUserData(this);
 	m_box.getFixture()->SetRestitution(0.0);
 	m_box.getFixture()->SetFriction(1.0);
 	m_box.getFixture()->SetDensity(1.0);
@@ -81,12 +82,12 @@ Box Projectile::GetBox()
 
 void Projectile::Update()
 {
-	m_rotationUpdate += 1.0f;
+	m_rotationUpdate += 0.01f;
 
 	glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
 
 
-	if (m_isBullet = false)
+	if (m_isBullet == false)
 	{
 		m_prefab->SetPosition(position);
 		m_prefab->SetRotation(0, 0, m_rotationUpdate * 15);
@@ -103,7 +104,7 @@ void Projectile::Update()
 void Projectile::Render(Camera camera)
 {
 	Transform transform;
-	if (m_isBullet = false) {
+	if (!m_isBullet) {
 		m_prefab->Update();
 		m_prefab->Render(camera);
 	}
@@ -112,4 +113,14 @@ void Projectile::Render(Camera camera)
 		m_bulletSprite.Update(transform, camera);
 		m_bulletSprite.draw();
 	}
+}
+
+void Projectile::StartContact()
+{
+	m_contact = true;
+}
+
+void Projectile::EndContact()
+{
+	m_contact = false;
 }
