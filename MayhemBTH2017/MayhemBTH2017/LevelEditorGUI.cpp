@@ -195,7 +195,7 @@ void LevelEditorGUI::Input()
 		}
 	}
 
-	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_RIGHTBUTTON))
+	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_BUTTON_RIGHT))
 	{
 		if (m_state + 2 <= GUI_NUM)
 		{
@@ -213,7 +213,7 @@ void LevelEditorGUI::Input()
 		}
 	}
 
-	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON))
+	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_BUTTON_LEFT))
 	{
 		if (m_state - 2 > GUI_CLOSED || m_state - 1 != GUI_OPEN)
 		{
