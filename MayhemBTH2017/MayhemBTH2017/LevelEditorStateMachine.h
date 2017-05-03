@@ -66,20 +66,8 @@ private:
 	int32_t			m_offsetX;
 	int32_t			m_offsetY;
 	int32_t			m_offsetMother;
-
-	std::ifstream	m_texFile;
-	std::string		m_line;
-	uint32_t		m_nSize;
-	uint32_t		m_hSize;
-	int32_t			m_state;
-	int32_t			m_pos;
-
-	int32_t			m_rows;
-	int32_t			m_columns;
-	int32_t			m_offsetX;
-	int32_t			m_offsetY;
-	int32_t			m_offsetMother;
 	int32_t			m_offsetCounter;
+
 	LevelEditorPropPlacer m_propPlacer;
 };
 
