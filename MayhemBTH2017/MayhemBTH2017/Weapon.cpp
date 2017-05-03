@@ -92,8 +92,8 @@ void Weapon::Render(Camera camera)
 		m_projectiles[i]->Render(camera);
 
 	}
-	m_prefabGun->Update();
-	m_prefabGun->Render(camera);
+	//m_prefabGun->Update();
+	//m_prefabGun->Render(camera);
 }
 
 void Weapon::RenderParticles(Camera camera) {

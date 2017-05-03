@@ -9,6 +9,7 @@ LevelEditor::LevelEditor()
 	m_input = InputManager::Get();
 	m_stateManager = StateManager::Get();
 	m_levelHandler.Init();
+	m_videoManager = VideoManager::Get();
 
 	m_timer.SetTimer(0.1f, true, true);
 }
@@ -131,11 +132,17 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
 	{
-		std::cout << "Pressed B: " << std::endl;
+		glViewport(0, 0, 84, 48);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		m_level.Render(m_camera);
+		m_videoManager->Swap();
+		//temp
+		//m_levelTexture.SaveImage(".\\Assets\\Textures\\TextureTestB.TGA");
 		m_levelHandler.Export(m_level);
 		m_levelHandler.ExportRegister();
+
+		glViewport(0, 0, 1280, 720);
 		// REMOVE
-		temp.SaveImage(".\\Assets\\Textures\\TextureTestE.TGA");
 
 	}
 

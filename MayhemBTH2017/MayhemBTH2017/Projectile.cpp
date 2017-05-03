@@ -21,7 +21,7 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 
 	b2Filter filter;
 	filter.categoryBits = PROJECTILE;
-	filter.maskBits = PLAYER | BOUNDARY;
+	filter.maskBits = PLAYER | BOUNDARY | PROJECTILE;
 
 
 	m_box.InitDynamic(world, pos, scale);
@@ -50,7 +50,7 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 	//Collision info
 	b2Filter filter;
 	filter.categoryBits = PROJECTILE;
-	filter.maskBits = PLAYER | BOUNDARY;
+	filter.maskBits = PLAYER | BOUNDARY | PROJECTILE;
 	m_box.getFixture()->SetFilterData(filter);
 }
 
@@ -82,6 +82,16 @@ Box Projectile::GetBox()
 
 void Projectile::Update()
 {
+	if (m_contact)
+	{
+		m_prefab->Scale(glm::vec3(2, 2, 2));
+		m_bulletSprite.setColor(glm::vec3(1.0, 0.0, 0.0));
+	}
+	else
+	{
+		m_prefab->Scale(glm::vec3(0.5, 0.5, 0.5));
+	}
+
 	m_rotationUpdate += 0.01f;
 
 	glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);

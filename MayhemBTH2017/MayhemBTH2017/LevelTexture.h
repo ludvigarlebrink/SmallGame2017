@@ -4,6 +4,7 @@
 #include <string>
 #include <glew.h>
 #include <iostream>
+#include <fstream>
 
 class LevelTexture
 {
@@ -12,14 +13,17 @@ public:
 	virtual ~LevelTexture();
 	void Init();
 	bool SaveImage(std::string fileName);
+	void SetStatus(bool save);
+
+	bool GetStatus();
 
 private:
 	char*	m_dataBuffer;
 	//temp
-	int		m_width = 32;
-	int		m_height = 32;
+	int		m_width = 84;
+	int		m_height = 48;
 	int		m_nrOfMaps;
-
+	bool	m_saveNextFrame;
 
 	GLuint	m_frameBuffer;
 };
