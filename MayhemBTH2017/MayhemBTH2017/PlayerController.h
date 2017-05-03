@@ -15,7 +15,8 @@ struct Button
 
 struct Axis
 {
-	float axis;
+	float axisDeadzone;
+	float axisRaw;
 };
 
 enum ButtonInput
@@ -63,7 +64,8 @@ public:
 	bool GetButtonDown(size_t button);
 	bool GetButtonHeld(size_t button);
 	bool GetButtonUp(size_t button);
-	float GetAxisDirection(size_t button);
+	float GetAxis(size_t button);
+	float GetAxisRaw(size_t button);
 	size_t GetNumButtons();
 	size_t GetNumAxis();
 
@@ -74,7 +76,6 @@ private:
 	void ButtonUp(const SDL_ControllerButtonEvent controllerEvent);
 	void GetAxis(const SDL_ControllerAxisEvent controllerEvent);
 	void GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent);
-	//Scale value to [-1, 1]
 	float ScaleRange(Sint16 value);
 
 private:
