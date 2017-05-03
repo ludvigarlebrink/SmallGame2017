@@ -15,8 +15,9 @@
 #include "Sprite.h"
 #include "Texture.h"
 #include "TextureHandler.h"
+#include "Collidable.h"
 
-class Collider2D
+class Collider2D : public Collidable
 {
 public:
 	const static int SIZE_X = 84;

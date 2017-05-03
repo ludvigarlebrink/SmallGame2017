@@ -248,6 +248,8 @@
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="PropHandler.cpp" />
+    <ClCompile Include="MyContactListener.cpp" />
+    <ClCompile Include="Collidable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -425,6 +427,7 @@
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="PropHandler.h" />
+    <ClInclude Include="Collidable.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

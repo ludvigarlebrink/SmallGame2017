@@ -6,9 +6,10 @@
 #include "Texture.h"
 #include "TextureHandler.h"
 #include "Box.h"
+#include "Collidable.h"
 
 
-class Projectile
+class Projectile : public Collidable
 {
 public:
 	//::.. CONSTRUCTORS ..:://
