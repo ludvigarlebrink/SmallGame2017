@@ -39,7 +39,6 @@ void Collider2D::DrawCollider(Camera camera)
 	glUseProgram(0);
 	m_megaTexture.Bind(0);
 	m_level.Render(camera);
-	//m_shader.SendTexture(0, "t", m_uv);
 }
 
 void Collider2D::CreateBoundingBoxes(b2World* world) {
