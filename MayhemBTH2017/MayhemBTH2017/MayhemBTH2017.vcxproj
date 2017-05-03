@@ -286,9 +286,15 @@
     <None Include="Assets\GLSL\BlurrShader.frag" />
     <None Include="Assets\GLSL\BlurrShader.geom" />
     <None Include="Assets\GLSL\BlurrShader.vert" />
+    <None Include="Assets\GLSL\BulletShader.frag" />
+    <None Include="Assets\GLSL\BulletShader.vert" />
+    <None Include="Assets\GLSL\ColliderShader.frag" />
+    <None Include="Assets\GLSL\ColliderShader.vert" />
     <None Include="Assets\GLSL\DebugGreen.frag" />
     <None Include="Assets\GLSL\DebugGreen.vert" />
     <None Include="Assets\GLSL\DebugShader.vert" />
+    <None Include="Assets\GLSL\DrawShader.frag" />
+    <None Include="Assets\GLSL\DrawShader.geom" />
     <None Include="Assets\GLSL\LevelMarkerShader.frag" />
     <None Include="Assets\GLSL\LevelMarkerShader.vert" />
     <None Include="Assets\GLSL\LevelShader.frag" />

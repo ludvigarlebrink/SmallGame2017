@@ -35,12 +35,18 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 
 void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 {
+
 	m_isBullet = true;
+	
+	m_texture=m_texhandler.Import(".\\Assets\\Textures\\bullet.png");
+	
 	m_bulletScale = 2;
 	m_bulletSprite.createSprite(glm::vec2(0), glm::vec2(m_bulletScale));
-	m_bulletSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
 
-	m_box.InitDynamic(world, spawnPos, glm::vec2(m_bulletScale));
+
+	m_bulletSprite.Init(".\\Assets\\GLSL\\BulletShader", 0, 0);
+
+	m_box.InitDynamic(world, spawnPos, glm::vec2(1.0, 2.0));
 	m_box.getFixture()->SetRestitution(0.0);
 	m_box.getFixture()->SetFriction(1.0);
 	m_box.getFixture()->SetDensity(1.0);
@@ -60,7 +66,9 @@ void Projectile::SetLife(int life)
 
 void Projectile::AddForce(b2Vec2 force)
 {
+
 	m_box.getBody()->ApplyForce(force, m_box.getBody()->GetWorldCenter(), true);
+	
 }
 
 int Projectile::GetLife()
@@ -93,7 +101,7 @@ void Projectile::Update()
 	}
 	else
 	{
-		m_bulletSprite.update(glm::vec2(position.x, position.y), glm::vec2(m_bulletScale));
+		m_bulletSprite.update(glm::vec2(position.x, position.y), glm::vec2(2, 0.8));
 	}
 
 	if (m_rotationUpdate > 360)
@@ -108,8 +116,17 @@ void Projectile::Render(Camera camera)
 		m_prefab->Render(camera);
 	}
 	else {
-		m_bulletSprite.Bind();
+
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		m_texture.Bind(0);
+
 		m_bulletSprite.Update(transform, camera);
+		m_bulletSprite.Bind();
 		m_bulletSprite.draw();
+		glDisable(GL_BLEND);
+	
+
 	}
 }
