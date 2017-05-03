@@ -35,6 +35,7 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	Prefab * GetPlayerPrefab();
+	glm::vec3 GetProjectileSpawnPoint();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetWeapon(Prefab * weapon);
@@ -47,6 +48,7 @@ private:
 private:
 	Prefab *	m_player;
 	Prefab *	m_weapon;
+	glm::vec3	m_projectileSpawnPoint;
 
 	KeyFrame *	m_kf;
 	KeyFrame *	m_keyUp;
@@ -57,7 +59,7 @@ private:
 	float		m_y;
 	float		m_x;
 
-	float		weapRotY = 0.0f;
+	float		m_weapRotY = 0.0f;
 };
 
 

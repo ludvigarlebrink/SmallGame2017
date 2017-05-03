@@ -2,6 +2,9 @@
 #define __PROJECTILE_H__
 
 #include "PrefabManager.h"
+#include "InputManager.h"
+#include "Texture.h"
+#include "TextureHandler.h"
 #include "Box.h"
 
 
@@ -18,7 +21,7 @@ public:
 		float damping, float density,
 		float fireRate, bool startUp, Prefab * prefab);
 
-	void InitBullet(b2World * world, glm::vec2 spawnPos);
+	void InitBullet(b2World * world, glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(int life);
@@ -34,8 +37,8 @@ public:
 	//::.. OTHER FUNCTIONS ..:://
 	void Update();
 	void Render(Camera camera);
-
-
+	void StartContact();
+	void EndContact();
 
 
 private:
@@ -44,11 +47,15 @@ private:
 	float		m_fireRate;
 	float		m_time;
 	int			m_life;
+	TextureHandler m_texhandler;
+	Texture m_texture;
+
 	GLfloat m_rotationUpdate;
 	Sprite m_bulletSprite;
 	GLfloat m_bulletScale;
 	bool m_isBullet;
 	bool m_fired;
+	bool m_contact;
 	
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
