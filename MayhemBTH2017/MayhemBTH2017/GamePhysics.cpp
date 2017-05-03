@@ -41,7 +41,7 @@ void GamePhysics::EnterWorld()
 
 	Prefab * gun = PrefabManager::Instantiate("Player");
 
-	gun->SetScale(glm::vec3(1, 1, 1));
+	gun->SetScale(glm::vec3(2, 2, 2));
 
 	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
 
@@ -50,7 +50,7 @@ void GamePhysics::EnterWorld()
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapon = Weapon(gun);
+	m_weapon = Weapon(gun, projectile);
 
 
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
