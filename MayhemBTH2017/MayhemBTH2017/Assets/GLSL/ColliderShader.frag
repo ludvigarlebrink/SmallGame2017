@@ -3,7 +3,7 @@
 
 
 out vec4 FragColor;
-uniform sampler2D DiffuseMap;
+uniform vec3 color;
 
 
 void main()
@@ -11,5 +11,5 @@ void main()
 	
 
 
-	FragColor = vec4(1.0,1.0, 0.0, 0.5);
+	FragColor = vec4(color, 0.5);
 }

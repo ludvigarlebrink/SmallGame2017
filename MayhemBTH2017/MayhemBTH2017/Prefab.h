@@ -40,7 +40,7 @@ public:
 	//::.. GET FUNCTIONS ..:://
 	bool GetIsEnabled() const;
 	const char * GetName() const;
-	const Transform& GetTransform(uint32_t space = SPACE_LOCAL) const;
+	Transform& GetTransform(uint32_t space = SPACE_LOCAL);
 	glm::vec3 GetPosition(uint32_t space = SPACE_LOCAL);
 	glm::vec3 GetRotation(uint32_t space = SPACE_LOCAL);
 	glm::vec3 GetScale(uint32_t space = SPACE_LOCAL);

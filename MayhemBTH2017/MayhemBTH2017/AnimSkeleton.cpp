@@ -1,9 +1,9 @@
 #include "AnimSkeleton.h"
 
+#include "TimeManager.h"
 
 #include <iostream>
 #include <iomanip>
-#include "TimeManager.h"
 
 AnimSkeleton::AnimSkeleton()
 {
@@ -16,7 +16,7 @@ AnimSkeleton::~AnimSkeleton()
 {
 }
 
-void AnimSkeleton::Update(KeyFrame * kf, bool animateBindPose, int32_t from, int32_t to)
+void AnimSkeleton::Update(KeyFrame * kf, KeyFrame * preKf, float inter, bool animateBindPose, int32_t from, int32_t to)
 {
 	if (to == -1)
 	{
@@ -25,7 +25,22 @@ void AnimSkeleton::Update(KeyFrame * kf, bool animateBindPose, int32_t from, int
 
 	if (animateBindPose)
 	{
-		m_skel[0].globalTx = kf->localTx[0];
+		glm::mat4 finalMat;
+
+		if (preKf != nullptr)
+		{
+			glm::quat rot1(glm::quat_cast(kf->localTx[0]));
+			glm::quat rot2(glm::quat_cast(preKf->localTx[0]));
+			glm::quat rot3 = glm::lerp(rot2, rot1, abs(inter));
+			finalMat = glm::mat4(rot3);
+			finalMat[3] = kf->localTx[0][3];
+		}
+		else
+		{
+			finalMat = kf->localTx[0];
+		}
+
+		m_skel[0].globalTx = finalMat;
 		m_skinnedTx[0] = m_skel[0].globalTx * m_skel[0].invBindPose;
 	}
 	else
@@ -36,7 +51,23 @@ void AnimSkeleton::Update(KeyFrame * kf, bool animateBindPose, int32_t from, int
 
 	for (uint32_t i = from; i <= to; i++)
 	{
-		m_skel[i].globalTx = m_skel[m_skel[i].parentID].globalTx * kf->localTx[i];
+		glm::mat4 finalMat;
+
+		if (preKf != nullptr)
+		{
+			glm::quat rot1(glm::quat_cast(kf->localTx[i]));
+			glm::quat rot2(glm::quat_cast(preKf->localTx[i]));
+			glm::quat rot3 = glm::lerp(rot2, rot1, inter);
+			finalMat = glm::mat4(rot3);
+
+			finalMat[3] = kf->localTx[i][3];
+		}
+		else
+		{
+			finalMat = kf->localTx[i];
+		}
+
+		m_skel[i].globalTx = m_skel[m_skel[i].parentID].globalTx * finalMat;
 		m_skinnedTx[i] = m_skel[i].globalTx * m_skel[i].invBindPose;
 	}
 }
@@ -53,6 +84,7 @@ Joint * AnimSkeleton::GetJointAt(int32_t index)
 {
 	return &m_skel[index];
 }
+
 
 glm::mat4 * AnimSkeleton::GetSkinnedTx()
 {

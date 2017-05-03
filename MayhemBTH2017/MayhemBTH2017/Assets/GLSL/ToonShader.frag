@@ -9,7 +9,6 @@ uniform mat4 M;
 uniform mat4 V;
 uniform mat4 P;
 
-uniform mat4 Joints[22];
 uniform sampler2D AlbedoMap;
 
 void main()

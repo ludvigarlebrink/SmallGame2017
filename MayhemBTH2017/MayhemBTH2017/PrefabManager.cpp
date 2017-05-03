@@ -137,22 +137,38 @@ Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, const 
 
 		Mesh * mesh = new Mesh;
 		uint32_t numVerts = meshHandler->GetNumVerts();
-		Vertex3DSkelAnimation * vert = new Vertex3DSkelAnimation[numVerts];
 
-		for (uint32_t i = 0; i < numVerts; i++)
+		if (meshHandler->GetHasSkinWeights())
 		{
-			vert[i].position = meshHandler->GetPositions()[i];
-			vert[i].normal = meshHandler->GetNormals()[i];
-			vert[i].texCoordsAlpha = glm::vec3(meshHandler->GetTexCoords()[i].x, meshHandler->GetTexCoords()[i].y, 1);
+			Vertex3DSkelAnimation * verts = new Vertex3DSkelAnimation[numVerts];
 
-			if (meshHandler->GetHasSkinWeights())
+			for (uint32_t i = 0; i < numVerts; i++)
 			{
-				vert[i].jointIDs = meshHandler->GetJointIDs()[i];
-				vert[i].weights = meshHandler->GetSkinWeights()[i];
+				verts[i].position = meshHandler->GetPositions()[i];
+				verts[i].normal = meshHandler->GetNormals()[i];
+				verts[i].texCoordsAlpha = glm::vec3(meshHandler->GetTexCoords()[i].x, meshHandler->GetTexCoords()[i].y, 1);
+				verts[i].jointIDs = meshHandler->GetJointIDs()[i];
+				verts[i].weights = meshHandler->GetSkinWeights()[i];
 			}
+
+			mesh->Load(verts, numVerts);
+		}
+		else
+		{
+			Vertex3D * verts = new Vertex3D[numVerts];
+
+			for (uint32_t i = 0; i < numVerts; i++)
+			{
+				verts[i].position = meshHandler->GetPositions()[i];
+				verts[i].normal = meshHandler->GetNormals()[i];
+				verts[i].texCoordsAlpha = glm::vec3(meshHandler->GetTexCoords()[i].x, meshHandler->GetTexCoords()[i].y, 1);
+			}
+
+			mesh->Load(verts, numVerts);
+			
 		}
 
-		delete meshHandler;
+	//	delete meshHandler;
 
 		prefab->SetMesh(mesh);
 	}
@@ -190,6 +206,7 @@ Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, const 
 		for (uint32_t i = 0; i < numAnim; i++)
 		{	
 			std::string animFilepath(".\\Assets\\Animations\\");
+			animFilepath.append(skel);
 			animFilepath.append(anim[i]);
 			animFilepath.append(".mranim");
 

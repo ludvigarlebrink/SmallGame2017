@@ -46,10 +46,12 @@ void Sprite::createSprite(glm::vec2 pos, glm::vec2 scale)
 	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->quad.vertArr[0]), &this->quad.vertArr, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
 	//glEnableVertexAttribArray(2);
 
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(GUIVertex), 0);
-	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(GUIVertex), (void*)(2 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GUIVertex), (void*)(2 * sizeof(float)));
+
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -159,11 +161,13 @@ void Sprite::sendTexture()
 
 void Sprite::draw()
 {
-	sendColor();
 
-	sendTexture();
+	//sendTexture();
 
 	glBindVertexArray(m_vao);
+
+	sendColor();
+
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_ID);
 	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->quad.vertArr[0]), &this->quad.vertArr, GL_STATIC_DRAW);
 
