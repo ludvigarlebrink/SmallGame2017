@@ -6,6 +6,7 @@
 PlayerPrefab::PlayerPrefab()
 {
 	Init(nullptr);
+	m_weapRotY = 90;
 }
 
 
@@ -34,13 +35,13 @@ void PlayerPrefab::Update(float x, float y, float speed)
 	if (x > 0.3f)
 	{
 		m_player->SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
-		weapRotY = 90;
+		m_weapRotY = 90;
 	}
 	
 	if( x < -0.3f)
 	{
 		m_player->SetRotation(glm::vec3(0.0f, -90.0f, 0.0f));
-		weapRotY = -90;
+		m_weapRotY = -90;
 	}
 
 	if (y < 0.0f)
@@ -87,7 +88,7 @@ void PlayerPrefab::Update(float x, float y, float speed)
 
 	Joint * hand = skel->GetJointAt(6);
 	m_weapon->SetPosition(glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]));
-	m_weapon->SetRotation(glm::vec3(y * -90, weapRotY, 0.0f));
+	m_weapon->SetRotation(glm::vec3(y * -90, m_weapRotY, 0.0f));
 }
 
 
