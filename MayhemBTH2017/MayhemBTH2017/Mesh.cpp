@@ -78,7 +78,6 @@ bool Mesh::Load(Vertex3D * vertices, uint64_t numVerts)
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
-	glEnableVertexAttribArray(3);
 
 	// Generate buffers.
 	glGenBuffers(1, &m_buffer);

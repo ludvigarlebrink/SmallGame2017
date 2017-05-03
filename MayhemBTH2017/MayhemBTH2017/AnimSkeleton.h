@@ -4,7 +4,7 @@
 
 #include "AnimUtil.h"
 #include "Transform.h"
-
+#include "GLM\gtc\quaternion.hpp"
 
 #include <glm.hpp>
 
@@ -18,7 +18,7 @@ public:
 	AnimSkeleton();
 	virtual ~AnimSkeleton();
 
-	void Update(KeyFrame * kf, bool animateBindPose = true, int32_t from = 0, int32_t to = -1);
+	void Update(KeyFrame * kf, KeyFrame * preKf, float inter, bool animateBindPose = true, int32_t from = 0, int32_t to = -1);
 
 	//::.. GET FUNCTIONS ..:://
 	uint32_t GetNumJoints();

@@ -110,7 +110,9 @@ void Player::Update() {
 		}
 	}
 
-	m_playerPrefab->Update(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX), InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTY));
+	m_playerPrefab->Update(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX), 
+		InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTY),
+		InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX));
 
 	//DOUBLE JUMP
 	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f && m_isMidAir) 
@@ -139,10 +141,10 @@ void Player::Update() {
 void Player::Render(Camera camera) {
 
 	Transform transform;
-	m_playerSprite.Bind();
-	m_playerSprite.Update(transform, camera);
-	m_playerSprite.draw();
-	glUseProgram(0);
+	//m_playerSprite.Bind();
+	//m_playerSprite.Update(transform, camera);
+	//m_playerSprite.draw();
+//	glUseProgram(0);
 
 	m_playerPrefab->Render(camera);
 
