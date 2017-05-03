@@ -72,19 +72,19 @@ void Player::Update() {
 
 
 	//PLAYER MOVEMENT
-	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX);
+	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X);
 	
-	if (InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX) != 0.0f &&leftVelocity > -5)
+	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X) != 0.0f &&leftVelocity > -5)
 	{
 	//	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
 		if (m_isMidAir) {
 
-			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-100)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-100)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 
 		}
 		if (!m_isMidAir ) {
 
-			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX)*(-200)*TimeManager::Get()->GetDeltaTime(), 0));
+			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-200)*TimeManager::Get()->GetDeltaTime(), 0));
 		}
 
 
@@ -110,9 +110,9 @@ void Player::Update() {
 		}
 	}
 
-	m_playerPrefab->Update(InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTX), 
-		InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_RIGHTY),
-		InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX));
+	m_playerPrefab->Update(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X),
+		InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y),
+		InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X));
 
 	//DOUBLE JUMP
 	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f && m_isMidAir) 
@@ -154,9 +154,9 @@ Box Player::GetBox()
 	return m_boundingBox;
 }
 
-Prefab* Player::GetPrefab()
+PlayerPrefab* Player::GetPrefab()
 {
-	return m_playerPrefab->GetPlayerPrefab();
+	return m_playerPrefab;
 }
 
 void Player::StartContact()

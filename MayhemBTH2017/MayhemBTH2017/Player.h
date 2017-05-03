@@ -31,7 +31,7 @@ public:
 	uint16 GetCategoryBits();
 	uint16 GetMaskBits();
 	Box GetBox();
-	Prefab* GetPrefab();
+	PlayerPrefab* GetPrefab();
 	b2Fixture* GetFilter();
 	void StartContact();
 	void EndContact();
