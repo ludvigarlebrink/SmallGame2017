@@ -26,7 +26,6 @@ LevelMarker::LevelMarker()
 	verts[2].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
-
 	verts[3].position = glm::vec3(-0.5f, 0.5f, 0.0f);
 	verts[3].normal = glm::vec3(1.0f, 1.0f, 0.0f);
 	verts[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
