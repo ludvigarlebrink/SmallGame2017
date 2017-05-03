@@ -364,6 +364,7 @@ void PlayerController::GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent)
 	}
 }
 
+
 float PlayerController::ScaleRange(Sint16 value)
 {
 	//Scale range to [-1, 1]

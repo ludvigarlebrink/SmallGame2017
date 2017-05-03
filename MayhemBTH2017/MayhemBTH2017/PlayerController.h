@@ -37,7 +37,7 @@ enum ButtonInput
 
 enum AxisInput
 {
-	CONTROLLER_AXIS_LEFTX,
+	CONTROLLER_AXIS_LEFTX = 0,
 	CONTROLLER_AXIS_LEFTY,
 	CONTROLLER_AXIS_RIGHTX,
 	CONTROLLER_AXIS_RIGHTY,
@@ -74,7 +74,8 @@ private:
 	void ButtonUp(const SDL_ControllerButtonEvent controllerEvent);
 	void GetAxis(const SDL_ControllerAxisEvent controllerEvent);
 	void GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent);
-	float ScaleRange(Sint16 value); //Scale value to [-1, 1]
+	//Scale value to [-1, 1]
+	float ScaleRange(Sint16 value);
 
 private:
 	Button					m_button[NUM_BUTTONS];
