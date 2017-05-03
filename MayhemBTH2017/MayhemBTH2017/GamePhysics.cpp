@@ -26,10 +26,9 @@ void GamePhysics::EnterWorld()
 	m_floorCollider.CreateBoundingBoxes(m_world.get());
 
 	//at global scope
-	//m_contactListener;
 
 	//in FooTest constructor
-	//m_world->SetContactListener(&m_contactListener);
+	m_world.get()->SetContactListener(new MyContactListener());
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
@@ -51,7 +50,7 @@ void GamePhysics::EnterWorld()
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapon = Weapon(gun);
+	m_weapon = Weapon(gun, projectile);
 
 
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
@@ -79,7 +78,7 @@ void GamePhysics::Update()
 
 		}
 
-		m_world->Step(1.0f / 10.0f, 6, 2);
+		m_world->Step(1.0f / 30.0f, 6, 2);
 
 		for (b2Contact* contact = m_world->GetContactList(); contact; contact = contact->GetNext())
 		{
@@ -94,26 +93,21 @@ void GamePhysics::Update()
 
 		}
 
-
-
-
-
 		m_player.Update();
-		m_weapon.Update(m_player.GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
+		m_weapon.Update(m_player.GetPrefab()->GetPosition() + glm::vec3(5, 5, 0), b2Vec2(1.0, 1.0));
 
 		if (InputManager::Get()->GetButtonHeld(CONTROLLER_BUTTON_Y))
 		{
 			if (m_weapon.FireRate(0.2f))
 			{
-				m_weapon.Shoot(b2Vec2(5, 0), m_world.get(), m_player.GetPrefab()->GetProjectileSpawnPoint());
-				
+				m_weapon.Shoot(b2Vec2(450, 450), m_world.get(), glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
 			}
 		}
 
-		m_world->Step(1.0f / 10.0f, 6, 2); }
+		m_world->Step(1.0f / 30.0f, 6, 2); }
 		break;
 	case false:
-
+		std::cout << "LOADING" << std::endl;
 		EnterWorld();
 		break;
 		//Update player bounding box sprite position to the position of the player mesh
