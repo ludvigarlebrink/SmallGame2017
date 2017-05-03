@@ -54,30 +54,30 @@ void LevelEditor::Update()
 void LevelEditor::AxisMove()
 {
 	//Left stick
-	if (m_input->GetAxis(CONTROLLER_AXIS_LEFTY) || m_input->GetAxis(CONTROLLER_AXIS_LEFTX))
+	if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) || m_input->GetAxis(CONTROLLER_AXIS_LEFT_X))
 	{
 
-		if (m_input->GetAxis(CONTROLLER_AXIS_LEFTY) > 0.3)
+		if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) > 0.3)
 		{
 			m_levelMarker.SetCurrentPosY(m_levelMarker.GetCurrentPosY() - 1);
 		}
-		else if (m_input->GetAxis(CONTROLLER_AXIS_LEFTY) < -0.3)
+		else if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) < -0.3)
 		{
 			m_levelMarker.SetCurrentPosY(m_levelMarker.GetCurrentPosY() - (-1));
 		}
 
-		if(m_input->GetAxis(CONTROLLER_AXIS_LEFTX) > 0.3)
+		if(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X) > 0.3)
 		{
 			m_levelMarker.SetCurrentPosX(m_levelMarker.GetCurrentPosX() - 1);
 		}
-		else if (m_input->GetAxis(CONTROLLER_AXIS_LEFTX) < -0.3)
+		else if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_X) < -0.3)
 		{
 			m_levelMarker.SetCurrentPosX(m_levelMarker.GetCurrentPosX() - (-1));
 		}
 	}
 
 	//Right stick
-	if (m_input->GetAxis(CONTROLLER_AXIS_RIGHTY) != 0.0f || m_input->GetAxis(CONTROLLER_AXIS_RIGHTX) != 0.0f)
+	if (m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y) != 0.0f || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) != 0.0f)
 	{
 		// Do nothing...
 	}
