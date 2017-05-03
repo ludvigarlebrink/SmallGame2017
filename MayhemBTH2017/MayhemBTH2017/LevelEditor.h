@@ -60,7 +60,9 @@ private:
 	Camera				m_camera;
 	Timer				m_timer;
 	VirtualKeyboard		m_vk;
-	LevelTexture temp;
+	//TEMP
+	LevelTexture		m_levelTexture;
+	VideoManager	*	m_videoManager;
 };
 
 #endif // ! __LEVELEDITOR_H__

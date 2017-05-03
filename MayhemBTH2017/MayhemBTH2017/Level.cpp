@@ -26,8 +26,7 @@ void Level::Render(Camera camera)
 
 	m_debugShader.Update(tran, camera);
 
-
-	m_uv.x = 32.0/ 512.0;
+	m_uv.x = 0.0/ 512.0;
 	m_uv.y = 0.0 / 512.0;
 	m_uv.z = 32.0 / 512.0;
 	m_uv.w = 32.0 / 512.0;

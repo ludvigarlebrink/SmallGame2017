@@ -161,11 +161,13 @@ void Sprite::sendTexture()
 
 void Sprite::draw()
 {
-	sendColor();
 
-	sendTexture();
+	//sendTexture();
 
 	glBindVertexArray(m_vao);
+
+	sendColor();
+
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_ID);
 	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->quad.vertArr[0]), &this->quad.vertArr, GL_STATIC_DRAW);
 

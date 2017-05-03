@@ -23,6 +23,11 @@ int32_t LevelEditorStateMachine::GetState()
 	return m_state;
 }
 
+glm::vec2 LevelEditorStateMachine::GetCurrentUV()
+{
+	return m_currentUV;
+}
+
 void LevelEditorStateMachine::SetState(int32_t state)
 {
 	m_state = state;
@@ -39,6 +44,7 @@ void LevelEditorStateMachine::Render(Camera& cam)
 	case GUI_BLOCK:
 		Input();
 		RenderIcons(GUI_BLOCK);
+		m_currentUV = m_gui[GUI_BLOCK].m_icons[m_pos].GetUV();
 		break;
 
 	case GUI_PROP:
@@ -46,8 +52,7 @@ void LevelEditorStateMachine::Render(Camera& cam)
 		RenderIcons(GUI_PROP);
 
 		m_propPlacer.Update(m_pos);
-		m_propPlacer.Render(cam);
-		
+		m_propPlacer.Render(cam);	
 		
 		break;
 
@@ -60,10 +65,8 @@ void LevelEditorStateMachine::Render(Camera& cam)
 
 void LevelEditorStateMachine::RenderIcons(size_t gui)
 {
-
 	for (int i = 0; i < m_gui[gui].m_numIcons; i++)
 	{
-		//m_gui[gui].m_icons[i].RenderWithUV();
 		m_gui[gui].m_icons[i].RenderWithUV();
 	}
 	m_gui[gui].m_text.Render();
@@ -96,7 +99,7 @@ void LevelEditorStateMachine::Init()
 
 		case GUI_BLOCK:
 			m_gui[GUI_BLOCK].m_text.SetText("BLOCKS");
-			m_gui[GUI_BLOCK].m_texture.SetTexture(".\\Assets\\Sprites\\textureMap.png");
+			m_gui[GUI_BLOCK].m_texture.SetTexture(".\\Assets\\Textures\\textureMap.png");
 			m_gui[GUI_BLOCK].m_numIcons = 8;
 			break;
 
@@ -144,7 +147,6 @@ void LevelEditorStateMachine::Init()
 
 			if (m_gui[guiIndex].m_iconUV.x == 16)
 				++m_gui[guiIndex].m_iconUV.y;
-
 		}
 	}
 
