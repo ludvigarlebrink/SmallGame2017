@@ -6,6 +6,9 @@ LevelEditorPropPlacer::LevelEditorPropPlacer()
 {
 	Init();
 	m_time = TimeManager::Get();
+	m_input = InputManager::Get();
+
+	m_snap = true;
 }
 
 
@@ -13,16 +16,71 @@ LevelEditorPropPlacer::~LevelEditorPropPlacer()
 {
 }
 
+void LevelEditorPropPlacer::Start(glm::vec2 pos)
+{
+	m_pos = pos;
+}
+
 void LevelEditorPropPlacer::Update(int32_t pos)
 {
 	m_currentSelected = pos;
-	m_props[m_currentSelected]->prefab->SetPosition(glm::vec3(m_pos.x, m_pos.y, 0.0f));
+
+	m_pos.x -= m_input->GetAxis(CONTROLLER_AXIS_LEFT_X) * m_time->GetDeltaTime() * 20;
+	m_pos.y -= m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) * m_time->GetDeltaTime() * 20;
+
+	if (m_snap)
+	{
+		m_props[m_currentSelected]->prefab->SetPosition(glm::vec3(std::round(m_pos.x), 
+			std::round(m_pos.y) + 0.5f, 0.0f));
+	}
+	else
+	{
+		m_props[m_currentSelected]->prefab->SetPosition(glm::vec3(m_pos.x, m_pos.y, 0.0f));
+	}
+
 	m_props[m_currentSelected]->prefab->Update();
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
+	{
+		m_props.push_back(m_propHandler.Instantiate(m_props[m_currentSelected]->id));
+
+		if (m_snap)
+		{
+			m_props[m_props.size() - 1]->prefab->SetPosition(glm::vec3(std::round(m_pos.x), 
+				std::round(m_pos.y) + 0.5f, 0.0f));
+		}
+		else
+		{
+			m_props[m_props.size() - 1]->prefab->SetPosition(glm::vec3(m_pos.x, m_pos.y, 0.0f));
+		}
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
+	{
+		m_snap = !m_snap;
+	}
+
 }
 
 void LevelEditorPropPlacer::Render(Camera & cam)
 {
 	m_props[m_currentSelected]->prefab->Render(cam);
+
+	for (uint32_t i = m_propHandler.NUM_PROPS - 1; i < m_props.size(); i++)
+	{
+		m_props[i]->prefab->Render(cam);
+	}
+
+}
+
+void LevelEditorPropPlacer::Place()
+{
+	// TODO
+}
+
+void LevelEditorPropPlacer::Remove()
+{
+	// TODO
 }
 
 void LevelEditorPropPlacer::Init()

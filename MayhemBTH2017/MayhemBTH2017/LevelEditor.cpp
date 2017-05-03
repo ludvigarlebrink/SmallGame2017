@@ -54,14 +54,14 @@ void LevelEditor::Update()
 void LevelEditor::AxisMove()
 {
 	//Left stick
-	if (m_input->GetAxis(CONTROLLER_AXIS_LEFTY) || m_input->GetAxis(CONTROLLER_AXIS_LEFT_X))
+	if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) || m_input->GetAxis(CONTROLLER_AXIS_LEFT_X))
 	{
 
-		if (m_input->GetAxis(CONTROLLER_AXIS_LEFTY) > 0.3)
+		if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) > 0.3)
 		{
 			m_levelMarker.SetCurrentPosY(m_levelMarker.GetCurrentPosY() - 1);
 		}
-		else if (m_input->GetAxis(CONTROLLER_AXIS_LEFTY) < -0.3)
+		else if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) < -0.3)
 		{
 			m_levelMarker.SetCurrentPosY(m_levelMarker.GetCurrentPosY() - (-1));
 		}

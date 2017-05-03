@@ -7,8 +7,10 @@
 #include "Transform.h"
 #include "PropHandler.h"
 #include "TimeManager.h"
+#include "InputManager.h"
 
 
+#include <math.h>
 #include <glm.hpp>
 #include <vector>
 
@@ -16,8 +18,17 @@
 class LevelEditorPropPlacer
 {
 public:
+	struct PropsExport
+	{
+		uint32_t	id;
+		glm::vec2	pos;
+		float		rot;
+	};
+
 	LevelEditorPropPlacer();
 	virtual ~LevelEditorPropPlacer();
+	
+	void Start(glm::vec2 pos);
 
 	void Update(int32_t pos);
 	void Render(Camera& cam);
@@ -31,6 +42,9 @@ private:
 
 private:
 	TimeManager *						m_time;
+	InputManager *						m_input;
+
+	bool								m_snap;
 
 	PropHandler							m_propHandler;
 	std::vector<PropHandler::Prop *>	m_props;
