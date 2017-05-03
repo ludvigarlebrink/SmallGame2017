@@ -66,9 +66,7 @@ void Projectile::SetLife(int life)
 
 void Projectile::AddForce(b2Vec2 force)
 {
-
 	m_box.getBody()->ApplyForce(force, m_box.getBody()->GetWorldCenter(), true);
-	
 }
 
 int Projectile::GetLife()
