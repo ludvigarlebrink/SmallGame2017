@@ -45,22 +45,22 @@ private:
 		SAVE
 	};
 
-	glm::vec2				m_u = glm::vec2(0,0);
+	glm::vec2					m_u = glm::vec2(0,0);
 
-	InputManager *		m_input;
-	StateManager *		m_stateManager;
+	InputManager *				m_input;
+	StateManager *				m_stateManager;
 
-	uint32_t			m_state;
+	uint32_t					m_state;
 
-	Level				m_level;
-	LevelHandler		m_levelHandler;
-	LevelMarker			m_levelMarker;
+	Level						m_level;
+	LevelHandler				m_levelHandler;
+	LevelMarker					m_levelMarker;
 	LevelEditorStateMachine		m_levelGUI;
 
-	Camera				m_camera;
-	Timer				m_timer;
-	VirtualKeyboard		m_vk;
-	LevelTexture temp;
+	Camera						m_camera;
+	Timer						m_timer;
+	VirtualKeyboard				m_vk;
+	LevelTexture				temp;
 };
 
 #endif // ! __LEVELEDITOR_H__
