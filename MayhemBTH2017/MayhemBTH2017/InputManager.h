@@ -22,7 +22,8 @@ public:
 	bool GetButtonDown(size_t button, size_t controller = 0);
 	bool GetButtonHeld(size_t button, size_t controller = 0);
 	bool GetButtonUp(size_t button, size_t controller = 0);
-	float GetAxisDirection(size_t button, size_t controller = 0);
+	float GetAxis(size_t axis, size_t controller = 0);
+	float GetAxisRaw(size_t axis, size_t controller = 0);
 
 	//::.. SET FUNCTIONS ..:://
 	void SetNrOfPlayers(uint32_t value);

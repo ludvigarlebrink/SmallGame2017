@@ -154,7 +154,7 @@ void VirtualKeyboard::Input()
 		m_textField.SetText(m_inputString.c_str());
 	}
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_RB))
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_BUTTON_RIGHT))
 	{
 		if (m_currentLayout == QWERTY)
 		{

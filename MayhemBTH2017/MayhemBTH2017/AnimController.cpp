@@ -22,58 +22,14 @@ void AnimController::QuickUpdate(GLuint locations)
 
 void AnimController::Update(GLuint locations)
 {
-	Transform transform;
 
-	InputManager * input = InputManager::Get();
 
-	float x =  input->GetAxisDirection(CONTROLLER_AXIS_RIGHTX);
-	float y = input->GetAxisDirection(CONTROLLER_AXIS_RIGHTY);
-
-	KeyFrame * kf = new KeyFrame;
-	kf->localTx = new glm::mat4[m_skel->GetNumJoints()];
-	if (y < 0)
-	{
-		for (uint32_t i = 0; i < m_skel->GetNumJoints(); i++)
-		{
-			glm::quat rot1(glm::quat_cast(m_keyBase->localTx[i]));
-			glm::quat rot2(glm::quat_cast(m_keyUp->localTx[i]));
-			glm::quat rot3 = glm::lerp(rot1, rot2, abs(y));
-			kf->localTx[i] = glm::mat4(rot3);
-			kf->localTx[i][3] = m_keyBase->localTx[i][3];
-
-		}
-	}
-	else
-	{
-		if (abs(y) < 0.5f)
-		{
-			for (uint32_t i = 0; i < m_skel->GetNumJoints(); i++)
-			{
-				glm::quat rot1(glm::quat_cast(m_keyBase->localTx[i]));
-				glm::quat rot2(glm::quat_cast(m_keyDown->localTx[i]));
-				glm::quat rot3 = glm::lerp(rot1, rot2, abs(y * 2));
-				kf->localTx[i] = glm::mat4(rot3);
-				kf->localTx[i][3] = m_keyBase->localTx[i][3];
-			}
-		}
-		else
-		{
-			for (uint32_t i = 0; i < m_skel->GetNumJoints(); i++)
-			{
-				glm::quat rot1(glm::quat_cast(m_keyDown->localTx[i]));
-				glm::quat rot2(glm::quat_cast(m_keyDown2->localTx[i]));
-				glm::quat rot3 = glm::lerp(rot1, rot2, abs((y - 0.5f) * 2));
-				kf->localTx[i] = glm::mat4(rot3);
-				kf->localTx[i][3] = m_keyBase->localTx[i][3];
-			}
-		}
-	}
-
-	m_skel->Update(kf, true, 1, 11);
+//	m_skel->Update(kf, pre_ktrue, 1, 11);
 
 	m_clips[m_currClip]->Update();
 
-	m_skel->Update(m_clips[m_currClip]->GetCurrentKeyFrame(), false, 12);
+	m_skel->Update(m_clips[m_currClip]->GetCurrentKeyFrame(), 
+		m_clips[m_currClip]->GetPreviousKeyFrame(), m_clips[m_currClip]->GetInter(), false, 12);
 
 	glUniformMatrix4fv(locations, m_skel->GetNumJoints(), GL_FALSE, &m_skel->GetSkinnedTx()[0][0][0]);
 }
