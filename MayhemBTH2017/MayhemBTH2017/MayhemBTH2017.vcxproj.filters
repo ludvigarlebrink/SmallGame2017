@@ -231,6 +231,10 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="PowerUpHandler.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -388,6 +392,10 @@
     <ClInclude Include="Projectile.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="PowerUpHandler.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -453,5 +461,11 @@
     <None Include="Assets\GLSL\LevelShader.frag" />
     <None Include="Assets\GLSL\LevelShader.vert" />
     <None Include="DebugShader.frag" />
+    <None Include="Assets\GLSL\ColliderShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ColliderShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

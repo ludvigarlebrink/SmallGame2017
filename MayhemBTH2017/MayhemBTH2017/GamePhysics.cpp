@@ -48,6 +48,7 @@ void GamePhysics::EnterWorld()
 
 	///////////////////////////////////////////////////////////////////
 
+	m_powerupHandler.Init(m_player, m_world.get(), 60);
 
 	//FIXTURES FOR COLLISIONS
 
@@ -61,10 +62,8 @@ void GamePhysics::Update()
 {
 
 	//Update player bounding box sprite position to the position of the player mesh
+	
 
-	if (!(m_player.GetCategoryBits() & powerUpFixture.filter.maskBits) != 0 && (powerUpFixture.filter.categoryBits & m_player.GetMaskBits()) != 0) {
-		std::cout << "touching" << std::endl;
-	}
 
 	m_world->Step(2.0f / 80.0f, 6, 2);
 	
@@ -72,6 +71,7 @@ void GamePhysics::Update()
 
 	m_weapon.Update(m_player.GetPrefab()->GetPosition() + glm::vec3(5, 5, 0), b2Vec2(1.0, 1.0));
 
+	
 	if (InputManager::Get()->GetButtonHeld(CONTROLLER_BUTTON_Y))
 	{
 		if (m_weapon.FireRate(0.1f))
@@ -79,6 +79,8 @@ void GamePhysics::Update()
 			m_weapon.Shoot(b2Vec2(1000, 1000), m_world.get(), glm::vec3(m_player.GetPrefab()->GetPosition().x + 10, m_player.GetPrefab()->GetPosition().y, m_player.GetPrefab()->GetPosition().z));
 		}
 	}
+
+	m_powerupHandler.Update();
 
 	m_world->Step(2.0f / 80.0f, 6, 2);
 
@@ -97,5 +99,7 @@ void GamePhysics::Render(Camera camera) {
 	m_player.Render(camera);
 
 	m_weapon.Render(camera);
+
+	m_powerupHandler.Render(camera);
 
 }

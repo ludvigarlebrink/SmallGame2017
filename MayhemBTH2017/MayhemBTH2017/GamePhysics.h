@@ -5,6 +5,8 @@
 #include "Collider2D.h"
 #include "Player.h"
 #include "Weapon.h"
+#include "PowerUpHandler.h"
+#include "Vector.h"
 
 
 class GamePhysics
@@ -51,7 +53,7 @@ private:
 	b2FixtureDef powerUpFixture;
 
 	Weapon m_weapon;
-
+	PowerUpHandler m_powerupHandler;
 
 };
 
