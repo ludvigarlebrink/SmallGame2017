@@ -21,7 +21,7 @@ public:
 		float damping, float density,
 		float fireRate, bool startUp, Prefab * prefab);
 
-	void InitBullet(b2World * world, glm::vec2 spawnPos);
+	void InitBullet(b2World * world, glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(int life);
@@ -37,6 +37,9 @@ public:
 	//::.. OTHER FUNCTIONS ..:://
 	void Update();
 	void Render(Camera camera);
+	void StartContact();
+	void EndContact();
+
 
 private:
 	Prefab*		m_prefab;
@@ -52,6 +55,7 @@ private:
 	GLfloat m_bulletScale;
 	bool m_isBullet;
 	bool m_fired;
+	bool m_contact;
 	
 	enum _entityCategory {
 		BOUNDARY = 0x0001,

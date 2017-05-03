@@ -16,7 +16,7 @@ void main()
 	UV1=UV;
 	float x=Position.x;
 	float y=Position.y;
-	gl_Position=P*V*M*vec4(x,y, 0, 1);
+	gl_Position=P*V*vec4(x,y, 0, 1);
 
 }
 

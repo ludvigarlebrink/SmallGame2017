@@ -1,7 +1,6 @@
 #include "PlayerPrefab.h"
 
 
-
 //::.. CONSTRUCTORS ..:://
 PlayerPrefab::PlayerPrefab()
 {
@@ -91,6 +90,8 @@ void PlayerPrefab::Update(float x, float y, float speed)
 	m_weapon->SetRotation(glm::vec3(y * -90, m_weapRotY, 0.0f));
 
 	m_projectileSpawnPoint = glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]);
+
+	
 }
 
 

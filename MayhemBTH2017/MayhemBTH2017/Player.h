@@ -50,11 +50,10 @@ private:
 	bool m_doubleJump;
 	bool m_contact;
 	b2FixtureDef m_fixture;
-
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
 		PLAYER = 0x0002,
-		ENEMY = 0x0004,
+		PROJECTILE = 0x0004,
 		FRIENDLY_AIRCRAFT = 0x0008,
 		ENEMY_AIRCRAFT = 0x0010,
 	};

@@ -12,10 +12,12 @@
 
 struct GUI
 {
-	UIText					m_text;
+	glm::vec2				m_iconUV = glm::vec2(0, 0);
+	static const int32_t	m_resolution = 256;
 	int32_t					m_numIcons = 0;
-	glm::vec2				m_iconUV[16][16];
-	std::vector<UIImage>	m_icons;
+	UIText					m_text;
+	UIImage					m_texture;
+	UIImage					m_icons[m_resolution];
 };
 
 enum LevelEditorState
@@ -67,7 +69,17 @@ private:
 
 	std::ifstream	m_texFile;
 	std::string		m_line;
+	uint32_t		m_nSize;
+	uint32_t		m_hSize;
+	int32_t			m_state;
+	int32_t			m_pos;
 
+	int32_t			m_rows;
+	int32_t			m_columns;
+	int32_t			m_offsetX;
+	int32_t			m_offsetY;
+	int32_t			m_offsetMother;
+	int32_t			m_offsetCounter;
 	LevelEditorPropPlacer m_propPlacer;
 };
 
