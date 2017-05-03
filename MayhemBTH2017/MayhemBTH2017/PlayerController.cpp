@@ -341,20 +341,17 @@ void PlayerController::GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent)
 		// Horizonal
 	case SDL_CONTROLLER_AXIS_LEFTX:
 		m_axis[CONTROLLER_AXIS_LEFT_X].axisRaw = ScaleRange(controllerEvent.value);
-		std::cout << "CONTROLLER_AXIS_LEFTX: " << m_axis[CONTROLLER_AXIS_LEFT_X].axisRaw << std::endl;
 		break;
 
 		// Vetical
 	case SDL_CONTROLLER_AXIS_LEFTY:
 		m_axis[CONTROLLER_AXIS_LEFT_Y].axisRaw = ScaleRange(controllerEvent.value);
-
 		break;
 
 		// Right stick
 		// Horizontal
 	case SDL_CONTROLLER_AXIS_RIGHTX:
 		m_axis[CONTROLLER_AXIS_RIGHT_X].axisRaw = ScaleRange(controllerEvent.value);
-		std::cout << "CONTROLLER_AXIS_RIGHTX: " << m_axis[CONTROLLER_AXIS_RIGHT_X].axisRaw << std::endl;
 		break;
 		// Vetical
 	case SDL_CONTROLLER_AXIS_RIGHTY:
@@ -364,13 +361,11 @@ void PlayerController::GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent)
 		// Left trigger
 	case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
 		m_axis[CONTROLLER_AXIS_TRIGGER_LEFT].axisRaw = ScaleRange(controllerEvent.value);
-		std::cout << "CONTROLLER_AXIS_TRIGGERLEFT: " << m_axis[CONTROLLER_AXIS_TRIGGER_LEFT].axisRaw << std::endl;
 		break;
 
 		// Right trigger
 	case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
 		m_axis[CONTROLLER_AXIS_TRIGGER_RIGHT].axisRaw = ScaleRange(controllerEvent.value);
-		std::cout << "CONTROLLER_AXIS_TRIGGERRIGHT: " << m_axis[CONTROLLER_AXIS_TRIGGER_RIGHT].axisRaw << std::endl;
 		break;
 	}
 }
