@@ -15,7 +15,7 @@ struct Button
 
 struct Axis
 {
-	float axisDirection;
+	float axis;
 };
 
 enum ButtonInput
@@ -26,8 +26,8 @@ enum ButtonInput
 	CONTROLLER_BUTTON_Y,
 	CONTROLLER_BUTTON_BACK,
 	CONTROLLER_BUTTON_START,
-	CONTROLLER_BUTTON_LEFTSHOULDER,
-	CONTROLLER_BUTTON_RB,
+	CONTROLLER_BUTTON_LEFTBUTTON,
+	CONTROLLER_BUTTON_RIGHTBUTTON,
 	CONTROLLER_BUTTON_DPAD_UP,
 	CONTROLLER_BUTTON_DPAD_DOWN,
 	CONTROLLER_BUTTON_DPAD_LEFT,
@@ -41,6 +41,8 @@ enum AxisInput
 	CONTROLLER_AXIS_LEFTY,
 	CONTROLLER_AXIS_RIGHTX,
 	CONTROLLER_AXIS_RIGHTY,
+	CONTROLLER_AXIS_TRIGGERLEFT,
+	CONTROLLER_AXIS_TRIGGERRIGHT,
 	NUM_AXIS
 };
 
@@ -70,7 +72,8 @@ private:
 	void Init();
 	void ButtonDown(const SDL_ControllerButtonEvent controllerEvent);
 	void ButtonUp(const SDL_ControllerButtonEvent controllerEvent);
-	void AxisInput(const SDL_ControllerAxisEvent controllerEvent);
+	void GetAxis(const SDL_ControllerAxisEvent controllerEvent);
+	void GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent);
 	float ScaleRange(Sint16 value); //Scale value to [-1, 1]
 
 private:

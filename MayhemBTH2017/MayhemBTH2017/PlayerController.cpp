@@ -36,7 +36,7 @@ void PlayerController::Update()
 			break;
 
 		case SDL_CONTROLLERAXISMOTION:
-			AxisInput(m_event.caxis);
+			GetAxis(m_event.caxis);
 			break;
 		}
 	}
@@ -84,7 +84,7 @@ bool PlayerController::GetButtonUp(size_t button)
 
 float PlayerController::GetAxisDirection(size_t axis)
 {
-	return m_axis[axis].axisDirection;
+	return m_axis[axis].axis;
 }
 
 size_t PlayerController::GetNumButtons()
@@ -147,13 +147,13 @@ void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEven
 		break;
 
 	case SDL_CONTROLLER_BUTTON_LEFTSHOULDER:
-		m_button[CONTROLLER_BUTTON_LEFTSHOULDER].isDown = true;
-		m_button[CONTROLLER_BUTTON_LEFTSHOULDER].isHeld = true;
+		m_button[CONTROLLER_BUTTON_LEFTBUTTON].isDown = true;
+		m_button[CONTROLLER_BUTTON_LEFTBUTTON].isHeld = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
-		m_button[CONTROLLER_BUTTON_RB].isDown = true;
-		m_button[CONTROLLER_BUTTON_RB].isHeld = true;
+		m_button[CONTROLLER_BUTTON_RIGHTBUTTON].isDown = true;
+		m_button[CONTROLLER_BUTTON_RIGHTBUTTON].isHeld = true;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_DPAD_UP:
@@ -214,13 +214,13 @@ void PlayerController::ButtonUp(const SDL_ControllerButtonEvent controllerEvent)
 		break;
 
 	case SDL_CONTROLLER_BUTTON_LEFTSHOULDER:
-		m_button[CONTROLLER_BUTTON_LEFTSHOULDER].isUp = true;
-		m_button[CONTROLLER_BUTTON_LEFTSHOULDER].isHeld = false;
+		m_button[CONTROLLER_BUTTON_LEFTBUTTON].isUp = true;
+		m_button[CONTROLLER_BUTTON_LEFTBUTTON].isHeld = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
-		m_button[CONTROLLER_BUTTON_RB].isUp = true;
-		m_button[CONTROLLER_BUTTON_RB].isHeld = false;
+		m_button[CONTROLLER_BUTTON_RIGHTBUTTON].isUp = true;
+		m_button[CONTROLLER_BUTTON_RIGHTBUTTON].isHeld = false;
 		break;
 
 	case SDL_CONTROLLER_BUTTON_DPAD_UP:
@@ -246,7 +246,7 @@ void PlayerController::ButtonUp(const SDL_ControllerButtonEvent controllerEvent)
 	}
 }
 
-void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
+void PlayerController::GetAxis(const SDL_ControllerAxisEvent controllerEvent)
 {
 
 	switch (controllerEvent.axis) {
@@ -256,11 +256,11 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 	case SDL_CONTROLLER_AXIS_LEFTX:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_LEFTX].axis = ScaleRange(controllerEvent.value);
 		}
 		else
 		{
-			m_axis[CONTROLLER_AXIS_LEFTX].axisDirection = 0.0f;
+			m_axis[CONTROLLER_AXIS_LEFTX].axis = 0.0f;
 		}
 		break;
 
@@ -268,11 +268,11 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 	case SDL_CONTROLLER_AXIS_LEFTY:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_axis[CONTROLLER_AXIS_LEFTY].axisDirection = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_LEFTY].axis = ScaleRange(controllerEvent.value);
 		}
 		else
 		{
-			m_axis[CONTROLLER_AXIS_LEFTY].axisDirection = 0.0f;
+			m_axis[CONTROLLER_AXIS_LEFTY].axis = 0.0f;
 		}
 		break;
 
@@ -282,23 +282,84 @@ void PlayerController::AxisInput(const SDL_ControllerAxisEvent controllerEvent)
 	case SDL_CONTROLLER_AXIS_RIGHTX:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_RIGHTX].axis = ScaleRange(controllerEvent.value);
 		}
 		else
 		{
-			m_axis[CONTROLLER_AXIS_RIGHTX].axisDirection = 0.0f;
+			m_axis[CONTROLLER_AXIS_RIGHTX].axis = 0.0f;
 		}
 		break;
 		// Vetical
 	case SDL_CONTROLLER_AXIS_RIGHTY:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_RIGHTY].axis = ScaleRange(controllerEvent.value);
 		}
 		else
 		{
-			m_axis[CONTROLLER_AXIS_RIGHTY].axisDirection = 0.0f;
+			m_axis[CONTROLLER_AXIS_RIGHTY].axis = 0.0f;
 		}
+		break;
+
+		// Left trigger
+	case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
+		if (ScaleRange(controllerEvent.value) > m_deadzone)
+		{
+			m_axis[CONTROLLER_AXIS_TRIGGERLEFT].axis = ScaleRange(controllerEvent.value);
+		}
+		else
+		{
+			m_axis[CONTROLLER_AXIS_TRIGGERLEFT].axis = 0.0f;
+		}
+		break;
+
+		// Right trigger
+	case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
+		if (ScaleRange(controllerEvent.value) > m_deadzone)
+		{
+			m_axis[CONTROLLER_AXIS_TRIGGERRIGHT].axis = ScaleRange(controllerEvent.value);
+		}
+		else
+		{
+			m_axis[CONTROLLER_AXIS_TRIGGERRIGHT].axis = 0.0f;
+		}
+		break;
+	}
+}
+
+void PlayerController::GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent)
+{
+	switch (controllerEvent.axis) {
+
+		// Left Stick
+		// Horizonal
+	case SDL_CONTROLLER_AXIS_LEFTX:
+		m_axis[CONTROLLER_AXIS_LEFTX].axis = ScaleRange(controllerEvent.value);
+		break;
+
+		// Vetical
+	case SDL_CONTROLLER_AXIS_LEFTY:
+		m_axis[CONTROLLER_AXIS_LEFTY].axis = ScaleRange(controllerEvent.value);
+		break;
+
+		// Right stick
+		// Horizontal
+	case SDL_CONTROLLER_AXIS_RIGHTX:
+		m_axis[CONTROLLER_AXIS_RIGHTX].axis = ScaleRange(controllerEvent.value);
+		break;
+		// Vetical
+	case SDL_CONTROLLER_AXIS_RIGHTY:
+		m_axis[CONTROLLER_AXIS_RIGHTY].axis = ScaleRange(controllerEvent.value);
+		break;
+
+		// Left trigger
+	case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
+		m_axis[CONTROLLER_AXIS_TRIGGERLEFT].axis = ScaleRange(controllerEvent.value);
+		break;
+
+		// Right trigger
+	case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
+		m_axis[CONTROLLER_AXIS_TRIGGERRIGHT].axis = ScaleRange(controllerEvent.value);
 		break;
 	}
 }
