@@ -59,7 +59,7 @@ bool InputManager::GetButtonUp(size_t button, size_t controller)
 	return m_playerController[controller].GetButtonUp(button);
 }
 
-float InputManager::GetAxisDirection(size_t axis, size_t controller)
+float InputManager::GetAxis(size_t axis, size_t controller)
 {
 	return m_playerController[controller].GetAxisDirection(axis);
 }
