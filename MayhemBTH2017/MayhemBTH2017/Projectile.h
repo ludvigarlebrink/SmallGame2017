@@ -25,7 +25,7 @@ public:
 
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(int life);
-	void AddForce(b2Vec2 force);
+	void AddForce(glm::vec3 force);
 	void SetFired(bool fired);
 
 	//::.. GET FUNCTIONS ..:://
@@ -49,7 +49,8 @@ private:
 	int			m_life;
 	TextureHandler m_texhandler;
 	Texture m_texture;
-
+	Transform m_transform;
+	Camera	m_camera;
 	GLfloat m_rotationUpdate;
 	Sprite m_bulletSprite;
 	GLfloat m_bulletScale;

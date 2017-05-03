@@ -44,7 +44,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	
 	b2Filter filter;
 	filter.categoryBits = PLAYER;
-	filter.maskBits = BOUNDARY| PROJECTILE;
+	filter.maskBits = BOUNDARY;
 	GetBox().getFixture()->SetFilterData(filter);
 
 	GetBox().getBody()->SetUserData(this);

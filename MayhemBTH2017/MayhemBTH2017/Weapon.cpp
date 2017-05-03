@@ -92,8 +92,8 @@ void Weapon::Render(Camera camera)
 		m_projectiles[i]->Render(camera);
 
 	}
-	m_prefabGun->Update();
-	m_prefabGun->Render(camera);
+	//m_prefabGun->Update();
+	//m_prefabGun->Render(camera);
 }
 
 void Weapon::RenderParticles(Camera camera) {
@@ -101,8 +101,17 @@ void Weapon::RenderParticles(Camera camera) {
 
 }
 
-void Weapon::Shoot(b2Vec2 force, b2World * world, glm::vec3 pos)
+void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos)
 {
+
+
+	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X), InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_Y));
+
+	if (abs(force.x) > 0.001f || abs(force.y) > 0.001f)
+		force = glm::normalize(force);
+
+	firePower *= -1;
+	force *= firePower;
 
 	if (m_projectiles.size() < m_clearRate)
 	{
@@ -117,12 +126,13 @@ void Weapon::Shoot(b2Vec2 force, b2World * world, glm::vec3 pos)
 				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile);
 		}
 		else if (m_isBullet == true) {
-	
+
 			projectile->InitBullet(world, glm::vec2(pos.x, pos.y));
 		}
 
-		projectile->AddForce(force);
+		projectile->AddForce(glm::vec3(force, 0.0f));
 		m_projectiles.push_back(projectile);
+
 	}
 
 
@@ -141,17 +151,17 @@ void Weapon::Shoot(b2Vec2 force, b2World * world, glm::vec3 pos)
 					glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 					m_restitution, m_friction, m_damping, m_density, m_fireRate, false, m_prefabProjectile);
 				m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
-				m_projectiles[m_projectileCounter]->AddForce(force);
+				m_projectiles[m_projectileCounter]->AddForce(glm::vec3(force, 0.0f));
 
 				m_projectileCounter++;
 
 			}
 
 			else if (m_isBullet == true) {
-				
+
 				m_projectiles[m_projectileCounter]->InitBullet(world, glm::vec2(pos.x, pos.y));
 
-				m_projectiles[m_projectileCounter]->AddForce(force);
+				m_projectiles[m_projectileCounter]->AddForce(glm::vec3(force, 0.0f));
 
 				m_projectileCounter++;
 
@@ -169,7 +179,6 @@ void Weapon::Shoot(b2Vec2 force, b2World * world, glm::vec3 pos)
 bool Weapon::FireRate(float rate)
 {
 
-	std::cout << "timer: " << m_time << " rate " << rate << std::endl;
 
 	if (m_time >= rate)
 	{
