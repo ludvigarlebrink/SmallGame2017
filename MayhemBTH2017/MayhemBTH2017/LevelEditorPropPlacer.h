@@ -32,6 +32,7 @@ public:
 
 	void Update(int32_t pos);
 	void Render(Camera& cam);
+	void RenderProps(Camera& cam);
 
 	void Place();
 	void Remove();

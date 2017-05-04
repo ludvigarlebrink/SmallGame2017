@@ -85,6 +85,8 @@ inline bool MrMatHandler::Import(const char * filepath)
 
 	file.read(reinterpret_cast<char*>(&m_numTextures), sizeof(uint32_t));
 
+	m_textures = new MrTexture[m_numTextures];
+
 	for (uint32_t i = 0; i < m_numTextures; i++)
 	{
 		file.read(reinterpret_cast<char*>(&m_textures[i].type), sizeof(uint32_t));
@@ -92,6 +94,9 @@ inline bool MrMatHandler::Import(const char * filepath)
 		file.read(reinterpret_cast<char*>(&m_textures[i].height), sizeof(uint32_t));
 		file.read(reinterpret_cast<char*>(&m_textures[i].numComponents), sizeof(uint32_t));
 		file.read(reinterpret_cast<char*>(&m_textures[i].dataLength), sizeof(uint32_t));
+
+		m_textures[i].data = new unsigned char[m_textures[i].dataLength];
+
 		file.read(reinterpret_cast<char*>(m_textures[i].data), sizeof(unsigned char) * m_textures[i].dataLength);
 	}
 
@@ -159,7 +164,7 @@ inline void MrMatHandler::SetTextures(MrTexture * textures, uint32_t num)
 //::.. HELP FUNCTIONS ..:://
 inline void MrMatHandler::Init()
 {
-	m_isLoaded			= false;
+	m_isLoaded = false;
 
-	m_textures			= nullptr;
+	m_textures = nullptr;
 }

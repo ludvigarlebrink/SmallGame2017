@@ -23,8 +23,8 @@ public:
 	Prefab();
 	virtual ~Prefab();
 
-	void Update();
-	void Render(Camera& cam);
+	virtual void Update();
+	virtual void Render(Camera& cam);
 
 	void Create();
 	void Free();

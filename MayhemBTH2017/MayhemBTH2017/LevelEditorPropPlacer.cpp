@@ -65,12 +65,14 @@ void LevelEditorPropPlacer::Update(int32_t pos)
 void LevelEditorPropPlacer::Render(Camera & cam)
 {
 	m_props[m_currentSelected]->prefab->Render(cam);
+}
 
+void LevelEditorPropPlacer::RenderProps(Camera & cam)
+{
 	for (uint32_t i = m_propHandler.NUM_PROPS - 1; i < m_props.size(); i++)
 	{
 		m_props[i]->prefab->Render(cam);
 	}
-
 }
 
 void LevelEditorPropPlacer::Place()
