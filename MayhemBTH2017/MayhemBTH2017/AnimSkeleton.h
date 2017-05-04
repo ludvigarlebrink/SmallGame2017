@@ -3,7 +3,8 @@
 
 
 #include "AnimUtil.h"
-
+#include "Transform.h"
+#include "GLM\gtc\quaternion.hpp"
 
 #include <glm.hpp>
 
@@ -17,7 +18,7 @@ public:
 	AnimSkeleton();
 	virtual ~AnimSkeleton();
 
-	void Update(KeyFrame * kf);
+	void Update(KeyFrame * kf, KeyFrame * preKf, float inter, bool animateBindPose = true, int32_t from = 0, int32_t to = -1);
 
 	//::.. GET FUNCTIONS ..:://
 	uint32_t GetNumJoints();
@@ -27,16 +28,12 @@ public:
 	//::.. SET FUNCTIONS ..:://
 	void SetSkeleton(uint32_t * parentID, glm::mat4 * localTx,
 		uint32_t numJoints);
-
-private:
-	glm::mat4 ReadHierarchy(uint32_t n, glm::mat4 kf);
+	void SetJointRotation(Transform& rotation, uint32_t jointID);
 
 private:
 	uint32_t	m_numJoints;
 	Joint *		m_skel;
 	glm::mat4 *	m_skinnedTx;
-	float		m_counter;
-	
 };
 
 

@@ -599,6 +599,7 @@ namespace glm
 		typename tmat4x4<T, P>::col_type const SrcA2 = m1[2];
 		typename tmat4x4<T, P>::col_type const SrcA3 = m1[3];
 
+
 		typename tmat4x4<T, P>::col_type const SrcB0 = m2[0];
 		typename tmat4x4<T, P>::col_type const SrcB1 = m2[1];
 		typename tmat4x4<T, P>::col_type const SrcB2 = m2[2];

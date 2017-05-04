@@ -19,7 +19,9 @@ public:
 	UIImage();
 	virtual ~UIImage();
 
+	//::.. UPDATE FUNCTIONS ..:://
 	void Render();
+	void RenderWithUV();
 
 
 	//::.. GET FUNCTIONS ..:://
@@ -27,6 +29,8 @@ public:
 	int32_t GetSizeY();
 	int32_t GetPosX();
 	int32_t GetPosY();
+	Texture GetTexture();
+	glm::vec2 GetUV();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetPosition(int32_t x, int32_t y);
@@ -35,7 +39,8 @@ public:
 	void SetAlpha(float alpha);
 	void SetAlpha(uint8_t alpha);
 	void SetTexture(const char* filepath);
-	void SetUV(const char* filepath, glm::vec4 uv);
+	void SetTexture(Texture texture);
+	void SetUV(glm::vec2 uv);
 
 private:
 	VideoManager * m_videoManager;
@@ -49,11 +54,12 @@ private:
 	int32_t m_posX;
 	int32_t m_posY;
 
-	glm::vec4 m_texUV;
+	glm::vec2 m_UV;	
 
 	SDL_Color m_color;
 	Texture m_texture;
 	bool	m_showTexture;
+
 };
 
 

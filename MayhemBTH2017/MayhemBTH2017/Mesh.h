@@ -53,6 +53,7 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	bool GetIsLoaded();
+	GLfloat GetHeight();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetRenderMode(GLenum renderMode);

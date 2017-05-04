@@ -4,12 +4,14 @@
 
 #include "Level.h"
 #include "Timer.h"
+#include "TimeManager.h"
 //#include "TextureHandler.h"
 #include "LevelHandler.h"
 #include "LevelMarker.h"
 #include "StateManager.h"
 #include "VirtualKeyboard.h"
-#include "LevelEditorGUI.h"
+#include "LevelEditorStateMachine.h"
+#include "LevelTexture.h"
 
 
 #include <glm.hpp>
@@ -32,9 +34,9 @@ public:
 
 private:
 	//::.. HELP FUNCTIONS ..:://
+	void Reset();
 	void AxisMove();
 	void ButtonInput();
-	void Reset();
 
 private:
 	enum State
@@ -48,17 +50,21 @@ private:
 
 	InputManager *		m_input;
 	StateManager *		m_stateManager;
+	TimeManager *		m_timeManager;
 
 	uint32_t			m_state;
 
 	Level				m_level;
 	LevelHandler		m_levelHandler;
 	LevelMarker			m_levelMarker;
-	LevelEditorGUI		m_levelGUI;
+	LevelEditorStateMachine		m_levelGUI;
 
 	Camera				m_camera;
 	Timer				m_timer;
 	VirtualKeyboard		m_vk;
+	//TEMP
+	LevelTexture		m_levelTexture;
+	VideoManager	*	m_videoManager;
 };
 
 #endif // ! __LEVELEDITOR_H__

@@ -47,8 +47,8 @@ public:
 	const char * GetName();
 	int32_t GetFirstKeyFrame();
 	int32_t GetLastKeyFrame();
-	uint32_t GetNumKeyFrames();
-	MrKeyFramedJoint * GetKeyFrames();
+	uint32_t GetNumKeyFramedJoints();
+	MrKeyFramedJoint * GetKeyFramedJoints();
 
 
 private:
@@ -107,8 +107,8 @@ inline bool MrAnimHandler::Import(const char * filepath)
 		file.read(reinterpret_cast<char*>(&m_keyFramedJoints[i].jointID), sizeof(uint32_t));
 		file.read(reinterpret_cast<char*>(&m_keyFramedJoints[i].numKeyframes), sizeof(uint32_t));
 
-		m_keyFramedJoints[i].matrix = new glm::mat4[m_numKeyFramedJoints];
-		m_keyFramedJoints[i].keyFrames = new int32_t[m_numKeyFramedJoints];
+		m_keyFramedJoints[i].matrix = new glm::mat4[m_keyFramedJoints[i].numKeyframes];
+		m_keyFramedJoints[i].keyFrames = new int32_t[m_keyFramedJoints[i].numKeyframes];
 
 		file.read(reinterpret_cast<char*>(m_keyFramedJoints[i].matrix), sizeof(glm::mat4) * m_keyFramedJoints[i].numKeyframes);
 		file.read(reinterpret_cast<char*>(m_keyFramedJoints[i].keyFrames), sizeof(int32_t) * m_keyFramedJoints[i].numKeyframes);
@@ -218,13 +218,13 @@ inline int32_t MrAnimHandler::GetLastKeyFrame()
 }
 
 
-inline uint32_t MrAnimHandler::GetNumKeyFrames()
+inline uint32_t MrAnimHandler::GetNumKeyFramedJoints()
 {
 	return m_numKeyFramedJoints;
 }
 
 
-inline MrKeyFramedJoint * MrAnimHandler::GetKeyFrames()
+inline MrKeyFramedJoint * MrAnimHandler::GetKeyFramedJoints()
 {
 	return m_keyFramedJoints;
 }

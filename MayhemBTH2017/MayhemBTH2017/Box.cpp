@@ -11,16 +11,15 @@ Box::~Box()
 {
 }
 
-void Box::initDynamic(b2World * world, const glm::vec2 & pos, const glm::vec2 & scale)
+void Box::InitDynamic(b2World * world, const glm::vec2 & pos, const glm::vec2 & scale)
 {
-	this->m_scale = scale;
+	m_scale = scale;
 
 
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(pos.x, pos.y);
+	m_bodyDef.type = b2_dynamicBody;
+	m_bodyDef.position.Set(pos.x, pos.y);
 
-	this->body = world->CreateBody(&bodyDef);
+	m_body = world->CreateBody(&m_bodyDef);
 
 	b2PolygonShape boxShape;
 	boxShape.SetAsBox(scale.x / 2, scale.y / 2);
@@ -28,20 +27,20 @@ void Box::initDynamic(b2World * world, const glm::vec2 & pos, const glm::vec2 & 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &boxShape;
 
-	this->fixture = this->body->CreateFixture(&fixtureDef);
+	m_fixture = m_body->CreateFixture(&fixtureDef);
 
 }
 
-void Box::initStatic(b2World * world, const glm::vec2 & pos, const glm::vec2 & scale)
+void Box::InitStatic(b2World * world, const glm::vec2 & pos, const glm::vec2 & scale)
 {
-	this->m_scale = scale;
+	m_scale = scale;
 
 
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(pos.x + (scale.x/2), pos.y + (scale.y / 2));
 
-	this->body = world->CreateBody(&bodyDef);
+	m_body = world->CreateBody(&bodyDef);
 
 	b2PolygonShape boxShape;
 	boxShape.SetAsBox(scale.x / 2, scale.y / 2);
@@ -52,20 +51,49 @@ void Box::initStatic(b2World * world, const glm::vec2 & pos, const glm::vec2 & s
 	fixtureDef.friction = 0.3f;
 	fixtureDef.restitution = 0.7f;
 
-	this->fixture = this->body->CreateFixture(&fixtureDef);
+	m_fixture = m_body->CreateFixture(&fixtureDef);
 }
 
-b2Body * Box::getBody()
+void Box::SetCategoryBits(short CATEGORY)
 {
-	return this->body;
+	m_fixtureDef.filter.categoryBits = CATEGORY;
 }
 
-b2Fixture * Box::getFixture()
+void Box::SetMaskBits(short MASK)
 {
-	return this->fixture;
+	m_fixtureDef.filter.maskBits = MASK;
 }
 
-glm::vec2 Box::getScale()
+uint16 Box::GetCategoryBits()
 {
-	return this->m_scale;
+	return m_fixtureDef.filter.categoryBits;
 }
+
+uint16 Box::GetMaskBits()
+{
+	return  m_fixtureDef.filter.maskBits;
+}
+
+b2BodyDef Box::GetBodyDef()
+{
+	return m_bodyDef;
+}
+
+void Box::SetBodyDef(b2World * world, const glm::vec2 & pos, const glm::vec2 & scale, b2BodyType type)
+{
+
+	m_bodyDef.type = type;
+	m_bodyDef.position.Set(pos.x, pos.y);
+
+	m_body = world->CreateBody(&m_bodyDef);
+
+	b2PolygonShape boxShape;
+	boxShape.SetAsBox(scale.x / 2, scale.y / 2);
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &boxShape;
+
+	m_fixture = m_body->CreateFixture(&fixtureDef);
+}
+
+

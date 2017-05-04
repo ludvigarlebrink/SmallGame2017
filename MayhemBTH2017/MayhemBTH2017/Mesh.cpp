@@ -78,7 +78,6 @@ bool Mesh::Load(Vertex3D * vertices, uint64_t numVerts)
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
-	glEnableVertexAttribArray(3);
 
 	// Generate buffers.
 	glGenBuffers(1, &m_buffer);
@@ -200,6 +199,20 @@ bool Mesh::GetIsLoaded()
 	return m_isLoaded;
 }
 
+GLfloat Mesh::GetHeight() {
+
+	GLfloat maxY = 0;
+
+	for (int i = 0; i < m_drawCount; i++) {
+
+		if (m_vertices3DSkelAnimation[i].position.y > maxY) {
+			maxY = m_vertices3DSkelAnimation[i].position.y;
+
+		}
+	}
+
+	return maxY;
+}
 
 void Mesh::SetRenderMode(GLenum renderMode)
 {
@@ -211,3 +224,4 @@ void Mesh::Update()
 	glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex3D) * m_drawCount, m_vertices3D, GL_STATIC_DRAW);
 }
+

@@ -69,15 +69,15 @@ public:
 
 
 	//::.. UPDATE FUNCTIONS ..:://
-	void Update(Camera & camera);
-	void Render(Camera & camera);
+	//void Update(Camera & camera);
+	void Render(Camera & camera, glm::vec2 m_uv);
 	
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void ClampPos();
 
 private:
-	glm::vec4			m_uv;
+	//glm::vec2			m_uv = glm::vec2(0,0);
 	Texture				m_megaTexture;
 
 	glm::vec2			m_position;

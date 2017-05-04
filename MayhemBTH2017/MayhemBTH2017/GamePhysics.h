@@ -5,8 +5,8 @@
 #include "Collider2D.h"
 #include "Player.h"
 #include "Weapon.h"
-#include "PowerUpHandler.h"
-#include "Vector.h"
+#include "Contact.h"
+#include "MyContactListener.h"
 
 
 class GamePhysics
@@ -26,10 +26,12 @@ private:
 	Box m_newBox2;
 	Box m_powerUpBox;
 	Player m_player;
+	Collider2D gameFloor;
 
 	TimeManager* m_time;
 	GLfloat m_jumpTimer=0.0f;
 	bool m_isMidAir;
+	bool m_loadWorld;
 	GLfloat m_playerScaleX;
 	GLfloat m_playerScaleY;
 	GLfloat m_playerPosX;
@@ -43,17 +45,23 @@ private:
 	Sprite m_playerSprite;
 	Sprite m_powerUpSprite;
 	Transform m_transform;
-	Collider2D m_collision;
+	Collider2D m_floorCollider;
 	Sprite		m_firesprites[10];
-	short CATEGORY_PLAYER = 0x0001;  // 0000000000000001 in binary
-	short CATEGORY_MONSTER = 0x0002; // 0000000000000010 in binary
-	short CATEGORY_POWERUP = 0x0004; // 0000000000000100 in binary
 	Sprite		m_shot;
 	//Temporary
 	b2FixtureDef powerUpFixture;
 
+	MyContactListener m_contactListener;
+
 	Weapon m_weapon;
-	PowerUpHandler m_powerupHandler;
+
+	enum _entityCategory {
+		BOUNDARY = 0x0001,
+		PLAYER = 0x0002,
+		POWERUP = 0x0004,
+		FRIENDLY_AIRCRAFT = 0x0008,
+		ENEMY_AIRCRAFT = 0x0010,
+	};
 
 };
 

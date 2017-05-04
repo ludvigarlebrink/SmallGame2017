@@ -1,15 +1,14 @@
 #include "AnimSkeleton.h"
 
+#include "TimeManager.h"
 
 #include <iostream>
 #include <iomanip>
-#include "TimeManager.h"
 
 AnimSkeleton::AnimSkeleton()
 {
 	m_numJoints = 0;
 	m_skel = nullptr;
-	m_counter = 0.0f;
 }
 
 
@@ -17,31 +16,59 @@ AnimSkeleton::~AnimSkeleton()
 {
 }
 
-void AnimSkeleton::Update(KeyFrame * kf)
+void AnimSkeleton::Update(KeyFrame * kf, KeyFrame * preKf, float inter, bool animateBindPose, int32_t from, int32_t to)
 {
-	m_skel[0].globalTx = kf->localTx[0];
-	m_skinnedTx[0] = m_skel[0].globalTx * m_skel[0].invBindPose;
-	
-	m_counter += TimeManager::Get()->GetDeltaTime();
-
-	for (uint32_t i = 1; i < m_numJoints; i++)
+	if (to == -1)
 	{
-		m_skel[i].globalTx = m_skel[m_skel[i].parentID].globalTx * kf->localTx[i];
+		to = m_numJoints - 1;
+	}
+
+	if (animateBindPose)
+	{
+		glm::mat4 finalMat;
+
+		if (preKf != nullptr)
+		{
+			glm::quat rot1(glm::quat_cast(kf->localTx[0]));
+			glm::quat rot2(glm::quat_cast(preKf->localTx[0]));
+			glm::quat rot3 = glm::lerp(rot2, rot1, abs(inter));
+			finalMat = glm::mat4(rot3);
+			finalMat[3] = kf->localTx[0][3];
+		}
+		else
+		{
+			finalMat = kf->localTx[0];
+		}
+
+		m_skel[0].globalTx = finalMat;
+		m_skinnedTx[0] = m_skel[0].globalTx * m_skel[0].invBindPose;
+	}
+	else
+	{
+		m_skel[0].globalTx = m_skel[0].localTx;
+		m_skinnedTx[0] = m_skel[0].globalTx * m_skel[0].invBindPose;
+	}
+
+	for (uint32_t i = from; i <= to; i++)
+	{
+		glm::mat4 finalMat;
+
+		if (preKf != nullptr)
+		{
+			glm::quat rot1(glm::quat_cast(kf->localTx[i]));
+			glm::quat rot2(glm::quat_cast(preKf->localTx[i]));
+			glm::quat rot3 = glm::lerp(rot2, rot1, inter);
+			finalMat = glm::mat4(rot3);
+
+			finalMat[3] = kf->localTx[i][3];
+		}
+		else
+		{
+			finalMat = kf->localTx[i];
+		}
+
+		m_skel[i].globalTx = m_skel[m_skel[i].parentID].globalTx * finalMat;
 		m_skinnedTx[i] = m_skel[i].globalTx * m_skel[i].invBindPose;
-	//
-	//
-	//	for (int j = 0; j < 4; j++)
-	//	{
-	//		for (int n = 0; n < 4; n++)
-	//		{
-	//
-	//			std::cout << std::fixed << std::setprecision(4) << kf->localTx[i][j][n] << "\t\t";
-	//		}
-	//
-	//		std::cout << std::endl;
-	//	}
-		// REMOVE
-	//	getchar();
 	}
 }
 
@@ -57,6 +84,7 @@ Joint * AnimSkeleton::GetJointAt(int32_t index)
 {
 	return &m_skel[index];
 }
+
 
 glm::mat4 * AnimSkeleton::GetSkinnedTx()
 {
@@ -91,15 +119,10 @@ void AnimSkeleton::SetSkeleton(uint32_t * parentID, glm::mat4 * localTx,
 	}
 }
 
-glm::mat4 AnimSkeleton::ReadHierarchy(uint32_t n, glm::mat4 kf)
+void AnimSkeleton::SetJointRotation(Transform & rotation, uint32_t jointID)
 {
-	if (m_skel[n].parentID == 0)
-	{
-		m_skel[0].globalTx = m_skel[0].localTx;
-		return m_skel[0].globalTx * m_skel[0].invBindPose;
-	}
-	
-	m_skel[n].globalTx = m_skel[m_skel[n].parentID].globalTx * kf;
-	glm::mat4 global = m_skel[n].invBindPose * m_skel[n].globalTx;
-	return global * ReadHierarchy(m_skel[n].parentID, kf);
+	rotation.SetPosition(m_skel[jointID].localTx[3].x, m_skel[jointID].localTx[3].y, m_skel[jointID].localTx[3].z);
+//	glm::mat4 isolatedRot = rotation.GetModelMatrix() * m_skel[jointID].invBindPose;
+	m_skel[jointID].globalTx = m_skel[m_skel[jointID].parentID].globalTx * rotation.GetModelMatrix();
+	m_skinnedTx[jointID] = m_skel[jointID].globalTx *  m_skel[jointID].invBindPose;
 }

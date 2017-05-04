@@ -26,32 +26,16 @@ void Level::Render(Camera camera)
 
 	m_debugShader.Update(tran, camera);
 
+	m_uv.x = 0.0/ 512.0;
+	m_uv.y = 0.0 / 512.0;
+	m_uv.z = 32.0 / 512.0;
+	m_uv.w = 32.0 / 512.0;
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
-	{
-
-	/*	m_uv.x = (32 * 3) / 512.0;
-		m_uv.y = 0.0 / 512.0;
-		m_uv.z = 32 / 512.0;
-		m_uv.w = 32 / 512.0;*/
-		//std::cout << "pressed" << std::endl;
-	}
-
-	//Left stick
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
-	{
-
-	}
-
-		m_uv.x = 32.0/ 512.0;
-		m_uv.y = 0.0 / 512.0;
-		m_uv.z = 32.0 / 512.0;
-		m_uv.w = 32.0 / 512.0;
 	m_debugShader.SendTexture(0, "t", m_uv);
 
 	m_mesh.Render();
-
 	m_mesh2.Render();
+	m_meshBackground.Render();
 }
 
 
@@ -61,6 +45,7 @@ void Level::AddBlock(uint32_t posX, uint32_t posY, glm::vec2 uv)
 	if (!m_grid[posX][posY].isOccupied)
 	{
 		SetOccupied(posX, posY, true);
+		setUv(posX, posY, uv);
 	}
 	UpdateBlocks(posX, posY, true, uv);
 	m_mesh.Update(); //Front quad
@@ -100,6 +85,12 @@ bool Level::GetIsSpawnPoint(uint32_t posX, uint32_t posY)
 	return m_grid[posX][posY].isSpawnPoint;
 }
 
+
+glm::vec2 Level::GetTempUV(uint32_t posX, uint32_t posY)
+{
+	return m_grid[posX][posY].uvCoord;
+}
+
 uint32_t Level::GetTextureID(uint32_t posX, uint32_t posY)
 {
 	return m_grid[posX][posY].textureID;
@@ -127,6 +118,11 @@ void Level::SetSpawnPoint(uint32_t posX, uint32_t posY, bool isSpawnPoint)
 	m_grid[posX][posY].isSpawnPoint = isSpawnPoint;
 }
 
+void Level::setUv(uint32_t posX, uint32_t posY, glm::vec2 uv)
+{
+	m_grid[posX][posY].uvCoord = uv;
+}
+
 void Level::SetName(const std::string & name)
 {
 	m_name = name;
@@ -151,16 +147,20 @@ void Level::InitGrid()
 			m_grid[x][y].textureID = 0;
 			m_grid[x][y].isOccupied = false;
 			m_grid[x][y].isSpawnPoint = false;
+			m_grid[x][y].uvCoord = glm::vec2(0, 1);
 		}
 	}
+	
 }
 
 void Level::InitMesh()
 {
 	const uint64_t length = SIZE_X * SIZE_Y * 6;
 	const uint64_t length2 = SIZE_X * SIZE_Y * 12;
+	//const uint64_t length3 = SIZE_X * SIZE_Y;
 	m_vertices = (Vertex3D*)malloc(sizeof(Vertex3D) * length);
 	m_vertices2 = (Vertex3D*)malloc(sizeof(Vertex3D) * length2);
+	m_vertices3 = (Vertex3D*)malloc(sizeof(Vertex3D) * 6);
 
 	uint64_t i = 0;
 
@@ -260,8 +260,35 @@ void Level::InitMesh()
 	}
 
 
+	// Background quad
+
+	m_vertices3[0].position = glm::vec3(-1.0f, 1.0f, -2.0f);
+	m_vertices3[0].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[0].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
+			  
+	m_vertices3[1].position = glm::vec3(1.0f, 1.0f, -2.0f);
+	m_vertices3[1].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[1].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+			  
+	m_vertices3[2].position = glm::vec3(-1.0f, -1.0f, -2.0f);
+	m_vertices3[2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			  
+	m_vertices3[3].position = glm::vec3(1.0f, -1.0f, -2.0f);
+	m_vertices3[3].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			  
+	m_vertices3[4].position = glm::vec3(1.0f, 1.0f, -2.0f);
+	m_vertices3[4].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[4].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+			  
+	m_vertices3[5].position = glm::vec3(-1.0f, -1.0f, -2.0f);
+	m_vertices3[5].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 0.0f);
+
 	m_mesh.Load(m_vertices, length);
 	m_mesh2.Load(m_vertices2, length2);
+	m_meshBackground.Load(m_vertices3, 6);
 }
 
 void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, glm::vec2 uv)
@@ -281,7 +308,9 @@ void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, glm::vec
 				m_vertices[pos + (i+2)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1) )/512), ((32.0 * (y + 1))/512), 1.0f);
 				m_vertices[pos + (i+3)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1) )/512), ((32.0 * (y + 1))/512), 1.0f);
 				m_vertices[pos + (i+4)].texCoordsAlpha = glm::vec3(((32.0 * (x + 0) )/512), ((32.0 * (y + 0))/512), 1.0f);
-				m_vertices[pos + (i+5)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1) )/512), ((32.0 * (y + 0))/512), 1.0f);
+				m_vertices[pos + (i + 5)].texCoordsAlpha = glm::vec3(((32.0 * (x + 1)) / 512), ((32.0 * (y + 0)) / 512), 1.0f);
+
+
 			}
 			else
 			{

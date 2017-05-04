@@ -1,21 +1,21 @@
 #version 420
 
 layout(location = 0) in vec2 Position;
-
+layout(location = 1) in vec2 UV;
 
 
 uniform mat4 M;
 uniform mat4 V;
 uniform mat4 P;
 
-out vec3 UV;
+out vec2 UV1;
 
 void main()
 {
 
-
-	float x=Position.x-0.5*84;
-	float y=Position.y-0.5*48;
+	UV1=UV;
+	float x=Position.x;
+	float y=Position.y;
 	gl_Position=P*V*M*vec4(x,y, 0, 1);
 
 }
