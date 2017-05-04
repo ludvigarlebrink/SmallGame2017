@@ -27,28 +27,28 @@ public:
 	Sprite(const std::string& shader, bool geom, bool particles);
 	virtual ~Sprite();
 
-	void createSprite(glm::vec2 pos, glm::vec2 scale);
+	void CreateSprite(glm::vec2 pos, glm::vec2 scale);
 
 
-	void sendColor();
+	void SendColor();
 
 
 
 	//::.. SET FUNCTIONS ..:://
-	void setTexture(const std::string& filePath);
-	void setTexture2(const std::string& filePath2);
-	void setColor(glm::vec3 color);
+	void SetTexture(const std::string& filePath);
+	void SetTexture2(const std::string& filePath2);
+	void SetColor(glm::vec3 color);
 
-	void sendTexture();
+	void SendTexture();
 
-	void draw();
+	void Render();
 
-	void update(glm::vec2 pos, glm::vec2 scale);
+	void ModifyPos(glm::vec2 pos, glm::vec2 scale);
 
 private:
 	void setColorLoc();
 	void setTexLoc();
-	GUIQuad		quad;
+	GUIQuad		m_quad;
 	GLuint		vbo_ID;
 	GLuint		m_vao;
 	GLuint		colorLoc;
