@@ -121,7 +121,7 @@ Prefab * PrefabManager::Instantiate(const char * name)
 	return prefab;
 }
 
-Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, const char ** anim, uint32_t numAnim)
+Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, const char ** anim, uint32_t numAnim, const char * mat)
 {
 	Prefab * prefab = new Prefab;
 
@@ -181,12 +181,11 @@ Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, const 
 		AnimSkeleton * animSkel = new AnimSkeleton;
 		AnimController * animCtrl = new AnimController;
 
-		skelHandler->Import(".\\Assets\\Skeletons\\super.mrskel");
-
 		std::string filepath(".\\Assets\\Skeletons\\");
 		filepath.append(skel);
 		filepath.append(".mrskel");
 
+		skelHandler->Import(filepath.c_str());
 
 		glm::mat4 * localTx = new glm::mat4[skelHandler->GetNumJoints()];
 
@@ -238,6 +237,19 @@ Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, const 
 	prefab->SetName(mesh);
 	prefab->Create();
 
+	if (mat != nullptr)
+	{
+		MrMatHandler * matHandler = new MrMatHandler;
+
+		std::string filepath(".\\Assets\\Materials\\");
+		filepath.append(mat);
+		filepath.append(".mrmat");
+
+		matHandler->Import(filepath.c_str());
+
+		prefab->SetAlbedoID(TextureManager::Load(matHandler->GetTextures()));
+	}
+
 	return prefab;
 }
 
@@ -251,4 +263,5 @@ bool PrefabManager::Destroy(Prefab * prefab)
 //::.. HELP FUNCTIONS ..:://
 void PrefabManager::Load()
 {
+
 }

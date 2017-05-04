@@ -65,8 +65,8 @@ void Prefab::Create()
 	}
 	else
 	{
-		shaders[0] = ".\\Assets\\GLSL\\DebugShader.vert";
-		shaders[1] = ".\\Assets\\GLSL\\DebugShader.frag";
+		shaders[0] = ".\\Assets\\GLSL\\ToonShader.vert";
+		shaders[1] = ".\\Assets\\GLSL\\ToonShader.frag";
 	}
 
 	types[0] = ShaderManager::VERT_SHADER;
