@@ -19,7 +19,7 @@ void GamePhysics::EnterWorld()
 
 	//Get deltatime
 	m_time = TimeManager::Get();
-	b2Vec2 gravity(0.0f, -1.21f);
+	b2Vec2 gravity(0.0f, -5.21f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
@@ -54,7 +54,7 @@ void GamePhysics::EnterWorld()
 
 
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
-	m_weapon.SetProjectileType(0.3f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
+	m_weapon.SetProjectileType(0.3f, 1.0f, 0.0f, 0.1f, 5.0f, 30);
 
 
 	///////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ void GamePhysics::Update()
 
 		if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT)!=0)
 		{
-			if (m_weapon.FireRate(0.2f))
+			if (m_weapon.FireRate(0.09f))
 			{
 	
 				m_weapon.Shoot(5.0f, m_world.get(), glm::vec3(m_player.GetPrefab()->GetProjectileSpawnPoint().x, m_player.GetPrefab()->GetProjectileSpawnPoint().y, m_player.GetPrefab()->GetProjectileSpawnPoint().z));

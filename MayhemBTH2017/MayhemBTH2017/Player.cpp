@@ -44,7 +44,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	
 	b2Filter filter;
 	filter.categoryBits = PLAYER;
-	filter.maskBits = BOUNDARY| PROJECTILE;
+	filter.maskBits = BOUNDARY;
 	GetBox().getFixture()->SetFilterData(filter);
 
 	GetBox().getBody()->SetUserData(this);
@@ -138,7 +138,7 @@ void Player::Update() {
 	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f && m_isMidAir) 
 	{
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 170), GetBox().getBody()->GetWorldCenter(), 1);
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 150), GetBox().getBody()->GetWorldCenter(), 1);
 
 	}
 
