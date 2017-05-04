@@ -10,6 +10,7 @@ LevelEditor::LevelEditor()
 	m_stateManager = StateManager::Get();
 	m_levelHandler.Init();
 	m_videoManager = VideoManager::Get();
+	m_timeManager = TimeManager::Get();
 
 	m_timer.SetTimer(0.1f, true, true);
 }
@@ -33,17 +34,16 @@ void LevelEditor::Update()
 		}
 
 		ButtonInput();
-		m_levelMarker.Update(m_camera);
+		m_levelMarker.Render(m_camera, m_levelGUI.GetCurrentUV());
 		m_level.Render(m_camera);
 		m_levelGUI.Render(m_camera);
 		break;
 	case MENU:
 		break;
 	case SAVE:
-		
+
 		ButtonInput();
 		m_level.Render(m_camera);
-		
 		break;
 	default:
 		break;
@@ -55,19 +55,19 @@ void LevelEditor::Update()
 void LevelEditor::AxisMove()
 {
 	//Left stick
-	if (m_input->GetAxis(CONTROLLER_AXIS_LEFTY) || m_input->GetAxis(CONTROLLER_AXIS_LEFT_X))
+	if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) || m_input->GetAxis(CONTROLLER_AXIS_LEFT_X))
 	{
 
-		if (m_input->GetAxis(CONTROLLER_AXIS_LEFTY) > 0.3)
+		if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) > 0.3)
 		{
 			m_levelMarker.SetCurrentPosY(m_levelMarker.GetCurrentPosY() - 1);
 		}
-		else if (m_input->GetAxis(CONTROLLER_AXIS_LEFTY) < -0.3)
+		else if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) < -0.3)
 		{
 			m_levelMarker.SetCurrentPosY(m_levelMarker.GetCurrentPosY() - (-1));
 		}
 
-		if(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X) > 0.3)
+		if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_X) > 0.3)
 		{
 			m_levelMarker.SetCurrentPosX(m_levelMarker.GetCurrentPosX() - 1);
 		}
@@ -78,24 +78,30 @@ void LevelEditor::AxisMove()
 	}
 
 	//Right stick
-	if (m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y) != 0.0f || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) != 0.0f)
+	if (m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y) < -0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y) > 0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) < -0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) > 0.3)
 	{
-		// Do nothing...
+		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x,
+			m_camera.GetPosition().y - m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y) * m_timeManager->GetDeltaTime() * 600,
+			m_camera.GetPosition().z));
+
+		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x - m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) * m_timeManager->GetDeltaTime() * 600,
+			m_camera.GetPosition().y,
+			m_camera.GetPosition().z));
+	}
+
+	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT) != 0.0 && m_camera.GetPosition().z < -20.0)
+	{
+		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x, m_camera.GetPosition().y, m_camera.GetPosition().z + m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT) * m_timeManager->GetDeltaTime() * 500));
+	}
+
+	else if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERLEFT) != 0.0 && m_camera.GetPosition().z > -70.0)
+	{
+		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x, m_camera.GetPosition().y, m_camera.GetPosition().z - m_input->GetAxis(CONTROLLER_AXIS_TRIGGERLEFT) * m_timeManager->GetDeltaTime() * 500));
 	}
 }
 
 void LevelEditor::ButtonInput()
 {
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
-	{
-		m_u.x++;
-	}
-
-	//Left stick
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
-	{
-		m_u.x--;
-	}
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 	{
 		m_levelMarker.SetSavedPosX(m_levelMarker.GetCurrentPosX());
@@ -111,7 +117,7 @@ void LevelEditor::ButtonInput()
 		{
 			for (size_t y = m_levelMarker.GetStartY(); y <= m_levelMarker.GetEndY(); y++)
 			{
-				m_level.AddBlock(x, y, m_u);
+				m_level.AddBlock(x, y, m_levelGUI.GetCurrentUV());
 			}
 		}
 	}
@@ -172,7 +178,6 @@ void LevelEditor::ButtonInput()
 		}
 		else
 		{
-			
 			m_state = SAVE;
 		}
 	}
