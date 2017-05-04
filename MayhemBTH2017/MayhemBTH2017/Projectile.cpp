@@ -73,7 +73,8 @@ void Projectile::AddForce(glm::vec3 force)
 
 	//rotate box after firing direction
 	glm::vec2 axisAngle = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X), InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_Y));
-	axisAngle *= 360;
+
+
 	m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (axisAngle.x*axisAngle.y));
 	float angle = m_box.getBody()->GetAngle();
 
