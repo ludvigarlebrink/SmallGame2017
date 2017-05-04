@@ -258,6 +258,9 @@
     </ClCompile>
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="GameUI.cpp" />
+    <ClCompile Include="Collidable.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -444,6 +447,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="GameUI.h" />
+    <ClInclude Include="Collidable.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -530,6 +536,8 @@
     <None Include="Assets\GLSL\GameLevelShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
+    <None Include="Assets\GLSL\BulletShader.frag" />
+    <None Include="Assets\GLSL\BulletShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\TextureTestA.TGA">
