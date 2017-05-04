@@ -8,7 +8,7 @@ LevelEditor::LevelEditor()
 	m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
 	m_input = InputManager::Get();
 	m_stateManager = StateManager::Get();
-	m_levelHandler.Init();
+	//m_levelHandler.Init();
 	m_videoManager = VideoManager::Get();
 	m_timeManager = TimeManager::Get();
 
