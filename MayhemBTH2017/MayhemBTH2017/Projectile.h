@@ -43,11 +43,13 @@ public:
 
 private:
 	Prefab*		m_prefab;
+	Prefab m_prefabPointer;
 	Box			m_box;
 	float		m_fireRate;
 	float		m_time;
 	int			m_life;
 	Transform m_transform;
+	GLfloat m_angle;
 	Camera	m_camera;
 	GLfloat m_rotationUpdate;
 	Prefab* m_bulletSprite;

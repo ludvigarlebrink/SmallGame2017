@@ -94,7 +94,7 @@ void Player::Update() {
 
 
 
-	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERLEFT) != 0)
+	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON))
 	{
 		
 
@@ -115,7 +115,7 @@ void Player::Update() {
 		InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X));
 
 	//DOUBLE JUMP
-	if (m_doubleJump && InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERLEFT) == 0 && m_isMidAir)
+	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON) != 0 && m_isMidAir)
 	{
 		m_doubleJump = false;
 		GetBox().getBody()->ApplyForce(b2Vec2(0, 250), GetBox().getBody()->GetWorldCenter(), 1);
