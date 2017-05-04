@@ -32,7 +32,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	//SET BOUNDING BOX SIZE 
 	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_playerPrefab->GetPlayerPrefab()->GetScale().x + 1, m_playerPrefab->GetPlayerPrefab()->GetScale().y*m_playerPrefab->GetPlayerPrefab()->GetMesh()->GetHeight()));
 	//sprite for size of bouding box
-	m_playerSprite.createSprite(glm::vec2(0), glm::vec2(20));
+	m_playerSprite.CreateSprite(glm::vec2(0), glm::vec2(20));
 	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
@@ -94,14 +94,14 @@ void Player::Update() {
 
 
 
-	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f)
+	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERLEFT) != 0)
 	{
 		
 
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 300), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 250), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 	
 
@@ -115,10 +115,10 @@ void Player::Update() {
 		InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X));
 
 	//DOUBLE JUMP
-	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f && m_isMidAir) 
+	if (m_doubleJump && InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERLEFT) == 0 && m_isMidAir)
 	{
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 400), GetBox().getBody()->GetWorldCenter(), 1);
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 250), GetBox().getBody()->GetWorldCenter(), 1);
 
 	}
 
@@ -128,8 +128,7 @@ void Player::Update() {
 	GLfloat yScale = GetBox().getScale().y;
 
 	m_playerPrefab->GetPlayerPrefab()->SetPosition(glm::vec3(xPos + 0.5, yPos + GetBox().getScale().y - 6, 0));
-
-	m_playerSprite.update(glm::vec2(xPos - (GetBox().getScale().x / 2), yPos - (GetBox().getScale().y / 2)), glm::vec2(GetBox().getScale().x, GetBox().getScale().y));
+	m_playerSprite.ModifyPos(glm::vec2(xPos - (GetBox().getScale().x / 2), yPos - (GetBox().getScale().y / 2)), glm::vec2(GetBox().getScale().x, GetBox().getScale().y));
 
 	//////////////////////////////////////////////////////////
 

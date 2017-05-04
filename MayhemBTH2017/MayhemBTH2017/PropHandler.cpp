@@ -25,12 +25,12 @@ PropHandler::Prop * PropHandler::Instantiate(const char * name)
 			{
 				const char * def = "Default";
 				pre = PrefabManager::Instantiate(m_props[i]->name,
-					m_props[i]->name, &def, 1);
+					m_props[i]->name, &def, 1, m_props[i]->name);
 			}
 			else
 			{
 				pre = PrefabManager::Instantiate(m_props[i]->name,
-					nullptr, nullptr, 0);
+					nullptr, nullptr, 0, m_props[i]->name);
 			}
 
 			Prop * prop = new Prop;
@@ -53,12 +53,12 @@ PropHandler::Prop * PropHandler::Instantiate(uint32_t id)
 	{
 		const char * def = "Default";
 		pre = PrefabManager::Instantiate(m_props[id]->name,
-			m_props[id]->name, &def, 1);
+			m_props[id]->name, &def, 1, m_props[id]->name);
 	}
 	else
 	{
 		pre = PrefabManager::Instantiate(m_props[id]->name,
-			nullptr, nullptr, 0);
+			nullptr, nullptr, 0, m_props[id]->name);
 	}
 
 	Prop * prop = new Prop;
