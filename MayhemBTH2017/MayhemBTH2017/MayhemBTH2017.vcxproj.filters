@@ -217,9 +217,6 @@
     <ClCompile Include="ImportTester.cpp">
       <Filter>Engine\Resources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="LevelEditorGUI.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="GamePhysics.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -246,6 +243,18 @@
     </ClCompile>
     <ClCompile Include="thumbnail.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEditorPropPlacer.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEditorStateMachine.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="PropHandler.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="MyContactListener.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -417,6 +426,18 @@
     </ClInclude>
     <ClInclude Include="thumbnail.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEditorPropPlacer.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEditorStateMachine.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="PropHandler.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="MyContactListener.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
