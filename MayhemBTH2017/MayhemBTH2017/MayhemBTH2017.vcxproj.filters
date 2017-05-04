@@ -241,15 +241,23 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="LevelEditorPropPlacer.cpp">
-      <Filter>Engine\LevelEditor</Filter>
+    <ClCompile Include="thumbnail.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
     <ClCompile Include="LevelEditorStateMachine.cpp">
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="PropHandler.cpp" />
-    <ClCompile Include="MyContactListener.cpp" />
-    <ClCompile Include="Collidable.cpp" />
+    <ClCompile Include="LevelEditorPropPlacer.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="PropHandler.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MyContactListener.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="GameUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -418,17 +426,24 @@
     <ClInclude Include="ParticleSystem.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="GamePhysics.h" />
-    <ClInclude Include="LevelEditorPropPlacer.h">
-      <Filter>Engine\LevelEditor</Filter>
+    <ClInclude Include="thumbnail.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="LevelEditorStateMachine.h">
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
-    <ClInclude Include="PropHandler.h" />
-    <ClInclude Include="Collidable.h" />
-    <ClInclude Include="MyContactListener.h" />
+    <ClInclude Include="LevelEditorPropPlacer.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="PropHandler.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MyContactListener.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Score.h" />
+    <ClInclude Include="GameUI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -509,16 +524,19 @@
     <None Include="Assets\GLSL\LevelMarkerShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\GLSL\BulletShader.frag" />
-    <None Include="Assets\GLSL\BulletShader.vert" />
-    <None Include="Assets\GLSL\ColliderShader.frag" />
-    <None Include="Assets\GLSL\ColliderShader.vert" />
-    <None Include="Assets\GLSL\DrawShader.frag" />
-    <None Include="Assets\GLSL\DrawShader.geom" />
+    <None Include="Assets\GLSL\GameLevelShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\GameLevelShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\Textures\TextureTestD.TGA">
-      <Filter>Assets\GLSL</Filter>
+    <Image Include="Assets\Textures\TextureTestA.TGA">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Textures\TextureTestB.TGA">
+      <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
 </Project>

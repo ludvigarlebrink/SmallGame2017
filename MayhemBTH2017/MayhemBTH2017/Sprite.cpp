@@ -16,8 +16,10 @@ Sprite::~Sprite()
 {
 }
 
-void Sprite::createSprite(glm::vec2 pos, glm::vec2 scale)
+void Sprite::CreateSprite(glm::vec2 pos, glm::vec2 scale)
 {
+
+
 
 	glGenVertexArrays(1, &m_vao);
 
@@ -27,50 +29,46 @@ void Sprite::createSprite(glm::vec2 pos, glm::vec2 scale)
 
 	scale = 1.0f * scale;
 
-	this->quad.vertArr[0].position = glm::vec2((pos.x ), pos.y );
-	this->quad.vertArr[1].position = glm::vec2((pos.x ) + (scale.x ), pos.y );
-	this->quad.vertArr[2].position = glm::vec2((pos.x ), (pos.y ) + (scale.y ));
-	this->quad.vertArr[3].position = glm::vec2((pos.x ) + (scale.x ), (pos.y) + (scale.y));
+	m_quad.vertArr[0].position = glm::vec2((pos.x ), pos.y );
+	m_quad.vertArr[1].position = glm::vec2((pos.x ) + (scale.x ), pos.y );
+	m_quad.vertArr[2].position = glm::vec2((pos.x ), (pos.y ) + (scale.y ));
+	m_quad.vertArr[3].position = glm::vec2((pos.x ) + (scale.x ), (pos.y) + (scale.y));
 
-	this->quad.vertArr[0].UV = glm::vec2(0.0, 0.0);
-	this->quad.vertArr[1].UV = glm::vec2(1.0, 0.0);
-	this->quad.vertArr[2].UV = glm::vec2(0.0, 1.0);
-	this->quad.vertArr[3].UV = glm::vec2(1.0, 1.0);
+	m_quad.vertArr[0].UV = glm::vec2(0.0, 0.0);
+	m_quad.vertArr[1].UV = glm::vec2(1.0, 0.0);
+	m_quad.vertArr[2].UV = glm::vec2(0.0, 1.0);
+	m_quad.vertArr[3].UV = glm::vec2(1.0, 1.0);
 
-	if (this->vbo_ID == 0)
-	{
-		glGenBuffers(1, &this->vbo_ID);
-	}
+	glGenBuffers(1, &vbo_ID);
 	glBindVertexArray(m_vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_ID);
-	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->quad.vertArr[0]), &this->quad.vertArr, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(GUIVertex), m_quad.vertArr, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
-	//glEnableVertexAttribArray(2);
+	glEnableVertexAttribArray(2);
 
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(GUIVertex), 0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GUIVertex), (void*)(2 * sizeof(float)));
 
 
 	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 }
 
-void Sprite::setColor(glm::vec3 color)
+void Sprite::SetColor(glm::vec3 color)
 {
-	this->quad.color = color;
+	this->m_quad.color = color;
 }
 
-void Sprite::sendColor()
+void Sprite::SendColor()
 {
-	glUniform3f(this->colorLoc, this->quad.color.x, this->quad.color.y, this->quad.color.z);
+	glUniform3f(this->colorLoc, this->m_quad.color.x, this->m_quad.color.y, this->m_quad.color.z);
 }
 
 
 
-void Sprite::setTexture(const std::string& filePath)
+void Sprite::SetTexture(const std::string& filePath)
 {
 
 	SDL_Surface* texture = SDL_LoadBMP(filePath.c_str());//TTF_RenderText_Solid(font, "Cdarja", color);
@@ -99,8 +97,8 @@ void Sprite::setTexture(const std::string& filePath)
 	}
 
 	glEnable(GL_TEXTURE_2D);
-	glGenTextures(1, &this->quad.texture_ID);
-	glBindTexture(GL_TEXTURE_2D, this->quad.texture_ID);
+	glGenTextures(1, &this->m_quad.texture_ID);
+	glBindTexture(GL_TEXTURE_2D, this->m_quad.texture_ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
@@ -113,7 +111,7 @@ void Sprite::setTexture(const std::string& filePath)
 
 }
 
-void Sprite::setTexture2(const std::string & filePath)
+void Sprite::SetTexture2(const std::string & filePath)
 {
 	SDL_Surface* texture2 = SDL_LoadBMP(filePath.c_str());//TTF_RenderText_Solid(font, "Cdarja", color);
 
@@ -154,38 +152,32 @@ void Sprite::setTexture2(const std::string & filePath)
 	glDisable(GL_TEXTURE_2D);
 }
 
-void Sprite::sendTexture()
+void Sprite::SendTexture()
 {
-	glUniform1i(this->texLoc, this->quad.texture_ID);
+	glUniform1i(this->texLoc, this->m_quad.texture_ID);
 }
 
-void Sprite::draw()
+void Sprite::Render()
 {
 
 	//sendTexture();
-
-	glBindVertexArray(m_vao);
-
-	sendColor();
-
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_ID);
-	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->quad.vertArr[0]), &this->quad.vertArr, GL_STATIC_DRAW);
-
+	SendColor();
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-
-
 
 }
 
-void Sprite::update(glm::vec2 pos, glm::vec2 scale)
+void Sprite::ModifyPos(glm::vec2 pos, glm::vec2 scale)
 {
-	this->quad.vertArr[0].position = pos;
-	this->quad.vertArr[1].position = glm::vec2(pos.x + scale.x, pos.y);
-	this->quad.vertArr[2].position = glm::vec2(pos.x , pos.y + scale.y);
-	this->quad.vertArr[3].position = glm::vec2(pos.x + scale.x, pos.y + scale.y);
+	this->m_quad.vertArr[0].position = pos;
+	this->m_quad.vertArr[1].position = glm::vec2(pos.x + scale.x, pos.y);
+	this->m_quad.vertArr[2].position = glm::vec2(pos.x , pos.y + scale.y);
+	this->m_quad.vertArr[3].position = glm::vec2(pos.x + scale.x, pos.y + scale.y);
+	
+	glBindVertexArray(m_vao);
+	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->m_quad.vertArr[0]), &this->m_quad.vertArr, GL_STATIC_DRAW);
+	glBindVertexArray(0);
+
 }
 
 void Sprite::setColorLoc()

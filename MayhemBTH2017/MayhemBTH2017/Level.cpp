@@ -26,8 +26,7 @@ void Level::Render(Camera camera)
 
 	m_debugShader.Update(tran, camera);
 
-
-	m_uv.x = 32.0/ 512.0;
+	m_uv.x = 0.0/ 512.0;
 	m_uv.y = 0.0 / 512.0;
 	m_uv.z = 32.0 / 512.0;
 	m_uv.w = 32.0 / 512.0;
@@ -35,8 +34,8 @@ void Level::Render(Camera camera)
 	m_debugShader.SendTexture(0, "t", m_uv);
 
 	m_mesh.Render();
-
 	m_mesh2.Render();
+	m_meshBackground.Render();
 }
 
 
@@ -158,8 +157,10 @@ void Level::InitMesh()
 {
 	const uint64_t length = SIZE_X * SIZE_Y * 6;
 	const uint64_t length2 = SIZE_X * SIZE_Y * 12;
+	//const uint64_t length3 = SIZE_X * SIZE_Y;
 	m_vertices = (Vertex3D*)malloc(sizeof(Vertex3D) * length);
 	m_vertices2 = (Vertex3D*)malloc(sizeof(Vertex3D) * length2);
+	m_vertices3 = (Vertex3D*)malloc(sizeof(Vertex3D) * 6);
 
 	uint64_t i = 0;
 
@@ -259,8 +260,35 @@ void Level::InitMesh()
 	}
 
 
+	// Background quad
+
+	m_vertices3[0].position = glm::vec3(-1.0f, 1.0f, -2.0f);
+	m_vertices3[0].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[0].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
+			  
+	m_vertices3[1].position = glm::vec3(1.0f, 1.0f, -2.0f);
+	m_vertices3[1].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[1].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+			  
+	m_vertices3[2].position = glm::vec3(-1.0f, -1.0f, -2.0f);
+	m_vertices3[2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			  
+	m_vertices3[3].position = glm::vec3(1.0f, -1.0f, -2.0f);
+	m_vertices3[3].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+			  
+	m_vertices3[4].position = glm::vec3(1.0f, 1.0f, -2.0f);
+	m_vertices3[4].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[4].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+			  
+	m_vertices3[5].position = glm::vec3(-1.0f, -1.0f, -2.0f);
+	m_vertices3[5].normal = glm::vec3(0.0f, 0.0f, -1.0f);
+	m_vertices3[5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 0.0f);
+
 	m_mesh.Load(m_vertices, length);
 	m_mesh2.Load(m_vertices2, length2);
+	m_meshBackground.Load(m_vertices3, 6);
 }
 
 void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, glm::vec2 uv)

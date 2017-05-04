@@ -8,6 +8,8 @@ LevelMarker::LevelMarker()
 
 	m_input = InputManager::Get();
 	m_mode = NORMAL;
+
+
 	m_levelShader.Init(".\\Assets\\GLSL\\LevelMarkerShader", false, false);
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
 
@@ -170,40 +172,27 @@ uint32_t LevelMarker::GetSizeY()
 {
 	return sizeY;
 }
-
-void LevelMarker::Update(Camera & camera)
-{
-	ClampPos();
-	Render(camera);
-}
+//
+//void LevelMarker::Update(Camera & camera)
+//{
+//	
+//	Render(camera);
+//}
 
 //::.. UPDATE FUNCTIONS ..:://
-void LevelMarker::Render(Camera & camera)
+void LevelMarker::Render(Camera & camera, glm::vec2 m_uv)
 {
+	ClampPos();
 	//temp stuff-------------------------------
 	m_megaTexture.Bind(0);
 
-
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
-	{
-		m_uv.x++;
-	}
-	
-	//Left stick
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
-	{
-		m_uv.x--;
-		
-	}
 	glm::vec4 markerLoc;
 	markerLoc.x = (32 * m_uv.x) / 512.0;
 	markerLoc.y = (32 * m_uv.y) / 512.0;
 	markerLoc.z = 32 / 512.0;
 	markerLoc.w = 32 / 512.0;
 
-
 	m_levelShader.SendTexture(0, "t", markerLoc);
-
 	m_levelShader.Bind();
 
 

@@ -38,6 +38,7 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	int32_t GetState();
+	glm::vec2 GetCurrentUV();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetState(int32_t state);
@@ -67,6 +68,7 @@ private:
 	int32_t			m_offsetY;
 	int32_t			m_offsetMother;
 	int32_t			m_offsetCounter;
+	glm::vec2		m_currentUV;
 
 	LevelEditorPropPlacer m_propPlacer;
 };

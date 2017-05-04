@@ -30,6 +30,7 @@ public:
 	int32_t GetPosX();
 	int32_t GetPosY();
 	Texture GetTexture();
+	glm::vec2 GetUV();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetPosition(int32_t x, int32_t y);
@@ -53,9 +54,7 @@ private:
 	int32_t m_posX;
 	int32_t m_posY;
 
-	glm::vec2 m_UV;
-
-	
+	glm::vec2 m_UV;	
 
 	SDL_Color m_color;
 	Texture m_texture;

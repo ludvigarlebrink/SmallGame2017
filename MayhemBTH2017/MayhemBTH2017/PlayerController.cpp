@@ -274,11 +274,11 @@ void PlayerController::GetAxis(const SDL_ControllerAxisEvent controllerEvent)
 	case SDL_CONTROLLER_AXIS_LEFTY:
 		if (ScaleRange(controllerEvent.value) > m_deadzone || ScaleRange(controllerEvent.value) < -m_deadzone)
 		{
-			m_axis[CONTROLLER_AXIS_LEFTY].axisDeadzone = ScaleRange(controllerEvent.value);
+			m_axis[CONTROLLER_AXIS_LEFT_Y].axisDeadzone = ScaleRange(controllerEvent.value);
 		}
 		else
 		{
-			m_axis[CONTROLLER_AXIS_LEFTY].axisDeadzone = 0.0f;
+			m_axis[CONTROLLER_AXIS_LEFT_Y].axisDeadzone = 0.0f;
 		}
 		break;
 
@@ -345,7 +345,7 @@ void PlayerController::GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent)
 
 		// Vetical
 	case SDL_CONTROLLER_AXIS_LEFTY:
-		m_axis[CONTROLLER_AXIS_LEFTY].axisRaw = ScaleRange(controllerEvent.value);
+		m_axis[CONTROLLER_AXIS_LEFT_Y].axisRaw = ScaleRange(controllerEvent.value);
 		break;
 
 		// Right stick

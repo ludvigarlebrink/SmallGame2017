@@ -21,7 +21,7 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 
 	b2Filter filter;
 	filter.categoryBits = PROJECTILE;
-	filter.maskBits = PLAYER | BOUNDARY | PROJECTILE;
+	filter.maskBits = PLAYER | BOUNDARY;
 
 
 	m_box.InitDynamic(world, pos, scale);
@@ -37,20 +37,20 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 {
 	m_isBullet = true;
 	m_bulletScale = 2;
-	m_bulletSprite.createSprite(glm::vec2(0), glm::vec2(m_bulletScale));
-	m_bulletSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
+	
+	m_bulletSprite = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");//PrefabManager::InstantiateSprite("RifleProjectile");
 
-	m_box.InitDynamic(world, spawnPos, glm::vec2(m_bulletScale));
+	m_box.InitDynamic(world, spawnPos, glm::vec2(2, 0.8));
 	m_box.getBody()->SetUserData(this);
 	m_box.getFixture()->SetRestitution(0.0);
 	m_box.getFixture()->SetFriction(1.0);
 	m_box.getFixture()->SetDensity(1.0);
-	m_box.getBody()->SetLinearDamping(0.3);
+	m_box.getBody()->SetLinearDamping(0.0);
 
 	//Collision info
 	b2Filter filter;
 	filter.categoryBits = PROJECTILE;
-	filter.maskBits = PLAYER | BOUNDARY | PROJECTILE;
+	filter.maskBits = BOUNDARY;
 	m_box.getFixture()->SetFilterData(filter);
 }
 
@@ -59,9 +59,37 @@ void Projectile::SetLife(int life)
 	m_life = life;
 }
 
-void Projectile::AddForce(b2Vec2 force)
+void Projectile::AddForce(glm::vec3 force)
 {
-	m_box.getBody()->ApplyForce(force, m_box.getBody()->GetWorldCenter(), true);
+
+	b2Vec2 boxForce;
+	boxForce.x = force.x;
+	boxForce.y = force.y;
+
+	//Fire 
+	m_box.getBody()->ApplyForce(boxForce, m_box.getBody()->GetWorldCenter(), true);
+
+
+	//bounding box rotation
+	//m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (force.x*force.y));
+
+	//sprite rotation
+	//glm::vec3 boundingBoxPos = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
+
+	m_transform.SetRotation(glm::vec3(0, 0, 45));
+
+//	m_transform.SetPosition(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
+
+	glm::vec3 rotation = glm::vec3(0, 0, 20);
+
+
+
+	if (m_isBullet == true) {
+
+	
+		m_bulletSprite->Render(m_camera);
+	}
+
 }
 
 int Projectile::GetLife()
@@ -82,17 +110,11 @@ Box Projectile::GetBox()
 
 void Projectile::Update()
 {
-	if (m_contact)
-	{
-		m_prefab->Scale(glm::vec3(2, 2, 2));
-		m_bulletSprite.setColor(glm::vec3(1.0, 0.0, 0.0));
-	}
-	else
-	{
-		m_prefab->Scale(glm::vec3(0.5, 0.5, 0.5));
-	}
-
 	m_rotationUpdate += 0.01f;
+
+	if (m_isBullet == true) {
+		//	m_box.getBody()->SetLinearVelocity(-(m_box.getBody()->GetWorld()->GetGravity()));
+	}
 
 	glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
 
@@ -104,7 +126,7 @@ void Projectile::Update()
 	}
 	else
 	{
-		m_bulletSprite.update(glm::vec2(position.x, position.y), glm::vec2(m_bulletScale));
+		m_bulletSprite->SetPosition(glm::vec3(position.x, position.y, 0.0f));
 	}
 
 	if (m_rotationUpdate > 360)
@@ -113,15 +135,23 @@ void Projectile::Update()
 
 void Projectile::Render(Camera camera)
 {
-	Transform transform;
+
 	if (!m_isBullet) {
 		m_prefab->Update();
 		m_prefab->Render(camera);
 	}
 	else {
-		m_bulletSprite.Bind();
-		m_bulletSprite.Update(transform, camera);
-		m_bulletSprite.draw();
+
+
+//		glEnable(GL_BLEND);
+//		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		m_bulletSprite->Update();
+		m_bulletSprite->Render(camera);
+
+//		glDisable(GL_BLEND);
+//		glUseProgram(0);
+
 	}
 }
 

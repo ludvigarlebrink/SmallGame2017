@@ -51,6 +51,9 @@ private:
 	std::string							m_names[3];
 	uint32_t							m_size;
 	uint32_t							m_mapSize;
+	uint32_t							m_width = 84;
+	uint32_t							m_height = 48;
+	char*								m_dataBuffer;
 };
 
 #endif // ! __LEVELIMPORTER_H__

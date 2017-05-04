@@ -4,6 +4,7 @@
 
 #include "Level.h"
 #include "Timer.h"
+#include "TimeManager.h"
 //#include "TextureHandler.h"
 #include "LevelHandler.h"
 #include "LevelMarker.h"
@@ -49,6 +50,7 @@ private:
 
 	InputManager *		m_input;
 	StateManager *		m_stateManager;
+	TimeManager *		m_timeManager;
 
 	uint32_t			m_state;
 
@@ -60,7 +62,9 @@ private:
 	Camera				m_camera;
 	Timer				m_timer;
 	VirtualKeyboard		m_vk;
-	LevelTexture temp;
+	//TEMP
+	LevelTexture		m_levelTexture;
+	VideoManager	*	m_videoManager;
 };
 
 #endif // ! __LEVELEDITOR_H__

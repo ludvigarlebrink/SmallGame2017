@@ -268,6 +268,11 @@ Texture UIImage::GetTexture()
 	return m_texture;
 }
 
+glm::vec2 UIImage::GetUV()
+{
+	return m_UV;
+}
+
 
 //::.. SET FUNCTIONS ..:://
 void UIImage::SetPosition(int32_t x, int32_t y)
