@@ -17,39 +17,62 @@ void MyContactListener::BeginContact(b2Contact * contact)
 	Collidable * bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
 	Collidable * bodyUserData2 = static_cast<Collidable*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
-	Projectile * proj1 = dynamic_cast<Projectile*>(bodyUserData);
-	Projectile * proj2 = dynamic_cast<Projectile*>(bodyUserData2);
+	Projectile * proj = dynamic_cast<Projectile*>(bodyUserData);
+	Player * player = dynamic_cast<Player*>(bodyUserData2);
 
-	if ((proj1 != nullptr) && (proj2 != nullptr))
+	if ((proj != nullptr) && (player != nullptr))
 	{
 		static_cast<Projectile*>(bodyUserData)->StartContact();
+		static_cast<Player*>(bodyUserData2)->StartContact(true);
+
+		return;
 	}
 
-	//check if fixture B was a ball
+	bodyUserData  = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	bodyUserData2 = static_cast<Collidable*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	Player * player1 = dynamic_cast<Player*>(bodyUserData);
+	Projectile * proj1 = dynamic_cast<Projectile*>(bodyUserData2);
+
+	if ((player1 != nullptr) && (proj1 != nullptr))
+	{
+		static_cast<Player*>(bodyUserData)->StartContact(true);
+		static_cast<Projectile*>(bodyUserData2)->StartContact();
+
+	}
 
 
 	std::cout << "Collision" << std::endl;
-
-	////check if fixture A was a Player
-	//void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
-	//if (bodyUserData)
-	//	static_cast<Player*>(bodyUserData)->StartContact();
-
-	////check if fixture B was a Projectile
-	//bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
-	//if (bodyUserData)
-	//	static_cast<Projectile*>(bodyUserData)->StartContact();
 
 }
 
 void MyContactListener::EndContact(b2Contact * contact)
 {
 
-	Projectile * bodyUserData = static_cast<Projectile*>(contact->GetFixtureA()->GetBody()->GetUserData());
-	Projectile * bodyUserData2 = static_cast<Projectile*>(contact->GetFixtureB()->GetBody()->GetUserData());
-	if ((bodyUserData->GetPrefab() != NULL) && (bodyUserData2->GetPrefab() != NULL))
+	Collidable * bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	Collidable * bodyUserData2 = static_cast<Collidable*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	Projectile * proj = dynamic_cast<Projectile*>(bodyUserData);
+	Player * player = dynamic_cast<Player*>(bodyUserData2);
+
+	if ((proj != nullptr) && (player != nullptr))
 	{
 		static_cast<Projectile*>(bodyUserData)->EndContact();
+		static_cast<Player*>(bodyUserData2)->EndContact();
+
+		return;
+	}
+
+	bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	bodyUserData2 = static_cast<Collidable*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	Player * player1 = dynamic_cast<Player*>(bodyUserData);
+	Projectile * proj1 = dynamic_cast<Projectile*>(bodyUserData2);
+
+	if ((player1 != nullptr) && (proj1 != nullptr))
+	{
+		static_cast<Player*>(bodyUserData)->EndContact();
+		static_cast<Projectile*>(bodyUserData2)->EndContact();
 	}
 
 	std::cout << "No Collision..." << std::endl;

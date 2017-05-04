@@ -5,6 +5,8 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale) {
 
 	Init(world, pos, scale);
 	m_contact = false;
+
+	m_killed = false;
 }
 
 Player::Player()
@@ -37,10 +39,10 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
-	GetBox().getFixture()->SetDensity(10.0);
+	GetBox().getFixture()->SetDensity(0.1);
 	GetBox().getFixture()->SetFriction(1.0);
 	GetBox().getFixture()->SetRestitution(0.0);
-	GetBox().getBody()->SetLinearDamping(0.2);
+	GetBox().getBody()->SetLinearDamping(0.0);
 	
 	b2Filter filter;
 	filter.categoryBits = PLAYER;
@@ -54,6 +56,28 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 }
 
 void Player::Update() {
+
+	if (m_contact)
+	{
+		if (m_collidedProjectile)
+		{
+			m_killed = true;
+		}		
+	}
+	else if(m_killed)
+	{
+		m_time += TimeManager::Get()->GetDeltaTime();
+		Respawn(glm::vec2(70, 70));
+		if (Timer(2))
+		{
+			Respawn(glm::vec2(40, 30));
+			m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
+			m_killed = false;
+		}
+	}
+
+
+
 
 	if (GetBox().getBody()->GetLinearVelocity().y != 0) {
 		m_isMidAir = true;
@@ -101,7 +125,7 @@ void Player::Update() {
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 300), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 150), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 	
 
@@ -118,7 +142,7 @@ void Player::Update() {
 	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f && m_isMidAir) 
 	{
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 400), GetBox().getBody()->GetWorldCenter(), 1);
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 170), GetBox().getBody()->GetWorldCenter(), 1);
 
 	}
 
@@ -134,6 +158,11 @@ void Player::Update() {
 	//////////////////////////////////////////////////////////
 
 
+}
+
+void Player::Respawn(glm::vec2 pos)
+{
+	m_boundingBox.getBody()->SetTransform(b2Vec2(pos.x, pos.y), 0);
 }
 
 //::.. RENDER ..:://
@@ -158,9 +187,15 @@ PlayerPrefab* Player::GetPrefab()
 	return m_playerPrefab;
 }
 
-void Player::StartContact()
+void Player::StartContact(bool projectile)
 {
 	m_contact = true;
+
+	if (projectile)
+	{
+		m_collidedProjectile = true;
+	}
+	
 }
 
 void Player::EndContact()
@@ -179,6 +214,16 @@ void Player::SetMaskBits(short MASK) {
 
 	m_fixture.filter.maskBits = MASK;
 
+}
+
+bool Player::Timer(float rate)
+{
+	if (m_time >= rate)
+	{
+		m_time = 0;
+		return true;
+	}
+	return false;
 }
 
 //::.. GET FUNCTIONS ..:://

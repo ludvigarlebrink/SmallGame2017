@@ -428,6 +428,7 @@
     </ClInclude>
     <ClInclude Include="PropHandler.h" />
     <ClInclude Include="Collidable.h" />
+    <ClInclude Include="MyContactListener.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
