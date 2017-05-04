@@ -4,16 +4,31 @@
 
 Thumbnail::Thumbnail(const char* filepath)
 {
-	filepath = (".\\Assets\\Textures\\NewTexx.mrthumb");
-	std::fstream file(filepath, std::ios::binary);
+//	filepath = (".\\Assets\\Textures\\NewTexx.mrthumb");
+	std::ifstream file(".\\Assets\\Textures\\NewTexx.mrthumb", std::ios::binary);
+
+	if (!file.is_open())
+	{
+		return;
+	}
+
+	int size = 84 * 48 * 4;
 
 	unsigned char * textureData = new unsigned char[84 * 48 * 4];
-	file.read(reinterpret_cast<char*>(textureData), 84 * 48 * 4);
+	for (size_t i = 0; i < 84 * 48 * 4; i++)
+	{
+		file.read(reinterpret_cast<char*>(&textureData[i]), sizeof(unsigned char));
+	}
 	//std::cout << rbg[i] << std::endl;
 
 
-
-
+	for (size_t i = 0; i < 84 * 48 * 4; i += 4)
+	{
+		std::cout << "R: " << (int)textureData[i];
+		std::cout << "\tG: " << (int)textureData[i + 1];
+		std::cout << "\tB: " << (int)textureData[i + 2];
+		std::cout << "\tA: " << (int)textureData[i + 3] << std::endl;
+	}
 	
 	//std::cout << textureData << std::endl;
 	glGenTextures(1, &m_texture);
@@ -26,7 +41,7 @@ Thumbnail::Thumbnail(const char* filepath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 84, 48, 0,
-		GL_RGBA, GL_UNSIGNED_BYTE, textureData);
+		GL_RGBA, GL_UNSIGNED_BYTE, (unsigned int*)textureData);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	file.close();

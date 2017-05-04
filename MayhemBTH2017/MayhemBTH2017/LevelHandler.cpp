@@ -103,7 +103,7 @@ void LevelHandler::Export(Level & level)
 
 	int nSize = m_width * m_height * 4;
 	unsigned char* tempPixelBuffer;
-	tempPixelBuffer = (unsigned char*)malloc(nSize * sizeof(char));
+	tempPixelBuffer = new unsigned char[84 * 48 * 4];
 
 	glReadPixels(0, 0, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, tempPixelBuffer);
 
@@ -134,7 +134,15 @@ void LevelHandler::Export(Level & level)
 
 	std::ofstream tex(".\\Assets\\Textures\\NewTexx.mrthumb", std::ios::binary);
 
-	tex.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) * ((level.SIZE_X * level.SIZE_Y)) * 4);
+	tex.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char));
+
+	for (size_t i = 0; i < 84 * 48 * 4; i += 4)
+	{
+		std::cout << "R: " << (int)tempPixelBuffer[i];
+		std::cout << "\tG: " << (int)tempPixelBuffer[i + 1];
+		std::cout << "\tB: " << (int)tempPixelBuffer[i + 2];
+		std::cout << "\tA: " << (int)tempPixelBuffer[i + 3] << std::endl;
+	}
 	
 	tex.close();
 }

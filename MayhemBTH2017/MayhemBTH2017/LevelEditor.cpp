@@ -160,6 +160,7 @@ void LevelEditor::ButtonInput()
 		m_levelHandler.Export(m_level);
 		m_levelHandler.ExportRegister();
 
+		// FIX
 		glViewport(0, 0, 1280, 720);
 		// REMOVE
 
