@@ -171,7 +171,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="thumbnail.cpp" />
+    <ClCompile Include="Thumbnail.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -252,7 +252,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="thumbnail.h" />
+    <ClInclude Include="Thumbnail.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -319,6 +319,8 @@
     <None Include="Assets\Levels\NewFormat.mrlevel" />
     <None Include="Assets\Levels\Register.mrlevelreg" />
     <None Include="Assets\Prefabs\T.mr" />
+    <None Include="Assets\Textures\NewTex.mrTex" />
+    <None Include="Assets\Textures\NewTexx.mrthumb" />
     <None Include="DebugShader.frag" />
   </ItemGroup>
   <ItemGroup>

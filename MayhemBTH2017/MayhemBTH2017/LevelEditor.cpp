@@ -8,11 +8,13 @@ LevelEditor::LevelEditor()
 	m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
 	m_input = InputManager::Get();
 	m_stateManager = StateManager::Get();
-	m_levelHandler.Init();
+	//m_levelHandler.Init();
 	m_videoManager = VideoManager::Get();
 	m_timeManager = TimeManager::Get();
 
 	m_timer.SetTimer(0.1f, true, true);
+
+	Thumbnail temp("s");
 }
 
 LevelEditor::~LevelEditor()
@@ -33,10 +35,10 @@ void LevelEditor::Update()
 			AxisMove();
 		}
 
-		ButtonInput();
 		m_levelMarker.Render(m_camera, m_levelGUI.GetCurrentUV());
 		m_level.Render(m_camera);
 		m_levelGUI.Render(m_camera);
+		ButtonInput();
 		break;
 	case MENU:
 		break;
@@ -154,7 +156,7 @@ void LevelEditor::ButtonInput()
 		m_level.Render(m_camera);
 		m_videoManager->Swap();
 		//temp
-		//m_levelTexture.SaveImage(".\\Assets\\Textures\\TextureTestB.TGA");
+		m_levelTexture.SaveImage(".\\Assets\\Textures\\TextureTestB.TGA");
 		m_levelHandler.Export(m_level);
 		m_levelHandler.ExportRegister();
 

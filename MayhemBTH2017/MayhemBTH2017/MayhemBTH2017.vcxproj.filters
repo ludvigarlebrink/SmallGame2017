@@ -241,9 +241,6 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="thumbnail.cpp">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="LevelEditorPropPlacer.cpp">
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
@@ -255,6 +252,9 @@
     </ClCompile>
     <ClCompile Include="MyContactListener.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Thumbnail.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -424,9 +424,6 @@
     <ClInclude Include="ParticleSystem.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="thumbnail.h">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClInclude>
     <ClInclude Include="LevelEditorPropPlacer.h">
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
@@ -438,6 +435,9 @@
     </ClInclude>
     <ClInclude Include="MyContactListener.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Thumbnail.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -524,6 +524,12 @@
     </None>
     <None Include="Assets\GLSL\GameLevelShader.vert">
       <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\Textures\NewTex.mrTex">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </None>
+    <None Include="Assets\Textures\NewTexx.mrthumb">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

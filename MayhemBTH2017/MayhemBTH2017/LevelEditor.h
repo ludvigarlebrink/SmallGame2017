@@ -12,6 +12,7 @@
 #include "VirtualKeyboard.h"
 #include "LevelEditorStateMachine.h"
 #include "LevelTexture.h"
+#include "Thumbnail.h"
 
 
 #include <glm.hpp>
