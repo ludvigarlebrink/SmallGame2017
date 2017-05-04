@@ -37,7 +37,7 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 {
 	m_isBullet = true;
 	m_bulletScale = 2;
-	
+
 	m_bulletSprite = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");//PrefabManager::InstantiateSprite("RifleProjectile");
 
 	m_box.InitDynamic(world, spawnPos, glm::vec2(2, 0.8));
@@ -65,30 +65,24 @@ void Projectile::AddForce(glm::vec3 force)
 	b2Vec2 boxForce;
 	boxForce.x = force.x;
 	boxForce.y = force.y;
+	boxForce *= 10;
+
+	GLfloat yAngle = InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_Y);
+
+	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X) > 0)
+		yAngle = 90 + (yAngle) * 90;
+	else
+		yAngle = -90 + (yAngle) * (-90);
+
 
 	//Fire 
+
 	m_box.getBody()->ApplyForce(boxForce, m_box.getBody()->GetWorldCenter(), true);
+	m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (yAngle));
+
+	 m_prefab->SetRotation(0, 0, yAngle);
 
 
-	//bounding box rotation
-	//m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (force.x*force.y));
-
-	//sprite rotation
-	//glm::vec3 boundingBoxPos = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
-
-	m_transform.SetRotation(glm::vec3(0, 0, 45));
-
-//	m_transform.SetPosition(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
-
-	glm::vec3 rotation = glm::vec3(0, 0, 20);
-
-
-
-	if (m_isBullet == true) {
-
-	
-		m_bulletSprite->Render(m_camera);
-	}
 
 }
 
@@ -112,22 +106,8 @@ void Projectile::Update()
 {
 	m_rotationUpdate += 0.01f;
 
-	if (m_isBullet == true) {
-		//	m_box.getBody()->SetLinearVelocity(-(m_box.getBody()->GetWorld()->GetGravity()));
-	}
-
 	glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
-
-
-	if (m_isBullet == false)
-	{
-		m_prefab->SetPosition(position);
-		m_prefab->SetRotation(0, 0, m_rotationUpdate * 15);
-	}
-	else
-	{
-		m_bulletSprite->SetPosition(glm::vec3(position.x, position.y, 0.0f));
-	}
+	m_prefab->SetPosition(position);
 
 	if (m_rotationUpdate > 360)
 		m_rotationUpdate = 0;
@@ -141,17 +121,6 @@ void Projectile::Render(Camera camera)
 		m_prefab->Render(camera);
 	}
 	else {
-
-
-//		glEnable(GL_BLEND);
-//		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		m_bulletSprite->Update();
-		m_bulletSprite->Render(camera);
-
-//		glDisable(GL_BLEND);
-//		glUseProgram(0);
-
 	}
 }
 

@@ -10,7 +10,9 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile)
 {
 	m_isBullet = false;
 	m_prefabGun = gun;
+
 	m_prefabProjectile = projectile;
+
 	m_time = 0;
 	m_clearTime = 0;
 	m_counter = 0;
@@ -112,6 +114,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos)
 	firePower *= -10;
 	force *= firePower;
 
+
 	if (m_projectiles.size() < m_clearRate)
 	{
 		Projectile* projectile = nullptr;
@@ -123,14 +126,16 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos)
 			projectile->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile);
+		
 		}
 		else if (m_isBullet == true) {
-
 			projectile->InitBullet(world, glm::vec2(pos.x, pos.y));
 		}
 
 		projectile->AddForce(glm::vec3(force, 0.0f));
 		m_projectiles.push_back(projectile);
+
+
 
 	}
 
