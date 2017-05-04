@@ -166,6 +166,7 @@
     </ClCompile>
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="PropHandler.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -248,6 +249,7 @@
     </ClInclude>
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="PropHandler.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

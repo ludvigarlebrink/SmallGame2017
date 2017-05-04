@@ -21,6 +21,8 @@ public:
 	static Prefab * Instantiate(const char * mesh, const char * skel, 
 		const char** anim, uint32_t numAnim, const char * mat = nullptr);
 
+	static Prefab * InstantiateSprite(char * name);
+
 	static bool Destroy(Prefab * prefab);
 
 private:
