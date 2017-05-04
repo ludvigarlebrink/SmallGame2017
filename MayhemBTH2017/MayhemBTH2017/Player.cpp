@@ -128,7 +128,6 @@ void Player::Update() {
 	GLfloat yScale = GetBox().getScale().y;
 
 	m_playerPrefab->GetPlayerPrefab()->SetPosition(glm::vec3(xPos + 0.5, yPos + GetBox().getScale().y - 6, 0));
-
 	m_playerSprite.ModifyPos(glm::vec2(xPos - (GetBox().getScale().x / 2), yPos - (GetBox().getScale().y / 2)), glm::vec2(GetBox().getScale().x, GetBox().getScale().y));
 
 	//////////////////////////////////////////////////////////
