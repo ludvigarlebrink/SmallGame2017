@@ -244,17 +244,17 @@
     <ClCompile Include="thumbnail.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="LevelEditorStateMachine.cpp">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClCompile>
     <ClCompile Include="LevelEditorPropPlacer.cpp">
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
+    <ClCompile Include="LevelEditorStateMachine.cpp">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClCompile>
     <ClCompile Include="PropHandler.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
     <ClCompile Include="MyContactListener.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -427,17 +427,17 @@
     <ClInclude Include="thumbnail.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="LevelEditorStateMachine.h">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
     <ClInclude Include="LevelEditorPropPlacer.h">
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
+    <ClInclude Include="LevelEditorStateMachine.h">
+      <Filter>Engine\LevelEditor</Filter>
+    </ClInclude>
     <ClInclude Include="PropHandler.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="MyContactListener.h">
-      <Filter>Engine</Filter>
+      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Player.h" />
   </ItemGroup>

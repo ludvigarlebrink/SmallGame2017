@@ -75,6 +75,9 @@ private:
 	Mesh		m_mesh2;
 	Vertex3D *	m_vertices2;
 
+	Mesh		m_meshBackground;
+	Vertex3D *	m_vertices3;
+
 	AShader		m_debugShader;
 
 	uint32_t	m_nrOfSpawnPoints;
