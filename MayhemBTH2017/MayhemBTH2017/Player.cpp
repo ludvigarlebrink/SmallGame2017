@@ -114,8 +114,6 @@ void Player::Update() {
 
 
 
-
-
 	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f)
 	{
 		
