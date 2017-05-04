@@ -45,7 +45,7 @@ void GamePhysics::EnterWorld()
 
 	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
 
-	Prefab * projectile = PrefabManager::Instantiate("Player");
+	Prefab * projectile = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
 
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
@@ -96,7 +96,7 @@ void GamePhysics::Update()
 		m_player.Update();
 		m_weapon.Update(m_player.GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 
-		if (InputManager::Get()->GetButtonHeld(CONTROLLER_BUTTON_Y))
+		if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT)!=0)
 		{
 			if (m_weapon.FireRate(0.2f))
 			{

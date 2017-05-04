@@ -37,10 +37,8 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 {
 	m_isBullet = true;
 	m_bulletScale = 2;
-	m_bulletSprite.createSprite(glm::vec2(0), glm::vec2(2, 0.8));
-	m_bulletSprite.Init(".\\Assets\\GLSL\\BulletShader", 0, 0);
-
-	m_texture = m_texhandler.Import(".\\Assets\\Textures\\bullet.png");
+	
+	m_bulletSprite = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");//PrefabManager::InstantiateSprite("RifleProjectile");
 
 	m_box.InitDynamic(world, spawnPos, glm::vec2(2, 0.8));
 	m_box.getBody()->SetUserData(this);
@@ -68,20 +66,28 @@ void Projectile::AddForce(glm::vec3 force)
 	boxForce.x = force.x;
 	boxForce.y = force.y;
 
-
+	//Fire 
 	m_box.getBody()->ApplyForce(boxForce, m_box.getBody()->GetWorldCenter(), true);
 
-	//rotate box after firing direction
-	glm::vec2 axisAngle = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X), InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_Y));
+
+	//bounding box rotation
+	//m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (force.x*force.y));
+
+	//sprite rotation
+	//glm::vec3 boundingBoxPos = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
+
+	m_transform.SetRotation(glm::vec3(0, 0, 45));
+
+//	m_transform.SetPosition(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
+
+	glm::vec3 rotation = glm::vec3(0, 0, 20);
 
 
-	m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (axisAngle.x*axisAngle.y));
-	float angle = m_box.getBody()->GetAngle();
 
 	if (m_isBullet == true) {
 
-		//m_transform.SetRotation(0, 0, (axisAngle.x*axisAngle.y));
-		m_bulletSprite.Update(m_transform, m_camera);
+	
+		m_bulletSprite->Render(m_camera);
 	}
 
 }
@@ -107,7 +113,7 @@ void Projectile::Update()
 	m_rotationUpdate += 0.01f;
 
 	if (m_isBullet == true) {
-		m_box.getBody()->SetLinearVelocity(-(m_box.getBody()->GetWorld()->GetGravity()));
+		//	m_box.getBody()->SetLinearVelocity(-(m_box.getBody()->GetWorld()->GetGravity()));
 	}
 
 	glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
@@ -120,7 +126,7 @@ void Projectile::Update()
 	}
 	else
 	{
-		m_bulletSprite.update(glm::vec2(position.x, position.y), glm::vec2(2, 0.8));
+		m_bulletSprite->SetPosition(glm::vec3(position.x, position.y, 0.0f));
 	}
 
 	if (m_rotationUpdate > 360)
@@ -137,14 +143,14 @@ void Projectile::Render(Camera camera)
 	else {
 
 
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		m_texture.Bind(0);
-		m_bulletSprite.Bind();
-		m_bulletSprite.Update(m_transform, camera);
-		m_bulletSprite.draw();
-		glDisable(GL_BLEND);
+//		glEnable(GL_BLEND);
+//		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+		m_bulletSprite->Update();
+		m_bulletSprite->Render(camera);
+
+//		glDisable(GL_BLEND);
+//		glUseProgram(0);
 
 	}
 }

@@ -96,7 +96,7 @@ void System::Run()
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
 		// SKÄLL UT ERIK OCH LUKAS IMORGON :D
-		//SDL_Delay(10);
+		SDL_Delay(10);
 		//	counter += m_timeManager->GetDeltaTime();
 	}
 }

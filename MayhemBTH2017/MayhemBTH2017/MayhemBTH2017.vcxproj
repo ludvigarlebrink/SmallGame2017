@@ -300,6 +300,8 @@
     <None Include="Assets\GLSL\BlurrShader.frag" />
     <None Include="Assets\GLSL\BlurrShader.geom" />
     <None Include="Assets\GLSL\BlurrShader.vert" />
+    <None Include="Assets\GLSL\BulletShader.frag" />
+    <None Include="Assets\GLSL\BulletShader.vert" />
     <None Include="Assets\GLSL\DebugGreen.frag" />
     <None Include="Assets\GLSL\DebugGreen.vert" />
     <None Include="Assets\GLSL\DebugShader.vert" />
