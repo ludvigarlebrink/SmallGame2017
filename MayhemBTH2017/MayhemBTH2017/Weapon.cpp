@@ -8,12 +8,12 @@ Weapon::Weapon()
 
 Weapon::Weapon(Prefab * gun, Prefab * projectile)
 {
+	m_isBullet = false;
 	m_prefabGun = gun;
 	m_prefabProjectile = projectile;
 	m_time = 0;
 	m_clearTime = 0;
 	m_counter = 0;
-	m_isBullet = false;
 }
 
 Weapon::Weapon(Prefab * gun)
@@ -109,7 +109,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos)
 	if (abs(force.x) > 0.001f || abs(force.y) > 0.001f)
 		force = glm::normalize(force);
 
-	firePower *= -100;
+	firePower *= -10;
 	force *= firePower;
 
 	if (m_projectiles.size() < m_clearRate)

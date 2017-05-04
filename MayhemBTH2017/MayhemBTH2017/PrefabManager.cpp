@@ -298,11 +298,13 @@ Prefab * PrefabManager::InstantiateSprite(char * name)
 
 	matHandler->Import(filepath.c_str());
 
-	prefab->SetAlbedoID(TextureManager::Load(matHandler->GetTextures));
+	prefab->SetAlbedoID(TextureManager::Load(matHandler->GetTextures()));
+
+	prefab->SetName(name);
+
+
 
 	prefab->Create();
-
-	delete matHandler;
 
 	return prefab;
 }
