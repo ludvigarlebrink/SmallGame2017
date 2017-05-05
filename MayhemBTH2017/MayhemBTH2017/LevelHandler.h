@@ -3,14 +3,23 @@
 
 
 #include "Level.h"
+#include "LevelEditorPropPlacer.h"
 
 
 #include <fstream>
 #include <vector>
 
+	struct PropsExport
+	{
+		uint32_t	id;
+		glm::vec2	pos;
+		float		rot;
+	};
+
 class LevelHandler
 {
 public:
+
 	LevelHandler();
 	virtual ~LevelHandler();
 
