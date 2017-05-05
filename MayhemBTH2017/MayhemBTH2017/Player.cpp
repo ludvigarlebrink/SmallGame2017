@@ -83,7 +83,6 @@ void Player::Update() {
 	{
 		if (m_weapon.FireRate(0.09f))
 		{
-
 			m_weapon.Shoot(5.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z));
 		}
 	}
