@@ -292,11 +292,14 @@
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\GLSL\BackgroundShader.frag" />
+    <None Include="Assets\GLSL\BackgroundShader.vert" />
     <None Include="Assets\GLSL\BlurrShader.frag" />
     <None Include="Assets\GLSL\BlurrShader.geom" />
     <None Include="Assets\GLSL\BlurrShader.vert" />
     <None Include="Assets\GLSL\DebugGreen.frag" />
     <None Include="Assets\GLSL\DebugGreen.vert" />
+    <None Include="Assets\GLSL\DebugShader.frag" />
     <None Include="Assets\GLSL\DebugShader.vert" />
     <None Include="Assets\GLSL\GameLevelShader.frag" />
     <None Include="Assets\GLSL\GameLevelShader.vert" />
@@ -319,7 +322,6 @@
     <None Include="Assets\Levels\NewFormat.mrlevel" />
     <None Include="Assets\Levels\Register.mrlevelreg" />
     <None Include="Assets\Prefabs\T.mr" />
-    <None Include="DebugShader.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\TextureTestA.TGA" />
