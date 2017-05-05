@@ -93,13 +93,9 @@ void InputManager::RemovePlayer(uint32_t value)
 
 void InputManager::Update()
 {
-	/*for (int i = 0; i < 2; i++)
-	{
-		m_playerController[i].Update(i);
-	}	*/
 
-	std::cout << m_playerController[0].GetControllerID() << std::endl;
-	std::cout << m_playerController[1].GetControllerID() << std::endl;
+	m_playerController[0].Update();
+
 }
 
 void InputManager::Reset()
@@ -114,8 +110,7 @@ void InputManager::Init()
 {
 	m_nrOfPlayers = 1;
 	m_maxNrOfPlayers = 4;
-	m_playerController[0].AddPlayerController(0);
-	m_playerController[1].AddPlayerController(1);
+
+	SDL_Init(SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK);
+	std::cout << "INITTED" << std::endl;
 }
-
-
