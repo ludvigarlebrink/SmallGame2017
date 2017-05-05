@@ -31,7 +31,7 @@ public:
 	void SetCategoryBits(short CATEGORY);
 	void SetMaskBits(short MASK);
 	bool Timer(float rate);
-
+	void SetControllerID(int ID);
 	
 	//::..GETTERS..:://
 	uint16 GetCategoryBits();
@@ -41,6 +41,8 @@ public:
 	b2Fixture* GetFilter();
 	void StartContact(bool projectile, bool powerup);
 	void EndContact();
+	int GetControllerID();
+	void UpdateParticles();
 
 private:
 private:
@@ -57,6 +59,7 @@ private:
 	bool m_contact;
 	bool m_killed;
 	float m_time;
+	int m_controllerID;
 	bool m_collidedProjectile;
 
 	Weapon m_weapon;

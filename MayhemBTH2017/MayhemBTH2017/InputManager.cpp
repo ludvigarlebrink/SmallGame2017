@@ -26,23 +26,11 @@ void InputManager::StartUp()
 	}
 }
 
-void InputManager::ShutDown()
-{
-	for (int i = 0; i < m_nrOfPlayers; i++)
-	{
-		m_playerController[i].RemovePlayerController();
-	}
-}
-
 InputManager * InputManager::Get()
 {
 	return m_instance;
 }
 
-uint32_t InputManager::GetNrOfPlayers()
-{
-	return m_nrOfPlayers;
-}
 
 bool InputManager::GetButtonDown(size_t button, size_t controller)
 {
@@ -69,41 +57,11 @@ float InputManager::GetAxisRaw(size_t axis, size_t controller)
 	return m_playerController[controller].GetAxisRaw(axis);
 }
 
-void InputManager::SetNrOfPlayers(uint32_t value)
-{
-	m_nrOfPlayers = value;
-}
-
-void InputManager::AddPlayer()
-{
-	if (m_nrOfPlayers < m_maxNrOfPlayers)
-	{
-		m_nrOfPlayers++;
-//		m_playerController[m_nrOfPlayers].AddPlayerController(m_nrOfPlayers);
-	}
-}
-
-void InputManager::RemovePlayer(uint32_t value)
-{
-
-	m_playerController[value].RemovePlayerController();
-	m_nrOfPlayers--;
-
-}
-
 void InputManager::Update()
 {
 
 	m_playerController[0].Update();
 
-}
-
-void InputManager::Reset()
-{
-	for (int i = 0; i < m_nrOfPlayers; i++)
-	{
-		m_playerController[i].Reset();
-	}
 }
 
 void InputManager::Init()
@@ -113,4 +71,9 @@ void InputManager::Init()
 
 	SDL_Init(SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK);
 	std::cout << "INITTED" << std::endl;
+}
+
+void InputManager::ShutDown()
+{
+	// Do something...
 }
