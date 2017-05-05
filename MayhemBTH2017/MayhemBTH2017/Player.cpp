@@ -68,7 +68,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	//	m_weapon = Weapon(gun, projectile);
 	m_weapon = Weapon(gun, projectile);
 
-	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
+	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 5);
 
 	//Set fixture 
 
@@ -97,7 +97,7 @@ void Player::Update() {
 		}
 		if (m_collidedPowerUp)
 		{
-			m_weapon.SetProjectileType(1.0f, 1.0f, 0.0f, 0.1f, 5.0f, 100);
+			m_weapon.SetProjectileType(1.0f, 1.0f, 0.0f, 0.1f, 5.0f, 5);
 		}
 	}
 	else if(m_killed)

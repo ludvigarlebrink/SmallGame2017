@@ -85,6 +85,7 @@ void PowerUp::Update()
 	if (m_collidedPlayer)
 	{
 		SetActive(false);
+		m_boundingBox.getBody()->SetActive(false);
 	}
 
 	GLfloat xPos = GetBox().getBody()->GetPosition().x;
