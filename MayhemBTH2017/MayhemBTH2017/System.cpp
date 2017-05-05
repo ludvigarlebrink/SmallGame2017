@@ -45,8 +45,8 @@ void System::Run()
 	Camera cam;
 	GamePhysics physics;
 
-	ParticleSystem p(".\\Assets\\GLSL\\GeometryPass", glm::vec3(0, 0, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
 
+	ParticleSystem particles(".\\Assets\\GLSL\\GeometryPass", glm::vec3(40, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 50.0f, 5005);
 	TextureHandler teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
@@ -63,6 +63,11 @@ void System::Run()
 
 
 
+		//physics.Update();
+		//physics.Render(camera);
+		//particles.UpdateParticles();
+		//particles.RenderTransformed();
+
 
 		switch (m_stateManager->GetCurrentState())
 		{
@@ -74,6 +79,7 @@ void System::Run()
 			break;
 		case GameState::LEVEL_EDITOR:
 			l.Update();
+
 			break;
 		case GameState::GAME:
 			physics.Update();
@@ -89,12 +95,12 @@ void System::Run()
 
 		//m_inputManager->Reset();
 
-		// Switch between back and front buffer.
+		 //Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
-	
+
 		SDL_Delay(10);
-		//	counter += m_timeManager->GetDeltaTime();
+			counter += m_timeManager->GetDeltaTime();
 	}
 }
 

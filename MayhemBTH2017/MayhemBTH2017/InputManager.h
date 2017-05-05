@@ -23,6 +23,7 @@ public:
 	bool GetButtonUp(size_t button, size_t controller = 0);
 	float GetAxis(size_t axis, size_t controller = 0);
 	float GetAxisRaw(size_t axis, size_t controller = 0);
+	int GetControllerID(int ID);
 
 	//::.. MODIFY FUNCTIONS ..:://
 	void Update();

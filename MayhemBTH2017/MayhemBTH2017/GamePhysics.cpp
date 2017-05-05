@@ -18,7 +18,6 @@ void GamePhysics::EnterWorld()
 {
 
 
-
 	//Get deltatime
 	m_time = TimeManager::Get();
 	b2Vec2 gravity(0.0f, -8.21f);
@@ -41,16 +40,17 @@ void GamePhysics::EnterWorld()
 	m_player[0].Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 2.0));
 	m_player[0].SetCategoryBits(PLAYER);
 	m_player[0].SetMaskBits(POWERUP);
+	m_player[0].SetControllerID(InputManager::Get()->GetControllerID(0));
 
 
 	m_player[1].Init(m_world.get(), glm::vec2(15, 24), glm::vec2(2.0, 2.0));
 	m_player[1].SetCategoryBits(PLAYER);
 	m_player[1].SetMaskBits(POWERUP);
-
+	m_player[1].SetControllerID(InputManager::Get()->GetControllerID(1));
 	///////////////////////////////////////////////////////////////////
 
 
-	//m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
+	
 
 
 	///////////////////////////////////////////////////////////////////
@@ -64,12 +64,14 @@ void GamePhysics::EnterWorld()
 
 void GamePhysics::Update()
 {
+	m_particles.UpdateParticles();
+	
 	switch (m_loadWorld) {
 	case true:
 	{
 
 
-		m_world->Step(1.0f / 30.0f, 8, 4);
+		m_world->Step(1.0f / 20.0f, 8, 4);
 
 		for (b2Contact* contact = m_world->GetContactList(); contact; contact = contact->GetNext())
 		{
@@ -87,11 +89,13 @@ void GamePhysics::Update()
 		for (int i = 0; i < 2; i++) {
 
 			m_player[i].Update();
+			m_player[i].UpdateParticles();
 		}
 
 		m_PH.Update();
 
-		m_world->Step(1.0f / 30.0f, 8, 4); }
+		m_world->Step(1.0f / 20.0f, 8, 4); 
+	}
 	break;
 	case false:
 		std::cout << "LOADING" << std::endl;
@@ -113,16 +117,19 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 }
 
 void GamePhysics::Render(Camera camera) {
+
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 	m_floorCollider.DrawCollider(camera);
 
 	for (int i = 0; i < 2; i++) {
 
 		m_player[i].Render(camera);
+	
 	}
+
 
 	m_PH.Render(camera);
 
-	//m_weapon.RenderParticles(camera);
+
 
 }

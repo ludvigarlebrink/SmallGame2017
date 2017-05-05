@@ -25,7 +25,7 @@ public:
 	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf);
 	//::.. SET FUNTIONS ..:://
 	void Shoot(GLfloat firePower, b2World * world, glm::vec3 pos);
-	void RenderParticles(Camera camera);
+	void UpdateParticles();
 	//::.. GET FUNTIONS ..:://
 
 	bool FireRate(float rate);
