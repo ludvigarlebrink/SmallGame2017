@@ -60,13 +60,55 @@ void Prefab::Create()
 
 	if (m_animController != nullptr)
 	{
-		shaders[0] = ".\\Assets\\GLSL\\SkeletalAnimation.vert";
-		shaders[1] = ".\\Assets\\GLSL\\ToonShader.frag";
+		if (m_vertShader == nullptr)
+		{
+			shaders[0] = ".\\Assets\\GLSL\\SkeletalAnimation.vert";
+		}
+		else
+		{
+			std::string path = ".\\Assets\\GLSL\\";
+			path.append(m_vertShader);
+			path.append(".vert");
+			shaders[0] = path.c_str();
+		}
+
+		if (m_fragShader == nullptr)
+		{
+			shaders[1] = ".\\Assets\\GLSL\\ToonShader.frag";
+		}
+		else
+		{
+			std::string path = ".\\Assets\\GLSL\\";
+			path.append(m_fragShader);
+			path.append(".frag");
+			shaders[1] = path.c_str();
+		}
 	}
 	else
 	{
-		shaders[0] = ".\\Assets\\GLSL\\ToonShader.vert";
-		shaders[1] = ".\\Assets\\GLSL\\ToonShader.frag";
+		if (m_vertShader == nullptr)
+		{
+			shaders[0] = ".\\Assets\\GLSL\\ToonShader.vert";
+		}
+		else
+		{
+			std::string path = ".\\Assets\\GLSL\\";
+			path.append(m_vertShader);
+			path.append(".vert");
+			shaders[0] = path.c_str();
+		}
+
+		if (m_fragShader == nullptr)
+		{
+			shaders[1] = ".\\Assets\\GLSL\\ToonShader.frag";
+		}
+		else
+		{
+			std::string path = ".\\Assets\\GLSL\\";
+			path.append(m_fragShader);
+			path.append(".frag");
+			shaders[1] = path.c_str();
+		}
 	}
 
 	types[0] = ShaderManager::VERT_SHADER;
@@ -287,15 +329,31 @@ void Prefab::SetMaterial(Material * material)
 	m_material = material;
 }
 
+
 void Prefab::SetAlbedoID(GLuint id)
 {
 	m_albedoID = id;
 }
 
 
+void Prefab::SetVertShader(char * shader)
+{
+	m_vertShader = shader;
+}
+
+
+void Prefab::SetFragShader(char * shader)
+{
+	m_fragShader = shader;
+}
+
+
 //::.. HELP FUNCTIONS ..:://
 void Prefab::Init()
 {
+	m_vertShader		= nullptr;
+	m_fragShader		= nullptr;
+
 	m_hasBeenCreated	= false;
 	m_isEnabled			= true;
 	m_hasAnimation		= false;

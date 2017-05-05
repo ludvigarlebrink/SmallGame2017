@@ -35,8 +35,8 @@ void Collider2D::DrawCollider(Camera camera)
 	Transform transf;
 	transf.SetPosition(42.0, 24.0, -0.0);
 	m_shader.Update(transf, camera);
-	m_mesh.Render();
-	glUseProgram(0);
+	
+
 	m_megaTexture.Bind(0);
 	m_level.Render(camera);
 }
@@ -45,7 +45,7 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
 	m_contact = false;
-	m_imp.Import(m_level, 1);
+	m_levelImport.Import(m_level, 1);
 	
 	
 	const uint32_t length = SIZE_X * SIZE_Y * 6;
@@ -102,7 +102,7 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 				gameFloor.getBody()->SetUserData(this);
 				b2Filter filter;
 				filter.categoryBits = BOUNDARY;
-				filter.maskBits = PLAYER|PROJECTILE;
+				filter.maskBits = PLAYER|PROJECTILE|POWERUP;
 				gameFloor.getFixture()->SetFilterData(filter);
 			
 

@@ -226,9 +226,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="LevelTexture.cpp">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -256,8 +253,12 @@
     <ClCompile Include="MyContactListener.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Score.cpp" />
     <ClCompile Include="GameUI.cpp" />
+    <ClCompile Include="GameSystem.cpp" />
+    <ClCompile Include="PlayerStats.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="PowerUpHandler.cpp" />
+    <ClCompile Include="Collidable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -411,9 +412,6 @@
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="LevelTexture.h">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -442,8 +440,12 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Score.h" />
     <ClInclude Include="GameUI.h" />
+    <ClInclude Include="GameSystem.h" />
+    <ClInclude Include="PlayerStats.h" />
+    <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="PowerUpHandler.h" />
+    <ClInclude Include="Collidable.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -506,6 +508,9 @@
     <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
     </None>
+    <None Include="DebugShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
     <None Include="Assets\GLSL\LevelShader.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
@@ -527,15 +532,34 @@
     <None Include="Assets\GLSL\GameLevelShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\GLSL\BackgroundShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\BackgroundShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\DebugShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
+    <None Include="Assets\GLSL\BulletShader.frag" />
+    <None Include="Assets\GLSL\BulletShader.vert" />
+    <None Include="Assets\Textures\NewTex.mrTex" />
+    <None Include="Assets\Textures\NewTexx.mrthumb" />
+    <None Include="Assets\GLSL\GeometryPass.vert" />
+    <None Include="Assets\GLSL\DrawShader.frag" />
+    <None Include="Assets\GLSL\DrawShader.geom" />
+    <None Include="Assets\GLSL\DrawShader.vert" />
+    <None Include="Assets\GLSL\emitterShader.frag" />
+    <None Include="Assets\GLSL\emitterShader.vert" />
+    <None Include="Assets\GLSL\ColliderShader.frag" />
+    <None Include="Assets\GLSL\ColliderShader.vert" />
+    <None Include="Assets\GLSL\leo.frag" />
+    <None Include="Assets\GLSL\leo.geom" />
+    <None Include="Assets\GLSL\DebugShader.frag" />
+    <None Include="Assets\GLSL\ToonShader.vert" />
+    <None Include="Assets\GLSL\SplitterShader.vert" />
+    <None Include="Assets\GLSL\TextureTest" />
+    <None Include="Assets\GLSL\ToonShader" />
+    <None Include="Assets\GLSL\ToonShader.frag" />
+    <None Include="Assets\GLSL\ShadowShader.vert" />
+    <None Include="Assets\GLSL\ShadowShader.geom" />
+    <None Include="Assets\GLSL\ShadowPass.frag" />
+    <None Include="Assets\GLSL\PowerUpShader.vert" />
+    <None Include="Assets\GLSL\ParticleDrop.vert" />
+    <None Include="Assets\GLSL\ParticleExplosion.vert" />
+    <None Include="Assets\GLSL\PlayerShader.vert" />
+    <None Include="Assets\GLSL\PowerUpShader.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\TextureTestA.TGA">

@@ -14,10 +14,10 @@
 #include <glm.hpp>
 #include <vector>
 
-
 class LevelEditorPropPlacer
 {
 public:
+
 	struct PropsExport
 	{
 		uint32_t	id;
@@ -36,6 +36,11 @@ public:
 
 	void Place();
 	void Remove();
+
+	//::.. GET FUNCTIONS ..:://
+	PropsExport * GetPropExport();
+	uint32_t GetNumProps();
+
 
 private:
 	//::.. HELP FUNCTIONS ..:://

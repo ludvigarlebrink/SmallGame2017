@@ -6,6 +6,8 @@
 #include "Prefab.h"
 #include "PrefabManager.h"
 #include "GamePhysics.h"
+#include "GameUI.h"
+
 
 System::System()
 {
@@ -48,6 +50,8 @@ void System::Run()
 	TextureHandler teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
+	GameUI gameUI;
+
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -58,14 +62,7 @@ void System::Run()
 		//	pre->Render(cam);
 
 
-		//p.UpdateParticles();
-		//texture.Bind(1);
-		//glEnable(GL_BLEND);
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		//glDepthMask(GL_FALSE);
-		//p.RenderTransformed(1);
-		//glDisable(GL_BLEND);
-		//glDepthMask(TRUE);
+
 
 		switch (m_stateManager->GetCurrentState())
 		{
@@ -79,9 +76,9 @@ void System::Run()
 			l.Update();
 			break;
 		case GameState::GAME:
-
 			physics.Update();
 			physics.Render(camera);
+			gameUI.Render();
 			break;
 		case GameState::EXIT:
 			isRunning = false;
@@ -95,7 +92,7 @@ void System::Run()
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
-		// SKÄLL UT ERIK OCH LUKAS IMORGON :D
+	
 		SDL_Delay(10);
 		//	counter += m_timeManager->GetDeltaTime();
 	}

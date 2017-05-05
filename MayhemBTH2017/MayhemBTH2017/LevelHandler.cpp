@@ -52,8 +52,8 @@ void LevelHandler::Import(Level & level, uint32_t id)
 	bool isOccupied[nrOfBlocks] = { 0 };
 	bool isSpawn[nrOfBlocks] = { 0 };
 	glm::vec2 *uv = new glm::vec2[nrOfBlocks];
-	//glm::vec2 *uv2 = new  glm::vec2[nrOfBlocks * (12 * 2)];
-	//glm::vec3 *rgb = new glm::vec3[(nrOfBlocks * 6) * 3];
+
+
 	int nSize = m_width * m_height * 3;
 	m_dataBuffer = (char*)malloc(nSize * sizeof(char));
 	uint32_t i = 0;
@@ -98,14 +98,17 @@ void LevelHandler::Export(Level & level)
 	newRegister.level = nullptr;
 	m_register.push_back(newRegister);
 
+	int nSize = m_width * m_height * 4;
+
+
 	glReadBuffer(GL_FRONT);
 	glPixelStorei(GL_PACK_ALIGNMENT, 1);
 
-	int nSize = m_width * m_height * 4;
 	unsigned char* tempPixelBuffer;
 	tempPixelBuffer = new unsigned char[84 * 48 * 4];
-
 	glReadPixels(0, 0, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, tempPixelBuffer);
+	PropsExport props;
+	//props = LevelEditorPropPlacer::GetPropExport();
 
 	char* nameBuffer = new char[m_size];
 	
@@ -130,14 +133,11 @@ void LevelHandler::Export(Level & level)
 	output.write(reinterpret_cast<char*>(isOccupied), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(isSpawn), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(uvCoords), sizeof(glm::vec2) * (level.SIZE_X * level.SIZE_Y));
-	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char));
+	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(level.SIZE_X * level.SIZE_Y) * 4);
+
 	output.close();
 
-	//std::ofstream tex(".\\Assets\\Textures\\NewTexx.mrthumb", std::ios::binary);
 
-	//tex.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char));
-	
-	//tex.close();
 }
 
 
