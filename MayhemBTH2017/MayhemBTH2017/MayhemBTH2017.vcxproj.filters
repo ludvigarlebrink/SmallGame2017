@@ -255,6 +255,7 @@
     </ClCompile>
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="GameUI.cpp" />
+    <ClCompile Include="GameSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -438,6 +439,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="GameUI.h" />
+    <ClInclude Include="GameSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

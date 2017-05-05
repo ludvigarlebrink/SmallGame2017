@@ -62,6 +62,8 @@ public:
 	void SetShaderProgram(const char * programName);
 	void SetMaterial(Material * material);
 	void SetAlbedoID(GLuint id);
+	void SetVertShader(char * shader);
+	void SetFragShader(char * shader);
 
 
 private:
@@ -79,6 +81,9 @@ private:
 		NORMAL_MAP,
 		NUM_UNIFORMS
 	};
+
+	char *				m_vertShader;
+	char *				m_fragShader;
 
 	bool				m_hasBeenCreated;
 	bool				m_isEnabled;

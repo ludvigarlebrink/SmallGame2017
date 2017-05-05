@@ -37,6 +37,11 @@ public:
 	void Place();
 	void Remove();
 
+	//::.. GET FUNCTIONS ..:://
+	PropsExport * GetPropExport();
+	uint32_t GetNumProps();
+
+
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
