@@ -144,7 +144,6 @@
     </ClCompile>
     <ClCompile Include="LevelEditorPropPlacer.cpp" />
     <ClCompile Include="LevelEditorStateMachine.cpp" />
-    <ClCompile Include="LevelTexture.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Menu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -229,7 +228,6 @@
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="LevelEditorPropPlacer.h" />
     <ClInclude Include="LevelEditorStateMachine.h" />
-    <ClInclude Include="LevelTexture.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Menu.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
