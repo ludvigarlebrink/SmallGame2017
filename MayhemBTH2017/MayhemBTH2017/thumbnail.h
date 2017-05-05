@@ -8,15 +8,6 @@
 
 #include <glew.h>
 
-typedef union PixelInfo
-{
-	std::uint32_t Color;
-	struct 
-	{
-		std::uint8_t R, G, B, A;
-			 
-	};
-}*PPixelInfo;
 
 class Thumbnail
 {

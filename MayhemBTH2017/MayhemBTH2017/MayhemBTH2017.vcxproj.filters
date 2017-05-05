@@ -226,9 +226,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="LevelTexture.cpp">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -411,9 +408,6 @@
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="LevelTexture.h">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -530,6 +524,10 @@
     <None Include="Assets\GLSL\GameLevelShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
+    <None Include="Assets\GLSL\BulletShader.frag" />
+    <None Include="Assets\GLSL\BulletShader.vert" />
+    <None Include="Assets\Textures\NewTex.mrTex" />
+    <None Include="Assets\Textures\NewTexx.mrthumb" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\TextureTestA.TGA">
