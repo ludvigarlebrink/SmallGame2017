@@ -13,27 +13,27 @@ PlayerController::~PlayerController()
 	// Do nothing...
 }
 
-void PlayerController::Update()
+void PlayerController::Update(Sint32 playerControllerID)
 {
 	while (SDL_PollEvent(&m_event) != 0)
 	{
 		switch (m_event.type)
 		{
-		case SDL_CONTROLLERDEVICEADDED:
-			AddPlayerController(m_event.cdevice);
-			break;
+			case SDL_CONTROLLERDEVICEADDED:
+				AddPlayerController(m_event.cdevice.which);
+				break;
 
-		case SDL_CONTROLLERDEVICEREMOVED:
-			RemovePlayerController();
-			break;
+			//case SDL_CONTROLLERDEVICEREMOVED:
+			//	RemovePlayerController();
+			//	break;
 
 		case SDL_CONTROLLERBUTTONDOWN:
-			ButtonDown(m_event.cbutton);
+			ButtonDown(playerControllerID);
 			break;
 
-		case SDL_CONTROLLERBUTTONUP:
-			ButtonUp(m_event.cbutton);
-			break;
+		//case SDL_CONTROLLERBUTTONUP:
+		//	ButtonUp(m_event.cbutton);
+		//	break;
 
 		case SDL_CONTROLLERAXISMOTION:
 			GetAxis(m_event.caxis);
@@ -52,12 +52,13 @@ void PlayerController::Reset()
 	}
 }
 
-void PlayerController::AddPlayerController(SDL_ControllerDeviceEvent PlayerControllerID)
+void PlayerController::AddPlayerController(Sint32 playerControllerID)
 {
-	if (SDL_IsGameController(PlayerControllerID.which))
-	{
-		SDL_GameController * m_controller = SDL_GameControllerOpen(PlayerControllerID.which);
-	}
+
+	SDL_GameController * m_controller = SDL_GameControllerOpen(playerControllerID);
+	m_controllerID = playerControllerID;
+
+	std::cout << "ID: " << playerControllerID << std::endl;
 }
 
 void PlayerController::RemovePlayerController()
@@ -103,10 +104,17 @@ size_t PlayerController::GetNumAxis()
 	return NUM_AXIS;
 }
 
+Sint32 PlayerController::GetControllerID()
+{
+	return m_controllerID;
+}
+
 
 //::.. HELP FUNCTIONS ..:://
 void PlayerController::Init()
 {
+	SDL_Init(SDL_INIT_GAMECONTROLLER);
+
 	for (size_t i = 0; i < NUM_BUTTONS; i++)
 	{
 		m_button[i].isDown = false;
@@ -118,9 +126,12 @@ void PlayerController::Init()
 }
 
 
-void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEvent)
+void PlayerController::ButtonDown(Sint32 playerControllerID)
 {
-	switch (controllerEvent.button)
+
+	std::cout << playerControllerID << std::endl;
+	std::cout << m_controllerID << std::endl;
+	/*switch (controllerEvent.button)
 	{
 	case SDL_CONTROLLER_BUTTON_A:
 		m_button[CONTROLLER_BUTTON_A].isDown = true;
@@ -182,7 +193,7 @@ void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEven
 		m_button[CONTROLLER_BUTTON_DPAD_RIGHT].isHeld = true;
 		break;
 
-	}
+	}*/
 }
 
 void PlayerController::ButtonUp(const SDL_ControllerButtonEvent controllerEvent)
@@ -373,7 +384,7 @@ void PlayerController::GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent)
 //Scale range to [-1, 1]
 float PlayerController::ScaleRange(Sint16 value)
 {
-	
+
 	float result = (2.0f * ((value - (-32768.0f)) / (32767.0f - (-32768.0f))) - 1.0f);
 
 	return result;
