@@ -256,6 +256,18 @@
     <ClCompile Include="GameUI.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="PlayerStats.cpp" />
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUpHandler.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Collidable.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelTexture.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -440,6 +452,18 @@
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="PlayerStats.h" />
+    <ClInclude Include="PowerUp.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUpHandler.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Collidable.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelTexture.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
