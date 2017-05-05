@@ -102,6 +102,8 @@ LevelEditorPropPlacer::PropsExport * LevelEditorPropPlacer::GetPropExport()
 
 		++counter;
 	}
+
+	return props;
 }
 
 

@@ -5,7 +5,7 @@
 #include "VideoManager.h"
 #include "UIImage.h"
 #include "UIText.h"
-#include "Score.h"
+#include "PlayerStats.h"
 
 #include <cstdint>
 #include <cstdlib>
@@ -17,7 +17,7 @@ public:
 	GameUI();
 	virtual ~GameUI();
 	
-	void Update(Score::PlayerScore* playerScore, int32_t time);
+	void Update(PlayerStats * stats, int32_t time);
 	void Render();
 
 	//::.. SET FUNCTIONS ..:://
