@@ -7,6 +7,7 @@ PlayerController * PlayerController::m_controllers = new PlayerController[4];
 
 PlayerController::PlayerController()
 {
+	Init();
 	m_isConnected = false;
 	m_controller = 0;
 	m_controllerID = -1;
@@ -20,15 +21,15 @@ PlayerController::~PlayerController()
 
 void PlayerController::Update()
 {
-
-	//SDL_Event sdlEvent;
-	while (SDL_PollEvent(&m_event))
-		switch (m_event.type)
+	SDL_Event sdlEvent;
+	while (SDL_PollEvent(&sdlEvent))
+	{
+		switch (sdlEvent.type)
 		{
 		case SDL_CONTROLLERDEVICEADDED:
-			if (m_event.cdevice.which < 4) {
-				PlayerController& pController = m_controllers[m_event.cdevice.which];
-				pController.AddPlayerController(m_event.cdevice.which);
+			if (sdlEvent.cdevice.which < 4) {
+				PlayerController& pController = m_controllers[sdlEvent.cdevice.which];
+				pController.AddPlayerController(sdlEvent.cdevice.which);
 			}
 			break;
 
@@ -37,19 +38,19 @@ void PlayerController::Update()
 			break;
 
 		case SDL_CONTROLLERBUTTONDOWN:
-			ButtonDown(m_event.cbutton);
+			ButtonDown(sdlEvent.cbutton);
 			break;
 
 		case SDL_CONTROLLERBUTTONUP:
-			ButtonUp(m_event.cbutton);
+			ButtonUp(sdlEvent.cbutton);
 			break;
 
 		case SDL_CONTROLLERAXISMOTION:
-			GetAxis(m_event.caxis);
-			GetAxisRaw(m_event.caxis);
+			GetAxis(sdlEvent.caxis);
+			GetAxisRaw(sdlEvent.caxis);
 			break;
-
 		}
+	}
 }
 
 

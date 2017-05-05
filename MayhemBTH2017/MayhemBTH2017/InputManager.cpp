@@ -65,8 +65,8 @@ int InputManager::GetControllerID(int ID)
 void InputManager::Update()
 {
 
+	m_playerController[0].Reset();
 	m_playerController[0].Update();
-
 }
 
 void InputManager::Init()
@@ -74,7 +74,6 @@ void InputManager::Init()
 	m_nrOfPlayers = 1;
 	m_maxNrOfPlayers = 4;
 
-	SDL_Init(SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK);
 	std::cout << "INITTED" << std::endl;
 }
 
