@@ -54,7 +54,7 @@ void GamePhysics::EnterWorld()
 
 
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
-	m_weapon.SetProjectileType(0.3f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
+	m_weapon.SetProjectileType(0.8f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
 
 
 	///////////////////////////////////////////////////////////////////
@@ -101,7 +101,7 @@ void GamePhysics::Update()
 			if (m_weapon.FireRate(0.2f))
 			{
 	
-				m_weapon.Shoot(5.0f, m_world.get(), glm::vec3(m_player.GetPrefab()->GetProjectileSpawnPoint().x, m_player.GetPrefab()->GetProjectileSpawnPoint().y, m_player.GetPrefab()->GetProjectileSpawnPoint().z));
+				m_weapon.Shoot(10.0f, m_world.get(), glm::vec3(m_player.GetPrefab()->GetProjectileSpawnPoint().x, m_player.GetPrefab()->GetProjectileSpawnPoint().y, m_player.GetPrefab()->GetProjectileSpawnPoint().z));
 			}
 		}
 
@@ -128,6 +128,6 @@ void GamePhysics::Render(Camera camera) {
 	m_player.Render(camera);
 
 	m_weapon.Render(camera);
-	m_weapon.RenderParticles(camera);
+	//m_weapon.RenderParticles(camera);
 
 }
