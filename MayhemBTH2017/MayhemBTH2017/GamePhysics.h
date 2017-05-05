@@ -28,7 +28,7 @@ private:
 	Box m_newBox;
 	Box m_newBox2;
 	Box m_powerUpBox;
-	Player m_player;
+	Player m_player[4];
 	Collider2D gameFloor;
 
 	TimeManager* m_time;
