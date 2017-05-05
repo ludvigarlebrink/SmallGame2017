@@ -158,6 +158,11 @@ int PlayerController::GetControllerID_3()
 	return m_controllers[3].GetControllerIndex(3);
 }
 
+PlayerController * PlayerController::GetController(int ID)
+{
+	return &m_controllers[ID];
+}
+
 int PlayerController::GetControllerIndex(SDL_JoystickID instance)
 {
 	for (int i = 0; i < 4; ++i)

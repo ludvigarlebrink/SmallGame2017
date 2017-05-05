@@ -72,6 +72,7 @@ public:
 	int GetControllerID_1();
 	int GetControllerID_2();
 	int GetControllerID_3();
+	PlayerController* GetController(int ID);
 
 	static int GetControllerIndex(SDL_JoystickID instance);
 
