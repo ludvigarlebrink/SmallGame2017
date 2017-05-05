@@ -256,6 +256,8 @@
     <ClCompile Include="MyContactListener.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="GameUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -439,6 +441,9 @@
     <ClInclude Include="MyContactListener.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Score.h" />
+    <ClInclude Include="GameUI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

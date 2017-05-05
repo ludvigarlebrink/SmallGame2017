@@ -13,6 +13,8 @@ LevelEditor::LevelEditor()
 	m_timeManager = TimeManager::Get();
 
 	m_timer.SetTimer(0.1f, true, true);
+
+	Thumbnail temp("s");
 }
 
 LevelEditor::~LevelEditor()
@@ -33,10 +35,10 @@ void LevelEditor::Update()
 			AxisMove();
 		}
 
-		ButtonInput();
 		m_levelMarker.Render(m_camera, m_levelGUI.GetCurrentUV());
 		m_level.Render(m_camera);
 		m_levelGUI.Render(m_camera);
+		ButtonInput();
 		break;
 	case MENU:
 		break;
@@ -154,10 +156,11 @@ void LevelEditor::ButtonInput()
 		m_level.Render(m_camera);
 		m_videoManager->Swap();
 		//temp
-		//m_levelTexture.SaveImage(".\\Assets\\Textures\\TextureTestB.TGA");
+		m_levelTexture.SaveImage(".\\Assets\\Textures\\TextureTestB.TGA");
 		m_levelHandler.Export(m_level);
 		m_levelHandler.ExportRegister();
 
+		// FIX
 		glViewport(0, 0, 1280, 720);
 		// REMOVE
 

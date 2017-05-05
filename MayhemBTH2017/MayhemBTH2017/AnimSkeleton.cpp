@@ -122,7 +122,6 @@ void AnimSkeleton::SetSkeleton(uint32_t * parentID, glm::mat4 * localTx,
 void AnimSkeleton::SetJointRotation(Transform & rotation, uint32_t jointID)
 {
 	rotation.SetPosition(m_skel[jointID].localTx[3].x, m_skel[jointID].localTx[3].y, m_skel[jointID].localTx[3].z);
-//	glm::mat4 isolatedRot = rotation.GetModelMatrix() * m_skel[jointID].invBindPose;
 	m_skel[jointID].globalTx = m_skel[m_skel[jointID].parentID].globalTx * rotation.GetModelMatrix();
 	m_skinnedTx[jointID] = m_skel[jointID].globalTx *  m_skel[jointID].invBindPose;
 }
