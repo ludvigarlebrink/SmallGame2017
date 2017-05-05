@@ -10,12 +10,12 @@ PowerUpHandler::~PowerUpHandler()
 {
 }
 
-void PowerUpHandler::Init(Player p, b2World * world, int nrOfSpawns)
+void PowerUpHandler::Init( b2World * world, int nrOfSpawns)
 {
 	m_time = 0;
 
 	m_world = world;
-	m_player = &p;
+
 	m_rate = 120 / nrOfSpawns;
 	m_nrOfSpawns = nrOfSpawns;
 

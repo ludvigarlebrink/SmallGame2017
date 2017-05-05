@@ -17,9 +17,11 @@ GamePhysics::~GamePhysics()
 void GamePhysics::EnterWorld()
 {
 
+
+
 	//Get deltatime
 	m_time = TimeManager::Get();
-	b2Vec2 gravity(0.0f, -5.21f);
+	b2Vec2 gravity(0.0f, -8.21f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
@@ -32,15 +34,24 @@ void GamePhysics::EnterWorld()
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
+	m_PH.Init(m_world.get(), 20);
 	//PLAYER
-	m_player.Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 2.0));
+
+
+	m_player[0].Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 2.0));
+	m_player[0].SetCategoryBits(PLAYER);
+	m_player[0].SetMaskBits(POWERUP);
+
+
+	m_player[1].Init(m_world.get(), glm::vec2(15, 24), glm::vec2(2.0, 2.0));
+	m_player[1].SetCategoryBits(PLAYER);
+	m_player[1].SetMaskBits(POWERUP);
 
 	///////////////////////////////////////////////////////////////////
 
 
 	//m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
 
-	m_PH.Init(m_player, m_world.get(), 100);
 
 	///////////////////////////////////////////////////////////////////
 
@@ -48,8 +59,6 @@ void GamePhysics::EnterWorld()
 
 
 	//player fixture is of type PLAYER
-	m_player.SetCategoryBits(PLAYER);
-	m_player.SetMaskBits(POWERUP);
 	m_loadWorld = true;
 }
 
@@ -58,9 +67,7 @@ void GamePhysics::Update()
 	switch (m_loadWorld) {
 	case true:
 	{
-		if (!(m_player.GetCategoryBits() & powerUpFixture.filter.maskBits) != 0 && (powerUpFixture.filter.categoryBits & m_player.GetMaskBits()) != 0) {
 
-		}
 
 		m_world->Step(1.0f / 30.0f, 6, 2);
 
@@ -77,7 +84,10 @@ void GamePhysics::Update()
 
 		}
 
-		m_player.Update();
+		for (int i = 0; i < 2; i++) {
+
+			m_player[i].Update();
+		}
 
 		m_PH.Update();
 
@@ -106,7 +116,10 @@ void GamePhysics::Render(Camera camera) {
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 	m_floorCollider.DrawCollider(camera);
 
-	m_player.Render(camera);
+	for (int i = 0; i < 2; i++) {
+
+		m_player[i].Render(camera);
+	}
 
 	m_PH.Render(camera);
 
