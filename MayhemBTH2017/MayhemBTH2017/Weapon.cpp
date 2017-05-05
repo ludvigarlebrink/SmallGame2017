@@ -16,6 +16,8 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile)
 	m_time = 0;
 	m_clearTime = 0;
 	m_counter = 0;
+
+	m_projectileCounter = 0;
 }
 
 Weapon::Weapon(Prefab * gun)
@@ -43,7 +45,6 @@ void Weapon::SetProjectileType(float restitution, float friction, float damping,
 	m_density = density;
 	m_fireRate = fireRate;
 	m_clearRate = clearRate;
-	m_projectileCounter = 0;
 
 }
 
@@ -51,6 +52,8 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 {
 	//m_prefabGun->SetPosition(playerPos);
 	m_time += TimeManager::Get()->GetDeltaTime();
+	m_clearTime += TimeManager::Get()->GetDeltaTime();
+
 
 	DeleteProjectile();
 
@@ -59,7 +62,7 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 
 void Weapon::DeleteProjectile()
 {
-	if (m_time > (float)m_clearRate)
+	if (m_clearTime > (float)m_clearRate)
 	{
 		for (int i = 0; i < m_projectiles.size(); i++)
 		{
@@ -67,6 +70,7 @@ void Weapon::DeleteProjectile()
 		}
 		m_projectiles.clear();
 		m_projectileCounter = 0;
+		m_clearTime = 0;
 	}
 }
 

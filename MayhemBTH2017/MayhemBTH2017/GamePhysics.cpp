@@ -37,28 +37,12 @@ void GamePhysics::EnterWorld()
 
 	///////////////////////////////////////////////////////////////////
 
-	//Weapon
 
-	Prefab * gun = PrefabManager::Instantiate("Player");
+	//m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
 
-	gun->SetScale(glm::vec3(2, 2, 2));
-
-	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
-
-	Prefab * projectile = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
-
-	projectile->SetScale(glm::vec3(1, 1, 1));
-
-	//	m_weapon = Weapon(gun, projectile);
-	m_weapon = Weapon(gun, projectile);
-
-
-	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
-	m_weapon.SetProjectileType(0.3f, 1.0f, 0.0f, 0.1f, 5.0f, 30);
-
+	m_PH.Init(m_player, m_world.get(), 100);
 
 	///////////////////////////////////////////////////////////////////
-
 
 	//FIXTURES FOR COLLISIONS
 
@@ -94,16 +78,8 @@ void GamePhysics::Update()
 		}
 
 		m_player.Update();
-		m_weapon.Update(m_player.GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 
-		if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT)!=0)
-		{
-			if (m_weapon.FireRate(0.09f))
-			{
-	
-				m_weapon.Shoot(5.0f, m_world.get(), glm::vec3(m_player.GetPrefab()->GetProjectileSpawnPoint().x, m_player.GetPrefab()->GetProjectileSpawnPoint().y, m_player.GetPrefab()->GetProjectileSpawnPoint().z));
-			}
-		}
+		m_PH.Update();
 
 		m_world->Step(1.0f / 30.0f, 6, 2); }
 	break;
@@ -121,13 +97,19 @@ glm::vec3 GamePhysics::GetPosition() {
 
 }
 
+void GamePhysics::SetNrOfPlayers(int nrOf)
+{
+	m_nrOfPlayers = nrOf;
+}
+
 void GamePhysics::Render(Camera camera) {
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 	m_floorCollider.DrawCollider(camera);
 
 	m_player.Render(camera);
 
-	m_weapon.Render(camera);
-	m_weapon.RenderParticles(camera);
+	m_PH.Render(camera);
+
+	//m_weapon.RenderParticles(camera);
 
 }

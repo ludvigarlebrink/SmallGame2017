@@ -261,6 +261,12 @@
     <ClCompile Include="Collidable.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUpHandler.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -450,6 +456,13 @@
     <ClInclude Include="Collidable.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="PowerUp.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUpHandler.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePhysics.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -538,6 +551,12 @@
     </None>
     <None Include="Assets\GLSL\BulletShader.frag" />
     <None Include="Assets\GLSL\BulletShader.vert" />
+    <None Include="Assets\GLSL\ColliderShader.frag">
+      <Filter>Engine</Filter>
+    </None>
+    <None Include="Assets\GLSL\ColliderShader.vert">
+      <Filter>Engine</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\TextureTestA.TGA">

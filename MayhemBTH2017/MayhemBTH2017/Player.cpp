@@ -25,6 +25,8 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	m_contact = false;
 	//Load player MESH
 
+	m_world = world;
+
 	m_playerPrefab = new PlayerPrefab();
 	
 	//m_playerPrefab->SetScale(glm::vec3(1.3));
@@ -44,10 +46,29 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	
 	b2Filter filter;
 	filter.categoryBits = PLAYER;
-	filter.maskBits = BOUNDARY;
+	filter.maskBits = BOUNDARY | POWERUP;
 	GetBox().getFixture()->SetFilterData(filter);
 
 	GetBox().getBody()->SetUserData(this);
+
+	m_collidedPowerUp = false;
+
+	//set weapon
+
+	Prefab * gun = PrefabManager::Instantiate("Player");
+
+	gun->SetScale(glm::vec3(2, 2, 2));
+
+	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
+
+	Prefab * projectile = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
+
+	projectile->SetScale(glm::vec3(1, 1, 1));
+
+	//	m_weapon = Weapon(gun, projectile);
+	m_weapon = Weapon(gun, projectile);
+
+	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
 
 	//Set fixture 
 
@@ -55,12 +76,29 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 
 void Player::Update() {
 
+
+	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
+
+	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT) != 0)
+	{
+		if (m_weapon.FireRate(0.09f))
+		{
+
+			m_weapon.Shoot(5.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z));
+		}
+	}
+
+
 	if (m_contact)
 	{
 		if (m_collidedProjectile)
 		{
 			m_killed = true;
-		}		
+		}
+		if (m_collidedPowerUp)
+		{
+			m_weapon.SetProjectileType(1.0f, 1.0f, 0.0f, 0.1f, 5.0f, 100);
+		}
 	}
 	else if(m_killed)
 	{
@@ -121,7 +159,7 @@ void Player::Update() {
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 150), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 300), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 	
 
@@ -138,7 +176,7 @@ void Player::Update() {
 	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_A) != 0.0f && m_isMidAir) 
 	{
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 150), GetBox().getBody()->GetWorldCenter(), 1);
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 300), GetBox().getBody()->GetWorldCenter(), 1);
 
 	}
 
@@ -168,6 +206,8 @@ void Player::Render(Camera camera) {
 	//m_playerSprite.draw();
 	//glUseProgram(0);
 
+	m_weapon.Render(camera);
+
 	m_playerPrefab->Render(camera);
 
 }
@@ -181,13 +221,17 @@ PlayerPrefab* Player::GetPrefab()
 	return m_playerPrefab;
 }
 
-void Player::StartContact(bool projectile)
+void Player::StartContact(bool projectile, bool powerup)
 {
 	m_contact = true;
 
 	if (projectile)
 	{
 		m_collidedProjectile = true;
+	}
+	if (powerup)
+	{
+		m_collidedPowerUp = true;
 	}
 	
 }

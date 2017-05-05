@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "Projectile.h"
+#include "PowerUp.h"
 
 #include <box2d.h>
 

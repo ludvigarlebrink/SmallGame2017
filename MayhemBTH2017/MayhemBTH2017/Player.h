@@ -9,6 +9,7 @@
 #include "PlayerPrefab.h"
 #include "Collidable.h"
 #include "Projectile.h"
+#include "Weapon.h"
 
 class Player : public Collidable
 {
@@ -38,7 +39,7 @@ public:
 	Box GetBox();
 	PlayerPrefab* GetPrefab();
 	b2Fixture* GetFilter();
-	void StartContact(bool projectile);
+	void StartContact(bool projectile, bool powerup);
 	void EndContact();
 
 private:
@@ -58,12 +59,18 @@ private:
 	float m_time;
 	bool m_collidedProjectile;
 
+	Weapon m_weapon;
+
+	b2World * m_world;
+
+	bool m_collidedPowerUp;
+
 	b2FixtureDef m_fixture;
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
 		PLAYER = 0x0002,
 		PROJECTILE = 0x0004,
-		FRIENDLY_AIRCRAFT = 0x0008,
+		POWERUP = 0x0008,
 		ENEMY_AIRCRAFT = 0x0010,
 	};
 };

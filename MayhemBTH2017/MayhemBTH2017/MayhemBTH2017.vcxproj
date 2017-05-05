@@ -160,6 +160,8 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerPrefab.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="PowerUpHandler.cpp" />
     <ClCompile Include="Prefab.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -226,6 +228,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Collidable.h" />
+    <ClInclude Include="GamePhysics.h" />
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="LevelEditorPropPlacer.h" />
     <ClInclude Include="LevelEditorStateMachine.h" />
@@ -245,6 +248,8 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerPrefab.h" />
+    <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="PowerUpHandler.h" />
     <ClInclude Include="Prefab.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -304,6 +309,8 @@
     <None Include="Assets\GLSL\BlurrShader.vert" />
     <None Include="Assets\GLSL\BulletShader.frag" />
     <None Include="Assets\GLSL\BulletShader.vert" />
+    <None Include="Assets\GLSL\ColliderShader.frag" />
+    <None Include="Assets\GLSL\ColliderShader.vert" />
     <None Include="Assets\GLSL\DebugGreen.frag" />
     <None Include="Assets\GLSL\DebugGreen.vert" />
     <None Include="Assets\GLSL\DebugShader.vert" />
