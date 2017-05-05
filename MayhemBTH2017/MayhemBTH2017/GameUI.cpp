@@ -51,7 +51,7 @@ GameUI::~GameUI()
 }
 
 
-void GameUI::Update(Score::PlayerScore * playerScore, int32_t time)
+void GameUI::Update(PlayerStats * stats, int32_t time)
 {
 	char msg[10];
 	sprintf_s(msg, 10, "%d", time);
