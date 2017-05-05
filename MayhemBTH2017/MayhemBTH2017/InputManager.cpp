@@ -62,6 +62,12 @@ int InputManager::GetControllerID(int ID)
 	return m_playerController[0].GetControllerIndex(ID);
 }
 
+
+PlayerController InputManager::GetController()
+{
+	return m_playerController[0];
+}
+
 void InputManager::Update()
 {
 

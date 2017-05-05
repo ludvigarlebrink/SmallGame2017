@@ -24,6 +24,7 @@ public:
 	float GetAxis(size_t axis, size_t controller = 0);
 	float GetAxisRaw(size_t axis, size_t controller = 0);
 	int GetControllerID(int ID);
+	PlayerController GetController();
 
 	//::.. MODIFY FUNCTIONS ..:://
 	void Update();
