@@ -7,7 +7,7 @@
 #include "Camera.h"
 #include "Mesh.h"
 #include "InputManager.h"
-
+#include "Prefab.h"
 
 #include <glm.hpp>
 #include <cstdint>
@@ -75,17 +75,17 @@ private:
 	Mesh		m_mesh2;
 	Vertex3D *	m_vertices2;
 
-	Mesh		m_meshBackground;
+	Mesh *		m_meshBackground;
 	Vertex3D *	m_vertices3;
 
 	AShader		m_debugShader;
+	Prefab *	m_backgroundShader;
 
 	uint32_t	m_nrOfSpawnPoints;
 	uint32_t	m_nrOfBlocks;
 
 	InputManager *		m_input;
 	glm::vec4			m_uv;
-
 
 };
 

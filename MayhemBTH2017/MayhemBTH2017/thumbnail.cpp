@@ -20,6 +20,8 @@ Thumbnail::Thumbnail(const char* filepath)
 		file.read(reinterpret_cast<char*>(&textureData[i]), sizeof(unsigned char));
 	}
 	//std::cout << rbg[i] << std::endl;
+
+
 	
 	//std::cout << textureData << std::endl;
 	glGenTextures(1, &m_texture);

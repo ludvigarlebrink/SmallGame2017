@@ -16,7 +16,7 @@ uniform float Alpha;
 void main()
 {
 
-		if(TexCoords.z > 0.01f)
+	if(TexCoords.z > 0.01f)
 	{
 		mat4 PV = P * V;
 		mat4 MVP = PV * M;

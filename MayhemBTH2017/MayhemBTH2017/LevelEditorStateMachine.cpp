@@ -38,7 +38,7 @@ void LevelEditorStateMachine::Render(Camera& cam)
 	switch (m_state)
 	{
 	case GUI_CLOSED:
-		//RenderIcons(GUI_CLOSED);
+		RenderIcons(GUI_CLOSED);
 		break;
 
 	case GUI_BLOCK:
@@ -65,6 +65,11 @@ void LevelEditorStateMachine::Render(Camera& cam)
 
 void LevelEditorStateMachine::RenderIcons(size_t gui)
 {
+	if (m_state != GUI_CLOSED)
+		m_gui[GUI_OPEN].m_texture.Render();
+	else if (m_state == GUI_CLOSED)
+		m_gui[GUI_CLOSED].m_texture.Render();
+
 	for (int i = 0; i < m_gui[gui].m_numIcons; i++)
 	{
 		m_gui[gui].m_icons[i].RenderWithUV();
@@ -86,7 +91,7 @@ void LevelEditorStateMachine::Init()
 	for (int i = 0; i < GUI_NUM; i++)
 	{
 		m_gui[i].m_text.SetSize(80);
-		m_gui[i].m_text.SetPosition(-430, 320);
+		m_gui[i].m_text.SetPosition(-440, 280);
 		m_gui[i].m_text.SetFont(".\\Assets\\Fonts\\steelfish.ttf");
 		m_gui[i].m_text.SetPivot(UIText::CENTER);
 		m_gui[i].m_text.SetColor(255, 255, 255, 255);
@@ -94,7 +99,15 @@ void LevelEditorStateMachine::Init()
 		switch (i)
 		{
 		case GUI_CLOSED:
-			m_gui[GUI_CLOSED].m_text.SetText("");
+			m_gui[GUI_CLOSED].m_texture.SetTexture(".\\Assets\\Sprites\\LevelEditorMenuClosed2.png");
+			m_gui[GUI_CLOSED].m_texture.SetPosition(-430, 320);
+			m_gui[GUI_CLOSED].m_texture.SetSize(400, 90);
+			break;
+
+		case GUI_OPEN:
+			m_gui[GUI_OPEN].m_texture.SetTexture(".\\Assets\\Sprites\\LevelEditorMenu.png");
+			m_gui[GUI_OPEN].m_texture.SetPosition(-430, 120);
+			m_gui[GUI_OPEN].m_texture.SetSize(400, 500);
 			break;
 
 		case GUI_BLOCK:
@@ -124,8 +137,8 @@ void LevelEditorStateMachine::Init()
 		m_offsetMother = 3;
 		m_offsetCounter = 0;
 
-		m_rows = -480;
-		m_columns = 230;
+		m_rows = -490;
+		m_columns = 170;
 
 		for (int iconIndex = 0; iconIndex < m_gui[guiIndex].m_resolution; iconIndex++)
 		{
@@ -137,7 +150,7 @@ void LevelEditorStateMachine::Init()
 			if (m_offsetCounter == m_offsetMother)
 			{
 				m_columns -= 50;
-				m_rows = -480;
+				m_rows = -490;
 				m_offsetCounter = 0;
 			}
 

@@ -506,9 +506,6 @@
     <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
     </None>
-    <None Include="DebugShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
     <None Include="Assets\GLSL\LevelShader.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
@@ -528,6 +525,15 @@
       <Filter>Assets\GLSL</Filter>
     </None>
     <None Include="Assets\GLSL\GameLevelShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\BackgroundShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\BackgroundShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\DebugShader.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
   </ItemGroup>
