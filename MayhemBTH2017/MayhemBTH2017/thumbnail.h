@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <fstream>
+#include <iostream>
 
 #include <glew.h>
 
@@ -16,11 +17,11 @@ typedef union PixelInfo
 	};
 }*PPixelInfo;
 
-class thumbnail
+class Thumbnail
 {
 public:
-	thumbnail(const char* FilePath);
-	virtual ~thumbnail();
+	Thumbnail(const char* FilePath);
+	virtual ~Thumbnail();
 
 	std::vector<std::uint8_t> GetPixels()const;
 	std::uint32_t GetWidth()const;
@@ -32,9 +33,8 @@ public:
 private:
 	std::vector<std::uint8_t> m_pixels;
 	std::uint32_t m_width, m_height, m_size, m_bitsPerPixel;
-	GLuint *textureData;
-	GLuint m_texture = 1;
+	//uint8_t * textureData;
+	GLuint m_texture;
 };
 
-
-#endif // !__THUMBNAIL_H__
+#endif
