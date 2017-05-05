@@ -68,7 +68,11 @@ public:
 	float GetAxisRaw(size_t button);
 	size_t GetNumButtons();
 	size_t GetNumAxis();
-	Sint32 GetControllerID();
+	int GetControllerID_0();
+	int GetControllerID_1();
+	int GetControllerID_2();
+	int GetControllerID_3();
+
 	static int GetControllerIndex(SDL_JoystickID instance);
 
 private:

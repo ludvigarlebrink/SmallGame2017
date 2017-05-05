@@ -57,6 +57,11 @@ float InputManager::GetAxisRaw(size_t axis, size_t controller)
 	return m_playerController[controller].GetAxisRaw(axis);
 }
 
+int InputManager::GetControllerID(int ID)
+{
+	return m_playerController[0].GetControllerIndex(ID);
+}
+
 void InputManager::Update()
 {
 

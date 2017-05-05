@@ -137,16 +137,31 @@ size_t PlayerController::GetNumAxis()
 	return NUM_AXIS;
 }
 
-Sint32 PlayerController::GetControllerID()
+int PlayerController::GetControllerID_0()
 {
-	return m_controllerID;
+	return m_controllers[0].GetControllerIndex(0);
+}
+
+int PlayerController::GetControllerID_1()
+{
+	return m_controllers[1].GetControllerIndex(1);
+}
+
+int PlayerController::GetControllerID_2()
+{
+	return m_controllers[2].GetControllerIndex(2);
+}
+
+int PlayerController::GetControllerID_3()
+{
+	return m_controllers[3].GetControllerIndex(3);
 }
 
 int PlayerController::GetControllerIndex(SDL_JoystickID instance)
 {
 	for (int i = 0; i < 4; ++i)
 	{
-		if (m_controllers[i].m_isConnected &&  m_controllers[i].m_controllerID == instance) {
+		if (m_controllers[i].m_isConnected && m_controllers[i].m_controllerID == instance) {
 			return i;
 		}
 	}
