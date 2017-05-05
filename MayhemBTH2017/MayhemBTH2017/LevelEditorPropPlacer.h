@@ -14,10 +14,10 @@
 #include <glm.hpp>
 #include <vector>
 
-
 class LevelEditorPropPlacer
 {
 public:
+
 	struct PropsExport
 	{
 		uint32_t	id;

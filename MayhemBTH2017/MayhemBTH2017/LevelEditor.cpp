@@ -153,8 +153,6 @@ void LevelEditor::ButtonInput()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		m_level.Render(m_camera);
 		m_videoManager->Swap();
-		//temp
-		m_levelTexture.SaveImage(".\\Assets\\Textures\\TextureTestB.TGA");
 		m_levelHandler.Export(m_level);
 		m_levelHandler.ExportRegister();
 
