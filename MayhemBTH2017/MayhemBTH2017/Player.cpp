@@ -79,12 +79,12 @@ void Player::Update() {
 	//	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
 		if (m_isMidAir) {
 
-			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-100)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-600)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 
 		}
 		if (!m_isMidAir ) {
 
-			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-200)*TimeManager::Get()->GetDeltaTime(), 0));
+			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0));
 		}
 
 
@@ -93,15 +93,14 @@ void Player::Update() {
 
 
 
-
+	//for playerID[i]->GetButtonDown
 	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON))
 	{
-		
 
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 250), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 350), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 	
 
@@ -118,7 +117,7 @@ void Player::Update() {
 	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON) != 0 && m_isMidAir)
 	{
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 250), GetBox().getBody()->GetWorldCenter(), 1);
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 350), GetBox().getBody()->GetWorldCenter(), 1);
 
 	}
 

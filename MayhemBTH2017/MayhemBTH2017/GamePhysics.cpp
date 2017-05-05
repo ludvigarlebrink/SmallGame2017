@@ -19,7 +19,7 @@ void GamePhysics::EnterWorld()
 
 	//Get deltatime
 	m_time = TimeManager::Get();
-	b2Vec2 gravity(0.0f, -1.81f);
+	b2Vec2 gravity(0.0f, -9.81f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
@@ -32,10 +32,6 @@ void GamePhysics::EnterWorld()
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
-	//PLAYER
-	m_player.Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 2.0));
-
-	///////////////////////////////////////////////////////////////////
 
 	//Weapon
 
@@ -49,13 +45,28 @@ void GamePhysics::EnterWorld()
 
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
-	//	m_weapon = Weapon(gun, projectile);
-	m_weapon = Weapon(gun, projectile);
+
+	///////////////////////////////////////////////////////////////////
+	glm::vec2 spawnPos[2];
+	spawnPos[0] = glm::vec2(42, 24);
+	spawnPos[1] = glm::vec2(15, 24);
 
 
-	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
-	m_weapon.SetProjectileType(0.8f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
 
+	//PLAYER
+	m_player[0].Init(m_world.get(), spawnPos[0], glm::vec2(2.0, 2.0));
+	m_player[1].Init(m_world.get(), spawnPos[1], glm::vec2(2.0, 2.0));
+
+	//Player Weapons
+	m_weapon[0] = Weapon(gun, projectile);
+	m_weapon[1] = Weapon(gun, projectile);
+
+
+	m_weapon[0].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 500);
+	m_weapon[0].SetProjectileType(0.8f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
+
+	m_weapon[1].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 500);
+	m_weapon[1].SetProjectileType(0.8f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
 
 	///////////////////////////////////////////////////////////////////
 
@@ -64,8 +75,12 @@ void GamePhysics::EnterWorld()
 
 
 	//player fixture is of type PLAYER
-	m_player.SetCategoryBits(PLAYER);
-	m_player.SetMaskBits(POWERUP);
+	m_player[0].SetCategoryBits(PLAYER);
+	m_player[0].SetMaskBits(POWERUP);
+	//player fixture is of type PLAYER
+	m_player[1].SetCategoryBits(PLAYER);
+	m_player[1].SetMaskBits(POWERUP);
+
 	m_loadWorld = true;
 }
 
@@ -74,9 +89,7 @@ void GamePhysics::Update()
 	switch (m_loadWorld) {
 	case true:
 	{
-		if (!(m_player.GetCategoryBits() & powerUpFixture.filter.maskBits) != 0 && (powerUpFixture.filter.categoryBits & m_player.GetMaskBits()) != 0) {
 
-		}
 
 		m_world->Step(1.0f / 30.0f, 6, 2);
 
@@ -93,17 +106,22 @@ void GamePhysics::Update()
 
 		}
 
-		m_player.Update();
-		m_weapon.Update(m_player.GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 
-		if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT)!=0)
-		{
-			if (m_weapon.FireRate(0.2f))
+		//Update players and their weapons
+		for (int i = 0; i < 2; i++) {
+			m_player[i].Update();
+						m_weapon[i].Update(m_player[i].GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
+
+			if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT) != 0)
 			{
-	
-				m_weapon.Shoot(10.0f, m_world.get(), glm::vec3(m_player.GetPrefab()->GetProjectileSpawnPoint().x, m_player.GetPrefab()->GetProjectileSpawnPoint().y, m_player.GetPrefab()->GetProjectileSpawnPoint().z));
+				if (m_weapon[i].FireRate(0.2f))
+				{
+
+					m_weapon[i].Shoot(10.0f, m_world.get(), glm::vec3(m_player[i].GetPrefab()->GetProjectileSpawnPoint().x, m_player[i].GetPrefab()->GetProjectileSpawnPoint().y, m_player[i].GetPrefab()->GetProjectileSpawnPoint().z));
+				}
 			}
 		}
+
 
 		m_world->Step(1.0f / 30.0f, 6, 2); }
 	break;
@@ -123,11 +141,14 @@ glm::vec3 GamePhysics::GetPosition() {
 
 void GamePhysics::Render(Camera camera) {
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+
+
 	m_floorCollider.DrawCollider(camera);
+	for (int i = 0; i < 2; i++) {
+		m_player[i].Render(camera);
+		m_weapon[i].Render(camera);
+		m_weapon[i].RenderParticles(camera);
+	}
 
-	m_player.Render(camera);
-
-	m_weapon.Render(camera);
-	//m_weapon.RenderParticles(camera);
 
 }

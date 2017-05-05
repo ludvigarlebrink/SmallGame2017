@@ -33,6 +33,7 @@ public:
 	Box GetBox();
 	PlayerPrefab* GetPrefab();
 	b2Fixture* GetFilter();
+
 	void StartContact();
 	void EndContact();
 

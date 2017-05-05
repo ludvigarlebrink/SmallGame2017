@@ -54,7 +54,6 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 
 	DeleteProjectile();
 
-
 }
 
 void Weapon::DeleteProjectile()
@@ -93,16 +92,24 @@ void Weapon::Render(Camera camera)
 		m_projectiles[i]->Render(camera);
 
 	}
+	
+		m_particles.UpdateParticles();
+		m_particles.RenderTransformed(0);
 
 }
 
 void Weapon::RenderParticles(Camera camera) {
 
 
+
+
+
+
 }
 
 void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos)
 {
+
 
 
 	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X), InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_Y));
@@ -125,7 +132,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos)
 			projectile->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile);
-		
+
 		}
 		else if (m_isBullet == true) {
 			projectile->InitBullet(world, glm::vec2(pos.x, pos.y));
@@ -153,8 +160,8 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos)
 				m_projectiles[m_projectileCounter]->InitProjectile(world, glm::vec2(pos.x, pos.y),
 					glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 					m_restitution, m_friction, m_damping, m_density, m_fireRate, false, m_prefabProjectile);
-			//	m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
-				
+				//	m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
+
 				m_projectiles[m_projectileCounter]->AddForce(glm::vec3(force, 0.0f));
 
 				m_projectileCounter++;
@@ -189,6 +196,7 @@ bool Weapon::FireRate(float rate)
 		m_time = 0;
 		return true;
 	}
+
 
 	return false;
 }

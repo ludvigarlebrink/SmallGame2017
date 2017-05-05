@@ -34,7 +34,6 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 
 	}
 
-
 	//BUFFERS
 	glGenBuffers(1, &m_particleBufferA);
 	glBindBuffer(GL_ARRAY_BUFFER, m_particleBufferA);
@@ -67,7 +66,6 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 	glVertexAttribPointer(inSizeID, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3) * 2 + sizeof(glm::vec4) + sizeof(GLfloat)));
 
 
-
 	//Buffer to hold the outValue retrieved from the geopass vertex shader
 	glGenBuffers(1, &m_particleBufferB);
 	glBindBuffer(GL_ARRAY_BUFFER, m_particleBufferB);
@@ -90,9 +88,7 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 	glDisable(GL_RASTERIZER_DISCARD);
 	glBindVertexArray(0);
 
-
 	//// INFO FOR TRIANGLE
-
 	Transform tpm;
 	tpm.SetPosition(0, 0, 100);
 	tmpTransform = tpm;
@@ -108,18 +104,11 @@ glm::vec3 ParticleSystem::GetRandomDir() {
 void ParticleSystem::ShadersInit() {
 
 
-
-
-
 }
 
 ParticleSystem::~ParticleSystem()
 {
 	
-	
-	
-
-
 	glDeleteProgram(m_pShader.GetProgramID());
 	glDeleteProgram(m_drawShader.GetProgramID());
 
@@ -153,8 +142,8 @@ void ParticleSystem::LoadParticleVBOS(Particle* p, GLuint nrOfVerts) {
 
 void ParticleSystem::RenderTransformed(GLuint textureID) {
 
-	
 
+	glUseProgram(m_drawShader.GetProgramID());
 	glBindVertexArray(m_drawVAO);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glBindVertexArray(0);
@@ -203,16 +192,14 @@ void ParticleSystem::UpdateParticles() {
 	//glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(info), &info);
 	//std::cout << info[0] << ". " << info[1] << ", " << info[2] << ", " << info[3] << ", " << info[4] << ", " << info[5] << std::endl;
 
-	//glUseProgram(m_drawShader.GetProgramID());
+	glUseProgram(m_drawShader.GetProgramID());
 	
-	//m_camera.SetRotation(0.0f, 0.0f);
-	////m_camera.SetPosition(glm::vec3(((48 / 2) - 0.5f), ((54 / 2) + 0.5f), -60));
-	//m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 
-	//m_drawShader.Update(tmpTransform, m_camera);
-	
-	//Clear depth buffer for the particles
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	m_drawShader.Update(tmpTransform, m_camera);
+	////
+	//////Clear depth buffer for the particles
+	//////glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
 
