@@ -2,12 +2,14 @@
 #define __GAMEUI_H__
 
 
+#include "VideoManager.h"
 #include "UIImage.h"
 #include "UIText.h"
-#include "Score.h"
+#include "PlayerStats.h"
 
 #include <cstdint>
-
+#include <cstdlib>
+#include <cstdio>
 
 class GameUI
 {
@@ -15,19 +17,20 @@ public:
 	GameUI();
 	virtual ~GameUI();
 	
-	void Update(Score::PlayerScore* playerScore);
+	void Update(PlayerStats * stats, int32_t time);
 	void Render();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetNumPLayers(uint32_t numPlayers);
 
-
 private:
-	uint32_t	m_numPlayers;
+	VideoManager *	m_video;
 
-	UIText		m_gameTimer;
-	UIText *	m_playerScore;
+	uint32_t		m_numPlayers;
 
+	UIText			m_gameTimer;
+	UIText			m_playerName[4];
+	UIText			m_playerScore[4];
 };
 
 

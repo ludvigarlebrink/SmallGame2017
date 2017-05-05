@@ -226,9 +226,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="LevelTexture.cpp">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -256,17 +253,9 @@
     <ClCompile Include="MyContactListener.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Score.cpp" />
     <ClCompile Include="GameUI.cpp" />
-    <ClCompile Include="Collidable.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerUp.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerUpHandler.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
+    <ClCompile Include="GameSystem.cpp" />
+    <ClCompile Include="PlayerStats.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -420,9 +409,6 @@
     </ClInclude>
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="LevelTexture.h">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -451,18 +437,9 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Score.h" />
     <ClInclude Include="GameUI.h" />
-    <ClInclude Include="Collidable.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerUp.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerUpHandler.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePhysics.h" />
+    <ClInclude Include="GameSystem.h" />
+    <ClInclude Include="PlayerStats.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -551,12 +528,8 @@
     </None>
     <None Include="Assets\GLSL\BulletShader.frag" />
     <None Include="Assets\GLSL\BulletShader.vert" />
-    <None Include="Assets\GLSL\ColliderShader.frag">
-      <Filter>Engine</Filter>
-    </None>
-    <None Include="Assets\GLSL\ColliderShader.vert">
-      <Filter>Engine</Filter>
-    </None>
+    <None Include="Assets\Textures\NewTex.mrTex" />
+    <None Include="Assets\Textures\NewTexx.mrthumb" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\TextureTestA.TGA">

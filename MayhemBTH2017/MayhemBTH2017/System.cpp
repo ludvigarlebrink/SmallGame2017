@@ -6,6 +6,8 @@
 #include "Prefab.h"
 #include "PrefabManager.h"
 #include "GamePhysics.h"
+#include "GameUI.h"
+
 
 System::System()
 {
@@ -48,6 +50,8 @@ void System::Run()
 	TextureHandler teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
+	GameUI gameUI;
+
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -79,9 +83,9 @@ void System::Run()
 			l.Update();
 			break;
 		case GameState::GAME:
-
 			physics.Update();
 			physics.Render(camera);
+			gameUI.Render();
 			break;
 		case GameState::EXIT:
 			isRunning = false;

@@ -85,6 +85,34 @@ void LevelEditorPropPlacer::Remove()
 	// TODO
 }
 
+LevelEditorPropPlacer::PropsExport * LevelEditorPropPlacer::GetPropExport()
+{
+	uint32_t size = m_props.size() - m_propHandler.NUM_PROPS;
+
+	PropsExport * props = new PropsExport[size];
+
+	uint32_t counter = 0;
+
+	for (uint32_t i = m_propHandler.NUM_PROPS; i < m_props.size(); i++)
+	{
+		props[counter].id = m_props[i]->id;
+		props[counter].pos.x = m_props[i]->prefab->GetPosition().x;
+		props[counter].pos.y = m_props[i]->prefab->GetPosition().y;
+		props[counter].rot = m_props[i]->prefab->GetRotation().z;
+
+		++counter;
+	}
+
+	return props;
+}
+
+
+uint32_t LevelEditorPropPlacer::GetNumProps()
+{
+	return m_props.size() - m_propHandler.NUM_PROPS;
+}
+
+
 void LevelEditorPropPlacer::Init()
 {
 	m_props.resize(m_propHandler.NUM_PROPS);

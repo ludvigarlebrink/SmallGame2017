@@ -101,11 +101,11 @@ void LevelHandler::Export(Level & level)
 	glReadBuffer(GL_FRONT);
 	glPixelStorei(GL_PACK_ALIGNMENT, 1);
 
-	int nSize = m_width * m_height * 3;
-	char* tempPixelBuffer;
-	tempPixelBuffer = (char*)malloc(nSize * sizeof(char));
+	int nSize = m_width * m_height * 4;
+	unsigned char* tempPixelBuffer;
+	tempPixelBuffer = new unsigned char[84 * 48 * 4];
 
-	glReadPixels(0, 0, m_width, m_height, GL_BGR, GL_UNSIGNED_BYTE, tempPixelBuffer);
+	glReadPixels(0, 0, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, tempPixelBuffer);
 
 	char* nameBuffer = new char[m_size];
 	
@@ -121,7 +121,7 @@ void LevelHandler::Export(Level & level)
 			isOccupied[i] = level.GetIsOccupied(x, y);
 			isSpawn[i] = level.GetIsSpawnPoint(x, y);
 			uvCoords[i] = level.GetTempUV(x, y);
-			i++;
+			++i;
 		}
 	}
 
@@ -130,8 +130,10 @@ void LevelHandler::Export(Level & level)
 	output.write(reinterpret_cast<char*>(isOccupied), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(isSpawn), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(uvCoords), sizeof(glm::vec2) * (level.SIZE_X * level.SIZE_Y));
-	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(GLubyte) * (level.SIZE_X * level.SIZE_Y));
+	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(level.SIZE_X * level.SIZE_Y) * 4);
+
 	output.close();
+
 
 }
 
