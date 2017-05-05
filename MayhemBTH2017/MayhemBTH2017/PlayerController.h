@@ -55,9 +55,9 @@ public:
 	virtual ~PlayerController();
 
 	//::.. MODIFY FUNCTIONS ..:://
-	void Update();
+	void Update(Sint32 playerControllerID);
 	void Reset();
-	void AddPlayerController(SDL_ControllerDeviceEvent PlayerControllerID);
+	void AddPlayerController(Sint32 playerControllerID);
 	void RemovePlayerController();
 
 	//::.. GET FUNCTIONS ..:://
@@ -68,11 +68,12 @@ public:
 	float GetAxisRaw(size_t button);
 	size_t GetNumButtons();
 	size_t GetNumAxis();
+	Sint32 GetControllerID();
 
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
-	void ButtonDown(const SDL_ControllerButtonEvent controllerEvent);
+	void ButtonDown(Sint32 playerControllerID);
 	void ButtonUp(const SDL_ControllerButtonEvent controllerEvent);
 	void GetAxis(const SDL_ControllerAxisEvent controllerEvent);
 	void GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent);
@@ -84,8 +85,7 @@ private:
 	float					m_deadzone; //Set in Init()
 	SDL_Event				m_event;
 	SDL_GameController*		m_controller;
-
-	
+	Sint32					m_controllerID;
 
 };
 
