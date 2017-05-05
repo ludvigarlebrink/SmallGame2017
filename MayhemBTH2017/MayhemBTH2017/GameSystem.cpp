@@ -34,7 +34,10 @@ void GameSystem::Update()
 	switch (m_currState)
 	{
 	case PLAYER_READY:
-		UpdatePlayerReady();
+		PlayerReady();
+		break;
+
+	case INIT_PLAY:
 		break;
 
 	case PLAY:
@@ -43,13 +46,16 @@ void GameSystem::Update()
 	case LOAD_NEXT_LEVEL:
 		break;
 
+	case GAME_OVER:
+		break;
+
 	default:
 		break;
 	}
 }
 
 
-void GameSystem::UpdatePlayerReady()
+void GameSystem::PlayerReady()
 {
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 	{
@@ -77,10 +83,21 @@ void GameSystem::UpdatePlayerReady()
 		{
 			if (m_playerReady[i])
 			{
-				m_gameMode = INIT_PLAY;
+				m_currState = INIT_PLAY;
 				return;
 			}
 		}
 	}
 }
 
+
+void GameSystem::InitPlay()
+{
+	for(uint32_t i = 0; i < MAX_PLAYERS; ++i)
+	{
+		if (m_playerReady[i])
+		{
+			++m_numPlayers;
+		}
+	}
+}

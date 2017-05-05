@@ -6,9 +6,11 @@
 #include "GameUI.h"
 #include "Timer.h"
 #include "InputManager.h"
+#include "Level.h"
 
 
 #include <cstdint>
+#include <vector>
 
 
 class GameSystem
@@ -41,7 +43,8 @@ private:
 		GAME_OVER
 	};
 	
-	void UpdatePlayerReady();
+	void PlayerReady();
+	void InitPlay();
 
 private:
 	InputManager * m_input;
@@ -54,6 +57,8 @@ private:
 	uint32_t	m_timer;
 
 	uint32_t	m_numPlayers;
+
+	std::vector<Level*>		m_levelQueue;
 };
 
 
