@@ -7,8 +7,11 @@
 #include "InputManager.h"
 #include "TimeManager.h"
 #include "PlayerPrefab.h"
+#include "Collidable.h"
+#include "Projectile.h"
+#include "Weapon.h"
 
-class Player
+class Player : public Collidable
 {
 public:
 	//::.. CONSTRUCTORS ..:://
@@ -22,10 +25,13 @@ public:
 	//::..RENDER..:://
 	void Render(Camera camera);
 	void Update();
+	void Respawn(glm::vec2 pos);
 
 	//::..SETTERS..:://
 	void SetCategoryBits(short CATEGORY);
 	void SetMaskBits(short MASK);
+	bool Timer(float rate);
+
 	
 	//::..GETTERS..:://
 	uint16 GetCategoryBits();
@@ -33,7 +39,7 @@ public:
 	Box GetBox();
 	PlayerPrefab* GetPrefab();
 	b2Fixture* GetFilter();
-	void StartContact();
+	void StartContact(bool projectile, bool powerup);
 	void EndContact();
 
 private:
@@ -49,12 +55,22 @@ private:
 	bool	m_isMidAir;
 	bool m_doubleJump;
 	bool m_contact;
+	bool m_killed;
+	float m_time;
+	bool m_collidedProjectile;
+
+	Weapon m_weapon;
+
+	b2World * m_world;
+
+	bool m_collidedPowerUp;
+
 	b2FixtureDef m_fixture;
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
 		PLAYER = 0x0002,
 		PROJECTILE = 0x0004,
-		FRIENDLY_AIRCRAFT = 0x0008,
+		POWERUP = 0x0008,
 		ENEMY_AIRCRAFT = 0x0010,
 	};
 };

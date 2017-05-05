@@ -6,9 +6,10 @@
 #include "Texture.h"
 #include "TextureHandler.h"
 #include "Box.h"
+#include "Collidable.h"
 
 
-class Projectile
+class Projectile : public Collidable
 {
 public:
 	//::.. CONSTRUCTORS ..:://
@@ -57,6 +58,10 @@ private:
 	bool m_isBullet;
 	bool m_fired;
 	bool m_contact;
+	GLfloat tempAngle;
+	float m_xAngle;
+	float m_yAngle;
+
 	
 	enum _entityCategory {
 		BOUNDARY = 0x0001,

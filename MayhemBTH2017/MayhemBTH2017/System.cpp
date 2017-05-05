@@ -58,18 +58,11 @@ void System::Run()
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 
 		m_inputManager->Update();
-
+		//std::cout << m_inputManager->GetNrOfPlayers() << std::endl;
 		//	pre->Render(cam);
 
 
-		//p.UpdateParticles();
-		//texture.Bind(1);
-		//glEnable(GL_BLEND);
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		//glDepthMask(GL_FALSE);
-		//p.RenderTransformed(1);
-		//glDisable(GL_BLEND);
-		//glDepthMask(TRUE);
+
 
 		switch (m_stateManager->GetCurrentState())
 		{
@@ -94,12 +87,12 @@ void System::Run()
 			break;
 		}
 
-		m_inputManager->Reset();
+		//m_inputManager->Reset();
 
 		// Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
-		// SKÄLL UT ERIK OCH LUKAS IMORGON :D
+	
 		SDL_Delay(10);
 		//	counter += m_timeManager->GetDeltaTime();
 	}

@@ -161,9 +161,12 @@ void Sprite::Render()
 {
 
 	//sendTexture();
+	glBindVertexArray(m_vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_ID);
+	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->m_quad.vertArr[0]), &this->m_quad.vertArr, GL_STATIC_DRAW);
 	SendColor();
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glBindVertexArray(0);
 
 }
 
@@ -173,10 +176,6 @@ void Sprite::ModifyPos(glm::vec2 pos, glm::vec2 scale)
 	this->m_quad.vertArr[1].position = glm::vec2(pos.x + scale.x, pos.y);
 	this->m_quad.vertArr[2].position = glm::vec2(pos.x , pos.y + scale.y);
 	this->m_quad.vertArr[3].position = glm::vec2(pos.x + scale.x, pos.y + scale.y);
-	
-	glBindVertexArray(m_vao);
-	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->m_quad.vertArr[0]), &this->m_quad.vertArr, GL_STATIC_DRAW);
-	glBindVertexArray(0);
 
 }
 

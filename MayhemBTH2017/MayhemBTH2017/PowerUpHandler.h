@@ -14,7 +14,7 @@ public:
 	PowerUpHandler();
 	virtual ~PowerUpHandler();
 
-	void Init(Player p, b2World * world, int rate);
+	void Init(b2World * world, int rate);
 
 	void Spawn();
 
