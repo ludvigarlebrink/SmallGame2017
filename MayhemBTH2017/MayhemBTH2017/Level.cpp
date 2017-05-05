@@ -20,10 +20,9 @@ void Level::Render(Camera camera)
 	// SELECT THE SHADER
 	// UPDATE THE SHADER
 
-	Transform tran;
+	Transform tran;	
 
 	m_debugShader.Bind();
-
 	m_debugShader.Update(tran, camera);
 
 	m_uv.x = 0.0/ 512.0;
@@ -35,7 +34,8 @@ void Level::Render(Camera camera)
 
 	m_mesh.Render();
 	m_mesh2.Render();
-	m_meshBackground.Render();
+
+	m_backgroundShader->Render(camera);
 }
 
 
@@ -262,33 +262,40 @@ void Level::InitMesh()
 
 	// Background quad
 
-	m_vertices3[0].position = glm::vec3(-1.0f, 1.0f, -2.0f);
+	m_vertices3[0].position = glm::vec3(1.0f, 1.0f, 2.0f);
 	m_vertices3[0].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[0].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
+	m_vertices3[0].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 1.0f);
 			  
-	m_vertices3[1].position = glm::vec3(1.0f, 1.0f, -2.0f);
+	m_vertices3[1].position = glm::vec3(1.0f, -1.0f, 2.0f);
 	m_vertices3[1].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[1].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+	m_vertices3[1].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 1.0f);
 			  
-	m_vertices3[2].position = glm::vec3(-1.0f, -1.0f, -2.0f);
+	m_vertices3[2].position = glm::vec3(-1.0f, 1.0f, 2.0f);
 	m_vertices3[2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+	m_vertices3[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 			  
-	m_vertices3[3].position = glm::vec3(1.0f, -1.0f, -2.0f);
+	m_vertices3[3].position = glm::vec3(-1.0f, 1.0f, 2.0f);
 	m_vertices3[3].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+	m_vertices3[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
 			  
-	m_vertices3[4].position = glm::vec3(1.0f, 1.0f, -2.0f);
+	m_vertices3[4].position = glm::vec3(1.0f, -1.0f, 2.0f);
 	m_vertices3[4].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[4].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+	m_vertices3[4].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 1.0f);
 			  
-	m_vertices3[5].position = glm::vec3(-1.0f, -1.0f, -2.0f);
+	m_vertices3[5].position = glm::vec3(-1.0f, -1.0f, 2.0f);
 	m_vertices3[5].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 0.0f);
+	m_vertices3[5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 1.0f);
 
 	m_mesh.Load(m_vertices, length);
 	m_mesh2.Load(m_vertices2, length2);
-	m_meshBackground.Load(m_vertices3, 6);
+
+	m_meshBackground = new Mesh;
+	m_meshBackground->Load(m_vertices3, 6);
+
+	m_backgroundShader = new Prefab;
+	m_backgroundShader->Create();
+	m_backgroundShader->SetMesh(m_meshBackground);
+
 }
 
 void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, glm::vec2 uv)

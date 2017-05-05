@@ -8,13 +8,10 @@ LevelEditor::LevelEditor()
 	m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
 	m_input = InputManager::Get();
 	m_stateManager = StateManager::Get();
-	//m_levelHandler.Init();
 	m_videoManager = VideoManager::Get();
 	m_timeManager = TimeManager::Get();
 
 	m_timer.SetTimer(0.1f, true, true);
-
-	Thumbnail temp("s");
 }
 
 LevelEditor::~LevelEditor()
@@ -42,6 +39,7 @@ void LevelEditor::Update()
 		break;
 	case MENU:
 		break;
+
 	case SAVE:
 
 		ButtonInput();

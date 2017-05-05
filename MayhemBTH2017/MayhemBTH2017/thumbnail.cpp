@@ -2,10 +2,19 @@
 
 
 
-Thumbnail::Thumbnail(const char* filepath)
+Thumbnail::Thumbnail()
 {
-//	filepath = (".\\Assets\\Textures\\NewTexx.mrthumb");
-	std::ifstream file(".\\Assets\\Textures\\NewTexx.mrthumb", std::ios::binary);
+	
+}
+
+
+Thumbnail::~Thumbnail()
+{
+}
+
+void Thumbnail::Import(const char * FilePath)
+{
+	std::ifstream file(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
 
 	if (!file.is_open())
 	{
@@ -15,15 +24,15 @@ Thumbnail::Thumbnail(const char* filepath)
 	int size = 84 * 48 * 4;
 
 	unsigned char * textureData = new unsigned char[84 * 48 * 4];
+	file.ignore(sizeof(bool) * (84 * 48));
+	file.ignore(sizeof(bool) * (84 * 48));
+	file.ignore(sizeof(glm::vec2) * (84 * 48));
 	for (size_t i = 0; i < 84 * 48 * 4; i++)
 	{
 		file.read(reinterpret_cast<char*>(&textureData[i]), sizeof(unsigned char));
 	}
-	//std::cout << rbg[i] << std::endl;
 
 
-	
-	//std::cout << textureData << std::endl;
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
@@ -39,11 +48,6 @@ Thumbnail::Thumbnail(const char* filepath)
 
 	file.close();
 	delete textureData;
-}
-
-
-Thumbnail::~Thumbnail()
-{
 }
 
 std::vector<std::uint8_t> Thumbnail::GetPixels() const

@@ -137,13 +137,13 @@
     </ClCompile>
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="GamePhysics.cpp" />
+    <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="GameUI.cpp" />
     <ClCompile Include="ImportTester.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="LevelEditorPropPlacer.cpp" />
     <ClCompile Include="LevelEditorStateMachine.cpp" />
-    <ClCompile Include="LevelTexture.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Menu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -167,7 +167,7 @@
     </ClCompile>
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="PropHandler.cpp" />
-    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="PlayerStats.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -224,10 +224,10 @@
     <ClInclude Include="Box.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="LevelEditorPropPlacer.h" />
     <ClInclude Include="LevelEditorStateMachine.h" />
-    <ClInclude Include="LevelTexture.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Menu.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -251,7 +251,7 @@
     </ClInclude>
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="PropHandler.h" />
-    <ClInclude Include="Score.h" />
+    <ClInclude Include="PlayerStats.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

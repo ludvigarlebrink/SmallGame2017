@@ -41,25 +41,25 @@ VideoManager * VideoManager::Get()
 }
 
 
-bool VideoManager::GetIsClosed()const
+bool VideoManager::GetIsClosed() const
 {
 	return m_isClosed;
 }
 
 
-int VideoManager::GetHeight()const
+int VideoManager::GetHeight() const
 {
 	return m_height;
 }
 
 
-int VideoManager::GetWidth()const
+int VideoManager::GetWidth() const
 {
 	return m_width;
 }
 
 
-SDL_Window* VideoManager::GetWindow()const
+SDL_Window* VideoManager::GetWindow() const
 {
 	return m_window;
 }
