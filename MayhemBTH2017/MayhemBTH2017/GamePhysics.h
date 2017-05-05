@@ -7,6 +7,7 @@
 #include "Weapon.h"
 #include "Contact.h"
 #include "MyContactListener.h"
+#include "PowerUpHandler.h"
 
 
 class GamePhysics
@@ -20,13 +21,14 @@ public:
 	void Render(Camera camera);
 	glm::vec3 GetPosition();
 
+	void SetNrOfPlayers(int nrOf);
+
 private:
 	std::unique_ptr<b2World> m_world;
 	Box m_newBox;
 	Box m_newBox2;
 	Box m_powerUpBox;
-	Player m_player[4];
-	Weapon m_weapon[4];
+	Player m_player;
 	Collider2D gameFloor;
 
 	TimeManager* m_time;
@@ -53,6 +55,11 @@ private:
 	b2FixtureDef powerUpFixture;
 
 	MyContactListener m_contactListener;
+
+	PowerUpHandler m_PH;
+
+	int m_nrOfPlayers;
+
 
 
 	enum _entityCategory {
