@@ -97,6 +97,7 @@ void PlayerPrefab::Update(float x, float y, float speed)
 
 void PlayerPrefab::Render(Camera & cam)
 {
+	//Renders the prefab meshes
 	m_player->Render(cam);
 	m_weapon->Render(cam);
 }

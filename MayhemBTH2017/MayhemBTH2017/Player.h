@@ -41,6 +41,7 @@ public:
 	b2Fixture* GetFilter();
 	void StartContact(bool projectile, bool powerup);
 	void EndContact();
+	void UpdateParticles();
 
 private:
 private:

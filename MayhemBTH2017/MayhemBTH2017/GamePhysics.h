@@ -39,7 +39,7 @@ private:
 	GLfloat m_playerScaleY;
 	GLfloat m_playerPosX;
 	GLfloat m_playerPosY;
-
+	ParticleSystem m_particles;
 	GLfloat m_powerUpScaleX;
 	GLfloat m_powerUpScaleY;
 	GLfloat m_powerUpPosX;

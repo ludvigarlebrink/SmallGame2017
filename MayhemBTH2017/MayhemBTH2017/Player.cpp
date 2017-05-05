@@ -69,6 +69,8 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	m_weapon = Weapon(gun, projectile);
 
 	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
+	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 50);
+
 
 	//Set fixture 
 
@@ -189,6 +191,7 @@ void Player::Update() {
 	//////////////////////////////////////////////////////////
 
 
+	
 }
 
 void Player::Respawn(glm::vec2 pos)
@@ -196,20 +199,6 @@ void Player::Respawn(glm::vec2 pos)
 	m_boundingBox.getBody()->SetTransform(b2Vec2(pos.x, pos.y), 0);
 }
 
-//::.. RENDER ..:://
-void Player::Render(Camera camera) {
-
-	Transform transform;
-	//m_playerSprite.Bind();
-	//m_playerSprite.Update(transform, camera);
-	//m_playerSprite.draw();
-	//glUseProgram(0);
-
-	m_weapon.Render(camera);
-
-	m_playerPrefab->Render(camera);
-
-}
 Box Player::GetBox()
 {
 	return m_boundingBox;
@@ -238,6 +227,12 @@ void Player::StartContact(bool projectile, bool powerup)
 void Player::EndContact()
 {
 	m_contact = false;
+}
+
+void Player::UpdateParticles()
+{
+
+	m_weapon.UpdateParticles();
 }
 
 
@@ -279,3 +274,18 @@ uint16 Player::GetMaskBits() {
 //void Player::EndContact() {
 //	m_contact = false;
 //}
+
+//::.. RENDER ..:://
+void Player::Render(Camera camera) {
+
+	//Renders the player and the gun 
+	m_playerPrefab->Render(camera);
+
+
+	//Renders projectiles of a weapon and its particles
+	m_weapon.Render(camera);
+
+
+	
+
+}
