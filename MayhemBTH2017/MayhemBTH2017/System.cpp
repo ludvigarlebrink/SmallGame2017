@@ -58,7 +58,7 @@ void System::Run()
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 
 		m_inputManager->Update();
-
+		//std::cout << m_inputManager->GetNrOfPlayers() << std::endl;
 		//	pre->Render(cam);
 
 
@@ -93,7 +93,7 @@ void System::Run()
 			break;
 		}
 
-		m_inputManager->Reset();
+		//m_inputManager->Reset();
 
 		 //Switch between back and front buffer.
 		m_videoManager->Swap();

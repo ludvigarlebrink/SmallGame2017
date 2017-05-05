@@ -28,18 +28,23 @@ public:
 	void SetLife(int life);
 	void AddForce(glm::vec3 force);
 	void SetFired(bool fired);
+	void SetActive(bool active);
 
 	//::.. GET FUNCTIONS ..:://
 	int GetLife();
 	Prefab* GetPrefab();
 	Box GetBox();
 	bool GetFired();
+	bool GetContact();
+	bool IsActive();
 
 	//::.. OTHER FUNCTIONS ..:://
 	void Update();
 	void Render(Camera camera);
 	void StartContact();
 	void EndContact();
+
+
 
 
 private:
@@ -62,12 +67,14 @@ private:
 	float m_xAngle;
 	float m_yAngle;
 
+	bool m_active;
+
 	
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
 		PLAYER = 0x0002,
 		PROJECTILE = 0x0004,
-		FRIENDLY_AIRCRAFT = 0x0008,
+		POWERUP = 0x0008,
 		ENEMY_AIRCRAFT = 0x0010,
 	};
 
