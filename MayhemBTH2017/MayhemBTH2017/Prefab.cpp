@@ -351,8 +351,8 @@ void Prefab::SetFragShader(char * shader)
 //::.. HELP FUNCTIONS ..:://
 void Prefab::Init()
 {
-	m_vertShader = nullptr;
-	m_fragShader = nullptr;
+	m_vertShader		= nullptr;
+	m_fragShader		= nullptr;
 
 	m_hasBeenCreated	= false;
 	m_isEnabled			= true;

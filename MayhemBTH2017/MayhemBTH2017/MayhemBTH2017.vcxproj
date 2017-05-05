@@ -137,6 +137,7 @@
     </ClCompile>
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="GamePhysics.cpp" />
+    <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="GameUI.cpp" />
     <ClCompile Include="ImportTester.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -224,6 +225,7 @@
     <ClInclude Include="Box.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="LevelEditorPropPlacer.h" />
     <ClInclude Include="LevelEditorStateMachine.h" />

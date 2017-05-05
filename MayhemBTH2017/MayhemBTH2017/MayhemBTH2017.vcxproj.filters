@@ -258,6 +258,7 @@
     </ClCompile>
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="GameUI.cpp" />
+    <ClCompile Include="GameSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -444,6 +445,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="GameUI.h" />
+    <ClInclude Include="GameSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -506,6 +508,9 @@
     <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
     </None>
+    <None Include="DebugShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
     <None Include="Assets\GLSL\LevelShader.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
@@ -527,15 +532,10 @@
     <None Include="Assets\GLSL\GameLevelShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\GLSL\BackgroundShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\BackgroundShader.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\DebugShader.frag">
-      <Filter>Assets\GLSL</Filter>
-    </None>
+    <None Include="Assets\GLSL\BulletShader.frag" />
+    <None Include="Assets\GLSL\BulletShader.vert" />
+    <None Include="Assets\Textures\NewTex.mrTex" />
+    <None Include="Assets\Textures\NewTexx.mrthumb" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\TextureTestA.TGA">
