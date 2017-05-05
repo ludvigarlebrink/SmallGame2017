@@ -30,6 +30,7 @@ private:
 	Box m_powerUpBox;
 	Player m_player[4];
 	Collider2D gameFloor;
+	
 
 	TimeManager* m_time;
 	GLfloat m_jumpTimer=0.0f;

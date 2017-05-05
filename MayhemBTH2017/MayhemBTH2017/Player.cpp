@@ -229,6 +229,11 @@ void Player::EndContact()
 	m_contact = false;
 }
 
+int Player::GetControllerID()
+{
+	return m_controllerID;
+}
+
 void Player::UpdateParticles()
 {
 
@@ -256,6 +261,11 @@ bool Player::Timer(float rate)
 		return true;
 	}
 	return false;
+}
+
+void Player::SetControllerID(int ID)
+{
+	m_controllerID = ID;
 }
 
 //::.. GET FUNCTIONS ..:://
