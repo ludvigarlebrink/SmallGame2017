@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <glm.hpp>
 
 #include <glew.h>
 
@@ -20,15 +21,16 @@ typedef union PixelInfo
 class Thumbnail
 {
 public:
-	Thumbnail(const char* FilePath);
+	Thumbnail();
 	virtual ~Thumbnail();
+
+	void Import(const char* FilePath);
 
 	std::vector<std::uint8_t> GetPixels()const;
 	std::uint32_t GetWidth()const;
 	std::uint32_t GetHeight()const;
 	bool HasAlphaChannel();
 
-	void Import();
 
 private:
 	std::vector<std::uint8_t> m_pixels;

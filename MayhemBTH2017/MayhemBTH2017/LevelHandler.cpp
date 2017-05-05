@@ -130,14 +130,11 @@ void LevelHandler::Export(Level & level)
 	output.write(reinterpret_cast<char*>(isOccupied), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(isSpawn), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(uvCoords), sizeof(glm::vec2) * (level.SIZE_X * level.SIZE_Y));
-	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char));
+	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(level.SIZE_X * level.SIZE_Y) * 4);
+
 	output.close();
 
-	//std::ofstream tex(".\\Assets\\Textures\\NewTexx.mrthumb", std::ios::binary);
 
-	//tex.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char));
-	
-	//tex.close();
 }
 
 
