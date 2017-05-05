@@ -2,11 +2,16 @@
 
 
 
+PlayerController * PlayerController::m_controllers = new PlayerController[4];
+
+
 PlayerController::PlayerController()
 {
-	Init();
+	m_isConnected = false;
+	m_controller = 0;
+	m_controllerID = -1;
+	m_haptic = 0;
 }
-
 
 PlayerController::~PlayerController()
 {
@@ -15,12 +20,16 @@ PlayerController::~PlayerController()
 
 void PlayerController::Update()
 {
-	while (SDL_PollEvent(&m_event) != 0)
-	{
+
+	//SDL_Event sdlEvent;
+	while (SDL_PollEvent(&m_event))
 		switch (m_event.type)
 		{
 		case SDL_CONTROLLERDEVICEADDED:
-			AddPlayerController(m_event.cdevice);
+			if (m_event.cdevice.which < 4) {
+				PlayerController& pController = m_controllers[m_event.cdevice.which];
+				pController.AddPlayerController(m_event.cdevice.which);
+			}
 			break;
 
 		case SDL_CONTROLLERDEVICEREMOVED:
@@ -39,9 +48,10 @@ void PlayerController::Update()
 			GetAxis(m_event.caxis);
 			GetAxisRaw(m_event.caxis);
 			break;
+
 		}
-	}
 }
+
 
 void PlayerController::Reset()
 {
@@ -52,18 +62,42 @@ void PlayerController::Reset()
 	}
 }
 
-void PlayerController::AddPlayerController(SDL_ControllerDeviceEvent PlayerControllerID)
+void PlayerController::AddPlayerController(int playerControllerID)
 {
-	if (SDL_IsGameController(PlayerControllerID.which))
-	{
-		SDL_GameController * m_controller = SDL_GameControllerOpen(PlayerControllerID.which);
+	m_controller = SDL_GameControllerOpen(playerControllerID);
+	SDL_Joystick *joy = SDL_GameControllerGetJoystick(m_controller);
+	m_controllerID = SDL_JoystickInstanceID(joy);
+	m_isConnected = true;
+
+	if (SDL_JoystickIsHaptic(joy)) {
+		m_haptic = SDL_HapticOpenFromJoystick(joy);
+		printf("Haptic Effects: %d\n", SDL_HapticNumEffects(m_haptic));
+		printf("Haptic Query: %x\n", SDL_HapticQuery(m_haptic));
+		if (SDL_HapticRumbleSupported(m_haptic)) {
+			if (SDL_HapticRumbleInit(m_haptic) != 0) {
+				printf("Haptic Rumble Init: %s\n", SDL_GetError());
+				SDL_HapticClose(m_haptic);
+				m_haptic = 0;
+			}
+		}
+		else {
+			SDL_HapticClose(m_haptic);
+			m_haptic = 0;
+		}
 	}
 }
 
 void PlayerController::RemovePlayerController()
 {
-	SDL_GameControllerClose(m_controller);
-	m_controller = nullptr;
+	if (m_isConnected) {
+		m_isConnected = false;
+		if (m_haptic) {
+			SDL_HapticClose(m_haptic);
+			m_haptic = 0;
+		}
+		SDL_GameControllerClose(m_controller);
+		m_controller = 0;
+	}
 }
 
 
@@ -103,10 +137,28 @@ size_t PlayerController::GetNumAxis()
 	return NUM_AXIS;
 }
 
+Sint32 PlayerController::GetControllerID()
+{
+	return m_controllerID;
+}
+
+int PlayerController::GetControllerIndex(SDL_JoystickID instance)
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		if (m_controllers[i].m_isConnected &&  m_controllers[i].m_controllerID == instance) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 
 //::.. HELP FUNCTIONS ..:://
 void PlayerController::Init()
 {
+	SDL_Init(SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK);
+
 	for (size_t i = 0; i < NUM_BUTTONS; i++)
 	{
 		m_button[i].isDown = false;
@@ -120,6 +172,7 @@ void PlayerController::Init()
 
 void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEvent)
 {
+
 	switch (controllerEvent.button)
 	{
 	case SDL_CONTROLLER_BUTTON_A:
@@ -373,7 +426,7 @@ void PlayerController::GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent)
 //Scale range to [-1, 1]
 float PlayerController::ScaleRange(Sint16 value)
 {
-	
+
 	float result = (2.0f * ((value - (-32768.0f)) / (32767.0f - (-32768.0f))) - 1.0f);
 
 	return result;
