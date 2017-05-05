@@ -41,7 +41,8 @@ private:
 private:
 	uint32_t m_nrOfPlayers, m_maxNrOfPlayers;
 	static InputManager*	m_instance;
-	PlayerController		m_playerController[4];
+	PlayerController		m_playerController[1];
+
 };
 
 #endif
