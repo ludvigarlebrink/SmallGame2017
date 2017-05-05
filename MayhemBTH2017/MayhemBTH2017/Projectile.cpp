@@ -19,6 +19,8 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 
 	m_prefabPointer = *prefab;
 
+	m_active = true;
+
 	b2Filter filter;
 	filter.categoryBits = PROJECTILE;
 	filter.maskBits = PLAYER | BOUNDARY;
@@ -36,6 +38,8 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 {
 	m_isBullet = true;
 	m_bulletScale = 2;
+
+	m_active = true;
 
 	//m_bulletSprite = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");//PrefabManager::InstantiateSprite("RifleProjectile");
 
@@ -96,6 +100,11 @@ void Projectile::AddForce(glm::vec3 force)
 
 }
 
+void Projectile::SetActive(bool active)
+{
+	m_active = active;
+}
+
 int Projectile::GetLife()
 {
 	return m_life;
@@ -111,24 +120,46 @@ Box Projectile::GetBox()
 	return m_box;
 }
 
+bool Projectile::GetContact()
+{
+	return m_contact;
+}
+
+bool Projectile::IsActive()
+{
+	return m_active;
+}
+
 
 void Projectile::Update()
 {
-	m_rotationUpdate += 10;
+	if (m_active)
+	{
+		m_rotationUpdate += 10;
 
-	glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
-	m_prefabPointer.SetPosition(position);
+		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
+		m_prefabPointer.SetPosition(position);
 
-	if (m_rotationUpdate > 360)
-		m_rotationUpdate = 0;
+		if (m_rotationUpdate > 360)
+			m_rotationUpdate = 0;
+	}
+	else
+	{
+		if (m_box.IsBody())
+		{
+			m_box.SetHasBody(false);
+			m_box.getBody()->GetWorld()->DestroyBody(m_box.getBody());
+		}
+	}
 }
 
 void Projectile::Render(Camera camera)
 {
-
-	m_prefabPointer.Update();
-	m_prefabPointer.Render(camera);
-
+	if (m_active)
+	{
+		m_prefabPointer.Update();
+		m_prefabPointer.Render(camera);
+	}
 }
 
 void Projectile::StartContact()

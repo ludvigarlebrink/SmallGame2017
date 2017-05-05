@@ -69,7 +69,7 @@ void GamePhysics::Update()
 	{
 
 
-		m_world->Step(1.0f / 30.0f, 6, 2);
+		m_world->Step(1.0f / 30.0f, 8, 4);
 
 		for (b2Contact* contact = m_world->GetContactList(); contact; contact = contact->GetNext())
 		{
@@ -91,7 +91,7 @@ void GamePhysics::Update()
 
 		m_PH.Update();
 
-		m_world->Step(1.0f / 30.0f, 6, 2); }
+		m_world->Step(1.0f / 30.0f, 8, 4); }
 	break;
 	case false:
 		std::cout << "LOADING" << std::endl;
