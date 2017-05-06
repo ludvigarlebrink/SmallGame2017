@@ -30,6 +30,7 @@ private:
 	Box m_powerUpBox;
 	Player m_player[4];
 	Collider2D gameFloor;
+	
 
 	TimeManager* m_time;
 	GLfloat m_jumpTimer=0.0f;
@@ -39,7 +40,7 @@ private:
 	GLfloat m_playerScaleY;
 	GLfloat m_playerPosX;
 	GLfloat m_playerPosY;
-
+	ParticleSystem m_particles;
 	GLfloat m_powerUpScaleX;
 	GLfloat m_powerUpScaleY;
 	GLfloat m_powerUpPosX;

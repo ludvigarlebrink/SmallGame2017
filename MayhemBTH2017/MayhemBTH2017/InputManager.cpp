@@ -26,23 +26,11 @@ void InputManager::StartUp()
 	}
 }
 
-void InputManager::ShutDown()
-{
-	for (int i = 0; i < m_nrOfPlayers; i++)
-	{
-		m_playerController[i].RemovePlayerController();
-	}
-}
-
 InputManager * InputManager::Get()
 {
 	return m_instance;
 }
 
-uint32_t InputManager::GetNrOfPlayers()
-{
-	return m_nrOfPlayers;
-}
 
 bool InputManager::GetButtonDown(size_t button, size_t controller)
 {
@@ -69,53 +57,33 @@ float InputManager::GetAxisRaw(size_t axis, size_t controller)
 	return m_playerController[controller].GetAxisRaw(axis);
 }
 
-void InputManager::SetNrOfPlayers(uint32_t value)
+int InputManager::GetControllerID(int ID)
 {
-	m_nrOfPlayers = value;
+	return m_playerController[0].GetControllerIndex(ID);
 }
 
-void InputManager::AddPlayer()
+
+PlayerController InputManager::GetController()
 {
-	if (m_nrOfPlayers < m_maxNrOfPlayers)
-	{
-		m_nrOfPlayers++;
-//		m_playerController[m_nrOfPlayers].AddPlayerController(m_nrOfPlayers);
-	}
-}
-
-void InputManager::RemovePlayer(uint32_t value)
-{
-
-	m_playerController[value].RemovePlayerController();
-	m_nrOfPlayers--;
-
+	return m_playerController[0];
 }
 
 void InputManager::Update()
 {
-	/*for (int i = 0; i < 2; i++)
-	{
-		m_playerController[i].Update(i);
-	}	*/
 
-	std::cout << m_playerController[0].GetControllerID() << std::endl;
-	std::cout << m_playerController[1].GetControllerID() << std::endl;
-}
-
-void InputManager::Reset()
-{
-	for (int i = 0; i < m_nrOfPlayers; i++)
-	{
-		m_playerController[i].Reset();
-	}
+	m_playerController[0].Reset();
+	m_playerController[0].Update();
 }
 
 void InputManager::Init()
 {
 	m_nrOfPlayers = 1;
 	m_maxNrOfPlayers = 4;
-	m_playerController[0].AddPlayerController(0);
-	m_playerController[1].AddPlayerController(1);
+
+	std::cout << "INITTED" << std::endl;
 }
 
-
+void InputManager::ShutDown()
+{
+	// Do something...
+}

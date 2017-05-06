@@ -15,6 +15,8 @@ void Box::InitDynamic(b2World * world, const glm::vec2 & pos, const glm::vec2 & 
 {
 	m_scale = scale;
 
+	m_hasBody = true;
+
 
 	m_bodyDef.type = b2_dynamicBody;
 	m_bodyDef.position.Set(pos.x, pos.y);
@@ -35,6 +37,7 @@ void Box::InitStatic(b2World * world, const glm::vec2 & pos, const glm::vec2 & s
 {
 	m_scale = scale;
 
+	m_hasBody = true;
 
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_staticBody;
@@ -94,6 +97,16 @@ void Box::SetBodyDef(b2World * world, const glm::vec2 & pos, const glm::vec2 & s
 	fixtureDef.shape = &boxShape;
 
 	m_fixture = m_body->CreateFixture(&fixtureDef);
+}
+
+void Box::SetHasBody(bool hasBody)
+{
+	m_hasBody = hasBody;
+}
+
+bool Box::IsBody()
+{
+	return m_hasBody;
 }
 
 

@@ -29,6 +29,10 @@ public:
 	b2BodyDef GetBodyDef();
 	void SetBodyDef(b2World * world, const glm::vec2 & pos, const glm::vec2 & scale, b2BodyType type);
 
+	void SetHasBody(bool hasBody);
+
+	bool IsBody();
+
 
 
 private:
@@ -37,6 +41,8 @@ private:
 	b2FixtureDef m_fixtureDef;
 	b2BodyDef m_bodyDef;
 	glm::vec2 m_scale;
+
+	bool m_hasBody;
 
 };
 

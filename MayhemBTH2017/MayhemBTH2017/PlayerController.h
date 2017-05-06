@@ -55,9 +55,9 @@ public:
 	virtual ~PlayerController();
 
 	//::.. MODIFY FUNCTIONS ..:://
-	void Update(Sint32 playerControllerID);
+	void Update();
 	void Reset();
-	void AddPlayerController(Sint32 playerControllerID);
+	void AddPlayerController(int playerControllerID);
 	void RemovePlayerController();
 
 	//::.. GET FUNCTIONS ..:://
@@ -68,24 +68,34 @@ public:
 	float GetAxisRaw(size_t button);
 	size_t GetNumButtons();
 	size_t GetNumAxis();
-	Sint32 GetControllerID();
+	int GetControllerID_0();
+	int GetControllerID_1();
+	int GetControllerID_2();
+	int GetControllerID_3();
+	PlayerController* GetController(int ID);
+
+	static int GetControllerIndex(SDL_JoystickID instance);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
-	void ButtonDown(Sint32 playerControllerID);
+	void ButtonDown(const SDL_ControllerButtonEvent controllerEvent);
 	void ButtonUp(const SDL_ControllerButtonEvent controllerEvent);
 	void GetAxis(const SDL_ControllerAxisEvent controllerEvent);
 	void GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent);
 	float ScaleRange(Sint16 value);
 
 private:
-	Button					m_button[NUM_BUTTONS];
-	Axis					m_axis[NUM_AXIS];
-	float					m_deadzone; //Set in Init()
-	SDL_Event				m_event;
-	SDL_GameController*		m_controller;
-	Sint32					m_controllerID;
+	Button						m_button[NUM_BUTTONS];
+	Axis						m_axis[NUM_AXIS];
+	float						m_deadzone; //Set in Init()
+	SDL_Event					m_event;
+	SDL_GameController *		m_controller;
+	SDL_Haptic *				m_haptic;
+	SDL_JoystickID				m_controllerID;
+	bool						m_isConnected;
+	static PlayerController	*	m_controllers;
+
 
 };
 

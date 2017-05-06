@@ -24,7 +24,7 @@ public:
 	//Destructor
 	virtual ~ParticleSystem();
 	void UpdateParticles();
-	void RenderTransformed(GLuint textureID);
+	void RenderTransformed();
 
 	//::..HELPER FUNCTIONS..:://
 

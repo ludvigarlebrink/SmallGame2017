@@ -20,7 +20,7 @@ void main()
 {
 
 	int seed=gl_VertexID;
-	if(outLife<10.0f){
+	if(outLife<2.0f){
 
 	outPos=inPos+0.001/(normalize(inDir));
 
@@ -35,9 +35,9 @@ void main()
 	
 	}
 
-	if(outLife>300.0f){
+	if(outLife>2.0f){
 		outCol.a=1.0;
-
+		outPos=vec3(0,0,0);
 
 		outLife=0.0f;
 	}
