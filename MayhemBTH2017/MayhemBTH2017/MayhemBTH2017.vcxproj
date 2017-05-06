@@ -228,6 +228,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Collidable.h" />
+    <ClInclude Include="GamePhysics.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="LevelEditorPropPlacer.h" />
