@@ -62,13 +62,6 @@ void System::Run()
 		//	pre->Render(cam);
 
 
-
-		//physics.Update();
-		//physics.Render(camera);
-		//particles.UpdateParticles();
-		//particles.RenderTransformed();
-
-
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
