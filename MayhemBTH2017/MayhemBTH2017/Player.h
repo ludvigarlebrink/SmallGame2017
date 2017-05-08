@@ -75,11 +75,10 @@ private:
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
 		PLAYER1 = 0x0002,
-		PROJECTILE = 0x0004,
+		PROJECTILE1 = 0x0004,
 		POWERUP = 0x0008,
-		PLAYER2 = 0x0010,
-		PLAYER3 = 0x0012,
-		PLAYER4 = 0x0014,
+		PLAYER2 = 0x0016,
+		PROJECTILE2 = 0x0032,
 	};
 
 

@@ -94,7 +94,7 @@ void System::Run()
 		}
 
 		//m_inputManager->Reset();
-
+		//SDL_Delay(100);
 		 //Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();

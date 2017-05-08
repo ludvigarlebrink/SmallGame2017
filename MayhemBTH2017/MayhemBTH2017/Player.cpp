@@ -59,21 +59,14 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	if (m_controllerID == 0)
 	{
 		filter.categoryBits = PLAYER1;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE2;
 	}
 	else if (m_controllerID == 1)
 	{
 		filter.categoryBits = PLAYER2;
-	}
-	else if (m_controllerID == 2)
-	{
-		filter.categoryBits = PLAYER3;
-	}
-	else if (m_controllerID == 3)
-	{
-		filter.categoryBits = PLAYER4;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1;
 	}
 
-	filter.maskBits = BOUNDARY | POWERUP;
 	GetBox().getFixture()->SetFilterData(filter);
 
 	GetBox().getBody()->SetUserData(this);
@@ -93,7 +86,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapon = Weapon(gun, projectile);
+	m_weapon = Weapon(gun, projectile, m_controllerID);
 
 	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
@@ -108,7 +101,7 @@ void Player::Update() {
 	
 	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 
-	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.1f)
+	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
 	{
 		if (m_weapon.FireRate(0.15))
 		{
@@ -127,9 +120,11 @@ void Player::Update() {
 		if (m_collidedPowerUp)
 		{
 			m_weapon.SetProjectileType(1.0f, 1.0f, 0.0f, 0.1f, 5.0f, 100);
+			m_collidedPowerUp = false;
 		}
+		m_contact = false;
 	}
-	else if (m_dead)
+	if (m_dead)
 	{
 		m_time += TimeManager::Get()->GetDeltaTime();
 		Respawn(glm::vec2(70, 70));
@@ -226,7 +221,7 @@ void Player::Update() {
 
 void Player::Respawn(glm::vec2 pos)
 {
-	m_boundingBox.getBody()->SetTransform(b2Vec2(pos.x, pos.y), 0);
+	m_boundingBox.getBody()->SetTransform(b2Vec2(pos.x, pos.y), 0.0f);
 }
 
 Box Player::GetBox()
@@ -246,17 +241,18 @@ void Player::StartContact(bool projectile, bool powerup)
 	if (projectile)
 	{
 		m_collidedProjectile = true;
+		m_collidedPowerUp = false;
 	}
 	if (powerup)
 	{
 		m_collidedPowerUp = true;
+		m_collidedProjectile = false;
 	}
 
 }
 
 void Player::EndContact()
 {
-	m_contact = false;
 }
 
 int Player::GetControllerID()
