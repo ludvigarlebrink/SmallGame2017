@@ -39,7 +39,9 @@ LevelEditor::LevelEditor()
 	m_menuText[2].SetPivot(UIText::CENTER);
 	m_menuText[2].SetColor(255, 255, 255, 255);
 
+	m_textPos = 0;
 	m_menuText[m_textPos].SetSize(100);
+	m_menuText[m_textPos].SetColor(255, 0, 0, 128);
 }
 
 LevelEditor::~LevelEditor()
@@ -75,21 +77,21 @@ void LevelEditor::Update()
 		m_menuText[0].Render();
 		m_menuText[1].Render();
 		m_menuText[2].Render();
-		
 
-		ButtonInput();
+
+		MenuInput();
 		break;
 
 	case SAVE:
-		m_level.Render(m_camera);
-		m_levelGUI.Render(m_camera);
 		m_virtualKeyboard.Render();
-
-		ButtonInput();
+		MenuInput();
 		break;
 
 	case LOAD:
-
+		Reset();
+		m_levelID++;
+		m_levelHandler.Import(m_level, m_levelID);
+		m_state = EDIT;
 		break;
 	default:
 		break;
@@ -181,16 +183,6 @@ void LevelEditor::ButtonInput()
 		}
 	}
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
-	{
-		// Menu Up
-	}
-
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
-	{
-		// Menu down
-	}
-
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_X))
 	{
 		m_levelMarker.SetSavedPosX(m_levelMarker.GetCurrentPosX());
@@ -203,38 +195,9 @@ void LevelEditor::ButtonInput()
 		m_levelMarker.SetMarkerMode(NORMAL);
 	}
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
-	{
-		glViewport(0, 0, 84, 48);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		m_level.Render(m_camera);
-		m_videoManager->Swap();
-		m_levelHandler.Export(m_level, m_levelGUI.GetPropPlacer());
-		m_levelHandler.ExportRegister();
-
-		// FIX
-		glViewport(0, 0, 1280, 720);
-		// REMOVE
-
-	}
-
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
-	{
-		Reset();
-		uint32_t p = 1;
-		m_levelHandler.Import(m_level, p);
-	}
-
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
-		if (m_state == MENU)
-		{
-			m_state = EDIT;
-		}
-		else
-		{
-			m_state = MENU;
-		}
+		m_state = MENU;
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_BACK))
@@ -249,6 +212,73 @@ void LevelEditor::ButtonInput()
 			{
 				m_levelGUI.SetState(GUI_CLOSED);
 			}
+		}
+	}
+}
+
+void LevelEditor::MenuInput()
+{
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
+	{
+		if (m_textPos - 1 >= 0)
+		{
+			m_menuText[m_textPos].SetColor(255, 255, 255, 255);
+			m_menuText[m_textPos].SetSize(90);
+			m_textPos--;
+			m_menuText[m_textPos].SetSize(100);
+			m_menuText[m_textPos].SetColor(255, 0, 0, 128);
+		}
+	}
+
+	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
+	{
+		if (m_textPos + 1 < 3)
+		{
+			m_menuText[m_textPos].SetColor(255, 255, 255, 255);
+			m_menuText[m_textPos].SetSize(90);
+			m_textPos++;
+			m_menuText[m_textPos].SetSize(100);
+			m_menuText[m_textPos].SetColor(255, 0, 0, 128);
+		}
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
+	{
+		if (m_state == MENU)
+			m_state = EDIT;
+		else if (m_state == SAVE)
+		{
+			// Add confirmation for save
+			m_level.SetName(m_virtualKeyboard.GetString());
+			glViewport(0, 0, 84, 48);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			m_level.Render(m_camera);
+			m_videoManager->Swap();
+			m_levelHandler.Export(m_level, m_levelGUI.GetPropPlacer());
+			m_levelHandler.ExportRegister();
+			// FIX
+			glViewport(0, 0, 1280, 720);
+			// REMOVE
+			m_textPos = 0;
+			m_state = MENU;
+		}
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A) && m_state == MENU)
+	{
+		switch (m_textPos)
+		{
+		case 0:
+			m_state = SAVE;
+			break;
+
+		case 1:
+			m_state = LOAD;
+			break;
+
+		case 2:
+			// Exit
+			break;
 		}
 	}
 }

@@ -265,7 +265,7 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	}*/
 	int x = 2;
 
-	std::ofstream output(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
+	std::ofstream output(".\\Assets\\Levels\\" + level.GetName() + ".mrlevel", std::ios::binary);
 
 	output.write(reinterpret_cast<char*>(isOccupied), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(isSpawn), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
@@ -364,7 +364,7 @@ bool LevelHandler::ExportRegister()
 	}
 
 	// Open the file.
-	std::ofstream file(".\\Assets\\Levels\\Register.mrlevelreg", std::ios::binary);
+	std::ofstream file(".\\Assets\\Levels\\Register.mrlevelreg", std::ios::binary | std::ios::app);
 
 	// Version.
 	uint32_t version = 1;
