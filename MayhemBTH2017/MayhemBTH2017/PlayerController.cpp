@@ -7,6 +7,7 @@ PlayerController * PlayerController::m_controllers = new PlayerController[4];
 
 PlayerController::PlayerController()
 {
+	Init();
 	m_isConnected = false;
 	m_controller = 0;
 	m_controllerID = -1;
@@ -20,15 +21,15 @@ PlayerController::~PlayerController()
 
 void PlayerController::Update()
 {
-
-	//SDL_Event sdlEvent;
-	while (SDL_PollEvent(&m_event))
-		switch (m_event.type)
+	SDL_Event sdlEvent;
+	while (SDL_PollEvent(&sdlEvent))
+	{
+		switch (sdlEvent.type)
 		{
 		case SDL_CONTROLLERDEVICEADDED:
-			if (m_event.cdevice.which < 4) {
-				PlayerController& pController = m_controllers[m_event.cdevice.which];
-				pController.AddPlayerController(m_event.cdevice.which);
+			if (sdlEvent.cdevice.which < 4) {
+				PlayerController& pController = m_controllers[sdlEvent.cdevice.which];
+				pController.AddPlayerController(sdlEvent.cdevice.which);
 			}
 			break;
 
@@ -37,29 +38,35 @@ void PlayerController::Update()
 			break;
 
 		case SDL_CONTROLLERBUTTONDOWN:
-			ButtonDown(m_event.cbutton);
+			m_controllers[sdlEvent.cdevice.which].ButtonDown(sdlEvent.cbutton, sdlEvent.cdevice.which);
 			break;
 
 		case SDL_CONTROLLERBUTTONUP:
-			ButtonUp(m_event.cbutton);
+			m_controllers[sdlEvent.cdevice.which].ButtonUp(sdlEvent.cbutton);
 			break;
 
 		case SDL_CONTROLLERAXISMOTION:
-			GetAxis(m_event.caxis);
-			GetAxisRaw(m_event.caxis);
+			GetAxis(sdlEvent.caxis);
+			GetAxisRaw(sdlEvent.caxis);
 			break;
-
 		}
+	}
 }
 
 
 void PlayerController::Reset()
 {
-	for (size_t i = 0; i < NUM_BUTTONS; i++)
+	for (uint32_t i = 0; i < 4; i++)
 	{
-		m_button[i].isDown = false;
-		m_button[i].isUp = false;
+
+		for (size_t j = 0; j < NUM_BUTTONS; j++)
+		{
+			m_controllers[i].m_button[j].isDown = false;
+			m_controllers[i].m_button[j].isUp = false;
+		}
 	}
+
+	
 }
 
 void PlayerController::AddPlayerController(int playerControllerID)
@@ -89,12 +96,17 @@ void PlayerController::AddPlayerController(int playerControllerID)
 
 void PlayerController::RemovePlayerController()
 {
-	if (m_isConnected) {
+	if (m_isConnected) 
+	{
+		
 		m_isConnected = false;
-		if (m_haptic) {
+		
+		if (m_haptic) 
+		{
 			SDL_HapticClose(m_haptic);
 			m_haptic = 0;
 		}
+
 		SDL_GameControllerClose(m_controller);
 		m_controller = 0;
 	}
@@ -102,9 +114,9 @@ void PlayerController::RemovePlayerController()
 
 
 //::.. GET FUNCTIONS ..:://
-bool PlayerController::GetButtonDown(size_t button)
+bool PlayerController::GetButtonDown(size_t button, uint32_t id)
 {
-	return m_button[button].isDown;
+	return m_controllers[id].m_button[button].isDown;
 }
 
 bool PlayerController::GetButtonHeld(size_t button)
@@ -137,16 +149,36 @@ size_t PlayerController::GetNumAxis()
 	return NUM_AXIS;
 }
 
-Sint32 PlayerController::GetControllerID()
+int PlayerController::GetControllerID_0()
 {
-	return m_controllerID;
+	return m_controllers[0].GetControllerIndex(1);
+}
+
+int PlayerController::GetControllerID_1()
+{
+	return m_controllers[1].GetControllerIndex(2);
+}
+
+int PlayerController::GetControllerID_2()
+{
+	return m_controllers[2].GetControllerIndex(3);
+}
+
+int PlayerController::GetControllerID_3()
+{
+	return m_controllers[3].GetControllerIndex(4);
+}
+
+PlayerController * PlayerController::GetController(int ID)
+{
+	return &m_controllers[ID];
 }
 
 int PlayerController::GetControllerIndex(SDL_JoystickID instance)
 {
 	for (int i = 0; i < 4; ++i)
 	{
-		if (m_controllers[i].m_isConnected &&  m_controllers[i].m_controllerID == instance) {
+		if (m_controllers[i].m_isConnected && m_controllers[i].m_controllerID == instance) {
 			return i;
 		}
 	}
@@ -170,8 +202,10 @@ void PlayerController::Init()
 }
 
 
-void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEvent)
-{
+void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEvent, int ID)
+{	
+	
+	std::cout << m_controllers[ID].m_controllerID << std::endl;
 
 	switch (controllerEvent.button)
 	{

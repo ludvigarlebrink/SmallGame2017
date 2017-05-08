@@ -16,7 +16,7 @@ LevelEditor::LevelEditor()
 
 LevelEditor::~LevelEditor()
 {
-
+	// Do nothing...
 }
 
 

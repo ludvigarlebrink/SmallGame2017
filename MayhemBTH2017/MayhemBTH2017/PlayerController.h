@@ -61,20 +61,25 @@ public:
 	void RemovePlayerController();
 
 	//::.. GET FUNCTIONS ..:://
-	bool GetButtonDown(size_t button);
+	bool GetButtonDown(size_t button, uint32_t id);
 	bool GetButtonHeld(size_t button);
 	bool GetButtonUp(size_t button);
 	float GetAxis(size_t button);
 	float GetAxisRaw(size_t button);
 	size_t GetNumButtons();
 	size_t GetNumAxis();
-	Sint32 GetControllerID();
+	int GetControllerID_0();
+	int GetControllerID_1();
+	int GetControllerID_2();
+	int GetControllerID_3();
+	static PlayerController* GetController(int ID);
+
 	static int GetControllerIndex(SDL_JoystickID instance);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
-	void ButtonDown(const SDL_ControllerButtonEvent controllerEvent);
+	void ButtonDown(const SDL_ControllerButtonEvent controllerEvent, int ID);
 	void ButtonUp(const SDL_ControllerButtonEvent controllerEvent);
 	void GetAxis(const SDL_ControllerAxisEvent controllerEvent);
 	void GetAxisRaw(const SDL_ControllerAxisEvent controllerEvent);

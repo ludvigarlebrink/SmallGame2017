@@ -34,7 +34,7 @@ InputManager * InputManager::Get()
 
 bool InputManager::GetButtonDown(size_t button, size_t controller)
 {
-	return m_playerController[controller].GetButtonDown(button);
+	return m_playerController->GetButtonDown(button, controller);
 }
 
 bool InputManager::GetButtonHeld(size_t button, size_t controller)
@@ -57,11 +57,21 @@ float InputManager::GetAxisRaw(size_t axis, size_t controller)
 	return m_playerController[controller].GetAxisRaw(axis);
 }
 
+int InputManager::GetControllerID(int ID)
+{
+	return m_playerController[0].GetControllerIndex(ID);
+}
+
+
+PlayerController * InputManager::GetController()
+{
+	return &m_playerController[0];
+}
+
 void InputManager::Update()
 {
-
+	m_playerController[0].Reset();
 	m_playerController[0].Update();
-
 }
 
 void InputManager::Init()
@@ -69,7 +79,6 @@ void InputManager::Init()
 	m_nrOfPlayers = 1;
 	m_maxNrOfPlayers = 4;
 
-	SDL_Init(SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK);
 	std::cout << "INITTED" << std::endl;
 }
 
