@@ -27,18 +27,14 @@ void Thumbnail::Import(const char * FilePath)
 	file.ignore(sizeof(bool) * (84 * 48));
 	file.ignore(sizeof(bool) * (84 * 48));
 	file.ignore(sizeof(glm::vec2) * (84 * 48));
-	//for (size_t i = 0; i < m_height * m_widht * 4; i++)
-	//{
-	//	file.read(reinterpret_cast<char*>(&textureData[i]), sizeof(unsigned char));
-	//}
 	file.read(reinterpret_cast<char*>(textureData), sizeof(unsigned char) * ((m_height * m_widht) * 4));
-	for (size_t i = 0; i < 84 * 48 * 4; i += 4)
-	{
-		std::cout << "R: " << (int)textureData[i];
-		std::cout << "\tG: " << (int)textureData[i + 1];
-		std::cout << "\tB: " << (int)textureData[i + 2];
-		std::cout << "\tA: " << (int)textureData[i + 3] << std::endl;
-	}
+	//for (size_t i = 0; i < 84 * 48 * 4; i += 4)
+	//{
+	//	std::cout << "R: " << (int)textureData[i];
+	//	std::cout << "\tG: " << (int)textureData[i + 1];
+	//	std::cout << "\tB: " << (int)textureData[i + 2];
+	//	std::cout << "\tA: " << (int)textureData[i + 3] << std::endl;
+	//}
 
 
 	glGenTextures(1, &m_texture);
