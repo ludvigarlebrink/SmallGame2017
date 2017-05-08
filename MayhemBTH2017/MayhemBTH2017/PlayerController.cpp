@@ -38,7 +38,7 @@ void PlayerController::Update()
 			break;
 
 		case SDL_CONTROLLERBUTTONDOWN:
-			m_controllers[sdlEvent.cdevice.which].ButtonDown(sdlEvent.cbutton, sdlEvent.cdevice.which);
+			m_controllers[sdlEvent.cdevice.which].ButtonDown(sdlEvent.cbutton);
 			break;
 
 		case SDL_CONTROLLERBUTTONUP:
@@ -46,8 +46,8 @@ void PlayerController::Update()
 			break;
 
 		case SDL_CONTROLLERAXISMOTION:
-			GetAxis(sdlEvent.caxis);
-			GetAxisRaw(sdlEvent.caxis);
+			m_controllers[sdlEvent.cdevice.which].GetAxis(sdlEvent.caxis);
+			m_controllers[sdlEvent.cdevice.which].GetAxisRaw(sdlEvent.caxis);
 			break;
 		}
 	}
@@ -119,24 +119,24 @@ bool PlayerController::GetButtonDown(size_t button, uint32_t id)
 	return m_controllers[id].m_button[button].isDown;
 }
 
-bool PlayerController::GetButtonHeld(size_t button)
+bool PlayerController::GetButtonHeld(size_t button, uint32_t id)
 {
-	return m_button[button].isHeld;
+	return m_controllers[id].m_button[button].isHeld;
 }
 
-bool PlayerController::GetButtonUp(size_t button)
+bool PlayerController::GetButtonUp(size_t button, uint32_t id)
 {
-	return m_button[button].isUp;
+	return m_controllers[id].m_button[button].isUp;
 }
 
-float PlayerController::GetAxis(size_t axis)
+float PlayerController::GetAxis(size_t axis, uint32_t id)
 {
-	return m_axis[axis].axisDeadzone;
+	return m_controllers[id].m_axis[axis].axisDeadzone;
 }
 
-float PlayerController::GetAxisRaw(size_t axis)
+float PlayerController::GetAxisRaw(size_t axis, uint32_t id)
 {
-	return m_axis[axis].axisRaw;
+	return m_controllers[id].m_axis[axis].axisRaw;
 }
 
 size_t PlayerController::GetNumButtons()
@@ -202,11 +202,8 @@ void PlayerController::Init()
 }
 
 
-void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEvent, int ID)
+void PlayerController::ButtonDown(const SDL_ControllerButtonEvent controllerEvent)
 {	
-	
-	std::cout << m_controllers[ID].m_controllerID << std::endl;
-
 	switch (controllerEvent.button)
 	{
 	case SDL_CONTROLLER_BUTTON_A:

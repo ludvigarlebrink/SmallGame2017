@@ -7,6 +7,7 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale) {
 	m_contact = false;
 
 	m_killed = false;
+
 }
 
 Player::Player()
@@ -21,6 +22,11 @@ Player::~Player()
 //::..INITIALIZERS..:://
 void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 {
+
+	//MARTIN TEST SHIT REMOVE
+	//m_testCon = new PlayerController;
+	//TEST END
+
 	//Initiate the players bounding box
 	m_contact = false;
 	//Load player MESH
@@ -29,6 +35,8 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 
 	m_playerPrefab = new PlayerPrefab();
 	
+	m_testCon = new PlayerController;
+
 	//m_playerPrefab->SetScale(glm::vec3(1.3));
 
 
@@ -81,7 +89,7 @@ void Player::Update() {
 
 	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 
-	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT) != 0)
+	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.1f)
 	{
 		if (m_weapon.FireRate(0.09f))
 		{
@@ -131,15 +139,14 @@ void Player::Update() {
 	//controller input///////////////////////////////////////////
 
 
-
-
 	//PLAYER MOVEMENT
-	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X);
+	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x * InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X);
+	
 
+	// THIS STUFF WORKS
+	InputManager * m_input = InputManager::Get();
 
-
-	//InputManager::Get()->GetControllerID()->GetAxis(CONTROLLER_AXIS_LEFT_X)
-	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X) != 0.0f &&leftVelocity > -5 )
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B, m_controllerID))
 	{
 	//	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
 		if (m_isMidAir) {
@@ -154,14 +161,16 @@ void Player::Update() {
 
 
 	}
+	// ** //
+
+	std::cout << InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID) << std::endl;
+
+	m_playerPrefab->Update(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
+		InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
+		InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID));
 
 
-	m_playerPrefab->Update(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X),
-		InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y),
-		InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X));
-
-
-	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON) != 0.0f && m_controllerID != 1)
+	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f)
 	{
 		
 
@@ -177,7 +186,7 @@ void Player::Update() {
 	}
 
 	//DOUBLE JUMP
-	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON) != 0.0f && m_isMidAir)
+	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f && m_isMidAir)
 	{
 		m_doubleJump = false;
 		GetBox().getBody()->ApplyForce(b2Vec2(0, 300), GetBox().getBody()->GetWorldCenter(), 1);

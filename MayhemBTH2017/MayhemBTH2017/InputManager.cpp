@@ -39,27 +39,27 @@ bool InputManager::GetButtonDown(size_t button, size_t controller)
 
 bool InputManager::GetButtonHeld(size_t button, size_t controller)
 {
-	return m_playerController[controller].GetButtonHeld(button);
+	return m_playerController->GetButtonHeld(button, controller);
 }
 
 bool InputManager::GetButtonUp(size_t button, size_t controller)
 {
-	return m_playerController[controller].GetButtonUp(button);
+	return m_playerController->GetButtonUp(button, controller);
 }
 
 float InputManager::GetAxis(size_t axis, size_t controller)
 {
-	return m_playerController[controller].GetAxis(axis);
+	return m_playerController->GetAxis(axis, controller);
 }
 
 float InputManager::GetAxisRaw(size_t axis, size_t controller)
 {
-	return m_playerController[controller].GetAxisRaw(axis);
+	return m_playerController->GetAxisRaw(axis, controller);
 }
 
 int InputManager::GetControllerID(int ID)
 {
-	return m_playerController[0].GetControllerIndex(ID);
+	return m_playerController->GetControllerIndex(ID);
 }
 
 
