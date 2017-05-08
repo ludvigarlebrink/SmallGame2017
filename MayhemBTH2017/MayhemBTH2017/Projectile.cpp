@@ -70,37 +70,17 @@ void Projectile::AddForce(glm::vec3 force, int controllerID)
 	boxForce.y = force.y;
 	boxForce *= 10;
 	
-	float x = InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID);
-	float y = InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID);
-	
+//	float x = InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID);
+//	float y = InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID);
+//	
+//
 
-	float angle = 90;//atan2(y, x);
-
-	if (abs(x) > 0.2f)
-	{
-		angle = atan2(y, x);
-
-		angle = glm::degrees(angle);
-
-	//	m_xAngle = x;
-	//
-	//	if (m_xAngle > 0.001f)
-	//	{
-	//		m_yAngle = (90 + y) * 90;
-	//
-	//	}
-	//	else if (m_xAngle < 0.001f)
-	//	{
-	//		m_yAngle =  (y - 90) * (-90);
-	//
-	//	}
+	float angle = glm::degrees(atan2(force.y, force.x));
 
 
-	}
-
+	m_prefabPointer.SetRotation(0, 0, angle - 90);
 
 	
-	m_prefabPointer.SetRotation(0, 0, angle);
 
 	m_box.getBody()->ApplyForce(boxForce, m_box.getBody()->GetWorldCenter(), true);
 	m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (angle));
