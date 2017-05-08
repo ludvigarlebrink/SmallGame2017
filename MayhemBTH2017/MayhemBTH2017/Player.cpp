@@ -138,21 +138,21 @@ void Player::Update() {
 
 
 	//InputManager::Get()->GetControllerID()->GetAxis(CONTROLLER_AXIS_LEFT_X)
-	if (InputManager::GetGetAxis(CONTROLLER_AXIS_LEFT_X) != 0.0f &&leftVelocity > -5 )
-	{
-	//	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
-		if (m_isMidAir) {
+	//if (InputManager::GetGetAxis(CONTROLLER_AXIS_LEFT_X) != 0.0f &&leftVelocity > -5 )
+	//{
+	////	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
+	//	if (m_isMidAir) {
 
-			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+	//		GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 
-		}
-		if (!m_isMidAir ) {
+	//	}
+	//	if (!m_isMidAir ) {
 
-			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0));
-		}
+	//		GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0));
+	//	}
 
 
-	}
+	//}
 
 
 	m_playerPrefab->Update(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X),
@@ -242,6 +242,11 @@ void Player::UpdateParticles()
 	m_weapon.UpdateParticles();
 }
 
+Weapon Player::GetWeapon()
+{
+	return m_weapon;
+}
+
 
 
 //::.. SET FUNCTIONS ..:://
@@ -296,8 +301,4 @@ void Player::Render(Camera camera) {
 
 	//Renders projectiles of a weapon and its particles
 	m_weapon.Render(camera);
-
-
-	
-
 }

@@ -200,8 +200,6 @@ void Weapon::Render(Camera camera)
 		pTransform.SetPosition(m_projectiles[i]->GetBox().getBody()->GetPosition().x / 2, m_projectiles[i]->GetBox().getBody()->GetPosition().y / 2, 0);
 		m_projectiles[i]->Update();
 		m_projectiles[i]->Render(camera);
-
-
 	}
 	
 	m_particles.UpdateParticles();

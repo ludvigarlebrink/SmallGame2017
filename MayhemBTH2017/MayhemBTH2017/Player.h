@@ -43,7 +43,8 @@ public:
 	void EndContact();
 	int GetControllerID();
 	void UpdateParticles();
-
+	Weapon GetWeapon();
+	
 private:
 private:
 	b2Fixture* m_filter;

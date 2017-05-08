@@ -38,14 +38,17 @@ void GamePhysics::EnterWorld()
 
 
 	m_player[0].Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 2.0));
+	m_player[0].GetWeapon().InitParticleSystem("GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 300);
 	m_player[0].SetCategoryBits(PLAYER);
 	m_player[0].SetMaskBits(POWERUP);
 	m_player[0].SetControllerID(0);
 
 	m_player[1].Init(m_world.get(), glm::vec2(15, 24), glm::vec2(2.0, 2.0));
+	m_player[1].GetWeapon().InitParticleSystem("GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 300);
 	m_player[1].SetCategoryBits(PLAYER);
 	m_player[1].SetMaskBits(POWERUP);
 	m_player[1].SetControllerID(1);
+
 	///////////////////////////////////////////////////////////////////
 
 
@@ -126,9 +129,5 @@ void GamePhysics::Render(Camera camera) {
 	
 	}
 
-
 	m_PH.Render(camera);
-
-
-
 }
