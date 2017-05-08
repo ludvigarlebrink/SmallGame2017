@@ -15,8 +15,9 @@
 #include "Sprite.h"
 #include "Texture.h"
 #include "TextureHandler.h"
+#include "Collidable.h"
 
-class Collider2D
+class Collider2D : public Collidable
 {
 public:
 	const static int SIZE_X = 84;
@@ -50,7 +51,7 @@ private:
 	GLuint		m_bufferID;
 	GLuint		m_vao;
 	AShader		m_shader;
-	LevelHandler m_imp;
+	LevelHandler m_levelImport;
 	Transform	m_transform;
 	Camera		m_camera;
 	Level		m_level;
@@ -62,7 +63,7 @@ private:
 		BOUNDARY = 0x0001,
 		PLAYER = 0x0002,
 		PROJECTILE = 0x0004,
-		FRIENDLY_AIRCRAFT = 0x0008,
+		POWERUP = 0x0008,
 		ENEMY_AIRCRAFT = 0x0010,
 	};
 

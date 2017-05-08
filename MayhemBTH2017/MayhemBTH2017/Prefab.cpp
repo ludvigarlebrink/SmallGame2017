@@ -28,13 +28,14 @@ void Prefab::Render(Camera & cam)
 
 	glUseProgram(m_shaderProgram);
 
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_albedoID);
 
 	glUniformMatrix4fv(m_uniforms[M], 1, GL_FALSE, &m_tx[SPACE_LOCAL].GetModelMatrix()[0][0]);
 	glUniformMatrix4fv(m_uniforms[V], 1, GL_FALSE, &cam.GetView()[0][0]);
 	glUniformMatrix4fv(m_uniforms[P], 1, GL_FALSE, &cam.GetProjection()[0][0]);
-	
+
 	if (m_hasAnimation)
 	{
 		m_animController->QuickUpdate(m_uniforms[JOINTS]);
@@ -43,7 +44,6 @@ void Prefab::Render(Camera & cam)
 
 
 	m_mesh->Render();
-
 	glUseProgram(0);
 }
 
@@ -197,8 +197,8 @@ void Prefab::Scale(glm::vec3 scale, uint32_t space)
 
 void Prefab::Scale(float x, float y, float z, uint32_t space)
 {
-		m_tx[space].SetScale(glm::vec3(m_localTx.GetScale().x + x,
-			m_localTx.GetScale().y + y, m_localTx.GetScale().z + z));
+	m_tx[space].SetScale(glm::vec3(m_localTx.GetScale().x + x,
+		m_localTx.GetScale().y + y, m_localTx.GetScale().z + z));
 }
 
 
@@ -221,7 +221,7 @@ Transform & Prefab::GetTransform(uint32_t space)
 }
 
 
-glm::vec3 Prefab::GetPosition(uint32_t space) 
+glm::vec3 Prefab::GetPosition(uint32_t space)
 {
 	return m_tx[space].GetPosition();
 }
@@ -351,16 +351,16 @@ void Prefab::SetFragShader(char * shader)
 //::.. HELP FUNCTIONS ..:://
 void Prefab::Init()
 {
-	m_vertShader		= nullptr;
-	m_fragShader		= nullptr;
+	m_vertShader = nullptr;
+	m_fragShader = nullptr;
 
-	m_hasBeenCreated	= false;
-	m_isEnabled			= true;
-	m_hasAnimation		= false;
+	m_hasBeenCreated = false;
+	m_isEnabled = true;
+	m_hasAnimation = false;
 
-	m_mesh				= nullptr;
-	m_animController	= nullptr;
-	m_material			= nullptr;
+	m_mesh = nullptr;
+	m_animController = nullptr;
+	m_material = nullptr;
 
 	for (uint32_t i = 0; i < NUM_UNIFORMS; i++)
 	{

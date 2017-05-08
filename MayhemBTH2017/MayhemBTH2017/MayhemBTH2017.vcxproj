@@ -135,6 +135,7 @@
     <ClCompile Include="Box.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Collidable.cpp" />
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="GamePhysics.cpp" />
     <ClCompile Include="GameSystem.cpp" />
@@ -144,6 +145,7 @@
     </ClCompile>
     <ClCompile Include="LevelEditorPropPlacer.cpp" />
     <ClCompile Include="LevelEditorStateMachine.cpp" />
+    <ClCompile Include="LevelTexture.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Menu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -159,6 +161,8 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerPrefab.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="PowerUpHandler.cpp" />
     <ClCompile Include="Prefab.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -224,10 +228,13 @@
     <ClInclude Include="Box.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Collidable.h" />
+    <ClInclude Include="GamePhysics.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="LevelEditorPropPlacer.h" />
     <ClInclude Include="LevelEditorStateMachine.h" />
+    <ClInclude Include="LevelTexture.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Menu.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -243,6 +250,8 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerPrefab.h" />
+    <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="PowerUpHandler.h" />
     <ClInclude Include="Prefab.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -302,11 +311,22 @@
     <None Include="Assets\GLSL\BlurrShader.vert" />
     <None Include="Assets\GLSL\BulletShader.frag" />
     <None Include="Assets\GLSL\BulletShader.vert" />
+    <None Include="Assets\GLSL\ColliderShader.frag" />
+    <None Include="Assets\GLSL\ColliderShader.vert" />
     <None Include="Assets\GLSL\DebugGreen.frag" />
     <None Include="Assets\GLSL\DebugGreen.vert" />
+    <None Include="Assets\GLSL\DebugShader.frag" />
     <None Include="Assets\GLSL\DebugShader.vert" />
+    <None Include="Assets\GLSL\DrawShader.frag" />
+    <None Include="Assets\GLSL\DrawShader.geom" />
+    <None Include="Assets\GLSL\DrawShader.vert" />
+    <None Include="Assets\GLSL\emitterShader.frag" />
+    <None Include="Assets\GLSL\emitterShader.vert" />
     <None Include="Assets\GLSL\GameLevelShader.frag" />
     <None Include="Assets\GLSL\GameLevelShader.vert" />
+    <None Include="Assets\GLSL\GeometryPass.vert" />
+    <None Include="Assets\GLSL\leo.frag" />
+    <None Include="Assets\GLSL\leo.geom" />
     <None Include="Assets\GLSL\LevelMarkerShader.frag" />
     <None Include="Assets\GLSL\LevelMarkerShader.vert" />
     <None Include="Assets\GLSL\LevelShader.frag" />
@@ -314,14 +334,27 @@
     <None Include="Assets\GLSL\MainShader.frag" />
     <None Include="Assets\GLSL\MainShader.geom" />
     <None Include="Assets\GLSL\MainShader.vert" />
+    <None Include="Assets\GLSL\ParticleDrop.vert" />
+    <None Include="Assets\GLSL\ParticleExplosion.vert" />
+    <None Include="Assets\GLSL\PlayerShader.vert" />
+    <None Include="Assets\GLSL\PowerUpShader.frag" />
+    <None Include="Assets\GLSL\PowerUpShader.vert" />
     <None Include="Assets\GLSL\QuadShader.frag" />
     <None Include="Assets\GLSL\QuadShader.geom" />
     <None Include="Assets\GLSL\QuadShader.vert" />
+    <None Include="Assets\GLSL\ShadowPass.frag" />
+    <None Include="Assets\GLSL\ShadowShader.geom" />
+    <None Include="Assets\GLSL\ShadowShader.vert" />
     <None Include="Assets\GLSL\SharpnelShader.frag" />
     <None Include="Assets\GLSL\SharpnelShader.geom" />
     <None Include="Assets\GLSL\SharpnelShader.vert" />
     <None Include="Assets\GLSL\SkeletalAnimation.frag" />
     <None Include="Assets\GLSL\SkeletalAnimation.vert" />
+    <None Include="Assets\GLSL\SplitterShader.vert" />
+    <None Include="Assets\GLSL\TextureTest" />
+    <None Include="Assets\GLSL\ToonShader" />
+    <None Include="Assets\GLSL\ToonShader.frag" />
+    <None Include="Assets\GLSL\ToonShader.vert" />
     <None Include="Assets\Levels\ExportTestLOL.mrlevel" />
     <None Include="Assets\Levels\NewFormat.mrlevel" />
     <None Include="Assets\Levels\Register.mrlevelreg" />

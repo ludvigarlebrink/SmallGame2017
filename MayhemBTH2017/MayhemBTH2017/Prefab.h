@@ -104,6 +104,7 @@ private:
 	GLuint				m_shaderProgram;
 	GLuint				m_uniforms[NUM_UNIFORMS];
 	GLuint				m_albedoID;
+	GLuint				m_vao;
 };
 
 

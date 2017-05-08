@@ -18,11 +18,12 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_isBullet = false;
 
 	m_prefabPointer = *prefab;
-	
+
+	m_active = true;
+
 	b2Filter filter;
 	filter.categoryBits = PROJECTILE;
 	filter.maskBits = PLAYER | BOUNDARY;
-
 
 	m_box.InitDynamic(world, pos, scale);
 	m_box.getBody()->SetUserData(this);
@@ -38,7 +39,9 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 	m_isBullet = true;
 	m_bulletScale = 2;
 
-	m_bulletSprite = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");//PrefabManager::InstantiateSprite("RifleProjectile");
+	m_active = true;
+
+	//m_bulletSprite = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");//PrefabManager::InstantiateSprite("RifleProjectile");
 
 	m_box.InitDynamic(world, spawnPos, glm::vec2(2, 0.8));
 	m_box.getBody()->SetUserData(this);
@@ -59,38 +62,37 @@ void Projectile::SetLife(int life)
 	m_life = life;
 }
 
-void Projectile::AddForce(glm::vec3 force)
+void Projectile::AddForce(glm::vec3 force, int controllerID)
 {
 
 	b2Vec2 boxForce;
 	boxForce.x = force.x;
 	boxForce.y = force.y;
 	boxForce *= 10;
+	
+//	float x = InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID);
+//	float y = InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID);
+//	
+//
 
-	GLfloat yAngle = InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_Y);
-
-	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X) > 0)
-		yAngle = 90 + (yAngle) * 90;
-	else
-		yAngle = -90 + (yAngle) * (-90);
+	float angle = glm::degrees(atan2(force.y, force.x));
 
 
-	//if no axis input
-	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X) < 0 && yAngle == 0)
-		yAngle = 45;
-	else if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X) < 0 && yAngle == -0)
-		yAngle = -45;
+	m_prefabPointer.SetRotation(0, 0, angle - 90);
 
-	m_prefabPointer.SetRotation(0, 0, yAngle);
-
-	//Fire 
+	
 
 	m_box.getBody()->ApplyForce(boxForce, m_box.getBody()->GetWorldCenter(), true);
-	m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (yAngle));
+	m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (angle));
+
+	tempAngle = m_yAngle;
 
 
+}
 
-
+void Projectile::SetActive(bool active)
+{
+	m_active = active;
 }
 
 int Projectile::GetLife()
@@ -108,28 +110,45 @@ Box Projectile::GetBox()
 	return m_box;
 }
 
+bool Projectile::GetContact()
+{
+	return m_contact;
+}
+
+bool Projectile::IsActive()
+{
+	return m_active;
+}
+
 
 void Projectile::Update()
 {
-	m_rotationUpdate += 10;
+	if (m_active)
+	{
+		m_rotationUpdate += 10;
 
+		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
+		m_prefabPointer.SetPosition(position);
 
-
-	glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
-	m_prefabPointer.SetPosition(position);
-
-	if (m_rotationUpdate > 360)
-		m_rotationUpdate = 0;
+		if (m_rotationUpdate > 360)
+			m_rotationUpdate = 0;
+	}
+	else
+	{
+		if (m_box.IsBody())
+		{
+			m_box.SetHasBody(false);
+			m_box.getBody()->GetWorld()->DestroyBody(m_box.getBody());
+		}
+	}
 }
 
 void Projectile::Render(Camera camera)
 {
-
-	if (!m_isBullet) {
+	if (m_active)
+	{
 		m_prefabPointer.Update();
 		m_prefabPointer.Render(camera);
-	}
-	else {
 	}
 }
 

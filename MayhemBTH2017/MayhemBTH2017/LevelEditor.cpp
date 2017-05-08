@@ -10,7 +10,6 @@ LevelEditor::LevelEditor()
 	m_stateManager = StateManager::Get();
 	m_videoManager = VideoManager::Get();
 	m_timeManager = TimeManager::Get();
-
 	m_timer.SetTimer(0.1f, true, true);
 	Thumbnail s;
 	s.Import("s");
@@ -18,7 +17,7 @@ LevelEditor::LevelEditor()
 
 LevelEditor::~LevelEditor()
 {
-
+	// Do nothing...
 }
 
 
@@ -79,25 +78,25 @@ void LevelEditor::AxisMove()
 	}
 
 	//Right stick
-	if (m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y) < -0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y) > 0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) < -0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) > 0.3)
+	if (m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) < -0.3 || m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) > 0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) < -0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) > 0.3)
 	{
 		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x,
-			m_camera.GetPosition().y - m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y) * m_timeManager->GetDeltaTime() * 600,
+			m_camera.GetPosition().y - m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) * m_timeManager->GetDeltaTime() * 600,
 			m_camera.GetPosition().z));
 
-		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x - m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) * m_timeManager->GetDeltaTime() * 600,
+		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x - m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X) * m_timeManager->GetDeltaTime() * 600,
 			m_camera.GetPosition().y,
 			m_camera.GetPosition().z));
 	}
 
-	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT) != 0.0 && m_camera.GetPosition().z < -20.0)
+	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT) > 0.1 && m_camera.GetPosition().z < -20.0)
 	{
-		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x, m_camera.GetPosition().y, m_camera.GetPosition().z + m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT) * m_timeManager->GetDeltaTime() * 500));
+		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x, m_camera.GetPosition().y, m_camera.GetPosition().z + m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT) * m_timeManager->GetDeltaTime() * 500));
 	}
 
-	else if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERLEFT) != 0.0 && m_camera.GetPosition().z > -70.0)
+	else if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERLEFT) > 0.1 && m_camera.GetPosition().z > -70.0)
 	{
-		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x, m_camera.GetPosition().y, m_camera.GetPosition().z - m_input->GetAxis(CONTROLLER_AXIS_TRIGGERLEFT) * m_timeManager->GetDeltaTime() * 500));
+		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x, m_camera.GetPosition().y, m_camera.GetPosition().z - m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERLEFT) * m_timeManager->GetDeltaTime() * 500));
 	}
 }
 

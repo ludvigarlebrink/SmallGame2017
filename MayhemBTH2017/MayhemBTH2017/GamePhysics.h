@@ -7,6 +7,7 @@
 #include "Weapon.h"
 #include "Contact.h"
 #include "MyContactListener.h"
+#include "PowerUpHandler.h"
 
 
 class GamePhysics
@@ -20,13 +21,16 @@ public:
 	void Render(Camera camera);
 	glm::vec3 GetPosition();
 
+	void SetNrOfPlayers(int nrOf);
+
 private:
 	std::unique_ptr<b2World> m_world;
 	Box m_newBox;
 	Box m_newBox2;
 	Box m_powerUpBox;
-	Player m_player;
+	Player m_player[4];
 	Collider2D gameFloor;
+	
 
 	TimeManager* m_time;
 	GLfloat m_jumpTimer=0.0f;
@@ -36,7 +40,7 @@ private:
 	GLfloat m_playerScaleY;
 	GLfloat m_playerPosX;
 	GLfloat m_playerPosY;
-
+	ParticleSystem m_particles;
 	GLfloat m_powerUpScaleX;
 	GLfloat m_powerUpScaleY;
 	GLfloat m_powerUpPosX;
@@ -53,7 +57,11 @@ private:
 
 	MyContactListener m_contactListener;
 
-	Weapon m_weapon;
+	PowerUpHandler m_PH;
+
+	int m_nrOfPlayers;
+
+
 
 	enum _entityCategory {
 		BOUNDARY = 0x0001,

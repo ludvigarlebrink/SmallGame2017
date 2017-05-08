@@ -293,8 +293,8 @@ void Level::InitMesh()
 	m_meshBackground->Load(m_vertices3, 6);
 
 	m_backgroundShader = new Prefab;
-	m_backgroundShader->Create();
 	m_backgroundShader->SetMesh(m_meshBackground);
+	m_backgroundShader->Create();
 
 }
 

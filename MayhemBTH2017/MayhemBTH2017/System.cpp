@@ -7,6 +7,8 @@
 #include "PrefabManager.h"
 #include "GamePhysics.h"
 #include "GameUI.h"
+#include "UIImage.h"
+#include "GameSystem.h"
 
 
 System::System()
@@ -33,8 +35,7 @@ void System::Run()
 	bool isRunning = true;
 
 	Transform transform;
-	Camera camera;
-	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+
 	VirtualKeyboard vk;
 	int count = 1;
 	m.Init();
@@ -43,12 +44,19 @@ void System::Run()
 
 	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
-	GamePhysics physics;
 
-	ParticleSystem p(".\\Assets\\GLSL\\GeometryPass", glm::vec3(0, 0, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 500);
 
+	GameSystem gs;
+
+	ParticleSystem particles(".\\Assets\\GLSL\\GeometryPass", glm::vec3(40, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 50.0f, 5005);
 	TextureHandler teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
+
+	
+	UIImage bg;
+	bg.SetTexture(".\\Assets\\Sprites\\BackgroundPirate.png");
+	bg.SetSize(1280, 720);
+
 
 	GameUI gameUI;
 
@@ -58,18 +66,9 @@ void System::Run()
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 
 		m_inputManager->Update();
-
+		//std::cout << m_inputManager->GetNrOfPlayers() << std::endl;
 		//	pre->Render(cam);
 
-
-		//p.UpdateParticles();
-		//texture.Bind(1);
-		//glEnable(GL_BLEND);
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		//glDepthMask(GL_FALSE);
-		//p.RenderTransformed(1);
-		//glDisable(GL_BLEND);
-		//glDepthMask(TRUE);
 
 		switch (m_stateManager->GetCurrentState())
 		{
@@ -83,8 +82,8 @@ void System::Run()
 			l.Update();
 			break;
 		case GameState::GAME:
-			physics.Update();
-			physics.Render(camera);
+			bg.Render();
+			gs.Update();
 			gameUI.Render();
 			break;
 		case GameState::EXIT:
@@ -94,14 +93,12 @@ void System::Run()
 			break;
 		}
 
-		m_inputManager->Reset();
+		//m_inputManager->Reset();
 
-		// Switch between back and front buffer.
+		 //Switch between back and front buffer.
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
-		// SKÄLL UT ERIK OCH LUKAS IMORGON :D
-		SDL_Delay(10);
-		//	counter += m_timeManager->GetDeltaTime();
+		counter += m_timeManager->GetDeltaTime();
 	}
 }
 

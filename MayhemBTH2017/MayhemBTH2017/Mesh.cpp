@@ -185,7 +185,6 @@ bool Mesh::Free()
 //::.. RENDER ..:://
 bool Mesh::Render()
 {
-
 	glBindVertexArray(m_vao);
 	glDrawArrays(GL_TRIANGLES, 0, m_drawCount);
 	glBindVertexArray(0);

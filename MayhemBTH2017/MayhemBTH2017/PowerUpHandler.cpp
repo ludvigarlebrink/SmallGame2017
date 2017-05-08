@@ -10,12 +10,12 @@ PowerUpHandler::~PowerUpHandler()
 {
 }
 
-void PowerUpHandler::Init(Player p, b2World * world, int nrOfSpawns)
+void PowerUpHandler::Init( b2World * world, int nrOfSpawns)
 {
 	m_time = 0;
 
 	m_world = world;
-	m_player = &p;
+
 	m_rate = 120 / nrOfSpawns;
 	m_nrOfSpawns = nrOfSpawns;
 
@@ -45,26 +45,7 @@ void PowerUpHandler::Spawn()
 
 bool PowerUpHandler::CollisionCheck(int index)
 {
-	for (b2Contact* contact = m_world->GetContactList(); contact; contact = contact->GetNext())
-	{
-		if (contact->IsTouching())
-		{
-			void* bodyUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
-			void* bodyUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
-
-			if (static_cast<PowerUp*>(bodyUserDataA) || static_cast<PowerUp*>(bodyUserDataB))
-			{
-				if (static_cast<Player*>(bodyUserDataA) || static_cast<Player*>(bodyUserDataB))
-				{
-					m_pu[index];
-					std::cout << " den nudlar .." << std::endl;
-					//m_counter --;
-					//replace index 
-					return true;
-				}
-			}
-		}
-	}
+	
 	return false;
 }
 

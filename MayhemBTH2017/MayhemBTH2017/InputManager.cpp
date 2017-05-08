@@ -26,91 +26,63 @@ void InputManager::StartUp()
 	}
 }
 
-void InputManager::ShutDown()
-{
-	for (int i = 0; i < m_nrOfPlayers; i++)
-	{
-		m_playerController[i].RemovePlayerController();
-	}
-}
-
 InputManager * InputManager::Get()
 {
 	return m_instance;
 }
 
-uint32_t InputManager::GetNrOfPlayers()
-{
-	return m_nrOfPlayers;
-}
 
 bool InputManager::GetButtonDown(size_t button, size_t controller)
 {
-	return m_playerController[controller].GetButtonDown(button);
+	return m_playerController->GetButtonDown(button, controller);
 }
 
 bool InputManager::GetButtonHeld(size_t button, size_t controller)
 {
-	return m_playerController[controller].GetButtonHeld(button);
+	return m_playerController->GetButtonHeld(button, controller);
 }
 
 bool InputManager::GetButtonUp(size_t button, size_t controller)
 {
-	return m_playerController[controller].GetButtonUp(button);
+	return m_playerController->GetButtonUp(button, controller);
 }
 
 float InputManager::GetAxis(size_t axis, size_t controller)
 {
-	return m_playerController[controller].GetAxis(axis);
+	return m_playerController->GetAxis(axis, controller);
 }
 
 float InputManager::GetAxisRaw(size_t axis, size_t controller)
 {
-	return m_playerController[controller].GetAxisRaw(axis);
+	return m_playerController->GetAxisRaw(axis, controller);
 }
 
-void InputManager::SetNrOfPlayers(uint32_t value)
+int InputManager::GetControllerID(int ID)
 {
-	m_nrOfPlayers = value;
+	return m_playerController->GetControllerIndex(ID);
 }
 
-void InputManager::AddPlayer()
+
+PlayerController * InputManager::GetController()
 {
-	if (m_nrOfPlayers < m_maxNrOfPlayers)
-	{
-		m_nrOfPlayers++;
-	}
-}
-
-void InputManager::RemovePlayer(uint32_t value)
-{
-
-	m_playerController[value].RemovePlayerController();
-	m_nrOfPlayers--;
-
+	return &m_playerController[0];
 }
 
 void InputManager::Update()
 {
-	for (int i = 0; i < m_nrOfPlayers; i++)
-	{
-		m_playerController[i].Update();
-	}
-}
-
-void InputManager::Reset()
-{
-	for (int i = 0; i < m_nrOfPlayers; i++)
-	{
-		m_playerController[i].Reset();
-	}
+	m_playerController[0].Reset();
+	m_playerController[0].Update();
 }
 
 void InputManager::Init()
 {
-	SDL_Init(SDL_INIT_GAMECONTROLLER);
 	m_nrOfPlayers = 1;
 	m_maxNrOfPlayers = 4;
+
+	std::cout << "INITTED" << std::endl;
 }
 
-
+void InputManager::ShutDown()
+{
+	// Do something...
+}
