@@ -8,6 +8,7 @@
 #include "GamePhysics.h"
 #include "GameUI.h"
 #include "UIImage.h"
+#include "GameSystem.h"
 
 
 System::System()
@@ -30,12 +31,11 @@ void System::Run()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
-	m_stateManager->SetCurrentState(GameState::GAME);
+	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
 	Transform transform;
-	Camera camera;
-	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+
 	VirtualKeyboard vk;
 	int count = 1;
 	m.Init();
@@ -44,10 +44,11 @@ void System::Run()
 
 	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
-	GamePhysics physics;
 
 
-	ParticleSystem particles(".\\Assets\\GLSL\\GeometryPass", glm::vec3(40, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 0.2f, 5005);
+	GameSystem gs;
+
+	ParticleSystem particles(".\\Assets\\GLSL\\GeometryPass", glm::vec3(40, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 50.0f, 5005);
 	TextureHandler teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
@@ -82,12 +83,7 @@ void System::Run()
 			break;
 		case GameState::GAME:
 			bg.Render();
-			physics.Update();
-			physics.Render(camera);
-	/*
-			particles.UpdateParticles();
-			particles.RenderTransformed();*/
-
+			gs.Update();
 			gameUI.Render();
 			break;
 		case GameState::EXIT:
