@@ -6,9 +6,13 @@
 #include "GameUI.h"
 #include "Timer.h"
 #include "InputManager.h"
+#include "Level.h"
+#include "UIText.h"
+#include "UIImage.h"
 
 
 #include <cstdint>
+#include <vector>
 
 
 class GameSystem
@@ -33,6 +37,7 @@ private:
 	enum States
 	{
 		GAME_SETUP = 0,
+		INIT_PLAYER_READY,
 		PLAYER_READY,
 		INIT_PLAY,
 		START_PLAY,
@@ -41,10 +46,19 @@ private:
 		GAME_OVER
 	};
 	
-	void UpdatePlayerReady();
+	void GameSetup();
+	void InitPlayerReady();
+	void PlayerReady();
+	void InitPlay();
+	void StartPlay();
+	void Play();
+	void LoadNextLevel();
+	void GameOver();
 
 private:
-	InputManager * m_input;
+	InputManager *	m_input;
+
+	GamePhysics *	m_world;
 
 	bool		m_isPaused;
 	bool		m_playerReady[MAX_PLAYERS];
@@ -54,6 +68,22 @@ private:
 	uint32_t	m_timer;
 
 	uint32_t	m_numPlayers;
+
+	std::vector<Level*>		m_levelQueue;
+
+
+	struct GameSettings
+	{
+		bool		randomOrder;
+		uint32_t	time;
+	};
+
+	// Init Players.
+	struct PlayerReadyUI
+	{
+		UIText playerName;
+		UIText playerReady;
+	} * m_playerReadyUI;
 };
 
 
