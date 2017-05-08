@@ -51,8 +51,9 @@ void System::Run()
 	ParticleSystem particles(".\\Assets\\GLSL\\GeometryPass", glm::vec3(40, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 50.0f, 5005);
 	TextureHandler teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
+	AShader particleShader;
+	particleShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0);
 
-	
 	UIImage bg;
 	bg.SetTexture(".\\Assets\\Sprites\\BackgroundPirate.png");
 	bg.SetSize(1280, 720);
@@ -73,7 +74,7 @@ void System::Run()
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
-			
+
 			break;
 		case GameState::MAIN_MENU:
 			m.Update();
@@ -82,7 +83,9 @@ void System::Run()
 			l.Update();
 			break;
 		case GameState::GAME:
+
 			bg.Render();
+			particleShader.Bind();
 			gs.Update();
 			gameUI.Render();
 			break;

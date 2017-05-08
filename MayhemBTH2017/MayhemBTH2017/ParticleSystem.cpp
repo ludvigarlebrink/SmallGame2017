@@ -109,9 +109,9 @@ void ParticleSystem::ShadersInit() {
 
 ParticleSystem::~ParticleSystem()
 {
-	//
-	//glDeleteProgram(m_pShader.GetProgramID());
-	//glDeleteProgram(m_drawShader.GetProgramID());
+	
+	glDeleteProgram(m_pShader.GetProgramID());
+	glDeleteProgram(m_drawShader.GetProgramID());
 
 }
 
@@ -142,16 +142,16 @@ void ParticleSystem::LoadParticleVBOS(Particle* p, GLuint nrOfVerts) {
 }
 
 void ParticleSystem::RenderTransformed() {
-	Camera camera;
-	Transform transform;
-
-
+	
+	Transform t;
+	Camera c;
+	c.SetPosition(glm::vec3(20, 40, -101));
+	m_drawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0);
 	m_drawShader.Bind();
-	m_drawShader.Update(transform, camera);
-	glBindVertexArray(m_drawVAO);
+	m_drawShader.Update(t,c);
+	//glBindVertexArray(m_drawVAO);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glBindVertexArray(0);
-	glUseProgram(0);
 
 }
 void ParticleSystem::UpdateParticles() {

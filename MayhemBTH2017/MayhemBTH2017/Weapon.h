@@ -38,10 +38,13 @@ private:
 	float m_restitution;
 	glm::vec2 m_previousForce;
 	float m_friction; 
+	AShader m_particleDrawShader;
+	AShader m_particlePhysicsShader;
 	float m_damping;
 	float m_density; 
 	float m_fireRate;
 	float m_time;
+	float m_particleTimer;
 	float m_clearTime;
 	int	  m_projectileCounter;
 	int   m_clearRate;

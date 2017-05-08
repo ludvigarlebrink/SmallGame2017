@@ -77,8 +77,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	//	m_weapon = Weapon(gun, projectile);
 	m_weapon = Weapon(gun, projectile);
 
-	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
-	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
+	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 3);
+	//m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
+	//m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 5005);
 
 
 	//Set fixture 
@@ -301,10 +302,11 @@ uint16 Player::GetMaskBits() {
 void Player::Render(Camera camera) {
 
 	//Renders the player and the gun 
-	m_playerPrefab->Render(camera);
+//	m_playerPrefab->Render(camera);
 
 
 	//Renders projectiles of a weapon and its particles
+	
 	m_weapon.Render(camera);
 
 

@@ -178,10 +178,13 @@ void GameSystem::StartPlay()
 void GameSystem::Play()
 {
 	Camera camera;
-	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -100.0f)); //-51.2f
+
 
 	m_world->Update();
 	m_world->Render(camera);
+
+	
 }
 
 void GameSystem::LoadNextLevel()
