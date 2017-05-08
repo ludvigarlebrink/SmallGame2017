@@ -76,6 +76,12 @@ private:
 		POWERUP = 0x0008,
 		ENEMY_AIRCRAFT = 0x0010,
 	};
+
+
+
+
+	//TEMP DEBUG MARTIN
+	PlayerController*	m_testCon;
 };
 
 #endif

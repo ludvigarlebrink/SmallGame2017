@@ -135,8 +135,11 @@ void Player::Update() {
 
 	//PLAYER MOVEMENT
 	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X);
-	
-	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X) != 0.0f &&leftVelocity > -5)
+
+
+
+	//InputManager::Get()->GetControllerID()->GetAxis(CONTROLLER_AXIS_LEFT_X)
+	if (InputManager::GetGetAxis(CONTROLLER_AXIS_LEFT_X) != 0.0f &&leftVelocity > -5 )
 	{
 	//	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
 		if (m_isMidAir) {
@@ -158,7 +161,7 @@ void Player::Update() {
 		InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X));
 
 
-	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON) != 0.0f)
+	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON) != 0.0f && m_controllerID != 1)
 	{
 		
 

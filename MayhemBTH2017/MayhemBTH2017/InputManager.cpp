@@ -34,7 +34,7 @@ InputManager * InputManager::Get()
 
 bool InputManager::GetButtonDown(size_t button, size_t controller)
 {
-	return m_playerController[controller].GetButtonDown(button);
+	return m_playerController->GetButtonDown(button, controller);
 }
 
 bool InputManager::GetButtonHeld(size_t button, size_t controller)
@@ -63,14 +63,13 @@ int InputManager::GetControllerID(int ID)
 }
 
 
-PlayerController InputManager::GetController()
+PlayerController * InputManager::GetController()
 {
-	return m_playerController[0];
+	return &m_playerController[0];
 }
 
 void InputManager::Update()
 {
-
 	m_playerController[0].Reset();
 	m_playerController[0].Update();
 }
