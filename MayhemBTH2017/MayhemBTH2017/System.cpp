@@ -29,7 +29,7 @@ void System::Run()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
-	m_stateManager->SetCurrentState(GameState::GAME);
+	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
 	Transform transform;

@@ -146,21 +146,21 @@ void Player::Update() {
 	// THIS STUFF WORKS
 	InputManager * m_input = InputManager::Get();
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B, m_controllerID))
-	{
-	//	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
-		if (m_isMidAir) {
+	//if (m_input->GetButtonDown(CONTROLLER_BUTTON_B, m_controllerID))
+	//{
+	////	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
+	//	if (m_isMidAir) {
 
-			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+	//		GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 
-		}
-		if (!m_isMidAir ) {
+	//	}
+	//	if (!m_isMidAir ) {
 
-			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0));
-		}
+	//		GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0));
+	//	}
 
 
-	}
+	//}
 	// ** //
 
 	std::cout << InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID) << std::endl;

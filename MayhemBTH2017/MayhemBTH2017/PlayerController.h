@@ -15,8 +15,8 @@ struct Button
 
 struct Axis
 {
-	float axisDeadzone = 1;
-	float axisRaw = 1;
+	float axisDeadzone;
+	float axisRaw;
 };
 
 enum ButtonInput
