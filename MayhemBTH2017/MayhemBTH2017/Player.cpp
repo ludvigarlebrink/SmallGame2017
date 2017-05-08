@@ -7,7 +7,6 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale) {
 	m_contact = false;
 
 	m_killed = false;
-
 }
 
 Player::Player()
@@ -22,11 +21,6 @@ Player::~Player()
 //::..INITIALIZERS..:://
 void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 {
-
-	//MARTIN TEST SHIT REMOVE
-	//m_testCon = new PlayerController;
-	//TEST END
-
 	//Initiate the players bounding box
 	m_contact = false;
 	//Load player MESH
@@ -35,8 +29,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 
 	m_playerPrefab = new PlayerPrefab();
 	
-	m_testCon = new PlayerController;
-
 	//m_playerPrefab->SetScale(glm::vec3(1.3));
 
 
@@ -138,17 +130,18 @@ void Player::Update() {
 	//controller input///////////////////////////////////////////
 
 
+
+
 	//PLAYER MOVEMENT
-	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x * InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X);
-	
+	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x*InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X);
 
-	InputManager * m_input = InputManager::Get();
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B, GetControllerID()))
+
+	//InputManager::Get()->GetControllerID()->GetAxis(CONTROLLER_AXIS_LEFT_X)
+	if (InputManager::GetGetAxis(CONTROLLER_AXIS_LEFT_X) != 0.0f &&leftVelocity > -5 )
 	{
-		std::cout << "BAJSUS" << std::endl;
 	//	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
-		/*if (m_isMidAir) {
+		if (m_isMidAir) {
 
 			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 
@@ -156,7 +149,7 @@ void Player::Update() {
 		if (!m_isMidAir ) {
 
 			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0));
-		}*/
+		}
 
 
 	}
@@ -167,7 +160,7 @@ void Player::Update() {
 		InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X));
 
 
-	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON) != 0.0f)
+	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON) != 0.0f && m_controllerID != 1)
 	{
 		
 

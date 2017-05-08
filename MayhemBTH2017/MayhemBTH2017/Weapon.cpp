@@ -206,7 +206,7 @@ void Weapon::Render(Camera camera)
 	
 	m_particles.UpdateParticles();
 
-	m_particles.Update(pTransform, camera);
+	//m_particles.Update(pTransform, camera);
 
 	m_particles.RenderTransformed();
 }
