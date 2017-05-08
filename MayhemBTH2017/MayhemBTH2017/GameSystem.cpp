@@ -100,6 +100,14 @@ void GameSystem::PlayerReady()
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A), 0)
 	{
 		m_playerReady[0] = !m_playerReady[0];
+		if (m_playerReady)
+		{
+
+		}
+		else
+		{
+
+		}
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A), 1)
@@ -115,11 +123,6 @@ void GameSystem::PlayerReady()
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A), 3)
 	{
 		m_playerReady[3] = !m_playerReady[3];
-	}
-
-	for (uint32_t i = 0; i < 4; i++)
-	{
-
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
@@ -168,12 +171,17 @@ void GameSystem::StartPlay()
 		delete[] m_playerReadyUI;
 		m_playerReadyUI = nullptr;
 	}
+
+	m_currState = PLAY;
 }
 
 void GameSystem::Play()
 {
+	Camera camera;
+	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+
 	m_world->Update();
-	//m_world->Render();
+	m_world->Render(camera);
 }
 
 void GameSystem::LoadNextLevel()

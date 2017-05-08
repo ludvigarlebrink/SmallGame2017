@@ -36,7 +36,7 @@ private:
 	std::vector<Projectile*>m_projectiles;
 	ParticleSystem m_particles;
 	float m_restitution;
-	glm::vec3 m_previousForce;
+	glm::vec2 m_previousForce;
 	float m_friction; 
 	float m_damping;
 	float m_density; 
