@@ -46,6 +46,7 @@ public:
 	
 private:
 private:
+	InputManager * m_input;
 	b2Fixture* m_filter;
 	Box m_boundingBox;
 	PlayerPrefab * m_playerPrefab;

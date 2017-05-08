@@ -30,7 +30,7 @@ void System::Run()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
-	m_stateManager->SetCurrentState(GameState::GAME);
+	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
 	Transform transform;
@@ -69,13 +69,6 @@ void System::Run()
 		//	pre->Render(cam);
 
 
-
-		//physics.Update();
-		//physics.Render(camera);
-		//particles.UpdateParticles();
-		//particles.RenderTransformed();
-
-
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
@@ -86,7 +79,6 @@ void System::Run()
 			break;
 		case GameState::LEVEL_EDITOR:
 			l.Update();
-
 			break;
 		case GameState::GAME:
 			bg.Render();
