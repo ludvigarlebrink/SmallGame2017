@@ -151,8 +151,10 @@ void LevelEditor::ButtonInput()
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
 	{
 		glViewport(0, 0, 84, 48);
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
+		m_levelMarker.Render(m_camera, m_levelGUI.GetCurrentUV());
 		m_level.Render(m_camera);
 		m_videoManager->Swap();
 		m_levelHandler.Export(m_level, m_levelGUI.GetPropPlacer());

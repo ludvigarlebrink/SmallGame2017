@@ -54,7 +54,7 @@ void LevelHandler::Import(Level & level, uint32_t id)
 	glm::vec2 *uv = new glm::vec2[nrOfBlocks];
 
 
-	int nSize = m_width * m_height * 3;
+	//int nSize = m_width * m_height * 3;
 	uint32_t i = 0;
 	uint32_t propSize = 0;
 
@@ -63,7 +63,7 @@ void LevelHandler::Import(Level & level, uint32_t id)
 	file.read(reinterpret_cast<char*>(isOccupied), sizeof(bool) * nrOfBlocks);
 	file.read(reinterpret_cast<char*>(isSpawn), sizeof(bool) * nrOfBlocks);
 	file.read(reinterpret_cast<char*>(uv), sizeof(glm::vec2) * nrOfBlocks);
-	file.ignore(sizeof(unsigned char) * (level.SIZE_X * level.SIZE_Y) * 4);
+	file.ignore(sizeof(unsigned char) * (m_height * m_width) * 4);
 	file.read(reinterpret_cast<char*>(&propSize), sizeof(uint32_t));
 	std::cout << propSize << std::endl;
 
@@ -107,11 +107,11 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	int nSize = m_width * m_height * 4;
 
 
-	glReadBuffer(GL_BACK_LEFT);
+	glReadBuffer(GL_FRONT);
 	glPixelStorei(GL_PACK_ALIGNMENT, 1);
 
 	unsigned char* tempPixelBuffer;
-	tempPixelBuffer = new unsigned char[84 * 48 * 4];
+	tempPixelBuffer = new unsigned char[m_height * m_width * 4];
 	glReadPixels(0, 0, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, tempPixelBuffer);
 	
 	outProps = propPlacer.GetPropExport();
@@ -274,7 +274,7 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 
 
 	//output.write(reinterpret_cast<char*>(texData), sizeof(uint8_t) * (level.SIZE_X * level.SIZE_Y) * 4);
-	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(level.SIZE_X * level.SIZE_Y) * 4);
+	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(m_height * m_width) * 4);
 	output.write(reinterpret_cast<char*>(&propsSize), sizeof(uint32_t));
 	for (uint32_t i = 0; i < 2; i++)
 	{
@@ -288,10 +288,11 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 
 	/*for (size_t i = 0; i < 84 * 48 * 4; i += 4)
 	{
-		std::cout << "R: " << (int)texData[i];
-		std::cout << "\tG: " << (int)texData[i + 1];
-		std::cout << "\tB: " << (int)texData[i + 2];
-		std::cout << "\tA: " << (int)texData[i + 3] << std::endl;
+		std::cout << i<<"\t "<< "R: " << (int)tempPixelBuffer[i];
+		std::cout << "\tG: " << (int)tempPixelBuffer[i + 1];
+		std::cout << "\tB: " << (int)tempPixelBuffer[i + 2];
+		std::cout << "\tA: " << (int)tempPixelBuffer[i + 3] << std::endl;
+
 	}*/
 	std::cout << "saved" << std::endl;
 	output.close();
