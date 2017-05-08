@@ -18,9 +18,6 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile)
 	m_counter = 0;
 
 	m_projectileCounter = 0;
-
-
-	
 }
 
 Weapon::Weapon(Prefab * gun)
@@ -133,7 +130,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 			projectile->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
-				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile);
+				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile, controllerID);
 		
 		}
 
@@ -164,7 +161,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 			m_projectiles[m_projectileCounter]->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
-				m_restitution, m_friction, m_damping, m_density, m_fireRate, false, m_prefabProjectile);
+				m_restitution, m_friction, m_damping, m_density, m_fireRate, false, m_prefabProjectile, controllerID);
 			//m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
 			m_projectiles[m_projectileCounter]->AddForce(glm::vec3(force, 0.0f), controllerID);
 
