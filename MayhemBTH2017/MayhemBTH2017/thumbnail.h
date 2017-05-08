@@ -25,9 +25,11 @@ public:
 
 private:
 	std::vector<std::uint8_t> m_pixels;
-	std::uint32_t m_width, m_height, m_size, m_bitsPerPixel;
+	//std::uint32_t m_width, m_height, m_size, m_bitsPerPixel;
 	//uint8_t * textureData;
 	GLuint m_texture;
+	uint32_t m_height = 84;
+	uint32_t m_widht = 48;
 };
 
 #endif
