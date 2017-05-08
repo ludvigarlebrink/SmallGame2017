@@ -139,7 +139,7 @@ void Player::Update() {
 
 
 	//InputManager::Get()->GetControllerID()->GetAxis(CONTROLLER_AXIS_LEFT_X)
-	if (InputManager::GetGetAxis(CONTROLLER_AXIS_LEFT_X) != 0.0f &&leftVelocity > -5 )
+	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X) != 0.0f &&leftVelocity > -5 )
 	{
 	//	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
 		if (m_isMidAir) {

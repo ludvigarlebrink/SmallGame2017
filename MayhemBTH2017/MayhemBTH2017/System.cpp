@@ -7,6 +7,7 @@
 #include "PrefabManager.h"
 #include "GamePhysics.h"
 #include "GameUI.h"
+#include "UIImage.h"
 
 
 System::System()
@@ -50,6 +51,12 @@ void System::Run()
 	TextureHandler teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
+	
+	UIImage bg;
+	bg.SetTexture(".\\Assets\\Sprites\\BackgroundPirate.png");
+	bg.SetSize(1280, 720);
+
+
 	GameUI gameUI;
 
 	while (isRunning)
@@ -82,6 +89,7 @@ void System::Run()
 
 			break;
 		case GameState::GAME:
+			bg.Render();
 			physics.Update();
 			physics.Render(camera);
 			gameUI.Render();
