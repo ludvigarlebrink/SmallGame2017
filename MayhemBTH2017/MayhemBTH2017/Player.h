@@ -16,11 +16,11 @@ class Player : public Collidable
 public:
 	//::.. CONSTRUCTORS ..:://
 	Player();
-	Player(b2World* world, glm::vec2 pos, glm::vec2 scale);
+	Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID);
 	virtual ~Player();
 
 	//::..INITIALIZER..:://
-	void Init(b2World* world, glm::vec2 pos, glm::vec2 scale);
+	void Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID);
 	
 	//::..RENDER..:://
 	void Render(Camera camera);
@@ -32,6 +32,7 @@ public:
 	void SetMaskBits(short MASK);
 	bool Timer(float rate);
 	void SetControllerID(int ID);
+	void Hit();
 	
 	//::..GETTERS..:://
 	uint16 GetCategoryBits();
@@ -43,7 +44,7 @@ public:
 	void EndContact();
 	int GetControllerID();
 	void UpdateParticles();
-
+	
 private:
 private:
 	InputManager * m_input;
@@ -58,10 +59,11 @@ private:
 	bool	m_isMidAir;
 	bool m_doubleJump;
 	bool m_contact;
-	bool m_killed;
+	bool m_dead;
 	float m_time;
 	int m_controllerID;
 	bool m_collidedProjectile;
+	bool m_hitByProjectile;
 
 	Weapon m_weapon;
 
@@ -72,11 +74,14 @@ private:
 	b2FixtureDef m_fixture;
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
-		PLAYER = 0x0002,
+		PLAYER1 = 0x0002,
 		PROJECTILE = 0x0004,
 		POWERUP = 0x0008,
-		ENEMY_AIRCRAFT = 0x0010,
+		PLAYER2 = 0x0010,
+		PLAYER3 = 0x0012,
+		PLAYER4 = 0x0014,
 	};
+
 
 
 

@@ -13,7 +13,7 @@ Projectile::~Projectile()
 {
 }
 
-void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab)
+void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID)
 {
 	m_isBullet = false;
 
@@ -23,7 +23,23 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 
 	b2Filter filter;
 	filter.categoryBits = PROJECTILE;
-	filter.maskBits = PLAYER | BOUNDARY;
+	
+	if (controllerID == 0)
+	{
+		filter.maskBits = PLAYER2 | PLAYER3 | PLAYER4 | BOUNDARY;
+	}
+	else if (controllerID == 1)
+	{
+		filter.maskBits = PLAYER1 | PLAYER3| PLAYER4 | BOUNDARY;
+	}
+	else if (controllerID == 2)
+	{
+		filter.maskBits = PLAYER1 | PLAYER2 | PLAYER4 | BOUNDARY;
+	}
+	else if (controllerID == 3)
+	{
+		filter.maskBits = PLAYER1 | PLAYER2 | PLAYER3 | BOUNDARY;
+	}
 
 	m_box.InitDynamic(world, pos, scale);
 	m_box.getBody()->SetUserData(this);
