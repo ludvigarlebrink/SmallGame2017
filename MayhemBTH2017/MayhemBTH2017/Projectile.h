@@ -20,7 +20,7 @@ public:
 	void InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 		float restitution, float friction,
 		float damping, float density,
-		float fireRate, bool startUp, Prefab * prefab);
+		float fireRate, bool startUp, Prefab * prefab, int controllerID);
 
 	void InitBullet(b2World * world, glm::vec2 pos);
 
@@ -72,12 +72,12 @@ private:
 	
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
-		PLAYER = 0x0002,
-		PROJECTILE = 0x0004,
+		PLAYER1 = 0x0002,
+		PROJECTILE1 = 0x0004,
 		POWERUP = 0x0008,
-		ENEMY_AIRCRAFT = 0x0010,
+		PLAYER2 = 0x0016,
+		PROJECTILE2 = 0x0032,
 	};
-
 };
 
 #endif

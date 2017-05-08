@@ -13,17 +13,28 @@ Projectile::~Projectile()
 {
 }
 
-void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab)
+void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID)
 {
 	m_isBullet = false;
+
+	m_contact = false;
 
 	m_prefabPointer = *prefab;
 
 	m_active = true;
 
 	b2Filter filter;
-	filter.categoryBits = PROJECTILE;
-	filter.maskBits = PLAYER | BOUNDARY;
+	
+	if (controllerID == 0)
+	{
+		filter.categoryBits = PROJECTILE1;
+		filter.maskBits = BOUNDARY| PLAYER2;
+	}
+	else if (controllerID == 1)
+	{
+		filter.categoryBits = PROJECTILE2;
+		filter.maskBits = PLAYER1 | BOUNDARY;
+	}
 
 	m_box.InitDynamic(world, pos, scale);
 	m_box.getBody()->SetUserData(this);
@@ -52,7 +63,7 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 
 	//Collision info
 	b2Filter filter;
-	filter.categoryBits = PROJECTILE;
+	filter.categoryBits = PROJECTILE1;
 	filter.maskBits = BOUNDARY;
 	m_box.getFixture()->SetFilterData(filter);
 }
