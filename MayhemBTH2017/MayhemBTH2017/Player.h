@@ -43,7 +43,7 @@ public:
 	void EndContact();
 	int GetControllerID();
 	void UpdateParticles();
-
+	
 private:
 private:
 	InputManager * m_input;

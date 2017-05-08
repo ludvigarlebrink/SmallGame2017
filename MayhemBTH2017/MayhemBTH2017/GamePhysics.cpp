@@ -17,7 +17,6 @@ GamePhysics::~GamePhysics()
 void GamePhysics::EnterWorld()
 {
 
-
 	//Get deltatime
 	m_time = TimeManager::Get();
 	b2Vec2 gravity(0.0f, -8.21f);
@@ -46,10 +45,8 @@ void GamePhysics::EnterWorld()
 	m_player[1].SetCategoryBits(PLAYER);
 	m_player[1].SetMaskBits(POWERUP);
 	m_player[1].SetControllerID(1);
+
 	///////////////////////////////////////////////////////////////////
-
-
-	
 
 
 	///////////////////////////////////////////////////////////////////
@@ -63,32 +60,18 @@ void GamePhysics::EnterWorld()
 
 void GamePhysics::Update()
 {
-	m_particles.UpdateParticles();
+	
+	
 	
 	switch (m_loadWorld) {
 	case true:
 	{
-
-
 		m_world->Step(1.0f / 20.0f, 8, 4);
-
-		for (b2Contact* contact = m_world->GetContactList(); contact; contact = contact->GetNext())
-		{
-			if (contact->IsTouching())
-			{
-				Projectile* proj = static_cast<Projectile*>(contact->GetFixtureB()->GetBody()->GetUserData());
-				if (proj != NULL)
-				{
-					//std::cout << " den nuddar något som kanske nuddar något osv .." << std::endl;
-				}
-			}
-
-		}
 
 		for (int i = 0; i < 2; i++) {
 
 			m_player[i].Update();
-			m_player[i].UpdateParticles();
+
 		}
 
 		m_PH.Update();
@@ -117,18 +100,14 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 
 void GamePhysics::Render(Camera camera) {
 
-	//camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+	m_particles.UpdateParticles();
+	m_particles.RenderTransformed();
 	m_floorCollider.DrawCollider(camera);
 
 	for (int i = 0; i < 2; i++) {
 
 		m_player[i].Render(camera);
-	
 	}
 
-
 	m_PH.Render(camera);
-
-
-
 }
