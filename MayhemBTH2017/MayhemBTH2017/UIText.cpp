@@ -205,7 +205,7 @@ void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, i
 	TTF_Font * font = TTF_OpenFont(m_font, m_size * m_scale);
 
 	// OUTLINE
-	SDL_Color black = { 0x00, 0x00, 0x00 };
+	SDL_Color black = { 0x00, 0x00, 0x00, 0x00 };
 	
 	SDL_Surface * sFont = TTF_RenderText_Blended(font, message.c_str(), color);
 
@@ -214,9 +214,7 @@ void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, i
 
 	SDL_Rect rect = { 4, 2, sOutline->w, sOutline->h };
 
-
 	SDL_BlitSurface(sFont, NULL, sOutline, &rect);
-
 
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

@@ -30,7 +30,7 @@ void PowerUp::Create(b2World* world, glm::vec2 pos)
 
 	b2Filter filter;
 	filter.categoryBits = POWERUP;
-	filter.maskBits = BOUNDARY | PLAYER;
+	filter.maskBits = BOUNDARY | PLAYER1 | PLAYER2;
 	m_boundingBox.getFixture()->SetFilterData(filter);
 
 	m_boundingBox.getBody()->SetUserData(this);
@@ -71,7 +71,7 @@ void PowerUp::CollidedWithPlayer(bool player)
 		return;
 	}
 
-	m_collidedPlayer = true;
+	m_collidedPlayer = false;
 }
 
 void PowerUp::SetActive(bool active)
