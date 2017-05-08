@@ -259,6 +259,8 @@
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="PowerUpHandler.cpp" />
     <ClCompile Include="Collidable.cpp" />
+    <ClCompile Include="LevelTexture.cpp" />
+    <ClCompile Include="GameSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -447,6 +449,8 @@
     <ClInclude Include="PowerUpHandler.h" />
     <ClInclude Include="Collidable.h" />
     <ClInclude Include="GamePhysics.h" />
+    <ClInclude Include="LevelTexture.h" />
+    <ClInclude Include="GameSettings.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
