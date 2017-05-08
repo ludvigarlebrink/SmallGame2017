@@ -5,12 +5,39 @@
 LevelEditor::LevelEditor()
 {
 
-	m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
 	m_input = InputManager::Get();
 	m_stateManager = StateManager::Get();
 	m_videoManager = VideoManager::Get();
 	m_timeManager = TimeManager::Get();
+
+	m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
 	m_timer.SetTimer(0.1f, true, true);
+
+	// THE BACKGROUND
+	m_fill.SetSize(m_videoManager->GetWidth(), m_videoManager->GetHeight());
+	m_fill.SetColor(0, 0, 0, 170);
+
+	// Text
+	m_menuText[0].SetText("SAVE LEVEL");
+	m_menuText[0].SetSize(80);
+	m_menuText[0].SetPosition(0, 145);
+	m_menuText[0].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
+	m_menuText[0].SetPivot(UIText::CENTER);
+	m_menuText[0].SetColor(255, 255, 255, 255);
+
+	m_menuText[1].SetText("LOAD LEVEL");
+	m_menuText[1].SetSize(80);
+	m_menuText[1].SetPosition(0, 0);
+	m_menuText[1].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
+	m_menuText[1].SetPivot(UIText::CENTER);
+	m_menuText[1].SetColor(255, 255, 255, 255);
+
+	m_menuText[2].SetText("EXIT");
+	m_menuText[2].SetSize(80);
+	m_menuText[2].SetPosition(0, -145);
+	m_menuText[2].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
+	m_menuText[2].SetPivot(UIText::CENTER);
+	m_menuText[2].SetColor(255, 255, 255, 255);
 }
 
 LevelEditor::~LevelEditor()
@@ -31,18 +58,36 @@ void LevelEditor::Update()
 			AxisMove();
 		}
 
+
 		m_levelMarker.Render(m_camera, m_levelGUI.GetCurrentUV());
 		m_level.Render(m_camera);
 		m_levelGUI.Render(m_camera);
+
 		ButtonInput();
 		break;
 	case MENU:
+		// Background
+		m_fill.Render();
+
+		// Text
+		m_menuText[0].Render();
+		m_menuText[1].Render();
+		m_menuText[2].Render();
+		
+
+		ButtonInput();
 		break;
 
 	case SAVE:
+		m_level.Render(m_camera);
+		m_levelGUI.Render(m_camera);
+		m_virtualKeyboard.Render();
 
 		ButtonInput();
-		m_level.Render(m_camera);
+		break;
+
+	case LOAD:
+
 		break;
 	default:
 		break;
@@ -54,30 +99,30 @@ void LevelEditor::Update()
 void LevelEditor::AxisMove()
 {
 	//Left stick
-	if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) || m_input->GetAxis(CONTROLLER_AXIS_LEFT_X))
+	if (m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_Y) || m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X))
 	{
 
-		if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) > 0.3)
+		if (m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_Y) > 0.3)
 		{
 			m_levelMarker.SetCurrentPosY(m_levelMarker.GetCurrentPosY() - 1);
 		}
-		else if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_Y) < -0.3)
+		else if (m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_Y) < -0.3)
 		{
 			m_levelMarker.SetCurrentPosY(m_levelMarker.GetCurrentPosY() - (-1));
 		}
 
-		if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_X) > 0.3)
+		if (m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X) > 0.3)
 		{
 			m_levelMarker.SetCurrentPosX(m_levelMarker.GetCurrentPosX() - 1);
 		}
-		else if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_X) < -0.3)
+		else if (m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X) < -0.3)
 		{
 			m_levelMarker.SetCurrentPosX(m_levelMarker.GetCurrentPosX() - (-1));
 		}
 	}
 
 	//Right stick
-	if (m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) < -0.3 || m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) > 0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) < -0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) > 0.3)
+	if (m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) < -0.3 || m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) > 0.3 || m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X) < -0.3 || m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X) > 0.3)
 	{
 		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x,
 			m_camera.GetPosition().y - m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) * m_timeManager->GetDeltaTime() * 600,
@@ -134,6 +179,16 @@ void LevelEditor::ButtonInput()
 		}
 	}
 
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
+	{
+		// Menu Up
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
+	{
+		// Menu down
+	}
+
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_X))
 	{
 		m_levelMarker.SetSavedPosX(m_levelMarker.GetCurrentPosX());
@@ -170,13 +225,13 @@ void LevelEditor::ButtonInput()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
-		if (m_state == SAVE)
+		if (m_state == MENU)
 		{
 			m_state = EDIT;
 		}
 		else
 		{
-			m_state = SAVE;
+			m_state = MENU;
 		}
 	}
 

@@ -6,6 +6,7 @@
 #include "UIText.h"
 #include "InputManager.h"
 #include "LevelEditorPropPlacer.h"
+#include "VideoManager.h"
 
 #include <fstream>
 #include <vector>
