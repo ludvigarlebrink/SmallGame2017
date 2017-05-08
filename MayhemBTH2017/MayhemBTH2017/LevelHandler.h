@@ -9,16 +9,17 @@
 #include <fstream>
 #include <vector>
 
-	struct PropsExport
+
+class LevelHandler
+{
+public:
+
+	struct PropsImport
 	{
 		uint32_t	id;
 		glm::vec2	pos;
 		float		rot;
 	};
-
-class LevelHandler
-{
-public:
 
 	LevelHandler();
 	virtual ~LevelHandler();
@@ -26,7 +27,7 @@ public:
 	//::.. IMPORT/EXPORT ..:://
 	void Init();
 	void Import(Level & level, uint32_t id);
-	void Export(Level & level);
+	void Export(Level & level, LevelEditorPropPlacer & propPlacer);
 	bool ImportRegister();
 	bool ExportRegister();
 
@@ -62,7 +63,7 @@ private:
 	uint32_t							m_mapSize;
 	uint32_t							m_width = 84;
 	uint32_t							m_height = 48;
-	char*								m_dataBuffer;
+	LevelEditorPropPlacer::PropsExport* outProps;
 };
 
 #endif // ! __LEVELIMPORTER_H__

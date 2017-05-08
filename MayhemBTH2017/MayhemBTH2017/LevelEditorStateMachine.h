@@ -38,6 +38,7 @@ public:
 	virtual ~LevelEditorStateMachine();
 
 	//::.. GET FUNCTIONS ..:://
+	LevelEditorPropPlacer& GetPropPlacer();
 	int32_t GetState();
 	glm::vec2 GetCurrentUV();
 
@@ -47,6 +48,7 @@ public:
 	//::.. UPDATE FUNCTIONS ..:://
 	void Render(Camera& cam);
 	void RenderIcons(size_t gui);
+
 
 private:
 
@@ -71,7 +73,7 @@ private:
 	int32_t			m_offsetCounter;
 	glm::vec2		m_currentUV;
 
-	LevelEditorPropPlacer m_propPlacer;
+	LevelEditorPropPlacer*  m_propPlacer;
 };
 
 #endif // !__LEVELEDITORSTATEMACHINE_H__

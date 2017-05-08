@@ -69,7 +69,7 @@ void LevelEditorPropPlacer::Render(Camera & cam)
 
 void LevelEditorPropPlacer::RenderProps(Camera & cam)
 {
-	for (uint32_t i = m_propHandler.NUM_PROPS - 1; i < m_props.size(); i++)
+	for (uint32_t i = m_propHandler.NUM_PROPS; i < m_props.size(); i++)
 	{
 		m_props[i]->prefab->Render(cam);
 	}
@@ -88,7 +88,7 @@ void LevelEditorPropPlacer::Remove()
 LevelEditorPropPlacer::PropsExport * LevelEditorPropPlacer::GetPropExport()
 {
 	uint32_t size = m_props.size() - m_propHandler.NUM_PROPS;
-
+	int x = m_props.size();
 	PropsExport * props = new PropsExport[size];
 
 	uint32_t counter = 0;
@@ -109,16 +109,17 @@ LevelEditorPropPlacer::PropsExport * LevelEditorPropPlacer::GetPropExport()
 
 uint32_t LevelEditorPropPlacer::GetNumProps()
 {
-	return m_props.size() - m_propHandler.NUM_PROPS;
+	uint32_t toReturn = m_props.size() - m_propHandler.NUM_PROPS;
+	return toReturn;
 }
 
 
 void LevelEditorPropPlacer::Init()
 {
-	m_props.resize(m_propHandler.NUM_PROPS);
+//	m_props.resize(m_propHandler.NUM_PROPS);
 
 	for (uint32_t i = 0; i < m_propHandler.NUM_PROPS; i++)
 	{
-		m_props[i] = m_propHandler.Instantiate(i);
+		m_props.push_back(m_propHandler.Instantiate(i));
 	}
 }
