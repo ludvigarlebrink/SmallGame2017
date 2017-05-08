@@ -10,7 +10,6 @@ LevelEditor::LevelEditor()
 	m_stateManager = StateManager::Get();
 	m_videoManager = VideoManager::Get();
 	m_timeManager = TimeManager::Get();
-
 	m_timer.SetTimer(0.1f, true, true);
 }
 
