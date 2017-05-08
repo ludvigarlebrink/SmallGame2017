@@ -89,7 +89,7 @@ void Player::Update() {
 
 	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 
-	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT) != 0)
+	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.1f)
 	{
 		if (m_weapon.FireRate(0.09f))
 		{
@@ -143,13 +143,13 @@ void Player::Update() {
 	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x * InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X);
 	
 
+	// THIS STUFF WORKS
 	InputManager * m_input = InputManager::Get();
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B, GetControllerID()))
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B, m_controllerID))
 	{
-		std::cout << "BAJSUS" << std::endl;
 	//	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
-		/*if (m_isMidAir) {
+		if (m_isMidAir) {
 
 			GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 
@@ -157,18 +157,20 @@ void Player::Update() {
 		if (!m_isMidAir ) {
 
 			GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0));
-		}*/
+		}
 
 
 	}
+	// ** //
+
+	std::cout << InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID) << std::endl;
+
+	m_playerPrefab->Update(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
+		InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
+		InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID));
 
 
-	m_playerPrefab->Update(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X),
-		InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y),
-		InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X));
-
-
-	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON) != 0.0f)
+	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f)
 	{
 		
 
@@ -184,7 +186,7 @@ void Player::Update() {
 	}
 
 	//DOUBLE JUMP
-	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON) != 0.0f && m_isMidAir)
+	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f && m_isMidAir)
 	{
 		m_doubleJump = false;
 		GetBox().getBody()->ApplyForce(b2Vec2(0, 300), GetBox().getBody()->GetWorldCenter(), 1);
