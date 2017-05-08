@@ -117,7 +117,7 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 
 void GamePhysics::Render(Camera camera) {
 
-	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+	//camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 	m_floorCollider.DrawCollider(camera);
 
 	for (int i = 0; i < 2; i++) {

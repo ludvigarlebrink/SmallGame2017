@@ -26,7 +26,7 @@ public:
 
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(int life);
-	void AddForce(glm::vec3 force);
+	void AddForce(glm::vec3 force, int controllerID);
 	void SetFired(bool fired);
 	void SetActive(bool active);
 

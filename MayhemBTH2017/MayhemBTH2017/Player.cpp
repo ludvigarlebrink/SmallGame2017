@@ -12,7 +12,7 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale) {
 
 Player::Player()
 {
-	
+
 }
 
 
@@ -26,6 +26,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	//MARTIN TEST SHIT REMOVE
 	//m_testCon = new PlayerController;
 	//TEST END
+	m_input = InputManager::Get();
 
 	//Initiate the players bounding box
 	m_contact = false;
@@ -34,7 +35,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	m_world = world;
 
 	m_playerPrefab = new PlayerPrefab();
-	
+
 	m_testCon = new PlayerController;
 
 	//m_playerPrefab->SetScale(glm::vec3(1.3));
@@ -51,7 +52,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	GetBox().getFixture()->SetFriction(1.0);
 	GetBox().getFixture()->SetRestitution(0.0);
 	GetBox().getBody()->SetLinearDamping(0.0);
-	
+
 	b2Filter filter;
 	filter.categoryBits = PLAYER;
 	filter.maskBits = BOUNDARY | POWERUP;
@@ -89,12 +90,12 @@ void Player::Update() {
 
 	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 
-	if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.1f)
+	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.1f)
 	{
-		if (m_weapon.FireRate(0.09f))
+		if (m_weapon.FireRate(0.15))
 		{
 
-			m_weapon.Shoot(5.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z));
+			m_weapon.Shoot(5.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
 		}
 	}
 
@@ -110,7 +111,7 @@ void Player::Update() {
 			m_weapon.SetProjectileType(1.0f, 1.0f, 0.0f, 0.1f, 5.0f, 100);
 		}
 	}
-	else if(m_killed)
+	else if (m_killed)
 	{
 		m_time += TimeManager::Get()->GetDeltaTime();
 		Respawn(glm::vec2(70, 70));
@@ -127,8 +128,8 @@ void Player::Update() {
 
 	if (GetBox().getBody()->GetLinearVelocity().y != 0) {
 		m_isMidAir = true;
-	
-		
+
+
 	}
 	else {
 		m_isMidAir = false;
@@ -141,43 +142,42 @@ void Player::Update() {
 
 	//PLAYER MOVEMENT
 	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x * InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X);
-	
+
 
 	// THIS STUFF WORKS
-	InputManager * m_input = InputManager::Get();
 
-	//if (m_input->GetButtonDown(CONTROLLER_BUTTON_B, m_controllerID))
-	//{
-	////	m_playerPrefab->SetRotation(0, 90 * InputManager::Get()->GetAxisDirection(CONTROLLER_AXIS_LEFTX), 0);
-	//	if (m_isMidAir) {
+	if (m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID))
+	{
+	
+		if (m_isMidAir) {
 
-	//		GetBox().getBody()->ApplyForce(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-200)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 
-	//	}
-	//	if (!m_isMidAir ) {
+		}
+		if (!m_isMidAir) {
 
-	//		GetBox().getBody()->SetLinearVelocity(b2Vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X)*(-400)*TimeManager::Get()->GetDeltaTime(), 0));
-	//	}
+			GetBox().getBody()->SetLinearVelocity(b2Vec2(m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-200)*TimeManager::Get()->GetDeltaTime(), 0));
+		}
 
 
-	//}
+	}
 	// ** //
 
 	std::cout << InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID) << std::endl;
 
 	m_playerPrefab->Update(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
-		InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
-		InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID));
+		m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
+		m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID));
 
 
-	if (InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f)
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f)
 	{
-		
+
 
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 300), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 150), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 
 
@@ -186,10 +186,10 @@ void Player::Update() {
 	}
 
 	//DOUBLE JUMP
-	if (m_doubleJump && InputManager::Get()->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f && m_isMidAir)
+	if (m_doubleJump && m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f && m_isMidAir)
 	{
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 300), GetBox().getBody()->GetWorldCenter(), 1);
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 150), GetBox().getBody()->GetWorldCenter(), 1);
 
 	}
 
@@ -203,7 +203,7 @@ void Player::Update() {
 	//////////////////////////////////////////////////////////
 
 
-	
+
 }
 
 void Player::Respawn(glm::vec2 pos)
@@ -233,7 +233,7 @@ void Player::StartContact(bool projectile, bool powerup)
 	{
 		m_collidedPowerUp = true;
 	}
-	
+
 }
 
 void Player::EndContact()
@@ -308,6 +308,6 @@ void Player::Render(Camera camera) {
 	m_weapon.Render(camera);
 
 
-	
+
 
 }

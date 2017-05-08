@@ -110,11 +110,11 @@ void Weapon::UpdateParticles() {
 
 }
 
-void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos)
+void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID)
 {
 	
 	
-	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X), InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_Y));
+	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_Y, controllerID));
 
 	if (abs(force.x) > 0.001f || abs(force.y) > 0.001f)
 		force = glm::normalize(force);
@@ -142,7 +142,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos)
 		temptransform.SetPosition(projectile->GetBox().getBody()->GetPosition().x, projectile->GetBox().getBody()->GetPosition().y, 0);
 		m_particles.Update(temptransform, camera);
 
-		projectile->AddForce(glm::vec3(force, 0.0f));
+		projectile->AddForce(glm::vec3(force, 0.0f), controllerID);
 		m_projectiles.push_back(projectile);
 
 
@@ -166,7 +166,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos)
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 				m_restitution, m_friction, m_damping, m_density, m_fireRate, false, m_prefabProjectile);
 			//m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
-			m_projectiles[m_projectileCounter]->AddForce(glm::vec3(force, 0.0f));
+			m_projectiles[m_projectileCounter]->AddForce(glm::vec3(force, 0.0f), controllerID);
 
 			m_projectileCounter++;
 			
