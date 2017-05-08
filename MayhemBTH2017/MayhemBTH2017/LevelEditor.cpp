@@ -38,6 +38,8 @@ LevelEditor::LevelEditor()
 	m_menuText[2].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
 	m_menuText[2].SetPivot(UIText::CENTER);
 	m_menuText[2].SetColor(255, 255, 255, 255);
+
+	m_menuText[m_textPos].SetSize(100);
 }
 
 LevelEditor::~LevelEditor()

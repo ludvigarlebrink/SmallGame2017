@@ -65,25 +65,25 @@ private:
 
 	uint32_t	m_gameMode;
 	uint32_t	m_currState;
-	uint32_t	m_timer;
-
 	uint32_t	m_numPlayers;
+	Timer		m_timer;
 
 	std::vector<Level*>		m_levelQueue;
 
-
-	struct GameSettings
-	{
-		bool		randomOrder;
-		uint32_t	time;
-	};
+	GameUI		m_gameUI;
 
 	// Init Players.
 	struct PlayerReadyUI
 	{
-		UIText playerName;
-		UIText playerReady;
+		UIText	playerName;
+		UIText	playerReady;
+		uint8_t	r;
+		uint8_t	g;
+		uint8_t	b;
+		uint8_t	a;
 	} * m_playerReadyUI;
+
+	UIText	m_pressToCont;
 };
 
 

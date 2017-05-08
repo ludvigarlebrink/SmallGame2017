@@ -11,7 +11,7 @@ class Weapon
 public:
 	//::.. CONSTRUCTORS/DESTRUCTOR ..:://
 	Weapon();
-	Weapon(Prefab * gun, Prefab * projectile);
+	Weapon(Prefab * gun, Prefab * projectile, int controllerID);
 	Weapon(Prefab * gun);
 	virtual ~Weapon();
 
@@ -49,6 +49,7 @@ private:
 	int	  m_projectileCounter;
 	int   m_clearRate;
 	bool m_isBullet;
+	int  m_controllerID;
 	unsigned int m_counter;
 
 };

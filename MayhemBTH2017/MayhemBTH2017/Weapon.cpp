@@ -6,7 +6,7 @@ Weapon::Weapon()
 {
 }
 
-Weapon::Weapon(Prefab * gun, Prefab * projectile)
+Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 {
 	m_isBullet = false;
 	m_prefabGun = gun;
@@ -18,9 +18,8 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile)
 	m_counter = 0;
 
 	m_projectileCounter = 0;
-	m_particleTimer = 0;
 
-
+	m_controllerID = controllerID;
 }
 
 Weapon::Weapon(Prefab * gun)
@@ -53,12 +52,9 @@ void Weapon::SetProjectileType(float restitution, float friction, float damping,
 
 void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 {
-
-
 	//m_prefabGun->SetPosition(playerPos);
 	m_time += TimeManager::Get()->GetDeltaTime();
 	m_clearTime += TimeManager::Get()->GetDeltaTime();
-	m_particleTimer += TimeManager::Get()->GetDeltaTime();
 
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
@@ -74,7 +70,7 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 		m_projectiles[i]->Update();
 	}
 
-
+	//DeleteProjectile();
 
 
 }
@@ -95,9 +91,7 @@ void Weapon::DeleteProjectile()
 
 void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf)
 {
-	std::cout << "init particles" << std::endl;
-	ParticleSystem particles(shadername, glm::vec3(20, 20, 0), col, 200, 50.0f);
-	m_particles = particles;
+	ParticleSystem particles(shadername, glm::vec3(20, 20, 0), col, 2.0f, 500.0f);
 
 }
 
@@ -109,21 +103,16 @@ Projectile * Weapon::ReuseLast()
 
 void Weapon::UpdateParticles() {
 
-
+	m_particles.UpdateParticles();
 
 }
 
 void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID)
 {
-	std::cout << m_particleTimer << std::endl;
-
-	//if (m_particleTimer > 2) {
-	//	std::cout << "PANG<" << std::endl;
-	//	m_particleTimer = 0;
-	//	ParticleSystem particleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(40, 20, 0), glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50.0f);
-	//	m_particles = particleSystem;
-	//}
-
+	if (m_clearTime ==0) {
+		std::cout << "PANG<" << std::endl;
+	}
+	
 	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
 
 	if (abs(force.x) > 0.3f || abs(force.y) > 0.3f)
@@ -156,16 +145,16 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 			projectile->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
-				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile);
-
+				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile, m_controllerID);
+		
 		}
 
 		Camera camera;
 		Transform temptransform;
 		temptransform.SetPosition(projectile->GetBox().getBody()->GetPosition().x, projectile->GetBox().getBody()->GetPosition().y, 0);
+		m_particles.Update(temptransform, camera);
 
-
-		projectile->AddForce(glm::vec3(m_previousForce, 0.0f), controllerID);
+		projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
 		m_projectiles.push_back(projectile);
 
 
@@ -187,12 +176,12 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 			m_projectiles[m_projectileCounter]->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
-				m_restitution, m_friction, m_damping, m_density, m_fireRate, false, m_prefabProjectile);
+				m_restitution, m_friction, m_damping, m_density, m_fireRate, false, m_prefabProjectile, controllerID);
 			//m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
 			m_projectiles[m_projectileCounter]->AddForce(glm::vec3(m_previousForce, 0.0f), controllerID);
 
 			m_projectileCounter++;
-
+			
 		}
 
 	}
@@ -216,22 +205,16 @@ bool Weapon::FireRate(float rate)
 }
 void Weapon::Render(Camera camera)
 {
-	std::cout << "weapon render" << std::endl;
+	Transform pTransform;
+
+	for (int i = 0; i < m_projectiles.size(); i++)
+	{
+		pTransform.SetPosition(m_projectiles[i]->GetBox().getBody()->GetPosition().x / 2, m_projectiles[i]->GetBox().getBody()->GetPosition().y / 2, 0);
+		m_projectiles[i]->Update();
+		m_projectiles[i]->Render(camera);
+
+
+	}
 	
-
-	Transform transform;
-	camera.SetPosition(glm::vec3(20, 40, -50));
-	m_particles.Update(transform, camera);
-//	m_particles.UpdateParticles();
-	m_particles.RenderTransformed();
-
-	//for (int i = 0; i < m_projectiles.size(); i++)
-	//{
-	//	pTransform.SetPosition(m_projectiles[i]->GetBox().getBody()->GetPosition().x / 2, m_projectiles[i]->GetBox().getBody()->GetPosition().y / 2, 0);
-	//	m_projectiles[i]->Update();
-	//	m_projectiles[i]->Render(camera);
-
-	//}
-
 
 }

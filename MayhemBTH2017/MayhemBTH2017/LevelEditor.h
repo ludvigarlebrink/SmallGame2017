@@ -64,6 +64,7 @@ private:
 
 	UIText						m_menuText[3];
 	UIImage						m_fill;
+	uint32_t					m_textPos = 0;
 
 	Camera						m_camera;
 	Timer						m_timer;

@@ -42,10 +42,11 @@ private:
 
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
-		PLAYER = 0x0002,
-		PROJECTILE = 0x0004,
+		PLAYER1 = 0x0002,
+		PROJECTILE1 = 0x0004,
 		POWERUP = 0x0008,
-		ENEMY_AIRCRAFT = 0x0010,
+		PLAYER2 = 0x0016,
+		PROJECTILE2 = 0x0032,
 	};
 
 };

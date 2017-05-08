@@ -6,7 +6,8 @@ GameSystem::GameSystem()
 {
 	m_input = InputManager::Get();
 	m_numPlayers = 0;
-	m_currState = PLAYER_READY;
+	m_currState = INIT_PLAYER_READY;
+	m_playerReadyUI = nullptr;
 
 	for (uint32_t i = 0; i < MAX_PLAYERS; i++)
 	{
@@ -38,7 +39,7 @@ void GameSystem::Update()
 		break;
 
 	case INIT_PLAYER_READY:
-		PlayerReady();
+		InitPlayerReady();
 		break;
 
 	case PLAYER_READY:
@@ -79,50 +80,91 @@ void GameSystem::GameSetup()
 void GameSystem::InitPlayerReady()
 {
 	VideoManager * vm = VideoManager::Get();
-
-	m_playerReadyUI[0].playerName.SetPosition((-0.3f * vm->GetWidth()) / 2, -20);
-	m_playerReadyUI[1].playerName.SetPosition((-0.1f * vm->GetWidth()) / 2, -20);
-	m_playerReadyUI[2].playerName.SetPosition((0.1f * vm->GetWidth()) / 2, -20);
-	m_playerReadyUI[3].playerName.SetPosition((0.3f * vm->GetWidth()) / 2, -20);
-
-	m_playerReadyUI[0].playerReady.SetPosition((-0.3f * vm->GetWidth()) / 2, 20);
-	m_playerReadyUI[1].playerReady.SetPosition((-0.1f * vm->GetWidth()) / 2, 20);
-	m_playerReadyUI[2].playerReady.SetPosition((0.1f * vm->GetWidth()) / 2, 20);
-	m_playerReadyUI[3].playerReady.SetPosition((0.3f * vm->GetWidth()) / 2, 20);
+	m_playerReadyUI = new PlayerReadyUI[4];
 
 
-	m_currState = INIT_PLAY;
+	// FIX POS!
+	m_playerReadyUI[0].playerName.SetPosition((-0.75f * vm->GetWidth()) / 2, 20);
+	m_playerReadyUI[1].playerName.SetPosition((-0.25f * vm->GetWidth()) / 2, 20);
+	m_playerReadyUI[2].playerName.SetPosition((0.25f * vm->GetWidth()) / 2, 20);
+	m_playerReadyUI[3].playerName.SetPosition((0.75f * vm->GetWidth()) / 2, 20);
+
+	m_playerReadyUI[0].playerName.SetText("PLAYER 1");
+	m_playerReadyUI[1].playerName.SetText("PLAYER 2");
+	m_playerReadyUI[2].playerName.SetText("PLAYER 3");
+	m_playerReadyUI[3].playerName.SetText("PLAYER 4");
+
+	m_playerReadyUI[0].playerReady.SetPosition((-0.75f * vm->GetWidth()) / 2, -20);
+	m_playerReadyUI[1].playerReady.SetPosition((-0.25f * vm->GetWidth()) / 2, -20);
+	m_playerReadyUI[2].playerReady.SetPosition((0.25f * vm->GetWidth()) / 2, -20);
+	m_playerReadyUI[3].playerReady.SetPosition((0.75f * vm->GetWidth()) / 2, -20);
+
+	m_playerReadyUI[0].r = 248;
+	m_playerReadyUI[0].g = 78;
+	m_playerReadyUI[0].b = 78;
+	m_playerReadyUI[0].a = 255;
+
+	m_playerReadyUI[1].r = 78;
+	m_playerReadyUI[1].g = 248;
+	m_playerReadyUI[1].b = 78;
+	m_playerReadyUI[1].a = 255;
+
+	m_playerReadyUI[2].r = 248;
+	m_playerReadyUI[2].g = 248;
+	m_playerReadyUI[2].b = 78;
+	m_playerReadyUI[2].a = 255;
+
+	m_playerReadyUI[3].r = 78;
+	m_playerReadyUI[3].g = 78;
+	m_playerReadyUI[3].b = 248;
+	m_playerReadyUI[3].a = 255;
+
+
+	for (uint32_t i = 0; i < 4; i++)
+	{
+		m_playerReadyUI[i].playerReady.SetText("NOT READY");
+	}
+
+	for (uint32_t i = 0; i < 4; i++)
+	{
+		m_playerReadyUI[i].playerName.SetColor(170, 170, 170, 255);
+		m_playerReadyUI[i].playerReady.SetColor(170, 170, 170, 255);
+	}
+
+	m_pressToCont.SetPosition(0, -150);
+	m_pressToCont.SetColor(255, 255, 255, 255);
+	m_pressToCont.SetText("PRESS S TO CONTINUE!");
+
+	m_currState = PLAYER_READY;
 }
 
 
 void GameSystem::PlayerReady()
 {
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A), 0)
+	for (uint32_t i = 0; i < 4; i++)
 	{
-		m_playerReady[0] = !m_playerReady[0];
-		if (m_playerReady)
+		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A, i))
 		{
+			m_playerReady[i] = !m_playerReady[i];
+			
+			if (m_playerReady[i])
+			{
+				m_playerReadyUI[i].playerReady.SetColor(m_playerReadyUI[i].r, 
+					m_playerReadyUI[i].g, m_playerReadyUI[i].b, 255);
+				m_playerReadyUI[i].playerName.SetColor(m_playerReadyUI[i].r,
+					m_playerReadyUI[i].g, m_playerReadyUI[i].b, 255);
 
+
+				m_playerReadyUI[i].playerReady.SetText("READY!");
+			}
+			else
+			{
+				m_playerReadyUI[i].playerName.SetColor(170, 170, 170, 255);
+				m_playerReadyUI[i].playerReady.SetColor(170, 170, 170, 255);
+
+				m_playerReadyUI[i].playerReady.SetText("NOT READY!");
+			}
 		}
-		else
-		{
-
-		}
-	}
-
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A), 1)
-	{
-		m_playerReady[1] = !m_playerReady[1];
-	}
-
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A), 2)
-	{
-		m_playerReady[2] = !m_playerReady[2];
-	}
-
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A), 3)
-	{
-		m_playerReady[3] = !m_playerReady[3];
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
@@ -142,6 +184,14 @@ void GameSystem::PlayerReady()
 				return;
 			}
 		}
+	}
+
+	for (uint32_t i = 0; i < 4; i++)
+	{
+		m_playerReadyUI[i].playerReady.Render();
+		m_playerReadyUI[i].playerName.Render();
+		m_pressToCont.Render();
+
 	}
 }
 
@@ -166,25 +216,30 @@ void GameSystem::InitPlay()
 
 void GameSystem::StartPlay()
 {
-	if (m_playerReadyUI != nullptr)
-	{
-		delete[] m_playerReadyUI;
-		m_playerReadyUI = nullptr;
-	}
+//	if (m_playerReadyUI != nullptr)
+//	{
+//		delete[] m_playerReadyUI;
+//		m_playerReadyUI = nullptr;
+//	}
 
 	m_currState = PLAY;
+	m_timer.SetTimer(60.0f, true, true);
 }
 
 void GameSystem::Play()
 {
 	Camera camera;
-	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -100.0f)); //-51.2f
-
+	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 
 	m_world->Update();
 	m_world->Render(camera);
 
-	
+	m_gameUI.Update(nullptr, static_cast<int32_t>(m_timer.GetElapsed()));
+	m_gameUI.Render();
+
+
+
+	m_timer.Update();
 }
 
 void GameSystem::LoadNextLevel()

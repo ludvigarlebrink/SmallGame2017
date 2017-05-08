@@ -53,9 +53,12 @@ GameUI::~GameUI()
 
 void GameUI::Update(PlayerStats * stats, int32_t time)
 {
-	char msg[10];
-	sprintf_s(msg, 10, "%d", time);
-	m_gameTimer.SetText(msg);
+//	char msg[10];
+//	sprintf_s(msg, 10, "%d", time);
+
+	std::cout << time << std::endl;
+	std::string msg = std::to_string(time);
+	m_gameTimer.SetText(std::to_string(time).c_str());
 }
 
 

@@ -101,7 +101,7 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 				gameFloor.getBody()->SetUserData(this);
 				b2Filter filter;
 				filter.categoryBits = BOUNDARY;
-				filter.maskBits = PLAYER|PROJECTILE|POWERUP;
+				filter.maskBits = PLAYER1|PLAYER2|PROJECTILE1| PROJECTILE2 | POWERUP;
 				gameFloor.getFixture()->SetFilterData(filter);
 			
 
