@@ -136,136 +136,11 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 			++i;
 		}
 	}
-	/*uint8_t * texData = new uint8_t[level.SIZE_X * level.SIZE_Y * 4];
-	uint32_t counter = 0;
 
-	for (uint32_t i = 0; i < level.SIZE_X * level.SIZE_Y * 4; i += 4)
-	{
-		if (isOccupied[counter])
-		{
-			switch (static_cast<int>(uvCoords[counter].x))
-			{
-			case 0:
-				texData[i] = 199;
-				texData[i + 1] = 198;
-				texData[i + 2] = 198;
-				texData[i + 3] = 255;
-
-				break;
-			case 1:
-				texData[i] = 103;
-				texData[i + 1] = 165;
-				texData[i + 2] = 197;
-				texData[i + 3] = 255;
-
-				break;
-			case 2:
-				texData[i] = 58;
-				texData[i + 1] = 145;
-				texData[i + 2] = 84;
-				texData[i + 3] = 255;
-
-				break;
-			case 3:
-				texData[i] = 251;
-				texData[i + 1] = 180;
-				texData[i + 2] = 242;
-				texData[i + 3] = 255;
-
-				break;
-			case 4:
-				texData[i] = 90;
-				texData[i + 1] = 99;
-				texData[i + 2] = 109;
-				texData[i + 3] = 255;
-
-				break;
-			case 5:
-				texData[i] = 230;
-				texData[i + 1] = 197;
-				texData[i + 2] = 157;
-				texData[i + 3] = 255;
-
-				break;
-			case 6:
-				texData[i] = 176;
-				texData[i + 1] = 175;
-				texData[i + 2] = 175;
-				texData[i + 3] = 255;
-
-				break;
-			case 7:
-				texData[i] = 198;
-				texData[i + 1] = 137;
-				texData[i + 2] = 191;
-				texData[i + 3] = 255;
-
-				break;
-			case 8:
-				texData[i] = 1;
-				texData[i + 1] = 1;
-				texData[i + 2] = 1;
-				texData[i + 3] = 1;
-
-				break;
-			case 9:
-				texData[i] = 2;
-				texData[i + 1] = 2;
-				texData[i + 2] = 2;
-				texData[i + 3] = 2;
-
-				break;
-			case 10:
-				texData[i] = 3;
-				texData[i + 1] =3;
-				texData[i + 2] =3;
-				texData[i + 3] =3;
-
-				break;
-			case 11:
-				texData[i] = 4;
-				texData[i + 1] = 4;
-				texData[i + 2] = 4;
-				texData[i + 3] = 4;
-
-				break;
-			case 13:
-				texData[i] = 5;
-				texData[i + 1] = 5;
-				texData[i + 2] = 5;
-				texData[i + 3] = 5;
-
-				break;
-			case 14:
-				texData[i] = 6;
-				texData[i + 1] = 6;
-				texData[i + 2] = 6;
-				texData[i + 3] = 6;
-
-				break;
-			case 15:
-				texData[i] = 7;
-				texData[i + 1] = 7;
-				texData[i + 2] = 7;
-				texData[i + 3] = 7;
-
-				break;
-			default:
-				break;
-			}
-		}
-		else
-		{
-			texData[i] = 8;
-			texData[i + 1] = 8;
-			texData[i + 2] = 8;
-			texData[i + 3] = 8;
-		}
-		++counter;
-	}*/
 	int x = 2;
 
-	std::ofstream output(".\\Assets\\Levels\\" + level.GetName() + ".mrlevel", std::ios::binary);
+//	std::ofstream output(".\\Assets\\Levels\\" + level.GetName() + ".mrlevel", std::ios::binary);
+	std::ofstream output(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
 
 	output.write(reinterpret_cast<char*>(isOccupied), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(isSpawn), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
@@ -285,15 +160,6 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	}
 
 
-
-	/*for (size_t i = 0; i < 84 * 48 * 4; i += 4)
-	{
-		std::cout << i<<"\t "<< "R: " << (int)tempPixelBuffer[i];
-		std::cout << "\tG: " << (int)tempPixelBuffer[i + 1];
-		std::cout << "\tB: " << (int)tempPixelBuffer[i + 2];
-		std::cout << "\tA: " << (int)tempPixelBuffer[i + 3] << std::endl;
-
-	}*/
 	std::cout << "saved" << std::endl;
 	output.close();
 

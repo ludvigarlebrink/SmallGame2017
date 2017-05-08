@@ -15,6 +15,8 @@ GameSystem::GameSystem()
 	}
 
 	m_gameTime = 60.0f;
+
+	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 }
 
 
@@ -182,6 +184,7 @@ void GameSystem::PlayerReady()
 			// TEMP CHANGE TO TWO
 			if (num >= 1)
 			{
+				TransitionManager::StartFadingOut();
 				m_currState = INIT_PLAY;
 				return;
 			}
@@ -208,27 +211,30 @@ void GameSystem::InitPlay()
 		}
 	}
 
+	for (uint32_t i = 0; i < 4; i++)
+	{
+		m_playerReadyUI[i].playerReady.Render();
+		m_playerReadyUI[i].playerName.Render();
+	}
 
+	if (TransitionManager::GetIsBlack())
+	{
+		if (m_playerReadyUI != nullptr)
+		{
+			delete[] m_playerReadyUI;
+			m_playerReadyUI = nullptr;
+		}
 
-	m_world = new GamePhysics;
-	
-	m_currState = START_PLAY;
+		m_world = new GamePhysics;
+		m_currState = START_PLAY;
+
+		TransitionManager::StartFadingIn();
+		TimeManager::ResetDeltaTime();
+	}
 	
 }
 
 void GameSystem::StartPlay()
-{
-//	if (m_playerReadyUI != nullptr)
-//	{
-//		delete[] m_playerReadyUI;
-//		m_playerReadyUI = nullptr;
-//	}
-
-	m_currState = PLAY;
-	m_timer.SetTimer(60.0f, true, true);
-}
-
-void GameSystem::Play()
 {
 	Camera camera;
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
@@ -236,10 +242,19 @@ void GameSystem::Play()
 	m_world->Update();
 	m_world->Render(camera);
 
+	if (!TransitionManager::GetIsFadingIn())
+	{
+		m_currState = PLAY;
+	}
+}
+
+void GameSystem::Play()
+{
+	m_world->Update();
+	m_world->Render(m_camera);
+
 	m_gameUI.Update(nullptr, m_gameTime - m_timer.GetElapsed());
 	m_gameUI.Render();
-
-	
 
 	m_timer.Update();
 }

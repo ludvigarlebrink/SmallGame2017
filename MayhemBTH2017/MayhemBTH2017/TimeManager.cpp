@@ -3,6 +3,8 @@
 #include <iostream>
 
 TimeManager * TimeManager::m_instance = nullptr;
+float TimeManager::m_deltaTime = 0.0f;
+float TimeManager::m_lastFrame = 0.0f;
 
 
 TimeManager::TimeManager()
@@ -38,6 +40,12 @@ void TimeManager::UpdateDeltaTime()
 	
 	m_deltaTime = currentFrame - m_lastFrame;
 	m_lastFrame = currentFrame;
+}
+
+void TimeManager::ResetDeltaTime()
+{
+	m_deltaTime = 0.0f;
+	m_lastFrame = static_cast<float>(SDL_GetTicks()) / 1000.0f;
 }
 
 float TimeManager::GetDeltaTime()
