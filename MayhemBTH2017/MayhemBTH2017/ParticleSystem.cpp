@@ -144,7 +144,7 @@ void ParticleSystem::LoadParticleVBOS(Particle* p, GLuint nrOfVerts) {
 void ParticleSystem::RenderTransformed() {
 	Camera camera;
 	Transform transform;
-	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+
 
 	m_drawShader.Bind();
 	m_drawShader.Update(transform, camera);

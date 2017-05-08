@@ -77,7 +77,7 @@ void LevelEditor::AxisMove()
 	}
 
 	//Right stick
-	if (m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) < -0.3 || m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) > 0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) < -0.3 || m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X) > 0.3)
+	if (m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) < -0.3 || m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) > 0.3 || m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X) < -0.3 || m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X) > 0.3)
 	{
 		m_camera.SetPosition(glm::vec3(m_camera.GetPosition().x,
 			m_camera.GetPosition().y - m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y) * m_timeManager->GetDeltaTime() * 600,

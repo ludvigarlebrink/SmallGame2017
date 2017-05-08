@@ -102,6 +102,7 @@ void GamePhysics::Render(Camera camera) {
 
 	m_particles.UpdateParticles();
 	m_particles.RenderTransformed();
+
 	m_floorCollider.DrawCollider(camera);
 
 	for (int i = 0; i < 2; i++) {
