@@ -5,7 +5,6 @@
 #include "Level.h"
 #include "Timer.h"
 #include "TimeManager.h"
-//#include "TextureHandler.h"
 #include "LevelHandler.h"
 #include "LevelMarker.h"
 #include "StateManager.h"
@@ -13,6 +12,7 @@
 #include "LevelEditorStateMachine.h"
 #include "LevelTexture.h"
 #include "Thumbnail.h"
+#include "VideoManager.h"
 
 
 #include <glm.hpp>
@@ -44,7 +44,8 @@ private:
 	{	
 		EDIT,
 		MENU,
-		SAVE
+		SAVE,
+		LOAD
 	};
 
 	glm::vec2					m_u = glm::vec2(0,0);
@@ -59,10 +60,14 @@ private:
 	LevelHandler				m_levelHandler;
 	LevelMarker					m_levelMarker;
 	LevelEditorStateMachine		m_levelGUI;
+	VirtualKeyboard				m_virtualKeyboard;
+
+	UIText						m_menuText[3];
+	UIImage						m_fill;
+	uint32_t					m_textPos = 0;
 
 	Camera						m_camera;
 	Timer						m_timer;
-	VirtualKeyboard				m_vk;
 	VideoManager	*			m_videoManager;
 };
 

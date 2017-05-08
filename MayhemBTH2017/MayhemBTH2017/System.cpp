@@ -84,7 +84,7 @@ void System::Run()
 		case GameState::GAME:
 			bg.Render();
 			gs.Update();
-			gameUI.Render();
+//			gameUI.Render();
 			break;
 		case GameState::EXIT:
 			isRunning = false;
