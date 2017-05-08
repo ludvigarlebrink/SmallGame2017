@@ -38,6 +38,8 @@ LevelEditor::LevelEditor()
 	m_menuText[2].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
 	m_menuText[2].SetPivot(UIText::CENTER);
 	m_menuText[2].SetColor(255, 255, 255, 255);
+
+	m_menuText[m_textPos].SetSize(100);
 }
 
 LevelEditor::~LevelEditor()
@@ -207,7 +209,7 @@ void LevelEditor::ButtonInput()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		m_level.Render(m_camera);
 		m_videoManager->Swap();
-		m_levelHandler.Export(m_level);
+		m_levelHandler.Export(m_level, m_levelGUI.GetPropPlacer());
 		m_levelHandler.ExportRegister();
 
 		// FIX
