@@ -1,12 +1,12 @@
 #include "Player.h"
 
 //::..CONSTRUCTORS..:://
-Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID) {
+Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale) {
 
-	Init(world, pos, scale, controllerID);
+	Init(world, pos, scale);
 	m_contact = false;
 
-	m_dead = false;
+	m_killed = false;
 
 }
 
@@ -20,7 +20,7 @@ Player::~Player()
 {
 }
 //::..INITIALIZERS..:://
-void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
+void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 {
 
 	//MARTIN TEST SHIT REMOVE
@@ -38,8 +38,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_testCon = new PlayerController;
 
-	SetControllerID(controllerID);
-
 	//m_playerPrefab->SetScale(glm::vec3(1.3));
 
 
@@ -56,23 +54,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	GetBox().getBody()->SetLinearDamping(0.0);
 
 	b2Filter filter;
-	if (m_controllerID == 0)
-	{
-		filter.categoryBits = PLAYER1;
-	}
-	else if (m_controllerID == 1)
-	{
-		filter.categoryBits = PLAYER2;
-	}
-	else if (m_controllerID == 2)
-	{
-		filter.categoryBits = PLAYER3;
-	}
-	else if (m_controllerID == 3)
-	{
-		filter.categoryBits = PLAYER4;
-	}
-
+	filter.categoryBits = PLAYER;
 	filter.maskBits = BOUNDARY | POWERUP;
 	GetBox().getFixture()->SetFilterData(filter);
 
@@ -122,14 +104,14 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
-			m_dead = true;
+			m_killed = true;
 		}
 		if (m_collidedPowerUp)
 		{
 			m_weapon.SetProjectileType(1.0f, 1.0f, 0.0f, 0.1f, 5.0f, 100);
 		}
 	}
-	else if (m_dead)
+	else if (m_killed)
 	{
 		m_time += TimeManager::Get()->GetDeltaTime();
 		Respawn(glm::vec2(70, 70));
@@ -137,7 +119,7 @@ void Player::Update() {
 		{
 			Respawn(glm::vec2(40, 30));
 			m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
-			m_dead = false;
+			m_killed = false;
 		}
 	}
 
