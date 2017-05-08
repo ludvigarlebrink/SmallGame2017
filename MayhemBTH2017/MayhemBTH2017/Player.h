@@ -43,7 +43,6 @@ public:
 	void EndContact();
 	int GetControllerID();
 	void UpdateParticles();
-	Weapon GetWeapon();
 	
 private:
 private:

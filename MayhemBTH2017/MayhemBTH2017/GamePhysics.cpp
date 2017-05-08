@@ -38,21 +38,16 @@ void GamePhysics::EnterWorld()
 
 
 	m_player[0].Init(m_world.get(), glm::vec2(42, 24), glm::vec2(2.0, 2.0));
-	m_player[0].GetWeapon().InitParticleSystem("GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 300);
 	m_player[0].SetCategoryBits(PLAYER);
 	m_player[0].SetMaskBits(POWERUP);
 	m_player[0].SetControllerID(0);
 
 	m_player[1].Init(m_world.get(), glm::vec2(15, 24), glm::vec2(2.0, 2.0));
-	m_player[1].GetWeapon().InitParticleSystem("GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 300);
 	m_player[1].SetCategoryBits(PLAYER);
 	m_player[1].SetMaskBits(POWERUP);
 	m_player[1].SetControllerID(1);
 
 	///////////////////////////////////////////////////////////////////
-
-
-	
 
 
 	///////////////////////////////////////////////////////////////////
@@ -71,22 +66,7 @@ void GamePhysics::Update()
 	switch (m_loadWorld) {
 	case true:
 	{
-
-
 		m_world->Step(1.0f / 20.0f, 8, 4);
-
-		for (b2Contact* contact = m_world->GetContactList(); contact; contact = contact->GetNext())
-		{
-			if (contact->IsTouching())
-			{
-				Projectile* proj = static_cast<Projectile*>(contact->GetFixtureB()->GetBody()->GetUserData());
-				if (proj != NULL)
-				{
-					//std::cout << " den nuddar något som kanske nuddar något osv .." << std::endl;
-				}
-			}
-
-		}
 
 		for (int i = 0; i < 2; i++) {
 

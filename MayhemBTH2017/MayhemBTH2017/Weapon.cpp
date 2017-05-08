@@ -112,9 +112,7 @@ void Weapon::UpdateParticles() {
 
 void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos)
 {
-	
-	
-	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X), InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_Y));
+	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y));
 
 	if (abs(force.x) > 0.001f || abs(force.y) > 0.001f)
 		force = glm::normalize(force);
