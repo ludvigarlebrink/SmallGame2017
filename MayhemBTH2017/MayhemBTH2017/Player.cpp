@@ -90,7 +90,7 @@ void Player::Update() {
 	
 	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 
-	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.1f)
+	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.1f)
 	{
 		if (m_weapon.FireRate(0.15))
 		{

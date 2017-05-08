@@ -198,6 +198,12 @@ void PlayerController::Init()
 		m_button[i].isUp = false;
 	}
 
+	for (size_t i = 0; i < NUM_AXIS; i++)
+	{
+		m_axis[i].axisDeadzone = 0;
+		m_axis[i].axisRaw = 0;
+	}
+
 	m_deadzone = 0.1f;
 }
 

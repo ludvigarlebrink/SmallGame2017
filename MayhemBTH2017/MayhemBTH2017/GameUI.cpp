@@ -7,17 +7,19 @@ GameUI::GameUI()
 
 	m_numPlayers = 1;
 
-	m_gameTimer.SetText("60");
-	m_gameTimer.SetSize(46);
-	m_gameTimer.SetPosition(0, -60 + m_video->GetHeight() / 2);
-	m_gameTimer.SetColor(248, 238, 190);
+	m_gameTimer = new UIText;
+
+	m_gameTimer->SetText("60");
+	m_gameTimer->SetSize(46);
+	m_gameTimer->SetPosition(0, -60 + m_video->GetHeight() / 2);
+	m_gameTimer->SetColor(248, 238, 190);
 
 	m_playerName[0].SetText("PLAYER 1");
 	m_playerName[1].SetText("PLAYER 2");
 	m_playerName[2].SetText("PLAYER 3");
 	m_playerName[3].SetText("PLAYER 4");
 
-	m_playerScore[0].SetPosition((-0.75f * m_video->GetWidth()) / 2, 30 -(m_video->GetHeight() / 2));
+	m_playerScore[0].SetPosition((-0.75f * m_video->GetWidth()) / 2, 30 - (m_video->GetHeight() / 2));
 	m_playerScore[1].SetPosition((-0.25f * m_video->GetWidth()) / 2, 30 - (m_video->GetHeight() / 2));
 	m_playerScore[2].SetPosition((0.25f * m_video->GetWidth()) / 2, 30 - (m_video->GetHeight() / 2));
 	m_playerScore[3].SetPosition((0.75f * m_video->GetWidth()) / 2, 30 - (m_video->GetHeight() / 2));
@@ -27,7 +29,7 @@ GameUI::GameUI()
 	m_playerScore[2].SetColor(248, 248, 78, 255);
 	m_playerScore[3].SetColor(78, 78, 248, 255);
 
-	m_playerName[0].SetPosition((-0.75f * m_video->GetWidth()) / 2, (60 -(m_video->GetHeight() / 2)));
+	m_playerName[0].SetPosition((-0.75f * m_video->GetWidth()) / 2, (60 - (m_video->GetHeight() / 2)));
 	m_playerName[1].SetPosition((-0.25f * m_video->GetWidth()) / 2, (60 - (m_video->GetHeight() / 2)));
 	m_playerName[2].SetPosition((0.25f * m_video->GetWidth()) / 2, (60 - (m_video->GetHeight() / 2)));
 	m_playerName[3].SetPosition((0.75f * m_video->GetWidth()) / 2, (60 - (m_video->GetHeight() / 2)));
@@ -51,20 +53,20 @@ GameUI::~GameUI()
 }
 
 
-void GameUI::Update(PlayerStats * stats, int32_t time)
+void GameUI::Update(PlayerStats * stats, float time)
 {
-//	char msg[10];
-//	sprintf_s(msg, 10, "%d", time);
+	std::stringstream ss;
+	ss << std::fixed << std::setprecision(1) << time;
+	std::string str = ss.str();
+	m_gameTimer->SetText(str.c_str());
 
-	std::cout << time << std::endl;
-	std::string msg = std::to_string(time);
-	m_gameTimer.SetText(std::to_string(time).c_str());
+	// FIX THIS SHIIIT!
+	m_gameTimer->Render();
 }
 
 
 void GameUI::Render()
 {
-	m_gameTimer.Render();
 	for (uint32_t i = 0; i < 4; i++)
 	{
 		m_playerName[i].Render();

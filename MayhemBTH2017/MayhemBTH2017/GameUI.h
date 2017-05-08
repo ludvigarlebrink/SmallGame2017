@@ -8,6 +8,8 @@
 #include "PlayerStats.h"
 
 
+#include <iomanip>
+#include <sstream>
 #include <cstdint>
 #include <cstdlib>
 #include <cstdio>
@@ -19,7 +21,7 @@ public:
 	GameUI();
 	virtual ~GameUI();
 	
-	void Update(PlayerStats * stats, int32_t time);
+	void Update(PlayerStats * stats, float time);
 	void Render();
 
 	//::.. SET FUNCTIONS ..:://
@@ -30,7 +32,7 @@ private:
 
 	uint32_t		m_numPlayers;
 
-	UIText			m_gameTimer;
+	UIText *		m_gameTimer;
 	UIText			m_playerName[4];
 	UIText			m_playerScore[4];
 };

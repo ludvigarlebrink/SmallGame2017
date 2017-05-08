@@ -13,6 +13,8 @@ GameSystem::GameSystem()
 	{
 		m_playerReady[i] = false;
 	}
+
+	m_gameTime = 60.0f;
 }
 
 
@@ -234,10 +236,10 @@ void GameSystem::Play()
 	m_world->Update();
 	m_world->Render(camera);
 
-	m_gameUI.Update(nullptr, static_cast<int32_t>(m_timer.GetElapsed()));
+	m_gameUI.Update(nullptr, m_gameTime - m_timer.GetElapsed());
 	m_gameUI.Render();
 
-
+	
 
 	m_timer.Update();
 }

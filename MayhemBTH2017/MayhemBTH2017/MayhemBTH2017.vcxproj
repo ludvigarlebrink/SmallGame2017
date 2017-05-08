@@ -179,6 +179,7 @@
     </ClCompile>
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Thumbnail.cpp" />
+    <ClCompile Include="TransitionManager.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -269,6 +270,7 @@
     </ClInclude>
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Thumbnail.h" />
+    <ClInclude Include="TransitionManager.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
