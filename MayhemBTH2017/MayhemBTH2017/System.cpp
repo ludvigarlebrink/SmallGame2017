@@ -30,7 +30,7 @@ void System::Run()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
-	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
+	m_stateManager->SetCurrentState(GameState::GAME);
 	bool isRunning = true;
 
 	Transform transform;
@@ -47,7 +47,7 @@ void System::Run()
 	GamePhysics physics;
 
 
-	ParticleSystem particles(".\\Assets\\GLSL\\GeometryPass", glm::vec3(40, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 50.0f, 5005);
+	ParticleSystem particles(".\\Assets\\GLSL\\GeometryPass", glm::vec3(40, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 0.2f, 5005);
 	TextureHandler teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
@@ -84,6 +84,10 @@ void System::Run()
 			bg.Render();
 			physics.Update();
 			physics.Render(camera);
+	/*
+			particles.UpdateParticles();
+			particles.RenderTransformed();*/
+
 			gameUI.Render();
 			break;
 		case GameState::EXIT:

@@ -78,7 +78,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 	m_weapon = Weapon(gun, projectile);
 
 	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
-	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 2.0f, 50);
+	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
 
 
 	//Set fixture 
@@ -87,7 +87,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale)
 
 void Player::Update() {
 
-
+	
 	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 
 	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.1f)
@@ -163,7 +163,7 @@ void Player::Update() {
 	}
 	// ** //
 
-	std::cout << InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID) << std::endl;
+
 
 	m_playerPrefab->Update(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
 		m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),

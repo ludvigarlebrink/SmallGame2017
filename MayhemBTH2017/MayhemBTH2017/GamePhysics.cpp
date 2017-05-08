@@ -17,7 +17,6 @@ GamePhysics::~GamePhysics()
 void GamePhysics::EnterWorld()
 {
 
-
 	//Get deltatime
 	m_time = TimeManager::Get();
 	b2Vec2 gravity(0.0f, -8.21f);
@@ -63,7 +62,8 @@ void GamePhysics::EnterWorld()
 
 void GamePhysics::Update()
 {
-	m_particles.UpdateParticles();
+	
+	
 	
 	switch (m_loadWorld) {
 	case true:
@@ -88,7 +88,7 @@ void GamePhysics::Update()
 		for (int i = 0; i < 2; i++) {
 
 			m_player[i].Update();
-			m_player[i].UpdateParticles();
+
 		}
 
 		m_PH.Update();
@@ -117,15 +117,14 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 
 void GamePhysics::Render(Camera camera) {
 
-	//camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+	m_particles.UpdateParticles();
+	m_particles.RenderTransformed();
 	m_floorCollider.DrawCollider(camera);
 
 	for (int i = 0; i < 2; i++) {
 
 		m_player[i].Render(camera);
-	
 	}
-
 
 	m_PH.Render(camera);
 

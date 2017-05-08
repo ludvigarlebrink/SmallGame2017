@@ -92,9 +92,7 @@ void Weapon::DeleteProjectile()
 
 void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf)
 {
-	ParticleSystem particles(".\\Assets\\GLSL\\GeometryPass", glm::vec3(5, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 5.0f, 577);
-	m_particles = particles;
-
+	ParticleSystem particles(shadername, glm::vec3(20, 20, 0), col, 2.0f, 500.0f);
 
 }
 
@@ -112,7 +110,9 @@ void Weapon::UpdateParticles() {
 
 void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID)
 {
-	
+	if (m_clearTime ==0) {
+		std::cout << "PANG<" << std::endl;
+	}
 	
 	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
 
@@ -217,9 +217,5 @@ void Weapon::Render(Camera camera)
 
 	}
 	
-	m_particles.UpdateParticles();
 
-	//m_particles.Update(pTransform, camera);
-
-	m_particles.RenderTransformed();
 }

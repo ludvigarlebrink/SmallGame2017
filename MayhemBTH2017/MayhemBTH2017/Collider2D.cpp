@@ -35,10 +35,9 @@ void Collider2D::DrawCollider(Camera camera)
 	Transform transf;
 	transf.SetPosition(42.0, 24.0, -0.0);
 	m_shader.Update(transf, camera);
-	
-
 	m_megaTexture.Bind(0);
 	m_level.Render(camera);
+	
 }
 
 void Collider2D::CreateBoundingBoxes(b2World* world) {
