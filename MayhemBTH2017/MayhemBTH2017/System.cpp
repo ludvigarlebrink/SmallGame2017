@@ -70,13 +70,6 @@ void System::Run()
 		//	pre->Render(cam);
 
 
-
-		//physics.Update();
-		//physics.Render(camera);
-		//particles.UpdateParticles();
-		//particles.RenderTransformed();
-
-
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
@@ -87,7 +80,6 @@ void System::Run()
 			break;
 		case GameState::LEVEL_EDITOR:
 			l.Update();
-
 			break;
 		case GameState::GAME:
 			bg.Render();

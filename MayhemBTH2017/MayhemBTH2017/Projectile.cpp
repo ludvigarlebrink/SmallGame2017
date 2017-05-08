@@ -62,7 +62,7 @@ void Projectile::SetLife(int life)
 	m_life = life;
 }
 
-void Projectile::AddForce(glm::vec3 force)
+void Projectile::AddForce(glm::vec3 force, int controllerID)
 {
 
 	b2Vec2 boxForce;
@@ -70,30 +70,20 @@ void Projectile::AddForce(glm::vec3 force)
 	boxForce.y = force.y;
 	boxForce *= 10;
 	
-	float x = InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X);
-	float y = InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y);
+//	float x = InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID);
+//	float y = InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID);
+//	
+//
+
+	float angle = glm::degrees(atan2(force.y, force.x));
+
+
+	m_prefabPointer.SetRotation(0, 0, angle - 90);
+
 	
-	if (abs(x) > 0.1f || abs(y) > 0.1f)
-	{
-		m_xAngle = x;
-		m_yAngle = y;
-
-		if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X) > 0.001f)
-		{
-			m_yAngle = 90 + m_yAngle * 90;
-
-		}
-		else if (InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X) < 0.001f)
-		{
-			m_yAngle = -90 + m_yAngle * (-90);
-	
-		}
-
-	}
-	m_prefabPointer.SetRotation(0, 0, m_yAngle);
 
 	m_box.getBody()->ApplyForce(boxForce, m_box.getBody()->GetWorldCenter(), true);
-	m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (m_yAngle));
+	m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (angle));
 
 	tempAngle = m_yAngle;
 
