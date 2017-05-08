@@ -12,6 +12,8 @@ LevelEditor::LevelEditor()
 	m_timeManager = TimeManager::Get();
 
 	m_timer.SetTimer(0.1f, true, true);
+	Thumbnail s;
+	s.Import("s");
 }
 
 LevelEditor::~LevelEditor()
@@ -41,7 +43,6 @@ void LevelEditor::Update()
 		break;
 
 	case SAVE:
-
 		ButtonInput();
 		m_level.Render(m_camera);
 		break;
@@ -150,10 +151,11 @@ void LevelEditor::ButtonInput()
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
 	{
 		glViewport(0, 0, 84, 48);
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		m_level.Render(m_camera);
 		m_videoManager->Swap();
-		m_levelHandler.Export(m_level);
+		m_levelHandler.Export(m_level, m_levelGUI.GetPropPlacer());
 		m_levelHandler.ExportRegister();
 
 		// FIX

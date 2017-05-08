@@ -55,18 +55,26 @@ void LevelHandler::Import(Level & level, uint32_t id)
 
 
 	int nSize = m_width * m_height * 3;
-	m_dataBuffer = (char*)malloc(nSize * sizeof(char));
 	uint32_t i = 0;
-	
-	
+	uint32_t propSize = 0;
+
 	std::ifstream file(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
 
 	file.read(reinterpret_cast<char*>(isOccupied), sizeof(bool) * nrOfBlocks);
 	file.read(reinterpret_cast<char*>(isSpawn), sizeof(bool) * nrOfBlocks);
 	file.read(reinterpret_cast<char*>(uv), sizeof(glm::vec2) * nrOfBlocks);
-	file.read(reinterpret_cast<char*>(m_dataBuffer), sizeof(GLubyte) * (level.SIZE_X * level.SIZE_Y));
-	//file.read(reinterpret_cast<char*>(uv2), sizeof(uint32_t) * (nrOfBlocks * 12) * 2);
-	//file.read(reinterpret_cast<char*>(rgb), sizeof(uint32_t) * (nrOfBlocks * 6) * 3);
+	file.ignore(sizeof(unsigned char) * (level.SIZE_X * level.SIZE_Y) * 4);
+	file.read(reinterpret_cast<char*>(&propSize), sizeof(uint32_t));
+	std::cout << propSize << std::endl;
+
+	PropsImport * importedProps = new PropsImport[propSize];
+	for (uint32_t i = 0; i < propSize; i++)
+	{
+		file.read(reinterpret_cast<char*>(&importedProps[i].id), sizeof(uint32_t));
+		file.read(reinterpret_cast<char*>(&importedProps[i].pos), sizeof(glm::vec2));
+		file.read(reinterpret_cast<char*>(&importedProps[i].rot), sizeof(float));
+	
+	}
 
 
 	for (size_t x = 1; x < level.SIZE_X; x++)
@@ -84,13 +92,11 @@ void LevelHandler::Import(Level & level, uint32_t id)
 	}
 
 	file.close();
-
-
-
+	delete[] importedProps;
 }
 
 
-void LevelHandler::Export(Level & level)
+void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 {
 	LevelRegister newRegister;
 	newRegister.isLoaded = true;
@@ -101,14 +107,15 @@ void LevelHandler::Export(Level & level)
 	int nSize = m_width * m_height * 4;
 
 
-	glReadBuffer(GL_FRONT);
+	glReadBuffer(GL_BACK_LEFT);
 	glPixelStorei(GL_PACK_ALIGNMENT, 1);
 
 	unsigned char* tempPixelBuffer;
 	tempPixelBuffer = new unsigned char[84 * 48 * 4];
 	glReadPixels(0, 0, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, tempPixelBuffer);
-	PropsExport props;
-	//props = LevelEditorPropPlacer::GetPropExport();
+	
+	outProps = propPlacer.GetPropExport();
+	uint32_t propsSize = propPlacer.GetNumProps();
 
 	char* nameBuffer = new char[m_size];
 	
@@ -118,6 +125,8 @@ void LevelHandler::Export(Level & level)
 	glm::vec2 uvCoords[nrOfBlocks] = {glm::vec2(0,0)};
 	uint32_t i = 0;
 	for (size_t x = 1; x < level.SIZE_X; x++)
+
+
 	{
 		for (size_t y = 1; y < level.SIZE_Y; y++)
 		{
@@ -127,14 +136,164 @@ void LevelHandler::Export(Level & level)
 			++i;
 		}
 	}
+	/*uint8_t * texData = new uint8_t[level.SIZE_X * level.SIZE_Y * 4];
+	uint32_t counter = 0;
+
+	for (uint32_t i = 0; i < level.SIZE_X * level.SIZE_Y * 4; i += 4)
+	{
+		if (isOccupied[counter])
+		{
+			switch (static_cast<int>(uvCoords[counter].x))
+			{
+			case 0:
+				texData[i] = 199;
+				texData[i + 1] = 198;
+				texData[i + 2] = 198;
+				texData[i + 3] = 255;
+
+				break;
+			case 1:
+				texData[i] = 103;
+				texData[i + 1] = 165;
+				texData[i + 2] = 197;
+				texData[i + 3] = 255;
+
+				break;
+			case 2:
+				texData[i] = 58;
+				texData[i + 1] = 145;
+				texData[i + 2] = 84;
+				texData[i + 3] = 255;
+
+				break;
+			case 3:
+				texData[i] = 251;
+				texData[i + 1] = 180;
+				texData[i + 2] = 242;
+				texData[i + 3] = 255;
+
+				break;
+			case 4:
+				texData[i] = 90;
+				texData[i + 1] = 99;
+				texData[i + 2] = 109;
+				texData[i + 3] = 255;
+
+				break;
+			case 5:
+				texData[i] = 230;
+				texData[i + 1] = 197;
+				texData[i + 2] = 157;
+				texData[i + 3] = 255;
+
+				break;
+			case 6:
+				texData[i] = 176;
+				texData[i + 1] = 175;
+				texData[i + 2] = 175;
+				texData[i + 3] = 255;
+
+				break;
+			case 7:
+				texData[i] = 198;
+				texData[i + 1] = 137;
+				texData[i + 2] = 191;
+				texData[i + 3] = 255;
+
+				break;
+			case 8:
+				texData[i] = 1;
+				texData[i + 1] = 1;
+				texData[i + 2] = 1;
+				texData[i + 3] = 1;
+
+				break;
+			case 9:
+				texData[i] = 2;
+				texData[i + 1] = 2;
+				texData[i + 2] = 2;
+				texData[i + 3] = 2;
+
+				break;
+			case 10:
+				texData[i] = 3;
+				texData[i + 1] =3;
+				texData[i + 2] =3;
+				texData[i + 3] =3;
+
+				break;
+			case 11:
+				texData[i] = 4;
+				texData[i + 1] = 4;
+				texData[i + 2] = 4;
+				texData[i + 3] = 4;
+
+				break;
+			case 13:
+				texData[i] = 5;
+				texData[i + 1] = 5;
+				texData[i + 2] = 5;
+				texData[i + 3] = 5;
+
+				break;
+			case 14:
+				texData[i] = 6;
+				texData[i + 1] = 6;
+				texData[i + 2] = 6;
+				texData[i + 3] = 6;
+
+				break;
+			case 15:
+				texData[i] = 7;
+				texData[i + 1] = 7;
+				texData[i + 2] = 7;
+				texData[i + 3] = 7;
+
+				break;
+			default:
+				break;
+			}
+		}
+		else
+		{
+			texData[i] = 8;
+			texData[i + 1] = 8;
+			texData[i + 2] = 8;
+			texData[i + 3] = 8;
+		}
+		++counter;
+	}*/
+	int x = 2;
 
 	std::ofstream output(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
 
 	output.write(reinterpret_cast<char*>(isOccupied), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(isSpawn), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(uvCoords), sizeof(glm::vec2) * (level.SIZE_X * level.SIZE_Y));
-	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(level.SIZE_X * level.SIZE_Y) * 4);
+	// TEST:
 
+
+	//output.write(reinterpret_cast<char*>(texData), sizeof(uint8_t) * (level.SIZE_X * level.SIZE_Y) * 4);
+	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(level.SIZE_X * level.SIZE_Y) * 4);
+	output.write(reinterpret_cast<char*>(&propsSize), sizeof(uint32_t));
+	for (uint32_t i = 0; i < 2; i++)
+	{
+		output.write(reinterpret_cast<char*>(&outProps[i].id), sizeof(uint32_t));
+		output.write(reinterpret_cast<char*>(&outProps[i].pos), sizeof(glm::vec2));
+		output.write(reinterpret_cast<char*>(&outProps[i].rot), sizeof(float));
+
+	}
+
+
+
+	/*for (size_t i = 0; i < 84 * 48 * 4; i += 4)
+	{
+		std::cout << "R: " << (int)texData[i];
+		std::cout << "\tG: " << (int)texData[i + 1];
+		std::cout << "\tB: " << (int)texData[i + 2];
+		std::cout << "\tA: " << (int)texData[i + 3] << std::endl;
+	}*/
+	std::cout << "saved" << std::endl;
 	output.close();
 
 

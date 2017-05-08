@@ -9,6 +9,8 @@ LevelEditorStateMachine::LevelEditorStateMachine()
 
 	m_input = InputManager::Get();
 
+	m_propPlacer = new LevelEditorPropPlacer;
+
 	Init();
 }
 
@@ -16,6 +18,12 @@ LevelEditorStateMachine::LevelEditorStateMachine()
 LevelEditorStateMachine::~LevelEditorStateMachine()
 {
 	// Do nothing...
+}
+
+
+LevelEditorPropPlacer & LevelEditorStateMachine::GetPropPlacer()
+{
+	return *m_propPlacer;
 }
 
 int32_t LevelEditorStateMachine::GetState()
@@ -51,8 +59,8 @@ void LevelEditorStateMachine::Render(Camera& cam)
 		Input();
 		RenderIcons(GUI_PROP);
 
-		m_propPlacer.Update(m_pos);
-		m_propPlacer.Render(cam);	
+		m_propPlacer->Update(m_pos);
+		m_propPlacer->Render(cam);
 		
 		break;
 
@@ -61,6 +69,8 @@ void LevelEditorStateMachine::Render(Camera& cam)
 		RenderIcons(GUI_BACKGROUND);
 		break;
 	}
+
+	m_propPlacer->RenderProps(cam);
 }
 
 void LevelEditorStateMachine::RenderIcons(size_t gui)

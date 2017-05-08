@@ -35,7 +35,7 @@ void Level::Render(Camera camera)
 	m_mesh.Render();
 	m_mesh2.Render();
 
-	m_backgroundShader->Render(camera);
+	//m_backgroundShader->Render(camera);
 }
 
 

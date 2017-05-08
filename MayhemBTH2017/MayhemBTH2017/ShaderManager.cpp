@@ -29,6 +29,8 @@ void ShaderManager::StartUp()
 
 GLuint ShaderManager::CreateAndAttachShaders(std::string programName, std::string * shaders, uint32_t * shaderTypes, uint32_t numShaders)
 {
+
+
 	GLuint programID = glCreateProgram();
 
 	m_programs[programName] = programID;

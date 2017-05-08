@@ -31,6 +31,13 @@ void Thumbnail::Import(const char * FilePath)
 	{
 		file.read(reinterpret_cast<char*>(&textureData[i]), sizeof(unsigned char));
 	}
+	for (size_t i = 0; i < 84 * 48 * 4; i += 4)
+	{
+		std::cout << "R: " << (int)textureData[i];
+		std::cout << "\tG: " << (int)textureData[i + 1];
+		std::cout << "\tB: " << (int)textureData[i + 2];
+		std::cout << "\tA: " << (int)textureData[i + 3] << std::endl;
+	}
 
 
 	glGenTextures(1, &m_texture);

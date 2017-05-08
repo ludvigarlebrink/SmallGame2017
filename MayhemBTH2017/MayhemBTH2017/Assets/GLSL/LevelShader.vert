@@ -22,8 +22,13 @@ void main()
 		mat4 MVP = PV * M;
 		gl_Position = MVP * vec4(Position, 1.0f);
 	}
+	else
+	{
+		gl_Position = P * V* M * vec4(0, 0, -1000, 1.0f);
+	}
 	FragPos = vec3(M * vec4(Position, 1.0));
 	Normal1 = Normal;
 	TexCoords1 = TexCoords;
+
 }
 
