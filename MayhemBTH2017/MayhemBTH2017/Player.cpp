@@ -15,7 +15,6 @@ Player::Player()
 
 }
 
-
 Player::~Player()
 {
 }
@@ -42,7 +41,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	//m_playerPrefab->SetScale(glm::vec3(1.3));
 
-
 	//SET BOUNDING BOX SIZE 
 	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_playerPrefab->GetPlayerPrefab()->GetScale().x + 1, m_playerPrefab->GetPlayerPrefab()->GetScale().y*m_playerPrefab->GetPlayerPrefab()->GetMesh()->GetHeight()));
 	//sprite for size of bouding box
@@ -50,7 +48,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
-	GetBox().getFixture()->SetDensity(0.1);
+	GetBox().getFixture()->SetDensity(1.0);
 	GetBox().getFixture()->SetFriction(1.0);
 	GetBox().getFixture()->SetRestitution(0.0);
 	GetBox().getBody()->SetLinearDamping(0.0);
