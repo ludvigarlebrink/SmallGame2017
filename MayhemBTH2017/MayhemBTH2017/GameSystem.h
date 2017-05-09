@@ -10,6 +10,7 @@
 #include "UIText.h"
 #include "UIImage.h"
 #include "TransitionManager.h"
+#include "GameSettings.h"
 
 #include "ParticleSystem.h"
 
@@ -68,7 +69,6 @@ private:
 	uint32_t	m_gameMode;
 	uint32_t	m_currState;
 	uint32_t	m_numPlayers;
-	float	m_gameTime;
 	Timer		m_timer;
 
 	std::vector<Level*>		m_levelQueue;
@@ -91,6 +91,7 @@ private:
 	UIText	m_pressToCont;
 
 	Camera m_camera;
+	GameSettings * m_gameSettings;
 };
 
 

@@ -36,13 +36,14 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 		filter.maskBits = PLAYER1 | BOUNDARY;
 	}
 
-	m_box.InitDynamic(world, pos, scale);
+	m_box.InitDynamic(world, pos, glm::vec2(m_prefabPointer.GetScale().x, m_prefabPointer.GetScale().y));
 	m_box.getBody()->SetUserData(this);
 	m_box.getFixture()->SetRestitution(restitution);
 	m_box.getFixture()->SetFriction(friction);
 	m_box.getFixture()->SetDensity(density);
 	m_box.getBody()->SetLinearDamping(damping);
 	m_box.getFixture()->SetFilterData(filter);
+	m_box.getBody()->ResetMassData();
 }
 
 void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
@@ -134,6 +135,12 @@ bool Projectile::IsActive()
 
 void Projectile::Update()
 {
+	if (m_contact)
+	{
+		GetBox().getBody()->SetActive(false);
+		SetActive(false);
+	}
+
 	if (m_active)
 	{
 		m_rotationUpdate += 10;

@@ -61,8 +61,6 @@ private:
 
 	int m_nrOfPlayers;
 
-
-
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
 		PLAYER1 = 0x0002,

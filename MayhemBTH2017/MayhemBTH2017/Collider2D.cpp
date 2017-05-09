@@ -95,7 +95,8 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 
 				gameFloor.InitStatic(world, glm::vec2((tempX-0.5), (tempY-0.5)), glm::vec2(offset+0.84, scale+0.42));
 				gameFloor.getFixture()->SetRestitution(0.0); //floor bounciness
-				gameFloor.getFixture()->SetFriction(1.0); //floor friction
+				gameFloor.getFixture()->SetFriction(0.01); //floor friction
+				gameFloor.getFixture()->SetRestitution(0.0);
 				gameFloor.getBody()->ResetMassData();
 			
 				gameFloor.getBody()->SetUserData(this);

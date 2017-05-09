@@ -57,12 +57,12 @@ void AntiAliasing::Init()
 	glGenFramebuffers(1, &m_framebuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
 
-	m_textureColorBufferMultiSampled = GenerateMultiSampleTexture(4);
+	m_textureColorBufferMultiSampled = GenerateMultiSampleTexture(8);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, m_textureColorBufferMultiSampled, 0);
 	
 	glGenRenderbuffers(1, &m_rbo);
 	glBindRenderbuffer(GL_RENDERBUFFER, m_rbo);
-	glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, 1280, 720);
+	glRenderbufferStorageMultisample(GL_RENDERBUFFER, 8, GL_DEPTH24_STENCIL8, 1280, 720);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_rbo);
 
@@ -95,7 +95,7 @@ void AntiAliasing::Init()
 void AntiAliasing::Update()
 {
 
-	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer);
+//	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer);
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_intermediateFBO);
 	glBlitFramebuffer(0, 0, 1280, 720, 0, 0, 1280, 720, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
@@ -103,6 +103,7 @@ void AntiAliasing::Update()
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glDisable(GL_DEPTH_TEST);
+
 }
 
 void AntiAliasing::Bind()
@@ -114,7 +115,7 @@ void AntiAliasing::Bind()
 void AntiAliasing::Reset()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 }

@@ -5,6 +5,7 @@
 
 #include "Transform.h"
 #include "Camera.h"
+#include "PostProcessing.h"
 
 
 #include <glew.h>
@@ -31,6 +32,7 @@ public:
 	void Release();
 	void Bind();
 	virtual void Update(Transform& transform, Camera& camera);
+	void UpdateBool();
 
 
 	//::.. PROTECTED FUNCTIONS ..:://
@@ -65,6 +67,10 @@ private:
 	GLuint m_programID;
 	GLuint m_shader[NR_SHADERS];
 	GLuint m_uniforms[NR_UNIFORMS];
+
+private:
+	bool m_shake = false;
+	PostProcessing * m_effects;
 };
 
 #endif

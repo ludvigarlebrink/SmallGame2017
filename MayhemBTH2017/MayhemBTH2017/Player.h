@@ -44,6 +44,7 @@ public:
 	void EndContact();
 	int GetControllerID();
 	void UpdateParticles();
+	Prefab * GetHealthBar();
 	
 private:
 private:
