@@ -252,13 +252,13 @@
     </ClCompile>
     <ClCompile Include="GameUI.cpp" />
     <ClCompile Include="GameSystem.cpp" />
-    <ClCompile Include="PlayerStats.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="PowerUpHandler.cpp" />
     <ClCompile Include="Collidable.cpp" />
     <ClCompile Include="LevelTexture.cpp" />
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="TransitionManager.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -441,7 +441,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="GameSystem.h" />
-    <ClInclude Include="PlayerStats.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="PowerUpHandler.h" />
     <ClInclude Include="Collidable.h" />
@@ -452,6 +451,7 @@
     <ClInclude Include="Resource.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

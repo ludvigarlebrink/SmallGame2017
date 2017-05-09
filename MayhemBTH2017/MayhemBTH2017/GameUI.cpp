@@ -53,7 +53,7 @@ GameUI::~GameUI()
 }
 
 
-void GameUI::Update(PlayerStats * stats, float time)
+void GameUI::Update(float time)
 {
 	std::stringstream ss;
 	ss << std::fixed << std::setprecision(1) << time;

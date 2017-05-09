@@ -278,7 +278,7 @@ void GameSystem::Play()
 	}
 	else
 	{
-		m_gameUI.Update(nullptr, static_cast<float>(m_gameSettings->GetGameLenght()) - m_timer.GetElapsed());
+		m_gameUI.Update(static_cast<float>(m_gameSettings->GetGameLenght()) - m_timer.GetElapsed());
 		m_gameUI.Render();
 	}
 }
