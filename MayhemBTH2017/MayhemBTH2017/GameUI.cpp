@@ -64,9 +64,9 @@ void GameUI::Update(float time)
 	{
 		std::stringstream ss2;
 		ss2 << std::fixed << std::setprecision(1) << ScoreManager::GetScore(i);
-		str = ss2.str();
+		std::string str2 = ss2.str();
 
-		m_playerScore[i].SetText(str.c_str());
+		m_playerScore[i].SetText(str2.c_str());
 
 		m_playerScore[i].Render();
 	}
