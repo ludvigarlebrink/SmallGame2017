@@ -260,13 +260,13 @@
     <ClCompile Include="TransitionManager.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="MeshQuad.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Resources</Filter>
     </ClCompile>
     <ClCompile Include="QuadShader.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Resources</Filter>
     </ClCompile>
     <ClCompile Include="PostProcessing.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -462,13 +462,13 @@
     </ClInclude>
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="MeshQuad.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Resources</Filter>
     </ClInclude>
     <ClInclude Include="QuadShader.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Resources</Filter>
     </ClInclude>
     <ClInclude Include="PostProcessing.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

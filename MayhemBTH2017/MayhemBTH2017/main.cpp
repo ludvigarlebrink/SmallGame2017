@@ -6,6 +6,7 @@
 #include "TimeManager.h"
 #include "TextureManager.h"
 #include "TransitionManager.h"
+#include "PostProcessing.h"
 
 #include "System.h"
 
@@ -20,6 +21,8 @@ InputManager		g_inputManager;
 TimeManager			g_timeManager;
 TextureManager		g_textureManager;
 TransitionManager	g_transitionManager;
+PostProcessing		g_postProcessing;
+
 
 
 void BigInit();
@@ -54,6 +57,7 @@ void BigInit()
 	g_timeManager.StartUp();		// 6.
 	g_textureManager.StartUp();		// 7.
 	g_transitionManager.StartUp();	// 8.
+	g_postProcessing.StartUp();		//9.
 }
 
 void Terminate()
