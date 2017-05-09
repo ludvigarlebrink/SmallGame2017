@@ -53,12 +53,24 @@ GameUI::~GameUI()
 }
 
 
-void GameUI::Update(PlayerStats * stats, float time)
+void GameUI::Update(float time)
 {
 	std::stringstream ss;
 	ss << std::fixed << std::setprecision(1) << time;
 	std::string str = ss.str();
 	m_gameTimer->SetText(str.c_str());
+
+	for (uint32_t i = 0; i < 4; i++)
+	{
+		std::stringstream ss2;
+		ss2 << std::fixed << std::setprecision(1) << ScoreManager::GetScore(i);
+		str = ss2.str();
+
+		m_playerScore[i].SetText(str.c_str());
+
+		m_playerScore[i].Render();
+	}
+
 
 	// FIX THIS SHIIIT!
 	m_gameTimer->Render();
@@ -70,7 +82,6 @@ void GameUI::Render()
 	for (uint32_t i = 0; i < 4; i++)
 	{
 		m_playerName[i].Render();
-		m_playerScore[i].Render();
 	}
 }
 

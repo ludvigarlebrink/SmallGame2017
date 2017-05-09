@@ -37,6 +37,7 @@ public:
 	bool GetFired();
 	bool GetContact();
 	bool IsActive();
+	int GetProjectileID();
 
 	//::.. OTHER FUNCTIONS ..:://
 	void Update();
@@ -66,6 +67,7 @@ private:
 	GLfloat tempAngle;
 	float m_xAngle;
 	float m_yAngle;
+	int m_controllerID;
 
 	bool m_active;
 

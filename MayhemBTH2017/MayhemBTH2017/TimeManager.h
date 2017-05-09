@@ -15,17 +15,21 @@ public:
 	void StartUp();
 	void ShutDown();
 
-	void UpdateDeltaTime();
+	static void UpdateDeltaTime();
 
-	float GetDeltaTime();
+	static void ResetDeltaTime();
+
+	//::.. GET FUNCTIONS ..:://
+	static float GetDeltaTime();
 
 	static TimeManager * Get();
 
+	
 private:
 	static TimeManager * m_instance;
 
-	float m_lastFrame;
-	float m_deltaTime;
+	static float m_lastFrame;
+	static float m_deltaTime;
 };
 
 

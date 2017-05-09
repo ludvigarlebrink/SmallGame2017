@@ -4,13 +4,30 @@ uniform sampler2D DiffuseMap;
 in vec3 TexCoords1;
 out vec4 FragColor;
 
+uniform bool Shake;
+uniform bool Chaos;
+
 
 
 
 void main()
 {
-	vec3 col = texture2D(DiffuseMap, TexCoords1.xy).xyz;
+	vec4 col;
 
-	FragColor = vec4(col, 1);
+	if(Shake)
+	{
+		col = vec4(1,1,1,1);
+	}
+	else if(Chaos)
+	{
+		col = vec4(0,0,0,0);
+	}
+	else
+	{
+		col = texture2D(DiffuseMap, TexCoords1.xy);
+	}
+
+
+	FragColor = col;
 
 }

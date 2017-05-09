@@ -9,7 +9,9 @@
 #include "GameUI.h"
 #include "UIImage.h"
 #include "GameSystem.h"
-
+#include "TransitionManager.h"
+#include "AntiAliasing.h"
+#include "MeshQuad.h"
 
 System::System()
 {
@@ -25,6 +27,9 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
+//	TransitionManager transitionManager;
+	AntiAliasing msaa;
+	MeshQuad quad;
 
 	LevelEditor l;
 	MenuSystem m;
@@ -79,12 +84,24 @@ void System::Run()
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
+		//	msaa.Reset();
 			l.Update();
+		//	msaa.Update();
+		//	quad.Render();
+		//	msaa.Bind();
+		//	quad.Draw();
 			break;
 		case GameState::GAME:
+		//	msaa.Reset();
 			bg.Render();
 			gs.Update();
-//			gameUI.Render();
+			
+
+		//	msaa.Update();
+		//	quad.Render();
+
+		//	msaa.Bind();
+		//	quad.Draw();
 			break;
 		case GameState::EXIT:
 			isRunning = false;
@@ -95,7 +112,10 @@ void System::Run()
 
 		//m_inputManager->Reset();
 		//SDL_Delay(100);
-		 //Switch between back and front buffer.
+		//Switch between back and front buffer.
+
+		TransitionManager::Update();
+
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
 		counter += m_timeManager->GetDeltaTime();

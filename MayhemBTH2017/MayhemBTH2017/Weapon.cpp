@@ -37,7 +37,7 @@ Weapon::~Weapon()
 	m_projectiles.clear();
 }
 
-void Weapon::SetProjectileType(float restitution, float friction, float damping, float density, float fireRate, int clearRate)
+void Weapon::SetProjectileType(float restitution, float friction, float damping, float density, float fireRate, int clearRate, int controllerID)
 {
 
 
@@ -47,6 +47,8 @@ void Weapon::SetProjectileType(float restitution, float friction, float damping,
 	m_density = density;
 	m_fireRate = fireRate;
 	m_clearRate = clearRate;
+	m_controllerID = controllerID;
+
 
 }
 
@@ -55,15 +57,6 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 	//m_prefabGun->SetPosition(playerPos);
 	m_time += TimeManager::Get()->GetDeltaTime();
 	m_clearTime += TimeManager::Get()->GetDeltaTime();
-
-	for (int i = 0; i < m_projectiles.size(); i++)
-	{
-		if (m_projectiles[i]->IsActive() && m_projectiles[i]->GetContact())
-		{
-			m_projectiles[i]->GetBox().getBody()->SetActive(false);
-			m_projectiles[i]->SetActive(false);
-		}
-	}
 
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
@@ -123,11 +116,11 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 	{
 		if (m_previousForce.x < -0.1f)
 		{
-			m_previousForce = glm::vec2(1.0f, 0.0f);
+			m_previousForce = glm::vec2(1.0f, -0.1f);
 		}
 		else
 		{
-			m_previousForce = glm::vec2(-1.0f, 0.0f);
+			m_previousForce = glm::vec2(-1.0f, -0.0f);
 		}
 	}
 
