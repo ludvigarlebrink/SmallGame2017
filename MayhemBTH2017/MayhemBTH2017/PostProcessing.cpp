@@ -2,6 +2,14 @@
 
 PostProcessing * PostProcessing::m_instance = nullptr;
 
+float PostProcessing::m_currentFrame = 0.0f;
+float PostProcessing::m_deltaTime = 0.0f;
+float PostProcessing::m_lastFrame = 0.0f;
+float PostProcessing::m_shakeTime = 0.0f;
+
+bool PostProcessing::m_shake = false;
+bool PostProcessing::m_chaos = false;
+
 PostProcessing::PostProcessing()
 {
 }
@@ -23,19 +31,25 @@ void PostProcessing::ShutDown()
 {
 }
 
-bool * PostProcessing::GetBools()
+bool PostProcessing::IsShaking()
 {
-	return* bools;
+	return m_shake;
 }
+
+bool PostProcessing::IsChaos()
+{
+	return m_chaos;
+}
+
 
 void PostProcessing::StartTimer()
 {
 	m_deltaTime = 0.0;
 	m_lastFrame = static_cast<float>(SDL_GetTicks()) / 1000.0f;
 
-	currentFrame = static_cast<float>(SDL_GetTicks()) / 1000.0f;
+	m_currentFrame = static_cast<float>(SDL_GetTicks()) / 1000.0f;
 
-	m_deltaTime = currentFrame - m_lastFrame;
+	m_deltaTime = m_currentFrame - m_lastFrame;
 	m_lastFrame = static_cast<float>(SDL_GetTicks()) / 1000.0f;
 }
 
@@ -51,16 +65,20 @@ void PostProcessing::Update(int state)
 	{
 	default:
 		break;
-	case 0:
+	case NOTHING:
 		m_shake = false;
 		m_chaos = false;
 		break;
-	case 1:
+	case SHAKE:
 		m_shake = true;
 		break;
-	case 2:
+	case CHAOS:
 		m_chaos = true;
-
+		break;
+	case CHAOS | SHAKE:
+		m_shake = true;
+		m_chaos = true;
+		break;
 	}
 
 }

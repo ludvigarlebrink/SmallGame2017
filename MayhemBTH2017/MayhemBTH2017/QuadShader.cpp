@@ -80,10 +80,9 @@ void QuadShader::Update(Transform& transform, Camera& camera)
 
 void QuadShader::UpdateBool()
 {
-	bool * bools = m_effects->GetBools();
 
-	glUniform1i(glGetUniformLocation(m_programID, "Shake"),bools[0]);
-	glUniform1i(glGetUniformLocation(m_programID, "Chaos"), bools[1]);
+	glUniform1i(glGetUniformLocation(m_programID, "Shake"), PostProcessing::IsShaking());
+	glUniform1i(glGetUniformLocation(m_programID, "Chaos"), PostProcessing::IsChaos());
 	
 
 
