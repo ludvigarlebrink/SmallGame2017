@@ -16,11 +16,11 @@ void main()
 
 	if(Shake)
 	{
-		col = (1,1,1,1);
+		col = vec4(1,1,1,1);
 	}
 	else if(Chaos)
 	{
-		col = (0,0,0,0);
+		col = vec4(0,0,0,0);
 	}
 	else
 	{

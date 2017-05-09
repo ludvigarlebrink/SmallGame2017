@@ -24,6 +24,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 	{
 		static_cast<Projectile*>(bodyUserData)->StartContact();
 		static_cast<Player*>(bodyUserData2)->StartContact(true, false);
+		PostProcessing::Get()->Update(1);
 
 	}
 

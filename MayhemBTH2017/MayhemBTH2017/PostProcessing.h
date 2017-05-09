@@ -29,7 +29,7 @@ private:
 	GLfloat m_shakeTime = 0.0f;
 	bool m_shake = false;
 	bool m_chaos = false;
-	bool* bools[2] = { &m_shake, &m_chaos };
+	bool m_bools[2] = { m_shake, m_chaos };
 };
 
 #endif // !__POSTPROCESSING_H__
