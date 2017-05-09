@@ -20,7 +20,6 @@ public:
 	//::..CONSTRUCTORS..:://
 	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size,  const int nrOf);
 	ParticleSystem();
-
 	//Destructor
 	virtual ~ParticleSystem();
 	void UpdateParticles();

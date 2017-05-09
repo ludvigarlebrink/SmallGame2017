@@ -145,7 +145,7 @@ void ParticleSystem::LoadParticleVBOS(Particle* p, GLuint nrOfVerts) {
 void ParticleSystem::RenderTransformed() {
 
 
-	std::cout << "ello" << std::endl;
+
 	Camera camera;
 
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));

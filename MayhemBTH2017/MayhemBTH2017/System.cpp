@@ -42,7 +42,10 @@ void System::Run()
 	m.Init();
 	float counter = 0;
 
-	ParticleTest particletester;
+	//ParticleTest particletester;
+
+
+
 //	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
 
@@ -68,7 +71,7 @@ void System::Run()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 
-	//m_inputManager->Update();
+	m_inputManager->Update();
 		////std::cout << m_inputManager->GetNrOfPlayers() << std::endl;
 
 
@@ -76,24 +79,9 @@ void System::Run()
 		////	pre->Render(cam);
 
 
-
-
+	//particletester.Render();
 	//particleme.UpdateParticles();
 	//particleme.RenderTransformed();
-
-
-//	particletester.Render();
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -116,7 +104,7 @@ void System::Run()
 		//	//gameUI.Render();
 
 
-			gs.Update();
+		gs.Update();
 
 
 

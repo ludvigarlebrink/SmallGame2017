@@ -34,7 +34,7 @@ private:
 	Prefab*					m_prefabGun;
 	Prefab*					m_prefabProjectile;
 	std::vector<Projectile*>m_projectiles;
-	ParticleSystem m_particles;
+	ParticleSystem* m_particles;
 	float m_restitution;
 	glm::vec2 m_previousForce;
 	float m_friction; 

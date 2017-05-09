@@ -94,6 +94,8 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 3);
 
+
+	//Create the particle system////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 5005);
 
 	m_life = 1.0f;
@@ -333,7 +335,6 @@ void Player::Render(Camera camera) {
 
 
 	//Renders projectiles of a weapon and its particles
-	m_weapon.Render(camera);
 
 	m_healthBar->Render(camera);
 
@@ -341,4 +342,5 @@ void Player::Render(Camera camera) {
 	//Renders the player and the gun 
 	m_playerPrefab->Render(camera);
 
+	m_weapon.Render(camera);
 }
