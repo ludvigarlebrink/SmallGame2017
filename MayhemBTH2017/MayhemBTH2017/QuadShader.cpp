@@ -9,6 +9,8 @@ QuadShader::QuadShader()
 QuadShader::QuadShader(const std::string& filename, bool hasGeomShader)
 {
 	Init(filename, hasGeomShader);
+	m_effects = PostProcessing::Get();
+
 }
 
 QuadShader:: ~QuadShader()
@@ -74,6 +76,18 @@ void QuadShader::Update(Transform& transform, Camera& camera)
 	glUniformMatrix4fv(m_uniforms[P], 1, GL_FALSE, &camera.GetProjection()[0][0]);
 
 	glUniform1i(m_uniforms[DIFFUSE_MAP], 1);
+}
+
+void QuadShader::UpdateBool()
+{
+	bool * bools = m_effects->GetBools();
+
+	glUniform1i(glGetUniformLocation(m_programID, "Shake"),bools[0]);
+	glUniform1i(glGetUniformLocation(m_programID, "Chaos"), bools[1]);
+	
+
+
+
 }
 
 void QuadShader::AddAttributeLocation()
