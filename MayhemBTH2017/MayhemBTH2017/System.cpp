@@ -9,7 +9,7 @@
 #include "GameUI.h"
 #include "UIImage.h"
 #include "GameSystem.h"
-
+#include "TransitionManager.h"
 
 System::System()
 {
@@ -25,7 +25,7 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-
+//	TransitionManager transitionManager;
 	LevelEditor l;
 	MenuSystem m;
 	glDepthFunc(GL_LESS);
@@ -96,6 +96,9 @@ void System::Run()
 		//m_inputManager->Reset();
 		//SDL_Delay(100);
 		 //Switch between back and front buffer.
+
+		TransitionManager::Update();
+
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
 		counter += m_timeManager->GetDeltaTime();

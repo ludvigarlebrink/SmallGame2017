@@ -214,9 +214,6 @@
     </ClCompile>
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="ImportTester.cpp">
-      <Filter>Engine\Resources\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="GamePhysics.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -261,6 +258,7 @@
     <ClCompile Include="Collidable.cpp" />
     <ClCompile Include="LevelTexture.cpp" />
     <ClCompile Include="GameSettings.cpp" />
+    <ClCompile Include="TransitionManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -353,7 +351,6 @@
     <ClInclude Include="ResourceExporter.h">
       <Filter>Engine\Resources\Exporters</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h" />
     <ClInclude Include="LevelHandler.h">
       <Filter>Engine\Resources\Managers</Filter>
     </ClInclude>
@@ -451,6 +448,10 @@
     <ClInclude Include="GamePhysics.h" />
     <ClInclude Include="LevelTexture.h" />
     <ClInclude Include="GameSettings.h" />
+    <ClInclude Include="TransitionManager.h" />
+    <ClInclude Include="Resource.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -466,9 +467,6 @@
       <Filter>Assets\GLSL</Filter>
     </None>
     <None Include="Assets\GLSL\DebugGreen.vert">
-      <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\GLSL\DebugShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
     <None Include="Assets\GLSL\MainShader.frag">
@@ -512,9 +510,6 @@
     </None>
     <None Include="Assets\Prefabs\T.mr">
       <Filter>Assets</Filter>
-    </None>
-    <None Include="DebugShader.frag">
-      <Filter>Assets\GLSL</Filter>
     </None>
     <None Include="Assets\GLSL\LevelShader.frag">
       <Filter>Assets\GLSL</Filter>
@@ -565,6 +560,12 @@
     <None Include="Assets\GLSL\ParticleExplosion.vert" />
     <None Include="Assets\GLSL\PlayerShader.vert" />
     <None Include="Assets\GLSL\PowerUpShader.frag" />
+    <None Include="Assets\GLSL\TransitionShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\TransitionShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\TextureTestA.TGA">

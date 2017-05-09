@@ -24,7 +24,7 @@ public:
 	virtual ~TextureManager();
 
 	void StartUp();
-	void Shutdown();
+	void ShutDown();
 
 	//::.. MODIFY FUNCTIONS ..:://
 	static void AddTexture(const char * name, const char* filepath);

@@ -27,7 +27,7 @@ void TextureManager::StartUp()
 	}
 }
 
-void TextureManager::Shutdown()
+void TextureManager::ShutDown()
 {
 	std::map<std::string, Texture>::iterator it;
 
