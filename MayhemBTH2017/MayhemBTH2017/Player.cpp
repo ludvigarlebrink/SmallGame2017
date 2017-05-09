@@ -48,10 +48,11 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
-	GetBox().getFixture()->SetDensity(1.0);
-	GetBox().getFixture()->SetFriction(1.0);
+	//GetBox().getFixture()->SetDensity(0.1);
+	GetBox().getFixture()->SetFriction(10.0);
 	GetBox().getFixture()->SetRestitution(0.0);
 	GetBox().getBody()->SetLinearDamping(0.0);
+	GetBox().getBody()->ResetMassData();
 
 	b2Filter filter;
 	if (m_controllerID == 0)
@@ -90,7 +91,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//	m_weapon = Weapon(gun, projectile);
 	m_weapon = Weapon(gun, projectile, m_controllerID);
 
-	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
+	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 5.0f, 10);
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
 
 	m_life = 1.0f;
@@ -113,7 +114,7 @@ void Player::Update() {
 		if (m_weapon.FireRate(0.15))
 		{
 
-			m_weapon.Shoot(1000.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
+			m_weapon.Shoot(100.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
 		}
 	}
 
@@ -211,7 +212,7 @@ void Player::Update() {
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 250), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 240), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 
 
@@ -223,7 +224,7 @@ void Player::Update() {
 	if (m_doubleJump && m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f && m_isMidAir)
 	{
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 230), GetBox().getBody()->GetWorldCenter(), 1);
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 170), GetBox().getBody()->GetWorldCenter(), 1);
 
 	}
 

@@ -114,11 +114,11 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 	{
 		if (m_previousForce.x < -0.1f)
 		{
-			m_previousForce = glm::vec2(1.0f, 0.0f);
+			m_previousForce = glm::vec2(1.0f, -0.1f);
 		}
 		else
 		{
-			m_previousForce = glm::vec2(-1.0f, 0.0f);
+			m_previousForce = glm::vec2(-1.0f, -0.0f);
 		}
 	}
 
