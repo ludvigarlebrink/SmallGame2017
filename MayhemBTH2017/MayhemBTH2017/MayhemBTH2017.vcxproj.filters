@@ -259,6 +259,15 @@
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="TransitionManager.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
+    <ClCompile Include="MeshQuad.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadShader.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessing.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -452,6 +461,15 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="MeshQuad.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadShader.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessing.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

@@ -25,7 +25,7 @@ void PostProcessing::ShutDown()
 
 bool * PostProcessing::GetBools()
 {
-	return* bools;
+	return bools;
 }
 
 void PostProcessing::StartTimer()
