@@ -96,13 +96,13 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 
 void GamePhysics::Render(Camera camera) {
 
-	
-//	m_floorCollider.DrawCollider(camera);
-
 	for (int i = 0; i < 2; i++) {
 
 		m_player[i].Render(camera);
 	}
+	
+	m_floorCollider.DrawCollider(camera);
+	m_PH.Render(camera);
 
-	//m_PH.Render(camera);
+
 }

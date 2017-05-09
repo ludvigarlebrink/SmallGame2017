@@ -47,6 +47,7 @@ public:
 	
 private:
 private:
+	ParticleSystem m_particles;
 	InputManager * m_input;
 	b2Fixture* m_filter;
 	Box m_boundingBox;

@@ -15,6 +15,7 @@ GameSystem::GameSystem()
 	}
 
 	m_gameTime = 60.0f;
+	
 
 	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 }
@@ -213,7 +214,7 @@ void GameSystem::InitPlay()
 
 	for (uint32_t i = 0; i < 4; i++)
 	{
-		m_playerReadyUI[i].playerReady.Render();
+	m_playerReadyUI[i].playerReady.Render();
 		m_playerReadyUI[i].playerName.Render();
 	}
 
@@ -237,6 +238,7 @@ void GameSystem::InitPlay()
 void GameSystem::StartPlay()
 {
 	Camera camera;
+	
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 
 	m_world->Update();
@@ -250,6 +252,8 @@ void GameSystem::StartPlay()
 
 void GameSystem::Play()
 {
+	
+
 	m_world->Update();
 	m_world->Render(m_camera);
 
@@ -257,6 +261,7 @@ void GameSystem::Play()
 	m_gameUI.Render();
 
 	m_timer.Update();
+
 }
 
 void GameSystem::LoadNextLevel()

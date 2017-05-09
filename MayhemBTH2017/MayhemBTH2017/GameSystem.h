@@ -11,6 +11,7 @@
 #include "UIImage.h"
 #include "TransitionManager.h"
 
+#include "ParticleSystem.h"
 
 #include <cstdint>
 #include <vector>
@@ -58,7 +59,7 @@ private:
 
 private:
 	InputManager *	m_input;
-
+	ParticleSystem particles;
 	GamePhysics *	m_world;
 
 	bool		m_isPaused;

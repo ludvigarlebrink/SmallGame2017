@@ -179,7 +179,7 @@ void Player::Update() {
 
 	if (m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID))
 	{
-	
+
 		if (m_isMidAir) {
 
 			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-200)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
@@ -331,12 +331,14 @@ uint16 Player::GetMaskBits() {
 //::.. RENDER ..:://
 void Player::Render(Camera camera) {
 
-	//Renders the player and the gun 
-//	m_playerPrefab->Render(camera);
 
 	//Renders projectiles of a weapon and its particles
-	
 	m_weapon.Render(camera);
 
 	m_healthBar->Render(camera);
+
+
+	//Renders the player and the gun 
+	m_playerPrefab->Render(camera);
+
 }

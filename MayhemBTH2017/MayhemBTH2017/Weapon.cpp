@@ -20,7 +20,7 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 	m_projectileCounter = 0;
 
 	m_controllerID = controllerID;
-	m_particleDrawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0);
+	
 }
 
 Weapon::Weapon(Prefab * gun)
@@ -92,7 +92,7 @@ void Weapon::DeleteProjectile()
 
 void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf)
 {
-	ParticleSystem particles(shadername, glm::vec3(20, 20, 0), col, 84.0f, 500.0f);
+	ParticleSystem particles(shadername, glm::vec3(40, 20, 0), col, 84.0f, 500.0f);
 
 }
 
@@ -110,10 +110,10 @@ void Weapon::UpdateParticles() {
 
 void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID)
 {
-	if (m_clearTime ==0) {
+	if (m_clearTime == 0) {
 		std::cout << "PANG<" << std::endl;
 	}
-	
+
 	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
 
 	if (abs(force.x) > 0.3f || abs(force.y) > 0.3f)
@@ -147,7 +147,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 			projectile->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile, m_controllerID);
-		
+
 		}
 
 		Camera camera;
@@ -182,7 +182,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 			m_projectiles[m_projectileCounter]->AddForce(glm::vec3(m_previousForce, 0.0f), controllerID);
 
 			m_projectileCounter++;
-			
+
 		}
 
 	}
@@ -212,15 +212,12 @@ void Weapon::Render(Camera camera)
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
 		pTransform.SetPosition(m_projectiles[i]->GetBox().getBody()->GetPosition().x / 2, m_projectiles[i]->GetBox().getBody()->GetPosition().y / 2, 0);
-	//	m_projectiles[i]->Update();
-	//	m_projectiles[i]->Render(camera);
+		m_projectiles[i]->Update();
+		m_projectiles[i]->Render(camera);
 
 
 	}
+		m_particles.UpdateParticles();
+		m_particles.RenderTransformed();
 
-	m_particles.UpdateParticles();
-
-	m_particleDrawShader.Bind();
-	m_particles.Update(pTransform, camera);
-	m_particles.RenderTransformed();
 }

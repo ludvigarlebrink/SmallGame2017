@@ -259,6 +259,7 @@
     <ClCompile Include="LevelTexture.cpp" />
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="TransitionManager.cpp" />
+    <ClCompile Include="ParticleTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -452,6 +453,7 @@
     <ClInclude Include="Resource.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleTest.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
