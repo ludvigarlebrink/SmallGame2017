@@ -155,10 +155,12 @@
     <ClCompile Include="DefaultAllocator.cpp" />
     <ClCompile Include="MenuCredits.cpp" />
     <ClCompile Include="MenuVideo.cpp" />
+    <ClCompile Include="MeshQuad.cpp" />
     <ClCompile Include="MyContactListener.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerPrefab.cpp" />
+    <ClCompile Include="PostProcessing.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="PowerUpHandler.cpp" />
     <ClCompile Include="Prefab.cpp">
@@ -169,6 +171,7 @@
     </ClCompile>
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="PropHandler.cpp" />
+    <ClCompile Include="QuadShader.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sprite.cpp">
@@ -246,10 +249,12 @@
     <ClInclude Include="DefaultAllocator.h" />
     <ClInclude Include="MenuCredits.h" />
     <ClInclude Include="MenuVideo.h" />
+    <ClInclude Include="MeshQuad.h" />
     <ClInclude Include="MyContactListener.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerPrefab.h" />
+    <ClInclude Include="PostProcessing.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="PowerUpHandler.h" />
     <ClInclude Include="Prefab.h">
@@ -260,6 +265,7 @@
     </ClInclude>
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="PropHandler.h" />
+    <ClInclude Include="QuadShader.h" />
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sprite.h">
