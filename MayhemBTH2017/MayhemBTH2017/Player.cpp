@@ -123,6 +123,7 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
+
 			m_life -= 0.1f;
 
 			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
@@ -146,6 +147,7 @@ void Player::Update() {
 	}
 	if (m_dead)
 	{
+		ScoreManager::AddDeath(m_controllerID);
 		m_time += TimeManager::Get()->GetDeltaTime();
 		Respawn(glm::vec2(70, 70));
 		if (Timer(2))
