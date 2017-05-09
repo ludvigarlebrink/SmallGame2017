@@ -46,7 +46,7 @@ void VirtualKeyboard::Render()
 
 const char * VirtualKeyboard::GetString() const
 {
-	return nullptr;
+	return m_inputString.c_str();
 }
 
 
@@ -92,6 +92,7 @@ void VirtualKeyboard::Init()
 
 	SwitchLayout(ALPHABET);
 	m_currentLayout = ALPHABET;
+	m_chars[m_pos].SetColor(255.0, 0.0, 0.0, 128);
 }
 
 void VirtualKeyboard::Input()
@@ -100,36 +101,44 @@ void VirtualKeyboard::Input()
 	{
 		if (m_pos - 10 >= 0)
 		{
+			m_chars[m_pos].SetColor(255, 255, 255, 255);
 			m_chars[m_pos].SetSize(m_nSize);
 			m_pos -= 10;
 			m_chars[m_pos].SetSize(m_hSize);
+			m_chars[m_pos].SetColor(255, 0, 0, 128);
 		}
 	}
 	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
 	{
 		if (m_pos + 10 < NUM_CHARS)
 		{
+			m_chars[m_pos].SetColor(255, 255, 255, 255);
 			m_chars[m_pos].SetSize(m_nSize);
 			m_pos += 10;
 			m_chars[m_pos].SetSize(m_hSize);
+			m_chars[m_pos].SetColor(255, 0, 0, 128);
 		}
 	}
 	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_LEFT))
 	{
 		if (m_pos - 1 >= 0)
 		{
+			m_chars[m_pos].SetColor(255, 255, 255, 255);
 			m_chars[m_pos].SetSize(m_nSize);
 			--m_pos;
 			m_chars[m_pos].SetSize(m_hSize);
+			m_chars[m_pos].SetColor(255, 0, 0, 128);
 		}
 	}
 	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_RIGHT))
 	{
 		if (m_pos + 1 < NUM_CHARS)
 		{
+			m_chars[m_pos].SetColor(255, 255, 255, 255);
 			m_chars[m_pos].SetSize(m_nSize);
 			++m_pos;
 			m_chars[m_pos].SetSize(m_hSize);
+			m_chars[m_pos].SetColor(255, 0, 0, 128);
 		}
 	}
 
@@ -168,6 +177,7 @@ void VirtualKeyboard::Input()
 
 		}
 	}
+
 }
 
 

@@ -141,9 +141,6 @@
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="GameUI.cpp" />
-    <ClCompile Include="ImportTester.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="LevelEditorPropPlacer.cpp" />
     <ClCompile Include="LevelEditorStateMachine.cpp" />
     <ClCompile Include="LevelTexture.cpp" />
@@ -179,6 +176,7 @@
     </ClCompile>
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Thumbnail.cpp" />
+    <ClCompile Include="TransitionManager.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -269,6 +267,7 @@
     </ClInclude>
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Thumbnail.h" />
+    <ClInclude Include="TransitionManager.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="InputManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -318,7 +317,6 @@
     <None Include="Assets\GLSL\DebugGreen.frag" />
     <None Include="Assets\GLSL\DebugGreen.vert" />
     <None Include="Assets\GLSL\DebugShader.frag" />
-    <None Include="Assets\GLSL\DebugShader.vert" />
     <None Include="Assets\GLSL\DrawShader.frag" />
     <None Include="Assets\GLSL\DrawShader.geom" />
     <None Include="Assets\GLSL\DrawShader.vert" />
@@ -357,13 +355,14 @@
     <None Include="Assets\GLSL\ToonShader" />
     <None Include="Assets\GLSL\ToonShader.frag" />
     <None Include="Assets\GLSL\ToonShader.vert" />
+    <None Include="Assets\GLSL\TransitionShader.frag" />
+    <None Include="Assets\GLSL\TransitionShader.vert" />
     <None Include="Assets\Levels\ExportTestLOL.mrlevel" />
     <None Include="Assets\Levels\NewFormat.mrlevel" />
     <None Include="Assets\Levels\Register.mrlevelreg" />
     <None Include="Assets\Prefabs\T.mr" />
     <None Include="Assets\Textures\NewTex.mrTex" />
     <None Include="Assets\Textures\NewTexx.mrthumb" />
-    <None Include="DebugShader.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\TextureTestA.TGA" />

@@ -6,6 +6,7 @@ PlayerPrefab::PlayerPrefab()
 {
 	Init(nullptr);
 	m_weapRotY = 90;
+	m_player->SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
 }
 
 

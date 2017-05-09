@@ -77,6 +77,10 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	Prefab * gun = PrefabManager::Instantiate("Player");
 
+	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
+
+	m_healthBar->Create();
+
 	gun->SetScale(glm::vec3(2, 2, 2));
 
 	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
@@ -92,6 +96,10 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 5005);
 
+	m_life = 1.0f;
+
+	m_healthBar->SetScale(glm::vec3(m_life * 10, 10, 10));
+	m_healthBar->Rotate(glm::vec3(90.0, 0.0, 45.0));
 
 	//Set fixture 
 
@@ -99,8 +107,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 void Player::Update() {
 
-	
-	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
+	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x, m_boundingBox.getBody()->GetPosition().y, 0.0));
 
 	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
 	{
@@ -116,7 +123,16 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
-			m_dead = true;
+			m_life -= 0.1f;
+
+			m_healthBar->SetScale(glm::vec3(m_life * 100, 100, 0.0));
+
+			std::cout << m_life << std::endl;
+			if (m_life <= 0.0f)
+			{
+				m_healthBar->SetScale(glm::vec3(100, 100, 0.0));
+				m_dead = true;
+			}
 		}
 		if (m_collidedPowerUp)
 		{
@@ -133,6 +149,7 @@ void Player::Update() {
 		{
 			Respawn(glm::vec2(40, 30));
 			m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
+			m_life = 1.0;
 			m_dead = false;
 		}
 	}
@@ -216,7 +233,7 @@ void Player::Update() {
 
 	//////////////////////////////////////////////////////////
 
-
+	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 
 }
 
@@ -317,12 +334,9 @@ void Player::Render(Camera camera) {
 	//Renders the player and the gun 
 //	m_playerPrefab->Render(camera);
 
-
 	//Renders projectiles of a weapon and its particles
 	
 	m_weapon.Render(camera);
 
-
-
-
+	m_healthBar->Render(camera);
 }

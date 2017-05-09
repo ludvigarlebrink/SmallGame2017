@@ -5,20 +5,21 @@
 #include "InputManager.h"
 #include "TimeManager.h"
 #include "TextureManager.h"
+#include "TransitionManager.h"
 
 #include "System.h"
 
 
 
 // Global singleton managers.
-MemoryManager	g_memoryManager;
-ResourceManager	g_resourceManager;
-VideoManager	g_videoManager;
-StateManager	g_stateManager;
-InputManager	g_inputManager;
-TimeManager		g_timeManager;
-TextureManager	g_textureManager;;
-
+MemoryManager		g_memoryManager;
+ResourceManager		g_resourceManager;
+VideoManager		g_videoManager;
+StateManager		g_stateManager;
+InputManager		g_inputManager;
+TimeManager			g_timeManager;
+TextureManager		g_textureManager;
+TransitionManager	g_transitionManager;
 
 
 void BigInit();
@@ -52,11 +53,13 @@ void BigInit()
 	g_inputManager.StartUp();		// 5.
 	g_timeManager.StartUp();		// 6.
 	g_textureManager.StartUp();		// 7.
+	g_transitionManager.StartUp();	// 8.
 }
 
 void Terminate()
 {
-	g_textureManager.Shutdown();	// 7.
+	g_transitionManager.ShutDown();	// 8.
+	g_textureManager.ShutDown();	// 7.
 	g_timeManager.ShutDown();		// 6.
 	g_inputManager.ShutDown();		// 5.
 	g_stateManager.ShutDown();		// 4.

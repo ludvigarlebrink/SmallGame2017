@@ -38,6 +38,7 @@ private:
 	void Reset();
 	void AxisMove();
 	void ButtonInput();
+	void MenuInput();
 
 private:
 	enum State
@@ -64,11 +65,13 @@ private:
 
 	UIText						m_menuText[3];
 	UIImage						m_fill;
-	uint32_t					m_textPos = 0;
+	int32_t						m_textPos;
+	uint32_t					m_levelID;
 
 	Camera						m_camera;
 	Timer						m_timer;
 	VideoManager	*			m_videoManager;
+	
 };
 
 #endif // ! __LEVELEDITOR_H__
