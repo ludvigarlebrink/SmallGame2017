@@ -91,6 +91,8 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 10);
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
 
+	m_life = 1.0f;
+
 
 	//Set fixture 
 
@@ -98,8 +100,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 void Player::Update() {
 
-	
-	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
+
 
 	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
 	{
@@ -115,7 +116,11 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
-			m_dead = true;
+			m_life -= 0.1f;
+			if (m_life <= 0.0f)
+			{
+				m_dead = true;
+			}
 		}
 		if (m_collidedPowerUp)
 		{
@@ -132,6 +137,7 @@ void Player::Update() {
 		{
 			Respawn(glm::vec2(40, 30));
 			m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
+			m_life = 1.0;
 			m_dead = false;
 		}
 	}
@@ -215,7 +221,7 @@ void Player::Update() {
 
 	//////////////////////////////////////////////////////////
 
-
+	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 
 }
 

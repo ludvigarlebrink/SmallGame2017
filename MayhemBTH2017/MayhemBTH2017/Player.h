@@ -64,6 +64,7 @@ private:
 	int m_controllerID;
 	bool m_collidedProjectile;
 	bool m_hitByProjectile;
+	float m_life;
 
 	Weapon m_weapon;
 
