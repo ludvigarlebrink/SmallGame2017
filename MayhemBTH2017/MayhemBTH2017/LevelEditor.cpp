@@ -32,7 +32,7 @@ LevelEditor::LevelEditor()
 	m_menuText[1].SetPivot(UIText::CENTER);
 	m_menuText[1].SetColor(255, 255, 255, 255);
 
-	m_menuText[2].SetText("EXIT");
+	m_menuText[2].SetText("MAIN MENU");
 	m_menuText[2].SetSize(80);
 	m_menuText[2].SetPosition(0, -145);
 	m_menuText[2].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
@@ -42,6 +42,7 @@ LevelEditor::LevelEditor()
 	m_textPos = 0;
 	m_menuText[m_textPos].SetSize(100);
 	m_menuText[m_textPos].SetColor(255, 0, 0, 128);
+
 }
 
 LevelEditor::~LevelEditor()
@@ -61,8 +62,6 @@ void LevelEditor::Update()
 		{
 			AxisMove();
 		}
-
-
 		m_levelMarker.Render(m_camera, m_levelGUI.GetCurrentUV());
 		m_level.Render(m_camera);
 		m_levelGUI.Render(m_camera);
@@ -89,9 +88,19 @@ void LevelEditor::Update()
 
 	case LOAD:
 		Reset();
-		m_levelID++;
-		m_levelHandler.Import(m_level, m_levelID);
-		m_state = EDIT;
+		m_levelHandler.GetLevelNames(m_levelText);
+		for (int i = 0; i < m_levelHandler.GetNumLevels(); i++)
+		{
+			m_levelChoice[i].SetText(m_levelText.at(i).c_str());
+			m_levelChoice[i].SetPosition(0, -50 * i);
+			m_levelChoice[i].Render();
+
+			if (m_levelSelector == i)
+				m_levelChoice[i].SetColor(255, 255, 255, 255);
+			else
+				m_levelChoice[i].SetColor(255, 0, 0, 255);
+		}
+		MenuInput();
 		break;
 	default:
 		break;
@@ -195,6 +204,11 @@ void LevelEditor::ButtonInput()
 		m_levelMarker.SetMarkerMode(NORMAL);
 	}
 
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_B))
+	{
+		m_camera.SetPosition(glm::vec3(((SIZE_X / 2)), ((SIZE_Y / 2)), -51.2f));
+	}
+
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
 		m_state = MENU;
@@ -218,35 +232,41 @@ void LevelEditor::ButtonInput()
 
 void LevelEditor::MenuInput()
 {
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
+	switch (m_state)
 	{
-		if (m_textPos - 1 >= 0)
+	case MENU:
+		if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
 		{
-			m_menuText[m_textPos].SetColor(255, 255, 255, 255);
-			m_menuText[m_textPos].SetSize(90);
-			m_textPos--;
-			m_menuText[m_textPos].SetSize(100);
-			m_menuText[m_textPos].SetColor(255, 0, 0, 128);
+			if (m_textPos - 1 >= 0)
+			{
+				m_menuText[m_textPos].SetColor(255, 255, 255, 255);
+				m_menuText[m_textPos].SetSize(90);
+				m_textPos--;
+				m_menuText[m_textPos].SetSize(100);
+				m_menuText[m_textPos].SetColor(255, 0, 0, 128);
+			}
 		}
-	}
 
-	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
-	{
-		if (m_textPos + 1 < 3)
+		else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
 		{
-			m_menuText[m_textPos].SetColor(255, 255, 255, 255);
-			m_menuText[m_textPos].SetSize(90);
-			m_textPos++;
-			m_menuText[m_textPos].SetSize(100);
-			m_menuText[m_textPos].SetColor(255, 0, 0, 128);
+			if (m_textPos + 1 < 3)
+			{
+				m_menuText[m_textPos].SetColor(255, 255, 255, 255);
+				m_menuText[m_textPos].SetSize(90);
+				m_textPos++;
+				m_menuText[m_textPos].SetSize(100);
+				m_menuText[m_textPos].SetColor(255, 0, 0, 128);
+			}
 		}
-	}
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
-	{
-		if (m_state == MENU)
+		if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
+		{
 			m_state = EDIT;
-		else if (m_state == SAVE)
+		}
+		break;
+
+	case SAVE:
+		if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 		{
 			// Add confirmation for save
 			m_level.SetName(m_virtualKeyboard.GetString());
@@ -255,13 +275,46 @@ void LevelEditor::MenuInput()
 			m_level.Render(m_camera);
 			m_videoManager->Swap();
 			m_levelHandler.Export(m_level, m_levelGUI.GetPropPlacer());
-			m_levelHandler.ExportRegister();
+			//m_levelHandler.ExportRegister();
+			//m_levelHandler.TestExportRegister();
 			// FIX
 			glViewport(0, 0, 1280, 720);
 			// REMOVE
-			m_textPos = 0;
+
+			m_levelHandler.IncrementNumLevels();
 			m_state = MENU;
 		}
+		break;
+
+	case LOAD:
+
+		if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
+		{
+			if (m_levelSelector - 1 >= 0)
+			{
+				m_levelSelector--;
+			}
+		}
+
+		else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
+		{
+			if (m_levelSelector + 1 < m_levelHandler.GetNumLevels())
+			{
+				m_levelSelector++;
+			}
+		}
+
+		if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
+		{
+			m_state = MENU;
+		}
+
+		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
+		{
+			m_levelHandler.Import(m_level, m_levelID, m_levelChoice[m_levelSelector].GetText());
+			m_state = EDIT;
+		}
+		break;
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A) && m_state == MENU)
@@ -277,7 +330,7 @@ void LevelEditor::MenuInput()
 			break;
 
 		case 2:
-			// Exit
+			m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 			break;
 		}
 	}

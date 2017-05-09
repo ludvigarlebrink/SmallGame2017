@@ -64,9 +64,12 @@ private:
 	VirtualKeyboard				m_virtualKeyboard;
 
 	UIText						m_menuText[3];
+	std::vector<std::string>	m_levelText;
+	int32_t						m_levelSelector = 0;
 	UIImage						m_fill;
 	int32_t						m_textPos;
 	uint32_t					m_levelID;
+	UIText						m_levelChoice[10]; // Make vector?
 
 	Camera						m_camera;
 	Timer						m_timer;
