@@ -5,7 +5,7 @@
 #include "VideoManager.h"
 #include "UIImage.h"
 #include "UIText.h"
-#include "PlayerStats.h"
+#include "ScoreManager.h"
 
 
 #include <iomanip>
@@ -21,7 +21,7 @@ public:
 	GameUI();
 	virtual ~GameUI();
 	
-	void Update(PlayerStats * stats, float time);
+	void Update(float time);
 	void Render();
 
 	//::.. SET FUNCTIONS ..:://

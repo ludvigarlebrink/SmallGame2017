@@ -67,9 +67,6 @@
     <Filter Include="Engine\Resources\Managers">
       <UniqueIdentifier>{a68479e9-0ab3-4a9a-9d0b-9b2dcd747a00}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\PostProcessing">
-      <UniqueIdentifier>{5402923a-79c8-49a7-9048-d56bef4c2209}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -255,20 +252,13 @@
     </ClCompile>
     <ClCompile Include="GameUI.cpp" />
     <ClCompile Include="GameSystem.cpp" />
-    <ClCompile Include="PlayerStats.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="PowerUpHandler.cpp" />
     <ClCompile Include="Collidable.cpp" />
     <ClCompile Include="LevelTexture.cpp" />
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="TransitionManager.cpp" />
-    <ClCompile Include="MeshQuad.cpp">
-      <Filter>Game\PostProcessing</Filter>
-    </ClCompile>
-    <ClCompile Include="QuadShader.cpp">
-      <Filter>Game\PostProcessing</Filter>
-    </ClCompile>
-    <ClCompile Include="PostProcessing.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -451,7 +441,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="GameSystem.h" />
-    <ClInclude Include="PlayerStats.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="PowerUpHandler.h" />
     <ClInclude Include="Collidable.h" />
@@ -462,13 +451,7 @@
     <ClInclude Include="Resource.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="MeshQuad.h">
-      <Filter>Game\PostProcessing</Filter>
-    </ClInclude>
-    <ClInclude Include="QuadShader.h">
-      <Filter>Game\PostProcessing</Filter>
-    </ClInclude>
-    <ClInclude Include="PostProcessing.h" />
+    <ClInclude Include="ScoreManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
