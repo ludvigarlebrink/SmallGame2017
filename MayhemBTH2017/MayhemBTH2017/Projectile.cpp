@@ -134,6 +134,12 @@ bool Projectile::IsActive()
 
 void Projectile::Update()
 {
+	if (m_contact)
+	{
+		GetBox().getBody()->SetActive(false);
+		SetActive(false);
+	}
+
 	if (m_active)
 	{
 		m_rotationUpdate += 10;

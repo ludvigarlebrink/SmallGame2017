@@ -97,8 +97,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_life = 1.0f;
 
-	m_healthBar->SetScale(glm::vec3(m_life * 10, 10, 10));
-	m_healthBar->Rotate(glm::vec3(90.0, 0.0, 45.0));
+	m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
+	m_healthBar->Rotate(glm::vec3(0.0, 90.0, 0.0));
+	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
 	//Set fixture 
 
@@ -106,14 +107,15 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 void Player::Update() {
 
-	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x, m_boundingBox.getBody()->GetPosition().y, 0.0));
+	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
+	m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 
 	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
 	{
 		if (m_weapon.FireRate(0.15))
 		{
 
-			m_weapon.Shoot(5.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
+			m_weapon.Shoot(1000.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
 		}
 	}
 
@@ -124,12 +126,15 @@ void Player::Update() {
 		{
 			m_life -= 0.1f;
 
-			m_healthBar->SetScale(glm::vec3(m_life * 100, 100, 0.0));
+			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
+			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
+			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
+
 
 			std::cout << m_life << std::endl;
 			if (m_life <= 0.0f)
 			{
-				m_healthBar->SetScale(glm::vec3(100, 100, 0.0));
+				m_healthBar->SetScale(glm::vec3(1.0, 1.0, 0));
 				m_dead = true;
 			}
 		}
@@ -149,6 +154,7 @@ void Player::Update() {
 			Respawn(glm::vec2(40, 30));
 			m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
 			m_life = 1.0;
+			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
 			m_dead = false;
 		}
 	}
@@ -207,7 +213,7 @@ void Player::Update() {
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 150), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 250), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 
 
@@ -219,7 +225,7 @@ void Player::Update() {
 	if (m_doubleJump && m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f && m_isMidAir)
 	{
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 150), GetBox().getBody()->GetWorldCenter(), 1);
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 230), GetBox().getBody()->GetWorldCenter(), 1);
 
 	}
 
@@ -283,6 +289,11 @@ void Player::UpdateParticles()
 	m_weapon.UpdateParticles();
 }
 
+Prefab * Player::GetHealthBar()
+{
+	return m_healthBar;
+}
+
 
 
 //::.. SET FUNCTIONS ..:://
@@ -336,6 +347,4 @@ void Player::Render(Camera camera) {
 
 	//Renders projectiles of a weapon and its particles
 	m_weapon.Render(camera);
-
-	m_healthBar->Render(camera);
 }

@@ -58,15 +58,6 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
-		if (m_projectiles[i]->IsActive() && m_projectiles[i]->GetContact())
-		{
-			m_projectiles[i]->GetBox().getBody()->SetActive(false);
-			m_projectiles[i]->SetActive(false);
-		}
-	}
-
-	for (int i = 0; i < m_projectiles.size(); i++)
-	{
 		m_projectiles[i]->Update();
 	}
 

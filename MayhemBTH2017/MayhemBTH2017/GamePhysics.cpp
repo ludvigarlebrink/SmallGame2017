@@ -107,4 +107,11 @@ void GamePhysics::Render(Camera camera) {
 	}
 
 	m_PH.Render(camera);
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	for (int i = 0; i < 2; i++) {
+
+		m_player[i].GetHealthBar()->Render(camera);
+	}
 }
