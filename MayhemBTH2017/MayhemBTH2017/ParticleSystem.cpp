@@ -143,13 +143,16 @@ void ParticleSystem::LoadParticleVBOS(Particle* p, GLuint nrOfVerts) {
 
 void ParticleSystem::RenderTransformed() {
 	
-	Transform t;
-	Camera c;
-	c.SetPosition(glm::vec3(20, 40, -101));
-	m_drawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0);
-	m_drawShader.Bind();
-	m_drawShader.Update(t,c);
-	//glBindVertexArray(m_drawVAO);
+
+	//Transform t;
+	//Camera c;
+	//c.SetPosition(glm::vec3(20, 40, -101));
+	std::cout << "particle render" << std::endl;
+	//m_drawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0);
+	//m_drawShader.Update(t,c);
+//	m_drawShader.Bind();
+	glUseProgram(0);
+	glBindVertexArray(m_drawVAO);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glBindVertexArray(0);
 

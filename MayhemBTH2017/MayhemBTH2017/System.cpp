@@ -84,10 +84,9 @@ void System::Run()
 			break;
 		case GameState::GAME:
 
-			bg.Render();
-			particleShader.Bind();
 			gs.Update();
-//			gameUI.Render();
+			bg.Render();
+			gameUI.Render();
 			break;
 		case GameState::EXIT:
 			isRunning = false;

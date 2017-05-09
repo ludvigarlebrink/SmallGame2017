@@ -72,7 +72,6 @@ void GamePhysics::Update()
 		}
 
 		m_PH.Update();
-
 		m_world->Step(1.0f / 20.0f, 6, 2); 
 	}
 	break;

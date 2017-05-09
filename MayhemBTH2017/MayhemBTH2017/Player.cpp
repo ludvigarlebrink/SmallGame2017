@@ -89,8 +89,8 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_weapon = Weapon(gun, projectile, m_controllerID);
 
 	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.1f, 5.0f, 3);
-	//m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
-	//m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 5005);
+
+	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 5005);
 
 
 	//Set fixture 
@@ -264,7 +264,6 @@ int Player::GetControllerID()
 void Player::UpdateParticles()
 {
 
-	m_weapon.UpdateParticles();
 }
 
 

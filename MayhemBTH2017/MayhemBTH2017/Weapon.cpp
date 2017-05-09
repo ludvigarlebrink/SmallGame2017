@@ -20,6 +20,7 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 	m_projectileCounter = 0;
 
 	m_controllerID = controllerID;
+	m_particleDrawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0);
 }
 
 Weapon::Weapon(Prefab * gun)
@@ -91,7 +92,7 @@ void Weapon::DeleteProjectile()
 
 void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf)
 {
-	ParticleSystem particles(shadername, glm::vec3(20, 20, 0), col, 2.0f, 500.0f);
+	ParticleSystem particles(shadername, glm::vec3(20, 20, 0), col, 84.0f, 500.0f);
 
 }
 
@@ -206,15 +207,20 @@ bool Weapon::FireRate(float rate)
 void Weapon::Render(Camera camera)
 {
 	Transform pTransform;
+	camera.SetPosition(glm::vec3(20, 40, -50));
 
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
 		pTransform.SetPosition(m_projectiles[i]->GetBox().getBody()->GetPosition().x / 2, m_projectiles[i]->GetBox().getBody()->GetPosition().y / 2, 0);
-		m_projectiles[i]->Update();
-		m_projectiles[i]->Render(camera);
+	//	m_projectiles[i]->Update();
+	//	m_projectiles[i]->Render(camera);
 
 
 	}
-	
 
+	m_particles.UpdateParticles();
+
+	m_particleDrawShader.Bind();
+	m_particles.Update(pTransform, camera);
+	m_particles.RenderTransformed();
 }
