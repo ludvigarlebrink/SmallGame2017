@@ -10,6 +10,8 @@
 #include "UIImage.h"
 #include "GameSystem.h"
 #include "TransitionManager.h"
+#include "AntiAliasing.h"
+#include "MeshQuad.h"
 
 System::System()
 {
@@ -26,6 +28,9 @@ System::~System()
 void System::Run()
 {
 //	TransitionManager transitionManager;
+	AntiAliasing msaa;
+	MeshQuad quad;
+
 	LevelEditor l;
 	MenuSystem m;
 	glDepthFunc(GL_LESS);
@@ -79,11 +84,28 @@ void System::Run()
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
+			msaa.Reset();
 			l.Update();
+			msaa.Update();
+			quad.Render();
+			msaa.Bind();
+			quad.Draw();
 			break;
 		case GameState::GAME:
-			bg.Render();
+			msaa.Reset();
 			gs.Update();
+			
+
+			msaa.Update();
+			quad.Render();
+
+//
+//			bg.Render();
+//			
+//			glDisable(GL_BLEND);
+
+			msaa.Bind();
+			quad.Draw();
 //			gameUI.Render();
 			break;
 		case GameState::EXIT:

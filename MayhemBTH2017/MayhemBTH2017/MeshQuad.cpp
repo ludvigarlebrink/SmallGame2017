@@ -55,6 +55,7 @@ bool MeshQuad::Render()
 	
 	glUseProgram(quadShader.GetProgramID());
 	quadShader.Update(m_transform, m_camera);
+	quadShader.UpdateBool();
 	glBindVertexArray(m_vao);
 	
 
