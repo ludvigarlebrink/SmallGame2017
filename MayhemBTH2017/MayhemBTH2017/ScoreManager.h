@@ -14,6 +14,9 @@ public:
 	ScoreManager();
 	virtual ~ScoreManager();
 	
+	void StartUp();
+	void ShutDown();
+
 	static void Update();
 	static void Reset();
 
@@ -24,6 +27,7 @@ public:
 	static void AddKill(uint32_t id);
 
 	//::.. GET FUNCTIONS ..:://
+	static int32_t GetScore(uint32_t id);
 	static uint32_t GetDeaths(uint32_t id);
 	static uint32_t GetKills(uint32_t id);
 	static uint32_t GetCurrKillStreak(uint32_t id);
@@ -31,6 +35,8 @@ public:
 	static float GetKDRatio(uint32_t id);
 
 private:
+	static ScoreManager * m_instance;
+
 	struct PlayerScore
 	{
 		float		hitTimer;
@@ -41,7 +47,6 @@ private:
 		uint32_t	currKillStreak;
 		uint32_t	highestKillStreak;
 		float		kd;
-
 	};
 
 	static PlayerScore * m_playerScore;
