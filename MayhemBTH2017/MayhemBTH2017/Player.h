@@ -65,6 +65,7 @@ private:
 	bool m_collidedProjectile;
 	bool m_hitByProjectile;
 	float m_life;
+	Prefab * m_healthBar;
 
 	Weapon m_weapon;
 
