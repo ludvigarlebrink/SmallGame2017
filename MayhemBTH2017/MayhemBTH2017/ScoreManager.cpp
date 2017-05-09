@@ -30,17 +30,17 @@ void ScoreManager::Reset()
 {
 }
 
-void ScoreManager::AddScore(uint32_t score)
+void ScoreManager::AddScore(uint32_t id, uint32_t score)
 {
 	//m_score += score;
 }
 
-void ScoreManager::AddHitScore()
+void ScoreManager::AddHitScore(uint32_t id)
 {
 
 }
 
-void ScoreManager::AddDeath()
+void ScoreManager::AddDeath(uint32_t id)
 {
 	//if (m_currKillStreak > m_highestKillStreak)
 	//{
@@ -51,33 +51,33 @@ void ScoreManager::AddDeath()
 	//m_currKillStreak = 0;
 }
 
-void ScoreManager::AddKill()
+void ScoreManager::AddKill(uint32_t id)
 {
 	//++m_kills;
 	//++m_currKillStreak;
 }
 
-uint32_t ScoreManager::GetDeaths()
+uint32_t ScoreManager::GetDeaths(uint32_t id)
 {
 	return 0;
 }
 
-uint32_t ScoreManager::GetKills()
+uint32_t ScoreManager::GetKills(uint32_t id)
 {
 	return 0;
 }
 
-uint32_t ScoreManager::GetCurrKillStreak()
+uint32_t ScoreManager::GetCurrKillStreak(uint32_t id)
 {
 	return 0;
 }
 
-uint32_t ScoreManager::GetHighestKillStreak()
+uint32_t ScoreManager::GetHighestKillStreak(uint32_t id)
 {
 	return 0;
 }
 
-float ScoreManager::GetKDRatio()
+float ScoreManager::GetKDRatio(uint32_t id)
 {
 	return 0.0f;
 }

@@ -18,17 +18,17 @@ public:
 	static void Reset();
 
 	//::.. MODIFY FUNCTIONS ..:://
-	static void AddScore(uint32_t score);
-	static void AddHitScore();
-	static void AddDeath();
-	static void AddKill();
+	static void AddScore(uint32_t id, uint32_t score);
+	static void AddHitScore(uint32_t id);
+	static void AddDeath(uint32_t id);
+	static void AddKill(uint32_t id);
 
 	//::.. GET FUNCTIONS ..:://
-	static uint32_t GetDeaths();
-	static uint32_t GetKills();
-	static uint32_t GetCurrKillStreak();
-	static uint32_t GetHighestKillStreak();
-	static float GetKDRatio();
+	static uint32_t GetDeaths(uint32_t id);
+	static uint32_t GetKills(uint32_t id);
+	static uint32_t GetCurrKillStreak(uint32_t id);
+	static uint32_t GetHighestKillStreak(uint32_t id);
+	static float GetKDRatio(uint32_t id);
 
 private:
 	struct PlayerScore
