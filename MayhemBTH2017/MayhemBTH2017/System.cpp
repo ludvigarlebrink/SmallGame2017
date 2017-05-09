@@ -84,29 +84,24 @@ void System::Run()
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
-			msaa.Reset();
+		//	msaa.Reset();
 			l.Update();
-			msaa.Update();
-			quad.Render();
-			msaa.Bind();
-			quad.Draw();
+		//	msaa.Update();
+		//	quad.Render();
+		//	msaa.Bind();
+		//	quad.Draw();
 			break;
 		case GameState::GAME:
-			msaa.Reset();
+		//	msaa.Reset();
+			bg.Render();
 			gs.Update();
 			
 
-			msaa.Update();
-			quad.Render();
+		//	msaa.Update();
+		//	quad.Render();
 
-//
-//			bg.Render();
-//			
-//			glDisable(GL_BLEND);
-
-			msaa.Bind();
-			quad.Draw();
-//			gameUI.Render();
+		//	msaa.Bind();
+		//	quad.Draw();
 			break;
 		case GameState::EXIT:
 			isRunning = false;
@@ -117,7 +112,7 @@ void System::Run()
 
 		//m_inputManager->Reset();
 		//SDL_Delay(100);
-		 //Switch between back and front buffer.
+		//Switch between back and front buffer.
 
 		TransitionManager::Update();
 

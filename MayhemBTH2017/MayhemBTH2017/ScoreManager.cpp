@@ -53,6 +53,11 @@ void ScoreManager::AddDeath(uint32_t id)
 
 void ScoreManager::AddKill(uint32_t id)
 {
+	m_playerScore[id].kills += 1;
+	m_playerScore[id].currKillStreak += 1;
+	m_playerScore[id].score += 100 * m_playerScore[id].currKillStreak;
+
+
 	//++m_kills;
 	//++m_currKillStreak;
 }
