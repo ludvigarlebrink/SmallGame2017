@@ -8,6 +8,8 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 
 	m_dead = false;
 
+	m_hitByProjectile = -1;
+
 }
 
 Player::Player()
@@ -91,7 +93,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//	m_weapon = Weapon(gun, projectile);
 	m_weapon = Weapon(gun, projectile, m_controllerID);
 
-	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 5.0f, 10);
+	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 5.0f, 10, m_controllerID);
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
 
 	m_life = 1.0f;
@@ -123,6 +125,7 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
+			ScoreManager::AddHitScore(m_hitByProjectileID);
 
 			m_life -= 0.1f;
 
@@ -140,7 +143,7 @@ void Player::Update() {
 		}
 		if (m_collidedPowerUp)
 		{
-			m_weapon.SetProjectileType(1.0f, 1.0f, 0.0f, 0.1f, 5.0f, 100);
+			m_weapon.SetProjectileType(1.0f, 1.0f, 0.0f, 0.1f, 5.0f, 100, m_controllerID);
 			m_collidedPowerUp = false;
 		}
 		m_contact = false;
@@ -321,6 +324,11 @@ bool Player::Timer(float rate)
 void Player::SetControllerID(int ID)
 {
 	m_controllerID = ID;
+}
+
+void Player::Hit(int projectileID)
+{
+	m_hitByProjectileID = projectileID;
 }
 
 //::.. GET FUNCTIONS ..:://
