@@ -357,22 +357,17 @@
     <None Include="Assets\GLSL\SkeletalAnimation.frag" />
     <None Include="Assets\GLSL\SkeletalAnimation.vert" />
     <None Include="Assets\GLSL\SplitterShader.vert" />
+    <None Include="Assets\GLSL\SpriteShader.frag" />
+    <None Include="Assets\GLSL\SpriteShader.vert" />
     <None Include="Assets\GLSL\TextureTest" />
     <None Include="Assets\GLSL\ToonShader" />
     <None Include="Assets\GLSL\ToonShader.frag" />
     <None Include="Assets\GLSL\ToonShader.vert" />
     <None Include="Assets\GLSL\TransitionShader.frag" />
     <None Include="Assets\GLSL\TransitionShader.vert" />
-    <None Include="Assets\Levels\ExportTestLOL.mrlevel" />
     <None Include="Assets\Levels\NewFormat.mrlevel" />
-    <None Include="Assets\Levels\Register.mrlevelreg" />
-    <None Include="Assets\Prefabs\T.mr" />
     <None Include="Assets\Textures\NewTex.mrTex" />
     <None Include="Assets\Textures\NewTexx.mrthumb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\Textures\TextureTestA.TGA" />
-    <Image Include="Assets\Textures\TextureTestB.TGA" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
