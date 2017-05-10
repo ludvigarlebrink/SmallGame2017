@@ -5,6 +5,7 @@
 Timer::Timer()
 {
 	m_timeManager = TimeManager::Get();
+	m_hasElapsed = false;
 }
 
 
@@ -17,6 +18,7 @@ void Timer::SetTimer(float time, bool start, bool resetWhenDone)
 	m_setTime = time;
 	m_hasStarted = start;
 	m_resetWhenDone = resetWhenDone;
+	m_hasElapsed = false;
 	
 }
 
@@ -44,10 +46,16 @@ bool Timer::Update()
 		return false;
 	}
 
+	if (m_hasElapsed && !m_resetWhenDone)
+	{
+		return true;
+	}
+
 	m_currentTime += m_timeManager->GetDeltaTime();
 
 	if (m_currentTime > m_setTime)
 	{
+		m_hasElapsed = true;
 		m_currentTime = 0.0f;
 		return true;
 	}

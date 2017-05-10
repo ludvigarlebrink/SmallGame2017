@@ -243,6 +243,8 @@ void GameSystem::InitPlay()
 		TransitionManager::StartFadingIn();
 		TimeManager::ResetDeltaTime();
 	}
+
+	TransitionManager::Update();
 }
 
 void GameSystem::StartPlay()
@@ -258,15 +260,15 @@ void GameSystem::StartPlay()
 		m_currState = PLAY;
 		m_timer.SetTimer(m_gameSettings->GetGameLenght(), true, false);
 	}
+
+	TransitionManager::Update();
 }
 
 void GameSystem::Play()
 {
+	m_timer.Update();
 	m_world->Update();
 	m_world->Render(m_camera);
-
-	m_timer.Update();
-
 
 	if (TransitionManager::GetIsBlack())
 	{
@@ -281,18 +283,22 @@ void GameSystem::Play()
 		m_gameUI.Update(static_cast<float>(m_gameSettings->GetGameLenght()) - m_timer.GetElapsed());
 		m_gameUI.Render();
 	}
+
+
+	TransitionManager::Update();
 }
 
 void GameSystem::LoadNextLevel()
 {
+	TransitionManager::Update();
 
 	m_pressToCont.Render();
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
 		m_currState = START_PLAY;
+		TransitionManager::StartFadingIn();
 	}
-	
 }
 
 void GameSystem::GameOver()

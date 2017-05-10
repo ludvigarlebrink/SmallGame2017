@@ -104,6 +104,7 @@ void UIImage::Render()
 	}
 	glUniform1f(m_uniforms[POSITION_X], static_cast<float>(m_posX));
 	glUniform1f(m_uniforms[POSITION_Y], static_cast<float>(m_posY));
+	glUniform1f(m_uniforms[SCALE], 1.0f);
 
 	glUniform1i(m_uniforms[ALBEDO_MAP], 0);
 
