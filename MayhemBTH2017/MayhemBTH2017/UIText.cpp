@@ -231,11 +231,13 @@ void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, i
 	glUniform1f(m_uniforms[POSITION_X], static_cast<float>(m_posX));
 	glUniform1f(m_uniforms[POSITION_Y], static_cast<float>(m_posY));
 
-
 	glUniform1i(m_uniforms[ALBEDO_MAP], 0);
 
-
 	m_mesh->Render();
+
+	glDisable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_DEPTH_TEST);
 
 	glDeleteTextures(1, &texture);
 	TTF_CloseFont(font);

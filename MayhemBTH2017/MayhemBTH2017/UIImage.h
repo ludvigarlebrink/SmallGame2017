@@ -6,6 +6,7 @@
 #include "Mesh.h"
 #include "TextureHandler.h"
 #include "Texture.h"
+#include "ShaderManager.h"
 
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -43,6 +44,24 @@ public:
 	void SetUV(glm::vec2 uv);
 
 private:
+	//::.. HELP FUNCTIONS ..:://
+	void CreateMesh();
+	void CreateShader();
+
+private:
+	enum Uniforms
+	{
+		SCREEN_WIDTH,
+		SCREEN_HEIGHT,
+		WIDTH,
+		HEIGHT,
+		POSITION_X,
+		POSITION_Y,
+		SCALE,
+		ALBEDO_MAP,
+		NUM_UNIFORMS
+	};
+
 	VideoManager * m_videoManager;
 
 	int32_t m_windowHeight;
@@ -60,6 +79,9 @@ private:
 	Texture m_texture;
 	bool	m_showTexture;
 
+	Mesh *	m_mesh;	// Shader program.
+	GLuint	m_program;
+	GLuint	m_uniforms[NUM_UNIFORMS];
 };
 
 
