@@ -202,15 +202,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 	}
 
-	if (m_particlesCreated) {
-
-		for (int i = 0; i < m_projectiles.size(); i++) {
-			std::cout << "loop" << std::endl;
-			m_projectiles[i]->InitParticleSystem(m_shadername, m_col, m_size, m_nrof, m_life);
-		}
-		m_particlesCreated = false;
-	}
-
+	
 
 
 }

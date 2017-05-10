@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "TextureHandler.h"
 #include "Box.h"
+#include "ParticleSystem.h"
 #include "Collidable.h"
 
 
@@ -29,16 +30,17 @@ public:
 	void AddForce(glm::vec3 force, int controllerID);
 	void SetFired(bool fired);
 	void SetActive(bool active);
-
+	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf, float life);
 	//::.. GET FUNCTIONS ..:://
 	int GetLife();
 	Prefab* GetPrefab();
 	Box GetBox();
+	ParticleSystem* m_particles;
 	bool GetFired();
 	bool GetContact();
 	bool IsActive();
 	int GetProjectileID();
-
+	float m_particleTimer;
 	//::.. OTHER FUNCTIONS ..:://
 	void Update();
 	void Render(Camera camera);
@@ -55,6 +57,15 @@ private:
 	float		m_fireRate;
 	float		m_time;
 	int			m_life;
+
+	bool m_particleCreated;
+	glm::vec4 m_col;
+	std::string m_shadername;
+	float m_size;
+	float m_nrof;
+	float m_particleLife;
+	bool m_particlesCreated;
+
 	Transform m_transform;
 	GLfloat m_angle;
 	Camera	m_camera;
