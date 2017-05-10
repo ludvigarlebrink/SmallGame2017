@@ -23,7 +23,7 @@ void LevelHandler::Init()
 	//m_size = maxSizeofString.size();
 	m_size = 4;
 	char* nameBuffer = new char[m_size];
-	
+
 	std::ifstream file(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
 	//Read header!
 	//1. nr of maps
@@ -42,11 +42,9 @@ void LevelHandler::Init()
 }
 
 //::.. IMPORT/EXPORT ..:://
-void LevelHandler::Import(Level & level, uint32_t id)
+void LevelHandler::Import(Level & level, uint32_t id, std::string levelName)
 {
 
-
-	uint32_t headerSize = sizeof(uint32_t) + m_size + id;
 	const int nrOfBlocks = level.SIZE_X * level.SIZE_Y;
 
 	bool isOccupied[nrOfBlocks] = { 0 };
@@ -58,7 +56,7 @@ void LevelHandler::Import(Level & level, uint32_t id)
 	uint32_t i = 0;
 	uint32_t propSize = 0;
 
-	std::ifstream file(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
+	std::ifstream file(".\\Assets\\Levels\\" + levelName + ".mrlevel", std::ios::binary);
 
 	file.read(reinterpret_cast<char*>(isOccupied), sizeof(bool) * nrOfBlocks);
 	file.read(reinterpret_cast<char*>(isSpawn), sizeof(bool) * nrOfBlocks);
@@ -73,7 +71,7 @@ void LevelHandler::Import(Level & level, uint32_t id)
 		file.read(reinterpret_cast<char*>(&importedProps[i].id), sizeof(uint32_t));
 		file.read(reinterpret_cast<char*>(&importedProps[i].pos), sizeof(glm::vec2));
 		file.read(reinterpret_cast<char*>(&importedProps[i].rot), sizeof(float));
-	
+
 	}
 
 
@@ -83,9 +81,9 @@ void LevelHandler::Import(Level & level, uint32_t id)
 		{
 			level.SetOccupied(x, y, isOccupied[i]);
 			level.SetSpawnPoint(x, y, isSpawn[i]);
-			if(isOccupied[i])
-				level.AddBlock(x, y,uv[i]);
-	
+			if (isOccupied[i])
+				level.AddBlock(x, y, uv[i]);
+
 
 			i++;
 		}
@@ -113,16 +111,16 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	unsigned char* tempPixelBuffer;
 	tempPixelBuffer = new unsigned char[m_height * m_width * 4];
 	glReadPixels(0, 0, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, tempPixelBuffer);
-	
+
 	outProps = propPlacer.GetPropExport();
 	uint32_t propsSize = propPlacer.GetNumProps();
 
 	char* nameBuffer = new char[m_size];
-	
+
 	const int nrOfBlocks = level.SIZE_X * level.SIZE_Y;
 	bool isOccupied[nrOfBlocks] = { 0 };
 	bool isSpawn[nrOfBlocks] = { 0 };
-	glm::vec2 uvCoords[nrOfBlocks] = {glm::vec2(0,0)};
+	glm::vec2 uvCoords[nrOfBlocks] = { glm::vec2(0,0) };
 	uint32_t i = 0;
 	for (size_t x = 1; x < level.SIZE_X; x++)
 
@@ -139,8 +137,7 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 
 	int x = 2;
 
-//	std::ofstream output(".\\Assets\\Levels\\" + level.GetName() + ".mrlevel", std::ios::binary);
-	std::ofstream output(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
+	std::ofstream output(".\\Assets\\Levels\\" + level.GetName() + ".mrlevel", std::ios::binary);
 
 	output.write(reinterpret_cast<char*>(isOccupied), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(isSpawn), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
@@ -167,7 +164,7 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 }
 
 
-bool LevelHandler::ImportRegister()
+bool LevelHandler::ImportRegister(std::string & textField)
 {
 	// Try to open the file.
 	std::ifstream file(".\\Assets\\Levels\\Register.mrlevelreg", std::ios::binary);
@@ -187,31 +184,39 @@ bool LevelHandler::ImportRegister()
 	{
 		return false;
 	}
-	
+
 	// Clear the current register.
-	m_register.clear();
+	//m_register.clear();
 
 	// Check number of levels;
-	uint32_t numLevels = 0;
+	uint32_t numLevels = static_cast<uint32_t>(m_register.size());
 	file.read(reinterpret_cast<char*>(&numLevels), sizeof(uint32_t));
 
 	// Resize to fit the levels.
 	m_register.resize(numLevels);
 
+	std::cout << "import numLevels: " << numLevels << std::endl;
 	// Loop through the level cache and read from file.
 	for (uint32_t i = 0; i < numLevels; i++)
 	{
 		// Size of the file string.
-		uint32_t stringSize = static_cast<uint32_t>(m_register[i].name.size());
+		uint32_t stringSize = static_cast<uint32_t>(m_register[i].name.length());
 		file.read(reinterpret_cast<char*>(&stringSize), sizeof(uint32_t));
+		std::cout << stringSize << std::endl;
 
 		// The acual string.
-		const char * string = m_register[i].name.c_str();
-		file.read(reinterpret_cast<char*>(&string), sizeof(char) * stringSize);
+		for (int j = 0; j < stringSize; j++)
+		{
+			char string = m_register[i].name[j];
+			file.read(reinterpret_cast<char*>(&string), sizeof(char));
+			m_register[i].name.push_back(string);
 
+		}
 		// Add to the register.
-		m_register[i].name = string;
-		m_register[i].level = nullptr;
+		/*m_register[i].name = string;
+		m_register[i].level = nullptr;*/
+		std::cout << m_register[i].name.c_str() << std::endl;
+
 	}
 
 	// Close the file.
@@ -239,14 +244,15 @@ bool LevelHandler::ExportRegister()
 	// Number of levels.
 	uint32_t numLevels = static_cast<uint32_t>(m_register.size());
 	file.write(reinterpret_cast<char*>(&numLevels), sizeof(uint32_t));
+	std::cout << "export numLevels: " << numLevels << std::endl;
 
 	// Loop through the level cache and write to file.
 	for (uint32_t i = 0; i < numLevels; i++)
 	{
+
 		// Size of the file string.
 		uint32_t stringSize = static_cast<uint32_t>(m_register[i].name.length());
 
-		std::cout << stringSize << std::endl;
 		file.write(reinterpret_cast<char*>(&stringSize), sizeof(uint32_t));
 
 		// Loop through the string and store each char in the file.
@@ -259,9 +265,115 @@ bool LevelHandler::ExportRegister()
 
 	// Close the file.
 	file.close();
-	
+
 	return true;
 }
+
+bool LevelHandler::TestImportRegister()
+{
+	// Open the file.
+	std::ifstream file(".\\Assets\\Levels\\Register.mrlevelreg", std::ios::binary);
+
+	// Check if the file is open.
+	if (!file.is_open())
+	{
+		return false;
+	}
+
+	file.read(reinterpret_cast<char*>(&m_numLevels), sizeof(uint32_t));
+
+	std::cout << "Import m_numLevels: " << m_numLevels << std::endl;
+
+	// Close the file.
+	file.close();
+
+	return true;
+}
+
+bool LevelHandler::TestExportRegister()
+{
+
+	if (ReadNumLevels() + 1 <= 0)
+		return false;
+	else
+		m_numLevels = ReadNumLevels() + 1;
+
+	// Open the file.
+	std::ofstream file(".\\Assets\\Levels\\Register.mrlevelreg", std::ios::binary);
+
+	// Check if the file is open.
+	if (!file.is_open())
+	{
+		return false;
+	}
+
+	// Update file with new number of levels.
+	file.write(reinterpret_cast<char*>(&m_numLevels), sizeof(uint32_t));
+
+	for (int i = 0; i < m_numLevels; i++)
+	{
+		file.write(reinterpret_cast<char*>(&m_numLevels), sizeof(uint32_t));
+	}
+
+
+	std::cout << "Export m_numLevels: " << m_numLevels << std::endl;
+	// Close the file.
+	file.close();
+
+	return true;
+}
+
+uint32_t LevelHandler::ReadNumLevels()
+{
+	std::ifstream file(".\\Assets\\Levels\\Register.mrlevelreg", std::ios::binary);
+
+	// Check if the file is open.
+	if (!file.is_open())
+	{
+		return -1;
+	}
+
+	file.read(reinterpret_cast<char*>(&m_numLevels), sizeof(uint32_t));
+
+	// Close the file.
+	file.close();
+
+	return m_numLevels;
+}
+
+uint32_t LevelHandler::GetNumLevels()
+{
+	numLevels = 0;
+	std::string path = ".\\Assets\\Levels\\";
+	for (auto & p : std::experimental::filesystem::directory_iterator(path))
+	{
+		numLevels++;
+	}
+
+	return numLevels;
+}
+
+void LevelHandler::GetLevelNames(std::vector<std::string> & strVec)
+{
+	std::string path = ".\\Assets\\Levels\\";
+	size_t firstChar = path.find_last_of("\\");
+	size_t lastChar = path.find_last_of(".");
+	std::string temp;
+	std::string temp2;
+	strVec.clear();
+	for (auto & p : std::experimental::filesystem::directory_iterator(path))
+	{
+		temp = p.path().string();
+		temp2 = temp.substr(firstChar + 1, temp.length());
+		strVec.push_back(temp2.substr(0, temp2.find_last_of(".")));
+	}
+}
+
+void LevelHandler::IncrementNumLevels()
+{
+	numLevels++;
+}
+
 
 
 //::.. MODIFY FUNCTIONS ..:://
@@ -270,11 +382,26 @@ bool LevelHandler::AddToRegister(Level * level)
 	return false;
 }
 
-
-uint32_t LevelHandler::GetNumLevels()
+bool LevelHandler::RemoveFromRegister(const char * name)
 {
-	return m_register.size();
+	return false;
 }
+
+bool LevelHandler::RemoveFromRegisterAt(uint32_t index)
+{
+	return false;
+}
+
+bool LevelHandler::FindInRegister(const char * name)
+{
+	return false;
+}
+
+
+//uint32_t LevelHandler::GetNumLevels()
+//{
+//	return m_register.size();
+//}
 
 
 //::.. GET FUNCTIONS ..:://

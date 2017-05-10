@@ -16,7 +16,7 @@ public:
 	virtual ~Weapon();
 
 	void SetProjectileType(float restitution, float friction, float damping,
-		float density, float fireRate, int clearRate);
+		float density, float fireRate, int clearRate, int controllerID);
 
 	Projectile * ReuseLast();
 	void Render(Camera camera);

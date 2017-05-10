@@ -41,7 +41,7 @@ Weapon::~Weapon()
 	m_projectiles.clear();
 }
 
-void Weapon::SetProjectileType(float restitution, float friction, float damping, float density, float fireRate, int clearRate)
+void Weapon::SetProjectileType(float restitution, float friction, float damping, float density, float fireRate, int clearRate, int controllerID)
 {
 
 
@@ -51,6 +51,8 @@ void Weapon::SetProjectileType(float restitution, float friction, float damping,
 	m_density = density;
 	m_fireRate = fireRate;
 	m_clearRate = clearRate;
+	m_controllerID = controllerID;
+
 
 
 

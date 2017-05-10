@@ -33,7 +33,7 @@ public:
 	void SetMaskBits(short MASK);
 	bool Timer(float rate);
 	void SetControllerID(int ID);
-	void Hit();
+	void  Hit(int projectileID);
 	
 	//::..GETTERS..:://
 	uint16 GetCategoryBits();
@@ -69,6 +69,7 @@ private:
 	bool m_hitByProjectile;
 	float m_life;
 	Prefab * m_healthBar;
+	int m_hitByProjectileID;
 
 	Weapon m_weapon;
 

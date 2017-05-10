@@ -38,6 +38,8 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 		filter.maskBits = PLAYER1 | BOUNDARY;
 	}
 
+	m_controllerID = controllerID;
+
 	m_box.InitDynamic(world, pos, glm::vec2(m_prefabPointer.GetScale().x, m_prefabPointer.GetScale().y));
 	m_box.getBody()->SetUserData(this);
 	m_box.getFixture()->SetRestitution(restitution);
@@ -150,6 +152,11 @@ bool Projectile::GetContact()
 bool Projectile::IsActive()
 {
 	return m_active;
+}
+
+int Projectile::GetProjectileID()
+{
+	return m_controllerID;
 }
 
 
