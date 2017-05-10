@@ -30,6 +30,8 @@ private:
 	Box m_powerUpBox;
 	Player m_player[4];
 	Collider2D gameFloor;
+
+	Level		m_level;
 	
 
 	TimeManager* m_time;

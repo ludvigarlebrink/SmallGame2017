@@ -10,7 +10,7 @@
 #include "Collidable.h"
 #include "Projectile.h"
 #include "Weapon.h"
-#include "PostProcessingManager.h"
+#include "ScoreManager.h"
 
 class Player : public Collidable
 {
@@ -33,7 +33,7 @@ public:
 	void SetMaskBits(short MASK);
 	bool Timer(float rate);
 	void SetControllerID(int ID);
-	void Hit();
+	void  Hit(int projectileID);
 	
 	//::..GETTERS..:://
 	uint16 GetCategoryBits();
@@ -68,6 +68,7 @@ private:
 	bool m_hitByProjectile;
 	float m_life;
 	Prefab * m_healthBar;
+	int m_hitByProjectileID;
 
 	Weapon m_weapon;
 
