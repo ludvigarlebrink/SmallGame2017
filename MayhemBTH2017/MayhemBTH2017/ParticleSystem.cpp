@@ -2,11 +2,14 @@
 
 
 
-ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf)
+ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf, float life)
 
 {
 	m_drawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0); //Shade for drawing the transformed particles
 
+
+	m_timer += TimeManager::GetDeltaTime();
+	m_life = life;
 
 
 	//vertex shader program only
@@ -29,7 +32,7 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 		particle[i].position = pos;
 		particle[i].direction = (GetRandomDir());
 		particle[i].color = col;
-		particle[i].life = 12.0f;
+		particle[i].life = life;
 		particle[i].size = size;
 
 	}
@@ -148,7 +151,7 @@ void ParticleSystem::RenderTransformed() {
 
 	Camera camera;
 
-	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+	camera.SetPosition(glm::vec3(((84/2 )), ((48 / 2)), -51.2f));
 	Transform transform;
 
 	m_drawShader.Bind();
@@ -156,6 +159,9 @@ void ParticleSystem::RenderTransformed() {
 	glBindVertexArray(m_drawVAO);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glBindVertexArray(0);
+	
+	
+
 
 }
 void ParticleSystem::UpdateParticles() {

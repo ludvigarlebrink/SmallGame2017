@@ -7,7 +7,7 @@
 #include "TextureHandler.h"
 #include "Box.h"
 #include "Collidable.h"
-
+#include "ParticleSystem.h"
 
 class Projectile : public Collidable
 {
@@ -29,14 +29,17 @@ public:
 	void AddForce(glm::vec3 force, int controllerID);
 	void SetFired(bool fired);
 	void SetActive(bool active);
-
+	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf, float life);
 	//::.. GET FUNCTIONS ..:://
 	int GetLife();
 	Prefab* GetPrefab();
 	Box GetBox();
 	bool GetFired();
+	bool m_particleCreated;
 	bool GetContact();
 	bool IsActive();
+	bool m_renderParticles;
+	float m_particleTimer;
 
 	//::.. OTHER FUNCTIONS ..:://
 	void Update();
@@ -53,10 +56,17 @@ private:
 	Box			m_box;
 	float		m_fireRate;
 	float		m_time;
+	float		m_particleLife;
 	int			m_life;
 	Transform m_transform;
 	GLfloat m_angle;
 	Camera	m_camera;
+
+
+	glm::vec4 m_col;
+	std::string m_shadername;
+	float m_size;
+	float m_nrof;
 	GLfloat m_rotationUpdate;
 	Prefab* m_bulletSprite;
 	GLfloat m_bulletScale;
@@ -65,11 +75,12 @@ private:
 	bool m_contact;
 	GLfloat tempAngle;
 	float m_xAngle;
+	ParticleSystem* m_particles;
 	float m_yAngle;
 
 	bool m_active;
 
-	
+
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
 		PLAYER1 = 0x0002,

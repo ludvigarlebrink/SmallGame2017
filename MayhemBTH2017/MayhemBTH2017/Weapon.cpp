@@ -8,14 +8,14 @@ Weapon::Weapon()
 
 Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 {
-	
 
-	 
+	m_particlesCreated = false;
+
 	m_isBullet = false;
 	m_prefabGun = gun;
 
 	m_prefabProjectile = projectile;
-
+	m_particleTimer = 0;
 	m_time = 0;
 	m_clearTime = 0;
 	m_counter = 0;
@@ -23,17 +23,17 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 	m_projectileCounter = 0;
 
 	m_controllerID = controllerID;
-	
+
 }
 
 Weapon::Weapon(Prefab * gun)
 {
-	m_prefabGun = gun;
-
-	m_time = 0;
-	m_clearTime = 0;
-	m_counter = 0;
-	m_isBullet = true;
+	//m_prefabGun = gun;
+	//m_particleTimer = 0;
+	//m_time = 0;
+	//m_clearTime = 0;
+	//m_counter = 0;
+	//m_isBullet = true;
 }
 
 Weapon::~Weapon()
@@ -59,8 +59,12 @@ void Weapon::SetProjectileType(float restitution, float friction, float damping,
 
 void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 {
+
+
 	//m_prefabGun->SetPosition(playerPos);
 	m_time += TimeManager::Get()->GetDeltaTime();
+	m_particleTimer += TimeManager::Get()->GetDeltaTime();
+
 	m_clearTime += TimeManager::Get()->GetDeltaTime();
 
 	for (int i = 0; i < m_projectiles.size(); i++)
@@ -87,12 +91,22 @@ void Weapon::DeleteProjectile()
 	}
 }
 
-void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf)
+void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf, float life)
 {
-	//ParticleSystem particles(shadername, glm::vec3(40, 20, 0), col, 84.0f, 500.0f);
-	ParticleSystem * tempPart = new ParticleSystem(shadername, glm::vec3(40, 20, 0), col, size, nrOf);
+	std::cout << "New Particle System Created" << std::endl;
+	m_particlesCreated = true;
 
-	m_particles = tempPart;
+	//ParticleSystem * tempPart = new ParticleSystem(shadername, glm::vec3(0, 0, 0), col, size, nrOf, life);
+	//m_particles = tempPart;
+
+
+	m_col = col;
+	m_shadername = shadername;
+	m_size = size;
+	m_nrof = nrOf;
+	m_life = life;
+
+
 
 }
 
@@ -110,6 +124,7 @@ void Weapon::UpdateParticles() {
 
 void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID)
 {
+
 	if (m_clearTime == 0) {
 		std::cout << "PANG<" << std::endl;
 	}
@@ -153,8 +168,6 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 		Camera camera;
 		Transform temptransform;
 		temptransform.SetPosition(projectile->GetBox().getBody()->GetPosition().x, projectile->GetBox().getBody()->GetPosition().y, 0);
-	
-		m_particles->Update(temptransform, camera);
 		projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
 		m_projectiles.push_back(projectile);
 
@@ -174,7 +187,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 			//reuse projectile
 			m_projectiles[m_projectileCounter]->SetActive(false);
 			m_projectiles[m_projectileCounter]->Update();
-			
+
 			m_projectiles[m_projectileCounter]->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 				m_restitution, m_friction, m_damping, m_density, m_fireRate, false, m_prefabProjectile, controllerID);
@@ -187,6 +200,14 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 	}
 
+	if (m_particlesCreated) {
+
+		for (int i = 0; i < m_projectiles.size(); i++) {
+			std::cout << "loop" << std::endl;
+			m_projectiles[i]->InitParticleSystem(m_shadername, m_col, m_size, m_nrof, m_life);
+		}
+		m_particlesCreated = false;
+	}
 
 
 
@@ -209,15 +230,15 @@ void Weapon::Render(Camera camera)
 	Transform pTransform;
 	camera.SetPosition(glm::vec3(20, 40, -50));
 
+
+
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
 		pTransform.SetPosition(m_projectiles[i]->GetBox().getBody()->GetPosition().x / 2, m_projectiles[i]->GetBox().getBody()->GetPosition().y / 2, 0);
 		m_projectiles[i]->Update();
 		m_projectiles[i]->Render(camera);
-		m_particles->UpdateParticles();
-		m_particles->RenderTransformed();
 
 	}
-	
+
 
 }
