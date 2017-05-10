@@ -41,7 +41,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 		static_cast<Player*>(bodyUserData)->StartContact(true, false);
 		static_cast<Projectile*>(bodyUserData2)->StartContact();
 
-		static_cast<Player*>(bodyUserData)->Hit(static_cast<Projectile*>(bodyUserData)->GetProjectileID());
+		static_cast<Player*>(bodyUserData)->Hit(static_cast<Projectile*>(bodyUserData2)->GetProjectileID());
 	}
 
 	bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
