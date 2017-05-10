@@ -139,10 +139,16 @@ void Player::Update() {
 		if (m_collidedPowerUp)
 		{
 			m_weapon.SetProjectileType(1.0f, 1.0f, 0.0f, 0.1f, 5.0f, 100, m_controllerID);
+			PostProcessingManager::Get()->Update(2);
 			m_collidedPowerUp = false;
 		}
 		m_contact = false;
 	}
+	else
+	{
+		PostProcessingManager::Get()->Update(0);
+	}
+
 	if (m_dead)
 	{
 		m_time += TimeManager::Get()->GetDeltaTime();

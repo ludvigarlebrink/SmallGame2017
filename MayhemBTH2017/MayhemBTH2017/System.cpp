@@ -90,16 +90,16 @@ void System::Run()
 		//	quad.Draw();
 			break;
 		case GameState::GAME:
-		//	msaa.Reset();
+			msaa.Reset();
 			bg.Render();
 			gs.Update();
 			
 
-		//	msaa.Update();
-		//	quad.Render();
+			msaa.Update();
+			quad.Render();
 
-		//	msaa.Bind();
-		//	quad.Draw();
+			msaa.Bind();
+			quad.Draw();
 			break;
 		case GameState::EXIT:
 			isRunning = false;
