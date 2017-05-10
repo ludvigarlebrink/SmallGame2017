@@ -106,7 +106,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 		std::cout << "PANG<" << std::endl;
 	}
 	
-	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
+	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
 
 	if (abs(force.x) > 0.3f || abs(force.y) > 0.3f)
 	{
@@ -114,7 +114,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 	}
 	else
 	{
-		if (m_previousForce.x < -0.1f)
+		if (m_previousForce.x < -0.3f)
 		{
 			m_previousForce = glm::vec2(1.0f, -0.1f);
 		}

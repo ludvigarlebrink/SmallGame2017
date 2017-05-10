@@ -23,9 +23,10 @@ PropHandler::Prop * PropHandler::Instantiate(const char * name)
 
 			if (m_props[i]->hasAnimation)
 			{
-				const char * def = "Default";
+				std::string * def = new std::string;
+				def[0] = "Default";
 				pre = PrefabManager::Instantiate(m_props[i]->name,
-					m_props[i]->name, &def, 1, m_props[i]->name);
+					m_props[i]->name, def, 1, m_props[i]->name);
 			}
 			else
 			{
@@ -51,9 +52,10 @@ PropHandler::Prop * PropHandler::Instantiate(uint32_t id)
 
 	if (m_props[id]->hasAnimation)
 	{
-		const char * def = "Default";
+		std::string * def = new std::string;
+		def[0] = "Default";
 		pre = PrefabManager::Instantiate(m_props[id]->name,
-			m_props[id]->name, &def, 1, m_props[id]->name);
+			m_props[id]->name, def, 1, m_props[id]->name);
 	}
 	else
 	{

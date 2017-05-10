@@ -115,24 +115,24 @@ void GameSystem::InitPlayerReady()
 	m_playerReadyUI[2].playerReady.SetPosition((0.25f * vm->GetWidth()) / 2, -20);
 	m_playerReadyUI[3].playerReady.SetPosition((0.75f * vm->GetWidth()) / 2, -20);
 
-	m_playerReadyUI[0].r = 248;
-	m_playerReadyUI[0].g = 78;
-	m_playerReadyUI[0].b = 78;
+	m_playerReadyUI[0].r = 252;
+	m_playerReadyUI[0].g = 61;
+	m_playerReadyUI[0].b = 73;
 	m_playerReadyUI[0].a = 255;
 
-	m_playerReadyUI[1].r = 78;
-	m_playerReadyUI[1].g = 248;
-	m_playerReadyUI[1].b = 78;
+	m_playerReadyUI[1].r = 255;
+	m_playerReadyUI[1].g = 147;
+	m_playerReadyUI[1].b = 73;
 	m_playerReadyUI[1].a = 255;
 
-	m_playerReadyUI[2].r = 248;
-	m_playerReadyUI[2].g = 248;
-	m_playerReadyUI[2].b = 78;
+	m_playerReadyUI[2].r = 61;
+	m_playerReadyUI[2].g = 212;
+	m_playerReadyUI[2].b = 66;
 	m_playerReadyUI[2].a = 255;
 
-	m_playerReadyUI[3].r = 78;
-	m_playerReadyUI[3].g = 78;
-	m_playerReadyUI[3].b = 248;
+	m_playerReadyUI[3].r = 43;
+	m_playerReadyUI[3].g = 166;
+	m_playerReadyUI[3].b = 160;
 	m_playerReadyUI[3].a = 255;
 
 

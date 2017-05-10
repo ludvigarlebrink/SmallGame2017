@@ -15,7 +15,7 @@ PowerUp::~PowerUp()
 void PowerUp::Create(b2World* world, glm::vec2 pos)
 {
 
-	m_powerupPrefab = PrefabManager::Instantiate("Player");
+	m_powerupPrefab = PrefabManager::Instantiate("Player", nullptr, nullptr, 0, "Player2");
 	m_powerupPrefab->SetScale(glm::vec3(1.5));
 
 	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_powerupPrefab->GetScale().x, m_powerupPrefab->GetScale().y));

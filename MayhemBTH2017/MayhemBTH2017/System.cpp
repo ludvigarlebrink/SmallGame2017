@@ -46,8 +46,6 @@ void System::Run()
 	m.Init();
 	float counter = 0;
 
-
-	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
 
 
