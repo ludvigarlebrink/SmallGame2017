@@ -144,6 +144,11 @@ void Player::Update() {
 		}
 		m_contact = false;
 	}
+	else
+	{
+		PostProcessingManager::Get()->Update(0);
+	}
+
 	if (m_dead)
 	{
 		m_time += TimeManager::Get()->GetDeltaTime();

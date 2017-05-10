@@ -262,10 +262,10 @@
     <ClCompile Include="MeshQuad.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="PostProcessing.cpp">
+    <ClCompile Include="QuadShader.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="QuadShader.cpp">
+    <ClCompile Include="PostProcessingManager.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -464,10 +464,10 @@
     <ClInclude Include="MeshQuad.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="PostProcessing.h">
+    <ClInclude Include="QuadShader.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="QuadShader.h">
+    <ClInclude Include="PostProcessingManager.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

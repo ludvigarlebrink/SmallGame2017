@@ -10,6 +10,7 @@
 #include "Collidable.h"
 #include "Projectile.h"
 #include "Weapon.h"
+#include "PostProcessingManager.h"
 
 class Player : public Collidable
 {
