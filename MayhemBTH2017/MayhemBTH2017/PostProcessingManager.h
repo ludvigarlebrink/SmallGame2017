@@ -22,7 +22,8 @@ public:
 
 	static bool IsShaking();
 	static bool IsChaos();
-	static float GetTime();
+	static float GetShakingTime();
+	static float GetChaosTime();
 
 	//::..HELPFUNCTIONS..:://
 	static void StartTimer();
@@ -36,6 +37,7 @@ private:
 	static float m_deltaTime;
 	static float m_lastFrame;
 	static float m_shakeTime;
+	static float m_chaosTime;
 	static bool m_shake;
 	static bool m_chaos;
 };

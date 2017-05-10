@@ -10,7 +10,8 @@ uniform mat4 P;
 
 uniform bool Shake;
 uniform bool Chaos;
-uniform float Time;
+uniform float STime;
+uniform float CTime;
 
 
 void main()
@@ -19,10 +20,16 @@ void main()
 	TexCoords1 = TexCoords;
 	if(Shake)
 	{
-		float strenght = 0.03;
-		gl_Position.x += cos(Time * 10) * strenght;
-		gl_Position.y += cos(Time * 15) * strenght;
+		float strenght = 0.01;
+		gl_Position.x += cos(STime * 10) * strenght;
+		gl_Position.y += cos(STime * 15) * strenght;
 			
 	}
+	if(Chaos)
+	{
+		TexCoords1 = vec3(1.0- TexCoords.x, 1.0 - TexCoords.y, 1.0);
+	}
+
+	
 }
 

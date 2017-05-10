@@ -84,9 +84,10 @@ void QuadShader::UpdateBool()
 
 	glUniform1i(glGetUniformLocation(m_programID, "Shake"), PostProcessingManager::IsShaking());
 	glUniform1i(glGetUniformLocation(m_programID, "Chaos"), PostProcessingManager::IsChaos());
-	glUniform1f(glGetUniformLocation(m_programID, "Time"), PostProcessingManager::GetTime());
+	glUniform1f(glGetUniformLocation(m_programID, "STime"), PostProcessingManager::GetShakingTime());
+	glUniform1f(glGetUniformLocation(m_programID, "CTime"), PostProcessingManager::GetChaosTime());
 
-	
+	std::cout << PostProcessingManager::IsChaos()<<std::endl;
 
 
 

@@ -35,6 +35,11 @@ void main()
 	2.0/blurr, 4.0/blurr, 2.0/blurr,
 	1.0/blurr, 2.0/blurr, 1.0/blurr);
 
+	float kernalS[9] = float[](
+	-1,-1,-1,
+	-1, 9,-1,
+	-1,-1,-1);
+
 	vec3 sampleTex[9];
 	for(int i =0; i<9;i++)
 	{
@@ -52,7 +57,11 @@ void main()
 	}
 	else if(Chaos)
 	{
-		//col = texture2D(DiffuseMap, TexCoords1.xy);
+		col = 1 - texture2D(DiffuseMap, TexCoords1.xy);
+	}
+	else if(Chaos || Shake)
+	{
+		col = texture2D(DiffuseMap, TexCoords1.xy);
 	}
 	else
 	{

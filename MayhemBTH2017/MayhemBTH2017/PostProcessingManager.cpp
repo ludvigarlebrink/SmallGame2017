@@ -6,6 +6,7 @@ float PostProcessingManager::m_currentFrame = 0.0f;
 float PostProcessingManager::m_deltaTime = 0.0f;
 float PostProcessingManager::m_lastFrame = 0.0f;
 float PostProcessingManager::m_shakeTime = 0.0f;
+float PostProcessingManager::m_chaosTime = 0.0f;
 
 bool PostProcessingManager::m_shake = false;
 bool PostProcessingManager::m_chaos = false;
@@ -41,9 +42,13 @@ bool PostProcessingManager::IsChaos()
 	return m_chaos;
 }
 
-float PostProcessingManager::GetTime()
+float PostProcessingManager::GetShakingTime()
 {
 	return m_shakeTime;
+}
+float PostProcessingManager::GetChaosTime()
+{
+	return m_chaosTime;
 }
 
 
@@ -81,14 +86,23 @@ void PostProcessingManager::Update(int state)
 		break;
 	case CHAOS:
 		m_chaos = true;
+		m_chaosTime = 3.0f;
 		break;
 	case CHAOS | SHAKE:
 		m_shake = true;
-		m_chaos = true;
+		//m_chaos = true;
 		break;
 	}
+	if (m_chaosTime > 0.0f)
+	{
 
-	//StartTimer();
+		m_chaosTime -= m_deltaTime;
+		if (m_chaosTime <= 0.0)
+		{
+			m_chaos = false;
+		}
+	}
+
 	if (m_shakeTime > 0.0f)
 	{
 
@@ -96,9 +110,10 @@ void PostProcessingManager::Update(int state)
 		if (m_shakeTime <= 0.0)
 		{
 			m_shake = false;
+			m_chaos = false;
 		}
 	}
-	std::cout << "T\t" << m_shakeTime << std::endl;
+	//std::cout << "T\t" << m_shakeTime << std::endl;
 
 }
 
