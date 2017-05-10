@@ -11,6 +11,13 @@ UIText::UIText()
 	m_pivot = 0;
 	m_font = ".\\Assets\\Fonts\\Snap.ttf";
 	m_scale = 1.0f;
+
+	m_width = VideoManager::Get()->GetWidth();
+	m_height = VideoManager::Get()->GetHeight();
+
+
+	CreateShader();
+	CreateMesh();
 }
 
 
@@ -183,16 +190,6 @@ void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, i
 {
 	glUseProgram(0);
 
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-
-	// m_Width and m_Height is the resolution of window.
-	glOrtho(0, m_width, 0, m_height, -1, 1);
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-
 	glDisable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
@@ -217,128 +214,94 @@ void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, i
 	SDL_BlitSurface(sFont, NULL, sOutline, &rect);
 
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, sOutline->w, sOutline->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, sOutline->pixels);
 
 
-	float halfHeight = m_height / 2;
-	float halfWidth = m_width / 2;
+	glUseProgram(m_program);
+	glUniform1f(m_uniforms[SCREEN_WIDTH], static_cast<float>(m_width));
+	glUniform1f(m_uniforms[SCREEN_HEIGHT], static_cast<float>(m_height));
+	glUniform1f(m_uniforms[WIDTH], static_cast<float>(sOutline->w));
+	glUniform1f(m_uniforms[HEIGHT], static_cast<float>(sOutline->h));
+	glUniform1f(m_uniforms[POSITION_X], static_cast<float>(m_posX));
+	glUniform1f(m_uniforms[POSITION_Y], static_cast<float>(m_posY));
 
-	GLfloat offsetNegX = 0;
-	GLfloat offsetPosX = 0;
-	GLfloat offsetNegY = 0;
-	GLfloat offsetPosY = 0;
 
-	switch (m_pivot)
-	{
-	case CENTER:
-		offsetNegX = static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth));
-		offsetPosX = static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth));
-		offsetNegY = static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight));
-		offsetPosY = static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight));
+	glUniform1i(m_uniforms[ALBEDO_MAP], 0);
 
-		break;
-	case TOP:
-		offsetNegX = static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth));
-		offsetPosX = static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth));
-		offsetNegY = static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight));
-		offsetPosY = static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight));
 
-		break;
-	case BOTTOM:
-		offsetNegX = static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth));
-		offsetPosX = static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth));
-		offsetNegY = static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight));
-		offsetPosY = static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight));
-
-		break;
-	case LEFT:
-		offsetNegX = static_cast<GLfloat>(x + halfWidth);
-		offsetPosX = static_cast<GLfloat>(x + sFont->w + halfWidth);
-		offsetNegY = static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight));
-		offsetPosY = static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight));
-
-		break;
-	case RIGHT:
-		offsetNegX = static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth));
-		offsetPosX = static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth));
-		offsetNegY = static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight));
-		offsetPosY = static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight));
-
-		break;
-	case TOP_LEFT:
-		offsetNegX = static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth));
-		offsetPosX = static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth));
-		offsetNegY = static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight));
-		offsetPosY = static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight));
-
-		break;
-	case TOP_RIGHT:
-		offsetNegX = static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth));
-		offsetPosX = static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth));
-		offsetNegY = static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight));
-		offsetPosY = static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight));
-
-		break;
-	case BOTTOM_LEFT:
-		offsetNegX = static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth));
-		offsetPosX = static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth));
-		offsetNegY = static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight));
-		offsetPosY = static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight));
-
-		break;
-	case BOTTOM_RIGHT:
-		offsetNegX = static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth));
-		offsetPosX = static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth));
-		offsetNegY = static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight));
-		offsetPosY = static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight));
-
-		break;
-	default:
-		offsetNegX = static_cast<GLfloat>(x - ((sFont->w / 2) - halfWidth));
-		offsetPosX = static_cast<GLfloat>(x + ((sFont->w / 2) + halfWidth));
-		offsetNegY = static_cast<GLfloat>(y - ((sFont->h / 2) - halfHeight));
-		offsetPosY = static_cast<GLfloat>(y + ((sFont->h / 2) + halfHeight));
-
-		break;
-	}
-
-	glBegin(GL_QUADS);
-	{
-		glTexCoord2f(0, 1); 
-		glVertex2f(
-			offsetNegX,
-			offsetNegY);
-
-		glTexCoord2f(1, 1); 
-		glVertex2f(
-			offsetPosX,
-			offsetNegY);
-
-		glTexCoord2f(1, 0); 
-		glVertex2f(
-			offsetPosX,
-			offsetPosY);
-
-		glTexCoord2f(0, 0); 
-		glVertex2f(
-			offsetNegX,
-			offsetPosY);
-	}
-	glEnd();
-
-	glDisable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_DEPTH_TEST);
-
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
+	m_mesh->Render();
 
 	glDeleteTextures(1, &texture);
 	TTF_CloseFont(font);
 	SDL_FreeSurface(sFont);
 	SDL_FreeSurface(sOutline);
+}
+
+
+void UIText::CreateMesh()
+{
+	m_mesh = new Mesh;
+
+	Vertex2D vert[6];
+	vert[0].position = glm::vec2(-1.0f, -1.0f);
+	vert[0].texCoords = glm::vec2(0.0f, 1.0f);
+	vert[1].position = glm::vec2(1.0f, -1.0f);
+	vert[1].texCoords = glm::vec2(1.0f, 1.0f);
+	vert[2].position = glm::vec2(-1.0f, 1.0f);
+	vert[2].texCoords = glm::vec2(0.0f, 0.0f);
+	vert[3].position = glm::vec2(1.0f, -1.0f);
+	vert[3].texCoords = glm::vec2(1.0f, 1.0f);
+	vert[4].position = glm::vec2(-1.0f, 1.0f);
+	vert[4].texCoords = glm::vec2(0.0f, 0.0f);
+	vert[5].position = glm::vec2(1.0f, 1.0f);
+	vert[5].texCoords = glm::vec2(1.0f, 0.0f);
+
+	m_mesh->Load(vert, 6);
+}
+
+
+void UIText::CreateShader()
+{
+	std::string shaders[2];
+	uint32_t types[2];
+
+	shaders[0] = ".\\Assets\\GLSL\\SpriteShader.vert";
+	shaders[1] = ".\\Assets\\GLSL\\SpriteShader.frag";
+
+	types[0] = ShaderManager::VERT_SHADER;
+	types[1] = ShaderManager::FRAG_SHADER;
+
+	m_program = ShaderManager::CreateAndAttachShaders("SpriteShader", shaders, types, 2);
+
+	glBindAttribLocation(m_program, 0, "Position");
+	glBindAttribLocation(m_program, 1, "TexCoords");
+
+	ShaderManager::LinkAndValidate("SpriteShader");
+
+	m_uniforms[SCREEN_WIDTH] = glGetUniformLocation(m_program, "ScreenWidth");
+	m_uniforms[SCREEN_HEIGHT] = glGetUniformLocation(m_program, "ScreenHeight");
+	m_uniforms[WIDTH] = glGetUniformLocation(m_program, "Width");
+	m_uniforms[HEIGHT] = glGetUniformLocation(m_program, "Height");
+	m_uniforms[POSITION_X] = glGetUniformLocation(m_program, "PosX");
+	m_uniforms[POSITION_Y] = glGetUniformLocation(m_program, "PosY");
+	m_uniforms[SCALE] = glGetUniformLocation(m_program, "Scale");
+	m_uniforms[ALBEDO_MAP] = glGetUniformLocation(m_program, "AlbedoMap");
+}
+
+
+void UIText::CreateTexture()
+{
+
+}
+
+
+void UIText::Copy(const UIText & object)
+{
+
 }

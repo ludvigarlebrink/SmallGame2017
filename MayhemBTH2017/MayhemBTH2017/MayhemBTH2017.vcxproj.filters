@@ -520,15 +520,6 @@
     <None Include="Assets\GLSL\SkeletalAnimation.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\Levels\ExportTestLOL.mrlevel">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\Levels\Register.mrlevelreg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\Prefabs\T.mr">
-      <Filter>Assets</Filter>
-    </None>
     <None Include="Assets\GLSL\LevelShader.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
@@ -584,13 +575,11 @@
     <None Include="Assets\GLSL\TransitionShader.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\Textures\TextureTestA.TGA">
-      <Filter>Assets</Filter>
-    </Image>
-    <Image Include="Assets\Textures\TextureTestB.TGA">
-      <Filter>Assets</Filter>
-    </Image>
+    <None Include="Assets\GLSL\SpriteShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SpriteShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

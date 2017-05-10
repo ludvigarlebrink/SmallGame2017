@@ -3,10 +3,12 @@
 
 
 #include "Mesh.h"
-#include "SDL.h"
-#include "SDL_ttf.h"
+#include "ShaderManager.h"
+#include "VideoManager.h"
 
 
+#include <SDL.h>
+#include <SDL_ttf.h>
 #include <cstring>
 #include <string>
 
@@ -78,9 +80,25 @@ public:
 private:
 	//::.. HELP FUNCTIONS .:://
 	void TextToTexture(std::string message, SDL_Color color, int x, int y, int size);
+	void CreateMesh();
+	void CreateShader();
+	void CreateTexture();
 	void Copy(const UIText& object);
 
 private:
+	enum Uniforms
+	{
+		SCREEN_WIDTH,
+		SCREEN_HEIGHT,
+		WIDTH,
+		HEIGHT,
+		POSITION_X,
+		POSITION_Y,
+		SCALE,
+		ALBEDO_MAP,
+		NUM_UNIFORMS
+	};
+
 	GLuint stringTex = 0;
 	GLuint tex;
 
@@ -88,8 +106,8 @@ private:
 	const char* m_font;
 
 	SDL_Color	m_color;
-	int32_t		m_width = 1280;
-	int32_t		m_height = 720;
+	int32_t		m_width;
+	int32_t		m_height;
 	int32_t		m_posX;
 	int32_t		m_posY;
 	int32_t		m_size;
@@ -100,6 +118,10 @@ private:
 	bool m_hasOutlining;
 	bool m_hasShadows;
 	bool m_hasGradient;
+	
+	Mesh *	m_mesh;	// Shader program.
+	GLuint	m_program;
+	GLuint	m_uniforms[NUM_UNIFORMS];
 };
 
 
