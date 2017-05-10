@@ -35,7 +35,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_world = world;
 
-	m_playerPrefab = new PlayerPrefab();
+	m_playerPrefab = new PlayerPrefab(controllerID);
 
 	m_testCon = new PlayerController;
 
@@ -76,22 +76,17 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	//set weapon
 
-	Prefab * gun = PrefabManager::Instantiate("Player");
 
 	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar->Create();
-
-	gun->SetScale(glm::vec3(2, 2, 2));
-
-	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
 
 	Prefab * projectile = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
 
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapon = Weapon(gun, projectile, m_controllerID);
+	m_weapon = Weapon(nullptr, projectile, m_controllerID);
 
 	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 5.0f, 10, m_controllerID);
 	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
@@ -212,7 +207,7 @@ void Player::Update() {
 
 	m_playerPrefab->Update(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
 		m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
-		m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID));
+		m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID));
 
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f)

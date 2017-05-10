@@ -24,7 +24,7 @@ void main()
 	vec3 ambient = vec3(0.2f);
 	
 	float intensity = clamp(dot(lightDir, Normal1), 0, 1);
-	vec3 rgb = texture2D(AlbedoMap, TexCoords1.xy).rgb;
+	vec3 rgb = texture2D(AlbedoMap, vec2(TexCoords1.x, 1 - TexCoords1.y)).rgb;
 
 
     if(intensity >= 0.0f && intensity < 0.2f)

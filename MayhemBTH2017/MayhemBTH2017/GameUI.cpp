@@ -24,20 +24,20 @@ GameUI::GameUI()
 	m_playerScore[2].SetPosition((0.25f * m_video->GetWidth()) / 2, 30 - (m_video->GetHeight() / 2));
 	m_playerScore[3].SetPosition((0.75f * m_video->GetWidth()) / 2, 30 - (m_video->GetHeight() / 2));
 
-	m_playerScore[0].SetColor(248, 78, 78, 255);
-	m_playerScore[1].SetColor(78, 248, 78, 255);
-	m_playerScore[2].SetColor(248, 248, 78, 255);
-	m_playerScore[3].SetColor(78, 78, 248, 255);
+	m_playerScore[0].SetColor(252, 61, 73, 255);
+	m_playerScore[1].SetColor(255, 147, 73, 255);
+	m_playerScore[2].SetColor(61, 212, 66, 255);
+	m_playerScore[3].SetColor(43, 166, 160, 255);
 
 	m_playerName[0].SetPosition((-0.75f * m_video->GetWidth()) / 2, (60 - (m_video->GetHeight() / 2)));
 	m_playerName[1].SetPosition((-0.25f * m_video->GetWidth()) / 2, (60 - (m_video->GetHeight() / 2)));
 	m_playerName[2].SetPosition((0.25f * m_video->GetWidth()) / 2, (60 - (m_video->GetHeight() / 2)));
 	m_playerName[3].SetPosition((0.75f * m_video->GetWidth()) / 2, (60 - (m_video->GetHeight() / 2)));
 
-	m_playerName[0].SetColor(248, 78, 78, 255);
-	m_playerName[1].SetColor(78, 248, 78, 255);
-	m_playerName[2].SetColor(248, 248, 78, 255);
-	m_playerName[3].SetColor(78, 78, 248, 255);
+	m_playerName[0].SetColor(252, 61, 73, 255);
+	m_playerName[1].SetColor(255, 147, 73, 255);
+	m_playerName[2].SetColor(61, 212, 66, 255);
+	m_playerName[3].SetColor(43, 166, 160, 255);
 
 	for (uint32_t i = 0; i < 4; i++)
 	{
