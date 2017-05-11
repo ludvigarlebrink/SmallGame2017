@@ -23,11 +23,12 @@ public:
 	void Render(Camera camera);
 	void Update(glm::vec3 playerPos, b2Vec2 force);
 	void DeleteProjectile();
-	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf, float life);
+	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life);
 	//::.. SET FUNTIONS ..:://
 	void Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID);
 	void UpdateParticles();
 	//::.. GET FUNTIONS ..:://
+	float GetFireRate();
 
 	bool FireRate(float rate);
 
