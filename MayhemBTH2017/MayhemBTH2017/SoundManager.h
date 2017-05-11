@@ -10,10 +10,14 @@
 
 enum SoundType
 {
-	SOUND_CHANNEL_MUSIC = 0,	// Channels 0 - 1
-	SOUND_CHANNEL_AMBIENT,		// Channels 2 - 6
-	SOUND_CHANNEL_LOOPING,		// Channels 7 - 16
-	SOUND_CHANNEL_NONE_LOOPING,	// Channels 17 - 32
+	SOUND_CHANNEL_MUSIC_01 = 0,	// Channels 0 - 1
+	SOUND_CHANNEL_MUSIC_02,
+	SOUND_CHANNEL_AMBIENT_01,		// Channels 2 - 6
+	SOUND_CHANNEL_AMBIENT_02,
+	SOUND_CHANNEL_LOOPING_01,		// Channels 7 - 16
+	SOUND_CHANNEL_LOOPING_02,
+	SOUND_CHANNEL_NONE_LOOPING_01,	// Channels 17 - 32
+	SOUND_CHANNEL_NONE_LOOPING_02,
 	NUM_SOUNDTYPE
 };
 
@@ -32,6 +36,12 @@ enum SFX
 	SOUND_SFX_DAMAGE,
 	SOUND_SFX_CLICK,
 	NUM_SFX
+};
+
+enum Ambient
+{
+	SOUND_AMBIENT_FOREST = 0,
+	NUM_AMBIENT
 };
 
 class SoundManager
@@ -69,14 +79,13 @@ private:
 	struct Sounds
 	{
 		FMOD::Sound	*	m_sound = 0;
-		std::string		m_filePath;
 		bool			m_playing = false;
 	};
 
 	bool							m_playing;
 	float							m_volume;
-	FMOD::Sound			*			m_musicSound[NUM_MUSIC];
-	FMOD::Sound			*			m_sfxSound[NUM_SFX];
+	Sounds							m_musicSound[NUM_MUSIC];
+	Sounds							m_sfxSound[NUM_SFX];
 
 
 
