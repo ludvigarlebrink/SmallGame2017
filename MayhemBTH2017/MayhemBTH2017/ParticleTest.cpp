@@ -16,8 +16,7 @@ void ParticleTest::Render()
 	//camera.SetPosition(glm::vec3(0, 2, -0));
 	//Transform transform;
 
-	m_particles.UpdateParticles();
-	m_particles.RenderTransformed();
+
 }
 
 

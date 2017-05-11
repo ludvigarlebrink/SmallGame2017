@@ -113,9 +113,8 @@ void ParticleSystem::ShadersInit() {
 
 ParticleSystem::~ParticleSystem()
 {
-//
-//	glDeleteProgram(m_pShader.GetProgramID());
-//	glDeleteProgram(m_drawShader.GetProgramID());
+
+
 
 }
 

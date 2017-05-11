@@ -30,6 +30,7 @@ public:
 	void AddForce(glm::vec3 force, int controllerID);
 	void SetFired(bool fired);
 	void SetActive(bool active);
+	void SetHasParticles(bool status);
 	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf, float life);
 	//::.. GET FUNCTIONS ..:://
 	int GetLife();
@@ -46,7 +47,7 @@ public:
 	void Render(Camera camera);
 	void StartContact();
 	void EndContact();
-
+	bool GetHasParticles();
 
 
 
@@ -58,7 +59,8 @@ private:
 	float		m_time;
 	int			m_life;
 
-	bool m_particleCreated;
+	bool m_renderParticles;
+	bool m_hasParticles;
 	glm::vec4 m_col;
 	std::string m_shadername;
 	float m_size;

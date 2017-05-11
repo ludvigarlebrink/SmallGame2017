@@ -98,8 +98,6 @@ void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat s
 	std::cout << "New Particle System Created" << std::endl;
 	m_particlesCreated = true;
 
-	//ParticleSystem * tempPart = new ParticleSystem(shadername, glm::vec3(0, 0, 0), col, size, nrOf, life);
-	//m_particles = tempPart;
 
 
 	m_col = col;
@@ -107,6 +105,8 @@ void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat s
 	m_size = size;
 	m_nrof = nrOf;
 	m_life = life;
+
+
 
 
 
@@ -157,6 +157,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 	{
 		Projectile* projectile = nullptr;
 		projectile = new Projectile();
+
 		//create new projectile
 
 		if (m_isBullet == false) {
@@ -165,6 +166,12 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile, m_controllerID);
 
+
+
+			projectile->InitParticleSystem(m_shadername, m_col, m_size, m_nrof, m_life);
+			projectile->SetHasParticles(true);
+
+
 		}
 
 		Camera camera;
@@ -172,7 +179,6 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 		temptransform.SetPosition(projectile->GetBox().getBody()->GetPosition().x, projectile->GetBox().getBody()->GetPosition().y, 0);
 		projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
 		m_projectiles.push_back(projectile);
-
 
 
 	}
@@ -196,13 +202,19 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 			//m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
 			m_projectiles[m_projectileCounter]->AddForce(glm::vec3(m_previousForce, 0.0f), controllerID);
 
+
+
 			m_projectileCounter++;
+
+
+
 
 		}
 
 	}
 
-	
+
+
 
 
 }
