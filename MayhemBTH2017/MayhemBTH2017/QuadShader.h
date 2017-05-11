@@ -5,7 +5,7 @@
 
 #include "Transform.h"
 #include "Camera.h"
-#include "PostProcessing.h"
+#include "PostProcessingManager.h"
 
 
 #include <glew.h>
@@ -70,7 +70,7 @@ private:
 
 private:
 	bool m_shake = false;
-	PostProcessing * m_effects;
+	PostProcessingManager * m_effects;
 };
 
 #endif

@@ -9,7 +9,7 @@ QuadShader::QuadShader()
 QuadShader::QuadShader(const std::string& filename, bool hasGeomShader)
 {
 	Init(filename, hasGeomShader);
-	m_effects = PostProcessing::Get();
+	m_effects = PostProcessingManager::Get();
 
 }
 
@@ -81,9 +81,12 @@ void QuadShader::Update(Transform& transform, Camera& camera)
 void QuadShader::UpdateBool()
 {
 
-	glUniform1i(glGetUniformLocation(m_programID, "Shake"), PostProcessing::IsShaking());
-	glUniform1i(glGetUniformLocation(m_programID, "Chaos"), PostProcessing::IsChaos());
-	
+
+	glUniform1i(glGetUniformLocation(m_programID, "Shake"), PostProcessingManager::IsShaking());
+	glUniform1i(glGetUniformLocation(m_programID, "Chaos"), PostProcessingManager::IsChaos());
+	glUniform1f(glGetUniformLocation(m_programID, "STime"), PostProcessingManager::GetShakingTime());
+	glUniform1f(glGetUniformLocation(m_programID, "CTime"), PostProcessingManager::GetChaosTime());
+
 
 
 

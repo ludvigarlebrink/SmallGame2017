@@ -265,8 +265,9 @@
     <ClCompile Include="QuadShader.cpp">
       <Filter>Engine\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="PostProcessing.cpp">
-      <Filter>Engine\Resources</Filter>
+    <ClCompile Include="PostProcessingManager.cpp" />
+    <ClCompile Include="Background.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -467,8 +468,9 @@
     <ClInclude Include="QuadShader.h">
       <Filter>Engine\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="PostProcessing.h">
-      <Filter>Engine\Resources</Filter>
+    <ClInclude Include="PostProcessingManager.h" />
+    <ClInclude Include="Background.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -519,15 +521,6 @@
     </None>
     <None Include="Assets\GLSL\SkeletalAnimation.frag">
       <Filter>Assets\GLSL</Filter>
-    </None>
-    <None Include="Assets\Levels\ExportTestLOL.mrlevel">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\Levels\Register.mrlevelreg">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\Prefabs\T.mr">
-      <Filter>Assets</Filter>
     </None>
     <None Include="Assets\GLSL\LevelShader.frag">
       <Filter>Assets\GLSL</Filter>
@@ -584,13 +577,11 @@
     <None Include="Assets\GLSL\TransitionShader.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\Textures\TextureTestA.TGA">
-      <Filter>Assets</Filter>
-    </Image>
-    <Image Include="Assets\Textures\TextureTestB.TGA">
-      <Filter>Assets</Filter>
-    </Image>
+    <None Include="Assets\GLSL\SpriteShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SpriteShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -12,6 +12,7 @@
 #include "TransitionManager.h"
 #include "AntiAliasing.h"
 #include "MeshQuad.h"
+#include "Background.h"
 
 System::System()
 {
@@ -46,8 +47,6 @@ void System::Run()
 	m.Init();
 	float counter = 0;
 
-
-	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
 
 
@@ -58,10 +57,12 @@ void System::Run()
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
 	
-	UIImage bg;
-	bg.SetTexture(".\\Assets\\Sprites\\BackgroundPirate.png");
-	bg.SetSize(1280, 720);
+//	UIImage bg;
+//	bg.SetTexture(".\\Assets\\Sprites\\BackgroundPirate.png");
+//	bg.SetSize(1280, 720);
+//
 
+	Background bg;
 
 	GameUI gameUI;
 
@@ -92,16 +93,16 @@ void System::Run()
 		//	quad.Draw();
 			break;
 		case GameState::GAME:
-		//	msaa.Reset();
-			bg.Render();
+			msaa.Reset();
+			bg.UpdateAndRender();
 			gs.Update();
 			
 
-		//	msaa.Update();
-		//	quad.Render();
+			msaa.Update();
+			quad.Render();
 
-		//	msaa.Bind();
-		//	quad.Draw();
+			msaa.Bind();
+			quad.Draw();
 			break;
 		case GameState::EXIT:
 			isRunning = false;
@@ -114,7 +115,7 @@ void System::Run()
 		//SDL_Delay(100);
 		//Switch between back and front buffer.
 
-		TransitionManager::Update();
+		ScoreManager::Update();
 
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();

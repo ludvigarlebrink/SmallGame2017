@@ -8,11 +8,28 @@ uniform mat4 M;
 uniform mat4 V;
 uniform mat4 P;
 
+uniform bool Shake;
+uniform bool Chaos;
+uniform float STime;
+uniform float CTime;
+
+
 void main()
 {
-	//mat4 PV = P;
-	//gl_Position = MVP * vec4(Position, 1.0f);
 	gl_Position =  vec4(Position, 1.0f);
 	TexCoords1 = TexCoords;
+	if(Shake)
+	{
+		float strenght = 0.01;
+		gl_Position.x += cos(STime * 10) * strenght;
+		gl_Position.y += cos(STime * 15) * strenght;
+			
+	}
+	if(Chaos)
+	{
+		TexCoords1 = vec3(1.0- TexCoords.x, 1.0 - TexCoords.y, 1.0);
+	}
+
+	
 }
 

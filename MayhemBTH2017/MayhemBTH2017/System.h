@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "TimeManager.h"
 #include "StateManager.h"
+#include "ScoreManager.h"
 
 #include "AntiAliasing.h"
 #include "MeshQuad.h"

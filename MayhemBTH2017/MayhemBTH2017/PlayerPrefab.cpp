@@ -2,17 +2,17 @@
 
 
 //::.. CONSTRUCTORS ..:://
-PlayerPrefab::PlayerPrefab()
+PlayerPrefab::PlayerPrefab(int32_t id)
 {
-	Init(nullptr);
+	Init(id, nullptr);
 	m_weapRotY = 90;
 	m_player->SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
 }
 
 
-PlayerPrefab::PlayerPrefab(Prefab * weapon)
+PlayerPrefab::PlayerPrefab(int32_t id, Prefab * weapon)
 {
-	Init(weapon);
+	Init(id, weapon);
 }
 
 
@@ -126,12 +126,17 @@ void PlayerPrefab::SetAnimState(uint32_t playerAnimState)
 
 
 //::.. HELP FUNCTIONS ..:://
-void PlayerPrefab::Init(Prefab * weapon)
+void PlayerPrefab::Init(int32_t id, Prefab * weapon)
 {
 	m_weapon = PrefabManager::Instantiate("Rifle", nullptr, nullptr, 0);
 	m_weapon->SetScale(glm::vec3(1.3f));
 
-	m_player = PrefabManager::Instantiate("");
+	std::string mat = "Player";
+	mat.append(std::to_string(id + 1));
+
+	std::string * sanim = new std::string;
+	sanim[0] = "Run";
+	m_player = PrefabManager::Instantiate("Player", "Player", sanim, 1, mat.c_str());
 	m_player->SetScale(glm::vec3(1.3f));
 
 	AnimController * anim = m_player->GetAnimController();
