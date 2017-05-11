@@ -42,24 +42,32 @@ float SoundManager::GetVolume()
 	return m_volume;
 }
 
-void SoundManager::SetPause(SoundType channel, bool pause)
+void SoundManager::SetPause(SoundGroups channel, bool pause)
 {
 	m_channelGroup[channel]->setPaused(pause);
 }
 
-void SoundManager::SetVolume(SoundType channel, float volume)
+void SoundManager::SetVolume(SoundGroups channel, float volume)
 {
 	m_channelGroup[channel]->setVolume(volume);
 }
 
-void SoundManager::Play(SoundType channel, Music sound)
+void SoundManager::Play(Music sound)
 {
-	m_system->playSound(m_musicSound[sound], m_channelGroup[channel], false, &m_channel[channel]);
+	bool playing;
+	if (!m_channelGroup[SOUND_GROUP_MUSIC]->isPlaying(&playing))
+		m_system->playSound(m_musicSound[sound].m_sound, m_channelGroup[SOUND_GROUP_MUSIC], false, &m_channel[SOUND_CHANNEL_MUSIC_01]);
+	else
+		m_system->playSound(m_musicSound[sound].m_sound, m_channelGroup[SOUND_GROUP_MUSIC], false, &m_channel[SOUND_CHANNEL_MUSIC_02]);
 }
 
-void SoundManager::Play(SoundType channel, SFX sound)
+void SoundManager::Play(SFX sound)
 {
-	m_system->playSound(m_sfxSound[sound], m_channelGroup[channel], false, &m_channel[channel]);
+	bool playing;
+	if (!m_channelGroup[SOUND_GROUP_NONE_LOOPING]->isPlaying(&playing))
+		m_system->playSound(m_sfxSound[sound].m_sound, m_channelGroup[SOUND_GROUP_NONE_LOOPING], false, &m_channel[SOUND_CHANNEL_NONE_LOOPING_01]);
+	else
+		m_system->playSound(m_sfxSound[sound].m_sound, m_channelGroup[SOUND_GROUP_NONE_LOOPING], false, &m_channel[SOUND_CHANNEL_NONE_LOOPING_02]);
 }
 
 void SoundManager::Update()
@@ -105,9 +113,10 @@ void SoundManager::InitMusic()
 	for (auto & p : std::experimental::filesystem::directory_iterator(path))
 	{
 		soundPath = p.path().string();
-		m_system->createStream(soundPath.c_str(), FMOD_DEFAULT, 0, &m_musicSound[counter]);
-		m_system->playSound(m_musicSound[counter], m_channelGroup[SOUND_CHANNEL_MUSIC], true, &m_channel[SOUND_CHANNEL_MUSIC]);
-		m_channel[SOUND_CHANNEL_MUSIC]->setChannelGroup(m_channelGroup[SOUND_CHANNEL_MUSIC]);
+		m_system->createStream(soundPath.c_str(), FMOD_DEFAULT, 0, &m_musicSound[counter].m_sound);
+		m_system->playSound(m_musicSound[counter].m_sound, m_channelGroup[SOUND_GROUP_MUSIC], true, &m_channel[SOUND_CHANNEL_MUSIC_01]);
+		m_channel[SOUND_CHANNEL_MUSIC_01]->setChannelGroup(m_channelGroup[SOUND_GROUP_MUSIC]);
+		m_channel[SOUND_CHANNEL_MUSIC_02]->setChannelGroup(m_channelGroup[SOUND_GROUP_MUSIC]);
 
 		if (counter < NUM_MUSIC)
 			counter++;
@@ -124,10 +133,10 @@ void SoundManager::InitNoneLooping()
 	for (auto & p : std::experimental::filesystem::directory_iterator(path))
 	{
 		soundPath = p.path().string();
-		std::cout << soundPath.c_str() << std::endl;
-		m_system->createSound(soundPath.c_str(), FMOD_LOOP_OFF, 0, &m_sfxSound[counter]);
-		m_system->playSound(m_sfxSound[counter], m_channelGroup[SOUND_CHANNEL_NONE_LOOPING], true, &m_channel[SOUND_CHANNEL_NONE_LOOPING]);
-		m_channel[SOUND_CHANNEL_NONE_LOOPING]->setChannelGroup(m_channelGroup[SOUND_CHANNEL_NONE_LOOPING]);
+		m_system->createSound(soundPath.c_str(), FMOD_LOOP_OFF, 0, &m_sfxSound[counter].m_sound);
+		m_system->playSound(m_sfxSound[counter].m_sound, m_channelGroup[SOUND_GROUP_NONE_LOOPING], true, &m_channel[SOUND_CHANNEL_NONE_LOOPING_01]);
+		m_channel[SOUND_CHANNEL_NONE_LOOPING_01]->setChannelGroup(m_channelGroup[SOUND_GROUP_NONE_LOOPING]);
+		m_channel[SOUND_CHANNEL_NONE_LOOPING_02]->setChannelGroup(m_channelGroup[SOUND_GROUP_NONE_LOOPING]);
 
 		if (counter < NUM_SFX)
 			counter++;

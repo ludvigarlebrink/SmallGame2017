@@ -28,7 +28,7 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
-//	TransitionManager transitionManager;
+	//	TransitionManager transitionManager;
 	AntiAliasing msaa;
 	MeshQuad quad;
 
@@ -37,6 +37,7 @@ void System::Run()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
+	m_soundManager->Play(SOUND_MUSIC_BACKGROUND_01);
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
@@ -56,11 +57,6 @@ void System::Run()
 	TextureHandler teximp;
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
-	
-//	UIImage bg;
-//	bg.SetTexture(".\\Assets\\Sprites\\BackgroundPirate.png");
-//	bg.SetSize(1280, 720);
-//
 
 	Background bg;
 
@@ -72,31 +68,32 @@ void System::Run()
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 
 		m_inputManager->Update();
-		//std::cout << m_inputManager->GetNrOfPlayers() << std::endl;
-		//	pre->Render(cam);
-
+		m_soundManager->Update();
 
 		switch (m_stateManager->GetCurrentState())
 		{
 		case GameState::START:
-			
+
 			break;
 		case GameState::MAIN_MENU:
+
+			
+
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
-		//	msaa.Reset();
+			//	msaa.Reset();
 			l.Update();
-		//	msaa.Update();
-		//	quad.Render();
-		//	msaa.Bind();
-		//	quad.Draw();
+			//	msaa.Update();
+			//	quad.Render();
+			//	msaa.Bind();
+			//	quad.Draw();
 			break;
 		case GameState::GAME:
 			msaa.Reset();
 			bg.UpdateAndRender();
 			gs.Update();
-			
+
 
 			msaa.Update();
 			quad.Render();
@@ -111,11 +108,8 @@ void System::Run()
 			break;
 		}
 
-		//m_inputManager->Reset();
-		//SDL_Delay(100);
-		//Switch between back and front buffer.
-
 		ScoreManager::Update();
+
 
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
@@ -130,4 +124,5 @@ void System::Init()
 	m_inputManager = InputManager::Get();
 	m_timeManager = TimeManager::Get();
 	m_stateManager = StateManager::Get();
+	m_soundManager = SoundManager::Get();
 }

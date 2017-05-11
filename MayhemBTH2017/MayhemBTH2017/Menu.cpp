@@ -105,7 +105,7 @@ void Menu::GoForward()
 		m_stateManager->SetCurrentState(m_button[m_currentSelection]->gameState);
 		FreeChildren();
 	}
-	m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_SHOT);
+	m_soundManager->Play(SOUND_SFX_SHOT);
 }
 
 void Menu::GoBack()
@@ -124,7 +124,7 @@ void Menu::GoBack()
 	m_parent->SetIsActive(true);
 	m_isActive = false;
 
-	m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_SHOT);
+	m_soundManager->Play(SOUND_SFX_SHOT);
 }
 
 
@@ -139,7 +139,7 @@ void Menu::MoveUp()
 	m_button[m_currentSelection]->isSelected = false;
 
 	--m_currentSelection;
-	m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_DAMAGE);
+	m_soundManager->Play(SOUND_SFX_DAMAGE);
 
 	if (m_currentSelection < 0)
 	{
@@ -160,7 +160,7 @@ void Menu::MoveDown()
 	m_button[m_currentSelection]->isSelected = false;
 
 	++m_currentSelection;
-	m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_DAMAGE);
+	m_soundManager->Play(SOUND_SFX_DAMAGE);
 
 	if (m_currentSelection >= m_button.size())
 	{
