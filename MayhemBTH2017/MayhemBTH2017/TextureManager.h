@@ -28,7 +28,6 @@ public:
 
 	//::.. MODIFY FUNCTIONS ..:://
 	static void AddTexture(const char * name, const char* filepath);
-	static GLuint AddTexture(MrTexture * texture);
 	static GLuint Load(MrTexture * texture);
 	static void FreeTexture(GLuint id);
 	static void FreeTexture(const char * name);

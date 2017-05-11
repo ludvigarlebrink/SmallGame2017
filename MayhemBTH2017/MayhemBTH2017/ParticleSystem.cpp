@@ -2,11 +2,14 @@
 
 
 
-ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf)
+ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf, float life)
 
 {
 	m_drawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0); //Shade for drawing the transformed particles
 
+
+	m_timer += TimeManager::GetDeltaTime();
+	m_life = life;
 
 
 	//vertex shader program only
@@ -15,9 +18,9 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 	glUseProgram(m_pShader.GetProgramID());
 
 	//GENERATE VERTEX ARRAY OBJECT
-	glGenVertexArrays(1, &m_vao[0]); //Vertex array object to store  the data
-	glBindVertexArray(m_vao[0]); //use this vertex arrray object
-	
+	glGenVertexArrays(1, &m_drawVAO); //Vertex array object to store  the data
+	glBindVertexArray(m_drawVAO); //use this vertex arrray object
+
 	PARTICLE_COUNT = nrOf;
 
 	Particle particle[10000]; //Max number of particles
@@ -27,9 +30,9 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 	for (uint32_t i = 0; i < nrOf; i++) {
 
 		particle[i].position = pos;
-		particle[i].direction =(GetRandomDir());
+		particle[i].direction = (GetRandomDir());
 		particle[i].color = col;
-		particle[i].life = 0.0f;
+		particle[i].life = life;
 		particle[i].size = size;
 
 	}
@@ -39,7 +42,7 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 	glBindBuffer(GL_ARRAY_BUFFER, m_particleBufferA);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Particle)*PARTICLE_COUNT, particle, GL_STREAM_DRAW);
 
-	
+
 	//SET ATTRIBUTE POINTERS
 	inPosID = glGetAttribLocation(m_pShader.GetProgramID(), "inPos");
 	glEnableVertexAttribArray(inPosID);
@@ -78,6 +81,7 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 	//BUFFER A->BUFFER B
 	//SEND THE DATA TO BUFFER B
 	//The output from geometrypass-vertexshader is catched by the transformBuffer!
+
 	glBeginTransformFeedback(GL_POINTS);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glEndTransformFeedback();
@@ -96,7 +100,7 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 }
 
-ParticleSystem::ParticleSystem(){}
+ParticleSystem::ParticleSystem() {}
 glm::vec3 ParticleSystem::GetRandomDir() {
 
 	return glm::vec3((rand() % (0, 1000 + 1000)) - 1000, (rand() % (0, 1000 + 1000)) - 1000, (rand() % (0, 1000 + 1000)) - 1000);
@@ -109,9 +113,8 @@ void ParticleSystem::ShadersInit() {
 
 ParticleSystem::~ParticleSystem()
 {
-	//
-	//glDeleteProgram(m_pShader.GetProgramID());
-	//glDeleteProgram(m_drawShader.GetProgramID());
+
+
 
 }
 
@@ -142,16 +145,22 @@ void ParticleSystem::LoadParticleVBOS(Particle* p, GLuint nrOfVerts) {
 }
 
 void ParticleSystem::RenderTransformed() {
+
+
+
 	Camera camera;
+
+	camera.SetPosition(glm::vec3(((84/2 )), ((48 / 2)), -51.2f));
 	Transform transform;
-	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 
 	m_drawShader.Bind();
 	m_drawShader.Update(transform, camera);
 	glBindVertexArray(m_drawVAO);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glBindVertexArray(0);
-	glUseProgram(0);
+	
+	
+
 
 }
 void ParticleSystem::UpdateParticles() {
@@ -159,6 +168,8 @@ void ParticleSystem::UpdateParticles() {
 
 	glUseProgram(m_pShader.GetProgramID());
 	glEnable(GL_RASTERIZER_DISCARD);
+	glGenVertexArrays(1, &m_vao[0]);
+	glBindVertexArray(m_vao[0]);
 	glBindBuffer(GL_ARRAY_BUFFER, m_particleBufferA);
 
 
@@ -185,15 +196,18 @@ void ParticleSystem::UpdateParticles() {
 
 	inSizeID = glGetAttribLocation(m_pShader.GetProgramID(), "inSize");
 	glEnableVertexAttribArray(inSizeID);
-	glVertexAttribPointer(inSizeID, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3) * 2+sizeof(glm::vec4) + sizeof(GLfloat)));
-	
+	glVertexAttribPointer(inSizeID, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), BUFFER_OFFSET(sizeof(glm::vec3) * 2 + sizeof(glm::vec4) + sizeof(GLfloat)));
+
 	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBufferB);
 	glBeginTransformFeedback(GL_POINTS);
 
 	glUseProgram(m_drawShader.GetProgramID());
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glEndTransformFeedback();
+
 	std::swap(m_particleBufferA, m_particleBufferB);
+
+	glBindVertexArray(0);
 	glDisable(GL_RASTERIZER_DISCARD);
 	glUseProgram(0);
 

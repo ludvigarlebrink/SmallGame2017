@@ -5,7 +5,7 @@
 #include "Projectile.h"
 #include "PowerUp.h"
 #include "Collider2D.h"
-#include "PostProcessing.h"
+#include "PostProcessingManager.h"
 
 #include <box2d.h>
 

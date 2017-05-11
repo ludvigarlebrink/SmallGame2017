@@ -11,6 +11,8 @@
 #include "Projectile.h"
 #include "Weapon.h"
 #include "ScoreManager.h"
+#include "PostProcessingManager.h"
+#include "SoundManager.h"
 
 class Player : public Collidable
 {
@@ -49,6 +51,7 @@ public:
 	
 private:
 private:
+	ParticleSystem m_particles;
 	InputManager * m_input;
 	b2Fixture* m_filter;
 	Box m_boundingBox;
@@ -69,6 +72,7 @@ private:
 	float m_life;
 	Prefab * m_healthBar;
 	int m_hitByProjectileID;
+	SoundManager * m_soundManager;
 
 	Weapon  m_weapons[7];
 	int		m_currentWeapon;

@@ -20,6 +20,8 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 	m_projectileCounter = 0;
 
 	m_controllerID = controllerID;
+
+	m_soundManager = SoundManager::Get();
 }
 
 Weapon::Weapon(Prefab * gun)
@@ -82,9 +84,9 @@ void Weapon::DeleteProjectile()
 	}
 }
 
-void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf)
+void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int /*nrOf*/, float life)
 {
-	ParticleSystem particles(shadername, glm::vec3(20, 20, 0), col, 2.0f, 500.0f);
+	//m_particles = new ParticleSystem(shadername, glm::vec3(20, 20, 0), col, size, life, life);
 
 }
 
@@ -96,17 +98,19 @@ Projectile * Weapon::ReuseLast()
 
 void Weapon::UpdateParticles() {
 
-	m_particles.UpdateParticles();
+
 
 }
 
 void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID)
 {
+	m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_EXPLOSION);
+
 	if (m_clearTime ==0) {
 		std::cout << "PANG<" << std::endl;
 	}
 	
-	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
+	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
 
 	if (abs(force.x) > 0.3f || abs(force.y) > 0.3f)
 	{
@@ -114,7 +118,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 	}
 	else
 	{
-		if (m_previousForce.x < -0.1f)
+		if (m_previousForce.x < -0.3f)
 		{
 			m_previousForce = glm::vec2(1.0f, -0.1f);
 		}
@@ -145,7 +149,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 		Camera camera;
 		Transform temptransform;
 		temptransform.SetPosition(projectile->GetBox().getBody()->GetPosition().x, projectile->GetBox().getBody()->GetPosition().y, 0);
-		m_particles.Update(temptransform, camera);
+
 
 		projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
 		m_projectiles.push_back(projectile);

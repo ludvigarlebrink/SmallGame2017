@@ -33,6 +33,7 @@ public:
 	static uint32_t GetCurrKillStreak(uint32_t id);
 	static uint32_t GetHighestKillStreak(uint32_t id);
 	static float GetKDRatio(uint32_t id);
+	static bool GetGotScore(uint32_t id);
 
 private:
 	static ScoreManager * m_instance;
@@ -47,6 +48,7 @@ private:
 		uint32_t	currKillStreak;
 		uint32_t	highestKillStreak;
 		float		kd;
+		bool		gotScore;
 	};
 
 	static PlayerScore * m_playerScore;

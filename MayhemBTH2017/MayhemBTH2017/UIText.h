@@ -3,10 +3,12 @@
 
 
 #include "Mesh.h"
-#include "SDL.h"
-#include "SDL_ttf.h"
+#include "ShaderManager.h"
+#include "VideoManager.h"
 
 
+#include <SDL.h>
+#include <SDL_ttf.h>
 #include <cstring>
 #include <string>
 
@@ -46,6 +48,7 @@ public:
 	bool operator==(const char* text);
 
 	//::.. UPDATE FUNCTIONS .:://
+	void Update();
 	void Render();
 
 	//::.. MODIFY FUNCTIONS ..:://
@@ -77,10 +80,24 @@ public:
 
 private:
 	//::.. HELP FUNCTIONS .:://
-	void TextToTexture(std::string message, SDL_Color color, int x, int y, int size);
-	void Copy(const UIText& object);
+	void CreateMesh();
+	void CreateShader();
+	void CreateText();
 
 private:
+	enum Uniforms
+	{
+		SCREEN_WIDTH,
+		SCREEN_HEIGHT,
+		WIDTH,
+		HEIGHT,
+		POSITION_X,
+		POSITION_Y,
+		SCALE,
+		ALBEDO_MAP,
+		NUM_UNIFORMS
+	};
+
 	GLuint stringTex = 0;
 	GLuint tex;
 
@@ -88,8 +105,10 @@ private:
 	const char* m_font;
 
 	SDL_Color	m_color;
-	int32_t		m_width = 1280;
-	int32_t		m_height = 720;
+	int32_t		m_screenWidth;
+	int32_t		m_screenHeight;
+	int32_t		m_width;
+	int32_t		m_height;
 	int32_t		m_posX;
 	int32_t		m_posY;
 	int32_t		m_size;
@@ -100,6 +119,13 @@ private:
 	bool m_hasOutlining;
 	bool m_hasShadows;
 	bool m_hasGradient;
+	bool m_hasUpdated;
+	
+	static Mesh * m_mesh;	// Shader program.
+	static GLuint m_program;
+	static GLuint m_uniforms[NUM_UNIFORMS];
+
+	GLuint m_texture;
 };
 
 

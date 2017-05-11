@@ -28,6 +28,7 @@ void GamePhysics::EnterWorld()
 	//at global scope
 
 	//in FooTest constructor
+
 	m_world.get()->SetContactListener(new MyContactListener());
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
@@ -63,7 +64,7 @@ void GamePhysics::Update()
 	switch (m_loadWorld) {
 	case true:
 	{
-		m_world->Step(1.0f / 20.0f, 6, 2);
+		m_world->Step(1.0f / 20.0f, 8, 5);
 
 		for (int i = 0; i < 2; i++) {
 
@@ -73,7 +74,7 @@ void GamePhysics::Update()
 
 		m_PH.Update();
 
-		m_world->Step(1.0f / 20.0f, 6, 2); 
+		m_world->Step(1.0f / 20.0f, 8, 5); 
 	}
 	break;
 	case false:
@@ -97,8 +98,7 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 
 void GamePhysics::Render(Camera camera) {
 
-	m_particles.UpdateParticles();
-	m_particles.RenderTransformed();
+
 	m_floorCollider.DrawCollider(camera);
 
 	for (int i = 0; i < 2; i++) {

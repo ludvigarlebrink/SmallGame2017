@@ -4,6 +4,7 @@
 
 #include "Projectile.h"
 #include "ParticleSystem.h"
+#include "SoundManager.h"
 #include "String.h"
 
 class Weapon
@@ -49,6 +50,7 @@ private:
 	int  m_controllerID;
 	unsigned int m_counter;
 
+	SoundManager * m_soundManager;
 };
 
 
