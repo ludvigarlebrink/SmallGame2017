@@ -7,7 +7,7 @@
 #include "UIImage.h"
 #include "Menu.h"
 #include "Timer.h"
-
+#include "ParticleSystem.h"
 #include <vector>
 
 
@@ -28,7 +28,6 @@ private:
 	void InitPlayMenu(Menu* menu);
 	void InitCreateMenu(Menu* menu);
 	void InitOptionsMenu(Menu* menu);
-
 	void HandleInput();
 	void Render();
 

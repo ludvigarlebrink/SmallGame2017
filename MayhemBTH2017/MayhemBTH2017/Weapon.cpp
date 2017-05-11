@@ -84,9 +84,9 @@ void Weapon::DeleteProjectile()
 	}
 }
 
-void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf)
+void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int /*nrOf*/, float life)
 {
-	ParticleSystem particles(shadername, glm::vec3(20, 20, 0), col, 2.0f, 500.0f);
+	//m_particles = new ParticleSystem(shadername, glm::vec3(20, 20, 0), col, size, life, life);
 
 }
 
@@ -98,7 +98,7 @@ Projectile * Weapon::ReuseLast()
 
 void Weapon::UpdateParticles() {
 
-	m_particles.UpdateParticles();
+
 
 }
 
@@ -149,7 +149,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 		Camera camera;
 		Transform temptransform;
 		temptransform.SetPosition(projectile->GetBox().getBody()->GetPosition().x, projectile->GetBox().getBody()->GetPosition().y, 0);
-		m_particles.Update(temptransform, camera);
+
 
 		projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
 		m_projectiles.push_back(projectile);

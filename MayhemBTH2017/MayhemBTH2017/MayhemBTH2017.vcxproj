@@ -160,6 +160,7 @@
     <ClCompile Include="MeshQuad.cpp" />
     <ClCompile Include="MyContactListener.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="ParticleTest.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerPrefab.cpp" />
     <ClCompile Include="PostProcessingManager.cpp" />
@@ -256,6 +257,7 @@
     <ClInclude Include="MeshQuad.h" />
     <ClInclude Include="MyContactListener.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ParticleTest.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerPrefab.h" />
     <ClInclude Include="PostProcessingManager.h" />
