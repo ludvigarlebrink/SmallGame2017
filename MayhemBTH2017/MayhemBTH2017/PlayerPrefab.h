@@ -26,8 +26,8 @@ public:
 	};
 
 	//::.. CONSTRUCTORS ..:://
-	PlayerPrefab();
-	PlayerPrefab(Prefab * weapon);
+	PlayerPrefab(int32_t id);
+	PlayerPrefab(int32_t id, Prefab * weapon);
 	virtual ~PlayerPrefab();
 
 	void Update(float x, float y, float speed);
@@ -42,7 +42,7 @@ public:
 	void SetAnimState(uint32_t playerAnimState);
 
 private:
-	void Init(Prefab * weapon);
+	void Init(int32_t id, Prefab * weapon);
 	void Free();
 
 private:

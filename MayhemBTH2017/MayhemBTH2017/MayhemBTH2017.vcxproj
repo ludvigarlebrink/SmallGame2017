@@ -86,12 +86,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\Include\MRSDK;.\include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;.\Include\FMOD;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Include\MRSDK;.\include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>.\Lib\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;glew32.lib;glew32s.lib;MRSDK.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;fmod64_vc.lib;fmodL64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Box2D.lib;glew32.lib;glew32s.lib;MRSDK.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -132,6 +133,7 @@
     <ClCompile Include="AnimClip.cpp" />
     <ClCompile Include="AnimController.cpp" />
     <ClCompile Include="AnimSkeleton.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Box.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -160,7 +162,7 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerPrefab.cpp" />
-    <ClCompile Include="PostProcessing.cpp" />
+    <ClCompile Include="PostProcessingManager.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="PowerUpHandler.cpp" />
     <ClCompile Include="Prefab.cpp">
@@ -174,7 +176,6 @@
     <ClCompile Include="QuadShader.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
-    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -228,6 +229,7 @@
     <ClInclude Include="AnimController.h" />
     <ClInclude Include="AnimSkeleton.h" />
     <ClInclude Include="AnimUtil.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Box.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -255,7 +257,7 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerPrefab.h" />
-    <ClInclude Include="PostProcessing.h" />
+    <ClInclude Include="PostProcessingManager.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="PowerUpHandler.h" />
     <ClInclude Include="Prefab.h">
@@ -269,7 +271,6 @@
     <ClInclude Include="QuadShader.h" />
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="ShaderManager.h" />
-    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -359,22 +360,17 @@
     <None Include="Assets\GLSL\SkeletalAnimation.frag" />
     <None Include="Assets\GLSL\SkeletalAnimation.vert" />
     <None Include="Assets\GLSL\SplitterShader.vert" />
+    <None Include="Assets\GLSL\SpriteShader.frag" />
+    <None Include="Assets\GLSL\SpriteShader.vert" />
     <None Include="Assets\GLSL\TextureTest" />
     <None Include="Assets\GLSL\ToonShader" />
     <None Include="Assets\GLSL\ToonShader.frag" />
     <None Include="Assets\GLSL\ToonShader.vert" />
     <None Include="Assets\GLSL\TransitionShader.frag" />
     <None Include="Assets\GLSL\TransitionShader.vert" />
-    <None Include="Assets\Levels\ExportTestLOL.mrlevel" />
     <None Include="Assets\Levels\NewFormat.mrlevel" />
-    <None Include="Assets\Levels\Register.mrlevelreg" />
-    <None Include="Assets\Prefabs\T.mr" />
     <None Include="Assets\Textures\NewTex.mrTex" />
     <None Include="Assets\Textures\NewTexx.mrthumb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\Textures\TextureTestA.TGA" />
-    <Image Include="Assets\Textures\TextureTestB.TGA" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

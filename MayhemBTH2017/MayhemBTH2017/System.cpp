@@ -12,7 +12,7 @@
 #include "TransitionManager.h"
 #include "AntiAliasing.h"
 #include "MeshQuad.h"
-
+#include "Background.h"
 
 System::System()
 {
@@ -22,7 +22,6 @@ System::System()
 
 System::~System()
 {
-
 }
 
 
@@ -48,8 +47,6 @@ void System::Run()
 	m.Init();
 	float counter = 0;
 
-
-	Prefab * pre = PrefabManager::Instantiate("");
 	Camera cam;
 
 
@@ -60,20 +57,24 @@ void System::Run()
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
 	
-	UIImage bg;
-	bg.SetTexture(".\\Assets\\Sprites\\BackgroundPirate.png");
-	bg.SetSize(1280, 720);
+//	UIImage bg;
+//	bg.SetTexture(".\\Assets\\Sprites\\BackgroundPirate.png");
+//	bg.SetSize(1280, 720);
+//
 
-
+	Background bg;
 
 	GameUI gameUI;
+
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 
 		m_inputManager->Update();
-		m_soundManager->Update();
+		//std::cout << m_inputManager->GetNrOfPlayers() << std::endl;
+		//	pre->Render(cam);
+
 
 		switch (m_stateManager->GetCurrentState())
 		{
@@ -81,14 +82,27 @@ void System::Run()
 			
 			break;
 		case GameState::MAIN_MENU:
-			m.Update();			
+			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
+		//	msaa.Reset();
 			l.Update();
+		//	msaa.Update();
+		//	quad.Render();
+		//	msaa.Bind();
+		//	quad.Draw();
 			break;
 		case GameState::GAME:
-			bg.Render();
+			msaa.Reset();
+			bg.UpdateAndRender();
 			gs.Update();
+			
+
+			msaa.Update();
+			quad.Render();
+
+			msaa.Bind();
+			quad.Draw();
 			break;
 		case GameState::EXIT:
 			isRunning = false;
@@ -101,8 +115,7 @@ void System::Run()
 		//SDL_Delay(100);
 		//Switch between back and front buffer.
 
-		TransitionManager::Update();
-
+		ScoreManager::Update();
 
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
@@ -117,5 +130,4 @@ void System::Init()
 	m_inputManager = InputManager::Get();
 	m_timeManager = TimeManager::Get();
 	m_stateManager = StateManager::Get();
-	m_soundManager = SoundManager::Get();
 }

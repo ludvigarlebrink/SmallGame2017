@@ -204,7 +204,7 @@ void PlayerController::Init()
 		m_axis[i].axisRaw = 0;
 	}
 
-	m_deadzone = 0.1f;
+	m_deadzone = 0.3f;
 }
 
 

@@ -11,6 +11,7 @@
 #include "Projectile.h"
 #include "Weapon.h"
 #include "ScoreManager.h"
+#include "PostProcessingManager.h"
 
 class Player : public Collidable
 {
