@@ -50,6 +50,9 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_box.InitDynamic(world, pos, glm::vec2(m_prefabPointer.GetScale().x, m_prefabPointer.GetScale().y));
 	m_box.getBody()->SetUserData(this);
 	m_box.getFixture()->SetRestitution(restitution);
+
+	m_restitution = restitution;
+
 	m_box.getFixture()->SetFriction(friction);
 	m_box.getFixture()->SetDensity(density);
 	m_box.getBody()->SetLinearDamping(damping);
@@ -162,14 +165,14 @@ void Projectile::Update()
 
 	if (m_contact)
 	{
-		if (m_lifeTime >= m_life)
-		{
+		//if (m_lifeTime >= m_life)
+		//{
 			GetBox().getBody()->SetActive(false);
 			SetActive(false);
 			m_renderParticles = true;
 
 			m_lifeTime = 0;
-		}
+		//}
 	}
 
 	if (m_active)

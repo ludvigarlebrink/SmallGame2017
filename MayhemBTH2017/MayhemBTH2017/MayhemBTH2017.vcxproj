@@ -133,6 +133,7 @@
     <ClCompile Include="AnimClip.cpp" />
     <ClCompile Include="AnimController.cpp" />
     <ClCompile Include="AnimSkeleton.cpp" />
+    <ClCompile Include="AtomicBomb.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Box.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -231,6 +232,7 @@
     <ClInclude Include="AnimController.h" />
     <ClInclude Include="AnimSkeleton.h" />
     <ClInclude Include="AnimUtil.h" />
+    <ClInclude Include="AtomicBomb.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Box.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

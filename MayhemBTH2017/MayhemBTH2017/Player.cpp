@@ -196,6 +196,9 @@ void Player::Update() {
 	{
 		m_time += TimeManager::Get()->GetDeltaTime();
 		Respawn(glm::vec2(70, 70));
+
+		m_currentWeapon = 0;
+
 		if (Timer(2))
 		{
 			Respawn(glm::vec2(40, 30));
