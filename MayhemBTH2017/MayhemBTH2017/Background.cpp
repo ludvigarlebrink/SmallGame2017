@@ -50,7 +50,7 @@ void Background::UpdateGrandCanyon()
 //		m_sprites[1].SetPosition(1300.0f * deltaWidth, 300 * deltaHeight);
 //	}
 
-	std::cout << m_sprites[1].GetPosX() << std::endl;
+//	std::cout << m_sprites[1].GetPosX() << std::endl;
 	for (uint32_t i = 0; i < 7; i++)
 	{
 		m_sprites[i].Render();

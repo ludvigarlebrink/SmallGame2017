@@ -28,16 +28,14 @@ public:
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(int life);
 	void AddForce(glm::vec3 force, int controllerID);
-	void SetFired(bool fired);
+
 	void SetActive(bool active);
-	void SetHasParticles(bool status);
-	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf, float life);
+
 	//::.. GET FUNCTIONS ..:://
 	int GetLife();
 	Prefab* GetPrefab();
 	Box GetBox();
 	ParticleSystem* m_particles;
-	bool GetFired();
 	bool GetContact();
 	bool IsActive();
 	int GetProjectileID();
@@ -47,7 +45,7 @@ public:
 	void Render(Camera camera);
 	void StartContact();
 	void EndContact();
-	bool GetHasParticles();
+
 
 
 

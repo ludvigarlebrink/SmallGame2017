@@ -4,13 +4,11 @@
 
 Projectile::Projectile()
 {
-	//	b2Vec2 tempPos = GetBox().getBody()->GetPosition();
-	ParticleSystem * tempPart = new ParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(20, 20, 0), glm::vec4(0.0, 1.0, 0.0, 1.0), 0.52f, 500, m_particleLife);
-	m_particles = tempPart;
+	m_particles = new ParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(20, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 500, 5.0f);
 
 	m_time = 0.0;
 	m_rotationUpdate = 0.0f;
-	m_renderParticles = true;
+	m_renderParticles = false;
 	m_hasParticles = false;
 	m_particleTimer = 0;
 }
@@ -55,6 +53,8 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_box.getBody()->ResetMassData();
 
 }
+
+
 
 void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 {
@@ -118,28 +118,8 @@ void Projectile::SetActive(bool active)
 	m_active = active;
 }
 
-void Projectile::SetHasParticles(bool status)
-{
-	m_hasParticles = status;
-}
-
-void Projectile::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf, float life)
-{
-
-	if (!m_hasParticles) {
-
-		std::cout << "init particles in Projectile class" << std::endl;
 
 
-		m_col = col;
-		m_shadername = shadername;
-		m_size = size;
-		m_nrof = nrOf;
-		m_particleLife = life;
-		m_hasParticles = true;
-	}
-
-}
 
 int Projectile::GetLife()
 {
@@ -174,24 +154,15 @@ int Projectile::GetProjectileID()
 
 void Projectile::Update()
 {
-	if (m_particleTimer < 5.0f && m_particleTimer >= 0) {
-		m_particleTimer += TimeManager::GetDeltaTime();
-
-	}
-
-	if (m_particleTimer >= 5.0f) {
-		std::cout << "DELETE" << std::endl;
-		m_particleTimer = -1;
-		m_particles = nullptr;
-		m_renderParticles = false;
-	}
+	
 
 
 	if (m_contact)
 	{
 		GetBox().getBody()->SetActive(false);
 		SetActive(false);
-
+		m_renderParticles = true;
+		
 	}
 
 	if (m_active)
@@ -223,15 +194,17 @@ void Projectile::Render(Camera camera)
 {
 	if (m_active)
 	{
-		Camera mcamera;
-		camera.SetPosition(glm::vec3(70, 0, -51));
+
+		
 		m_prefabPointer.Update();
-		m_prefabPointer.Render(mcamera);
+		m_prefabPointer.Render(camera);
 	
-		if (m_renderParticles == true) {
-			m_particles->UpdateParticles();
-			m_particles->RenderTransformed();
-		}
+	
+	}
+
+	if (m_renderParticles) {
+		m_particles->UpdateParticles();
+		m_particles->RenderTransformed();
 	}
 }
 
@@ -245,7 +218,3 @@ void Projectile::EndContact()
 	m_contact = false;
 }
 
-bool Projectile::GetHasParticles()
-{
-	return m_hasParticles;
-}
