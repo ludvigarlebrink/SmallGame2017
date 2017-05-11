@@ -269,6 +269,7 @@
     <ClCompile Include="Background.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="AtomicBomb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -472,6 +473,7 @@
     <ClInclude Include="Background.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="AtomicBomb.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
