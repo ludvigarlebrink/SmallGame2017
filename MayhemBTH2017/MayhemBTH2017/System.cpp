@@ -37,7 +37,7 @@ void System::Run()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
-	m_soundManager->Play(SOUND_CHANNEL_MUSIC_01, SOUND_MUSIC_BACKGROUND_01);
+	m_soundManager->Play(SOUND_CHANNEL_MUSIC_01, SOUND_MUSIC_BACKGROUND_02);
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
