@@ -28,6 +28,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//m_testCon = new PlayerController;
 	//TEST END
 	m_input = InputManager::Get();
+	m_soundManager = SoundManager::Get();
 
 	//Initiate the players bounding box
 	m_contact = false;
@@ -35,11 +36,11 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_world = world;
 
-	m_playerPrefab = new PlayerPrefab();
+	SetControllerID(controllerID);
+
+	m_playerPrefab = new PlayerPrefab(m_controllerID);
 
 	m_testCon = new PlayerController;
-
-	SetControllerID(controllerID);
 
 	//m_playerPrefab->SetScale(glm::vec3(1.3));
 
@@ -76,7 +77,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	//set weapon
 
-	Prefab * gun = PrefabManager::Instantiate("Player");
+	Prefab * gun = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
@@ -86,42 +87,44 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
 
-	Prefab * projectile = PrefabManager::Instantiate("Rifle", nullptr, nullptr, 0, "Candle");
+	Prefab * projectile = PrefabManager::Instantiate("Player", nullptr, nullptr, 0, "Candle");
 
 	Prefab * projectile2 = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
 
-	Prefab * projectile3 = PrefabManager::Instantiate("super", nullptr, nullptr, 0, "Candle");
+	Prefab * projectile3 = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
+
+	Prefab * projectile4 = PrefabManager::Instantiate("Rifle", nullptr, nullptr, 0, "Candle");
 
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
 	m_weapons[0] = Weapon(gun, projectile, m_controllerID);
-	m_weapons[0].SetProjectileType(0.0, 1.0, 0.5f, 0.2f, 5.0f, 1, m_controllerID);
-	m_weapons[0].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
+	m_weapons[0].SetProjectileType(0.0, 1.0, 0.5f, 0.2f, 1.0f, 10, m_controllerID);
+	m_weapons[0].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
 	m_weapons[1] = Weapon(gun, projectile2, m_controllerID);
-	m_weapons[1].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.3f, 1, m_controllerID);
-	m_weapons[1].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
+	m_weapons[1].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.3f, 10, m_controllerID);
+	m_weapons[1].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
 	m_weapons[2] = Weapon(gun, projectile3, m_controllerID);
-	m_weapons[2].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.1f, 1, m_controllerID);
-	m_weapons[2].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
+	m_weapons[2].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.1f, 15, m_controllerID);
+	m_weapons[2].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
-	m_weapons[3] = Weapon(gun, projectile, m_controllerID);
-	m_weapons[3].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 1.0f, 1, m_controllerID);
-	m_weapons[3].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
+	m_weapons[3] = Weapon(gun, projectile4, m_controllerID);
+	m_weapons[3].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.1f, 18, m_controllerID);
+	m_weapons[3].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
-	m_weapons[4] = Weapon(gun, projectile2, m_controllerID);
-	m_weapons[4].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 2.0f, 1, m_controllerID);
-	m_weapons[4].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
+	m_weapons[4] = Weapon(gun, projectile, m_controllerID);
+	m_weapons[4].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.1f, 12, m_controllerID);
+	m_weapons[4].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
-	m_weapons[5] = Weapon(gun, projectile3, m_controllerID);
-	m_weapons[5].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 3.0f, 1, m_controllerID);
-	m_weapons[5].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
+	m_weapons[5] = Weapon(gun, projectile2, m_controllerID);
+	m_weapons[5].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.1f, 11, m_controllerID);
+	m_weapons[5].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
-	m_weapons[6] = Weapon(gun, projectile, m_controllerID);
-	m_weapons[6].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 5.0f, 1, m_controllerID);
-	m_weapons[6].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
+	m_weapons[6] = Weapon(gun, projectile3, m_controllerID);
+	m_weapons[6].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.1f, 14, m_controllerID);
+	m_weapons[6].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
 	m_currentWeapon = 0;
 
@@ -147,7 +150,7 @@ void Player::Update() {
 
 	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
 	{
-		if (m_weapons[m_currentWeapon].FireRate(0.1f))
+		if (m_weapons[m_currentWeapon].FireRate(m_weapons[m_currentWeapon].GetFireRate()))
 		{
 			m_weapons[m_currentWeapon].Shoot(100.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
 		}
@@ -158,6 +161,8 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
+			m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_BOUNCE);
+
 			ScoreManager::AddHitScore(m_hitByProjectileID);
 			m_life -= 0.1f;
 
@@ -176,17 +181,16 @@ void Player::Update() {
 		}
 		if (m_collidedPowerUp)
 		{
-			if (m_currentWeapon < 6)
-			{
-				m_currentWeapon = rand() % 6 + 1;
-			}
-			else
-			{
-				m_currentWeapon = 0;
-			}
+
+			m_currentWeapon = rand() % 6 + 1;
+
 			m_collidedPowerUp = false;
 		}
 		m_contact = false;
+	}
+	else
+	{
+		PostProcessingManager::Get()->Update(0);
 	}
 	if (m_dead)
 	{

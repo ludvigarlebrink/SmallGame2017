@@ -84,7 +84,7 @@ void Weapon::DeleteProjectile()
 	}
 }
 
-void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int /*nrOf*/, float life)
+void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life)
 {
 	//m_particles = new ParticleSystem(shadername, glm::vec3(20, 20, 0), col, size, life, life);
 
@@ -102,9 +102,13 @@ void Weapon::UpdateParticles() {
 
 }
 
+float Weapon::GetFireRate()
+{
+	return m_fireRate;
+}
+
 void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID)
 {
-	m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_EXPLOSION);
 
 	if (m_clearTime ==0) {
 		std::cout << "PANG<" << std::endl;
@@ -139,6 +143,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 		//create new projectile
 
 		if (m_isBullet == false) {
+			m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_EXPLOSION);
 
 			projectile->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
@@ -166,6 +171,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 		else if (m_projectileCounter <= m_clearRate)
 		{
+			m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_EXPLOSION);
 
 			//reuse projectile
 			m_projectiles[m_projectileCounter]->SetActive(false);

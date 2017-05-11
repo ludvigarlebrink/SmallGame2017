@@ -4,7 +4,7 @@
 
 Projectile::Projectile()
 {
-	m_particles = new ParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(20, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 500, 5.0f);
+	//m_particles = new ParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(20, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 500, 5.0f);
 
 	m_time = 0.0;
 	m_rotationUpdate = 0.0f;
@@ -203,8 +203,8 @@ void Projectile::Render(Camera camera)
 	}
 
 	if (m_renderParticles) {
-		m_particles->UpdateParticles();
-		m_particles->RenderTransformed();
+		//m_particles->UpdateParticles();
+		//m_particles->RenderTransformed();
 	}
 }
 
