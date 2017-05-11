@@ -70,7 +70,8 @@ private:
 	Prefab * m_healthBar;
 	int m_hitByProjectileID;
 
-	Weapon m_weapon;
+	Weapon  m_weapons[7];
+	int		m_currentWeapon;
 
 	b2World * m_world;
 

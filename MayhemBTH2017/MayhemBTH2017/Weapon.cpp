@@ -206,8 +206,6 @@ void Weapon::Render(Camera camera)
 		m_projectiles[i]->Update();
 		m_projectiles[i]->Render(camera);
 
-
 	}
-	
 
 }
