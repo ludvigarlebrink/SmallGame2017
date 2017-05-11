@@ -65,12 +65,10 @@ void GameUI::Update(float time)
 		if (ScoreManager::GetGotScore(i))
 		{
 			m_playerScore[i].SetScale(1.2f);
-			std::cout << m_playerScore[i].GetScale() << std::endl;
 		}
 		else if (m_playerScore[i].GetScale() > 1.00001f)
 		{
 			m_playerScore[i].SetScale(m_playerScore[i].GetScale() - TimeManager::GetDeltaTime());
-			std::cout << m_playerScore[i].GetScale() << std::endl;
 			if (m_playerScore[i].GetScale() < 0.9999f)
 			{
 				m_playerScore[i].SetScale(1.0f);

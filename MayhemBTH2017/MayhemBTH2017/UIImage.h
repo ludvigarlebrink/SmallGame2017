@@ -28,13 +28,13 @@ public:
 	//::.. GET FUNCTIONS ..:://
 	int32_t GetSizeX();
 	int32_t GetSizeY();
-	int32_t GetPosX();
-	int32_t GetPosY();
+	float GetPosX();
+	float GetPosY();
 	Texture GetTexture();
 	glm::vec2 GetUV();
 
 	//::.. SET FUNCTIONS ..:://
-	void SetPosition(int32_t x, int32_t y);
+	void SetPosition(float x, float y);
 	void SetSize(int32_t x, int32_t y);
 	void SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
 	void SetAlpha(float alpha);
@@ -47,6 +47,7 @@ private:
 	//::.. HELP FUNCTIONS ..:://
 	void CreateMesh();
 	void CreateShader();
+	void CreateTexture();
 
 private:
 	enum Uniforms
@@ -70,18 +71,18 @@ private:
 	uint32_t m_sizeX;
 	uint32_t m_sizeY;
 
-	int32_t m_posX;
-	int32_t m_posY;
+	float m_posX;
+	float m_posY;
 
 	glm::vec2 m_UV;	
 
-	SDL_Color m_color;
-	Texture m_texture;
-	bool	m_showTexture;
+	SDL_Color	m_color;
+	Texture		m_texture;
+	bool		m_showTexture;
 
-	Mesh *	m_mesh;	// Shader program.
-	GLuint	m_program;
-	GLuint	m_uniforms[NUM_UNIFORMS];
+	static Mesh *	m_mesh;	// Shader program.
+	static GLuint	m_program;
+	static GLuint	m_uniforms[NUM_UNIFORMS];
 };
 
 

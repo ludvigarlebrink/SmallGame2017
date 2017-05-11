@@ -12,6 +12,7 @@
 #include "TransitionManager.h"
 #include "AntiAliasing.h"
 #include "MeshQuad.h"
+#include "Background.h"
 
 System::System()
 {
@@ -56,10 +57,12 @@ void System::Run()
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
 	
-	UIImage bg;
-	bg.SetTexture(".\\Assets\\Sprites\\BackgroundPirate.png");
-	bg.SetSize(1280, 720);
+//	UIImage bg;
+//	bg.SetTexture(".\\Assets\\Sprites\\BackgroundPirate.png");
+//	bg.SetSize(1280, 720);
+//
 
+	Background bg;
 
 	GameUI gameUI;
 
@@ -91,7 +94,7 @@ void System::Run()
 			break;
 		case GameState::GAME:
 			msaa.Reset();
-			bg.Render();
+			bg.UpdateAndRender();
 			gs.Update();
 			
 

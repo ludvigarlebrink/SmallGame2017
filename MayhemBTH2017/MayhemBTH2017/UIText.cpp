@@ -1,5 +1,6 @@
 ﻿#include "UIText.h"
-#include <iostream>
+
+
 
 Mesh * UIText::m_mesh = nullptr;
 GLuint UIText::m_program = 0;

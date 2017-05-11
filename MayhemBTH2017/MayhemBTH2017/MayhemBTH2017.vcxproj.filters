@@ -265,8 +265,9 @@
     <ClCompile Include="QuadShader.cpp">
       <Filter>Engine\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="PostProcessing.cpp">
-      <Filter>Engine\Resources</Filter>
+    <ClCompile Include="PostProcessingManager.cpp" />
+    <ClCompile Include="Background.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -467,8 +468,9 @@
     <ClInclude Include="QuadShader.h">
       <Filter>Engine\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="PostProcessing.h">
-      <Filter>Engine\Resources</Filter>
+    <ClInclude Include="PostProcessingManager.h" />
+    <ClInclude Include="Background.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

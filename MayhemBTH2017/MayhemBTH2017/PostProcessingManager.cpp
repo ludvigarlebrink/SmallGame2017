@@ -61,7 +61,6 @@ void PostProcessingManager::StartTimer()
 
 	m_deltaTime = m_currentFrame - m_lastFrame;
 	m_lastFrame = m_currentFrame;
-	//std::cout << m_deltaTime << std::endl;
 }
 
 void PostProcessingManager::Shake()
@@ -113,7 +112,6 @@ void PostProcessingManager::Update(int state)
 			m_chaos = false;
 		}
 	}
-	//std::cout << "T\t" << m_shakeTime << std::endl;
 
 }
 
