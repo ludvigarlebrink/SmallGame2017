@@ -245,7 +245,7 @@ void GameSystem::InitPlay()
 		TransitionManager::StartFadingIn();
 		TimeManager::ResetDeltaTime();
 	}
-	m_soundManager->SwapPlay(SOUND_MUSIC_BACKGROUND_02);
+	m_soundManager->SwapMusic(SOUND_MUSIC_BACKGROUND_02);
 	TransitionManager::Update();
 }
 

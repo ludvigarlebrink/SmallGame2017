@@ -9,14 +9,12 @@
 #include <string>
 #include <experimental/filesystem>
 
-enum SoundType
+enum SoundChannels
 {
 	SOUND_CHANNEL_MUSIC_01 = 0,
 	SOUND_CHANNEL_MUSIC_02,
 	SOUND_CHANNEL_AMBIENT_01,
 	SOUND_CHANNEL_AMBIENT_02,
-	SOUND_CHANNEL_LOOPING_01,
-	SOUND_CHANNEL_LOOPING_02,
 	SOUND_CHANNEL_NONE_LOOPING_01,
 	SOUND_CHANNEL_NONE_LOOPING_02,
 	NUM_SOUNDTYPE
@@ -26,7 +24,6 @@ enum SoundGroups
 {
 	SOUND_GROUP_MUSIC = 0,
 	SOUND_GROUP_AMBIENT,
-	SOUND_GROUP_LOOPING,
 	SOUND_GROUP_NONE_LOOPING,
 	NUM_GROUPS
 
@@ -68,8 +65,6 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	static SoundManager * Get();
-	bool GetPlaying();
-	float GetVolume();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetPause(SoundGroups channel, bool pause);
@@ -78,28 +73,21 @@ public:
 	//::.. SOUND FUNCTIONS ..:://
 	void Play(Music sound, bool paused = false);
 	void Play(SFX sfx, bool paused = false);
-	void SwapPlay(Music newSound);
+	void Play(Ambient ambient, bool paused = false);
+	void SwapMusic(Music newSound);
 	void Update();
 
 private:
 	void Init();
 	void InitMusic();
+	void InitAmbient();
 	void InitNoneLooping();
 
 private:
 
-	struct Sounds
-	{
-		FMOD::Sound	*	m_sound = 0;
-		bool			m_playing = false;
-	};
-
-	bool							m_playing;
-	float							m_volume;
-	Sounds							m_musicSound[NUM_MUSIC];
-	Sounds							m_sfxSound[NUM_SFX];
-
-
+	FMOD::Sound	*					m_musicSound[NUM_MUSIC];
+	FMOD::Sound	*					m_sfxSound[NUM_SFX];
+	FMOD::Sound	*					m_ambientSound[NUM_AMBIENT];
 
 	static SoundManager	*			m_instance;
 	Timer							m_timer;
