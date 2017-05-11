@@ -90,7 +90,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_weapon = Weapon(nullptr, projectile, m_controllerID);
 
 	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 5.0f, 10, m_controllerID);
-	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 5.0f);
+	
 
 	m_life = 1.0f;
 
@@ -123,7 +123,7 @@ void Player::Update() {
 			ScoreManager::AddHitScore(m_hitByProjectileID);
 			m_life -= 0.1f;
 
-			m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_BOUNCE);
+			m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING_01, SOUND_SFX_BOUNCE);
 
 			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
