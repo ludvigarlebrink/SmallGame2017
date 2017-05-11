@@ -18,7 +18,7 @@ Projectile::~Projectile()
 {
 }
 
-void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID)
+void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID, float life)
 {
 	m_isBullet = false;
 
@@ -27,6 +27,10 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_prefabPointer = *prefab;
 
 	m_active = true;
+
+	m_life = life;
+
+	m_lifeTime = 0;
 
 	b2Filter filter;
 
@@ -80,7 +84,7 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 
 }
 
-void Projectile::SetLife(int life)
+void Projectile::SetLife(float life)
 {
 	m_life = life;
 }
@@ -121,7 +125,7 @@ void Projectile::SetActive(bool active)
 
 
 
-int Projectile::GetLife()
+float Projectile::GetLife()
 {
 	return m_life;
 }
@@ -154,15 +158,18 @@ int Projectile::GetProjectileID()
 
 void Projectile::Update()
 {
-	
-
+	m_lifeTime += TimeManager::GetDeltaTime();
 
 	if (m_contact)
 	{
-		GetBox().getBody()->SetActive(false);
-		SetActive(false);
-		m_renderParticles = true;
-		
+		if (m_lifeTime >= m_life)
+		{
+			GetBox().getBody()->SetActive(false);
+			SetActive(false);
+			m_renderParticles = true;
+
+			m_lifeTime = 0;
+		}
 	}
 
 	if (m_active)
@@ -184,10 +191,6 @@ void Projectile::Update()
 			m_box.getBody()->GetWorld()->DestroyBody(m_box.getBody());
 		}
 	}
-
-
-
-
 }
 
 void Projectile::Render(Camera camera)

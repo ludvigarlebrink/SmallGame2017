@@ -17,7 +17,7 @@ public:
 	virtual ~Weapon();
 
 	void SetProjectileType(float restitution, float friction, float damping,
-		float density, float fireRate, int clearRate, int controllerID);
+		float density, float fireRate, int clearRate, int controllerID, float life);
 
 	Projectile * ReuseLast();
 	void Render(Camera camera);
@@ -50,6 +50,7 @@ private:
 	bool m_isBullet;
 	int  m_controllerID;
 	unsigned int m_counter;
+	float m_life;
 
 	SoundManager * m_soundManager;
 };

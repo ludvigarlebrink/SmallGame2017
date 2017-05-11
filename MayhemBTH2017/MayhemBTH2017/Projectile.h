@@ -21,18 +21,18 @@ public:
 	void InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 		float restitution, float friction,
 		float damping, float density,
-		float fireRate, bool startUp, Prefab * prefab, int controllerID);
+		float fireRate, bool startUp, Prefab * prefab, int controllerID, float life);
 
 	void InitBullet(b2World * world, glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://
-	void SetLife(int life);
+	void SetLife(float life);
 	void AddForce(glm::vec3 force, int controllerID);
 
 	void SetActive(bool active);
 
 	//::.. GET FUNCTIONS ..:://
-	int GetLife();
+	float GetLife();
 	Prefab* GetPrefab();
 	Box GetBox();
 	ParticleSystem* m_particles;
@@ -55,7 +55,8 @@ private:
 	Box			m_box;
 	float		m_fireRate;
 	float		m_time;
-	int			m_life;
+	float			m_life;
+	float		m_lifeTime;
 
 	bool m_renderParticles;
 	bool m_hasParticles;
