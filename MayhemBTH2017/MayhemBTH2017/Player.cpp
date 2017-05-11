@@ -161,7 +161,7 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
-			m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING_01, SOUND_SFX_BOUNCE);
+			m_soundManager->Play(SOUND_SFX_BOUNCE);
 
 			ScoreManager::AddHitScore(m_hitByProjectileID);
 			m_life -= 0.1f;
@@ -196,6 +196,9 @@ void Player::Update() {
 	{
 		m_time += TimeManager::Get()->GetDeltaTime();
 		Respawn(glm::vec2(70, 70));
+
+		m_currentWeapon = 0;
+
 		if (Timer(2))
 		{
 			Respawn(glm::vec2(40, 30));
