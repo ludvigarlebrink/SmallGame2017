@@ -37,7 +37,7 @@ void System::Run()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
-	m_soundManager->Play(SOUND_CHANNEL_MUSIC_01, SOUND_MUSIC_BACKGROUND_01);
+	m_soundManager->Play(SOUND_MUSIC_BACKGROUND_01);
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
@@ -58,10 +58,6 @@ void System::Run()
 	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
 
-	//	UIImage bg;
-	//	bg.SetTexture(".\\Assets\\Sprites\\BackgroundPirate.png");
-	//	bg.SetSize(1280, 720);
-	//
 	Background bg;
 
 	GameUI gameUI;
@@ -80,6 +76,9 @@ void System::Run()
 
 			break;
 		case GameState::MAIN_MENU:
+
+			
+
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
@@ -108,10 +107,6 @@ void System::Run()
 		default:
 			break;
 		}
-
-		//m_inputManager->Reset();
-		//SDL_Delay(100);
-		//Switch between back and front buffer.
 
 		ScoreManager::Update();
 

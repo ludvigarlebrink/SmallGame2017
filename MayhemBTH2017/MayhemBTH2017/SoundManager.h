@@ -10,15 +10,25 @@
 
 enum SoundType
 {
-	SOUND_CHANNEL_MUSIC_01 = 0,	// Channels 0 - 1
+	SOUND_CHANNEL_MUSIC_01 = 0,
 	SOUND_CHANNEL_MUSIC_02,
-	SOUND_CHANNEL_AMBIENT_01,		// Channels 2 - 6
+	SOUND_CHANNEL_AMBIENT_01,
 	SOUND_CHANNEL_AMBIENT_02,
-	SOUND_CHANNEL_LOOPING_01,		// Channels 7 - 16
+	SOUND_CHANNEL_LOOPING_01,
 	SOUND_CHANNEL_LOOPING_02,
-	SOUND_CHANNEL_NONE_LOOPING_01,	// Channels 17 - 32
+	SOUND_CHANNEL_NONE_LOOPING_01,
 	SOUND_CHANNEL_NONE_LOOPING_02,
 	NUM_SOUNDTYPE
+};
+
+enum SoundGroups
+{
+	SOUND_GROUP_MUSIC = 0,
+	SOUND_GROUP_AMBIENT,
+	SOUND_GROUP_LOOPING,
+	SOUND_GROUP_NONE_LOOPING,
+	NUM_GROUPS
+
 };
 
 enum Music
@@ -61,19 +71,20 @@ public:
 	float GetVolume();
 
 	//::.. SET FUNCTIONS ..:://
-	void SetPause(SoundType channel, bool pause);
-	void SetVolume(SoundType channel, float volume);
+	void SetPause(SoundGroups channel, bool pause);
+	void SetVolume(SoundGroups channel, float volume);
 
 	//::.. SOUND FUNCTIONS ..:://
-	void Play(SoundType type, Music sfx);
-	void Play(SoundType type, SFX sfx);
+	void Play(Music sound);
+	void Play(SFX sfx);
+	void SwapPlay(Music sound);
 	void Update();
 
 private:
 	void Init();
 	void InitMusic();
 	void InitNoneLooping();
-	
+
 private:
 
 	struct Sounds
@@ -92,8 +103,8 @@ private:
 	static SoundManager	*			m_instance;
 	FMOD::System		*			m_system;
 	FMOD::Channel		*			m_channel[NUM_SOUNDTYPE];
-	FMOD::ChannelGroup	*			m_channelGroup[NUM_SOUNDTYPE];
-	
+	FMOD::ChannelGroup	*			m_channelGroup[NUM_GROUPS];
+
 };
 
 #endif
