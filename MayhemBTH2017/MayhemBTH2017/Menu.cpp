@@ -139,7 +139,7 @@ void Menu::MoveUp()
 	m_button[m_currentSelection]->isSelected = false;
 
 	--m_currentSelection;
-	m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_BOUNCE);
+	m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_DAMAGE);
 
 	if (m_currentSelection < 0)
 	{
@@ -160,7 +160,7 @@ void Menu::MoveDown()
 	m_button[m_currentSelection]->isSelected = false;
 
 	++m_currentSelection;
-	m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_BOUNCE);
+	m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_DAMAGE);
 
 	if (m_currentSelection >= m_button.size())
 	{
