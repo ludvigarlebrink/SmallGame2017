@@ -52,22 +52,40 @@ void SoundManager::SetVolume(SoundGroups channel, float volume)
 	m_channelGroup[channel]->setVolume(volume);
 }
 
-void SoundManager::Play(Music sound)
+void SoundManager::Play(Music sound, bool paused)
 {
 	bool playing;
 	if (!m_channelGroup[SOUND_GROUP_MUSIC]->isPlaying(&playing))
-		m_system->playSound(m_musicSound[sound].m_sound, m_channelGroup[SOUND_GROUP_MUSIC], false, &m_channel[SOUND_CHANNEL_MUSIC_01]);
+		m_system->playSound(m_musicSound[sound].m_sound, m_channelGroup[SOUND_GROUP_MUSIC], paused, &m_channel[SOUND_CHANNEL_MUSIC_01]);
 	else
-		m_system->playSound(m_musicSound[sound].m_sound, m_channelGroup[SOUND_GROUP_MUSIC], false, &m_channel[SOUND_CHANNEL_MUSIC_02]);
+		m_system->playSound(m_musicSound[sound].m_sound, m_channelGroup[SOUND_GROUP_MUSIC], paused, &m_channel[SOUND_CHANNEL_MUSIC_02]);
 }
 
-void SoundManager::Play(SFX sound)
+void SoundManager::Play(SFX sound, bool paused)
 {
 	bool playing;
 	if (!m_channelGroup[SOUND_GROUP_NONE_LOOPING]->isPlaying(&playing))
-		m_system->playSound(m_sfxSound[sound].m_sound, m_channelGroup[SOUND_GROUP_NONE_LOOPING], false, &m_channel[SOUND_CHANNEL_NONE_LOOPING_01]);
+		m_system->playSound(m_sfxSound[sound].m_sound, m_channelGroup[SOUND_GROUP_NONE_LOOPING], paused, &m_channel[SOUND_CHANNEL_NONE_LOOPING_01]);
 	else
-		m_system->playSound(m_sfxSound[sound].m_sound, m_channelGroup[SOUND_GROUP_NONE_LOOPING], false, &m_channel[SOUND_CHANNEL_NONE_LOOPING_02]);
+		m_system->playSound(m_sfxSound[sound].m_sound, m_channelGroup[SOUND_GROUP_NONE_LOOPING], paused, &m_channel[SOUND_CHANNEL_NONE_LOOPING_02]);
+}
+
+void SoundManager::SwapPlay(Music newSound)
+{
+	unsigned long long dspClock;
+	int rate;
+	m_system->getSoftwareFormat(&rate, 0, 0);
+
+	m_channel[SOUND_CHANNEL_MUSIC_01]->getDSPClock(0, &dspClock);
+	m_channel[SOUND_CHANNEL_MUSIC_01]->addFadePoint(dspClock, 1);
+	m_channel[SOUND_CHANNEL_MUSIC_01]->addFadePoint(dspClock + (rate * 3), 0.0);
+	m_channel[SOUND_CHANNEL_MUSIC_01]->setDelay(0, dspClock + (rate * 3), true);
+
+	Play(newSound);
+	m_channel[SOUND_CHANNEL_MUSIC_01]->getDSPClock(0, &dspClock);
+	m_channel[SOUND_CHANNEL_MUSIC_01]->addFadePoint(dspClock, 0); 
+	m_channel[SOUND_CHANNEL_MUSIC_01]->addFadePoint(dspClock + (rate * 4), 1.0); // Add GetVolume() instead of 1
+
 }
 
 void SoundManager::Update()

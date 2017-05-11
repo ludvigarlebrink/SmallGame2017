@@ -5,6 +5,7 @@
 GameSystem::GameSystem()
 {
 	m_input = InputManager::Get();
+	m_soundManager = SoundManager::Get();
 	m_numPlayers = 0;
 	m_currState = GAME_SETUP;
 	m_playerReadyUI = nullptr;
@@ -201,6 +202,7 @@ void GameSystem::PlayerReady()
 				return;
 			}
 		}
+		
 	}
 
 	for (uint32_t i = 0; i < 4; i++)
@@ -239,11 +241,11 @@ void GameSystem::InitPlay()
 
 		m_world = new GamePhysics;
 		m_currState = START_PLAY;
-
+		
 		TransitionManager::StartFadingIn();
 		TimeManager::ResetDeltaTime();
 	}
-
+	m_soundManager->SwapPlay(SOUND_MUSIC_BACKGROUND_02);
 	TransitionManager::Update();
 }
 
@@ -260,7 +262,7 @@ void GameSystem::StartPlay()
 		m_currState = PLAY;
 		m_timer.SetTimer(m_gameSettings->GetGameLenght(), true, false);
 	}
-
+	
 	TransitionManager::Update();
 }
 

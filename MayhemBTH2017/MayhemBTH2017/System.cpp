@@ -76,9 +76,6 @@ void System::Run()
 
 			break;
 		case GameState::MAIN_MENU:
-
-			
-
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:

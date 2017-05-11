@@ -11,6 +11,7 @@
 #include "UIImage.h"
 #include "TransitionManager.h"
 #include "GameSettings.h"
+#include "SoundManager.h"
 
 #include "ParticleSystem.h"
 
@@ -92,6 +93,7 @@ private:
 
 	Camera m_camera;
 	GameSettings * m_gameSettings;
+	SoundManager * m_soundManager;
 };
 
 

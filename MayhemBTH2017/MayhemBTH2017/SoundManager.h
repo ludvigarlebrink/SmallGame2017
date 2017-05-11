@@ -3,6 +3,7 @@
 
 #include "fmod.hpp"
 #include "fmod_errors.h"
+#include "Timer.h"
 
 #include <iostream>
 #include <string>
@@ -75,9 +76,9 @@ public:
 	void SetVolume(SoundGroups channel, float volume);
 
 	//::.. SOUND FUNCTIONS ..:://
-	void Play(Music sound);
-	void Play(SFX sfx);
-	void SwapPlay(Music sound);
+	void Play(Music sound, bool paused = false);
+	void Play(SFX sfx, bool paused = false);
+	void SwapPlay(Music newSound);
 	void Update();
 
 private:
@@ -101,6 +102,7 @@ private:
 
 
 	static SoundManager	*			m_instance;
+	Timer							m_timer;
 	FMOD::System		*			m_system;
 	FMOD::Channel		*			m_channel[NUM_SOUNDTYPE];
 	FMOD::ChannelGroup	*			m_channelGroup[NUM_GROUPS];

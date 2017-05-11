@@ -161,7 +161,7 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
-			m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_BOUNCE);
+			m_soundManager->Play(SOUND_SFX_BOUNCE);
 
 			ScoreManager::AddHitScore(m_hitByProjectileID);
 			m_life -= 0.1f;
@@ -170,7 +170,6 @@ void Player::Update() {
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
 
-			std::cout << m_life << std::endl;
 			if (m_life <= 0.0f)
 			{
 				ScoreManager::AddKill(m_hitByProjectileID);
