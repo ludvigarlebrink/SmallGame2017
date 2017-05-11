@@ -44,6 +44,7 @@ void CreateQuad(){
 		vec3 firstVert=position1[0].xyz-(right+up)*particleSize;
 
 		gl_Position=P*V*vec4(firstVert+position1[i].xyz, 1.0);
+
 		
 		UV = vec2(0.0, 0.0);
 		EmitVertex();
@@ -52,7 +53,8 @@ void CreateQuad(){
 		vec3 secondVert=position1[0].xyz-(right-up)*particleSize;
 	
 		gl_Position=P*V*vec4(secondVert.xyz+position1[i].xyz, 1.0);
-	
+
+
 		UV = vec2(0.0, 1.0);
 		EmitVertex();
 	
@@ -60,6 +62,8 @@ void CreateQuad(){
 		vec3 thirdVert=position1[0].xyz+(right-up)*particleSize;
 	
 		gl_Position=P*V*vec4(thirdVert+position1[i].xyz, 1.0);
+	
+
 
 		UV = vec2(1.0, 0.0);	
 		EmitVertex();
@@ -68,6 +72,7 @@ void CreateQuad(){
 		vec3 fourthVert=position1[0].xyz+(right+up)*particleSize;
 		
 		gl_Position=P*V*vec4(fourthVert+position1[i].xyz ,1.0);
+	
 
 		UV = vec2(1.0, 1.0);
 		EmitVertex();

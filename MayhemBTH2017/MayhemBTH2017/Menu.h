@@ -4,6 +4,7 @@
 
 #include "StateManager.h"
 #include "TimeManager.h"
+#include "SoundManager.h"
 #include "UIText.h"
 #include "UIImage.h"
 
@@ -72,6 +73,7 @@ private:
 
 	bool					m_isScalning;
 
+	SoundManager *			m_soundManager;
 	StateManager *			m_stateManager;
 	TimeManager	*			m_timeManager;
 };

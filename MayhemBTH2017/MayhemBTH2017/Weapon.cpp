@@ -20,6 +20,8 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 	m_projectileCounter = 0;
 
 	m_controllerID = controllerID;
+
+	m_soundManager = SoundManager::Get();
 }
 
 Weapon::Weapon(Prefab * gun)
@@ -37,10 +39,10 @@ Weapon::~Weapon()
 	m_projectiles.clear();
 }
 
-void Weapon::SetProjectileType(float restitution, float friction, float damping, float density, float fireRate, int clearRate, int controllerID)
+void Weapon::SetProjectileType(float restitution, float friction, float damping, float density, float fireRate, int clearRate, int controllerID, float life)
 {
 
-
+	m_life = life;
 	m_restitution = restitution;
 	m_friction = friction;
 	m_damping = damping;
@@ -82,9 +84,9 @@ void Weapon::DeleteProjectile()
 	}
 }
 
-void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf)
+void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life)
 {
-	ParticleSystem particles(shadername, glm::vec3(20, 20, 0), col, 2.0f, 500.0f);
+	//m_particles = new ParticleSystem(shadername, glm::vec3(20, 20, 0), col, size, life, life);
 
 }
 
@@ -96,12 +98,18 @@ Projectile * Weapon::ReuseLast()
 
 void Weapon::UpdateParticles() {
 
-	m_particles.UpdateParticles();
 
+
+}
+
+float Weapon::GetFireRate()
+{
+	return m_fireRate;
 }
 
 void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID)
 {
+
 	if (m_clearTime ==0) {
 		std::cout << "PANG<" << std::endl;
 	}
@@ -135,17 +143,18 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 		//create new projectile
 
 		if (m_isBullet == false) {
+			m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING_01, SOUND_SFX_EXPLOSION);
 
 			projectile->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
-				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile, m_controllerID);
+				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile, m_controllerID, m_life);
 		
 		}
 
 		Camera camera;
 		Transform temptransform;
 		temptransform.SetPosition(projectile->GetBox().getBody()->GetPosition().x, projectile->GetBox().getBody()->GetPosition().y, 0);
-		m_particles.Update(temptransform, camera);
+
 
 		projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
 		m_projectiles.push_back(projectile);
@@ -162,6 +171,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 		else if (m_projectileCounter <= m_clearRate)
 		{
+			m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING_01, SOUND_SFX_EXPLOSION);
 
 			//reuse projectile
 			m_projectiles[m_projectileCounter]->SetActive(false);
@@ -169,7 +179,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 			m_projectiles[m_projectileCounter]->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
-				m_restitution, m_friction, m_damping, m_density, m_fireRate, false, m_prefabProjectile, controllerID);
+				m_restitution, m_friction, m_damping, m_density, m_fireRate, false, m_prefabProjectile, controllerID, m_life);
 			//m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
 			m_projectiles[m_projectileCounter]->AddForce(glm::vec3(m_previousForce, 0.0f), controllerID);
 
@@ -206,8 +216,6 @@ void Weapon::Render(Camera camera)
 		m_projectiles[i]->Update();
 		m_projectiles[i]->Render(camera);
 
-
 	}
-	
 
 }

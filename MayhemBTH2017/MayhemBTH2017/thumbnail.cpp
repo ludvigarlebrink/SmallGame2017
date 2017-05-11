@@ -14,7 +14,7 @@ Thumbnail::~Thumbnail()
 
 void Thumbnail::Import(const char * FilePath)
 {
-	std::ifstream file(".\\Assets\\Levels\\NewFormat.mrlevel", std::ios::binary);
+	std::ifstream file(".\\Assets\\Levels\\MUST.mrlevel", std::ios::binary);
 
 	if (!file.is_open())
 	{

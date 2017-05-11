@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "TextureHandler.h"
 #include "Box.h"
+#include "ParticleSystem.h"
 #include "Collidable.h"
 
 
@@ -20,25 +21,25 @@ public:
 	void InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 		float restitution, float friction,
 		float damping, float density,
-		float fireRate, bool startUp, Prefab * prefab, int controllerID);
+		float fireRate, bool startUp, Prefab * prefab, int controllerID, float life);
 
 	void InitBullet(b2World * world, glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://
-	void SetLife(int life);
+	void SetLife(float life);
 	void AddForce(glm::vec3 force, int controllerID);
-	void SetFired(bool fired);
+
 	void SetActive(bool active);
 
 	//::.. GET FUNCTIONS ..:://
-	int GetLife();
+	float GetLife();
 	Prefab* GetPrefab();
 	Box GetBox();
-	bool GetFired();
+	ParticleSystem* m_particles;
 	bool GetContact();
 	bool IsActive();
 	int GetProjectileID();
-
+	float m_particleTimer;
 	//::.. OTHER FUNCTIONS ..:://
 	void Update();
 	void Render(Camera camera);
@@ -54,7 +55,18 @@ private:
 	Box			m_box;
 	float		m_fireRate;
 	float		m_time;
-	int			m_life;
+	float			m_life;
+	float		m_lifeTime;
+
+	bool m_renderParticles;
+	bool m_hasParticles;
+	glm::vec4 m_col;
+	std::string m_shadername;
+	float m_size;
+	float m_nrof;
+	float m_particleLife;
+	bool m_particlesCreated;
+
 	Transform m_transform;
 	GLfloat m_angle;
 	Camera	m_camera;
