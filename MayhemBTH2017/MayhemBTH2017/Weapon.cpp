@@ -84,7 +84,7 @@ void Weapon::DeleteProjectile()
 	}
 }
 
-void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int /*nrOf*/, float life)
+void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrOf, float life)
 {
 	//m_particles = new ParticleSystem(shadername, glm::vec3(20, 20, 0), col, size, life, life);
 

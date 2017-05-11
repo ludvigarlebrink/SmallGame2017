@@ -269,6 +269,7 @@
     <ClCompile Include="Background.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleTest.cpp" />
     <ClCompile Include="SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -473,6 +474,7 @@
     <ClInclude Include="Background.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleTest.h" />
     <ClInclude Include="SoundManager.h" />
   </ItemGroup>
   <ItemGroup>
