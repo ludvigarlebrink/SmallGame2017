@@ -13,6 +13,7 @@
 #include "AntiAliasing.h"
 #include "MeshQuad.h"
 
+
 System::System()
 {
 	Init();
@@ -21,6 +22,7 @@ System::System()
 
 System::~System()
 {
+
 }
 
 
@@ -63,17 +65,15 @@ void System::Run()
 	bg.SetSize(1280, 720);
 
 
-	GameUI gameUI;
 
+	GameUI gameUI;
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 
 		m_inputManager->Update();
-		//std::cout << m_inputManager->GetNrOfPlayers() << std::endl;
-		//	pre->Render(cam);
-
+		m_soundManager->Update();
 
 		switch (m_stateManager->GetCurrentState())
 		{
@@ -81,27 +81,14 @@ void System::Run()
 			
 			break;
 		case GameState::MAIN_MENU:
-			m.Update();
+			m.Update();			
 			break;
 		case GameState::LEVEL_EDITOR:
-		//	msaa.Reset();
 			l.Update();
-		//	msaa.Update();
-		//	quad.Render();
-		//	msaa.Bind();
-		//	quad.Draw();
 			break;
 		case GameState::GAME:
-		//	msaa.Reset();
 			bg.Render();
 			gs.Update();
-			
-
-		//	msaa.Update();
-		//	quad.Render();
-
-		//	msaa.Bind();
-		//	quad.Draw();
 			break;
 		case GameState::EXIT:
 			isRunning = false;
@@ -116,6 +103,7 @@ void System::Run()
 
 		TransitionManager::Update();
 
+
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
 		counter += m_timeManager->GetDeltaTime();
@@ -129,4 +117,5 @@ void System::Init()
 	m_inputManager = InputManager::Get();
 	m_timeManager = TimeManager::Get();
 	m_stateManager = StateManager::Get();
+	m_soundManager = SoundManager::Get();
 }

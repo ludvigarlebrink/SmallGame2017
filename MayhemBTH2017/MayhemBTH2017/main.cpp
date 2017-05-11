@@ -8,6 +8,7 @@
 #include "TransitionManager.h"
 #include "PostProcessing.h"
 #include "ScoreManager.h"
+#include "SoundManager.h"
 
 #include "System.h"
 
@@ -24,6 +25,7 @@ TextureManager		g_textureManager;
 TransitionManager	g_transitionManager;
 PostProcessing		g_postProcessing;
 ScoreManager		g_scoreManager;
+SoundManager		g_soundManager;
 
 
 
@@ -60,11 +62,13 @@ void BigInit()
 	g_textureManager.StartUp();		// 7.
 	g_transitionManager.StartUp();	// 8.
 	g_postProcessing.StartUp();		// 9.
-	g_scoreManager.StartUp();
+	g_scoreManager.StartUp();		// 10.
+	g_soundManager.StartUp();		// 11.
 }
 
 void Terminate()
 {
+	g_soundManager.ShutDown();		// 11.
 	g_scoreManager.ShutDown();		// 10.
 	g_transitionManager.ShutDown();	// 8.
 	g_textureManager.ShutDown();	// 7.

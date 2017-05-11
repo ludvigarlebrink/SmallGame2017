@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "TimeManager.h"
 #include "StateManager.h"
+#include "SoundManager.h"
 
 #include "AntiAliasing.h"
 #include "MeshQuad.h"
@@ -26,10 +27,13 @@ private:
 	void Init();
 
 private:
-	VideoManager *	m_videoManager;
-	InputManager *	m_inputManager;
-	TimeManager *	m_timeManager;
-	StateManager*	m_stateManager;
+	VideoManager	*	m_videoManager;
+	InputManager	*	m_inputManager;
+	TimeManager		*	m_timeManager;
+	StateManager	*	m_stateManager;
+	SoundManager	*	m_soundManager;
+
+
 
 };
 

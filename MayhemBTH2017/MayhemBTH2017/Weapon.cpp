@@ -20,6 +20,8 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 	m_projectileCounter = 0;
 
 	m_controllerID = controllerID;
+
+	m_soundManager = SoundManager::Get();
 }
 
 Weapon::Weapon(Prefab * gun)
@@ -102,6 +104,8 @@ void Weapon::UpdateParticles() {
 
 void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID)
 {
+	m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_EXPLOSION);
+
 	if (m_clearTime ==0) {
 		std::cout << "PANG<" << std::endl;
 	}

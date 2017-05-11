@@ -268,6 +268,7 @@
     <ClCompile Include="PostProcessing.cpp">
       <Filter>Engine\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -470,6 +471,7 @@
     <ClInclude Include="PostProcessing.h">
       <Filter>Engine\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
