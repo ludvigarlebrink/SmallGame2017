@@ -269,7 +269,9 @@
     <ClCompile Include="Background.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -473,7 +475,9 @@
     <ClInclude Include="Background.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="SoundManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

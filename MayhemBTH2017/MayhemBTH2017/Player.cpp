@@ -28,6 +28,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//m_testCon = new PlayerController;
 	//TEST END
 	m_input = InputManager::Get();
+	m_soundManager = SoundManager::Get();
 
 	//Initiate the players bounding box
 	m_contact = false;
@@ -122,10 +123,12 @@ void Player::Update() {
 			ScoreManager::AddHitScore(m_hitByProjectileID);
 			m_life -= 0.1f;
 
+			m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING, SOUND_SFX_BOUNCE);
+
 			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
-
+			
 
 			std::cout << m_life << std::endl;
 			if (m_life <= 0.0f)

@@ -12,6 +12,7 @@
 #include "Weapon.h"
 #include "ScoreManager.h"
 #include "PostProcessingManager.h"
+#include "SoundManager.h"
 
 class Player : public Collidable
 {
@@ -70,6 +71,7 @@ private:
 	float m_life;
 	Prefab * m_healthBar;
 	int m_hitByProjectileID;
+	SoundManager * m_soundManager;
 
 	Weapon m_weapon;
 
