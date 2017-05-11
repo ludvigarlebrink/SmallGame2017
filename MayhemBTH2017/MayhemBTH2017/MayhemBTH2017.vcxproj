@@ -159,6 +159,7 @@
     <ClCompile Include="MenuVideo.cpp" />
     <ClCompile Include="MeshQuad.cpp" />
     <ClCompile Include="MyContactListener.cpp" />
+    <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="ParticleTest.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -256,6 +257,7 @@
     <ClInclude Include="MenuVideo.h" />
     <ClInclude Include="MeshQuad.h" />
     <ClInclude Include="MyContactListener.h" />
+    <ClInclude Include="ParticleEmitter.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="ParticleTest.h" />
     <ClInclude Include="Player.h" />

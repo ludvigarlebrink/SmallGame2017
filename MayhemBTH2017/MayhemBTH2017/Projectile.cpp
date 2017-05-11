@@ -4,22 +4,24 @@
 
 Projectile::Projectile()
 {
-	m_particles = new ParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(20, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 500, 5.0f);
+	
 
 	m_time = 0.0;
 	m_rotationUpdate = 0.0f;
 	m_renderParticles = false;
 	m_hasParticles = false;
-	m_particleTimer = 0;
+
 }
 
 
 Projectile::~Projectile()
 {
+
 }
 
 void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID)
 {
+	m_particleTimer = 0;
 	m_isBullet = false;
 
 	m_contact = false;
@@ -154,16 +156,17 @@ int Projectile::GetProjectileID()
 
 void Projectile::Update()
 {
-	
 
 
 	if (m_contact)
 	{
 		GetBox().getBody()->SetActive(false);
 		SetActive(false);
-		m_renderParticles = true;
 		
+	
+
 	}
+
 
 	if (m_active)
 	{
@@ -186,6 +189,11 @@ void Projectile::Update()
 	}
 
 
+	if (m_particleTimer >= 5.0f) {
+		
+		m_particleTimer = -1;
+
+	}
 
 
 }
@@ -202,10 +210,8 @@ void Projectile::Render(Camera camera)
 	
 	}
 
-	if (m_renderParticles) {
-		m_particles->UpdateParticles();
-		m_particles->RenderTransformed();
-	}
+	
+
 }
 
 void Projectile::StartContact()

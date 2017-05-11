@@ -7,7 +7,8 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 {
 	m_drawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0); //Shade for drawing the transformed particles
 
-
+	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+	
 	m_timer += TimeManager::GetDeltaTime();
 	m_life = life;
 
@@ -92,12 +93,12 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 	glDisable(GL_RASTERIZER_DISCARD);
 	glBindVertexArray(0);
 
-	//// INFO FOR TRIANGLE
-	Transform tpm;
-	tpm.SetPosition(0, 0, 100);
-	tmpTransform = tpm;
+	////// INFO FOR TRIANGLE
+	//Transform tpm;
+	//tpm.SetPosition(0, 0, 100);
+	//tmpTransform = tpm;
 
-	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
+	//m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 }
 
 ParticleSystem::ParticleSystem() {}
@@ -113,7 +114,10 @@ void ParticleSystem::ShadersInit() {
 
 ParticleSystem::~ParticleSystem()
 {
+	std::cout << "DECONSTRUCTOR" << std::endl;
 
+	glDeleteProgram(m_drawShader.GetProgramID());
+	glDeleteProgram(m_pShader.GetProgramID());
 
 
 }
@@ -148,18 +152,15 @@ void ParticleSystem::RenderTransformed() {
 
 
 
-	Camera camera;
 
-	camera.SetPosition(glm::vec3(((84/2 )), ((48 / 2)), -51.2f));
-	Transform transform;
 
 	m_drawShader.Bind();
-	m_drawShader.Update(transform, camera);
+	m_drawShader.Update(m_transform, m_camera);
 	glBindVertexArray(m_drawVAO);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glBindVertexArray(0);
-	
-	
+
+
 
 
 }

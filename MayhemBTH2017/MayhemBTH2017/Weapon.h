@@ -3,7 +3,7 @@
 
 
 #include "Projectile.h"
-#include "ParticleSystem.h"
+#include "ParticleEmitter.h"
 #include "SoundManager.h"
 #include "String.h"
 
@@ -34,6 +34,7 @@ public:
 private:
 	Prefab*					m_prefabGun;
 	Prefab*					m_prefabProjectile;
+	ParticleEmitter			m_particleEmitter;
 	std::vector<Projectile*>m_projectiles;
 	ParticleSystem m_particles;
 	float m_restitution;
@@ -49,6 +50,16 @@ private:
 	bool m_isBullet;
 	int  m_controllerID;
 	unsigned int m_counter;
+
+
+	std::string				m_shaderName;
+	glm::vec3				m_pos;
+	glm::vec4				m_col;
+	float					m_size;
+	bool					m_render;
+	int						m_nrOf;
+	float					m_life;
+
 
 	SoundManager * m_soundManager;
 };
