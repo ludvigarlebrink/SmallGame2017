@@ -60,7 +60,7 @@ void SoundManager::PlayMusic(std::string soundName, bool paused)
 	{
 		if (m_musicSounds.at(i).m_soundPath.c_str() == soundFile)
 		{
-			m_system->playSound(m_musicSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_MUSIC], false, &m_channel[SOUND_CHANNEL_MUSIC_01]);
+			m_system->playSound(m_musicSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_MUSIC], paused, &m_channel[SOUND_CHANNEL_MUSIC_01]);
 		}
 	}
 }
@@ -80,9 +80,9 @@ void SoundManager::PlaySFX(std::string soundName, bool paused)
 		if (m_sfxSounds.at(i).m_soundPath.c_str() == soundFile)
 		{
 			if (m_channel[SOUND_CHANNEL_SFX_01]->isPlaying(&playing))
-				m_system->playSound(m_sfxSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_SFX], false, &m_channel[SOUND_CHANNEL_SFX_02]);
+				m_system->playSound(m_sfxSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_SFX], paused, &m_channel[SOUND_CHANNEL_SFX_02]);
 			else if (m_channel[SOUND_CHANNEL_SFX_02]->isPlaying(&playing))
-				m_system->playSound(m_sfxSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_SFX], false, &m_channel[SOUND_CHANNEL_SFX_01]);
+				m_system->playSound(m_sfxSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_SFX], paused, &m_channel[SOUND_CHANNEL_SFX_01]);
 		}
 	}
 }
@@ -99,7 +99,7 @@ void SoundManager::PlayAmbient(std::string soundName, bool paused)
 	{
 		if (m_ambientSounds.at(i).m_soundPath.c_str() == soundFile)
 		{
-			m_system->playSound(m_ambientSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_AMBIENT], false, &m_channel[SOUND_CHANNEL_AMBIENT_01]);
+			m_system->playSound(m_ambientSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_AMBIENT], paused, &m_channel[SOUND_CHANNEL_AMBIENT_01]);
 		}
 	}
 }

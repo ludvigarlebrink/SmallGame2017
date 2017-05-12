@@ -12,7 +12,7 @@ Menu::Menu()
 	m_currentSelection = 0;
 	m_selection.SetTexture(".\\Assets\\Sprites\\Selection.png");
 	m_selection.SetSize(336 * 0.8f, 78 * 0.8f);
-	
+
 	// Init title.
 	m_title.SetSize(FONT_SIZE + 12);
 	m_title.SetPosition(0, 170);
@@ -47,8 +47,8 @@ void Menu::Render()
 		{
 			// Set the position of the marker.
 			m_selection.SetPosition(0, (-i * (FONT_SIZE + 16)) + 70);
-			m_selection.Render();	
-			
+			m_selection.Render();
+
 			m_button[i]->text->SetPosition(0, (-i * (FONT_SIZE + 16)) + 70);
 
 			if (m_isScalning)
@@ -105,7 +105,7 @@ void Menu::GoForward()
 		m_stateManager->SetCurrentState(m_button[m_currentSelection]->gameState);
 		FreeChildren();
 	}
-	//m_soundManager->Play(SOUND_SFX_SHOT);
+	m_soundManager->PlaySFX("click");
 }
 
 void Menu::GoBack()
@@ -124,7 +124,7 @@ void Menu::GoBack()
 	m_parent->SetIsActive(true);
 	m_isActive = false;
 
-	//m_soundManager->Play(SOUND_SFX_SHOT);
+	m_soundManager->PlaySFX("click");
 }
 
 
@@ -139,6 +139,7 @@ void Menu::MoveUp()
 	m_button[m_currentSelection]->isSelected = false;
 
 	--m_currentSelection;
+	m_soundManager->PlaySFX("select");
 
 	if (m_currentSelection < 0)
 	{
@@ -159,6 +160,7 @@ void Menu::MoveDown()
 	m_button[m_currentSelection]->isSelected = false;
 
 	++m_currentSelection;
+	m_soundManager->PlaySFX("select");
 
 	if (m_currentSelection >= m_button.size())
 	{

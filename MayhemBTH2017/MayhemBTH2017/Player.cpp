@@ -161,7 +161,7 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
-			m_soundManager->PlaySFX("click");
+			m_soundManager->PlaySFX("punch");
 
 			ScoreManager::AddHitScore(m_hitByProjectileID);
 			m_life -= 0.1f;

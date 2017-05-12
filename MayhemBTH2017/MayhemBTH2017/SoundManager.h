@@ -89,7 +89,6 @@ private:
 	{
 		FMOD::Sound *	m_sound;
 		std::string		m_soundPath;
-		bool			m_isPlaying;
 	};
 
 	std::vector<Sounds>				m_sfxSounds;
