@@ -245,7 +245,7 @@ void GameSystem::InitPlay()
 		TransitionManager::StartFadingIn();
 		TimeManager::ResetDeltaTime();
 	}
-	m_soundManager->SwapMusic(SOUND_MUSIC_BACKGROUND_02);
+	m_soundManager->FadeInNewMusic("bensound-epic", 3, 10);
 	TransitionManager::Update();
 }
 

@@ -143,7 +143,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 		//create new projectile
 
 		if (m_isBullet == false) {
-			m_soundManager->Play(SOUND_SFX_EXPLOSION);
+			m_soundManager->PlaySFX("select");
 
 			projectile->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
@@ -171,7 +171,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 		else if (m_projectileCounter <= m_clearRate)
 		{
-			m_soundManager->Play(SOUND_SFX_EXPLOSION);
+			m_soundManager->PlaySFX("select");
 
 			//reuse projectile
 			m_projectiles[m_projectileCounter]->SetActive(false);
