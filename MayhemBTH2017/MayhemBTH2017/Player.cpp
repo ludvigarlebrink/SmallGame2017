@@ -87,44 +87,44 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
 
-	Prefab * projectile = PrefabManager::Instantiate("spike2", nullptr, nullptr, 0, "Candle");
+	Prefab * projectile = PrefabManager::Instantiate("Player", nullptr, nullptr, 0, "Candle");
 
-	Prefab * projectile2 = PrefabManager::Instantiate("sword3", nullptr, nullptr, 0, "Candle");
+	Prefab * projectile2 = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
 
-	Prefab * projectile3 = PrefabManager::Instantiate("missile3", nullptr, nullptr, 0, "Candle");
+	Prefab * projectile3 = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
-	Prefab * projectile4 = PrefabManager::Instantiate("bullet", nullptr, nullptr, 0, "Candle");
+	Prefab * projectile4 = PrefabManager::Instantiate("Rifle", nullptr, nullptr, 0, "Candle");
 
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
 	m_weapons[0] = Weapon(gun, projectile, m_controllerID);
 	m_weapons[0].SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 1.0f, 10, m_controllerID, 3.0f);
-	m_weapons[0].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 0.08f, 500, 1.0f);
+	m_weapons[0].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
 	m_weapons[1] = Weapon(gun, projectile2, m_controllerID);
 	m_weapons[1].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.3f, 10, m_controllerID, 0.7f);
-	m_weapons[1].InitParticleSystem(".\\Assets\\GLSL\\ParticleExplosion", glm::vec4(1.0, 1.0, 0.0, 1.0), 0.08f, 5000, 1.0f);
+	m_weapons[1].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
 	m_weapons[2] = Weapon(gun, projectile3, m_controllerID);
 	m_weapons[2].SetProjectileType(0.5f, 1.0f, 0.0f, 0.0f, 0.1f, 15, m_controllerID, 2.0f);
-	m_weapons[2].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 0.08f, 500, 1.0f);
+	m_weapons[2].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
 	m_weapons[3] = Weapon(gun, projectile4, m_controllerID);
 	m_weapons[3].SetProjectileType(0.2f, 1.0f, 0.0f, 0.0f, 0.1f, 18, m_controllerID, 0.7f);
-	m_weapons[3].InitParticleSystem(".\\Assets\\GLSL\\ParticleExplosion", glm::vec4(1.0, 1.0, 1.0, 1.0), 0.08f, 500, 1.0f);
+	m_weapons[3].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
 	m_weapons[4] = Weapon(gun, projectile, m_controllerID);
 	m_weapons[4].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.1f, 12, m_controllerID, 0.9f);
-	m_weapons[4].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 0.08f, 500, 1.0f);
+	m_weapons[4].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
 	m_weapons[5] = Weapon(gun, projectile2, m_controllerID);
 	m_weapons[5].SetProjectileType(0.8f, 1.0f, 0.0f, 0.0f, 0.1f, 11, m_controllerID, 10.2f);
-	m_weapons[5].InitParticleSystem(".\\Assets\\GLSL\\ParticleExplosion", glm::vec4(1.0, 1.0, 1.0, 1.0), 0.08f, 500, 1.0f);
+	m_weapons[5].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
 	m_weapons[6] = Weapon(gun, projectile3, m_controllerID);
 	m_weapons[6].SetProjectileType(0.7f, 1.0f, 0.0f, 0.0f, 0.1f, 14, m_controllerID, 10.2f);
-	m_weapons[6].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 0.08f, 500, 1.0f);
+	m_weapons[6].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
 	m_currentWeapon = 0;
 
@@ -161,7 +161,7 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
-			m_soundManager->Play(SOUND_SFX_BOUNCE);
+			m_soundManager->PlaySFX("punch");
 
 			ScoreManager::AddHitScore(m_hitByProjectileID);
 			m_life -= 0.1f;
@@ -196,6 +196,9 @@ void Player::Update() {
 	{
 		m_time += TimeManager::Get()->GetDeltaTime();
 		Respawn(glm::vec2(70, 70));
+
+		m_currentWeapon = 0;
+
 		if (Timer(2))
 		{
 			Respawn(glm::vec2(40, 30));

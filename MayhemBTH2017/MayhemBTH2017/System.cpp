@@ -32,12 +32,12 @@ void System::Run()
 	AntiAliasing msaa;
 	MeshQuad quad;
 
+
 	LevelEditor l;
 	MenuSystem m;
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
-	m_soundManager->Play(SOUND_MUSIC_BACKGROUND_01);
 	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
@@ -47,6 +47,8 @@ void System::Run()
 	int count = 1;
 	m.Init();
 	float counter = 0;
+
+	m_soundManager->PlayMusic("bensound-cute");
 
 	Camera cam;
 
@@ -76,9 +78,6 @@ void System::Run()
 
 			break;
 		case GameState::MAIN_MENU:
-
-			
-
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:

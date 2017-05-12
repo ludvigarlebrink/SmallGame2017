@@ -33,18 +33,14 @@ SoundManager * SoundManager::Get()
 	return m_instance;
 }
 
-bool SoundManager::GetPlaying()
-{
-	return m_playing;
-}
-float SoundManager::GetVolume()
-{
-	return m_volume;
-}
-
 void SoundManager::SetPause(SoundGroups channel, bool pause)
 {
 	m_channelGroup[channel]->setPaused(pause);
+}
+
+void SoundManager::SetPause(SoundChannels channel, bool pause)
+{
+	m_channel[channel]->setPaused(pause);
 }
 
 void SoundManager::SetVolume(SoundGroups channel, float volume)
@@ -52,29 +48,89 @@ void SoundManager::SetVolume(SoundGroups channel, float volume)
 	m_channelGroup[channel]->setVolume(volume);
 }
 
-void SoundManager::Play(Music sound)
+void SoundManager::PlayMusic(std::string soundName, bool paused)
 {
 	bool playing;
-	if (!m_channelGroup[SOUND_GROUP_MUSIC]->isPlaying(&playing))
-		m_system->playSound(m_musicSound[sound].m_sound, m_channelGroup[SOUND_GROUP_MUSIC], false, &m_channel[SOUND_CHANNEL_MUSIC_01]);
-	else
-		m_system->playSound(m_musicSound[sound].m_sound, m_channelGroup[SOUND_GROUP_MUSIC], false, &m_channel[SOUND_CHANNEL_MUSIC_02]);
+	std::string path = ".\\Assets\\Sounds\\Music\\";
+	std::string soundFile;
+
+	soundFile = path + soundName + ".wav";
+
+	for (int i = 0; i < m_musicSounds.size(); i++)
+	{
+		if (m_musicSounds.at(i).m_soundPath.c_str() == soundFile)
+		{
+			m_system->playSound(m_musicSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_MUSIC], paused, &m_channel[SOUND_CHANNEL_MUSIC_01]);
+		}
+	}
 }
 
-void SoundManager::Play(SFX sound)
+void SoundManager::PlaySFX(std::string soundName, bool paused)
 {
 	bool playing;
-	if (!m_channelGroup[SOUND_GROUP_NONE_LOOPING]->isPlaying(&playing))
-		m_system->playSound(m_sfxSound[sound].m_sound, m_channelGroup[SOUND_GROUP_NONE_LOOPING], false, &m_channel[SOUND_CHANNEL_NONE_LOOPING_01]);
-	else
-		m_system->playSound(m_sfxSound[sound].m_sound, m_channelGroup[SOUND_GROUP_NONE_LOOPING], false, &m_channel[SOUND_CHANNEL_NONE_LOOPING_02]);
+	std::string path = ".\\Assets\\Sounds\\SFX\\";
+	std::string soundFile;
+
+	FMOD::Sound*  yolo;
+
+	soundFile = path + soundName + ".wav";
+
+	for (int i = 0; i < m_sfxSounds.size(); i++)
+	{
+		if (m_sfxSounds.at(i).m_soundPath.c_str() == soundFile)
+		{
+			if (m_channel[SOUND_CHANNEL_SFX_01]->isPlaying(&playing))
+				m_system->playSound(m_sfxSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_SFX], paused, &m_channel[SOUND_CHANNEL_SFX_02]);
+			else if (m_channel[SOUND_CHANNEL_SFX_02]->isPlaying(&playing))
+				m_system->playSound(m_sfxSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_SFX], paused, &m_channel[SOUND_CHANNEL_SFX_01]);
+		}
+	}
+}
+
+void SoundManager::PlayAmbient(std::string soundName, bool paused)
+{
+	bool playing;
+	std::string path = ".\\Assets\\Sounds\\Ambient\\";
+	std::string soundFile;
+
+	soundFile = path + soundName + ".wav";
+
+	for (int i = 0; i < m_ambientSounds.size(); i++)
+	{
+		if (m_ambientSounds.at(i).m_soundPath.c_str() == soundFile)
+		{
+			m_system->playSound(m_ambientSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_AMBIENT], paused, &m_channel[SOUND_CHANNEL_AMBIENT_01]);
+		}
+	}
+}
+
+
+void SoundManager::FadeInNewMusic(std::string newSound, float fadeOutSeconds, float fadeInSeconds)
+{
+	unsigned long long dspClock;
+	int rate;
+	float volume;
+
+	m_channelGroup[SOUND_GROUP_MUSIC]->getVolume(&volume);
+
+	m_system->getSoftwareFormat(&rate, 0, 0);
+	m_channel[SOUND_CHANNEL_MUSIC_01]->getDSPClock(0, &dspClock);
+	m_channel[SOUND_CHANNEL_MUSIC_01]->addFadePoint(dspClock, volume);
+	m_channel[SOUND_CHANNEL_MUSIC_01]->addFadePoint(dspClock + (rate * fadeOutSeconds), 0.0);
+	m_channel[SOUND_CHANNEL_MUSIC_01]->setDelay(0, dspClock + (rate * fadeOutSeconds), true);
+
+	PlayMusic(newSound);
+
+	m_channel[SOUND_CHANNEL_MUSIC_01]->getDSPClock(0, &dspClock);
+	m_channel[SOUND_CHANNEL_MUSIC_01]->addFadePoint(dspClock, 0);
+	m_channel[SOUND_CHANNEL_MUSIC_01]->addFadePoint(dspClock + (rate * fadeInSeconds), volume);
+
 }
 
 void SoundManager::Update()
 {
 	m_system->update();
 }
-
 
 void SoundManager::Init()
 {
@@ -100,46 +156,51 @@ void SoundManager::Init()
 		m_system->createChannelGroup(NULL, &m_channelGroup[i]);
 
 	InitMusic();
-	InitNoneLooping();
-
+	InitSFX();
+	InitAmbient();
 }
 
 void SoundManager::InitMusic()
 {
 	std::string path = ".\\Assets\\Sounds\\Music\\";
-	std::string soundPath;
-	int counter = 0;
+	Sounds sounds;
 
 	for (auto & p : std::experimental::filesystem::directory_iterator(path))
 	{
-		soundPath = p.path().string();
-		m_system->createStream(soundPath.c_str(), FMOD_DEFAULT, 0, &m_musicSound[counter].m_sound);
-		m_system->playSound(m_musicSound[counter].m_sound, m_channelGroup[SOUND_GROUP_MUSIC], true, &m_channel[SOUND_CHANNEL_MUSIC_01]);
+		sounds.m_soundPath = p.path().string();
+		m_system->createStream(sounds.m_soundPath.c_str(), FMOD_DEFAULT, 0, &sounds.m_sound);
+		m_musicSounds.push_back(sounds);
 		m_channel[SOUND_CHANNEL_MUSIC_01]->setChannelGroup(m_channelGroup[SOUND_GROUP_MUSIC]);
 		m_channel[SOUND_CHANNEL_MUSIC_02]->setChannelGroup(m_channelGroup[SOUND_GROUP_MUSIC]);
-
-		if (counter < NUM_MUSIC)
-			counter++;
 	}
-
 }
 
-void SoundManager::InitNoneLooping()
+void SoundManager::InitAmbient()
 {
-	std::string path = ".\\Assets\\Sounds\\SFX\\";
-	std::string soundPath;
-	int counter = 0;
+	std::string path = ".\\Assets\\Sounds\\Ambient\\";
+	Sounds sounds;
 
 	for (auto & p : std::experimental::filesystem::directory_iterator(path))
 	{
-		soundPath = p.path().string();
-		m_system->createSound(soundPath.c_str(), FMOD_LOOP_OFF, 0, &m_sfxSound[counter].m_sound);
-		m_system->playSound(m_sfxSound[counter].m_sound, m_channelGroup[SOUND_GROUP_NONE_LOOPING], true, &m_channel[SOUND_CHANNEL_NONE_LOOPING_01]);
-		m_channel[SOUND_CHANNEL_NONE_LOOPING_01]->setChannelGroup(m_channelGroup[SOUND_GROUP_NONE_LOOPING]);
-		m_channel[SOUND_CHANNEL_NONE_LOOPING_02]->setChannelGroup(m_channelGroup[SOUND_GROUP_NONE_LOOPING]);
-
-		if (counter < NUM_SFX)
-			counter++;
+		sounds.m_soundPath = p.path().string();
+		m_system->createStream(sounds.m_soundPath.c_str(), FMOD_DEFAULT, 0, &sounds.m_sound);
+		m_ambientSounds.push_back(sounds);
+		m_channel[SOUND_CHANNEL_AMBIENT_01]->setChannelGroup(m_channelGroup[SOUND_GROUP_AMBIENT]);
+		m_channel[SOUND_CHANNEL_AMBIENT_02]->setChannelGroup(m_channelGroup[SOUND_GROUP_AMBIENT]);
 	}
+}
 
+void SoundManager::InitSFX()
+{
+	std::string path = ".\\Assets\\Sounds\\SFX\\";
+	Sounds sounds;
+
+	for (auto & p : std::experimental::filesystem::directory_iterator(path))
+	{
+		sounds.m_soundPath = p.path().string();
+		m_system->createSound(sounds.m_soundPath.c_str(), FMOD_LOOP_OFF, 0, &sounds.m_sound);
+		m_sfxSounds.push_back(sounds);
+		m_channel[SOUND_CHANNEL_SFX_01]->setChannelGroup(m_channelGroup[SOUND_GROUP_SFX]);
+		m_channel[SOUND_CHANNEL_SFX_02]->setChannelGroup(m_channelGroup[SOUND_GROUP_SFX]);
+	}
 }

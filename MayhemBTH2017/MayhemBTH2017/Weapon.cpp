@@ -4,27 +4,14 @@
 
 Weapon::Weapon()
 {
-
-
 }
 
 Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 {
-
-
-	//m_texMan.AddTexture("fireball", ".\\Assets\\Textures\\fireball.png");
-	Prefab * flash = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
-	flash->SetShaderProgram(".\\Assets\\GLSL\\BulletShader");
-
-	m_muzzleFlash = flash;
-
 	m_isBullet = false;
 	m_prefabGun = gun;
-	m_render = false;
-	m_prefabProjectile = projectile;
 
-	bool count = false;
-	m_particletimer = 0;
+	m_prefabProjectile = projectile;
 
 	m_time = 0;
 	m_clearTime = 0;
@@ -35,7 +22,6 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 	m_controllerID = controllerID;
 
 	m_soundManager = SoundManager::Get();
-
 }
 
 Weapon::Weapon(Prefab * gun)
@@ -70,34 +56,16 @@ void Weapon::SetProjectileType(float restitution, float friction, float damping,
 
 void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 {
-
 	//m_prefabGun->SetPosition(playerPos);
-
 	m_time += TimeManager::Get()->GetDeltaTime();
-
-	if (m_particletimer >= 0.0f) {
-		m_particletimer += TimeManager::Get()->GetDeltaTime();
-	}
-
 	m_clearTime += TimeManager::Get()->GetDeltaTime();
 
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
 		m_projectiles[i]->Update();
-
-
-		if (m_projectiles[i]->GetContact()) {
-
-
-
-
-
-		}
 	}
 
-
-
-
+	//DeleteProjectile();
 
 
 }
@@ -114,20 +82,11 @@ void Weapon::DeleteProjectile()
 		m_projectileCounter = 0;
 		m_clearTime = 0;
 	}
-
-
 }
-
 
 void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life)
 {
-	m_shaderName = shadername;
-	m_col = col;
-	m_size = size;
-	m_nrOf = nrof;
-	m_plife = life;
-
-
+	//m_particles = new ParticleSystem(shadername, glm::vec3(20, 20, 0), col, size, life, life);
 
 }
 
@@ -151,9 +110,10 @@ float Weapon::GetFireRate()
 void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID)
 {
 
-
-
-
+	if (m_clearTime ==0) {
+		std::cout << "PANG<" << std::endl;
+	}
+	
 	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
 
 	if (abs(force.x) > 0.3f || abs(force.y) > 0.3f)
@@ -178,42 +138,24 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 	if (m_projectiles.size() < m_clearRate)
 	{
-
 		Projectile* projectile = nullptr;
 		projectile = new Projectile();
-
-
 		//create new projectile
 
 		if (m_isBullet == false) {
-			m_soundManager->Play(SOUND_SFX_EXPLOSION);
-
+			m_soundManager->PlaySFX("skorpion");
 			projectile->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile, m_controllerID, m_life);
-
+		
 		}
 
+		Camera camera;
+		Transform temptransform;
+		temptransform.SetPosition(projectile->GetBox().getBody()->GetPosition().x, projectile->GetBox().getBody()->GetPosition().y, 0);
 
 
 		projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
-		Camera camera;
-
-
-		//Init projectiles when projectile has contact
-		if (projectile->GetContact() == true) {
-			m_render = true;
-
-			Transform temptransform;
-			temptransform.SetPosition(projectile->GetBox().getBody()->GetPosition().x, projectile->GetBox().getBody()->GetPosition().y, 0);
-			m_muzzlePos = temptransform.GetPosition();
-
-			/*	m_particleEmitter = nullptr;
-				m_particleEmitter = new ParticleEmitter();*/
-			m_particleEmitter->SetParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(20, 10, 0), glm::vec4(1.0, 1.0, 1.0, 1.0), 246.8f, 500, 1.0f);
-
-		}
-
 		m_projectiles.push_back(projectile);
 
 
@@ -228,7 +170,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 		else if (m_projectileCounter <= m_clearRate)
 		{
-			m_soundManager->Play(SOUND_SFX_EXPLOSION);
+			m_soundManager->PlaySFX("skorpion");
 
 			//reuse projectile
 			m_projectiles[m_projectileCounter]->SetActive(false);
@@ -240,43 +182,13 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 			//m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
 			m_projectiles[m_projectileCounter]->AddForce(glm::vec3(m_previousForce, 0.0f), controllerID);
 
-
-			//Init projectiles when projectile has contact
-			if (m_projectiles[m_projectileCounter]->GetContact() == true) {
-				m_render = true;
-
-
-				Transform temptransform;
-				temptransform.SetPosition(m_projectiles[m_projectileCounter]->GetBox().getBody()->GetPosition().x, m_projectiles[m_projectileCounter]->GetBox().getBody()->GetPosition().y, 0);
-				std::cout << "contact2" << std::endl;
-
-				/*m_particleEmitter = nullptr;
-				m_particleEmitter = new ParticleEmitter();*/
-				m_particleEmitter->SetParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(20, 10, 0), glm::vec4(1.0, 1.0, 1.0, 1.0), 246.8f, 500, 1.0f);
-			}
 			m_projectileCounter++;
-
-
+			
 		}
 
 	}
 
-	//if (m_particletimer >= 3.0) {
-	//	m_particleEmitter = nullptr;
-	//	m_render = false;
-	//	m_particletimer = -1;
-	//}
 
-
-
-
-
-	//	Camera cam;
-		//cam.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-	//	m_muzzleFlash->SetScale(1, 1, 1);
-		//m_muzzleFlash->SetPosition(pos.x - (2.0f*InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X)), m_muzzlePos.y, 0);
-		//	m_muzzleFlash->Update();
-		//	m_muzzleFlash->Render(cam);
 
 
 }
@@ -303,13 +215,6 @@ void Weapon::Render(Camera camera)
 		m_projectiles[i]->Update();
 		m_projectiles[i]->Render(camera);
 
-
-
-
-
 	}
-	if (m_render) {
-		m_particleEmitter->Update();
-		m_particleEmitter->Render();
-	}
+
 }

@@ -58,6 +58,7 @@ private:
 	float		m_time;
 	float			m_life;
 	float		m_lifeTime;
+	bool		m_onGround;
 
 	bool m_renderParticles;
 	bool m_hasParticles;
@@ -83,6 +84,7 @@ private:
 	int m_controllerID;
 
 	bool m_active;
+	float m_restitution;
 
 	
 	enum _entityCategory {
