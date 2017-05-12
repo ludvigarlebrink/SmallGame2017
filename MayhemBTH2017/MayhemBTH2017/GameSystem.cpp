@@ -272,6 +272,8 @@ void GameSystem::Play()
 	m_world->Update();
 	m_world->Render(m_camera);
 
+	m_atomicBomb.Update(m_camera);
+
 	if (TransitionManager::GetIsBlack())
 	{
 			m_currState = LOAD_NEXT_LEVEL;

@@ -7,9 +7,11 @@ float PostProcessingManager::m_deltaTime = 0.0f;
 float PostProcessingManager::m_lastFrame = 0.0f;
 float PostProcessingManager::m_shakeTime = 0.0f;
 float PostProcessingManager::m_chaosTime = 0.0f;
+float PostProcessingManager::m_atomicTime = 0.0f;
 
 bool PostProcessingManager::m_shake = false;
 bool PostProcessingManager::m_chaos = false;
+bool PostProcessingManager::m_atomic = false;
 
 PostProcessingManager::PostProcessingManager()
 {
@@ -42,6 +44,11 @@ bool PostProcessingManager::IsChaos()
 	return m_chaos;
 }
 
+bool PostProcessingManager::IsAtomic()
+{
+	return m_atomic;
+}
+
 float PostProcessingManager::GetShakingTime()
 {
 	return m_shakeTime;
@@ -51,30 +58,63 @@ float PostProcessingManager::GetChaosTime()
 	return m_chaosTime;
 }
 
-
-void PostProcessingManager::StartTimer()
+float PostProcessingManager::GetAtmoicTime()
 {
-		
-	//m_lastFrame = static_cast<float>(SDL_GetTicks()) / 1000.0f;
-
-	m_currentFrame = static_cast<float>(SDL_GetTicks()) / 1000.0f;
-
-	m_deltaTime = m_currentFrame - m_lastFrame;
-	m_lastFrame = m_currentFrame;
+	return m_atomicTime;
 }
+
 
 void PostProcessingManager::Shake()
 {
 
 }
 
-void PostProcessingManager::Update(int state)
+
+void PostProcessingManager::Update()
 {
-	StartTimer();
+	if (!m_chaos && !m_shake && !m_atomic)
+	{
+		return;
+	}
+
+	if (m_chaosTime > 0.0f)
+	{
+
+		m_chaosTime -= TimeManager::GetDeltaTime();
+		if (m_chaosTime <= 0.0)
+		{
+			m_chaos = false;
+		}
+	}
+
+	if (m_shakeTime > 0.0f)
+	{
+
+		m_shakeTime -= TimeManager::GetDeltaTime();
+		if (m_shakeTime <= 0.0)
+		{
+			m_shake = false;
+			m_chaos = false;
+		}
+	}
+	if (m_atomicTime > 0.0f)
+	{
+
+		m_atomicTime -= TimeManager::GetDeltaTime() * 4;
+		if (m_atomicTime <= 0.0)
+		{
+			m_shake = false;
+			m_chaos = false;
+			m_atomic = false;
+		}
+	}
+}
+
+
+void PostProcessingManager::SetState(int state)
+{
 	switch (state)
 	{
-	default:
-		break;
 	case NOTHING:
 		/*m_shake = false;
 		m_chaos = false;*/
@@ -87,33 +127,18 @@ void PostProcessingManager::Update(int state)
 		m_chaos = true;
 		m_chaosTime = 3.0f;
 		break;
+	case ATOMIC:
+		m_atomic = true;
+		m_atomicTime = 20;
 	case CHAOS | SHAKE:
 		m_shake = true;
 		//m_chaos = true;
 		break;
+	default:
+		break;
 	}
-	if (m_chaosTime > 0.0f)
-	{
-
-		m_chaosTime -= m_deltaTime;
-		if (m_chaosTime <= 0.0)
-		{
-			m_chaos = false;
-		}
-	}
-
-	if (m_shakeTime > 0.0f)
-	{
-
-		m_shakeTime -= m_deltaTime;
-		if (m_shakeTime <= 0.0)
-		{
-			m_shake = false;
-			m_chaos = false;
-		}
-	}
-
 }
+
 
 PostProcessingManager * PostProcessingManager::Get()
 {

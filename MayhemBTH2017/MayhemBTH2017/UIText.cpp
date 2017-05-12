@@ -152,6 +152,7 @@ int UIText::GetSize() const
 	return m_size;
 }
 
+
 float UIText::GetScale() const
 {
 	return m_scale;
@@ -165,16 +166,19 @@ void UIText::SetText(const char* text)
 	m_hasUpdated = true;
 }
 
+
 void UIText::SetPosition(int x, int y)
 {
 	m_posX = x;
 	m_posY = y;
 }
 
+
 void UIText::SetSize(int size)
 {
 	m_size = size;
 }
+
 
 void UIText::SetScale(float scale)
 {
@@ -204,15 +208,18 @@ void UIText::SetPivot(uint32_t pivot)
 	m_pivot = pivot;
 }
 
+
 void UIText::SetFont(const char * filepath)
 {
 	m_font = filepath;
 	m_hasUpdated = true;
 }
 
+
 void UIText::SetOutlineSize()
 {
 }
+
 
 void UIText::SetOutlineColor()
 {

@@ -76,8 +76,6 @@ public:
 	void SetOutlineSize();
 	void SetOutlineColor();
 
-
-
 private:
 	//::.. HELP FUNCTIONS .:://
 	void CreateMesh();

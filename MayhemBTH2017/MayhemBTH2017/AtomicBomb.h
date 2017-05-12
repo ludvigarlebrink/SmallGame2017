@@ -6,6 +6,7 @@
 #include "VideoManager.h"
 #include "Timer.h"
 #include "Camera.h"
+#include "PostProcessingManager.h"
 
 
 class AtomicBomb
@@ -19,10 +20,34 @@ public:
 
 
 private:
-	Prefab * m_bomber;
-	Prefab * m_atomicBomb;
+	enum States
+	{
+		FLYING = 0,
+		BOMB_DROPPED,
+		BOMB_EXPLOSION
+	};
 
-	bool m_sequenceStarted;
+	enum Uniforms
+	{
+		SCREEN_WIDTH,
+		SCREEN_HEIGHT,
+		T,
+		NUM_UNIFORMS
+	};
+
+	uint32_t	m_currState;
+
+	Prefab *	m_bomber;
+	Prefab *	m_atomicBomb;
+
+	bool		m_sequenceStarted;
+
+	GLuint m_shader;
+	GLuint m_vao;
+	GLuint m_buffer;
+	GLuint m_uniforms[NUM_UNIFORMS];
+	float m_t;
+	bool m_shakeEffect;
 
 };
 

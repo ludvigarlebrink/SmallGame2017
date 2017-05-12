@@ -161,7 +161,7 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
-			m_soundManager->Play(SOUND_CHANNEL_NONE_LOOPING_01, SOUND_SFX_BOUNCE);
+			m_soundManager->Play(SOUND_SFX_BOUNCE);
 
 			ScoreManager::AddHitScore(m_hitByProjectileID);
 			m_life -= 0.1f;
@@ -188,10 +188,7 @@ void Player::Update() {
 		}
 		m_contact = false;
 	}
-	else
-	{
-		PostProcessingManager::Get()->Update(0);
-	}
+
 	if (m_dead)
 	{
 		m_time += TimeManager::Get()->GetDeltaTime();
