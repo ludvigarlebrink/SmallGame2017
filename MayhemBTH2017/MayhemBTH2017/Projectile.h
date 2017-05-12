@@ -6,7 +6,7 @@
 #include "Texture.h"
 #include "TextureHandler.h"
 #include "Box.h"
-#include "ParticleSystem.h"
+#include "ParticleEmitter.h"
 #include "Collidable.h"
 
 
@@ -36,7 +36,7 @@ public:
 	Prefab* GetPrefab();
 	Box GetBox();
 	ParticleSystem* m_particles;
-	bool GetContact();
+	bool GetContactStatus();
 	bool IsActive();
 	int GetProjectileID();
 	float m_particleTimer;
@@ -45,13 +45,14 @@ public:
 	void Render(Camera camera);
 	void StartContact();
 	void EndContact();
-
+	bool GetContact();
 
 
 
 private:
 	Prefab*		m_prefab;
 	Prefab m_prefabPointer;
+	ParticleEmitter emitter;
 	Box			m_box;
 	float		m_fireRate;
 	float		m_time;

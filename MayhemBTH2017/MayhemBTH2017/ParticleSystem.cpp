@@ -5,6 +5,7 @@
 ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf, float life)
 
 {
+	glGenVertexArrays(1, &m_vao[0]);
 	m_drawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0); //Shade for drawing the transformed particles
 
 	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
@@ -116,9 +117,10 @@ ParticleSystem::~ParticleSystem()
 {
 	std::cout << "DECONSTRUCTOR" << std::endl;
 
+
 	glDeleteProgram(m_drawShader.GetProgramID());
 	glDeleteProgram(m_pShader.GetProgramID());
-
+	glUseProgram(0);
 
 }
 
@@ -169,7 +171,7 @@ void ParticleSystem::UpdateParticles() {
 
 	glUseProgram(m_pShader.GetProgramID());
 	glEnable(GL_RASTERIZER_DISCARD);
-	glGenVertexArrays(1, &m_vao[0]);
+
 	glBindVertexArray(m_vao[0]);
 	glBindBuffer(GL_ARRAY_BUFFER, m_particleBufferA);
 

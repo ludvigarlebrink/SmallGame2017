@@ -12,5 +12,5 @@ void main()
 	
 
 	vec4 tex=texture(DiffuseMap, UV1.xy);
-	FragColor = tex;
+	FragColor = glm::vec4(1.0, 1.0, 0.0, 1.0);
 }

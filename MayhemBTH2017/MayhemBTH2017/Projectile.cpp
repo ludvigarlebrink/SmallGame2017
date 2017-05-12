@@ -4,13 +4,17 @@
 
 Projectile::Projectile()
 {
-	//m_particles = new ParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(20, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 500, 5.0f);
+
+	m_hasParticles = false;
 
 	m_time = 0.0;
 	m_rotationUpdate = 0.0f;
 	m_renderParticles = false;
 	m_hasParticles = false;
 	m_particleTimer = 0;
+
+	m_renderParticles = false;
+
 }
 
 
@@ -58,7 +62,11 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 
 }
 
+bool Projectile::GetContactStatus() {
 
+
+	return 1;
+}
 
 void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 {
@@ -66,8 +74,6 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 	m_bulletScale = 2;
 
 	m_active = true;
-
-	//m_bulletSprite = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");//PrefabManager::InstantiateSprite("RifleProjectile");
 
 	m_box.InitDynamic(world, spawnPos, glm::vec2(2, 0.8));
 	m_box.getBody()->SetUserData(this);
@@ -158,19 +164,23 @@ int Projectile::GetProjectileID()
 
 void Projectile::Update()
 {
+
+
 	m_lifeTime += TimeManager::GetDeltaTime();
+
 
 	if (m_contact)
 	{
-		if (m_lifeTime >= m_life)
-		{
-			GetBox().getBody()->SetActive(false);
-			SetActive(false);
-			m_renderParticles = true;
+		
+		/*	if (m_lifeTime >= m_life)*/
+			//{
+		GetBox().getBody()->SetActive(false);
+		SetActive(false);
 
-			m_lifeTime = 0;
-		}
+
+		//}
 	}
+
 
 	if (m_active)
 	{
@@ -198,17 +208,15 @@ void Projectile::Render(Camera camera)
 	if (m_active)
 	{
 
-		
+
 		m_prefabPointer.Update();
 		m_prefabPointer.Render(camera);
-	
-	
+
+
+
 	}
 
-	if (m_renderParticles) {
-		//m_particles->UpdateParticles();
-		//m_particles->RenderTransformed();
-	}
+
 }
 
 void Projectile::StartContact()
