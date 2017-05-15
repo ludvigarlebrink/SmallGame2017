@@ -152,7 +152,7 @@ void SoundManager::Init()
 
 	m_system->init(36, FMOD_INIT_NORMAL, NULL);
 
-	for (int i = 0; i < NUM_SOUNDTYPE; i++)
+	for (int i = 0; i < NUM_GROUPS; i++)
 		m_system->createChannelGroup(NULL, &m_channelGroup[i]);
 
 	InitMusic();

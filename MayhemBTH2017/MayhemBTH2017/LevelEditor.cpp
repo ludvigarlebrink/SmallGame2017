@@ -77,7 +77,6 @@ void LevelEditor::Update()
 		m_menuText[1].Render();
 		m_menuText[2].Render();
 
-
 		MenuInput();
 		break;
 
@@ -87,19 +86,32 @@ void LevelEditor::Update()
 		break;
 
 	case LOAD:
-		Reset();
 		m_levelHandler.GetLevelNames(m_levelText);
 		for (int i = 0; i < m_levelHandler.GetNumLevels(); i++)
 		{
 			m_levelChoice[i].SetText(m_levelText.at(i).c_str());
-			m_levelChoice[i].SetPosition(0, -50 * i);
-			m_levelChoice[i].Render();
+		}
+
+		for (int i = 0; i < 5; i++)
+		{
+			if (i > m_levelHandler.GetNumLevels())
+				break;
+
+			m_levelChoice[i + (5 * m_levelSelector)].SetPosition(0, -50 * i);
+			m_levelChoice[i + (5 * m_levelSelector)].Render();
 
 			if (m_levelSelector == i)
-				m_levelChoice[i].SetColor(255, 255, 255, 255);
+			{
+				m_levelChoice[i + (5 * m_levelSelector)].SetColor(255, 255, 255, 255);
+			}
 			else
-				m_levelChoice[i].SetColor(255, 0, 0, 255);
+			{
+				m_levelChoice[i + (5 * m_levelSelector)].SetColor(255, 0, 0, 255);
+			}
+
 		}
+
+
 		MenuInput();
 		break;
 	default:
@@ -298,7 +310,7 @@ void LevelEditor::MenuInput()
 
 		else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
 		{
-			if (m_levelSelector + 1 < m_levelHandler.GetNumLevels())
+			if (m_levelSelector + 1 < m_levelHandler.GetNumLevels() / 5 + 1)
 			{
 				m_levelSelector++;
 			}
@@ -312,6 +324,7 @@ void LevelEditor::MenuInput()
 		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 		{
 			m_levelHandler.Import(m_level, m_levelID, m_levelChoice[m_levelSelector].GetText());
+			Reset();
 			m_state = EDIT;
 		}
 		break;
@@ -330,6 +343,12 @@ void LevelEditor::MenuInput()
 			break;
 
 		case 2:
+			// Reset everything
+			Reset();
+			m_virtualKeyboard.Reset();
+			m_state = EDIT;
+			m_levelSelector = 0;
+			m_textPos = 0;
 			m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 			break;
 		}

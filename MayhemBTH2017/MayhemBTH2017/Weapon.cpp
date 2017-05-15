@@ -187,10 +187,6 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 		}
 
 	}
-
-
-
-
 }
 
 bool Weapon::FireRate(float rate)
