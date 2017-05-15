@@ -43,10 +43,21 @@ void VirtualKeyboard::Render()
 	m_chars[m_pos].Render();
 }
 
+void VirtualKeyboard::Reset()
+{
+	m_pos = 0;
+	m_inputString = "";
+}
+
 
 const char * VirtualKeyboard::GetString() const
 {
 	return m_inputString.c_str();
+}
+
+void VirtualKeyboard::SetString(std::string text)
+{
+	m_inputString = text;
 }
 
 
