@@ -1,11 +1,16 @@
 #include "Background.h"
 
 
+bool Background::m_isPostNuclear = false;
+
 
 Background::Background()
 {
 	m_backgroundType = 0;
 	InitBackground();
+	Init();
+
+	m_t = 0;
 }
 
 
@@ -74,10 +79,41 @@ void Background::UpdateGrandCanyon()
 		m_sprites[5].SetPosition(1350.0f * deltaWidth, m_sprites[5].GetPosY());
 	}
 
-	for (uint32_t i = 0; i < 7; i++)
+	if (!m_isPostNuclear)
 	{
-		m_sprites[i].Render();
+		for (uint32_t i = 0; i < 7; i++)
+		{
+			m_sprites[i].Render();
+		}
 	}
+	else
+	{
+		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+		glUseProgram(m_shader);
+	
+		glUniform1f(m_uniforms[TIME], m_t);
+		glUniform2f(m_uniforms[RESOLUTION], VideoManager::Get()->GetWidth(), VideoManager::Get()->GetHeight());
+		glUniform1f(m_uniforms[ALPHA], 1.0f);
+	
+		glBindVertexArray(m_vao);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindVertexArray(0);
+	
+		glUseProgram(0);
+	
+		glDisable(GL_BLEND);
+
+		glEnable(GL_DEPTH_TEST);
+
+		m_sprites[6].SetIsGreyscale(true);
+		m_sprites[6].Render();
+
+		m_t += TimeManager::GetDeltaTime() * 0.14f;
+	}
+
 }
 
 
@@ -135,4 +171,69 @@ void Background::InitBackground()
 	default:
 		break;
 	}
+}
+
+void Background::SetIsPostNuclear(bool value)
+{
+	m_isPostNuclear = value;
+}
+
+
+void Background::Init()
+{
+
+	std::string shaders[2];
+	shaders[0] = ".\\Assets\\GLSL\\NuclearShader.vert";
+	shaders[1] = ".\\Assets\\GLSL\\NuclearShader.frag";
+
+	uint32_t shaderTypes[2];
+	shaderTypes[0] = ShaderManager::VERT_SHADER;
+	shaderTypes[1] = ShaderManager::FRAG_SHADER;
+
+
+	m_shader = ShaderManager::CreateAndAttachShaders("Nuclear", shaders, shaderTypes, 2);
+
+	glBindAttribLocation(m_shader, 0, "Position");
+
+	ShaderManager::LinkAndValidate("Nuclear");
+
+	m_uniforms[TIME] = glGetUniformLocation(m_shader, "Time");
+	m_uniforms[RESOLUTION] = glGetUniformLocation(m_shader, "Resolution");
+	m_uniforms[ALPHA] = glGetUniformLocation(m_shader, "Alpha");
+
+	glm::vec3 vertices[6] =
+	{
+		glm::vec3(-1.0f, -1.0f, 0.0f),
+		glm::vec3(1.0f, -1.0f, 0.0f),
+		glm::vec3(-1.0f, 1.0f, 0.0f),
+		glm::vec3(1.0f, -1.0f, 0.0f),
+		glm::vec3(-1.0f, 1.0f, 0.0f),
+		glm::vec3(1.0f, 1.0f, 0.0f)
+	};
+
+	// Generate VAO.
+	glGenVertexArrays(1, &m_vao);
+
+	// Bind VAO.
+	glBindVertexArray(m_vao);
+
+	// Enable attributes.
+	glEnableVertexAttribArray(0);
+
+	// Generate buffers.
+	glGenBuffers(1, &m_buffer);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
+
+	// Copy data to the gpu.
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * 6, vertices, GL_STATIC_DRAW);
+
+	uint64_t offset = 0;
+
+	// Position.
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), 0);
+
+
+	// Unbind
+	glBindVertexArray(0);
 }

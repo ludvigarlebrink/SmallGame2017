@@ -4,9 +4,10 @@
 
 AtomicBomb::AtomicBomb()
 {
-	m_bomber = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
-	m_atomicBomb = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
-
+	m_bomber = PrefabManager::Instantiate("Bomber", nullptr, nullptr, 0, "Bomber");
+	m_atomicBomb = PrefabManager::Instantiate("AtomicBomb", nullptr, nullptr, 0, "AtomicBomb");
+	m_bomber->SetRotation(0.0f, 90.0f, 0.0f);
+	m_atomicBomb->SetRotation(90.0f, 0.0f, 0.0f);
 //	VideoManager->VM
 
 	m_bomber->SetPosition(glm::vec3(100.0f, 38.0f, -10.0f));
@@ -97,7 +98,7 @@ void AtomicBomb::Update(Camera &cam)
 	switch (m_currState)
 	{
 	case FLYING:
-		m_bomber->SetPosition(glm::vec3(m_bomber->GetPosition().x - (TimeManager::GetDeltaTime() * 35.0f), 38.0f, -10.0f));
+		m_bomber->SetPosition(glm::vec3(m_bomber->GetPosition().x - (TimeManager::GetDeltaTime() * 20.0f), 38.0f, -10.0f));
 		m_bomber->Render(cam);
 
 		if (m_bomber->GetPosition().x < 38)
@@ -108,10 +109,10 @@ void AtomicBomb::Update(Camera &cam)
 		break;
 
 	case BOMB_DROPPED:
-		m_bomber->SetPosition(glm::vec3(m_bomber->GetPosition().x - (TimeManager::GetDeltaTime() * 35.0f), 38.0f, -10.0f));
-		m_atomicBomb->SetPosition(glm::vec3(42.0f, m_atomicBomb->GetPosition().y - (TimeManager::GetDeltaTime() * 20.0f), -10.0f));
+		m_bomber->SetPosition(glm::vec3(m_bomber->GetPosition().x - (TimeManager::GetDeltaTime() * 20.0f), 38.0f, -10.0f));
+		m_atomicBomb->SetPosition(glm::vec3(42.0f, m_atomicBomb->GetPosition().y - (TimeManager::GetDeltaTime() * 10.0f), -10.0f));
 
-		if (m_atomicBomb->GetPosition().y < 10.0f)
+		if (m_atomicBomb->GetPosition().y < 20.0f)
 		{
 			m_currState = BOMB_EXPLOSION;
 		}
@@ -130,7 +131,6 @@ void AtomicBomb::Update(Camera &cam)
 			m_shakeEffect = true;
 		}
 		m_bomber->Render(cam);
-		m_atomicBomb->Render(cam);
 
 		m_t += TimeManager::GetDeltaTime() * 1.0f;
 
@@ -150,6 +150,11 @@ void AtomicBomb::Update(Camera &cam)
 		glUseProgram(0);
 
 		glDisable(GL_BLEND);
+
+		if (m_t > 1.0f)
+		{
+			Background::SetIsPostNuclear(true);
+		}
 
 		break;
 

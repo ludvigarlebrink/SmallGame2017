@@ -7,6 +7,7 @@
 #include "Timer.h"
 #include "Camera.h"
 #include "PostProcessingManager.h"
+#include "Background.h"
 
 
 class AtomicBomb
