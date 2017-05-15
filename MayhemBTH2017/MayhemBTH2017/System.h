@@ -8,6 +8,7 @@
 #include "StateManager.h"
 #include "ScoreManager.h"
 #include "SoundManager.h"
+#include "PostProcessingManager.h"
 
 #include "AntiAliasing.h"
 #include "MeshQuad.h"

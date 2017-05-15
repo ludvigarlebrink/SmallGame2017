@@ -107,6 +107,8 @@ void System::Run()
 			break;
 		}
 
+		// Update managers.
+		PostProcessingManager::Update();
 		ScoreManager::Update();
 
 
