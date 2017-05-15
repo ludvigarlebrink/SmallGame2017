@@ -25,6 +25,7 @@ public:
 
 	virtual void Update();
 	virtual void Render(Camera& cam);
+	virtual void RenderShadow(Camera& cam);
 
 	void Create();
 	void Free();

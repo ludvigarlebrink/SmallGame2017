@@ -26,7 +26,10 @@ public:
 	virtual ~Collider2D();
 	void SetBoxCollider(glm::vec2 min, glm::vec2 max);
 	void CreateBoundingBoxes(b2World* world);
+
 	void DrawCollider(Camera camera);
+	void DrawColliderShadowPass(Camera camera);
+	
 	void ImportLevel(Level level);
 	void CreatePlayerBoundingBox(b2World* world);
 	uint16 GetMaskBits();

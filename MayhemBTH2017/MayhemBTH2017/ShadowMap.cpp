@@ -40,8 +40,8 @@ void ShadowMap::Init()
 void ShadowMap::FirstPass()
 {
 	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
-	glBindFramebuffer(GL_FRAMEBUFFER, m_depthMap);
-	glClear(GL_DEPTH_BUFFER_BIT);
+	glBindFramebuffer(GL_FRAMEBUFFER, m_depthMap);// error
+	//glClear(GL_DEPTH_BUFFER_BIT);
 }
 
 void ShadowMap::SecPass()

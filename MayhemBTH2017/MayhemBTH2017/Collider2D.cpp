@@ -40,6 +40,13 @@ void Collider2D::DrawCollider(Camera camera)
 	
 }
 
+void Collider2D::DrawColliderShadowPass(Camera camera)
+{
+	Transform transf;
+	transf.SetPosition(42.0, 24.0, -0.0);
+	m_level.Render();
+}
+
 void Collider2D::CreateBoundingBoxes(b2World* world) {
 
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");

@@ -54,14 +54,12 @@ float PostProcessingManager::GetChaosTime()
 
 void PostProcessingManager::StartTimer()
 {
-		
-	//m_lastFrame = static_cast<float>(SDL_GetTicks()) / 1000.0f;
 
 	m_currentFrame = static_cast<float>(SDL_GetTicks()) / 1000.0f;
 
 	m_deltaTime = m_currentFrame - m_lastFrame;
 	m_lastFrame = m_currentFrame;
-	//std::cout << m_deltaTime << std::endl;
+
 }
 
 void PostProcessingManager::Shake()
@@ -90,7 +88,7 @@ void PostProcessingManager::Update(int state)
 		break;
 	case CHAOS | SHAKE:
 		m_shake = true;
-		//m_chaos = true;
+		m_chaos = true;
 		break;
 	}
 	if (m_chaosTime > 0.0f)
@@ -110,10 +108,9 @@ void PostProcessingManager::Update(int state)
 		if (m_shakeTime <= 0.0)
 		{
 			m_shake = false;
-			m_chaos = false;
+			
 		}
 	}
-	//std::cout << "T\t" << m_shakeTime << std::endl;
 
 }
 

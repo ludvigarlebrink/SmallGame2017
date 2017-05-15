@@ -46,10 +46,15 @@ void main()
 		sampleTex[i] = vec3(texture(DiffuseMap,TexCoords1.xy +offsets[i]));
 	}
 
+
 	vec4 col;
 	//col = texture2D(DiffuseMap, TexCoords1.xy);
 
-	if(Shake)
+	if(Chaos && Shake)
+	{
+		col = 1 - texture2D(DiffuseMap, TexCoords1.xy);
+	}
+	else if(Shake)
 	{
 		for(int i =0;i<9;i++)
 			col += vec4(sampleTex[i] * kernalB[i], 0.0f);
@@ -58,10 +63,6 @@ void main()
 	else if(Chaos)
 	{
 		col = 1 - texture2D(DiffuseMap, TexCoords1.xy);
-	}
-	else if(Chaos || Shake)
-	{
-		col = texture2D(DiffuseMap, TexCoords1.xy);
 	}
 	else
 	{

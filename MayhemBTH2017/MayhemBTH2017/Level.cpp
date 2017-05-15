@@ -38,6 +38,13 @@ void Level::Render(Camera camera)
 	//m_backgroundShader->Render(camera);
 }
 
+void Level::Render()
+{
+	m_mesh.Render();
+	m_mesh2.Render();
+
+}
+
 
 //::.. MODIFY FUNCTIONS ..:://
 void Level::AddBlock(uint32_t posX, uint32_t posY, glm::vec2 uv)

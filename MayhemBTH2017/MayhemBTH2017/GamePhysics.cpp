@@ -7,6 +7,9 @@
 GamePhysics::GamePhysics()
 {
 	m_loadWorld = false;
+	m_shadowShader.Init("ShadowShader");
+	m_shadowShader2.Init("ShadowShaderPlayer");
+	m_shadowMap.Init();
 }
 
 GamePhysics::~GamePhysics()
@@ -98,21 +101,34 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 
 void GamePhysics::Render(Camera camera) {
 
-	m_particles.UpdateParticles();
-	m_particles.RenderTransformed();
-	m_floorCollider.DrawCollider(camera);
+	//m_particles.UpdateParticles();
+	//m_particles.RenderTransformed();
+	Transform transf;
+	transf.SetPosition(42.0, 24.0, -0.0);
+	m_shadowMap.FirstPass();
+	m_shadowShader.UpdateShadows(camera, transf);
+	m_floorCollider.DrawColliderShadowPass(camera);
+	Transform trans;
+	m_shadowShader2.UpdateShadows(camera, trans);
+	//m_player[0].Render(camera);
 
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 1; i++) {
 
-		m_player[i].Render(camera);
+	//	m_player[i].RenderShadow(camera);
 	}
 
-	m_PH.Render(camera);
+	
+	m_shadowMap.SecPass();
+	m_shadowMap.Bind();
 
-	glClear(GL_DEPTH_BUFFER_BIT);
+	
+	//m_PH.Render(camera);
+
+
+	//glClear(GL_DEPTH_BUFFER_BIT);
 
 	for (int i = 0; i < 2; i++) {
 
-		m_player[i].GetHealthBar()->Render(camera);
+	//	m_player[i].GetHealthBar()->Render(camera);
 	}
 }

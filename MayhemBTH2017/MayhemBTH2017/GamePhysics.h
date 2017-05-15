@@ -8,6 +8,8 @@
 #include "Contact.h"
 #include "MyContactListener.h"
 #include "PowerUpHandler.h"
+#include "ShadowMap.h"
+#include "ShadowShader.h"
 
 
 class GamePhysics
@@ -24,6 +26,11 @@ public:
 	void SetNrOfPlayers(int nrOf);
 
 private:
+
+	ShadowMap		m_shadowMap;
+	ShadowShader	m_shadowShader;
+	ShadowShader	m_shadowShader2;
+
 	std::unique_ptr<b2World> m_world;
 	Box m_newBox;
 	Box m_newBox2;

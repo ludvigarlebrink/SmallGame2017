@@ -33,6 +33,7 @@ public:
 	virtual ~Level();
 	
 	void Render(Camera camera);
+	void Render();
 
 	//::.. MODIFY FUNCTIONS ..:://
 	void AddBlock(uint32_t posX, uint32_t posY, glm::vec2 uv);

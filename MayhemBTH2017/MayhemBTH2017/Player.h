@@ -26,6 +26,8 @@ public:
 	
 	//::..RENDER..:://
 	void Render(Camera camera);
+	void RenderShadow(Camera camera);
+
 	void Update();
 	void Respawn(glm::vec2 pos);
 

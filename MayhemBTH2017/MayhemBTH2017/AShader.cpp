@@ -118,7 +118,7 @@ void AShader::Update(Transform& transform, Camera& camera)
 
 void AShader::AddAttributeLocation()
 {
-	std::cout << "ASHADERS" << std::endl;
+	//std::cout << "ASHADERS" << std::endl;
 	// These are three attributes are set for all shaders.
 	glBindAttribLocation(m_programID, 0, "Position");
 	glBindAttribLocation(m_programID, 1, "Normal");

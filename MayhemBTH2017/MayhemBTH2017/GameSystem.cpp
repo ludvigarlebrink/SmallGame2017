@@ -262,7 +262,9 @@ void GameSystem::StartPlay()
 
 void GameSystem::Play()
 {
+
 	m_world->Update();
+
 	m_world->Render(m_camera);
 
 	m_timer.Update();
