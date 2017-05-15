@@ -1,6 +1,7 @@
 #include "AtomicBomb.h"
 
 
+bool AtomicBomb::m_sequenceStarted = false;
 
 AtomicBomb::AtomicBomb()
 {
@@ -90,7 +91,7 @@ void AtomicBomb::Update(Camera &cam)
 {
 	if (!m_sequenceStarted)
 	{
-				
+		return;
 	}
 
 	m_bomber->SetPosition(glm::vec3(m_bomber->GetPosition().x - (TimeManager::GetDeltaTime() * 35.0f), 38.0f, -10.0f));
@@ -123,14 +124,11 @@ void AtomicBomb::Update(Camera &cam)
 		break;
 
 	case BOMB_EXPLOSION:
-		m_bomber->SetPosition(glm::vec3(m_bomber->GetPosition().x - (TimeManager::GetDeltaTime() * 35.0f), 38.0f, -10.0f));
-
 		if (!m_shakeEffect)
 		{
 			PostProcessingManager::SetState(PostProcessingManager::ATOMIC);
 			m_shakeEffect = true;
 		}
-		m_bomber->Render(cam);
 
 		m_t += TimeManager::GetDeltaTime() * 1.0f;
 
@@ -155,6 +153,7 @@ void AtomicBomb::Update(Camera &cam)
 		{
 			Background::SetIsPostNuclear(true);
 		}
+
 
 		break;
 

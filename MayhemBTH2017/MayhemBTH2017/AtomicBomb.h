@@ -16,7 +16,7 @@ public:
 	AtomicBomb();
 	virtual ~AtomicBomb();
 
-	void StartBombSequence();
+	static void StartBombSequence();
 	void Update(Camera &cam);
 
 
@@ -41,7 +41,7 @@ private:
 	Prefab *	m_bomber;
 	Prefab *	m_atomicBomb;
 
-	bool		m_sequenceStarted;
+	static bool		m_sequenceStarted;
 
 	GLuint m_shader;
 	GLuint m_vao;
