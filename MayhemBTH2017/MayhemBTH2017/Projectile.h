@@ -46,6 +46,8 @@ public:
 	void StartContact();
 	void EndContact();
 	bool GetContact();
+	void CollisionTimer();
+	void CollisionTrue();
 
 
 
@@ -82,9 +84,11 @@ private:
 	float m_xAngle;
 	float m_yAngle;
 	int m_controllerID;
-
+	ParticleEmitter m_emitter;
 	bool m_active;
 	float m_restitution;
+	float m_collisionTimer;
+	bool m_collision;
 
 	
 	enum _entityCategory {

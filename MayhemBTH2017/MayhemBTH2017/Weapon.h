@@ -57,7 +57,7 @@ private:
 	int  m_controllerID;
 	unsigned int m_counter;
 	float m_life;
-
+	Transform m_transform;
 	std::string				m_shaderName;
 	glm::vec3				m_pos;
 	glm::vec4				m_col;

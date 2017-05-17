@@ -5,19 +5,23 @@
 ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf, float life)
 
 {
+
+	m_timer = 0;
+
+	m_life = life;
+
 	glGenVertexArrays(1, &m_vao[0]);
 	m_drawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0); //Shade for drawing the transformed particles
 
 	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
-	
-	m_timer += TimeManager::GetDeltaTime();
-	m_life = life;
+
 
 
 	//vertex shader program only
 	m_pShader.Init(shadername, false, 1); //sets varying to "outValue" and only uses a vertex shader
 	glLinkProgram(m_pShader.GetProgramID()); ///////////////////////////////////////////////LINK THE PROGRAM
 	glUseProgram(m_pShader.GetProgramID());
+
 
 	//GENERATE VERTEX ARRAY OBJECT
 	glGenVertexArrays(1, &m_drawVAO); //Vertex array object to store  the data
@@ -118,8 +122,15 @@ ParticleSystem::~ParticleSystem()
 	std::cout << "DECONSTRUCTOR" << std::endl;
 
 
-	glDeleteProgram(m_drawShader.GetProgramID());
+	//delete after linking
 	glDeleteProgram(m_pShader.GetProgramID());
+	m_pShader.Release();
+	
+	//delete after linking
+	glDeleteProgram(m_drawShader.GetProgramID());
+	m_drawShader.Release();
+
+	
 	glUseProgram(0);
 
 }
@@ -150,24 +161,26 @@ void ParticleSystem::LoadParticleVBOS(Particle* p, GLuint nrOfVerts) {
 
 }
 
-void ParticleSystem::RenderTransformed() {
-
-
-
+void ParticleSystem::RenderTransformed(Transform transform) {
 
 
 	m_drawShader.Bind();
-	m_drawShader.Update(m_transform, m_camera);
+	m_drawShader.Update(transform, m_camera);
+	
 	glBindVertexArray(m_drawVAO);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glBindVertexArray(0);
 
+}
 
+float ParticleSystem::GetTimer() {
 
-
+	return m_timer;
 }
 void ParticleSystem::UpdateParticles() {
 
+
+	m_timer += TimeManager::GetDeltaTime();
 
 	glUseProgram(m_pShader.GetProgramID());
 	glEnable(GL_RASTERIZER_DISCARD);
@@ -213,6 +226,8 @@ void ParticleSystem::UpdateParticles() {
 	glBindVertexArray(0);
 	glDisable(GL_RASTERIZER_DISCARD);
 	glUseProgram(0);
+
+
 
 
 
