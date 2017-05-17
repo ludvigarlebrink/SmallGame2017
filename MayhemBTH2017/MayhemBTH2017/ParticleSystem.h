@@ -24,11 +24,10 @@ public:
 	//Destructor
 	virtual ~ParticleSystem();
 	void UpdateParticles();
-	void RenderTransformed();
+	float GetTimer();
+	void RenderTransformed(Transform transform);
 
 	//::..HELPER FUNCTIONS..:://
-
-
 
 private:
 	//::..HELPER FUNCTIONS..:://
@@ -42,12 +41,12 @@ private:
 private:
 	Particle m_part[1];
 
-
+	Camera m_camera;
+	Transform m_transform;
 	uint64_t PARTICLE_COUNT;
 	AShader	m_pShader;
 	AShader	m_emitterShader;
 	AShader m_drawShader;
-	Camera	m_camera;
 	GLint inputAttrib, inputAttrib2;
 
 	glm::vec3 m_feedbackInfo[6];

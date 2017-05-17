@@ -575,5 +575,17 @@
     <None Include="Assets\GLSL\ExplosionShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
+    <None Include="Assets\GLSL\NuclearShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\NuclearShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ToonShader.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ToonShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

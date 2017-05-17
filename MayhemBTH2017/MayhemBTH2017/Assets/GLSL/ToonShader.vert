@@ -18,7 +18,7 @@ void main()
 		gl_Position = P * V * M * vec4(Position, 1.0f);
 	}
 	
-	Normal1 = Normal;
+	Normal1 = (M * vec4(Normal, 1.0)).xyz;
 	TexCoords1 = TexCoordsAlpha;
 }
 
