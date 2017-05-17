@@ -22,7 +22,6 @@ public:
 	glm::vec3 GetPosition();
 
 	void SetNrOfPlayers(int nrOf);
-	void SetLevel(std::string levelName);
 
 private:
 	std::unique_ptr<b2World> m_world;

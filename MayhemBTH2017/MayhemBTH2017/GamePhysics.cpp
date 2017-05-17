@@ -85,11 +85,6 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 	m_nrOfPlayers = nrOf;
 }
 
-void GamePhysics::SetLevel(std::string levelName)
-{
-
-}
-
 void GamePhysics::Render(Camera camera) {
 
 
