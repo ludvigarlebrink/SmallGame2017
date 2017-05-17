@@ -13,6 +13,8 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 
 	m_prefabProjectile = projectile;
 
+	m_explosion = false;
+
 	m_time = 0;
 	m_clearTime = 0;
 	m_counter = 0;
@@ -22,6 +24,11 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 	m_controllerID = controllerID;
 
 	m_soundManager = SoundManager::Get();
+
+	m_rocketLauncher = false;
+
+	m_reuse = false;
+
 }
 
 Weapon::Weapon(Prefab * gun)
@@ -60,11 +67,26 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 	m_time += TimeManager::Get()->GetDeltaTime();
 	m_clearTime += TimeManager::Get()->GetDeltaTime();
 
+	if (m_projectiles.size() > 0)
+	{
+		m_currentProjectilePosition = GetCurrentProjectilePosition();		
+	}
+	bool exp = false;
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
-		m_projectiles[i]->Update();
+		m_projectiles[i]->Update(m_explosion);
+		if (m_explosion)
+		{
+			exp = m_explosion;
+			break;
+		}
 	}
-
+	bool nothing = false;
+	for (int i = 0; i < m_projectiles.size(); i++)
+	{
+		m_projectiles[i]->Update(nothing);
+	}
+	m_explosion = exp;
 	//DeleteProjectile();
 
 
@@ -100,6 +122,16 @@ void Weapon::UpdateParticles() {
 
 
 
+}
+
+void Weapon::SetRocketLauncher(bool is)
+{
+	m_rocketLauncher = is;
+}
+
+void Weapon::SetExplosion(bool explosion)
+{
+	m_explosion = explosion;
 }
 
 float Weapon::GetFireRate()
@@ -156,6 +188,10 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 
 		projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
+		if (m_rocketLauncher)
+		{
+			projectile->SetRocketLaunher(true);
+		}
 		m_projectiles.push_back(projectile);
 
 
@@ -172,9 +208,11 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 		{
 			m_soundManager->PlaySFX("skorpion");
 
+			m_reuse = true;
+
 			//reuse projectile
 			m_projectiles[m_projectileCounter]->SetActive(false);
-			m_projectiles[m_projectileCounter]->Update();
+			m_projectiles[m_projectileCounter]->Update(m_explosion);
 
 			m_projectiles[m_projectileCounter]->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
@@ -205,6 +243,41 @@ bool Weapon::FireRate(float rate)
 
 	return false;
 }
+bool Weapon::IsRocketLauncher()
+{
+	return m_rocketLauncher;
+}
+b2Vec2 Weapon::GetFiredCurrentProjectilePos()
+{
+	return m_currentProjectilePosition;
+}
+bool Weapon::GetExplosion()
+{
+	return m_explosion;
+}
+b2Vec2 Weapon::GetCurrentProjectilePosition()
+{
+	if (m_projectiles.size() > 0)
+	{
+		if (!m_reuse)
+		{
+			//m_projectiles[m_projectiles.size() - 1]->SetRocketLauncherExplosion(false);
+			return m_projectiles[m_projectiles.size() - 1]->GetBox().getBody()->GetPosition();
+		}
+		else
+		{
+			if (m_projectileCounter >= m_clearRate)
+				m_projectileCounter = 0;
+			//m_projectiles[m_projectileCounter]->SetRocketLauncherExplosion(false);
+			return m_projectiles[m_projectileCounter]->GetBox().getBody()->GetPosition();
+
+		}
+	}
+}
+std::vector<Projectile*> Weapon::GetProjectiles()
+{
+	return m_projectiles;
+}
 void Weapon::Render(Camera camera)
 {
 	Transform pTransform;
@@ -212,7 +285,7 @@ void Weapon::Render(Camera camera)
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
 		pTransform.SetPosition(m_projectiles[i]->GetBox().getBody()->GetPosition().x / 2, m_projectiles[i]->GetBox().getBody()->GetPosition().y / 2, 0);
-		m_projectiles[i]->Update();
+		//m_projectiles[i]->Update(m_explosion);
 		m_projectiles[i]->Render(camera);
 
 	}

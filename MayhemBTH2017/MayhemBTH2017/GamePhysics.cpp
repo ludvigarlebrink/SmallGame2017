@@ -42,7 +42,7 @@ void GamePhysics::EnterWorld()
 
 	m_player[1].Init(m_world.get(), glm::vec2(15, 24), glm::vec2(2.0, 5.0), 1);
 	//m_player[1].SetMaskBits(POWERUP);
-
+	m_nrOfPlayers = 2;
 
 	///////////////////////////////////////////////////////////////////
 
@@ -58,18 +58,46 @@ void GamePhysics::EnterWorld()
 
 void GamePhysics::Update()
 {
-	
-	
-	
+
 	switch (m_loadWorld) {
 	case true:
 	{
 		m_world->Step(1.0f / 20.0f, 8, 5);
-
-		for (int i = 0; i < 2; i++) {
+		int k = -1;
+		for (int i = 0; i < m_nrOfPlayers; i++) {
 
 			m_player[i].Update();
+		}
+		if (CreateRocketLauncherExplosion())
+		{
+			for (int i = 0; i < m_nrOfPlayers; i++)
+			{
+				if (m_player[i].GetWeapon().GetProjectiles().size() > 0)
+				{
+					k = i;
+				}
+			}
+			for (int i = 0; i < m_nrOfPlayers; i++)
+			{
+				if (k > -1)
+				{
 
+					b2Vec2 fullVec = m_player[i].GetBox().getBody()->GetPosition() - m_player[k].GetWeapon().GetFiredCurrentProjectilePos();
+
+					b2Vec2 fullVec2 = m_player[i].GetBox().getBody()->GetPosition() - m_player[k].GetWeapon().GetFiredCurrentProjectilePos();
+
+					fullVec.Normalize();
+
+					b2Vec2 radVec = b2Vec2(fullVec.x * 1000.0f, fullVec.y * 1000.0f);
+
+					b2Vec2 finalVec = b2Vec2(radVec.x / fullVec2.x, radVec.y / fullVec2.y);
+
+					m_player[i].GetBox().getBody()->ApplyForce(finalVec, m_player[i].GetBox().getBody()->GetWorldCenter(), true);
+
+					m_player[k].GetWeapon().SetExplosion(false);
+
+				}
+			}
 		}
 
 		m_PH.Update();
@@ -96,6 +124,22 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 	m_nrOfPlayers = nrOf;
 }
 
+bool GamePhysics::CreateRocketLauncherExplosion()
+{
+	for (int j = 0; j < m_nrOfPlayers; j++)
+	{
+		if (m_player[j].GetWeapon().GetProjectiles().size() > 0)
+		{
+			if (m_player[j].GetWeapon().IsRocketLauncher() && m_player[j].GetWeapon().GetExplosion())
+			{
+
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 void GamePhysics::Render(Camera camera) {
 
 
@@ -115,3 +159,4 @@ void GamePhysics::Render(Camera camera) {
 		m_player[i].GetHealthBar()->Render(camera);
 	}
 }
+

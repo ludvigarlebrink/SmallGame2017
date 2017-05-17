@@ -11,6 +11,8 @@ Projectile::Projectile()
 	m_renderParticles = false;
 	m_hasParticles = false;
 	m_particleTimer = 0;
+	m_rocketLauncher = false;
+	m_rocketLauncherExplosion = false;
 }
 
 
@@ -31,6 +33,10 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_life = life;
 
 	m_lifeTime = 0;
+
+	m_rocketLauncher = true;
+
+	m_rocketLauncherExplosion = false;
 
 	b2Filter filter;
 
@@ -120,13 +126,25 @@ void Projectile::AddForce(glm::vec3 force, int controllerID)
 
 }
 
+void Projectile::SetRocketLaunher(bool is)
+{
+	m_rocketLauncher = is;
+}
+
 void Projectile::SetActive(bool active)
 {
 	m_active = active;
 }
 
+void Projectile::SetRocketLauncherExplosion(bool active)
+{
+	m_rocketLauncherExplosion = active;
+}
 
-
+bool Projectile::GetRocketLauncherExplosion()
+{
+	return m_rocketLauncherExplosion;
+}
 
 float Projectile::GetLife()
 {
@@ -159,19 +177,28 @@ int Projectile::GetProjectileID()
 }
 
 
-void Projectile::Update()
+void Projectile::Update(bool & explosion)
 {
 	m_lifeTime += TimeManager::GetDeltaTime();
+
+	explosion = false;
 
 	if (m_contact)
 	{
 		//if (m_lifeTime >= m_life)
 		//{
+		if (m_rocketLauncher)
+		{
+			m_rocketLauncherExplosion = true;
+			explosion = m_rocketLauncherExplosion;
+		}
+
 			GetBox().getBody()->SetActive(false);
 			SetActive(false);
 			m_renderParticles = true;
 
 			m_lifeTime = 0;
+
 		//}
 	}
 

@@ -48,6 +48,7 @@ public:
 	int GetControllerID();
 	void UpdateParticles();
 	Prefab * GetHealthBar();
+	Weapon	GetWeapon();
 	
 private:
 private:

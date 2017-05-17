@@ -8,6 +8,7 @@
 #include "Contact.h"
 #include "MyContactListener.h"
 #include "PowerUpHandler.h"
+#include <math.h>
 
 
 class GamePhysics
@@ -22,6 +23,7 @@ public:
 	glm::vec3 GetPosition();
 
 	void SetNrOfPlayers(int nrOf);
+	bool CreateRocketLauncherExplosion();
 
 private:
 	std::unique_ptr<b2World> m_world;

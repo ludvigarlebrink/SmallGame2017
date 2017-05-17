@@ -27,12 +27,19 @@ public:
 	//::.. SET FUNTIONS ..:://
 	void Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID);
 	void UpdateParticles();
+	void SetRocketLauncher(bool is);
+	void SetExplosion(bool explosion);
 	//::.. GET FUNTIONS ..:://
 	float GetFireRate();
-
 	bool FireRate(float rate);
+	bool IsRocketLauncher();
+	b2Vec2 GetFiredCurrentProjectilePos();
+	bool GetExplosion();
+
+	std::vector<Projectile*> GetProjectiles();
 
 private:
+	b2Vec2 GetCurrentProjectilePosition();
 	Prefab*					m_prefabGun;
 	Prefab*					m_prefabProjectile;
 	std::vector<Projectile*>m_projectiles;
@@ -51,6 +58,10 @@ private:
 	int  m_controllerID;
 	unsigned int m_counter;
 	float m_life;
+	bool  m_rocketLauncher;
+	bool m_reuse;
+	b2Vec2 m_currentProjectilePosition;
+	bool   m_explosion;
 
 	SoundManager * m_soundManager;
 };
