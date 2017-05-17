@@ -42,6 +42,7 @@ public:
 	void SetTexture(const char* filepath);
 	void SetTexture(Texture texture);
 	void SetUV(glm::vec2 uv);
+	void SetIsGreyscale(bool value);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
@@ -59,6 +60,7 @@ private:
 		POSITION_X,
 		POSITION_Y,
 		SCALE,
+		GREYSCALE,
 		ALBEDO_MAP,
 		NUM_UNIFORMS
 	};
@@ -79,6 +81,7 @@ private:
 	SDL_Color	m_color;
 	Texture		m_texture;
 	bool		m_showTexture;
+	int			m_isGreyscale;
 
 	static Mesh *	m_mesh;	// Shader program.
 	static GLuint	m_program;

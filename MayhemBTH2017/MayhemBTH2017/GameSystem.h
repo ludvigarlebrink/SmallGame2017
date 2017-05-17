@@ -12,8 +12,9 @@
 #include "TransitionManager.h"
 #include "GameSettings.h"
 #include "SoundManager.h"
-
+#include "AtomicBomb.h"
 #include "ParticleSystem.h"
+
 
 #include <cstdint>
 #include <vector>
@@ -94,6 +95,10 @@ private:
 	Camera m_camera;
 	GameSettings * m_gameSettings;
 	SoundManager * m_soundManager;
+
+	// TMP ATOMIC BOMB
+
+	AtomicBomb m_atomicBomb;
 };
 
 

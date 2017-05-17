@@ -14,7 +14,7 @@ UIImage::UIImage()
 
 	m_windowHeight = m_videoManager->GetHeight();
 	m_windowWidth = m_videoManager->GetWidth();
-
+	m_isGreyscale = 0;
 
 	// TEMP
 	m_posY = 0;
@@ -109,8 +109,10 @@ void UIImage::Render()
 	glUniform1f(m_uniforms[POSITION_X], static_cast<float>(m_posX));
 	glUniform1f(m_uniforms[POSITION_Y], static_cast<float>(m_posY));
 	glUniform1f(m_uniforms[SCALE], 1.0f);
+	glUniform1i(m_uniforms[GREYSCALE], m_isGreyscale);
 
 	glUniform1i(m_uniforms[ALBEDO_MAP], 0);
+
 
 	m_mesh->Render();
 
@@ -309,10 +311,22 @@ void UIImage::SetTexture(Texture texture)
 }
 
 
-
 void UIImage::SetUV(glm::vec2 uv)
 {
 	m_UV = uv;
+}
+
+
+void UIImage::SetIsGreyscale(bool value)
+{
+	if (value)
+	{
+		m_isGreyscale = 1;
+	}
+	else
+	{
+		m_isGreyscale = 0;
+	}
 }
 
 
@@ -363,6 +377,7 @@ void UIImage::CreateShader()
 	m_uniforms[POSITION_X] = glGetUniformLocation(m_program, "PosX");
 	m_uniforms[POSITION_Y] = glGetUniformLocation(m_program, "PosY");
 	m_uniforms[SCALE] = glGetUniformLocation(m_program, "Scale");
+	m_uniforms[GREYSCALE] = glGetUniformLocation(m_program, "Greyscale");
 	m_uniforms[ALBEDO_MAP] = glGetUniformLocation(m_program, "AlbedoMap");
 }
 

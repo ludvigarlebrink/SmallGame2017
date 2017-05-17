@@ -84,8 +84,11 @@ void QuadShader::UpdateBool()
 
 	glUniform1i(glGetUniformLocation(m_programID, "Shake"), PostProcessingManager::IsShaking());
 	glUniform1i(glGetUniformLocation(m_programID, "Chaos"), PostProcessingManager::IsChaos());
+	glUniform1i(glGetUniformLocation(m_programID, "Atomic"), PostProcessingManager::IsAtomic());
+	
 	glUniform1f(glGetUniformLocation(m_programID, "STime"), PostProcessingManager::GetShakingTime());
 	glUniform1f(glGetUniformLocation(m_programID, "CTime"), PostProcessingManager::GetChaosTime());
+	glUniform1f(glGetUniformLocation(m_programID, "ATime"), PostProcessingManager::GetAtmoicTime());
 
 
 
