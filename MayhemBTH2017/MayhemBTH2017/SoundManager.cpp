@@ -71,8 +71,6 @@ void SoundManager::PlaySFX(std::string soundName, bool paused)
 	std::string path = ".\\Assets\\Sounds\\SFX\\";
 	std::string soundFile;
 
-	FMOD::Sound*  yolo;
-
 	soundFile = path + soundName + ".wav";
 
 	for (int i = 0; i < m_sfxSounds.size(); i++)

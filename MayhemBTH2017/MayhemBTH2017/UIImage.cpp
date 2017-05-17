@@ -113,9 +113,7 @@ void UIImage::Render()
 
 	glUniform1i(m_uniforms[ALBEDO_MAP], 0);
 
-
 	m_mesh->Render();
-
 
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);

@@ -16,12 +16,13 @@ public:
 
 	GamePhysics();
 	virtual ~GamePhysics();
-	void EnterWorld();
+	void EnterWorld(Level & level);
 	void Update();
 	void Render(Camera camera);
 	glm::vec3 GetPosition();
 
 	void SetNrOfPlayers(int nrOf);
+	void SetLevel(std::string levelName);
 
 private:
 	std::unique_ptr<b2World> m_world;
@@ -31,8 +32,7 @@ private:
 	Player m_player[4];
 	Collider2D gameFloor;
 
-	Level		m_level;
-	
+	Level		m_level;	
 
 	TimeManager* m_time;
 	GLfloat m_jumpTimer=0.0f;

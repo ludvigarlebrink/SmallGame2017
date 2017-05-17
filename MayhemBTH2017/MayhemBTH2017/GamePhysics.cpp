@@ -14,16 +14,17 @@ GamePhysics::~GamePhysics()
 
 }
 
-void GamePhysics::EnterWorld()
+void GamePhysics::EnterWorld(Level & level)
 {
 
 	//Get deltatime
+
 	m_time = TimeManager::Get();
 	b2Vec2 gravity(0.0f, -8.21f);
 
 	m_world = std::make_unique<b2World>(gravity);
 
-	m_floorCollider.CreateBoundingBoxes(m_world.get());
+	m_floorCollider.CreateBoundingBoxes(m_world.get(), level.GetName());
 
 	//at global scope
 
@@ -58,32 +59,20 @@ void GamePhysics::EnterWorld()
 
 void GamePhysics::Update()
 {
-	
-	
-	
-	switch (m_loadWorld) {
-	case true:
-	{
-		m_world->Step(1.0f / 20.0f, 8, 5);
+	m_world->Step(1.0f / 20.0f, 8, 5);
 
-		for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 2; i++) {
 
-			m_player[i].Update();
-
-		}
-
-		m_PH.Update();
-
-		m_world->Step(1.0f / 20.0f, 8, 5); 
+		m_player[i].Update();
 	}
-	break;
-	case false:
-		std::cout << "LOADING" << std::endl;
-		EnterWorld();
-		break;
-		//Update player bounding box sprite position to the position of the player mesh
-	}
+
+	//m_PH.Update();
+
+	m_world->Step(1.0f / 20.0f, 8, 5);
+	//Update player bounding box sprite position to the position of the player mesh
 }
+
+
 
 glm::vec3 GamePhysics::GetPosition() {
 
@@ -94,6 +83,11 @@ glm::vec3 GamePhysics::GetPosition() {
 void GamePhysics::SetNrOfPlayers(int nrOf)
 {
 	m_nrOfPlayers = nrOf;
+}
+
+void GamePhysics::SetLevel(std::string levelName)
+{
+
 }
 
 void GamePhysics::Render(Camera camera) {
