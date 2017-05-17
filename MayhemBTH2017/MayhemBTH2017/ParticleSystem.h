@@ -24,11 +24,10 @@ public:
 	//Destructor
 	virtual ~ParticleSystem();
 	void UpdateParticles();
-	void RenderTransformed();
+	float GetTimer();
+	void RenderTransformed(Transform transform);
 
 	//::..HELPER FUNCTIONS..:://
-
-
 
 private:
 	//::..HELPER FUNCTIONS..:://

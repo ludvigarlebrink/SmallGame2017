@@ -11,15 +11,16 @@ public:
 
 
 	virtual ~ParticleEmitter();
-	void Render();
+	void Render(Transform transform);
 	void Update();
+
 	void Delete();
 	void SetParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf, float life);
 	void Refresh(glm::vec3 position);
 private:
 	GLfloat					m_timer = 0;
 	const static int		m_nrof = 10;
-	ParticleSystem*			m_particleSystem;
+	std::vector<ParticleSystem*>	m_particleSystem;
 	Camera					m_camera;
 	std::string				m_shaderName;
 	glm::vec3				m_pos;

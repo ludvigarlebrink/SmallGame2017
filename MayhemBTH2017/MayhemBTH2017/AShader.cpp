@@ -86,19 +86,20 @@ void AShader::Init(const std::string& filename, bool hasGeomShader, bool particl
 	Debug(m_programID, GL_VALIDATE_STATUS, true, "Error: Invalid program: ");
 
 	AddUniforms();
+
 }
 
 
 void AShader::Release()
 {
 
-	
 	for (unsigned int i = 0; i < NR_SHADERS; i++) {
 		glDetachShader(m_programID, m_shader[i]);
 		glDeleteShader(m_shader[i]);
 	}
 
 	glDeleteProgram(m_programID);
+	glUseProgram(0);
 }
 
 

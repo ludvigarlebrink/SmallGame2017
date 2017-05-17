@@ -59,12 +59,10 @@ void GamePhysics::EnterWorld()
 void GamePhysics::Update()
 {
 	
-	
-	
 	switch (m_loadWorld) {
 	case true:
 	{
-		m_world->Step(1.0f / 20.0f, 8, 5);
+		m_world->Step(1.0f / 20.0f, 1, 1);
 
 		for (int i = 0; i < 2; i++) {
 
@@ -74,7 +72,7 @@ void GamePhysics::Update()
 
 		m_PH.Update();
 
-		m_world->Step(1.0f / 20.0f, 8, 5); 
+		//m_world->Step(1.0f / 20.0f, 8, 5); 
 	}
 	break;
 	case false:
