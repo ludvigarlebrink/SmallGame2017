@@ -3,7 +3,7 @@
 
 
 #include "Projectile.h"
-#include "ParticleEmitter.h"
+#include "ParticleSystem.h"
 #include "SoundManager.h"
 #include "String.h"
 
@@ -28,27 +28,28 @@ public:
 	//::.. SET FUNTIONS ..:://
 	void Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID);
 	void UpdateParticles();
+	void SetRocketLauncher(bool is);
+	void SetExplosion(bool explosion);
 	//::.. GET FUNTIONS ..:://
 	float GetFireRate();
-
 	bool FireRate(float rate);
+	bool IsRocketLauncher();
+	b2Vec2 GetFiredCurrentProjectilePos();
+	bool GetExplosion();
+
+	std::vector<Projectile*> GetProjectiles();
 
 private:
+	b2Vec2 GetCurrentProjectilePosition();
 	Prefab*					m_prefabGun;
-	Prefab*					m_muzzleFlash;
 	Prefab*					m_prefabProjectile;
 	std::vector<Projectile*>m_projectiles;
-	TextureManager m_texMan;
-	Texture		m_tex;
-	ParticleEmitter* m_particleEmitter;
+	ParticleSystem m_particles;
 	float m_restitution;
 	glm::vec2 m_previousForce;
-	float m_friction;
+	float m_friction; 
 	float m_damping;
-	bool count;
-	glm::vec3 m_muzzlePos;
-	float m_particletimer;
-	float m_density;
+	float m_density; 
 	float m_fireRate;
 	float m_time;
 	float m_clearTime;
@@ -58,14 +59,10 @@ private:
 	int  m_controllerID;
 	unsigned int m_counter;
 	float m_life;
-	Transform m_transform;
-	std::string				m_shaderName;
-	glm::vec3				m_pos;
-	glm::vec4				m_col;
-	float					m_size;
-	bool					m_render;
-	int						m_nrOf;
-	float					m_plife;
+	bool  m_rocketLauncher;
+	bool m_reuse;
+	b2Vec2 m_currentProjectilePosition;
+	bool   m_explosion;
 
 	SoundManager * m_soundManager;
 };

@@ -4,13 +4,15 @@
 
 Projectile::Projectile()
 {
-
+	//m_particles = new ParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(20, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 500, 5.0f);
 
 	m_time = 0.0;
 	m_rotationUpdate = 0.0f;
 	m_renderParticles = false;
 	m_hasParticles = false;
 	m_particleTimer = 0;
+	m_rocketLauncher = false;
+	m_rocketLauncherExplosion = false;
 }
 
 
@@ -22,8 +24,6 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 {
 	m_isBullet = false;
 
-	m_collision = false;
-
 	m_contact = false;
 
 	m_prefabPointer = *prefab;
@@ -33,6 +33,10 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_life = life;
 
 	m_lifeTime = 0;
+
+	m_rocketLauncher = true;
+
+	m_rocketLauncherExplosion = false;
 
 	b2Filter filter;
 
@@ -122,13 +126,25 @@ void Projectile::AddForce(glm::vec3 force, int controllerID)
 
 }
 
+void Projectile::SetRocketLaunher(bool is)
+{
+	m_rocketLauncher = is;
+}
+
 void Projectile::SetActive(bool active)
 {
 	m_active = active;
 }
 
+void Projectile::SetRocketLauncherExplosion(bool active)
+{
+	m_rocketLauncherExplosion = active;
+}
 
-
+bool Projectile::GetRocketLauncherExplosion()
+{
+	return m_rocketLauncherExplosion;
+}
 
 float Projectile::GetLife()
 {
@@ -147,22 +163,7 @@ Box Projectile::GetBox()
 
 bool Projectile::GetContact()
 {
-	return m_collision;
-}
-
-void Projectile::CollisionTimer()
-{
-	m_collisionTimer += TimeManager::GetDeltaTime();
-
-	if (m_collisionTimer >= 0.3f) {
-		m_collision = false;
-	}
-}
-
-void Projectile::CollisionTrue()
-{
-	m_collisionTimer = 0.0f;
-	m_collision = true;
+	return m_contact;
 }
 
 bool Projectile::IsActive()
@@ -176,39 +177,39 @@ int Projectile::GetProjectileID()
 }
 
 
-void Projectile::Update()
+void Projectile::Update(bool & explosion)
 {
-
-	CollisionTimer();
-
 	m_lifeTime += TimeManager::GetDeltaTime();
+
+	explosion = false;
 
 	if (m_contact)
 	{
-		/*if (m_lifeTime >= m_life)
-		{*/
-		GetBox().getBody()->SetActive(false);
-		SetActive(false);
+		//if (m_lifeTime >= m_life)
+		//{
+		if (m_rocketLauncher)
+		{
+			m_rocketLauncherExplosion = true;
+			explosion = m_rocketLauncherExplosion;
+		}
 
+			GetBox().getBody()->SetActive(false);
+			SetActive(false);
+			m_renderParticles = true;
 
-		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x/2, m_box.getBody()->GetPosition().y/2, 0.0f);
-	
-	//	m_particles = new ParticleSystem(".\\Assets\\GLSL\\GeometryPass", position, glm::vec4(1.0, 0.0, 0.0, 1.0), 0.2f, 500, 1.0f);
-	
-		m_emitter.SetParticleSystem(".\\Assets\\GLSL\\GeometryPass", position, glm::vec4(1.0, 0.0, 0.0, 1.0), 0.2f, 500, 1.0f);
-	
-		m_renderParticles = true;
+			m_lifeTime = 0;
 
-		m_lifeTime = 0;
 		//}
 	}
 
 	if (m_active)
 	{
 
+		m_rotationUpdate += 10;
+
 		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
 		m_prefabPointer.SetPosition(position);
-		m_rotationUpdate += 10;
+
 		if (m_rotationUpdate > 360)
 			m_rotationUpdate = 0;
 	}
@@ -227,24 +228,17 @@ void Projectile::Render(Camera camera)
 	if (m_active)
 	{
 
-
+		
 		m_prefabPointer.Update();
 		m_prefabPointer.Render(camera);
-		
-
+	
+	
 	}
 
 	if (m_renderParticles) {
-
-
-		Transform transform;
-
-		transform.SetPosition(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
-
-		m_emitter.Update();
-		m_emitter.Render(transform);
+		//m_particles->UpdateParticles();
+		//m_particles->RenderTransformed();
 	}
-
 }
 
 void Projectile::RenderShadow(Camera camera)
