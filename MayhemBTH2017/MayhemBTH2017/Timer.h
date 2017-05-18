@@ -29,6 +29,7 @@ private:
 
 	bool m_resetWhenDone;
 	bool m_hasStarted;
+	bool m_hasElapsed;
 
 	float m_currentTime;
 	float m_setTime;

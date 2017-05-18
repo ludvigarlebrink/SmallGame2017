@@ -86,13 +86,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\Include\MRSDK;.\include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Include\MRSDK;.\include;.\Include\Box2D;.\Include\STBI;.\Include\GLM;.\Include\SDL2;.\Include\GL;.\Include\FMOD;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>.\Lib\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;glew32.lib;glew32s.lib;MRSDK.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Box2D.lib;glew32.lib;glew32s.lib;MRSDK.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;fmod64_vc.lib;fmodL64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -133,6 +133,8 @@
     <ClCompile Include="AnimClip.cpp" />
     <ClCompile Include="AnimController.cpp" />
     <ClCompile Include="AnimSkeleton.cpp" />
+    <ClCompile Include="AtomicBomb.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Box.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -159,6 +161,7 @@
     <ClCompile Include="MeshQuad.cpp" />
     <ClCompile Include="MyContactListener.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="ParticleTest.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerPrefab.cpp" />
     <ClCompile Include="PostProcessingManager.cpp" />
@@ -175,8 +178,7 @@
     <ClCompile Include="QuadShader.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
-    <ClCompile Include="ShadowMap.cpp" />
-    <ClCompile Include="ShadowShader.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -230,6 +232,8 @@
     <ClInclude Include="AnimController.h" />
     <ClInclude Include="AnimSkeleton.h" />
     <ClInclude Include="AnimUtil.h" />
+    <ClInclude Include="AtomicBomb.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Box.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -255,6 +259,7 @@
     <ClInclude Include="MeshQuad.h" />
     <ClInclude Include="MyContactListener.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ParticleTest.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerPrefab.h" />
     <ClInclude Include="PostProcessingManager.h" />
@@ -271,8 +276,7 @@
     <ClInclude Include="QuadShader.h" />
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="ShaderManager.h" />
-    <ClInclude Include="ShadowMap.h" />
-    <ClInclude Include="ShadowShader.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -321,23 +325,12 @@
     <None Include="Assets\GLSL\BlurrShader.frag" />
     <None Include="Assets\GLSL\BlurrShader.geom" />
     <None Include="Assets\GLSL\BlurrShader.vert" />
-    <None Include="Assets\GLSL\BulletShader.frag" />
-    <None Include="Assets\GLSL\BulletShader.vert" />
-    <None Include="Assets\GLSL\ColliderShader.frag" />
-    <None Include="Assets\GLSL\ColliderShader.vert" />
     <None Include="Assets\GLSL\DebugGreen.frag" />
     <None Include="Assets\GLSL\DebugGreen.vert" />
-    <None Include="Assets\GLSL\DebugShader.frag" />
-    <None Include="Assets\GLSL\DrawShader.frag" />
-    <None Include="Assets\GLSL\DrawShader.geom" />
-    <None Include="Assets\GLSL\DrawShader.vert" />
-    <None Include="Assets\GLSL\emitterShader.frag" />
-    <None Include="Assets\GLSL\emitterShader.vert" />
+    <None Include="Assets\GLSL\ExplosionShader.frag" />
+    <None Include="Assets\GLSL\ExplosionShader.vert" />
     <None Include="Assets\GLSL\GameLevelShader.frag" />
     <None Include="Assets\GLSL\GameLevelShader.vert" />
-    <None Include="Assets\GLSL\GeometryPass.vert" />
-    <None Include="Assets\GLSL\leo.frag" />
-    <None Include="Assets\GLSL\leo.geom" />
     <None Include="Assets\GLSL\LevelMarkerShader.frag" />
     <None Include="Assets\GLSL\LevelMarkerShader.vert" />
     <None Include="Assets\GLSL\LevelShader.frag" />
@@ -345,36 +338,19 @@
     <None Include="Assets\GLSL\MainShader.frag" />
     <None Include="Assets\GLSL\MainShader.geom" />
     <None Include="Assets\GLSL\MainShader.vert" />
-    <None Include="Assets\GLSL\ParticleDrop.vert" />
-    <None Include="Assets\GLSL\ParticleExplosion.vert" />
-    <None Include="Assets\GLSL\PlayerShader.vert" />
-    <None Include="Assets\GLSL\PowerUpShader.frag" />
-    <None Include="Assets\GLSL\PowerUpShader.vert" />
     <None Include="Assets\GLSL\QuadShader.frag" />
     <None Include="Assets\GLSL\QuadShader.geom" />
     <None Include="Assets\GLSL\QuadShader.vert" />
-    <None Include="Assets\GLSL\ShadowShader.frag" />
-    <None Include="Assets\GLSL\ShadowShader.geom" />
-    <None Include="Assets\GLSL\ShadowShader.vert" />
-    <None Include="Assets\GLSL\ShadowShaderPlayer.frag" />
-    <None Include="Assets\GLSL\ShadowShaderPlayer.vert" />
     <None Include="Assets\GLSL\SharpnelShader.frag" />
     <None Include="Assets\GLSL\SharpnelShader.geom" />
     <None Include="Assets\GLSL\SharpnelShader.vert" />
     <None Include="Assets\GLSL\SkeletalAnimation.frag" />
     <None Include="Assets\GLSL\SkeletalAnimation.vert" />
-    <None Include="Assets\GLSL\SplitterShader.vert" />
     <None Include="Assets\GLSL\SpriteShader.frag" />
     <None Include="Assets\GLSL\SpriteShader.vert" />
-    <None Include="Assets\GLSL\TextureTest" />
-    <None Include="Assets\GLSL\ToonShader" />
-    <None Include="Assets\GLSL\ToonShader.frag" />
-    <None Include="Assets\GLSL\ToonShader.vert" />
     <None Include="Assets\GLSL\TransitionShader.frag" />
     <None Include="Assets\GLSL\TransitionShader.vert" />
     <None Include="Assets\Levels\NewFormat.mrlevel" />
-    <None Include="Assets\Textures\NewTex.mrTex" />
-    <None Include="Assets\Textures\NewTexx.mrthumb" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

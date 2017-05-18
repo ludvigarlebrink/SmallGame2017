@@ -24,12 +24,14 @@ public:
 
 	void Update();
 	void Render();
+	void Reset();
 
 	//::.. GET FUNCTIONS ..:://
 	const char* GetString() const;
 
 	//::.. SET FUNCTIONS ..:://
 	void SetTitle() const;
+	void SetString(std::string text);
 
 private:
 	//::.. HELP FUNCTIONS ..:://

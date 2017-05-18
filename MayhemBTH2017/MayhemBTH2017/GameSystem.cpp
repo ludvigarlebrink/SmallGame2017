@@ -5,6 +5,7 @@
 GameSystem::GameSystem()
 {
 	m_input = InputManager::Get();
+	m_soundManager = SoundManager::Get();
 	m_numPlayers = 0;
 	m_currState = GAME_SETUP;
 	m_playerReadyUI = nullptr;
@@ -201,6 +202,7 @@ void GameSystem::PlayerReady()
 				return;
 			}
 		}
+		
 	}
 
 	for (uint32_t i = 0; i < 4; i++)
@@ -239,10 +241,12 @@ void GameSystem::InitPlay()
 
 		m_world = new GamePhysics;
 		m_currState = START_PLAY;
-
+		
 		TransitionManager::StartFadingIn();
 		TimeManager::ResetDeltaTime();
 	}
+	m_soundManager->FadeInNewMusic("bensound-epic", 3, 10);
+	TransitionManager::Update();
 }
 
 void GameSystem::StartPlay()
@@ -258,17 +262,17 @@ void GameSystem::StartPlay()
 		m_currState = PLAY;
 		m_timer.SetTimer(m_gameSettings->GetGameLenght(), true, false);
 	}
+	
+	TransitionManager::Update();
 }
 
 void GameSystem::Play()
 {
-
+	m_timer.Update();
 	m_world->Update();
-
 	m_world->Render(m_camera);
 
-	m_timer.Update();
-
+	m_atomicBomb.Update(m_camera);
 
 	if (TransitionManager::GetIsBlack())
 	{
@@ -283,18 +287,22 @@ void GameSystem::Play()
 		m_gameUI.Update(static_cast<float>(m_gameSettings->GetGameLenght()) - m_timer.GetElapsed());
 		m_gameUI.Render();
 	}
+
+
+	TransitionManager::Update();
 }
 
 void GameSystem::LoadNextLevel()
 {
+	TransitionManager::Update();
 
 	m_pressToCont.Render();
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
 		m_currState = START_PLAY;
+		TransitionManager::StartFadingIn();
 	}
-	
 }
 
 void GameSystem::GameOver()

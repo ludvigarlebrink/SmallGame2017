@@ -2,6 +2,10 @@
 
 
 
+Mesh * UIText::m_mesh = nullptr;
+GLuint UIText::m_program = 0;
+GLuint UIText::m_uniforms[Uniforms::NUM_UNIFORMS] = { 0 };
+
 UIText::UIText()
 {
 	// FIX! DEBUG! PUT THIS SOMEWHERE ELSE :)
@@ -11,13 +15,21 @@ UIText::UIText()
 	m_pivot = 0;
 	m_font = ".\\Assets\\Fonts\\Snap.ttf";
 	m_scale = 1.0f;
+	m_texture = 0;
+	m_hasUpdated = true;
 
-	m_width = VideoManager::Get()->GetWidth();
-	m_height = VideoManager::Get()->GetHeight();
+	m_screenWidth = VideoManager::Get()->GetWidth();
+	m_screenHeight = VideoManager::Get()->GetHeight();
 
-
-	CreateShader();
-	CreateMesh();
+	if (m_mesh == nullptr)
+	{
+		CreateMesh();
+	}
+	
+	if (m_program == 0)
+	{
+		CreateShader();
+	}
 }
 
 
@@ -75,16 +87,34 @@ bool UIText::operator==(const char * text)
 //::.. UPDATE FUNCTIONS ..:://
 void UIText::Render()
 {
-	SDL_Color color;
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
-	color.a = 0;
-
-	if (strlen(m_text) > 0)
+	if (m_hasUpdated)
 	{
-		TextToTexture(m_text, m_color, m_posX, m_posY, m_size);
+		CreateText();
 	}
+
+	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+
+	glUseProgram(m_program);
+	glUniform1f(m_uniforms[SCREEN_WIDTH], static_cast<float>(m_screenWidth));
+	glUniform1f(m_uniforms[SCREEN_HEIGHT], static_cast<float>(m_screenHeight));
+	glUniform1f(m_uniforms[WIDTH], static_cast<float>(m_width));
+	glUniform1f(m_uniforms[HEIGHT], static_cast<float>(m_height));
+	glUniform1f(m_uniforms[POSITION_X], static_cast<float>(m_posX));
+	glUniform1f(m_uniforms[POSITION_Y], static_cast<float>(m_posY));
+	glUniform1f(m_uniforms[SCALE], static_cast<float>(m_scale));
+
+	glUniform1i(m_uniforms[ALBEDO_MAP], 0);
+
+	m_mesh->Render();
+
+	glDisable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_DEPTH_TEST);
 }
 
 bool UIText::Enable(uint32_t component)
@@ -122,6 +152,7 @@ int UIText::GetSize() const
 	return m_size;
 }
 
+
 float UIText::GetScale() const
 {
 	return m_scale;
@@ -132,7 +163,9 @@ float UIText::GetScale() const
 void UIText::SetText(const char* text)
 {
 	m_text = text;
+	m_hasUpdated = true;
 }
+
 
 void UIText::SetPosition(int x, int y)
 {
@@ -140,10 +173,12 @@ void UIText::SetPosition(int x, int y)
 	m_posY = y;
 }
 
+
 void UIText::SetSize(int size)
 {
 	m_size = size;
 }
+
 
 void UIText::SetScale(float scale)
 {
@@ -157,6 +192,8 @@ void UIText::SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 	m_color.g = g;
 	m_color.b = b;
 	m_color.a = a;
+
+	m_hasUpdated = true;
 }
 
 
@@ -171,14 +208,18 @@ void UIText::SetPivot(uint32_t pivot)
 	m_pivot = pivot;
 }
 
+
 void UIText::SetFont(const char * filepath)
 {
 	m_font = filepath;
+	m_hasUpdated = true;
 }
+
 
 void UIText::SetOutlineSize()
 {
 }
+
 
 void UIText::SetOutlineColor()
 {
@@ -186,66 +227,6 @@ void UIText::SetOutlineColor()
 
 
 //::.. HELP FUNCTIONS ..:://
-void UIText::TextToTexture(std::string message, SDL_Color color, int x, int y, int size)
-{
-	glUseProgram(0);
-
-	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	GLuint texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	TTF_Font * font = TTF_OpenFont(m_font, m_size * m_scale);
-
-	// OUTLINE
-	SDL_Color black = { 0x00, 0x00, 0x00, 0x00 };
-	
-	SDL_Surface * sFont = TTF_RenderText_Blended(font, message.c_str(), color);
-
-	TTF_SetFontOutline(font, 2);
-	SDL_Surface * sOutline = TTF_RenderText_Blended(font, message.c_str(), black);
-
-	SDL_Rect rect = { 4, 2, sOutline->w, sOutline->h };
-
-	SDL_BlitSurface(sFont, NULL, sOutline, &rect);
-
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, sOutline->w, sOutline->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, sOutline->pixels);
-
-
-	glUseProgram(m_program);
-	glUniform1f(m_uniforms[SCREEN_WIDTH], static_cast<float>(m_width));
-	glUniform1f(m_uniforms[SCREEN_HEIGHT], static_cast<float>(m_height));
-	glUniform1f(m_uniforms[WIDTH], static_cast<float>(sOutline->w));
-	glUniform1f(m_uniforms[HEIGHT], static_cast<float>(sOutline->h));
-	glUniform1f(m_uniforms[POSITION_X], static_cast<float>(m_posX));
-	glUniform1f(m_uniforms[POSITION_Y], static_cast<float>(m_posY));
-
-	glUniform1i(m_uniforms[ALBEDO_MAP], 0);
-
-	m_mesh->Render();
-
-	glDisable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_DEPTH_TEST);
-
-	glDeleteTextures(1, &texture);
-	TTF_CloseFont(font);
-	SDL_FreeSurface(sFont);
-	SDL_FreeSurface(sOutline);
-}
-
-
 void UIText::CreateMesh()
 {
 	m_mesh = new Mesh;
@@ -297,13 +278,43 @@ void UIText::CreateShader()
 }
 
 
-void UIText::CreateTexture()
+void UIText::CreateText()
 {
+	if (m_texture != 0)
+	{
+		glDeleteTextures(1, &m_texture);
+	}
 
-}
+	glGenTextures(1, &m_texture);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+
+	TTF_Font * font = TTF_OpenFont(m_font, m_size);
+
+	// OUTLINE
+	SDL_Color black = { 0x00, 0x00, 0x00, 0x00 };
+
+	SDL_Surface * sFont = TTF_RenderText_Blended(font, m_text, m_color);
+
+	TTF_SetFontOutline(font, 2);
+	SDL_Surface * sOutline = TTF_RenderText_Blended(font, m_text, black);
+
+	SDL_Rect rect = { 4, 2, sOutline->w, sOutline->h };
+
+	SDL_BlitSurface(sFont, NULL, sOutline, &rect);
 
 
-void UIText::Copy(const UIText & object)
-{
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, sOutline->w, sOutline->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, sOutline->pixels);
+
+	m_width = sOutline->w;
+	m_height = sOutline->h;
+
+	TTF_CloseFont(font);
+	SDL_FreeSurface(sFont);
+	SDL_FreeSurface(sOutline);
 }

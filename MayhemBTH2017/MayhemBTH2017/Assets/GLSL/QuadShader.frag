@@ -57,8 +57,10 @@ void main()
 	else if(Shake)
 	{
 		for(int i =0;i<9;i++)
+		{
 			col += vec4(sampleTex[i] * kernalB[i], 0.0f);
-			col.a = 1.0f;
+		}
+		col.a = 1.0f;
 	}
 	else if(Chaos)
 	{

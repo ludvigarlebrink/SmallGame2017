@@ -11,6 +11,9 @@
 #include "UIImage.h"
 #include "TransitionManager.h"
 #include "GameSettings.h"
+#include "SoundManager.h"
+#include "AtomicBomb.h"
+#include "ParticleSystem.h"
 
 
 #include <cstdint>
@@ -59,7 +62,7 @@ private:
 
 private:
 	InputManager *	m_input;
-
+	ParticleSystem particles;
 	GamePhysics *	m_world;
 
 	bool		m_isPaused;
@@ -91,6 +94,11 @@ private:
 
 	Camera m_camera;
 	GameSettings * m_gameSettings;
+	SoundManager * m_soundManager;
+
+	// TMP ATOMIC BOMB
+
+	AtomicBomb m_atomicBomb;
 };
 
 

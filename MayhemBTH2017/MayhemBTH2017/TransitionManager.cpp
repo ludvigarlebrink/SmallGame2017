@@ -50,7 +50,7 @@ void TransitionManager::Update()
 
 	if (m_isFadingIn)
 	{
-		m_t += TimeManager::GetDeltaTime() * 0.2f;
+		m_t += TimeManager::GetDeltaTime() * 0.6f;
 		if (m_t > 1.2f)
 		{
 			m_isFadingIn = false;
@@ -61,7 +61,7 @@ void TransitionManager::Update()
 	}
 	else if (m_isFadingOut)
 	{
-		m_t -= TimeManager::GetDeltaTime() * 0.8f;
+		m_t -= TimeManager::GetDeltaTime() * 1.8f;
 		if (m_t < 0.0f)
 		{
 			m_isFadingIn = false;

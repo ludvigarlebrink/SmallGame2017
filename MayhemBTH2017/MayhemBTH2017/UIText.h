@@ -48,6 +48,7 @@ public:
 	bool operator==(const char* text);
 
 	//::.. UPDATE FUNCTIONS .:://
+	void Update();
 	void Render();
 
 	//::.. MODIFY FUNCTIONS ..:://
@@ -75,15 +76,11 @@ public:
 	void SetOutlineSize();
 	void SetOutlineColor();
 
-
-
 private:
 	//::.. HELP FUNCTIONS .:://
-	void TextToTexture(std::string message, SDL_Color color, int x, int y, int size);
 	void CreateMesh();
 	void CreateShader();
-	void CreateTexture();
-	void Copy(const UIText& object);
+	void CreateText();
 
 private:
 	enum Uniforms
@@ -106,6 +103,8 @@ private:
 	const char* m_font;
 
 	SDL_Color	m_color;
+	int32_t		m_screenWidth;
+	int32_t		m_screenHeight;
 	int32_t		m_width;
 	int32_t		m_height;
 	int32_t		m_posX;
@@ -118,10 +117,13 @@ private:
 	bool m_hasOutlining;
 	bool m_hasShadows;
 	bool m_hasGradient;
+	bool m_hasUpdated;
 	
-	Mesh *	m_mesh;	// Shader program.
-	GLuint	m_program;
-	GLuint	m_uniforms[NUM_UNIFORMS];
+	static Mesh * m_mesh;	// Shader program.
+	static GLuint m_program;
+	static GLuint m_uniforms[NUM_UNIFORMS];
+
+	GLuint m_texture;
 };
 
 

@@ -11,6 +11,7 @@ uniform float Width;
 uniform float Height;
 uniform float PosX;
 uniform float PosY;
+uniform float Scale;
 
 void main()
 {
@@ -19,7 +20,7 @@ void main()
 	float posX = PosX / (ScreenWidth * 0.5);
 	float posY = PosY / (ScreenHeight * 0.5);
 
-	gl_Position = vec4(x + posX, y + posY, 0.0, 1.0);
+	gl_Position = vec4((x * Scale) + posX, (y * Scale) + posY, 0.0, 1.0);
 
 	TexCoords1 = TexCoords;
 }

@@ -37,7 +37,7 @@ void main()
 
 	if(outLife>10.0f){
 		outCol.a=1.0;
-		outPos=vec3(0,0,0);
+	//	outPos=vec3(0,0,0);
 
 		outLife=0.0f;
 	}

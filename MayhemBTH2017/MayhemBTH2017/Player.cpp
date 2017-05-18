@@ -28,6 +28,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//m_testCon = new PlayerController;
 	//TEST END
 	m_input = InputManager::Get();
+	m_soundManager = SoundManager::Get();
 
 	//Initiate the players bounding box
 	m_contact = false;
@@ -35,11 +36,11 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_world = world;
 
-	m_playerPrefab = new PlayerPrefab(controllerID);
+	SetControllerID(controllerID);
+
+	m_playerPrefab = new PlayerPrefab(m_controllerID);
 
 	m_testCon = new PlayerController;
-
-	SetControllerID(controllerID);
 
 	//m_playerPrefab->SetScale(glm::vec3(1.3));
 
@@ -76,20 +77,56 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	//set weapon
 
+	Prefab * gun = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar->Create();
 
-	Prefab * projectile = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
+	gun->SetScale(glm::vec3(2, 2, 2));
+
+	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
+
+	Prefab * projectile = PrefabManager::Instantiate("Player", nullptr, nullptr, 0, "Candle");
+
+	Prefab * projectile2 = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
+
+	Prefab * projectile3 = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
+
+	Prefab * projectile4 = PrefabManager::Instantiate("Rifle", nullptr, nullptr, 0, "Candle");
 
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapon = Weapon(nullptr, projectile, m_controllerID);
+	m_weapons[0] = Weapon(gun, projectile, m_controllerID);
+	m_weapons[0].SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 1.0f, 10, m_controllerID, 3.0f);
+	m_weapons[0].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
-	m_weapon.SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 5.0f, 10, m_controllerID);
-	m_weapon.InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50);
+	m_weapons[1] = Weapon(gun, projectile2, m_controllerID);
+	m_weapons[1].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.3f, 10, m_controllerID, 0.7f);
+	m_weapons[1].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
+	m_weapons[2] = Weapon(gun, projectile3, m_controllerID);
+	m_weapons[2].SetProjectileType(0.5f, 1.0f, 0.0f, 0.0f, 0.1f, 15, m_controllerID, 2.0f);
+	m_weapons[2].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
+	m_weapons[3] = Weapon(gun, projectile4, m_controllerID);
+	m_weapons[3].SetProjectileType(0.2f, 1.0f, 0.0f, 0.0f, 0.1f, 18, m_controllerID, 0.7f);
+	m_weapons[3].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
+	m_weapons[4] = Weapon(gun, projectile, m_controllerID);
+	m_weapons[4].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.1f, 12, m_controllerID, 0.9f);
+	m_weapons[4].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
+	m_weapons[5] = Weapon(gun, projectile2, m_controllerID);
+	m_weapons[5].SetProjectileType(0.8f, 1.0f, 0.0f, 0.0f, 0.1f, 11, m_controllerID, 10.2f);
+	m_weapons[5].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
+	m_weapons[6] = Weapon(gun, projectile3, m_controllerID);
+	m_weapons[6].SetProjectileType(0.7f, 1.0f, 0.0f, 0.0f, 0.1f, 14, m_controllerID, 10.2f);
+	m_weapons[6].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
+	m_currentWeapon = 0;
 
 	m_life = 1.0f;
 
@@ -103,14 +140,19 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 void Player::Update() {
 
+	if (m_currentWeapon > 6)
+	{
+		m_currentWeapon = 0;
+	}
+
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 
 	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
 	{
-		if (m_weapon.FireRate(0.15))
+		if (m_weapons[m_currentWeapon].FireRate(m_weapons[m_currentWeapon].GetFireRate()))
 		{
-			m_weapon.Shoot(100.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
+			m_weapons[m_currentWeapon].Shoot(100.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
 		}
 	}
 
@@ -119,13 +161,14 @@ void Player::Update() {
 	{
 		if (m_collidedProjectile)
 		{
+			m_soundManager->PlaySFX("punch");
+
 			ScoreManager::AddHitScore(m_hitByProjectileID);
 			m_life -= 0.1f;
 
 			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
-
 
 			std::cout << m_life << std::endl;
 			if (m_life <= 0.0f)
@@ -138,21 +181,21 @@ void Player::Update() {
 		}
 		if (m_collidedPowerUp)
 		{
-			m_weapon.SetProjectileType(1.0f, 1.0f, 0.0f, 0.1f, 5.0f, 100, m_controllerID);
-			PostProcessingManager::Get()->Update(2);
+
+			m_currentWeapon = rand() % 6 + 1;
+
 			m_collidedPowerUp = false;
 		}
 		m_contact = false;
-	}
-	else
-	{
-		PostProcessingManager::Get()->Update(0);
 	}
 
 	if (m_dead)
 	{
 		m_time += TimeManager::Get()->GetDeltaTime();
 		Respawn(glm::vec2(70, 70));
+
+		m_currentWeapon = 0;
+
 		if (Timer(2))
 		{
 			Respawn(glm::vec2(40, 30));
@@ -162,8 +205,6 @@ void Player::Update() {
 			m_dead = false;
 		}
 	}
-
-
 
 
 	if (GetBox().getBody()->GetLinearVelocity().y != 0) {
@@ -207,7 +248,7 @@ void Player::Update() {
 
 	m_playerPrefab->Update(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
 		m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
-		m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID));
+		m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID));
 
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f)
@@ -241,9 +282,10 @@ void Player::Update() {
 	m_playerPrefab->GetPlayerPrefab()->SetPosition(glm::vec3(xPos + 0.5, yPos + GetBox().getScale().y - 6, 0));
 
 	//////////////////////////////////////////////////////////
-
-	m_weapon.Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
-
+	for (int i = 0; i < 7; i++)
+	{
+		m_weapons[i].Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
+	}
 }
 
 void Player::Respawn(glm::vec2 pos)
@@ -290,7 +332,7 @@ int Player::GetControllerID()
 void Player::UpdateParticles()
 {
 
-	m_weapon.UpdateParticles();
+	m_weapons[m_currentWeapon].UpdateParticles();
 }
 
 Prefab * Player::GetHealthBar()
@@ -355,15 +397,8 @@ void Player::Render(Camera camera) {
 	m_playerPrefab->Render(camera);
 
 	//Renders projectiles of a weapon and its particles
-	m_weapon.Render(camera);
-}
-
-void Player::RenderShadow(Camera camera)
-{
-
-	//Renders the player and the gun 
-	m_playerPrefab->RenderShadow(camera);
-
-	//Renders projectiles of a weapon and its particles
-	m_weapon.RenderShadow(camera);
+	for (int i = 0; i < 7; i++)
+	{
+		m_weapons[i].Render(camera);
+	}
 }

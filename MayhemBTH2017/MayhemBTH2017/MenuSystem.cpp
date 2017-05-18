@@ -16,6 +16,7 @@ MenuSystem::~MenuSystem()
 
 void MenuSystem::Update()
 {
+
 	// First: handle input.
 	if (!m_changeMenu)
 	{
@@ -33,6 +34,8 @@ void MenuSystem::Reset()
 
 void MenuSystem::Init()
 {
+
+
 	m_videoManager = VideoManager::Get();
 	m_inputManager = InputManager::Get();
 	m_stateManager = StateManager::Get();

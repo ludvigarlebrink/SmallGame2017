@@ -266,11 +266,15 @@
       <Filter>Engine\Resources</Filter>
     </ClCompile>
     <ClCompile Include="PostProcessingManager.cpp" />
-    <ClCompile Include="ShadowMap.cpp">
-      <Filter>Engine\Rendering</Filter>
+    <ClCompile Include="Background.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="ShadowShader.cpp">
-      <Filter>Engine\Rendering</Filter>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleTest.cpp" />
+    <ClCompile Include="AtomicBomb.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -472,11 +476,15 @@
       <Filter>Engine\Resources</Filter>
     </ClInclude>
     <ClInclude Include="PostProcessingManager.h" />
-    <ClInclude Include="ShadowMap.h">
-      <Filter>Engine\Rendering</Filter>
+    <ClInclude Include="Background.h">
+      <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="ShadowShader.h">
-      <Filter>Engine\Rendering</Filter>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleTest.h" />
+    <ClInclude Include="AtomicBomb.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -549,33 +557,6 @@
     <None Include="Assets\GLSL\GameLevelShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\GLSL\BulletShader.frag" />
-    <None Include="Assets\GLSL\BulletShader.vert" />
-    <None Include="Assets\Textures\NewTex.mrTex" />
-    <None Include="Assets\Textures\NewTexx.mrthumb" />
-    <None Include="Assets\GLSL\GeometryPass.vert" />
-    <None Include="Assets\GLSL\DrawShader.frag" />
-    <None Include="Assets\GLSL\DrawShader.geom" />
-    <None Include="Assets\GLSL\DrawShader.vert" />
-    <None Include="Assets\GLSL\emitterShader.frag" />
-    <None Include="Assets\GLSL\emitterShader.vert" />
-    <None Include="Assets\GLSL\ColliderShader.frag" />
-    <None Include="Assets\GLSL\ColliderShader.vert" />
-    <None Include="Assets\GLSL\leo.frag" />
-    <None Include="Assets\GLSL\leo.geom" />
-    <None Include="Assets\GLSL\DebugShader.frag" />
-    <None Include="Assets\GLSL\ToonShader.vert" />
-    <None Include="Assets\GLSL\SplitterShader.vert" />
-    <None Include="Assets\GLSL\TextureTest" />
-    <None Include="Assets\GLSL\ToonShader" />
-    <None Include="Assets\GLSL\ToonShader.frag" />
-    <None Include="Assets\GLSL\ShadowShader.vert" />
-    <None Include="Assets\GLSL\ShadowShader.geom" />
-    <None Include="Assets\GLSL\PowerUpShader.vert" />
-    <None Include="Assets\GLSL\ParticleDrop.vert" />
-    <None Include="Assets\GLSL\ParticleExplosion.vert" />
-    <None Include="Assets\GLSL\PlayerShader.vert" />
-    <None Include="Assets\GLSL\PowerUpShader.frag" />
     <None Include="Assets\GLSL\TransitionShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
@@ -588,11 +569,10 @@
     <None Include="Assets\GLSL\SpriteShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\GLSL\ShadowShader.frag" />
-    <None Include="Assets\GLSL\ShadowShaderPlayer.frag">
+    <None Include="Assets\GLSL\ExplosionShader.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\GLSL\ShadowShaderPlayer.vert">
+    <None Include="Assets\GLSL\ExplosionShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
   </ItemGroup>

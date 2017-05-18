@@ -13,14 +13,14 @@
 #include "Mesh.h"
 #include "ParticleTransform.h"
 #include "Particle.h"
+#include "TimeManager.h"
 
 class ParticleSystem : public AShader
 {
 public:
 	//::..CONSTRUCTORS..:://
-	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size,  const int nrOf);
+	ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size,  const int nrOf, float life);
 	ParticleSystem();
-
 	//Destructor
 	virtual ~ParticleSystem();
 	void UpdateParticles();
@@ -68,6 +68,7 @@ private:
 	GLuint testVAO;
 	GLuint testBUffer;
 	GLfloat info[6];
+	float m_life;
 	GLuint particlePosID, particleDirID, particleColorID, particleVelocityID, particleTimeAliveID;
 	GLuint inPosID, inDirID, inColID, inTimeID, inSizeID;
 	uint32_t offset;

@@ -1,7 +1,11 @@
 #include "UIImage.h"
 
 
-#include "VideoManager.h"
+
+Mesh * UIImage::m_mesh = nullptr;
+GLuint UIImage::m_program = 0;
+GLuint UIImage::m_uniforms[Uniforms::NUM_UNIFORMS] = { 0 };
+
 
 
 UIImage::UIImage()
@@ -104,6 +108,7 @@ void UIImage::Render()
 	}
 	glUniform1f(m_uniforms[POSITION_X], static_cast<float>(m_posX));
 	glUniform1f(m_uniforms[POSITION_Y], static_cast<float>(m_posY));
+	glUniform1f(m_uniforms[SCALE], 1.0f);
 
 	glUniform1i(m_uniforms[ALBEDO_MAP], 0);
 
@@ -235,12 +240,12 @@ int32_t UIImage::GetSizeY()
 	return m_sizeY;
 }
 
-int32_t UIImage::GetPosX()
+float UIImage::GetPosX()
 {
 	return m_posX;
 }
 
-int32_t UIImage::GetPosY()
+float UIImage::GetPosY()
 {
 	return m_posY;
 }
@@ -257,7 +262,7 @@ glm::vec2 UIImage::GetUV()
 
 
 //::.. SET FUNCTIONS ..:://
-void UIImage::SetPosition(int32_t x, int32_t y)
+void UIImage::SetPosition(float x, float y)
 {
 	m_posX = x;
 	m_posY = y;
@@ -359,4 +364,8 @@ void UIImage::CreateShader()
 	m_uniforms[POSITION_Y] = glGetUniformLocation(m_program, "PosY");
 	m_uniforms[SCALE] = glGetUniformLocation(m_program, "Scale");
 	m_uniforms[ALBEDO_MAP] = glGetUniformLocation(m_program, "AlbedoMap");
+}
+
+void UIImage::CreateTexture()
+{
 }

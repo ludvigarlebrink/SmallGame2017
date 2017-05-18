@@ -6,6 +6,9 @@
 #include "InputManager.h"
 #include "TimeManager.h"
 #include "StateManager.h"
+#include "ScoreManager.h"
+#include "SoundManager.h"
+#include "PostProcessingManager.h"
 
 #include "AntiAliasing.h"
 #include "MeshQuad.h"
@@ -30,6 +33,7 @@ private:
 	InputManager *	m_inputManager;
 	TimeManager *	m_timeManager;
 	StateManager*	m_stateManager;
+	SoundManager*	m_soundManager;
 
 };
 

@@ -4,8 +4,13 @@
 
 Projectile::Projectile()
 {
+	//m_particles = new ParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(20, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 1.0f, 500, 5.0f);
+
 	m_time = 0.0;
 	m_rotationUpdate = 0.0f;
+	m_renderParticles = false;
+	m_hasParticles = false;
+	m_particleTimer = 0;
 }
 
 
@@ -13,7 +18,7 @@ Projectile::~Projectile()
 {
 }
 
-void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID)
+void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID, float life)
 {
 	m_isBullet = false;
 
@@ -23,12 +28,16 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 
 	m_active = true;
 
+	m_life = life;
+
+	m_lifeTime = 0;
+
 	b2Filter filter;
-	
+
 	if (controllerID == 0)
 	{
 		filter.categoryBits = PROJECTILE1;
-		filter.maskBits = BOUNDARY| PLAYER2;
+		filter.maskBits = BOUNDARY | PLAYER2;
 	}
 	else if (controllerID == 1)
 	{
@@ -41,12 +50,18 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_box.InitDynamic(world, pos, glm::vec2(m_prefabPointer.GetScale().x, m_prefabPointer.GetScale().y));
 	m_box.getBody()->SetUserData(this);
 	m_box.getFixture()->SetRestitution(restitution);
+
+	m_restitution = restitution;
+
 	m_box.getFixture()->SetFriction(friction);
 	m_box.getFixture()->SetDensity(density);
 	m_box.getBody()->SetLinearDamping(damping);
 	m_box.getFixture()->SetFilterData(filter);
 	m_box.getBody()->ResetMassData();
+
 }
+
+
 
 void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 {
@@ -69,9 +84,10 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 	filter.categoryBits = PROJECTILE1;
 	filter.maskBits = BOUNDARY;
 	m_box.getFixture()->SetFilterData(filter);
+
 }
 
-void Projectile::SetLife(int life)
+void Projectile::SetLife(float life)
 {
 	m_life = life;
 }
@@ -83,18 +99,18 @@ void Projectile::AddForce(glm::vec3 force, int controllerID)
 	boxForce.x = force.x;
 	boxForce.y = force.y;
 	boxForce *= 10;
-	
-//	float x = InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID);
-//	float y = InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID);
-//	
-//
+
+	//	float x = InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, controllerID);
+	//	float y = InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID);
+	//	
+	//
 
 	float angle = glm::degrees(atan2(force.y, force.x));
 
 
 	m_prefabPointer.SetRotation(0, 0, angle - 90);
 
-	
+
 
 	m_box.getBody()->ApplyForce(boxForce, m_box.getBody()->GetWorldCenter(), true);
 	m_box.getBody()->SetTransform(m_box.getBody()->GetPosition(), (angle));
@@ -109,7 +125,10 @@ void Projectile::SetActive(bool active)
 	m_active = active;
 }
 
-int Projectile::GetLife()
+
+
+
+float Projectile::GetLife()
 {
 	return m_life;
 }
@@ -142,14 +161,23 @@ int Projectile::GetProjectileID()
 
 void Projectile::Update()
 {
+	m_lifeTime += TimeManager::GetDeltaTime();
+
 	if (m_contact)
 	{
-		GetBox().getBody()->SetActive(false);
-		SetActive(false);
+		//if (m_lifeTime >= m_life)
+		//{
+			GetBox().getBody()->SetActive(false);
+			SetActive(false);
+			m_renderParticles = true;
+
+			m_lifeTime = 0;
+		//}
 	}
 
 	if (m_active)
 	{
+
 		m_rotationUpdate += 10;
 
 		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
@@ -172,8 +200,17 @@ void Projectile::Render(Camera camera)
 {
 	if (m_active)
 	{
+
+		
 		m_prefabPointer.Update();
 		m_prefabPointer.Render(camera);
+	
+	
+	}
+
+	if (m_renderParticles) {
+		//m_particles->UpdateParticles();
+		//m_particles->RenderTransformed();
 	}
 }
 
@@ -195,3 +232,4 @@ void Projectile::EndContact()
 {
 	m_contact = false;
 }
+
