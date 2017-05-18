@@ -10,6 +10,7 @@ AShader::AShader()
 AShader::AShader(const std::string& filename, bool hasGeomShader, bool particles)
 {
 	Init(filename, hasGeomShader, particles);
+	std::cout << "ShaderCreated" << std::endl;
 }
 
 AShader:: ~AShader()
@@ -114,8 +115,9 @@ void AShader::Update(Transform& transform, Camera& camera)
 	glUniformMatrix4fv(m_uniforms[V], 1, GL_FALSE, &camera.GetView()[0][0]);
 	glUniformMatrix4fv(m_uniforms[P], 1, GL_FALSE, &camera.GetProjection()[0][0]);
 	glUniform1i(m_uniforms[DIFFUSE_MAP], 0);
-	glUniform1i(m_uniforms[ALPHA], 1);
-
+	//ERROR
+	//glUniform1i(m_uniforms[ALPHA], 1);
+	//ERROR
 }
 
 void AShader::AddAttributeLocation()
@@ -133,14 +135,25 @@ void AShader::AddUniforms()
 	m_uniforms[1] = glGetUniformLocation(m_programID, "V");
 	m_uniforms[2] = glGetUniformLocation(m_programID, "P");
 	m_uniforms[DIFFUSE_MAP]= glGetUniformLocation(m_programID, "DiffuseMap");
-	m_uniforms[ALPHA] = glGetUniformLocation(m_programID, "Alpha");
+
 
 }
+
 
 void AShader::SendTexture(GLuint id, const GLchar* name, glm::vec4 UV)
 {
 	this->Bind();
 	glUniform1i(glGetUniformLocation(m_programID, name), id);
+	//const GLubyte* gluErrorString(GLenum errorCode);
+	//GLenum errCode;
+	//const GLubyte *errstring;
+	//if ((errCode = glGetError()) != GL_NO_ERROR)
+	//{
+	//	errstring = gluErrorString(errCode);
+	//}
+	//glUniform1i(glGetUniformLocation(m_programID, "ShadowMap"), 2);
+
+	uint32_t x = glGetUniformLocation(m_programID, "ShadowMap");
 	GLuint locUV = glGetUniformLocation(m_programID, "selectedUV");
 	glUniform4f(locUV, UV.x, UV.y, UV.z, UV.w);
 

@@ -2,6 +2,8 @@
 #define __SHADOWSHADER_H__
 
 #include "AShader.h"
+#include "Camera.h"
+
 
 class ShadowShader
 {
@@ -11,9 +13,9 @@ public:
 	virtual ~ShadowShader();
 
 	//::.. HELP FUNCTIONS ..:://
-	void Init();
+	void Init(std::string shaderName);
 
-	void UpdateShadows();
+	void UpdateShadows(Camera camera, Transform trans);
 
 private:
 

@@ -21,6 +21,7 @@ public:
 
 	Projectile * ReuseLast();
 	void Render(Camera camera);
+	void RenderShadow(Camera camera);
 	void Update(glm::vec3 playerPos, b2Vec2 force);
 	void DeleteProjectile();
 	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life);

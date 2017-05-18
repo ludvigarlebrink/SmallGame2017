@@ -247,6 +247,15 @@ void Projectile::Render(Camera camera)
 
 }
 
+void Projectile::RenderShadow(Camera camera)
+{
+	if (m_active)
+	{
+		m_prefabPointer.Update();
+		m_prefabPointer.RenderShadow(camera);
+	}
+}
+
 void Projectile::StartContact()
 {
 	m_contact = true;

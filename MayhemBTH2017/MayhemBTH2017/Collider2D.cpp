@@ -40,12 +40,18 @@ void Collider2D::DrawCollider(Camera camera)
 	
 }
 
-void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
+void Collider2D::DrawColliderShadowPass(Camera camera)
+{
+	Transform transf;
+	transf.SetPosition(42.0, 24.0, -0.0);
+	m_level.Render();
+}
+
+void Collider2D::CreateBoundingBoxes(b2World* world) {
 
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
 	m_contact = false;
-
-	m_levelHandler.Import(m_level, 1, levelName);
+	m_levelImport.Import(m_level, 1, "MARTIN");
 	
 	
 	const uint32_t length = SIZE_X * SIZE_Y * 6;

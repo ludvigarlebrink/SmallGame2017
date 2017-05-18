@@ -4,7 +4,6 @@
 //::.. CONSTRUCTORS ..:://
 LevelEditor::LevelEditor()
 {
-
 	m_input = InputManager::Get();
 	m_stateManager = StateManager::Get();
 	m_videoManager = VideoManager::Get();
@@ -45,9 +44,24 @@ LevelEditor::LevelEditor()
 
 }
 
+void LevelEditor::Init()
+{
+}
+
 LevelEditor::~LevelEditor()
 {
 	// Do nothing...
+
+
+	//delete m_input;
+	//delete m_stateManager;
+	//delete m_videoManager;
+	//delete m_timeManager ;
+	//m_input = nullptr;
+	//m_stateManager= nullptr;
+	//m_videoManager= nullptr;
+	//m_timeManager= nullptr;
+
 }
 
 

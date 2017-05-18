@@ -20,6 +20,7 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	glm::mat4 GetView();
+	glm::mat4 GetViewShadow();
 	glm::mat4 GetProjection();
 	glm::vec3 GetPosition();
 
