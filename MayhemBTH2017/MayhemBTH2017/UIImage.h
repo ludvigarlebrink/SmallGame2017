@@ -19,6 +19,7 @@ class UIImage
 public:
 	UIImage();
 	virtual ~UIImage();
+	void PTest();
 
 	//::.. UPDATE FUNCTIONS ..:://
 	void Render();
@@ -79,6 +80,7 @@ private:
 	SDL_Color	m_color;
 	Texture		m_texture;
 	bool		m_showTexture;
+	bool		m_temp = false;
 
 	static Mesh *	m_mesh;	// Shader program.
 	static GLuint	m_program;

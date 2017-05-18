@@ -106,7 +106,7 @@ void PlayerPrefab::RenderShadow(Camera & cam)
 {
 	//Renders the prefab meshes
 	m_player->RenderShadow(cam);
-	m_weapon->RenderShadow(cam);
+	m_weapon->Render(cam);
 }
 
 Prefab * PlayerPrefab::GetPlayerPrefab()

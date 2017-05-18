@@ -28,6 +28,7 @@ public:
 
 	//::.. CONSTRUCTORS ..:://
 	LevelEditor();
+	void Init();
 	virtual ~LevelEditor();
 
 	//::.. UPDATE FUNCTIONS ..:://

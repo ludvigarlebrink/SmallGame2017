@@ -20,10 +20,10 @@ void Level::Render(Camera camera)
 	// SELECT THE SHADER
 	// UPDATE THE SHADER
 
-	Transform tran;	
+	Transform m_tran;	
 
 	m_debugShader.Bind();
-	m_debugShader.Update(tran, camera);
+	m_debugShader.Update(m_tran, camera);
 
 	m_uv.x = 0.0/ 512.0;
 	m_uv.y = 0.0 / 512.0;

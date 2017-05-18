@@ -13,6 +13,7 @@ uniform mat4 P;
 
 
 uniform vec4 selectedUV;
+uniform sampler2D ShadowMap;
 
 uniform float Alpha;
 uniform sampler2D DiffuseMap;
@@ -36,6 +37,5 @@ void main()
 
 	vec3 result = ambient + diffuse + specular;
 
-
-	FragColor = texture2D(t, vec2(TexCoords1.x, -TexCoords1.y)) * vec4(result, 1.0);
+	FragColor = texture2D(ShadowMap, vec2(TexCoords1.x, -TexCoords1.y)) * vec4(result, 1.0);
 }

@@ -31,9 +31,9 @@ void System::Run()
 	//	TransitionManager transitionManager;
 	AntiAliasing msaa;
 	MeshQuad quad;
+	bool temp = false;
 
 
-	LevelEditor l;
 	MenuSystem m;
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
@@ -64,6 +64,7 @@ void System::Run()
 
 	GameUI gameUI;
 
+	LevelEditor* l = nullptr;
 	while (isRunning)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -78,11 +79,23 @@ void System::Run()
 
 			break;
 		case GameState::MAIN_MENU:
+			if (temp == true)
+			{
+				//delete l;
+				//l = nullptr;
+				//temp = false;
+			}
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
+			if (temp == false)
+			{
+				l = new LevelEditor;
+				temp = true;
+			}
 			//	msaa.Reset();
-			l.Update();
+		
+			l[0].Update();
 			//	msaa.Update();
 			//	quad.Render();
 			//	msaa.Bind();

@@ -68,6 +68,8 @@ private:
 
 	PowerUpHandler m_PH;
 
+
+	Transform m_transf;
 	int m_nrOfPlayers;
 
 	enum _entityCategory {

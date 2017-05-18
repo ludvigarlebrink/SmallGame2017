@@ -1,6 +1,7 @@
 #version 420
 
 uniform sampler2D DiffuseMap;
+uniform sampler2D ShadowMap;
 in vec3 TexCoords1;
 out vec4 FragColor;
 
@@ -71,7 +72,7 @@ void main()
 		col = texture2D(DiffuseMap, TexCoords1.xy);
 	}
 
-
+	col = texture2D(DiffuseMap, TexCoords1.xy);
 	FragColor = col;
 
 }

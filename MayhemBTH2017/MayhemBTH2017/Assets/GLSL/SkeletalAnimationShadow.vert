@@ -12,7 +12,7 @@ out vec3 TexCoords1;
 uniform mat4 M;
 uniform mat4 V;
 uniform mat4 P;
-uniform mat4 LightSpaceMatrix;
+
 uniform mat4 Joints[22];
 
 void main()

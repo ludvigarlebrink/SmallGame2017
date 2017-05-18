@@ -14,12 +14,12 @@ void main()
 
 	if(TexCoords.z > 0.01f)
 	{
-		gl_Position =  LightSpaceMatrix * M * vec4(Position, 1.0);
+		gl_Position = LightSpaceMatrix * vec4(Position, 1.0);
 
 	}
 	else
 	{
-		gl_Position = P * V * M * vec4(0, 0, -1000, 1.0f);
+		gl_Position = LightSpaceMatrix * M * vec4(0, 0, -1000, 1.0f);
 	}
 	TexCoords1 = TexCoords;
 }

@@ -31,6 +31,7 @@ void ShadowMap::Init()
 	glBindFramebuffer(GL_FRAMEBUFFER, m_depthMapFBO);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
 		GL_TEXTURE_2D, m_depthMap, 0);
+	
 	glDrawBuffer(GL_NONE);
 	glReadBuffer(GL_NONE);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -39,7 +40,7 @@ void ShadowMap::Init()
 
 void ShadowMap::FirstPass()
 {
-	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+	glViewport(0, 0, 1024, 1024);
 	glBindFramebuffer(GL_FRAMEBUFFER, m_depthMap);// error
 	//glClear(GL_DEPTH_BUFFER_BIT);
 }
@@ -53,7 +54,7 @@ void ShadowMap::SecPass()
 
 void ShadowMap::Bind()
 {
-	glActiveTexture(GL_TEXTURE10);
+	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, m_depthMap);
 }
 

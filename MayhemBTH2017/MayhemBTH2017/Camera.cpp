@@ -34,8 +34,15 @@ void Camera::SetRotation(float x, float y)
 //::.. GET FUNCTIONS ..:://
 glm::mat4 Camera::GetView()
 {
-	return glm::lookAt(m_pos, m_pos + m_front, m_up);;
+	return glm::lookAt(m_pos, m_pos + m_front, m_up);
 }
+
+glm::mat4 Camera::GetViewShadow()
+{
+	return glm::lookAt(glm::vec3(42, 24, -2) , glm::vec3(42, 24, -2) + glm::vec3(0,-0.3,1) ,  m_up);
+}
+
+
 
 glm::mat4 Camera::GetProjection()
 {

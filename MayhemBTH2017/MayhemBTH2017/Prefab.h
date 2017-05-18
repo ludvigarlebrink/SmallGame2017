@@ -103,6 +103,7 @@ private:
 	AnimController *	m_animController;
 	Material *			m_material;
 	GLuint				m_shaderProgram;
+	GLuint				m_shadowProgram;
 	GLuint				m_uniforms[NUM_UNIFORMS];
 	GLuint				m_albedoID;
 	GLuint				m_vao;

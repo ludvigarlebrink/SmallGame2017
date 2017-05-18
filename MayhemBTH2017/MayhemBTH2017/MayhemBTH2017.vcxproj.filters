@@ -266,15 +266,15 @@
       <Filter>Engine\Resources</Filter>
     </ClCompile>
     <ClCompile Include="PostProcessingManager.cpp" />
-    <ClCompile Include="Background.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
+    <ClCompile Include="AtomicBomb.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="ParticleTest.cpp" />
-    <ClCompile Include="AtomicBomb.cpp">
-      <Filter>Game</Filter>
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="ShadowMap.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowShader.cpp">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -476,15 +476,15 @@
       <Filter>Engine\Resources</Filter>
     </ClInclude>
     <ClInclude Include="PostProcessingManager.h" />
-    <ClInclude Include="Background.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
+    <ClInclude Include="AtomicBomb.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="ParticleTest.h" />
-    <ClInclude Include="AtomicBomb.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="ShadowMap.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowShader.h">
+      <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -569,10 +569,27 @@
     <None Include="Assets\GLSL\SpriteShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\GLSL\ExplosionShader.frag">
+    <None Include="Assets\GLSL\ExplosionShader.frag" />
+    <None Include="Assets\GLSL\ExplosionShader.vert" />
+    <None Include="Assets\GLSL\ShadowShader.frag">
       <Filter>Assets\GLSL</Filter>
     </None>
-    <None Include="Assets\GLSL\ExplosionShader.vert">
+    <None Include="Assets\GLSL\ShadowShader.geom">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ShadowShader.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ShadowShaderPlayer.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\ShadowShaderPlayer.vert">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SkeletalAnimationShadow.frag">
+      <Filter>Assets\GLSL</Filter>
+    </None>
+    <None Include="Assets\GLSL\SkeletalAnimationShadow.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
   </ItemGroup>

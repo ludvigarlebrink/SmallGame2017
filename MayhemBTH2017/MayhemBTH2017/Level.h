@@ -67,6 +67,7 @@ private:
 
 private:
 	Block		m_grid[SIZE_X][SIZE_Y];
+	Transform	m_tran;
 	
 	std::string	m_name;
 
