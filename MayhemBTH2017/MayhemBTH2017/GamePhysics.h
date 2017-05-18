@@ -10,7 +10,7 @@
 #include "PowerUpHandler.h"
 #include "ShadowMap.h"
 #include "ShadowShader.h"
-
+#include <math.h>
 
 class GamePhysics
 {
@@ -21,6 +21,7 @@ public:
 	void EnterWorld(Level & level);
 	void Update();
 	void Render(Camera camera);
+	bool CreateRocketLauncherExplosion();
 	glm::vec3 GetPosition();
 
 	void SetNrOfPlayers(int nrOf);
