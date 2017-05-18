@@ -42,7 +42,7 @@ LevelMarker::LevelMarker()
 
 	m_transform.SetPosition(0.0f, 0.0f, 0.0f);
 	m_mesh.Load(verts, 6);
-	
+
 }
 
 
@@ -198,6 +198,47 @@ void LevelMarker::Render(Camera & camera, glm::vec2 m_uv)
 
 	//temp stuff-------------------------------END
 
+	if (m_mode == ADD_SPAWN_POINT)
+	{
+
+		startX = m_currentPosX;
+		startY = m_currentPosY;
+		endX = m_currentPosX + 3;
+		endY = m_currentPosY + 3;
+
+		sizeX = endX - startX + 1;
+		sizeY = endY - startY + 1;
+
+		float offsetX;
+		float offsetY;
+
+		if (sizeX % 2 == 0)
+		{
+			offsetX = (startX + (sizeX / 2)) - 0.5f;
+		}
+		else
+		{
+			offsetX = (startX + (sizeX / 2));
+		}
+
+		if (sizeY % 2 == 0)
+		{
+			offsetY = (startY + (sizeY / 2)) - 0.5f;
+		}
+		else
+		{
+			offsetY = (startY + (sizeY / 2));
+		}
+
+
+		m_transform.SetScale(sizeX, sizeY, 1.0f);
+		m_transform.SetPosition(offsetX, offsetY, -2.001f);
+		m_levelShader.Update(m_transform, camera);
+		m_levelShader.TempUpdateAlpha(1.0f);
+		m_mesh.Render();
+	}
+
+
 	if (m_mode == ADD_BLOCK || m_mode == REMOVE_BLOCK)
 	{
 
@@ -268,21 +309,45 @@ void LevelMarker::Render(Camera & camera, glm::vec2 m_uv)
 
 void LevelMarker::ClampPos()
 {
-	if (m_currentPosX >= SIZE_X)
+	if (m_mode == NORMAL || ADD_BLOCK || REMOVE_BLOCK)
 	{
-		m_currentPosX = SIZE_X - 1;
+		if (m_currentPosX >= SIZE_X)
+		{
+			m_currentPosX = SIZE_X - 1;
+		}
+		else if (m_currentPosX <= 1)
+		{
+			m_currentPosX = 1;
+		}
+
+		if (m_currentPosY >= SIZE_Y)
+		{
+			m_currentPosY = SIZE_Y - 1;
+		}
+		else if (m_currentPosY <= 1)
+		{
+			m_currentPosY = 1;
+		}
 	}
-	else if (m_currentPosX <= 1)
+	else if (m_mode == ADD_SPAWN_POINT)
 	{
-		m_currentPosX = 1;
+		if (m_currentPosX >= SIZE_X - 4)
+		{
+			m_currentPosX = SIZE_X - 4;
+		}
+		else if (m_currentPosX <= 1)
+		{
+			m_currentPosX = 1;
+		}
+
+		if (m_currentPosY >= SIZE_Y - 4)
+		{
+			m_currentPosY = SIZE_Y - 4;
+		}
+		else if (m_currentPosY <= 1)
+		{
+			m_currentPosY = 1;
+		}
 	}
 
-	if (m_currentPosY >= SIZE_Y)
-	{
-		m_currentPosY = SIZE_Y - 1;
-	}
-	else if (m_currentPosY <= 1)
-	{
-		m_currentPosY = 1;
-	}
 }

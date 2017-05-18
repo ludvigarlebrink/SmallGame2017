@@ -48,8 +48,6 @@ void System::Run()
 	m.Init();
 	float counter = 0;
 
-	m_soundManager->PlayMusic("bensound-cute");
-
 	Camera cam;
 
 

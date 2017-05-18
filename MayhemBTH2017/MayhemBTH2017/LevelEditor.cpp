@@ -101,30 +101,24 @@ void LevelEditor::Update()
 
 	case LOAD:
 		m_levelHandler.GetLevelNames(m_levelText);
+
 		for (int i = 0; i < m_levelHandler.GetNumLevels(); i++)
 		{
 			m_levelChoice[i].SetText(m_levelText.at(i).c_str());
-		}
-
-		for (int i = 0; i < 5; i++)
-		{
-			if (i > m_levelHandler.GetNumLevels())
-				break;
-
-			m_levelChoice[i + (5 * m_levelSelector)].SetPosition(0, -50 * i);
-			m_levelChoice[i + (5 * m_levelSelector)].Render();
+			m_levelChoice[i].SetPosition(0, 200 - (50 * i));
+			
 
 			if (m_levelSelector == i)
 			{
-				m_levelChoice[i + (5 * m_levelSelector)].SetColor(255, 255, 255, 255);
+				m_levelChoice[i].SetColor(255, 255, 255, 128);
 			}
 			else
 			{
-				m_levelChoice[i + (5 * m_levelSelector)].SetColor(255, 0, 0, 255);
+				m_levelChoice[i].SetColor(255, 0, 0, 128);
 			}
 
+			m_levelChoice[i].Render();
 		}
-
 
 		MenuInput();
 		break;
@@ -185,14 +179,59 @@ void LevelEditor::AxisMove()
 
 void LevelEditor::ButtonInput()
 {
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
+	{
+		if (m_levelMarker.GetMarkerMode() == NORMAL)
+		{
+			m_levelMarker.SetMarkerMode(ADD_SPAWN_POINT);
+		}
+		else
+		{
+			m_levelMarker.SetMarkerMode(NORMAL);
+		}
+	}
+
+	if (m_input->GetButtonUp(CONTROLLER_BUTTON_A) && m_levelMarker.GetMarkerMode() == ADD_SPAWN_POINT)
+	{
+
+		for (size_t x = m_levelMarker.GetStartX(); x <= m_levelMarker.GetEndX(); x++)
+		{
+			for (size_t y = m_levelMarker.GetStartY(); y <= m_levelMarker.GetEndY(); y++)
+			{
+				m_level.SetSpawnPoint(x, y, true);
+				m_level.AddBlock(x, y, m_levelGUI.GetCurrentUV());
+			}
+		}
+
+		m_levelMarker.SetMarkerMode(NORMAL);
+	}
+
+	if (m_input->GetButtonUp(CONTROLLER_BUTTON_X) && m_levelMarker.GetMarkerMode() == ADD_SPAWN_POINT)
+	{
+
+		for (size_t x = m_levelMarker.GetStartX(); x <= m_levelMarker.GetEndX(); x++)
+		{
+			for (size_t y = m_levelMarker.GetStartY(); y <= m_levelMarker.GetEndY(); y++)
+			{
+				if (m_level.GetIsSpawnPoint(x, y))
+				{
+					m_level.SetSpawnPoint(x, y, false);
+					m_level.RemoveBlock(x, y);
+				}
+			}
+		}
+
+		m_levelMarker.SetMarkerMode(NORMAL);
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A) && m_levelMarker.GetMarkerMode() != ADD_SPAWN_POINT)
 	{
 		m_levelMarker.SetSavedPosX(m_levelMarker.GetCurrentPosX());
 		m_levelMarker.SetSavedPosY(m_levelMarker.GetCurrentPosY());
 		m_levelMarker.SetMarkerMode(ADD_BLOCK);
 	}
 
-	if (m_input->GetButtonUp(CONTROLLER_BUTTON_A) && m_levelMarker.GetMarkerMode())
+	if (m_input->GetButtonUp(CONTROLLER_BUTTON_A) && m_levelMarker.GetMarkerMode() && m_levelMarker.GetMarkerMode() != ADD_SPAWN_POINT)
 	{
 		m_levelMarker.SetMarkerMode(NORMAL);
 
@@ -205,7 +244,7 @@ void LevelEditor::ButtonInput()
 		}
 	}
 
-	if (m_input->GetButtonUp(CONTROLLER_BUTTON_X) && m_levelMarker.GetMarkerMode())
+	if (m_input->GetButtonUp(CONTROLLER_BUTTON_X) && m_levelMarker.GetMarkerMode() && m_levelMarker.GetMarkerMode() != ADD_SPAWN_POINT)
 	{
 		m_levelMarker.SetMarkerMode(NORMAL);
 
@@ -218,14 +257,14 @@ void LevelEditor::ButtonInput()
 		}
 	}
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_X))
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_X) && m_levelMarker.GetMarkerMode() != ADD_SPAWN_POINT)
 	{
 		m_levelMarker.SetSavedPosX(m_levelMarker.GetCurrentPosX());
 		m_levelMarker.SetSavedPosY(m_levelMarker.GetCurrentPosY());
 		m_levelMarker.SetMarkerMode(REMOVE_BLOCK);
 	}
 
-	if (m_input->GetButtonUp(CONTROLLER_BUTTON_X))
+	if (m_input->GetButtonUp(CONTROLLER_BUTTON_X) && m_levelMarker.GetMarkerMode() != ADD_SPAWN_POINT)
 	{
 		m_levelMarker.SetMarkerMode(NORMAL);
 	}
@@ -301,10 +340,8 @@ void LevelEditor::MenuInput()
 			m_level.Render(m_camera);
 			m_videoManager->Swap();
 			m_levelHandler.Export(m_level, m_levelGUI.GetPropPlacer());
-			//m_levelHandler.ExportRegister();
-			//m_levelHandler.TestExportRegister();
 			// FIX
-			glViewport(0, 0, 1280, 720);
+			glViewport(0, 0, 1280, 720); // FIX THIS?
 			// REMOVE
 
 			m_levelHandler.IncrementNumLevels();
@@ -324,7 +361,7 @@ void LevelEditor::MenuInput()
 
 		else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
 		{
-			if (m_levelSelector + 1 < m_levelHandler.GetNumLevels() / 5 + 1)
+			if (m_levelSelector + 1 < m_levelHandler.GetNumLevels())
 			{
 				m_levelSelector++;
 			}
@@ -337,8 +374,8 @@ void LevelEditor::MenuInput()
 
 		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 		{
-			m_levelHandler.Import(m_level, m_levelID, m_levelChoice[m_levelSelector].GetText());
 			Reset();
+			m_levelHandler.Import(m_level, m_levelID, m_levelChoice[m_levelSelector].GetText());
 			m_state = EDIT;
 		}
 		break;
@@ -363,6 +400,20 @@ void LevelEditor::MenuInput()
 			m_state = EDIT;
 			m_levelSelector = 0;
 			m_textPos = 0;
+			for (int i = 0; i < 3; i++)
+			{
+				if (i == m_textPos)
+				{
+					m_menuText[i].SetColor(255, 0, 0, 128);
+					m_menuText[i].SetSize(100);
+				}
+				else
+				{
+					m_menuText[i].SetColor(255, 255, 255, 255);
+					m_menuText[i].SetSize(90);
+				}
+			}
+
 			m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 			break;
 		}

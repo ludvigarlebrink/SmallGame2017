@@ -160,6 +160,7 @@
     <ClCompile Include="MenuVideo.cpp" />
     <ClCompile Include="MeshQuad.cpp" />
     <ClCompile Include="MyContactListener.cpp" />
+    <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="ParticleTest.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -260,6 +261,7 @@
     <ClInclude Include="MenuVideo.h" />
     <ClInclude Include="MeshQuad.h" />
     <ClInclude Include="MyContactListener.h" />
+    <ClInclude Include="ParticleEmitter.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="ParticleTest.h" />
     <ClInclude Include="Player.h" />
@@ -342,6 +344,8 @@
     <None Include="Assets\GLSL\MainShader.frag" />
     <None Include="Assets\GLSL\MainShader.geom" />
     <None Include="Assets\GLSL\MainShader.vert" />
+    <None Include="Assets\GLSL\NuclearShader.frag" />
+    <None Include="Assets\GLSL\NuclearShader.vert" />
     <None Include="Assets\GLSL\QuadShader.frag" />
     <None Include="Assets\GLSL\QuadShader.geom" />
     <None Include="Assets\GLSL\QuadShader.vert" />
@@ -359,6 +363,8 @@
     <None Include="Assets\GLSL\SkeletalAnimationShadow.vert" />
     <None Include="Assets\GLSL\SpriteShader.frag" />
     <None Include="Assets\GLSL\SpriteShader.vert" />
+    <None Include="Assets\GLSL\ToonShader.frag" />
+    <None Include="Assets\GLSL\ToonShader.vert" />
     <None Include="Assets\GLSL\TransitionShader.frag" />
     <None Include="Assets\GLSL\TransitionShader.vert" />
     <None Include="Assets\Levels\NewFormat.mrlevel" />

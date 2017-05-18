@@ -4,7 +4,7 @@
 
 ResourceExporter::ResourceExporter()
 {
-	m_filepath = ".\\Assets\\ResourceRegister.mrregister";
+	m_filepath = ".\\Assets\\Levels\\NewFormat.mrlevel";
 }
 
 

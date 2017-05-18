@@ -44,7 +44,7 @@ void LevelHandler::Init()
 //::.. IMPORT/EXPORT ..:://
 void LevelHandler::Import(Level & level, uint32_t id, std::string levelName)
 {
-
+	level.Clear();
 	const int nrOfBlocks = level.SIZE_X * level.SIZE_Y;
 
 	bool isOccupied[nrOfBlocks] = { 0 };
@@ -122,20 +122,22 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	bool isSpawn[nrOfBlocks] = { 0 };
 	glm::vec2 uvCoords[nrOfBlocks] = { glm::vec2(0,0) };
 	uint32_t i = 0;
+
 	for (size_t x = 1; x < level.SIZE_X; x++)
-
-
 	{
 		for (size_t y = 1; y < level.SIZE_Y; y++)
 		{
-			isOccupied[i] = level.GetIsOccupied(x, y);
-			isSpawn[i] = level.GetIsSpawnPoint(x, y);
-			uvCoords[i] = level.GetTempUV(x, y);
+			if (level.GetIsSpawnPoint(x, y) == true)
+				isSpawn[i] = level.GetIsSpawnPoint(x, y);
+			else
+			{
+				isOccupied[i] = level.GetIsOccupied(x, y);
+				uvCoords[i] = level.GetTempUV(x, y);
+			}
+
 			++i;
 		}
 	}
-
-	int x = 2;
 
 	std::ofstream output(".\\Assets\\Levels\\" + level.GetName() + ".mrlevel", std::ios::binary);
 
