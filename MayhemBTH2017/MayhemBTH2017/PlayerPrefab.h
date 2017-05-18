@@ -32,6 +32,7 @@ public:
 
 	void Update(float x, float y, float speed);
 	void Render(Camera& cam);
+	void RenderShadow(Camera& cam);
 
 	//::.. GET FUNCTIONS ..:://
 	Prefab * GetPlayerPrefab();

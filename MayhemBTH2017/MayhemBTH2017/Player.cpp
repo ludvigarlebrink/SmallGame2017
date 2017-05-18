@@ -414,3 +414,17 @@ void Player::Render(Camera camera) {
 		m_weapons[i].Render(camera);
 	}
 }
+
+
+void Player::RenderShadow(Camera camera)
+{
+
+	//Renders the player and the gun 
+	m_playerPrefab->RenderShadow(camera);
+
+	//Renders projectiles of a weapon and its particles
+	for (int i = 0; i < 7; i++)
+	{
+		m_weapons[i].RenderShadow(camera);
+	}
+}

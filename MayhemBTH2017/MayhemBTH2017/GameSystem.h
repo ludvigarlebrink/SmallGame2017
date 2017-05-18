@@ -47,6 +47,7 @@ private:
 		INIT_PLAY,
 		START_PLAY,
 		PLAY,
+		SELECT_LEVEL,
 		LOAD_NEXT_LEVEL,
 		GAME_OVER
 	};
@@ -57,10 +58,18 @@ private:
 	void InitPlay();
 	void StartPlay();
 	void Play();
+	void SelectLevel();
 	void LoadNextLevel();
 	void GameOver();
 
 private:
+
+	struct LevelSelect
+	{
+		UIText	levelText;
+		bool	isSelect = false;
+	};
+
 	InputManager *	m_input;
 	ParticleSystem particles;
 	GamePhysics *	m_world;
@@ -73,7 +82,15 @@ private:
 	uint32_t	m_numPlayers;
 	Timer		m_timer;
 
-	std::vector<Level*>		m_levelQueue;
+	Level						m_level;
+	std::vector<Level>			m_levelQueue;
+	LevelHandler				m_levelHandler;
+	int32_t						m_levelSelector = 0;
+	UIImage						m_selectorImage;
+	LevelSelect					m_levelChoice[10]; // make vector??
+	std::vector<std::string>	m_levelText;
+	int32_t						m_currentLevel = 0;
+	int32_t						m_numOfLevels = 0;
 
 	GameUI		m_gameUI;
 

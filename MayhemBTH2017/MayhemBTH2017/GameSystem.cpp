@@ -18,6 +18,9 @@ GameSystem::GameSystem()
 	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 	m_gameSettings = new GameSettings;
 	m_gameSettings->CreateUI();
+	m_selectorImage.SetTexture(".\\Assets\\Textures\\arredal.jpg");
+	m_selectorImage.SetSize(50, 50);
+
 }
 
 
@@ -58,9 +61,13 @@ void GameSystem::Update()
 	case START_PLAY:
 		StartPlay();
 		break;
-	
+
 	case PLAY:
 		Play();
+		break;
+
+	case SELECT_LEVEL:
+		SelectLevel();
 		break;
 
 	case LOAD_NEXT_LEVEL:
@@ -163,10 +170,10 @@ void GameSystem::PlayerReady()
 		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A, i))
 		{
 			m_playerReady[i] = !m_playerReady[i];
-			
+
 			if (m_playerReady[i])
 			{
-				m_playerReadyUI[i].playerReady.SetColor(m_playerReadyUI[i].r, 
+				m_playerReadyUI[i].playerReady.SetColor(m_playerReadyUI[i].r,
 					m_playerReadyUI[i].g, m_playerReadyUI[i].b, 255);
 				m_playerReadyUI[i].playerName.SetColor(m_playerReadyUI[i].r,
 					m_playerReadyUI[i].g, m_playerReadyUI[i].b, 255);
@@ -197,12 +204,12 @@ void GameSystem::PlayerReady()
 			// TEMP CHANGE TO TWO
 			if (num >= 1)
 			{
+				// INIT PLAY
 				TransitionManager::StartFadingOut();
-				m_currState = INIT_PLAY;
+				m_currState = SELECT_LEVEL;
 				return;
 			}
 		}
-		
 	}
 
 	for (uint32_t i = 0; i < 4; i++)
@@ -217,7 +224,7 @@ void GameSystem::PlayerReady()
 
 void GameSystem::InitPlay()
 {
-	for(uint32_t i = 0; i < MAX_PLAYERS; ++i)
+	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 	{
 		if (m_playerReady[i])
 		{
@@ -240,8 +247,9 @@ void GameSystem::InitPlay()
 		}
 
 		m_world = new GamePhysics;
+		m_world->EnterWorld(m_levelQueue.at(m_currentLevel));
 		m_currState = START_PLAY;
-		
+
 		TransitionManager::StartFadingIn();
 		TimeManager::ResetDeltaTime();
 	}
@@ -254,7 +262,7 @@ void GameSystem::StartPlay()
 	Camera camera;
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 
-	m_world->Update();
+	m_world->Update(); // enterplay?
 	m_world->Render(camera);
 
 	if (!TransitionManager::GetIsFadingIn())
@@ -262,7 +270,7 @@ void GameSystem::StartPlay()
 		m_currState = PLAY;
 		m_timer.SetTimer(m_gameSettings->GetGameLenght(), true, false);
 	}
-	
+
 	TransitionManager::Update();
 }
 
@@ -276,7 +284,7 @@ void GameSystem::Play()
 
 	if (TransitionManager::GetIsBlack())
 	{
-			m_currState = LOAD_NEXT_LEVEL;
+		m_currState = LOAD_NEXT_LEVEL;
 	}
 	else if (m_timer.GetElapsed() < 0.001f)
 	{
@@ -292,6 +300,76 @@ void GameSystem::Play()
 	TransitionManager::Update();
 }
 
+void GameSystem::SelectLevel()
+{
+	m_levelHandler.GetLevelNames(m_levelText);
+	int texLen = m_levelText.at(m_levelSelector).size();
+	m_selectorImage.SetPosition(-80 - (10 * texLen), 200 - (50 * m_levelSelector));
+	m_selectorImage.Render();
+
+	for (int i = 0; i < m_levelHandler.GetNumLevels(); i++)
+	{
+		m_levelChoice[i].levelText.SetText(m_levelText.at(i).c_str());
+		m_levelChoice[i].levelText.SetPosition(0, 200 - (50 * i));
+
+		if (m_levelChoice[i].isSelect == true)
+			m_levelChoice[i].levelText.SetColor(0, 255, 0, 255);
+		else
+			m_levelChoice[i].levelText.SetColor(255, 0, 0, 255);
+
+		m_levelChoice[i].levelText.Render();
+	}
+
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
+	{
+		if (m_levelSelector - 1 >= 0)
+		{
+			m_levelSelector--;
+		}
+	}
+
+	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
+	{
+		if (m_levelSelector + 1 < m_levelHandler.GetNumLevels())
+		{
+			m_levelSelector++;
+		}
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
+	{
+
+		m_levelChoice[m_levelSelector].isSelect = !m_levelChoice[m_levelSelector].isSelect;
+
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
+	{
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (m_levelChoice[i].isSelect == true)
+			{
+				m_levelHandler.Import(m_level, 1, m_levelChoice[i].levelText.GetText());
+				m_level.SetName(m_levelChoice[i].levelText.GetText());
+				m_levelQueue.push_back(m_level);
+			}
+		}
+
+		for (int i = 0; i < m_levelQueue.size(); i++)
+		{
+			m_levelHandler.Import(m_levelQueue.at(i), 1, m_levelQueue.at(i).GetName());
+		}
+		m_numOfLevels = m_levelQueue.size();
+		TransitionManager::StartFadingOut();
+		m_currState = INIT_PLAY;
+
+	}
+
+	m_pressToCont.Render();
+}
+
 void GameSystem::LoadNextLevel()
 {
 	TransitionManager::Update();
@@ -300,6 +378,11 @@ void GameSystem::LoadNextLevel()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
+
+		if (!(m_currentLevel + 1 == m_numOfLevels))
+			m_currentLevel++; // IF TRUE SWITCH TO GAME OVER
+
+		m_world->EnterWorld(m_levelQueue.at(m_currentLevel));
 		m_currState = START_PLAY;
 		TransitionManager::StartFadingIn();
 	}

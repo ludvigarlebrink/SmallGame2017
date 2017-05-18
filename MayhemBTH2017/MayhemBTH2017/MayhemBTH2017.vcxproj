@@ -179,6 +179,8 @@
     <ClCompile Include="QuadShader.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="ShadowMap.cpp" />
+    <ClCompile Include="ShadowShader.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -278,6 +280,8 @@
     <ClInclude Include="QuadShader.h" />
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="ShaderManager.h" />
+    <ClInclude Include="ShadowMap.h" />
+    <ClInclude Include="ShadowShader.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -345,11 +349,18 @@
     <None Include="Assets\GLSL\QuadShader.frag" />
     <None Include="Assets\GLSL\QuadShader.geom" />
     <None Include="Assets\GLSL\QuadShader.vert" />
+    <None Include="Assets\GLSL\ShadowShader.frag" />
+    <None Include="Assets\GLSL\ShadowShader.geom" />
+    <None Include="Assets\GLSL\ShadowShader.vert" />
+    <None Include="Assets\GLSL\ShadowShaderPlayer.frag" />
+    <None Include="Assets\GLSL\ShadowShaderPlayer.vert" />
     <None Include="Assets\GLSL\SharpnelShader.frag" />
     <None Include="Assets\GLSL\SharpnelShader.geom" />
     <None Include="Assets\GLSL\SharpnelShader.vert" />
     <None Include="Assets\GLSL\SkeletalAnimation.frag" />
     <None Include="Assets\GLSL\SkeletalAnimation.vert" />
+    <None Include="Assets\GLSL\SkeletalAnimationShadow.frag" />
+    <None Include="Assets\GLSL\SkeletalAnimationShadow.vert" />
     <None Include="Assets\GLSL\SpriteShader.frag" />
     <None Include="Assets\GLSL\SpriteShader.vert" />
     <None Include="Assets\GLSL\ToonShader.frag" />

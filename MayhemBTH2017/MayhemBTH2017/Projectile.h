@@ -45,6 +45,7 @@ public:
 	//::.. OTHER FUNCTIONS ..:://
 	void Update(bool & explosion);
 	void Render(Camera camera);
+	void RenderShadow(Camera camera);
 	void StartContact();
 	void EndContact();
 	bool GetContact();

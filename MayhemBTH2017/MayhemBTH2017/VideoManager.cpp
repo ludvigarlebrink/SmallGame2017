@@ -94,7 +94,7 @@ void VideoManager::Init()
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	m_width = 1280;
-	m_height = 720;
+	m_height = 768;
 
 	m_window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		m_width, m_height, SDL_WINDOW_OPENGL);

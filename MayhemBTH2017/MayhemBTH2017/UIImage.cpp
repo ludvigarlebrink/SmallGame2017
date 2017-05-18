@@ -26,19 +26,18 @@ UIImage::UIImage()
 
 	m_sizeX = 600;
 	m_sizeY = 500;
-
+	// ????????????????
 	CreateShader();
 	CreateMesh();
 
 	m_showTexture = false;
-	TextureHandler imp;
-	//m_texture = imp.Import(".\\Assets\\Sprites\\MainMenu.png");
 }
 
 
 UIImage::~UIImage()
 {
 }
+
 
 
 void UIImage::Render()
@@ -113,9 +112,7 @@ void UIImage::Render()
 
 	glUniform1i(m_uniforms[ALBEDO_MAP], 0);
 
-
 	m_mesh->Render();
-
 
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
@@ -356,7 +353,7 @@ void UIImage::CreateShader()
 {
 	std::string shaders[2];
 	uint32_t types[2];
-
+	std::cout << "hej" << std::endl;
 	shaders[0] = ".\\Assets\\GLSL\\SpriteShader.vert";
 	shaders[1] = ".\\Assets\\GLSL\\SpriteShader.frag";
 

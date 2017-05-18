@@ -8,7 +8,8 @@
 #include "Contact.h"
 #include "MyContactListener.h"
 #include "PowerUpHandler.h"
-#include <math.h>
+#include "ShadowMap.h"
+#include "ShadowShader.h"
 
 
 class GamePhysics
@@ -17,15 +18,19 @@ public:
 
 	GamePhysics();
 	virtual ~GamePhysics();
-	void EnterWorld();
+	void EnterWorld(Level & level);
 	void Update();
 	void Render(Camera camera);
 	glm::vec3 GetPosition();
 
 	void SetNrOfPlayers(int nrOf);
-	bool CreateRocketLauncherExplosion();
 
 private:
+
+	ShadowMap		m_shadowMap;
+	ShadowShader	m_shadowShader;
+	ShadowShader	m_shadowShader2;
+
 	std::unique_ptr<b2World> m_world;
 	Box m_newBox;
 	Box m_newBox2;
@@ -33,8 +38,7 @@ private:
 	Player m_player[4];
 	Collider2D gameFloor;
 
-	Level		m_level;
-	
+	Level		m_level;	
 
 	TimeManager* m_time;
 	GLfloat m_jumpTimer=0.0f;
@@ -63,6 +67,8 @@ private:
 
 	PowerUpHandler m_PH;
 
+
+	Transform m_transf;
 	int m_nrOfPlayers;
 
 	enum _entityCategory {

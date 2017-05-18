@@ -4,9 +4,9 @@
 
 #include "Transform.h"
 #include "Camera.h"
-
-
+#include <Windows.h>
 #include <glew.h>
+#include<GL\GLU.h>
 #include <SDL.h>
 #include <glm.hpp>
 #include <iostream>
