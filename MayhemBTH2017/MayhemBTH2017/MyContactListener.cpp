@@ -55,7 +55,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 	if ((proj3 != nullptr) && (col2d != nullptr))
 	{
 		static_cast<Projectile*>(bodyUserData)->StartContact();
-		static_cast<Projectile*>(bodyUserData)->CollisionTrue();
+		//static_cast<Projectile*>(bodyUserData)->CollisionTrue();
 	}
 
 	bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
@@ -67,7 +67,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 	if ((proj2 != nullptr) && (col2d2 != nullptr))
 	{
 		static_cast<Projectile*>(bodyUserData2)->StartContact();
-		static_cast<Projectile*>(bodyUserData2)->CollisionTrue();
+		//static_cast<Projectile*>(bodyUserData2)->CollisionTrue();
 	}
 
 	bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
@@ -148,7 +148,7 @@ void MyContactListener::EndContact(b2Contact * contact)
 	if ((proj3 != nullptr) && (col2d != nullptr))
 	{
 		static_cast<Projectile*>(bodyUserData)->EndContact();
-		static_cast<Projectile*>(bodyUserData)->CollisionTrue();
+		//static_cast<Projectile*>(bodyUserData)->CollisionTrue();
 	}
 
 	bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
@@ -160,7 +160,7 @@ void MyContactListener::EndContact(b2Contact * contact)
 	if ((proj2 != nullptr) && (col2d2 != nullptr))
 	{
 		static_cast<Projectile*>(bodyUserData2)->EndContact();
-		static_cast<Projectile*>(bodyUserData2)->CollisionTrue();
+		//static_cast<Projectile*>(bodyUserData2)->CollisionTrue();
 	}
 
 	bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());

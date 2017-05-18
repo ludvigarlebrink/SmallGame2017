@@ -82,15 +82,17 @@ void GamePhysics::Update()
 				if (k > -1)
 				{
 
-					b2Vec2 fullVec = m_player[i].GetBox().getBody()->GetPosition() - m_player[k].GetWeapon().GetFiredCurrentProjectilePos();
+					b2Vec2 fullVec = (m_player[i].GetBox().getBody()->GetPosition() - m_player[k].GetWeapon().GetFiredCurrentProjectilePos());
 
-					b2Vec2 fullVec2 = m_player[i].GetBox().getBody()->GetPosition() - m_player[k].GetWeapon().GetFiredCurrentProjectilePos();
+					b2Vec2 fullVec2 = (m_player[i].GetBox().getBody()->GetPosition() - m_player[k].GetWeapon().GetFiredCurrentProjectilePos());
 
 					fullVec.Normalize();
 
-					b2Vec2 radVec = b2Vec2(fullVec.x * 1000.0f, fullVec.y * 1000.0f);
+					b2Vec2 radVec = b2Vec2(fullVec.x * 10.0f, fullVec.y * 10.0f);
 
-					b2Vec2 finalVec = b2Vec2(radVec.x / fullVec2.x, radVec.y / fullVec2.y);
+					float force = 200;
+
+					b2Vec2 finalVec = b2Vec2((radVec.x)*200/fullVec.Length(), (radVec.y)*200/fullVec.Length());
 
 					m_player[i].GetBox().getBody()->ApplyForce(finalVec, m_player[i].GetBox().getBody()->GetWorldCenter(), true);
 
