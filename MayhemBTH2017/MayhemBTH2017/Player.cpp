@@ -19,6 +19,7 @@ Player::Player()
 
 Player::~Player()
 {
+
 }
 //::..INITIALIZERS..:://
 void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
