@@ -154,8 +154,6 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	{
 		output.write(reinterpret_cast<char*>(&outProps[i].id), sizeof(uint32_t));
 		output.write(reinterpret_cast<char*>(&outProps[i].pos), sizeof(glm::vec2));
-		output.write(reinterpret_cast<char*>(&outProps[i].rot), sizeof(float));
-
 	}
 
 
