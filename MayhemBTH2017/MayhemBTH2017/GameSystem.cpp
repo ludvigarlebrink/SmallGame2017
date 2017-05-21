@@ -191,8 +191,6 @@ void GameSystem::PlayerReady()
 		}
 	}
 
-
-
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
 		int num = 0;
@@ -234,11 +232,11 @@ void GameSystem::InitPlay()
 		}
 	}
 
-	//for (uint32_t i = 0; i < 4; i++)
-	//{
-	//	m_playerReadyUI[i].playerReady.Render();
-	//	m_playerReadyUI[i].playerName.Render();
-	//}
+	for (uint32_t i = 0; i < 4; i++)
+	{
+		m_playerReadyUI[i].playerReady.Render();
+		m_playerReadyUI[i].playerName.Render();
+	}
 
 	if (TransitionManager::GetIsBlack())
 	{

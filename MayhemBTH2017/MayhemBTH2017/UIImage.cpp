@@ -351,6 +351,7 @@ void UIImage::CreateMesh()
 
 void UIImage::CreateShader()
 {
+
 	std::string shaders[2];
 	uint32_t types[2];
 	std::cout << "hej" << std::endl;

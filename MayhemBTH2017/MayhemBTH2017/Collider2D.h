@@ -25,7 +25,7 @@ public:
 	Collider2D();
 	virtual ~Collider2D();
 	void SetBoxCollider(glm::vec2 min, glm::vec2 max);
-	void CreateBoundingBoxes(b2World* world, std::string levelName);
+	void CreateBoundingBoxes(b2World* world);
 
 	void DrawCollider(Camera camera);
 	void DrawColliderShadowPass(Camera camera);
@@ -54,10 +54,11 @@ private:
 	GLuint		m_bufferID;
 	GLuint		m_vao;
 	AShader		m_shader;
-	LevelHandler m_levelHandler;
+	LevelHandler m_levelImport;
 	Transform	m_transform;
 	Camera		m_camera;
 	Level		m_level;
+	Transform	m_transf;
 	bool m_contact;
 	Box m_gameFloor;
 	std::vector<Box>	m_boxes;
