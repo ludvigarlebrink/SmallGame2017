@@ -29,23 +29,26 @@ public:
 	void Init();
 	void Import(Level & level, uint32_t id, std::string levelName);
 	void Export(Level & level, LevelEditorPropPlacer & propPlacer);
-	//bool ImportRegister(std::string & textField);
-	//bool ExportRegister();
-	//bool TestImportRegister();
-	//bool TestExportRegister();
+	bool ImportRegister(std::string & textField);
+	bool ExportRegister();
+	bool TestImportRegister();
+	bool TestExportRegister();
 	
 
 
 
 	//::.. MODIFY FUNCTIONS ..:://
-	//bool AddToRegister(Level * level);
-	//bool RemoveFromRegister(const char* name);
-	//bool RemoveFromRegisterAt(uint32_t index);
-	//bool FindInRegister(const char* name);
+	bool AddToRegister(Level * level);
+	bool RemoveFromRegister(const char* name);
+	bool RemoveFromRegisterAt(uint32_t index);
+	bool FindInRegister(const char* name);
 
 	//::.. GET FUNCTIONS ..:://
-	//uint32_t	GetMaxNumLevels();
-	//Level *		GetLoadedLevel();
+	//uint32_t	GetNumLevels();
+	uint32_t	GetMaxNumLevels();
+	Level *		GetLoadedLevel();
+	uint32_t	ReadNumLevels();
+	std::string ReadLevel(std::string levelName);
 	uint32_t	GetNumLevels();
 	void		GetLevelNames(std::vector<std::string> & strVec);
 
@@ -53,9 +56,16 @@ public:
 	void IncrementNumLevels();
 
 private:
+	struct LevelRegister
+	{
+		bool			isLoaded;
+		std::string		name;
+		Level*			level;
+	};
 
 	bool								m_noneIsLoaded;
 	bool								m_regHasChanged;
+	std::vector<LevelRegister>			m_register;
 	std::vector<std::string>			m_levelNames;
 	uint32_t							m_loaded;
 

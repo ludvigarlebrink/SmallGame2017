@@ -28,12 +28,10 @@ public:
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(float life);
 	void AddForce(glm::vec3 force, int controllerID);
-	void SetRocketLaunher(bool is);
+
 	void SetActive(bool active);
-	void SetRocketLauncherExplosion(bool active);
 
 	//::.. GET FUNCTIONS ..:://
-	bool GetRocketLauncherExplosion();
 	float GetLife();
 	Prefab* GetPrefab();
 	Box GetBox();
@@ -43,7 +41,7 @@ public:
 	int GetProjectileID();
 	float m_particleTimer;
 	//::.. OTHER FUNCTIONS ..:://
-	void Update(bool & explosion);
+	void Update();
 	void Render(Camera camera);
 	void RenderShadow(Camera camera);
 	void StartContact();
@@ -73,8 +71,6 @@ private:
 	float m_nrof;
 	float m_particleLife;
 	bool m_particlesCreated;
-	bool m_rocketLauncher;
-	bool m_rocketLauncherExplosion;
 
 	Transform m_transform;
 	GLfloat m_angle;

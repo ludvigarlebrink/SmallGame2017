@@ -38,7 +38,6 @@ void MenuSystem::Init()
 
 	m_videoManager = VideoManager::Get();
 	m_inputManager = InputManager::Get();
-	m_stateManager = StateManager::Get();
 
 	m_changeMenu = false;
 
