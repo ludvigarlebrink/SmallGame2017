@@ -33,7 +33,7 @@ void GamePhysics::EnterWorld(Level & level)
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
-	m_PH.Init(m_world.get(), 20);
+	//m_PH.Init(m_world.get(), 20);
 	//PLAYER
 
 	//hej martin
@@ -101,7 +101,7 @@ void GamePhysics::Update()
 		}
 	}
 
-	m_PH.Update();
+	//m_PH.Update();
 
 	m_world->Step(1.0f / 20.0f, 8, 5);
 }

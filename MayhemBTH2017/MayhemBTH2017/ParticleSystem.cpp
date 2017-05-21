@@ -119,9 +119,6 @@ void ParticleSystem::ShadersInit() {
 
 ParticleSystem::~ParticleSystem()
 {
-	std::cout << "DECONSTRUCTOR" << std::endl;
-
-
 	//delete after linking
 	glDeleteProgram(m_pShader.GetProgramID());
 	m_pShader.Release();
