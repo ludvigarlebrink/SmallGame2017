@@ -70,7 +70,6 @@ void LevelHandler::Import(Level & level, uint32_t id, std::string levelName)
 	{
 		file.read(reinterpret_cast<char*>(&importedProps[i].id), sizeof(uint32_t));
 		file.read(reinterpret_cast<char*>(&importedProps[i].pos), sizeof(glm::vec2));
-		file.read(reinterpret_cast<char*>(&importedProps[i].rot), sizeof(float));
 	}
 
 
