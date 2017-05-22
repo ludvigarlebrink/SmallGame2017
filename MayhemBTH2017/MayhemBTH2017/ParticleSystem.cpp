@@ -133,12 +133,11 @@ ParticleSystem::~ParticleSystem()
 
 	//delete after linking
 	m_pShader.Release();
-	glDeleteProgram(m_pShader.GetProgramID());
 
 	
 	//delete after linking
 	m_drawShader.Release();
-	glDeleteProgram(m_drawShader.GetProgramID());
+
 
 	
 	glUseProgram(0);
