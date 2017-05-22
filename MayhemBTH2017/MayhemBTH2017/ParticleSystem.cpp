@@ -1,6 +1,15 @@
 #include "ParticleSystem.h"
 
 
+#ifdef _DEBUG
+#define DEBUG_NEW_PLACEMENT (_NORMAL_BLOCK, __FILE__, __LINE__)
+#else
+#define DEBUG_NEW_PLACEMENT
+#endif
+
+#include <stdlib.h>  
+#include <crtdbg.h>  
+
 
 ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf, float life)
 
@@ -123,12 +132,13 @@ ParticleSystem::~ParticleSystem()
 
 
 	//delete after linking
-	glDeleteProgram(m_pShader.GetProgramID());
 	m_pShader.Release();
+	glDeleteProgram(m_pShader.GetProgramID());
+
 	
 	//delete after linking
-	glDeleteProgram(m_drawShader.GetProgramID());
 	m_drawShader.Release();
+	glDeleteProgram(m_drawShader.GetProgramID());
 
 	
 	glUseProgram(0);

@@ -12,6 +12,13 @@
 
 #include "System.h"
 
+#ifdef _DEBUG
+#define DEBUG_NEW_PLACEMENT (_NORMAL_BLOCK, __FILE__, __LINE__)
+#else
+#define DEBUG_NEW_PLACEMENT
+#endif
+
+int* p = new DEBUG_NEW_PLACEMENT int(5);
 
 
 // Global singleton managers.
@@ -35,6 +42,9 @@ void Terminate();
 
 int main(int argc, char *argv[])
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
+
 	// Init all singleton managers.
 	BigInit();
 

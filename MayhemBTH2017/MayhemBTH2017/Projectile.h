@@ -62,6 +62,7 @@ private:
 	float			m_life;
 	float		m_lifeTime;
 	bool		m_onGround;
+	float		m_trailTime;
 
 	bool m_renderParticles;
 	bool m_hasParticles;

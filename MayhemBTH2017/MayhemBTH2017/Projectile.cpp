@@ -5,7 +5,7 @@
 Projectile::Projectile()
 {
 
-
+	m_trailTime = 0.0f;
 	m_time = 0.0;
 	m_rotationUpdate = 0.0f;
 	m_renderParticles = false;
@@ -183,6 +183,8 @@ void Projectile::Update()
 
 	m_lifeTime += TimeManager::GetDeltaTime();
 
+	
+	//WHEN PROJECTILE CONTACT WITH GROUND
 	if (m_contact)
 	{
 		/*if (m_lifeTime >= m_life)
@@ -219,6 +221,18 @@ void Projectile::Update()
 			m_box.SetHasBody(false);
 			m_box.getBody()->GetWorld()->DestroyBody(m_box.getBody());
 		}
+	}
+
+
+	//SMOKE PARTICLE EFFFECT TRAIL
+
+	m_trailTime += TimeManager::GetDeltaTime();
+
+	if (m_trailTime > 0.5f) {
+
+		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
+	//	m_emitter.SetParticleSystem(".\\Assets\\GLSL\\ParticleExplosion", position, glm::vec4(1.0, 1.0, 1.0, 1.0), 1.0f, 100, 1.0f);
+		m_trailTime = 0.0f;
 	}
 }
 

@@ -20,9 +20,9 @@ void main()
 {
 
 
-	outPos=inPos+0.06/(normalize(inDir));
+	outPos=inPos+0.2*(normalize(inDir));
 	outDir=inDir;
-	outCol.g=inCol.g+0.09f;
+	outCol.g=inCol.g+0.05f;
 	outLife=inLife;
 	outSize=inSize;
 
