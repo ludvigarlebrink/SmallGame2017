@@ -607,5 +607,10 @@
       <Filter>Assets\GLSL</Filter>
     </None>
     <None Include="Assets\GLSL\Particle1.vert" />
+    <None Include="Assets\GLSL\Particle2.vert" />
+    <None Include="Assets\GLSL\Particle3.vert" />
+    <None Include="Assets\GLSL\Particle4.vert" />
+    <None Include="Assets\GLSL\Particle5.vert" />
+    <None Include="Assets\GLSL\Particle6.vert" />
   </ItemGroup>
 </Project>

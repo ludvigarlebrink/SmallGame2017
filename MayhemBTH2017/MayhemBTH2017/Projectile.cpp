@@ -203,7 +203,6 @@ void Projectile::Update()
 
 		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x/2, m_box.getBody()->GetPosition().y/2, 0.0f);
 	
-	//	m_particles = new ParticleSystem(".\\Assets\\GLSL\\GeometryPass", position, glm::vec4(1.0, 0.0, 0.0, 1.0), 0.2f, 500, 1.0f);
 	
 		m_emitter.SetParticleSystem(m_shadername, position, m_col, m_size, m_nrof, m_particleLife);
 	

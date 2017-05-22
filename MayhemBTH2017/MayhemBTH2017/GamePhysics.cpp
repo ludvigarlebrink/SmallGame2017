@@ -69,7 +69,7 @@ void GamePhysics::Update()
 		m_player[i].Update();
 	}
 
-	//m_PH.Update();
+	m_PH.Update();
 
 	m_world->Step(1.0f / 20.0f, 8, 5);
 	//Update player bounding box sprite position to the position of the player mesh
@@ -90,8 +90,7 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 
 void GamePhysics::Render(Camera camera) {
 
-	//m_particles.UpdateParticles();
-	//m_particles.RenderTransformed();
+
 	m_transf.SetPosition(42.0, 24.0, -0.0);
 	//m_shadowMap.FirstPass();
 	//m_shadowShader.UpdateShadows(camera, m_transf);

@@ -14,6 +14,10 @@
 #include "MeshQuad.h"
 #include "Background.h"
 
+
+
+
+
 System::System()
 {
 	Init();
@@ -28,6 +32,7 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
+	
 	//	TransitionManager transitionManager;
 	AntiAliasing msaa;
 	MeshQuad quad;
@@ -83,7 +88,7 @@ void System::Run()
 				temp = true;
 			}
 			//	msaa.Reset();
-		
+
 			l[0].Update();
 			//	msaa.Update();
 			//	quad.Render();

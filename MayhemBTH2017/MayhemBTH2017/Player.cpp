@@ -155,27 +155,33 @@ void Player::Update() {
 			m_weapons[m_currentWeapon].Shoot(100.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
 
 			if (m_currentWeapon == 0) {
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 0.3f, 500, 1.0f);
+				std::cout << "part 1" << std::endl;
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 0.0, 1.0), 0.2f, 500, 1.0f);
 			}
 
 			if (m_currentWeapon == 1) {
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.5f, 500, 1.0f);
+				std::cout << "part 2" << std::endl;
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 1.0, 0.0, 1.0), 0.2f, 500, 1.0f);
 			}
 
 			if (m_currentWeapon == 2) {
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 1.0, 1.0, 1.0), 0.1f, 50, 1.0f);
+				std::cout << "part 3" << std::endl;
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 1.0, 1.0), 0.2f, 500, 1.0f);
 			}
 
 			if (m_currentWeapon == 3) {
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+				std::cout << "part 4" << std::endl;
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(1.0, 1.0, 0.0, 1.0), 0.2f, 500, 1.0f);
 			}
 
 			if (m_currentWeapon == 4) {
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+				std::cout << "part 5" << std::endl;
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 1.0, 1.0, 1.0), 0.2f, 500, 1.0f);
 
 			}
 			if (m_currentWeapon == 5) {
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+				std::cout << "part 6" << std::endl;
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.2f, 500, 1.0f);
 			}
 
 
@@ -434,12 +440,12 @@ void Player::RenderShadow(Camera camera)
 {
 
 	//Renders the player and the gun 
-	//m_playerPrefab->RenderShadow(camera);
-	m_playerPrefab->Render(camera);
+	m_playerPrefab->RenderShadow(camera);
+	
 	//Renders projectiles of a weapon and its particles
 	for (int i = 0; i < 7; i++)
 	{
-		//m_weapons[i].RenderShadow(camera);
-		m_weapons[i].Render(camera);
+		m_weapons[i].RenderShadow(camera);
+
 	}
 }

@@ -50,14 +50,14 @@ void ParticleEmitter::Update() {
 
 		//After 0.5 seconds delete particles
 
-		if (m_particleSystem.at(i)->GetTimer() >1.0f) {
+		if (m_particleSystem.at(i)->GetTimer() > 0.5f) {
 
 			//Delete the Particle System at position i 
 			delete m_particleSystem.at(i);
 
 			m_particleSystem.erase(m_particleSystem.begin() + i);
-			//Clear the vector
 
+			//Clear the vector
 
 
 		}
