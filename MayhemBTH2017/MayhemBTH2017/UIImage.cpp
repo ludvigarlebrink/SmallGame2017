@@ -354,7 +354,6 @@ void UIImage::CreateShader()
 
 	std::string shaders[2];
 	uint32_t types[2];
-	std::cout << "hej" << std::endl;
 	shaders[0] = ".\\Assets\\GLSL\\SpriteShader.vert";
 	shaders[1] = ".\\Assets\\GLSL\\SpriteShader.frag";
 

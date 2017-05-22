@@ -52,8 +52,6 @@ void System::Run()
 
 
 	GameSystem gs;
-
-	ParticleSystem particles(".\\Assets\\GLSL\\GeometryPass", glm::vec3(40, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 50.0f, 5005, 4.0f);
 	TextureHandler teximp;
 
 
