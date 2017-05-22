@@ -28,7 +28,7 @@ public:
 
 	//::.. MODIFY FUNCTIONS ..:://
 	void Init(const std::string& filename, bool hasGeomShader, bool particles);
-	void Release();
+	void Release(int nr);
 	void Bind();
 	virtual void Update(Transform& transform, Camera& camera);
 	void SendTexture(GLuint id, const GLchar* name, glm::vec4 UV);

@@ -132,12 +132,12 @@ ParticleSystem::~ParticleSystem()
 
 
 	//delete after linking
-	m_pShader.Release();
+	m_pShader.Release(1);
 
 
 	
 	//delete after linking
-	m_drawShader.Release();
+	m_drawShader.Release(3);
 
 
 	
