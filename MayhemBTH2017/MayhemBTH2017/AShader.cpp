@@ -45,6 +45,10 @@ void AShader::Init(const std::string& filename, bool hasGeomShader, bool particl
 
 	// Create shaders. Always create a vertex shader
 	m_shader[VERTEX_SHADER] = CreateShader(LoadShader(filename + ".vert"), GL_VERTEX_SHADER);
+	
+	//Attach vertex
+	glAttachShader(m_programID, m_shader[VERTEX_SHADER]);
+	//Debug(m_shader[VERTEX_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
 
 	//if not particles, proceed to check if geometry shader 
 	if (!particles) {
@@ -53,19 +57,16 @@ void AShader::Init(const std::string& filename, bool hasGeomShader, bool particl
 		if (hasGeomShader) {
 			m_shader[GEOMETRY_SHADER] = CreateShader(LoadShader(filename + ".geom"), GL_GEOMETRY_SHADER);
 			glAttachShader(m_programID, m_shader[GEOMETRY_SHADER]);
-			Debug(m_shader[GEOMETRY_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+			//Debug(m_shader[GEOMETRY_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
 		}
 
 		//Fragment shader
 		m_shader[FRAGMENT_SHADER] = CreateShader(LoadShader(filename + ".frag"), GL_FRAGMENT_SHADER);
 		glAttachShader(m_programID, m_shader[FRAGMENT_SHADER]);
-		Debug(m_shader[FRAGMENT_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
+		//Debug(m_shader[FRAGMENT_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
 
 	}
 
-	//Attach vertex
-	glAttachShader(m_programID, m_shader[VERTEX_SHADER]);
-	Debug(m_shader[VERTEX_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
 	//Attach geo
 
 

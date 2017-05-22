@@ -38,6 +38,7 @@ public:
 	ParticleSystem* m_particles;
 	bool GetContactStatus();
 	bool IsActive();
+	void InitParticles(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life);
 	int GetProjectileID();
 	float m_particleTimer;
 	//::.. OTHER FUNCTIONS ..:://

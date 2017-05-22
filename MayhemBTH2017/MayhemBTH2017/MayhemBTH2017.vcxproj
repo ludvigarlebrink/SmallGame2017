@@ -346,6 +346,7 @@
     <None Include="Assets\GLSL\MainShader.vert" />
     <None Include="Assets\GLSL\NuclearShader.frag" />
     <None Include="Assets\GLSL\NuclearShader.vert" />
+    <None Include="Assets\GLSL\Particle1.vert" />
     <None Include="Assets\GLSL\QuadShader.frag" />
     <None Include="Assets\GLSL\QuadShader.geom" />
     <None Include="Assets\GLSL\QuadShader.vert" />

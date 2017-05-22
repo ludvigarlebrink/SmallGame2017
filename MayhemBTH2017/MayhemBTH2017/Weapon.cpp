@@ -79,15 +79,6 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 	}
 
 
-	//for (int i = 0; i < m_projectiles.size(); i++) {
-
-	//	if (m_projectiles[i]->GetContact()) {
-	//		Transform tempTransform;
-	//		tempTransform.SetPosition(m_projectiles[i]->GetBox().getBody()->GetPosition().x / 2, m_projectiles[i]->GetBox().getBody()->GetPosition().y / 2, 0);
-	//		m_particleEmitter->SetParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec3(20, 10, 0), glm::vec4(1.0, 0.0, 1.0, 1.0), 1.0f, 500, 2.0f);
-	//		m_render = true;
-	//	}
-	//}
 }
 
 void Weapon::DeleteProjectile()
@@ -106,7 +97,12 @@ void Weapon::DeleteProjectile()
 
 void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life)
 {
-	//m_particles = new ParticleSystem(shadername, glm::vec3(20, 20, 0), col, size, life, life);
+
+	for (int i = 0; i < m_projectiles.size(); i++)
+	{
+		m_projectiles[i]->InitParticles(shadername, col, size, nrof, life);
+		
+	}
 
 }
 

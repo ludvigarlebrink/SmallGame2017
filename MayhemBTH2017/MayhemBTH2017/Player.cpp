@@ -100,31 +100,31 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//	m_weapon = Weapon(gun, projectile);
 	m_weapons[0] = Weapon(gun, projectile, m_controllerID);
 	m_weapons[0].SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.5f, 10, m_controllerID, 3.0f);
-	m_weapons[0].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
 
 	m_weapons[1] = Weapon(gun, projectile2, m_controllerID);
 	m_weapons[1].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.3f, 10, m_controllerID, 0.7f);
-	m_weapons[1].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
 
 	m_weapons[2] = Weapon(gun, projectile3, m_controllerID);
 	m_weapons[2].SetProjectileType(0.5f, 1.0f, 0.0f, 0.0f, 0.1f, 15, m_controllerID, 2.0f);
-	m_weapons[2].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
 
 	m_weapons[3] = Weapon(gun, projectile4, m_controllerID);
 	m_weapons[3].SetProjectileType(0.2f, 1.0f, 0.0f, 0.0f, 0.1f, 18, m_controllerID, 0.7f);
-	m_weapons[3].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
 
 	m_weapons[4] = Weapon(gun, projectile, m_controllerID);
 	m_weapons[4].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.1f, 12, m_controllerID, 0.9f);
-	m_weapons[4].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
 
 	m_weapons[5] = Weapon(gun, projectile2, m_controllerID);
 	m_weapons[5].SetProjectileType(0.8f, 1.0f, 0.0f, 0.0f, 0.1f, 11, m_controllerID, 10.2f);
-	m_weapons[5].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
 
 	m_weapons[6] = Weapon(gun, projectile3, m_controllerID);
 	m_weapons[6].SetProjectileType(0.7f, 1.0f, 0.0f, 0.0f, 0.1f, 14, m_controllerID, 10.2f);
-	m_weapons[6].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
 
 	m_currentWeapon = 0;
 
@@ -153,6 +153,32 @@ void Player::Update() {
 		if (m_weapons[m_currentWeapon].FireRate(m_weapons[m_currentWeapon].GetFireRate()))
 		{
 			m_weapons[m_currentWeapon].Shoot(100.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
+
+			if (m_currentWeapon == 0) {
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 0.3f, 500, 1.0f);
+			}
+
+			if (m_currentWeapon == 1) {
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.5f, 500, 1.0f);
+			}
+
+			if (m_currentWeapon == 2) {
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 1.0, 1.0, 1.0), 0.1f, 50, 1.0f);
+			}
+
+			if (m_currentWeapon == 3) {
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+			}
+
+			if (m_currentWeapon == 4) {
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+
+			}
+			if (m_currentWeapon == 5) {
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
+			}
+
+
 		}
 	}
 
@@ -229,7 +255,7 @@ void Player::Update() {
 
 	if (m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID))
 	{
-	
+
 		if (m_isMidAir) {
 
 			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-300)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);

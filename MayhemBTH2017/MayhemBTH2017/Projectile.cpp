@@ -128,7 +128,15 @@ void Projectile::SetActive(bool active)
 }
 
 
+void Projectile::InitParticles(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life) {
 
+	m_shadername = shadername;
+	m_col = col;
+	m_size = size;
+	m_nrof = nrof;
+	m_particleLife = life;
+
+}
 
 float Projectile::GetLife()
 {
@@ -197,7 +205,7 @@ void Projectile::Update()
 	
 	//	m_particles = new ParticleSystem(".\\Assets\\GLSL\\GeometryPass", position, glm::vec4(1.0, 0.0, 0.0, 1.0), 0.2f, 500, 1.0f);
 	
-		m_emitter.SetParticleSystem(".\\Assets\\GLSL\\GeometryPass", position, glm::vec4(1.0, 0.0, 0.0, 1.0), 0.2f, 500, 1.0f);
+		m_emitter.SetParticleSystem(m_shadername, position, m_col, m_size, m_nrof, m_particleLife);
 	
 		m_renderParticles = true;
 
