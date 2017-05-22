@@ -99,7 +99,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	//	m_weapon = Weapon(gun, projectile);
 	m_weapons[0] = Weapon(gun, projectile, m_controllerID);
-	m_weapons[0].SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 1.0f, 10, m_controllerID, 3.0f);
+	m_weapons[0].SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.5f, 10, m_controllerID, 3.0f);
 	m_weapons[0].InitParticleSystem(".\\Assets\\GLSL\\GeometryPass", glm::vec4(1.0, 1.0, 1.0, 1.0), 2.0f, 50, 1.0f);
 
 	m_weapons[1] = Weapon(gun, projectile2, m_controllerID);
@@ -408,11 +408,12 @@ void Player::RenderShadow(Camera camera)
 {
 
 	//Renders the player and the gun 
-	m_playerPrefab->RenderShadow(camera);
-
+	//m_playerPrefab->RenderShadow(camera);
+	m_playerPrefab->Render(camera);
 	//Renders projectiles of a weapon and its particles
 	for (int i = 0; i < 7; i++)
 	{
-		m_weapons[i].RenderShadow(camera);
+		//m_weapons[i].RenderShadow(camera);
+		m_weapons[i].Render(camera);
 	}
 }
