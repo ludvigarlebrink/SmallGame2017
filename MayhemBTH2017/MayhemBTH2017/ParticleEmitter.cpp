@@ -6,7 +6,7 @@
 #define DEBUG_NEW_PLACEMENT
 #endif
 
-int* a = new DEBUG_NEW_PLACEMENT int(5);
+
 #include <stdlib.h>  
 #include <crtdbg.h>  
 

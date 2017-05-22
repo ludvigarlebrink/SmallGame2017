@@ -69,7 +69,7 @@ void GamePhysics::Update()
 		m_player[i].Update();
 	}
 
-	m_PH.Update();
+//	m_PH.Update();
 
 	m_world->Step(1.0f / 20.0f, 8, 5);
 	//Update player bounding box sprite position to the position of the player mesh

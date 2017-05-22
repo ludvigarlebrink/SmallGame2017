@@ -38,24 +38,24 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 
 	PARTICLE_COUNT = nrOf;
 
-	Particle particle[10000]; //Max number of particles
+
 
 	//for nr of particles in parameter, fill with info
 
 	for (uint32_t i = 0; i < nrOf; i++) {
 
-		particle[i].position = pos;
-		particle[i].direction = (GetRandomDir());
-		particle[i].color = col;
-		particle[i].life = life;
-		particle[i].size = size;
+		m_particle[i].position = pos;
+		m_particle[i].direction = (GetRandomDir());
+		m_particle[i].color = col;
+		m_particle[i].life = life;
+		m_particle[i].size = size;
 
 	}
 
 	//BUFFERS
 	glGenBuffers(1, &m_particleBufferA);
 	glBindBuffer(GL_ARRAY_BUFFER, m_particleBufferA);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Particle)*PARTICLE_COUNT, particle, GL_STREAM_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Particle)*PARTICLE_COUNT, m_particle, GL_STREAM_DRAW);
 
 
 	//SET ATTRIBUTE POINTERS
@@ -100,6 +100,7 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 	glBeginTransformFeedback(GL_POINTS);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glEndTransformFeedback();
+
 	glFlush();
 
 	std::swap(m_particleBufferA, m_particleBufferB); //input in bufferB becomes input 
@@ -135,12 +136,18 @@ ParticleSystem::~ParticleSystem()
 	m_pShader.Release();
 
 
-	
+
 	//delete after linking
 	m_drawShader.Release();
 
 
-	
+	//Remove buffers
+	glDeleteBuffers(1, &m_particleBufferA);
+	glDeleteBuffers(1, &m_particleBufferB);
+	//remove vertex arrays
+
+	glDeleteVertexArrays(1, &m_drawVAO);
+	glDeleteVertexArrays(1, m_vao);
 	glUseProgram(0);
 
 }
@@ -176,7 +183,7 @@ void ParticleSystem::RenderTransformed(Transform transform) {
 
 	m_drawShader.Bind();
 	m_drawShader.Update(transform, m_camera);
-	
+
 	glBindVertexArray(m_drawVAO);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glBindVertexArray(0);
@@ -233,10 +240,12 @@ void ParticleSystem::UpdateParticles() {
 
 	std::swap(m_particleBufferA, m_particleBufferB);
 
+
 	glBindVertexArray(0);
 	glDisable(GL_RASTERIZER_DISCARD);
 	glUseProgram(0);
 
+	glFlush();
 
 
 
