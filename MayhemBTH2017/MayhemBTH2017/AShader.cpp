@@ -15,7 +15,7 @@ AShader::AShader(const std::string& filename, bool hasGeomShader, bool particles
 
 AShader:: ~AShader()
 {
-	Release();
+	Release(3);
 }
 
 //::..GET FUNCTIONS..:://
@@ -80,6 +80,7 @@ void AShader::Init(const std::string& filename, bool hasGeomShader, bool particl
 
 
 
+
 	}
 
 	glLinkProgram(m_programID);
@@ -93,10 +94,10 @@ void AShader::Init(const std::string& filename, bool hasGeomShader, bool particl
 }
 
 
-void AShader::Release()
+void AShader::Release(int nr)
 {
 
-	for (unsigned int i = 0; i < NR_SHADERS; i++) {
+	for (unsigned int i = 0; i < nr; i++) {
 		glDetachShader(m_programID, m_shader[i]);
 		glDeleteShader(m_shader[i]);
 	}
