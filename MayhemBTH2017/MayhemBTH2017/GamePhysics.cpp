@@ -33,7 +33,7 @@ void GamePhysics::EnterWorld(Level & level)
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
-	m_PH.Init(m_world.get(), 20);
+	m_PH.Init(m_world.get());
 	//PLAYER
 
 	//hej martin
@@ -52,7 +52,6 @@ void GamePhysics::EnterWorld(Level & level)
 	///////////////////////////////////////////////////////////////////
 
 	//FIXTURES FOR COLLISIONS
-
 
 	//player fixture is of type PLAYER
 	m_loadWorld = true;

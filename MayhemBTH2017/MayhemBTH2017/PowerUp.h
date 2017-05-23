@@ -29,6 +29,8 @@ public:
 
 	void Update();
 
+	void Destroy();
+
 
 private:
 
