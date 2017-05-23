@@ -25,7 +25,7 @@ public:
 	Collider2D();
 	virtual ~Collider2D();
 	void SetBoxCollider(glm::vec2 min, glm::vec2 max);
-	void CreateBoundingBoxes(b2World* world);
+	void CreateBoundingBoxes(b2World* world, std::string levelName);
 
 	void DrawCollider(Camera camera);
 	void DrawColliderShadowPass(Camera camera);
@@ -45,7 +45,6 @@ public:
 private:
 	b2Fixture* m_filter;
 	GLuint		m_grid[SIZE_X][SIZE_Y];
-	Vertex2D*	m_vertices;
 	Mesh		m_mesh;
 	glm::vec2	m_min;
 	glm::vec2	m_max;

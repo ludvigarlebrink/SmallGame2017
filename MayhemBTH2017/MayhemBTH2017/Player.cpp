@@ -1,9 +1,8 @@
 #include "Player.h"
 
 //::..CONSTRUCTORS..:://
-Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID) {
-
-	Init(world, pos, scale, controllerID);
+Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID) 
+{
 	m_contact = false;
 
 	m_dead = false;
@@ -14,12 +13,19 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 
 Player::Player()
 {
+	m_contact = false;
 
+	m_dead = false;
+
+	m_hitByProjectile = -1;
 }
+
 
 Player::~Player()
 {
 }
+
+
 //::..INITIALIZERS..:://
 void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 {
@@ -87,12 +93,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
 
-	Prefab * projectile = PrefabManager::Instantiate("missile3", nullptr, nullptr, 0, "Candle");
-
-	Prefab * projectile2 = PrefabManager::Instantiate("sword3", nullptr, nullptr, 0, "Candle");
-
-	Prefab * projectile3 = PrefabManager::Instantiate("spike2", nullptr, nullptr, 0, "Candle");
-
+	Prefab * projectile = PrefabManager::Instantiate("Player", nullptr, nullptr, 0, "Candle");
+	Prefab * projectile2 = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
+	Prefab * projectile3 = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile4 = PrefabManager::Instantiate("Rifle", nullptr, nullptr, 0, "Candle");
 
 	projectile->SetScale(glm::vec3(1, 1, 1));
@@ -100,7 +103,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//	m_weapon = Weapon(gun, projectile);
 	m_weapons[0] = Weapon(gun, projectile, m_controllerID);
 	m_weapons[0].SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.5f, 10, m_controllerID, 3.0f);
-	
+
 
 	m_weapons[1] = Weapon(gun, projectile2, m_controllerID);
 	m_weapons[1].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.3f, 10, m_controllerID, 0.7f);
@@ -108,7 +111,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_weapons[2] = Weapon(gun, projectile3, m_controllerID);
 	m_weapons[2].SetProjectileType(0.5f, 1.0f, 0.0f, 0.0f, 0.1f, 15, m_controllerID, 2.0f);
-	
+
 
 	m_weapons[3] = Weapon(gun, projectile4, m_controllerID);
 	m_weapons[3].SetProjectileType(0.2f, 1.0f, 0.0f, 0.0f, 0.1f, 18, m_controllerID, 0.7f);
@@ -124,10 +127,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_weapons[6] = Weapon(gun, projectile3, m_controllerID);
 	m_weapons[6].SetProjectileType(0.7f, 1.0f, 0.0f, 0.0f, 0.1f, 14, m_controllerID, 10.2f);
-
-
-
-
 
 
 	m_currentWeapon = 0;
@@ -149,9 +148,6 @@ void Player::Update() {
 		m_currentWeapon = 0;
 	}
 
-
-
-
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 
@@ -162,37 +158,32 @@ void Player::Update() {
 			m_weapons[m_currentWeapon].Shoot(100.0f, m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
 
 			if (m_currentWeapon == 0) {
-				
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 0.0, 1.0), 5.2f, 10, 1.0f );
-
+				std::cout << "part 1" << std::endl;
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 0.0, 1.0), 0.2f, 500, 1.0f);
 			}
 
 			if (m_currentWeapon == 1) {
-				
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 1.0, 0.0, 1.0), 2.2f, 10, 1.0f );
+				std::cout << "part 2" << std::endl;
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 1.0, 0.0, 1.0), 0.2f, 500, 1.0f);
 			}
 
 			if (m_currentWeapon == 2) {
-				
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 1.0, 1.0), 2.2f, 10, 1.0f );
+				std::cout << "part 3" << std::endl;
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 1.0, 1.0), 0.2f, 500, 1.0f);
 			}
 
 			if (m_currentWeapon == 3) {
-				
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(1.0, 1.0, 0.0, 1.0), 2.2f, 10, 1.0f );
+				std::cout << "part 4" << std::endl;
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(1.0, 1.0, 0.0, 1.0), 0.2f, 500, 1.0f);
 			}
 
 			if (m_currentWeapon == 4) {
-				
+				std::cout << "part 5" << std::endl;
 				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 1.0, 1.0, 1.0), 0.2f, 500, 1.0f);
 
 			}
 			if (m_currentWeapon == 5) {
-				
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.2f, 500, 1.0f);
-			}
-			if (m_currentWeapon == 6) {
-				
+				std::cout << "part 6" << std::endl;
 				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.2f, 500, 1.0f);
 			}
 
@@ -387,15 +378,18 @@ Prefab * Player::GetHealthBar()
 
 
 //::.. SET FUNCTIONS ..:://
-void Player::SetCategoryBits(short CATEGORY) {
-
+void Player::SetCategoryBits(short CATEGORY) 
+{
 	m_fixture.filter.categoryBits = CATEGORY;
 }
+
+
 void Player::SetMaskBits(short MASK) {
 
 	m_fixture.filter.maskBits = MASK;
 
 }
+
 
 bool Player::Timer(float rate)
 {
@@ -407,10 +401,12 @@ bool Player::Timer(float rate)
 	return false;
 }
 
+
 void Player::SetControllerID(int ID)
 {
 	m_controllerID = ID;
 }
+
 
 void Player::Hit(int projectileID)
 {
@@ -453,7 +449,7 @@ void Player::RenderShadow(Camera camera)
 
 	//Renders the player and the gun 
 	m_playerPrefab->RenderShadow(camera);
-
+	
 	//Renders projectiles of a weapon and its particles
 	for (int i = 0; i < 7; i++)
 	{

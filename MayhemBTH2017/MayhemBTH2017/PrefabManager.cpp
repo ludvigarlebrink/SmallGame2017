@@ -208,8 +208,6 @@ Prefab * PrefabManager::InstantiateSprite(char * name)
 
 	prefab->SetName(name);
 
-
-
 	prefab->Create();
 
 	return prefab;

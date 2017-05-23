@@ -19,14 +19,10 @@ void PowerUp::Create(b2World* world, glm::vec2 pos)
 	m_powerupPrefab->SetScale(glm::vec3(1.5));
 
 	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_powerupPrefab->GetScale().x, m_powerupPrefab->GetScale().y));
-	m_boundingBox.getBody()->SetAwake(false);
-	m_boundingBox.getBody()->SetActive(false);
+	SetActive(false);
 
 	m_sprite.CreateSprite(glm::vec2(GetBox().getBody()->GetPosition().x - (m_powerupPrefab->GetScale().x / 2), GetBox().getBody()->GetPosition().y - (m_powerupPrefab->GetScale().y / 2)), glm::vec2(m_powerupPrefab->GetScale().x, m_powerupPrefab->GetScale().y));
 	m_sprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
-	
-	m_active = false;
-
 
 	b2Filter filter;
 	filter.categoryBits = POWERUP;
@@ -77,24 +73,26 @@ void PowerUp::CollidedWithPlayer(bool player)
 void PowerUp::SetActive(bool active)
 {
 	m_active = active;
+	m_boundingBox.getBody()->SetActive(active);
+	m_boundingBox.getBody()->SetAwake(active);
 }
 
 void PowerUp::Update()
 {
 
-	if (m_collidedPlayer)
-	{
-		SetActive(false);
-		m_boundingBox.getBody()->SetActive(false);
-	}
-
-	GLfloat xPos = GetBox().getBody()->GetPosition().x;
-	GLfloat yPos = GetBox().getBody()->GetPosition().y;
-	GLfloat xScale = GetBox().getScale().x;
-	GLfloat yScale = GetBox().getScale().y;
+	GLfloat xPos = m_boundingBox.getBody()->GetPosition().x;
+	GLfloat yPos = m_boundingBox.getBody()->GetPosition().y;
+	GLfloat xScale = m_boundingBox.getScale().x;
+	GLfloat yScale = m_boundingBox.getScale().y;
 
 	m_powerupPrefab->SetPosition(glm::vec3(xPos, yPos, 0));
 
 	m_sprite.ModifyPos(glm::vec2(xPos - (m_powerupPrefab->GetScale().x / 2), yPos - (m_powerupPrefab->GetScale().y / 2)), glm::vec2(m_powerupPrefab->GetScale().x, m_powerupPrefab->GetScale().y));
 
+}
+
+void PowerUp::Destroy()
+{
+	delete m_powerupPrefab;
+	m_powerupPrefab = NULL;
 }
