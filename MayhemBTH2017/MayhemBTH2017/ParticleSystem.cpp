@@ -1,19 +1,16 @@
 #include "ParticleSystem.h"
 
 
-#ifdef _DEBUG
-#define DEBUG_NEW_PLACEMENT (_NORMAL_BLOCK, __FILE__, __LINE__)
-#else
-#define DEBUG_NEW_PLACEMENT
-#endif
-
-#include <stdlib.h>  
-#include <crtdbg.h>  
 
 
 ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf, float life)
 
 {
+
+
+
+
+
 
 	m_timer = 0;
 
@@ -148,7 +145,8 @@ ParticleSystem::~ParticleSystem()
 
 	glDeleteVertexArrays(1, &m_drawVAO);
 	glDeleteVertexArrays(1, m_vao);
-	glUseProgram(0);
+	
+	//glUseProgram(0);
 
 }
 
@@ -183,7 +181,8 @@ void ParticleSystem::RenderTransformed(Transform transform) {
 
 	m_drawShader.Bind();
 	m_drawShader.Update(transform, m_camera);
-
+	
+	
 	glBindVertexArray(m_drawVAO);
 	glDrawArrays(GL_POINTS, 0, PARTICLE_COUNT);
 	glBindVertexArray(0);
@@ -243,7 +242,7 @@ void ParticleSystem::UpdateParticles() {
 
 	glBindVertexArray(0);
 	glDisable(GL_RASTERIZER_DISCARD);
-	glUseProgram(0);
+//	glUseProgram(0);
 
 	glFlush();
 

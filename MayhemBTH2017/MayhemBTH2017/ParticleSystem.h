@@ -14,7 +14,9 @@
 #include "ParticleTransform.h"
 #include "Particle.h"
 #include "TimeManager.h"
-
+#include "Texture.h"
+#include "TextureHandler.h"
+#include "TextureManager.h"
 class ParticleSystem : public AShader
 {
 public:
@@ -39,6 +41,7 @@ private:
 	glm::vec3 GetRandomDir();
 
 private:
+
 	Particle m_part[1];
 	Particle m_particle[10000]; //Max number of particles
 	Camera m_camera;

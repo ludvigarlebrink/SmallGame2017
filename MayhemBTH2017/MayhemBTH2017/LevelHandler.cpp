@@ -42,7 +42,7 @@ void LevelHandler::Init()
 }
 
 //::.. IMPORT/EXPORT ..:://
-void LevelHandler::Import(Level & level, uint32_t id, std::string levelName)
+void LevelHandler::Import(Level & level, std::string levelName)
 {
 	level.Clear();
 	const int nrOfBlocks = level.SIZE_X * level.SIZE_Y;
@@ -70,7 +70,6 @@ void LevelHandler::Import(Level & level, uint32_t id, std::string levelName)
 	{
 		file.read(reinterpret_cast<char*>(&importedProps[i].id), sizeof(uint32_t));
 		file.read(reinterpret_cast<char*>(&importedProps[i].pos), sizeof(glm::vec2));
-		
 
 	}
 
@@ -154,6 +153,7 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	{
 		output.write(reinterpret_cast<char*>(&outProps[i].id), sizeof(uint32_t));
 		output.write(reinterpret_cast<char*>(&outProps[i].pos), sizeof(glm::vec2));
+
 	}
 
 
