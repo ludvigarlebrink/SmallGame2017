@@ -45,7 +45,6 @@ public:
 private:
 	b2Fixture* m_filter;
 	GLuint		m_grid[SIZE_X][SIZE_Y];
-	Vertex2D*	m_vertices;
 	Mesh		m_mesh;
 	glm::vec2	m_min;
 	glm::vec2	m_max;

@@ -32,7 +32,8 @@ public:
 	void Update();
 	void Respawn(glm::vec2 pos);
 
-	//::..SETTERS..:://
+	//::.. SET FUNCTIONS ..:://
+	void SetWorld(b2World* world, glm::vec2 pos);
 	void SetCategoryBits(short CATEGORY);
 	void SetMaskBits(short MASK);
 	bool Timer(float rate);
@@ -44,14 +45,13 @@ public:
 	uint16 GetMaskBits();
 	Box GetBox();
 	PlayerPrefab* GetPrefab();
-	b2Fixture* GetFilter();
+
 	void StartContact(bool projectile, bool powerup);
 	void EndContact();
 	int GetControllerID();
 	void UpdateParticles();
 	Prefab * GetHealthBar();
 	
-private:
 private:
 	ParticleSystem m_particles;
 	InputManager * m_input;

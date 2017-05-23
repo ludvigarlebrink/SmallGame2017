@@ -52,9 +52,7 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 	m_contact = false;
 	m_levelImport.Import(m_level, levelName);
 	
-	
 	const uint32_t length = SIZE_X * SIZE_Y * 6;
-	m_vertices = (Vertex2D*)malloc(sizeof(Vertex2D) * length);
 	
 	uint32_t i = 0;
 	float scaler = 1.0f;
@@ -77,19 +75,6 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 				}
 				
 				offset = (blocksInRow);
-				
-				//From current X, check next cells until next cell is empty in order to decide lenght of bounding box.
-				m_vertices[i].position = glm::vec2((x + blockScale) + offset, (y + blockScale));
-
-				m_vertices[i + 1].position = glm::vec2((x + blockScale)+offset, (y - blockScale));
-													 
-				m_vertices[i + 2].position = glm::vec2((x - blockScale), (y + blockScale));
-													 
-				m_vertices[i + 3].position = glm::vec2((x - blockScale), (y + blockScale));
-													 
-				m_vertices[i + 4].position = glm::vec2((x + blockScale)+offset, (y - blockScale));
-													 
-				m_vertices[i + 5].position = glm::vec2((x - blockScale), (y - blockScale));
 
 
 				Box gameFloor;
@@ -123,10 +108,6 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 			}
 		}
 	}
-
-	m_mesh.Load(m_vertices, length);
-
-	
 }
 
 void Collider2D::CreatePlayerBoundingBox(b2World* world) {
