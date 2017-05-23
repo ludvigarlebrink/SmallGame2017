@@ -4,6 +4,7 @@
 #include "PowerUp.h"
 #include "Player.h"
 #include "TimeManager.h"
+#include "GameSettings.h"
 
 #include <stdlib.h>
 #include <time.h>
@@ -14,34 +15,29 @@ public:
 	PowerUpHandler();
 	virtual ~PowerUpHandler();
 
-	void Init(b2World * world, int rate);
-
-	void Spawn();
-
-	bool CollisionCheck(int index);
+	void Init(b2World * world);
 
 	void Update();
 
 	void Render(Camera camera);
 
+	void Destroy();
+
 private:
 
-	float m_time;
-	float m_time2;
-
 	b2World * m_world;
-	Player * m_player;
 
+	float m_threshold;
+	float m_gameLenght;
+	float m_spawnPerSec;
 	int m_rate;
 	int m_nrOfSpawns;
+	int m_currSpawnNr;
+
 	std::vector <PowerUp*> m_pu;
 	std::vector <glm::vec2> m_randLoc;
-	std::vector <int> m_elementBuffer;
-	int m_currSpawnNr;
-	int temp = 0;
 
-	bool m_contact;
-
+	bool m_spawn;
 };
 
 

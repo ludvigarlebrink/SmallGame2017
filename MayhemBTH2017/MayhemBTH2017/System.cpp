@@ -14,6 +14,10 @@
 #include "MeshQuad.h"
 #include "Background.h"
 
+
+
+
+
 System::System()
 {
 	Init();
@@ -28,6 +32,7 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
+	
 	//	TransitionManager transitionManager;
 	AntiAliasing msaa;
 	MeshQuad quad;
@@ -52,8 +57,6 @@ void System::Run()
 
 
 	GameSystem gs;
-
-	ParticleSystem particles(".\\Assets\\GLSL\\GeometryPass", glm::vec3(40, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 50.0f, 5005, 4.0f);
 	TextureHandler teximp;
 
 
@@ -85,7 +88,7 @@ void System::Run()
 				temp = true;
 			}
 			//	msaa.Reset();
-		
+
 			l[0].Update();
 			//	msaa.Update();
 			//	quad.Render();

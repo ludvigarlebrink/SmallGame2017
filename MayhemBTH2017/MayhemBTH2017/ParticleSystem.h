@@ -40,7 +40,7 @@ private:
 
 private:
 	Particle m_part[1];
-
+	Particle m_particle[10000]; //Max number of particles
 	Camera m_camera;
 	Transform m_transform;
 	uint64_t PARTICLE_COUNT;
