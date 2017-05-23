@@ -276,6 +276,7 @@
     <ClCompile Include="ShadowShader.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleEmitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -486,6 +487,7 @@
     <ClInclude Include="ShadowShader.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleEmitter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">
@@ -604,5 +606,11 @@
     <None Include="Assets\GLSL\ToonShader.vert">
       <Filter>Assets\GLSL</Filter>
     </None>
+    <None Include="Assets\GLSL\Particle1.vert" />
+    <None Include="Assets\GLSL\Particle2.vert" />
+    <None Include="Assets\GLSL\Particle3.vert" />
+    <None Include="Assets\GLSL\Particle4.vert" />
+    <None Include="Assets\GLSL\Particle5.vert" />
+    <None Include="Assets\GLSL\Particle6.vert" />
   </ItemGroup>
 </Project>

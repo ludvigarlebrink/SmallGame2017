@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+UIImage * Menu::m_selection = nullptr;
+
 Menu::Menu()
 	: m_isActive(false)
 {
@@ -10,14 +12,18 @@ Menu::Menu()
 	m_soundManager = SoundManager::Get();
 
 	m_currentSelection = 0;
-	m_selection.SetTexture(".\\Assets\\Sprites\\Selection.png");
-	m_selection.SetSize(336 * 0.8f, 78 * 0.8f);
+	if (m_selection == nullptr)
+	{
+		m_selection = new UIImage;
+		m_selection->SetTexture(".\\Assets\\Sprites\\Selection.png");
+		m_selection->SetSize(336 * 0.8f, 78 * 0.8f);
+
+	}
 
 	// Init title.
 	m_title.SetSize(FONT_SIZE + 12);
 	m_title.SetPosition(0, 170);
 	m_title.SetColor(229, 122, 16, 255);
-
 
 
 	m_isScalning = true;
@@ -46,8 +52,8 @@ void Menu::Render()
 		if (m_button[i]->isSelected)
 		{
 			// Set the position of the marker.
-			m_selection.SetPosition(0, (-i * (FONT_SIZE + 16)) + 70);
-			m_selection.Render();
+			m_selection->SetPosition(0, (-i * (FONT_SIZE + 16)) + 70);
+			m_selection->Render();
 
 			m_button[i]->text->SetPosition(0, (-i * (FONT_SIZE + 16)) + 70);
 

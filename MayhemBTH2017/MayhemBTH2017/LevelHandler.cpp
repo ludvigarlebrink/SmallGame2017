@@ -70,7 +70,7 @@ void LevelHandler::Import(Level & level, uint32_t id, std::string levelName)
 	{
 		file.read(reinterpret_cast<char*>(&importedProps[i].id), sizeof(uint32_t));
 		file.read(reinterpret_cast<char*>(&importedProps[i].pos), sizeof(glm::vec2));
-		file.read(reinterpret_cast<char*>(&importedProps[i].rot), sizeof(float));
+		
 
 	}
 
@@ -154,6 +154,8 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	{
 		output.write(reinterpret_cast<char*>(&outProps[i].id), sizeof(uint32_t));
 		output.write(reinterpret_cast<char*>(&outProps[i].pos), sizeof(glm::vec2));
+		output.write(reinterpret_cast<char*>(&outProps[i].rot), sizeof(float));
+
 	}
 
 

@@ -14,6 +14,10 @@
 #include "MeshQuad.h"
 #include "Background.h"
 
+
+
+
+
 System::System()
 {
 	Init();
@@ -28,6 +32,7 @@ System::~System()
 //::.. THE MAIN LOOP ..:://
 void System::Run()
 {
+	
 	//	TransitionManager transitionManager;
 	AntiAliasing msaa;
 	MeshQuad quad;
@@ -52,10 +57,7 @@ void System::Run()
 
 
 	GameSystem gs;
-
-	ParticleSystem particles(".\\Assets\\GLSL\\GeometryPass", glm::vec3(40, 20, 0), glm::vec4(1.0, 0.0, 0.0, 1.0), 50.0f, 5005, 4.0f);
 	TextureHandler teximp;
-	Texture texture = teximp.Import(".\\Assets\\Textures\\fireball.png");
 
 
 	Background bg;
@@ -77,22 +79,16 @@ void System::Run()
 
 			break;
 		case GameState::MAIN_MENU:
-			if (temp == true)
-			{
-				//delete l;
-				//l = nullptr;
-				//temp = false;
-			}
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:
-			if (temp == false)
+			if (!temp)
 			{
 				l = new LevelEditor;
 				temp = true;
 			}
 			//	msaa.Reset();
-		
+
 			l[0].Update();
 			//	msaa.Update();
 			//	quad.Render();

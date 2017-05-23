@@ -3,7 +3,6 @@
 
 
 #include "InputManager.h"
-#include "StateManager.h"
 #include "UIImage.h"
 #include "Menu.h"
 #include "Timer.h"
@@ -34,7 +33,6 @@ private:
 private:
 	VideoManager *	m_videoManager;
 	InputManager *	m_inputManager;
-	StateManager *	m_stateManager;
 
 	Menu *			m_rootMenu;
 	UIImage			m_background;
