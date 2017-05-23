@@ -148,6 +148,11 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 void Player::Update() {
 
+	if (m_boundingBox.getBody()->GetPosition().y < -5.0f)
+	{
+		m_dead = true;
+	}
+
 	if (m_currentWeapon > 6)
 	{
 		m_currentWeapon = 0;
