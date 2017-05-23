@@ -351,7 +351,7 @@ void GameSystem::SelectLevel()
 		{
 			if (m_levelChoice[i].isSelect == true)
 			{
-				m_levelHandler.Import(m_level, 1, m_levelChoice[i].levelText.GetText());
+				m_levelHandler.Import(m_level, m_levelChoice[i].levelText.GetText());
 				m_level.SetName(m_levelChoice[i].levelText.GetText());
 				m_levelQueue.push_back(m_level);
 			}
@@ -359,7 +359,7 @@ void GameSystem::SelectLevel()
 
 		for (int i = 0; i < m_levelQueue.size(); i++)
 		{
-			m_levelHandler.Import(m_levelQueue.at(i), 1, m_levelQueue.at(i).GetName());
+			m_levelHandler.Import(m_levelQueue.at(i), m_levelQueue.at(i).GetName());
 		}
 		m_numOfLevels = m_levelQueue.size();
 		TransitionManager::StartFadingOut();

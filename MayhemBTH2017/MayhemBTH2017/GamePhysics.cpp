@@ -27,7 +27,7 @@ void GamePhysics::EnterWorld(Level & level)
 
 	m_world = std::make_unique<b2World>(gravity);
 
-	m_floorCollider.CreateBoundingBoxes(m_world.get());
+	m_floorCollider.CreateBoundingBoxes(m_world.get(), level.GetName());
 
 	//at global scope
 

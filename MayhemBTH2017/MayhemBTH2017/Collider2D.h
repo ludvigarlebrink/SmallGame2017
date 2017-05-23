@@ -25,7 +25,7 @@ public:
 	Collider2D();
 	virtual ~Collider2D();
 	void SetBoxCollider(glm::vec2 min, glm::vec2 max);
-	void CreateBoundingBoxes(b2World* world);
+	void CreateBoundingBoxes(b2World* world, std::string levelName);
 
 	void DrawCollider(Camera camera);
 	void DrawColliderShadowPass(Camera camera);

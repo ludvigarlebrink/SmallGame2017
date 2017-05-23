@@ -375,7 +375,7 @@ void LevelEditor::MenuInput()
 		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 		{
 			Reset();
-			m_levelHandler.Import(m_level, m_levelID, m_levelChoice[m_levelSelector].GetText());
+			m_levelHandler.Import(m_level, m_levelChoice[m_levelSelector].GetText());
 			m_state = EDIT;
 		}
 		break;

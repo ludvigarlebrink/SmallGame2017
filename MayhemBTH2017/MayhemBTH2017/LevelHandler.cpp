@@ -42,7 +42,7 @@ void LevelHandler::Init()
 }
 
 //::.. IMPORT/EXPORT ..:://
-void LevelHandler::Import(Level & level, uint32_t id, std::string levelName)
+void LevelHandler::Import(Level & level, std::string levelName)
 {
 	level.Clear();
 	const int nrOfBlocks = level.SIZE_X * level.SIZE_Y;

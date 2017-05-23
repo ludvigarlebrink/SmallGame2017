@@ -179,14 +179,12 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 
 	}
-
-
-	if (m_projectiles.size() == m_clearRate)
+	else if (m_projectiles.size() == m_clearRate)
 	{
-		if (m_projectileCounter >= m_clearRate)
+		if (m_projectileCounter == m_clearRate)
 			m_projectileCounter = 0;
 
-		else if (m_projectileCounter <= m_clearRate)
+		if (m_projectileCounter < m_clearRate)
 		{
 			m_soundManager->PlaySFX("skorpion");
 

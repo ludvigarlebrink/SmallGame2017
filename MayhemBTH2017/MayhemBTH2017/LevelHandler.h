@@ -26,7 +26,7 @@ public:
 
 	//::.. IMPORT/EXPORT ..:://
 	void Init();
-	void Import(Level & level, uint32_t id, std::string levelName);
+	void Import(Level & level, std::string levelName);
 	void Export(Level & level, LevelEditorPropPlacer & propPlacer);
 	bool ImportRegister(std::string & textField);
 	bool ExportRegister();

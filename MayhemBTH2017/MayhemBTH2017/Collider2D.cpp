@@ -46,11 +46,11 @@ void Collider2D::DrawColliderShadowPass(Camera camera)
 	m_level.Render(camera);
 }
 
-void Collider2D::CreateBoundingBoxes(b2World* world) {
+void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
 	m_contact = false;
-	m_levelImport.Import(m_level, 1, "ABC");
+	m_levelImport.Import(m_level, levelName);
 	
 	
 	const uint32_t length = SIZE_X * SIZE_Y * 6;
