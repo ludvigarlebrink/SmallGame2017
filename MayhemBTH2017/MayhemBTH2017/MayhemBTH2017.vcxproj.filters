@@ -462,7 +462,6 @@
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="PowerUpHandler.h" />
     <ClInclude Include="Collidable.h" />
-    <ClInclude Include="GamePhysics.h" />
     <ClInclude Include="LevelTexture.h" />
     <ClInclude Include="GameSettings.h" />
     <ClInclude Include="TransitionManager.h" />
@@ -488,6 +487,9 @@
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="ParticleEmitter.h" />
+    <ClInclude Include="GamePhysics.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

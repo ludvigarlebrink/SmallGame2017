@@ -1,9 +1,8 @@
 #include "Player.h"
 
 //::..CONSTRUCTORS..:://
-Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID) {
-
-	Init(world, pos, scale, controllerID);
+Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID) 
+{
 	m_contact = false;
 
 	m_dead = false;
@@ -14,12 +13,19 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 
 Player::Player()
 {
+	m_contact = false;
 
+	m_dead = false;
+
+	m_hitByProjectile = -1;
 }
+
 
 Player::~Player()
 {
 }
+
+
 //::..INITIALIZERS..:://
 void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 {
@@ -88,11 +94,8 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
 
 	Prefab * projectile = PrefabManager::Instantiate("Player", nullptr, nullptr, 0, "Candle");
-
 	Prefab * projectile2 = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
-
 	Prefab * projectile3 = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
-
 	Prefab * projectile4 = PrefabManager::Instantiate("Rifle", nullptr, nullptr, 0, "Candle");
 
 	projectile->SetScale(glm::vec3(1, 1, 1));
@@ -380,15 +383,18 @@ Prefab * Player::GetHealthBar()
 
 
 //::.. SET FUNCTIONS ..:://
-void Player::SetCategoryBits(short CATEGORY) {
-
+void Player::SetCategoryBits(short CATEGORY) 
+{
 	m_fixture.filter.categoryBits = CATEGORY;
 }
+
+
 void Player::SetMaskBits(short MASK) {
 
 	m_fixture.filter.maskBits = MASK;
 
 }
+
 
 bool Player::Timer(float rate)
 {
@@ -400,10 +406,12 @@ bool Player::Timer(float rate)
 	return false;
 }
 
+
 void Player::SetControllerID(int ID)
 {
 	m_controllerID = ID;
 }
+
 
 void Player::Hit(int projectileID)
 {
