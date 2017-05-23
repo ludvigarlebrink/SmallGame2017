@@ -18,12 +18,9 @@ void Collider2D::SetBoxCollider(glm::vec2 min, glm::vec2 max)
 
 }
 
-void Collider2D::ImportLevel(Level level) {
-
-
-
+void Collider2D::ImportLevel(Level level) 
+{
 	m_level = level;
-
 }
 std::vector<Box> Collider2D::GetBoxes()
 {
@@ -31,13 +28,10 @@ std::vector<Box> Collider2D::GetBoxes()
 }
 void Collider2D::DrawCollider(Camera camera)
 {
-
-
 	m_transf.SetPosition(42.0, 24.0, -0.0);
 	m_shader.Update(m_transf, camera);
 	m_megaTexture.Bind(0);
-	m_level.Render(camera);
-	
+	m_level.Render(camera);	
 }
 
 void Collider2D::DrawColliderShadowPass(Camera camera)
@@ -48,6 +42,11 @@ void Collider2D::DrawColliderShadowPass(Camera camera)
 
 void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 
+	for (int i = 0; i < m_boxes.size(); i++)
+	{
+		m_boxes[i].getBody()->GetWorld()->DestroyBody(m_boxes[i].getBody());
+	}
+	m_boxes.clear();
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
 	m_contact = false;
 	m_levelImport.Import(m_level, levelName);
@@ -94,12 +93,9 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 				b2Filter filter;
 				filter.categoryBits = BOUNDARY;
 				filter.maskBits = PLAYER1|PLAYER2|PROJECTILE1| PROJECTILE2 | POWERUP;
-				gameFloor.getFixture()->SetFilterData(filter);
-			
+				gameFloor.getFixture()->SetFilterData(filter);			
 
 				m_boxes.push_back(gameFloor);
-
-
 
 				x += blocksInRow;
 				blocksInRow = 0;
@@ -113,8 +109,6 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 void Collider2D::CreatePlayerBoundingBox(b2World* world) {
 
 	Box tempBox;
-
-
 
 	//SIZE OF THE PLAYER BOUNDING BOXZ
 	tempBox.InitDynamic(world, glm::vec2(42.0, 24.0), glm::vec2(0.5, 0.5));
