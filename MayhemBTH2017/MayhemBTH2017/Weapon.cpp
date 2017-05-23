@@ -17,16 +17,17 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 	m_clearTime = 0;
 	m_counter = 0;
 
-	m_particleEmitter = new ParticleEmitter;
+//	m_smokeEmitter = new ParticleEmitter;
 
 
 	m_render = false;
 
-
+	m_particletimer = 0.0f;
 	m_projectileCounter = 0;
 
 	m_controllerID = controllerID;
 
+	m_particleTexture = m_textureHandler.Import(".\\Assets\\Textures\\fireball.png");
 	m_soundManager = SoundManager::Get();
 }
 
@@ -43,6 +44,7 @@ Weapon::Weapon(Prefab * gun)
 Weapon::~Weapon()
 {
 	m_projectiles.clear();
+
 }
 
 void Weapon::SetProjectileType(float restitution, float friction, float damping, float density, float fireRate, int clearRate, int controllerID, float life)
@@ -60,6 +62,11 @@ void Weapon::SetProjectileType(float restitution, float friction, float damping,
 
 }
 
+void Weapon::SetParticleTexture(const char* texturepath) {
+	m_partTexture = texturepath;
+
+}
+
 void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 {
 	//m_prefabGun->SetPosition(playerPos);
@@ -73,10 +80,7 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 
 	//DeleteProjectile();
 
-	if (m_render) {
-		m_particletimer += TimeManager::GetDeltaTime();
 
-	}
 
 
 }
@@ -98,12 +102,25 @@ void Weapon::DeleteProjectile()
 void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life)
 {
 
+	m_shaderName = shadername;
+	m_col = col;
+	m_size = size;
+	m_nrOf = nrof;
+	m_plife = life;
+
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
 		m_projectiles[i]->InitParticles(shadername, col, size, nrof, life);
-		
-	}
 
+	}
+	
+
+}
+
+void Weapon::SetTexture(const char * filepath)
+{
+
+//
 }
 
 Projectile * Weapon::ReuseLast()
@@ -153,7 +170,8 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 	{
 		Projectile* projectile = nullptr;
 		projectile = new Projectile();
-		//create new projectile
+		//	projectile->InitParticles(m_shaderName, m_col, m_size, m_nrOf, m_plife);
+			//create new projectile
 
 		if (m_isBullet == false) {
 			m_soundManager->PlaySFX("skorpion");
@@ -225,10 +243,11 @@ void Weapon::Render(Camera camera)
 
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
+
 		m_projectiles[i]->Update();
 		m_projectiles[i]->Render(camera);
 
-	
+
 	}
 
 }
@@ -241,6 +260,7 @@ void Weapon::RenderShadow(Camera camera)
 	{
 		pTransform.SetPosition(m_projectiles[i]->GetBox().getBody()->GetPosition().x / 2, m_projectiles[i]->GetBox().getBody()->GetPosition().y / 2, 0);
 		m_projectiles[i]->Update();
+
 		m_projectiles[i]->Render(camera);
 
 
