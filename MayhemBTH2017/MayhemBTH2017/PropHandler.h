@@ -21,6 +21,7 @@ public:
 		bool			hasAnimation;
 		uint32_t		gridX;
 		uint32_t		gridY;
+		float			rotY;
 	};
 
 	struct Prop
