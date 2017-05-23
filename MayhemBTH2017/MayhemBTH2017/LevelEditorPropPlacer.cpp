@@ -98,6 +98,7 @@ LevelEditorPropPlacer::PropsExport * LevelEditorPropPlacer::GetPropExport()
 		props[counter].id = m_props[i]->id;
 		props[counter].pos.x = m_props[i]->prefab->GetPosition().x;
 		props[counter].pos.y = m_props[i]->prefab->GetPosition().y;
+		props[counter].rot = m_props[i]->prefab->GetRotation().z;
 
 		++counter;
 	}

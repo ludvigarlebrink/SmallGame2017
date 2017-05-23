@@ -27,14 +27,14 @@ public:
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
+	void Free();
 
 private:
-	VideoManager *	m_videoManager;
-	InputManager *	m_inputManager;
-	TimeManager *	m_timeManager;
-	StateManager*	m_stateManager;
-	SoundManager*	m_soundManager;
-
+	VideoManager	 *	m_videoManager;
+	InputManager	 *	m_inputManager;
+	TimeManager		 *	m_timeManager;
+	StateManager	 *	m_stateManager;
+	SoundManager	 *	m_soundManager;
 };
 
 

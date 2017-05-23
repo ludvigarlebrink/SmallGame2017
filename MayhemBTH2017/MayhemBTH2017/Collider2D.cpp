@@ -18,9 +18,12 @@ void Collider2D::SetBoxCollider(glm::vec2 min, glm::vec2 max)
 
 }
 
-void Collider2D::ImportLevel(Level level) 
-{
+void Collider2D::ImportLevel(Level level) {
+
+
+
 	m_level = level;
+
 }
 std::vector<Box> Collider2D::GetBoxes()
 {
@@ -29,9 +32,9 @@ std::vector<Box> Collider2D::GetBoxes()
 void Collider2D::DrawCollider(Camera camera)
 {
 
-	Transform transf;
-	transf.SetPosition(42.0, 24.0, -0.0);
-	m_shader.Update(transf, camera);
+
+	m_transf.SetPosition(42.0, 24.0, -0.0);
+	m_shader.Update(m_transf, camera);
 	m_megaTexture.Bind(0);
 	m_level.Render(camera);
 	
@@ -39,17 +42,15 @@ void Collider2D::DrawCollider(Camera camera)
 
 void Collider2D::DrawColliderShadowPass(Camera camera)
 {
-	Transform transf;
-	transf.SetPosition(42.0, 24.0, -0.0);
+	m_transf.SetPosition(42.0, 24.0, -0.0);
 	m_level.Render(camera);
 }
 
-void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
+void Collider2D::CreateBoundingBoxes(b2World* world) {
 
-	m_megaTexture = m_textureTemp.Import(".\Assets\Textures\textureMap.png");
+	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
 	m_contact = false;
-
-	m_levelHandler.Import(m_level, 1, levelName);
+	m_levelImport.Import(m_level, 1, "ABC");
 	
 	
 	const uint32_t length = SIZE_X * SIZE_Y * 6;

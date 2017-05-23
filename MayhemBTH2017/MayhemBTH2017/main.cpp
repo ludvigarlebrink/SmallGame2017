@@ -14,6 +14,7 @@
 
 
 
+
 // Global singleton managers.
 MemoryManager			g_memoryManager;
 ResourceManager			g_resourceManager;
@@ -35,6 +36,7 @@ void Terminate();
 
 int main(int argc, char *argv[])
 {
+
 	// Init all singleton managers.
 	BigInit();
 
