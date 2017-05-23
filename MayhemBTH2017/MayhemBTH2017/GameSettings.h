@@ -21,8 +21,8 @@ public:
 	void Update();
 	void Render();
 
-	int32_t GetGameLenght();
-	int32_t GetPowerUpSpawnRate();
+	static int32_t GetGameLenght();
+	static int32_t GetPowerUpSpawnRate();
 	bool GetRandomizedOrder();
 
 private:
@@ -41,10 +41,10 @@ private:
 
 	bool m_uiCreated;
 
-	int32_t m_gameLength;
-	int32_t m_powerUpsSpawnRate;
-	bool m_randomizedOrder;
-	bool m_instantKills;
+	static int32_t m_gameLength;
+	static int32_t m_powerUpsSpawnRate;
+	static bool m_randomizedOrder;
+	static bool m_instantKills;
 
 	UIText * m_ui;
 	UIText * m_uiV;

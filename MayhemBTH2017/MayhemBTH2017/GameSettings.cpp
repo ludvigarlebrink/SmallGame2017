@@ -1,15 +1,13 @@
 #include "GameSettings.h"
 
-
+int32_t GameSettings::m_gameLength = 60;
+int32_t GameSettings::m_powerUpsSpawnRate = 4;
+bool GameSettings::m_randomizedOrder = false;
+bool GameSettings::m_instantKills = false;
 
 GameSettings::GameSettings()
 {
 	m_currSel = 0;
-
-	m_gameLength = 60;
-	m_powerUpsSpawnRate = 4;
-	m_randomizedOrder = false;
-	m_instantKills = false;
 
 	m_input = InputManager::Get();
 }
