@@ -53,6 +53,11 @@ public:
 	
 private:
 private:
+	Texture m_particleTex1;
+	Texture m_particleTex2;
+	Texture m_particleTex3;
+	TextureHandler m_textureHandler;
+
 	ParticleSystem m_particles;
 	InputManager * m_input;
 	b2Fixture* m_filter;

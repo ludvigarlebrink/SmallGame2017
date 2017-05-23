@@ -5,6 +5,7 @@
 Projectile::Projectile()
 {
 
+	//m_texture
 	m_trailTime = 0.0f;
 	m_time = 0.0;
 	m_rotationUpdate = 0.0f;
@@ -20,6 +21,9 @@ Projectile::~Projectile()
 
 void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID, float life)
 {
+
+		
+
 	m_isBullet = false;
 
 	m_collision = false;
@@ -60,6 +64,13 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_box.getBody()->SetLinearDamping(damping);
 	m_box.getFixture()->SetFilterData(filter);
 	m_box.getBody()->ResetMassData();
+
+}
+
+void Projectile::SetTexture(Texture texture)
+{
+
+	m_texture = texture;
 
 }
 
@@ -135,6 +146,8 @@ void Projectile::InitParticles(std::string shadername, glm::vec4 col, GLfloat si
 	m_size = size;
 	m_nrof = nrof;
 	m_particleLife = life;
+
+
 
 }
 
@@ -231,16 +244,7 @@ void Projectile::Update()
 	}
 
 
-	//SMOKE PARTICLE EFFFECT TRAIL
 
-	m_trailTime += TimeManager::GetDeltaTime();
-
-	if (m_trailTime > 0.5f) {
-
-		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
-	//	m_emitter.SetParticleSystem(".\\Assets\\GLSL\\ParticleExplosion", position, glm::vec4(1.0, 1.0, 1.0, 1.0), 1.0f, 100, 1.0f);
-		m_trailTime = 0.0f;
-	}
 }
 
 void Projectile::Render(Camera camera)
@@ -261,6 +265,8 @@ void Projectile::Render(Camera camera)
 		Transform transform;
 
 		transform.SetPosition(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
+		
+		m_texture.Bind(m_texture.GetTexture());
 
 		m_emitter.Update();
 		m_emitter.Render(transform);

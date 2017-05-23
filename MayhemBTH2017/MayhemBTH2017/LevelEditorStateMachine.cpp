@@ -123,7 +123,7 @@ void LevelEditorStateMachine::Init()
 		case GUI_BLOCK:
 			m_gui[GUI_BLOCK].m_text.SetText("BLOCKS");
 			m_gui[GUI_BLOCK].m_texture.SetTexture(".\\Assets\\Textures\\textureMap.png");
-			m_gui[GUI_BLOCK].m_numIcons = 12 ;
+			m_gui[GUI_BLOCK].m_numIcons = 15 ;
 			break;
 
 		case GUI_PROP:

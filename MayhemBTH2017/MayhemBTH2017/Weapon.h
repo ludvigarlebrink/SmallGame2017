@@ -24,7 +24,9 @@ public:
 	void RenderShadow(Camera camera);
 	void Update(glm::vec3 playerPos, b2Vec2 force);
 	void DeleteProjectile();
+	void SetParticleTexture(const char* texturepath);
 	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life);
+	void SetTexture(const char* filepath);
 	//::.. SET FUNTIONS ..:://
 	void Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID);
 	void UpdateParticles();
@@ -34,13 +36,14 @@ public:
 	bool FireRate(float rate);
 
 private:
+	const char*				m_texturePath;
 	Prefab*					m_prefabGun;
 	Prefab*					m_muzzleFlash;
 	Prefab*					m_prefabProjectile;
 	std::vector<Projectile*>m_projectiles;
 	TextureManager m_texMan;
 	Texture		m_tex;
-	ParticleEmitter* m_particleEmitter;
+	ParticleEmitter* m_smokeEmitter;
 	float m_restitution;
 	glm::vec2 m_previousForce;
 	float m_friction;
@@ -66,7 +69,10 @@ private:
 	bool					m_render;
 	int						m_nrOf;
 	float					m_plife;
-
+	const char*	m_partTexture;
+	TextureHandler m_textureHandler;
+	Texture	m_particleTexture;
+	TextureManager m_textureManager;
 	SoundManager * m_soundManager;
 };
 
