@@ -8,16 +8,16 @@ Weapon::Weapon()
 
 Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 {
+	
+
 	m_isBullet = false;
 	m_prefabGun = gun;
-
+	m_hasParticles = false;
 	m_prefabProjectile = projectile;
 
 	m_time = 0;
 	m_clearTime = 0;
 	m_counter = 0;
-
-//	m_smokeEmitter = new ParticleEmitter;
 
 
 	m_render = false;
@@ -27,7 +27,6 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 
 	m_controllerID = controllerID;
 
-	m_particleTexture = m_textureHandler.Import(".\\Assets\\Textures\\fireball.png");
 	m_soundManager = SoundManager::Get();
 }
 
@@ -58,12 +57,26 @@ void Weapon::SetProjectileType(float restitution, float friction, float damping,
 	m_fireRate = fireRate;
 	m_clearRate = clearRate;
 	m_controllerID = controllerID;
-
+	m_hasParticles = false;
 
 }
 
-void Weapon::SetParticleTexture(const char* texturepath) {
-	m_partTexture = texturepath;
+void Weapon::SetFirePower(GLfloat firepower)
+{
+	m_firepower = firepower;
+}
+
+float Weapon::GetDamage()
+{
+	return m_damage;
+}
+
+void Weapon::SetParticleTexture(Texture texture) {
+
+	
+	m_particleTexture = texture;
+
+
 
 }
 
@@ -99,9 +112,20 @@ void Weapon::DeleteProjectile()
 	}
 }
 
-void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life)
+void Weapon::SetWeaponSound(const char * filepath)
 {
 
+	m_soundpath = filepath;
+}
+
+void Weapon::SetCollisionSound(const char * filepath)
+{
+	m_collisionpath = filepath;
+}
+
+void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life)
+{
+	m_hasParticles = true;
 	m_shaderName = shadername;
 	m_col = col;
 	m_size = size;
@@ -113,14 +137,20 @@ void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat s
 		m_projectiles[i]->InitParticles(shadername, col, size, nrof, life);
 
 	}
-	
+
 
 }
 
 void Weapon::SetTexture(const char * filepath)
 {
 
-//
+	//
+}
+
+void Weapon::SetDamage(float damage)
+{
+	m_damage = damage;
+
 }
 
 Projectile * Weapon::ReuseLast()
@@ -140,8 +170,10 @@ float Weapon::GetFireRate()
 	return m_fireRate;
 }
 
-void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID)
+void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 {
+	GLfloat firePower = m_firepower;
+
 
 
 	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
@@ -174,12 +206,15 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 			//create new projectile
 
 		if (m_isBullet == false) {
-			m_soundManager->PlaySFX("skorpion");
+			
+			m_soundManager->PlaySFX(m_soundpath);
+			
 			projectile->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile, m_controllerID, m_life);
 
-
+			projectile->SetHasParticles(m_hasParticles);
+			projectile->SetTexture(m_particleTexture);
 		}
 
 		Camera camera;
@@ -204,7 +239,7 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 
 		if (m_projectileCounter < m_clearRate)
 		{
-			m_soundManager->PlaySFX("skorpion");
+			m_soundManager->PlaySFX(m_soundpath);
 
 			//reuse projectile
 			m_projectiles[m_projectileCounter]->SetActive(false);
@@ -216,7 +251,8 @@ void Weapon::Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int contro
 			//m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
 			m_projectiles[m_projectileCounter]->AddForce(glm::vec3(m_previousForce, 0.0f), controllerID);
 
-
+			m_projectiles[m_projectileCounter]->SetHasParticles(m_hasParticles);
+			m_projectiles[m_projectileCounter]->SetTexture(m_particleTexture);
 
 			m_projectileCounter++;
 

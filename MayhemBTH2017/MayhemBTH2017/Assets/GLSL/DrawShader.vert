@@ -17,6 +17,7 @@ void main()
 
 
 	position1=inPos;
+
 	direction1=(inDir);
 	color1=inCol;
 	life1=inLife;

@@ -31,7 +31,7 @@ void GamePhysics::EnterWorld(Level & level)
 {
 	m_time = TimeManager::Get();
 
-	m_floorCollider.CreateBoundingBoxes(&m_world);
+	m_floorCollider.CreateBoundingBoxes(&m_world, level.GetName());
 
 	//at global scope
 
@@ -40,7 +40,7 @@ void GamePhysics::EnterWorld(Level & level)
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
-	m_powerupHandler.Init(&m_world, 20);
+	//m_powerupHandler.Init(&m_world);
 	//player fixture is of type PLAYER
 	m_loadWorld = true;
 }
@@ -55,7 +55,7 @@ void GamePhysics::Update()
 		m_player[i].Update();
 	}
 
-	m_powerupHandler.Update();
+	//m_powerupHandler.Update();
 
 	m_world.Step(1.0f / 20.0f, 8, 5);
 	//Update player bounding box sprite position to the position of the player mesh
@@ -100,7 +100,7 @@ void GamePhysics::Render(Camera camera) {
 	//m_shadowMap.Bind();
    
 	m_floorCollider.DrawCollider(camera);
-	for (int i = 0; i < 1; i++) {
+	for (int i = 0; i < 2; i++) {
 
 		m_player[i].Render(camera);
 	}

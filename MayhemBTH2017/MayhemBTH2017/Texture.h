@@ -11,7 +11,9 @@ class Texture
 public:
 	Texture();
 	virtual ~Texture();
-
+	
+	Texture(const Texture& other);
+	Texture& Texture::operator=(const Texture& other);
 	void LoadTexture(GLuint * textureData, GLsizei width, GLsizei height, GLuint numComponents);
 
 	//::.. GET FUNCTIONS ..:://

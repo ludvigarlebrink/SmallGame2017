@@ -18,7 +18,7 @@ GameSystem::GameSystem()
 	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 	m_gameSettings = new GameSettings;
 	m_gameSettings->CreateUI();
-	m_selectorImage.SetTexture(".\\Assets\\Textures\\arredal.jpg");
+	m_selectorImage.SetTexture(".\\Assets\\Textures\\menu_cursor.png");
 	m_selectorImage.SetSize(50, 50);
 
 }
@@ -253,7 +253,7 @@ void GameSystem::InitPlay()
 		TransitionManager::StartFadingIn();
 		TimeManager::ResetDeltaTime();
 	}
-	m_soundManager->FadeInNewMusic("bensound-epic", 3, 10);
+	m_soundManager->FadeInNewMusic("match_song_1", 3, 10);
 	TransitionManager::Update();
 }
 
