@@ -19,11 +19,14 @@ GamePhysics::~GamePhysics()
 
 void GamePhysics::EnterWorld(Level & level)
 {
-
 	//Get deltatime
 
 	m_time = TimeManager::Get();
 	b2Vec2 gravity(0.0f, -8.21f);
+	if (m_PH.GetSpawn() == true)
+	{
+		m_PH.free();
+	}
 
 	m_world = std::make_unique<b2World>(gravity);
 
@@ -68,7 +71,7 @@ void GamePhysics::Update()
 		m_player[i].Update();
 	}
 
-//	m_PH.Update();
+	m_PH.Update();
 
 	m_world->Step(1.0f / 20.0f, 8, 5);
 	//Update player bounding box sprite position to the position of the player mesh
