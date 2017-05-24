@@ -22,7 +22,7 @@ void main()
 
 	outPos=inPos+0.6*(normalize(inDir));
 	outDir=inDir;
-	outCol.r=inCol.r-0.02f;
+	outCol=inCol;
 	outLife=inLife;
 	outSize=inSize;
 

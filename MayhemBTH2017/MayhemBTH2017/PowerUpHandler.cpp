@@ -86,10 +86,8 @@ void PowerUpHandler::Update()
 		srand(time(NULL));
 
 		randomize = rand() % 5;
-		std::cout << randomize << std::endl;
 		m_pu[randomize]->RandPosition();
 		m_pu[randomize]->SetActive(true);
-		std::cout << "spawn"<<std::endl;
 		m_threshold = 0;
 		lastSpawned = randomize;
 	}

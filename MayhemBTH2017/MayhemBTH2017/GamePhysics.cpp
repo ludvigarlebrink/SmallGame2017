@@ -23,9 +23,9 @@ void GamePhysics::EnterWorld(Level & level)
 
 	m_time = TimeManager::Get();
 	b2Vec2 gravity(0.0f, -8.21f);
-	if (m_PH.GetSpawn() == true)
+	if (m_powerupHandler.GetSpawn() == true)
 	{
-		m_PH.free();
+		m_powerupHandler.free();
 	}
 
 	m_world = std::make_unique<b2World>(gravity);
@@ -40,7 +40,7 @@ void GamePhysics::EnterWorld(Level & level)
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
-	m_PH.Init(m_world.get());
+	m_powerupHandler.Init(m_world.get());
 	//PLAYER
 
 
@@ -64,16 +64,16 @@ void GamePhysics::EnterWorld(Level & level)
 
 void GamePhysics::Update()
 {
-	m_world->Step(1.0f / 20.0f, 8, 5);
+	m_world.Step(1.0f / 20.0f, 8, 5);
 
 	for (int i = 0; i < 2; i++) {
 
 		m_player[i].Update();
 	}
 
-	m_PH.Update();
+	m_powerupHandler.Update();
 
-	m_world->Step(1.0f / 20.0f, 8, 5);
+	m_world.Step(1.0f / 20.0f, 8, 5);
 	//Update player bounding box sprite position to the position of the player mesh
 }
 
@@ -114,7 +114,7 @@ void GamePhysics::Render(Camera camera) {
 		m_player[i].Render(camera);
 	}
 	
-	m_PH.Render(camera);
+	m_powerupHandler.Render(camera);
 
 
 	//glClear(GL_DEPTH_BUFFER_BIT);
