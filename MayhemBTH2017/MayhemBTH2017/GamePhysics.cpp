@@ -7,7 +7,7 @@ MyContactListener * GamePhysics::m_contactListener = nullptr;
 
 GamePhysics::GamePhysics()
 	:m_world(b2Vec2(0.0f, -8.21f))
-{
+{	
 	if (m_contactListener == nullptr)
 	{
 		m_contactListener = new MyContactListener;
@@ -40,7 +40,7 @@ void GamePhysics::EnterWorld(Level & level)
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
-	m_powerupHandler.Init(&m_world);
+	//m_powerupHandler.Init(&m_world);
 	//player fixture is of type PLAYER
 	m_loadWorld = true;
 }
@@ -49,15 +49,15 @@ void GamePhysics::Update()
 {
 	m_world.Step(1.0f / 20.0f, 8, 5);
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 2; i++) 
 	{
 
 		m_player[i].Update();
 	}
 
-	m_powerupHandler.Update();
+	//m_powerupHandler.Update();
 
-	//m_world.Step(1.0f / 20.0f, 8, 5);
+	m_world.Step(1.0f / 20.0f, 8, 5);
 	//Update player bounding box sprite position to the position of the player mesh
 }
 
@@ -98,14 +98,14 @@ void GamePhysics::Render(Camera camera) {
 	//
 	//m_shadowMap.SecPass();
 	//m_shadowMap.Bind();
-
+   
 	m_floorCollider.DrawCollider(camera);
-	for (int i = 0; i < 1; i++) {
+	for (int i = 0; i < 2; i++) {
 
 		m_player[i].Render(camera);
 	}
-
-	m_powerupHandler.Render(camera);
+	
+//	m_powerupHandler.Render(camera);
 
 
 	//glClear(GL_DEPTH_BUFFER_BIT);

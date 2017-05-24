@@ -28,7 +28,7 @@ public:
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(float life);
 	void AddForce(glm::vec3 force, int controllerID);
-
+	void SetHasParticles(bool has);
 	void SetActive(bool active);
 
 	//::.. GET FUNCTIONS ..:://
@@ -58,6 +58,9 @@ private:
 	Prefab m_prefabPointer;
 	GLuint m_texID;
 	ParticleEmitter emitter;
+	ParticleEmitter trailEmitter;
+	ParticleSystem* m_trailParticles;
+	bool m_renderSmoke;
 	Texture m_texture;
 	TextureHandler m_textureHandler;
 	Box			m_box;
@@ -97,7 +100,7 @@ private:
 	float m_collisionTimer;
 	bool m_collision;
 
-	
+
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
 		PLAYER1 = 0x0002,
