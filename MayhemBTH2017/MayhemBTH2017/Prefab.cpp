@@ -45,6 +45,7 @@ void Prefab::Render(Camera & cam)
 
 	m_mesh->Render();
 	glUseProgram(0);
+
 }
 
 void Prefab::RenderShadow(Camera & cam)

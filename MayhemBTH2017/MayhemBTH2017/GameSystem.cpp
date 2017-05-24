@@ -104,7 +104,7 @@ void GameSystem::GameSetup()
 void GameSystem::InitPlayerReady()
 {
 	VideoManager * vm = VideoManager::Get();
-	m_playerReadyUI = new PlayerReadyUI[4];
+	m_playerReadyUI = new PlayerReadyUI[MAX_PLAYERS];
 
 
 	// FIX POS!
@@ -144,12 +144,12 @@ void GameSystem::InitPlayerReady()
 	m_playerReadyUI[3].a = 255;
 
 
-	for (uint32_t i = 0; i < 4; i++)
+	for (uint32_t i = 0; i < MAX_PLAYERS; i++)
 	{
 		m_playerReadyUI[i].playerReady.SetText("PRESS A");
 	}
 
-	for (uint32_t i = 0; i < 4; i++)
+	for (uint32_t i = 0; i < MAX_PLAYERS; i++)
 	{
 		m_playerReadyUI[i].playerName.SetColor(170, 170, 170, 255);
 		m_playerReadyUI[i].playerReady.SetColor(170, 170, 170, 255);
@@ -165,7 +165,7 @@ void GameSystem::InitPlayerReady()
 
 void GameSystem::PlayerReady()
 {
-	for (uint32_t i = 0; i < 4; i++)
+	for (uint32_t i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A, i))
 		{
@@ -351,7 +351,7 @@ void GameSystem::SelectLevel()
 		{
 			if (m_levelChoice[i].isSelect == true)
 			{
-				m_levelHandler.Import(m_level, 1, m_levelChoice[i].levelText.GetText());
+				m_levelHandler.Import(m_level, m_levelChoice[i].levelText.GetText());
 				m_level.SetName(m_levelChoice[i].levelText.GetText());
 				m_levelQueue.push_back(m_level);
 			}
@@ -359,7 +359,7 @@ void GameSystem::SelectLevel()
 
 		for (int i = 0; i < m_levelQueue.size(); i++)
 		{
-			m_levelHandler.Import(m_levelQueue.at(i), 1, m_levelQueue.at(i).GetName());
+			m_levelHandler.Import(m_levelQueue.at(i), m_levelQueue.at(i).GetName());
 		}
 		m_numOfLevels = m_levelQueue.size();
 		TransitionManager::StartFadingOut();

@@ -23,7 +23,10 @@ public:
 	void Render(Camera camera);
 	glm::vec3 GetPosition();
 
+	//::.. SET FUNCTIONS ..:://
 	void SetNrOfPlayers(int nrOf);
+
+	void Free();
 
 private:
 
@@ -31,41 +34,43 @@ private:
 	ShadowShader	m_shadowShader;
 	ShadowShader	m_shadowShader2;
 
-	std::unique_ptr<b2World> m_world;
-	Box m_newBox;
-	Box m_newBox2;
-	Box m_powerUpBox;
-	Player m_player[4];
-	Collider2D gameFloor;
+	b2World				m_world;
+	Box					m_newBox;
+	Box					m_newBox2;
+	Box					m_powerUpBox;
+	Player				m_player[4];
+	Collider2D			gameFloor;
 
 	Level		m_level;	
 
 	TimeManager* m_time;
-	GLfloat m_jumpTimer=0.0f;
-	bool m_isMidAir;
-	bool m_loadWorld;
-	GLfloat m_playerScaleX;
-	GLfloat m_playerScaleY;
-	GLfloat m_playerPosX;
-	GLfloat m_playerPosY;
-	ParticleSystem m_particles;
-	GLfloat m_powerUpScaleX;
-	GLfloat m_powerUpScaleY;
-	GLfloat m_powerUpPosX;
-	GLfloat m_powerUpPosY;
+	GLfloat				m_jumpTimer=0.0f;
+	bool				m_isMidAir;
+	bool				m_loadWorld;
+	GLfloat				m_playerScaleX;
+	GLfloat				m_playerScaleY;
+	GLfloat				m_playerPosX;
+	GLfloat				m_playerPosY;
 
-	Sprite m_playerSprite;
-	Sprite m_powerUpSprite;
-	Transform m_transform;
-	Collider2D m_floorCollider;
-	Sprite		m_firesprites[10];
-	Sprite		m_shot;
+	GLfloat				m_powerUpScaleX;
+	GLfloat				m_powerUpScaleY;
+	GLfloat				m_powerUpPosX;
+	GLfloat				m_powerUpPosY;
+	
+	ParticleSystem		m_particles;
+
+	Sprite				m_playerSprite;
+	Sprite				m_powerUpSprite;
+	Transform			m_transform;
+	Collider2D			m_floorCollider;
+	Sprite				m_firesprites[10];
+	Sprite				m_shot;
 	//Temporary
-	b2FixtureDef powerUpFixture;
+	b2FixtureDef		m_powerUpFixture;
 
-	MyContactListener m_contactListener;
+	static MyContactListener * m_contactListener;
 
-	PowerUpHandler m_PH;
+	PowerUpHandler m_powerupHandler;
 
 
 	Transform m_transf;
