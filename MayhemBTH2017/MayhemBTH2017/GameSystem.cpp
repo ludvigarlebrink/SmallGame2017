@@ -104,7 +104,7 @@ void GameSystem::GameSetup()
 void GameSystem::InitPlayerReady()
 {
 	VideoManager * vm = VideoManager::Get();
-	m_playerReadyUI = new PlayerReadyUI[4];
+	m_playerReadyUI = new PlayerReadyUI[MAX_PLAYERS];
 
 
 	// FIX POS!
@@ -144,12 +144,12 @@ void GameSystem::InitPlayerReady()
 	m_playerReadyUI[3].a = 255;
 
 
-	for (uint32_t i = 0; i < 4; i++)
+	for (uint32_t i = 0; i < MAX_PLAYERS; i++)
 	{
 		m_playerReadyUI[i].playerReady.SetText("PRESS A");
 	}
 
-	for (uint32_t i = 0; i < 4; i++)
+	for (uint32_t i = 0; i < MAX_PLAYERS; i++)
 	{
 		m_playerReadyUI[i].playerName.SetColor(170, 170, 170, 255);
 		m_playerReadyUI[i].playerReady.SetColor(170, 170, 170, 255);
@@ -165,7 +165,7 @@ void GameSystem::InitPlayerReady()
 
 void GameSystem::PlayerReady()
 {
-	for (uint32_t i = 0; i < 4; i++)
+	for (uint32_t i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A, i))
 		{
