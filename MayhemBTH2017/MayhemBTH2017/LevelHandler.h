@@ -44,7 +44,6 @@ public:
 	uint32_t	GetMaxNumLevels();
 	Level *		GetLoadedLevel();
 	uint32_t	ReadNumLevels();
-	std::string ReadLevel(std::string levelName);
 	uint32_t	GetNumLevels();
 	void		GetLevelNames(std::vector<std::string> & strVec);
 
