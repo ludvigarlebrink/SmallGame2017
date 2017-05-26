@@ -40,7 +40,7 @@ void GamePhysics::EnterWorld(Level & level)
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 
-	//m_powerupHandler.Init(&m_world);
+	m_powerupHandler.Init(&m_world);
 	//player fixture is of type PLAYER
 	m_loadWorld = true;
 }
@@ -55,7 +55,7 @@ void GamePhysics::Update()
 		m_player[i].Update();
 	}
 
-	//m_powerupHandler.Update();
+	m_powerupHandler.Update();
 
 	m_world.Step(1.0f / 20.0f, 8, 5);
 	//Update player bounding box sprite position to the position of the player mesh
@@ -105,7 +105,7 @@ void GamePhysics::Render(Camera camera) {
 		m_player[i].Render(camera);
 	}
 	
-//	m_powerupHandler.Render(camera);
+	m_powerupHandler.Render(camera);
 
 
 	//glClear(GL_DEPTH_BUFFER_BIT);
