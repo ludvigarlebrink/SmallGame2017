@@ -41,10 +41,10 @@ private:
 	Player				m_player[4];
 	Collider2D			gameFloor;
 
-	Level		m_level;	
+	Level		m_level;
 
 	TimeManager* m_time;
-	GLfloat				m_jumpTimer=0.0f;
+	GLfloat				m_jumpTimer = 0.0f;
 	bool				m_isMidAir;
 	bool				m_loadWorld;
 	GLfloat				m_playerScaleX;
@@ -56,7 +56,7 @@ private:
 	GLfloat				m_powerUpScaleY;
 	GLfloat				m_powerUpPosX;
 	GLfloat				m_powerUpPosY;
-	
+
 	ParticleSystem		m_particles;
 
 	Sprite				m_playerSprite;
