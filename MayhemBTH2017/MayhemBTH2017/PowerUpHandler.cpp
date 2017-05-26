@@ -24,12 +24,12 @@ void PowerUpHandler::Init(b2World * world)
 
 	m_rate = GameSettings::GetPowerUpSpawnRate();
 	m_spawnPerSec = 0.05f;
-	m_nrOfSpawns = (m_gameLenght * m_spawnPerSec) * m_rate;
-	m_spawnTimer = m_gameLenght / m_nrOfSpawns;
+	m_nrOfSpawns = 10;
+	m_spawnTimer = m_gameLenght / (m_gameLenght * m_spawnPerSec * m_rate); // gameLenght / nrOfTotalSpawns
 
 	m_currSpawnNr = 0;
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
 		glm::vec2 rl;
 		rl.x = rand() % 80 + 2;
@@ -47,17 +47,13 @@ void PowerUpHandler::Init(b2World * world)
 
 void PowerUpHandler::Free()
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
 		m_pu.at(i)->Destroy();
 		delete m_pu[i];
 	}
 
 	m_pu.clear();
-	/*for (int i = 0; i < 7; i++)
-	{
-	m_pu.clear();
-	}*/
 }
 
 bool PowerUpHandler::GetSpawn() const
@@ -75,21 +71,23 @@ void PowerUpHandler::Update()
 {
 	m_threshold += TimeManager::Get()->GetDeltaTime();
 
-	//Spawn
-	//PROLEM MED SETACTIVE
-
 	if (m_threshold >= m_spawnTimer)
 	{
 		srand(time(NULL));
-
-		randomize = rand() % 5;
-		m_pu[randomize]->RandPosition();
-		m_pu[randomize]->SetActive(true);
+		m_pu[counter]->RandPosition();
+		m_pu[counter]->SetActive(true);
 		m_threshold = 0;
-		lastSpawned = randomize;
+
+		std::cout << "spawn" << std::endl;
+
+		counter++;
+		if (counter >= m_nrOfSpawns)
+		{
+			counter = 0;
+		}
 	}
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
 		if (m_pu[i]->GetActive())
 		{
@@ -100,7 +98,7 @@ void PowerUpHandler::Update()
 
 void PowerUpHandler::Render(Camera camera)
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
 		if (m_pu[i]->GetActive())
 		{
