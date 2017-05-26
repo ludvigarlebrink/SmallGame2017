@@ -15,6 +15,7 @@
 #include "AtomicBomb.h"
 #include "LevelSelector.h"
 #include "LevelHandler.h"
+#include "StateManager.h"
 
 
 #include <cstdint>

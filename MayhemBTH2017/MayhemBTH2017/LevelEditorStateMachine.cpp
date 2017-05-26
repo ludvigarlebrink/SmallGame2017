@@ -71,7 +71,6 @@ void LevelEditorStateMachine::RenderIcons(size_t gui)
 
 void LevelEditorStateMachine::Init()
 {
-
 	m_nSize = 40;
 	m_hSize = 50;
 	m_pos = 0;
@@ -83,7 +82,7 @@ void LevelEditorStateMachine::Init()
 	{
 		m_gui[i].m_text.SetSize(80);
 		m_gui[i].m_text.SetPosition(-440, 280);
-		m_gui[i].m_text.SetFont(".\\Assets\\Fonts\\steelfish.ttf");
+		m_gui[i].m_text.SetFont(".\\Assets\\Fonts\\Snap.ttf");
 		m_gui[i].m_text.SetPivot(UIText::CENTER);
 		m_gui[i].m_text.SetColor(255, 255, 255, 255);
 
@@ -128,7 +127,7 @@ void LevelEditorStateMachine::Init()
 		for (int iconIndex = 0; iconIndex < m_gui[guiIndex].m_resolution; iconIndex++)
 		{
 			m_gui[guiIndex].m_icons[iconIndex].SetSize(m_nSize, m_nSize);
-			m_gui[guiIndex].m_icons[iconIndex].SetPosition(m_rows, m_columns);
+			m_gui[guiIndex].m_icons[iconIndex].SetPosition(static_cast<float>(m_rows), static_cast<float>(m_columns));
 			m_rows += m_offsetX;
 			++m_offsetCounter;
 

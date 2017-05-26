@@ -18,11 +18,16 @@ GameSystem::GameSystem()
 	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 	m_gameSettings = new GameSettings;
 	m_gameSettings->CreateUI();
+
+	m_pressToCont.SetPosition(0, 80 - (VideoManager::Get()->GetHeight() / 2));
+	m_pressToCont.SetColor(255, 255, 255, 255);
+	m_pressToCont.SetText("Press S to continue");
 }
 
 
 GameSystem::~GameSystem()
 {
+	Free();
 }
 
 void GameSystem::Load(uint32_t gameMode)
@@ -67,7 +72,6 @@ void GameSystem::Update()
 		Play();
 		break;
 
-
 	case LOAD_NEXT_LEVEL:
 		LoadNextLevel();
 		break;
@@ -84,9 +88,6 @@ void GameSystem::Update()
 
 void GameSystem::SelectLevel()
 {
-	m_pressToCont.SetPosition(0, 80 - (VideoManager::Get()->GetHeight() / 2));
-	m_pressToCont.SetColor(255, 255, 255, 255);
-	m_pressToCont.SetText("Press S to continue");
 
 	if (!m_levelSelector.GetVisualsInitialized())
 	{
@@ -177,8 +178,6 @@ void GameSystem::InitPlayerReady()
 		m_playerReadyUI[i].playerReady.SetColor(170, 170, 170, 255);
 	}
 
-	m_pressToCont.SetPosition(0, -180);
-	m_pressToCont.SetColor(255, 255, 255, 255);
 	m_pressToCont.SetText("Press S to battle!");
 
 	m_currState = PLAYER_READY;
@@ -246,14 +245,6 @@ void GameSystem::PlayerReady()
 
 void GameSystem::InitPlay()
 {
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
-	{
-		if (m_playerReady[i])
-		{
-			++m_numPlayers;
-		}
-	}
-
 	for (uint32_t i = 0; i < 4; i++)
 	{
 		m_playerReadyUI[i].playerReady.Render();
@@ -272,7 +263,7 @@ void GameSystem::InitPlay()
 		{
 			m_world = new GamePhysics;
 		}
-		
+
 		LevelHandler levelHandler;
 		m_world->EnterWorld(m_levelSelector.GetLevel());
 		m_currState = START_PLAY;
@@ -290,7 +281,7 @@ void GameSystem::StartPlay()
 	Camera camera;
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 
-	m_world->Update(); // enterplay?
+	m_world->Update();
 	m_world->Render(camera);
 
 	if (!TransitionManager::GetIsFadingIn())
@@ -334,11 +325,24 @@ void GameSystem::LoadNextLevel()
 {
 	TransitionManager::Update();
 
+	if (!TransitionManager::GetIsBlack())
+	{
+		return;
+	}
+
+	if (m_levelSelector.GetHasPlaylistEnded())
+	{
+		m_currState = GAME_OVER;
+	}
+
 	m_pressToCont.Render();
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
-		m_currState = INIT_PLAY;
+		LevelHandler levelHandler;
+		m_world->EnterWorld(m_levelSelector.GetLevel());
+		m_currState = START_PLAY;
+
 		TransitionManager::StartFadingIn();
 	}
 }
@@ -346,5 +350,10 @@ void GameSystem::LoadNextLevel()
 
 void GameSystem::GameOver()
 {
+	m_pressToCont.Render();
 
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
+	{
+		StateManager::Get()->SetCurrentState(GameState::LOAD_MAIN_MENU);
+	}
 }
