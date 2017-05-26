@@ -53,6 +53,12 @@ public:
 	Prefab * GetHealthBar();
 	
 private:
+
+	Texture m_particleTexture1;
+	Texture m_particleTexture2;
+	Texture m_particleTexture3;
+
+	TextureHandler m_textureHandler;
 	ParticleSystem m_particles;
 	InputManager * m_input;
 	b2Fixture* m_filter;

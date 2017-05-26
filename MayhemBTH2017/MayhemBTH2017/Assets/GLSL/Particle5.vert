@@ -19,13 +19,13 @@ out float outSize;
 void main()
 {
 
+	int seed=gl_VertexID;
 
-	outPos=inPos+0.6*(normalize(inDir));
+	outPos=inPos+0.02*(normalize(inDir));
 	outDir=inDir;
-	outCol=inCol;
+	outCol.a=inCol.a-0.2;
 	outLife=inLife;
-	outSize=inSize;
-
+	outSize=inSize+0.1f*seed;
 
 
 }

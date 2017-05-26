@@ -105,7 +105,7 @@ void GamePhysics::Render(Camera camera) {
 		m_player[i].Render(camera);
 	}
 	
-//	m_powerupHandler.Render(camera);
+	m_powerupHandler.Render(camera);
 
 
 	//glClear(GL_DEPTH_BUFFER_BIT);

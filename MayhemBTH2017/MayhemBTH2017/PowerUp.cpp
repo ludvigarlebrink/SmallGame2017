@@ -9,7 +9,6 @@ PowerUp::PowerUp()
 
 PowerUp::~PowerUp()
 {
-
 }
 
 void PowerUp::Create(b2World* world, glm::vec2 pos)
@@ -77,8 +76,24 @@ void PowerUp::SetActive(bool active)
 	m_boundingBox.getBody()->SetAwake(active);
 }
 
+void PowerUp::RandPosition()
+{
+	srand(time(NULL));
+	b2Vec2 r;
+	r.x = rand() % 80 + 2;
+	r.y = rand() % 44 + 2;
+
+	m_boundingBox.getBody()->SetTransform(r, 0);
+
+}
+
 void PowerUp::Update()
 {
+	if (m_collidedPlayer)
+	{
+		m_collidedPlayer = false;
+		SetActive(false);
+	}
 
 	GLfloat xPos = m_boundingBox.getBody()->GetPosition().x;
 	GLfloat yPos = m_boundingBox.getBody()->GetPosition().y;
@@ -93,6 +108,8 @@ void PowerUp::Update()
 
 void PowerUp::Destroy()
 {
-	delete m_powerupPrefab;
-	m_powerupPrefab = NULL;
+	//delete m_powerupPrefab;
+	//m_powerupPrefab = NULL;
+	m_boundingBox.DestroyBody();
+
 }

@@ -6,17 +6,16 @@ Box::Box()
 {
 }
 
-
 Box::~Box()
 {
 }
+
 
 void Box::InitDynamic(b2World * world, const glm::vec2 & pos, const glm::vec2 & scale)
 {
 	m_scale = scale;
 
 	m_hasBody = true;
-
 
 	m_bodyDef.type = b2_dynamicBody;
 	m_bodyDef.position.Set(pos.x, pos.y);
@@ -55,6 +54,11 @@ void Box::InitStatic(b2World * world, const glm::vec2 & pos, const glm::vec2 & s
 	fixtureDef.restitution = 0.7f;
 
 	m_fixture = m_body->CreateFixture(&fixtureDef);
+}
+
+b2Body * Box::getBody()
+{
+	return m_body;
 }
 
 void Box::SetCategoryBits(short CATEGORY)
@@ -107,6 +111,11 @@ void Box::SetHasBody(bool hasBody)
 bool Box::IsBody()
 {
 	return m_hasBody;
+}
+
+void Box::DestroyBody()
+{
+	m_body->GetWorld()->DestroyBody(m_body);
 }
 
 

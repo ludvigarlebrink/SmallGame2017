@@ -46,7 +46,7 @@ void ParticleEmitter::Update() {
 
 		//After 0.5 seconds delete particles
 
-		if (m_particleSystem.at(i)->GetTimer() > 1.5f) {
+		if (m_particleSystem.at(i)->GetTimer() > 0.3f) {
 
 			//Delete the Particle System at position i 
 			delete m_particleSystem.at(i);

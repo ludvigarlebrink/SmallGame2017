@@ -58,7 +58,7 @@ void System::Run()
 
 	GameSystem gs;
 	TextureHandler teximp;
-
+	m_soundManager->FadeInNewMusic("Mayhem Mania Theme",3, 5);
 
 	Background bg;
 
@@ -79,6 +79,7 @@ void System::Run()
 
 			break;
 		case GameState::MAIN_MENU:
+			
 			m.Update();
 			break;
 		case GameState::LEVEL_EDITOR:

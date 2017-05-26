@@ -11,18 +11,40 @@ Texture::~Texture()
 {
 }
 
+Texture::Texture(const Texture & other)
+{
+	m_height = other.GetHeight();
+	m_texture = other.GetTexture();
+	m_width = other.GetWidth();
+
+	*this = other;
+
+}
+
+Texture & Texture::operator=(const Texture & other)
+{
+
+	m_width = other.m_width;
+	m_texture = other.m_texture;
+	m_height = other.m_height;
+	return *this;
+
+}
+
+
+
 
 void Texture::LoadTexture(GLuint * textureData, GLsizei width, GLsizei height, GLuint numComponents)
 {
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
-	
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	
+
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	
+
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width,
 		height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData);
 
