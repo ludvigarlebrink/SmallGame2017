@@ -47,6 +47,7 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 		m_boxes[i].getBody()->GetWorld()->DestroyBody(m_boxes[i].getBody());
 	}
 	m_boxes.clear();
+
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
 	m_contact = false;
 	m_levelImport.Import(m_level, levelName);

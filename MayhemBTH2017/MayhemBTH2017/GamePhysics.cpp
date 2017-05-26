@@ -31,6 +31,10 @@ void GamePhysics::EnterWorld(Level & level)
 {
 	m_time = TimeManager::Get();
 
+	if (m_powerupHandler.GetSpawn() == true)
+	{
+		m_powerupHandler.Free();
+	}
 	m_floorCollider.CreateBoundingBoxes(&m_world, level.GetName());
 
 	//at global scope
