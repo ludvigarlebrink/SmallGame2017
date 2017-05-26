@@ -17,7 +17,7 @@ public:
 	virtual ~PowerUpHandler();
 
 	void Init(b2World * world);
-	void free();
+	void Free();
 
 	bool GetSpawn()const;
 	void SetSpawn(bool x);

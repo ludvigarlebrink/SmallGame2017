@@ -38,7 +38,9 @@ private:
 
 	Box m_boundingBox;
 	Sprite m_sprite;
-	Prefab* m_powerupPrefab;
+	//Prefab* m_powerupPrefab;
+
+	glm::vec2 scale;
 
 	bool m_collidedPlayer;
 
