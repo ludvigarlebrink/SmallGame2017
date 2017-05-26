@@ -7,6 +7,7 @@
 #include "TextureHandler.h"
 #include "Box.h"
 #include "ParticleEmitter.h"
+#include "SoundManager.h"
 #include "Collidable.h"
 
 
@@ -22,13 +23,13 @@ public:
 		float restitution, float friction,
 		float damping, float density,
 		float fireRate, bool startUp, Prefab * prefab, int controllerID, float life);
-
+	void SetTexture(Texture texture);
 	void InitBullet(b2World * world, glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://
 	void SetLife(float life);
 	void AddForce(glm::vec3 force, int controllerID);
-
+	void SetHasParticles(bool has);
 	void SetActive(bool active);
 
 	//::.. GET FUNCTIONS ..:://
@@ -56,13 +57,21 @@ public:
 private:
 	Prefab*		m_prefab;
 	Prefab m_prefabPointer;
+	GLuint m_texID;
 	ParticleEmitter emitter;
+	ParticleEmitter trailEmitter;
+	ParticleSystem* m_trailParticles;
+	bool m_renderSmoke;
+	Texture m_texture;
+	SoundManager * m_soundManager;
+	TextureHandler m_textureHandler;
 	Box			m_box;
 	float		m_fireRate;
 	float		m_time;
 	float			m_life;
 	float		m_lifeTime;
 	bool		m_onGround;
+	const char* m_texturepath;
 	float		m_trailTime;
 
 	bool m_renderParticles;
@@ -93,7 +102,7 @@ private:
 	float m_collisionTimer;
 	bool m_collision;
 
-	
+
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
 		PLAYER1 = 0x0002,

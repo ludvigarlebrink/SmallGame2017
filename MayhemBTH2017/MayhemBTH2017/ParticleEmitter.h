@@ -20,6 +20,7 @@ public:
 private:
 	GLfloat					m_timer = 0;
 	const static int		m_nrof = 10;
+
 	std::vector<ParticleSystem*>	m_particleSystem;
 	Camera					m_camera;
 	std::string				m_shaderName;

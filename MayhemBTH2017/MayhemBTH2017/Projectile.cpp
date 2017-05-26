@@ -5,12 +5,15 @@
 Projectile::Projectile()
 {
 
+	//m_texture
 	m_trailTime = 0.0f;
 	m_time = 0.0;
 	m_rotationUpdate = 0.0f;
 	m_renderParticles = false;
 	m_hasParticles = false;
 	m_particleTimer = 0;
+
+	//m_texture = m_textureHandler.Import(".\\Assets\\Textures\\fireball.png");
 }
 
 
@@ -20,6 +23,13 @@ Projectile::~Projectile()
 
 void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID, float life)
 {
+
+	m_soundManager = SoundManager::Get();
+	m_hasParticles = false;
+
+	m_trailParticles = nullptr;
+
+	m_renderSmoke = false;
 	m_isBullet = false;
 
 	m_collision = false;
@@ -60,6 +70,14 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_box.getBody()->SetLinearDamping(damping);
 	m_box.getFixture()->SetFilterData(filter);
 	m_box.getBody()->ResetMassData();
+
+}
+
+void Projectile::SetTexture(Texture texture)
+{
+
+	m_texture = texture;
+
 
 }
 
@@ -122,6 +140,11 @@ void Projectile::AddForce(glm::vec3 force, int controllerID)
 
 }
 
+void Projectile::SetHasParticles(bool has)
+{
+	m_hasParticles = has;
+}
+
 void Projectile::SetActive(bool active)
 {
 	m_active = active;
@@ -135,6 +158,7 @@ void Projectile::InitParticles(std::string shadername, glm::vec4 col, GLfloat si
 	m_size = size;
 	m_nrof = nrof;
 	m_particleLife = life;
+
 
 }
 
@@ -187,11 +211,14 @@ int Projectile::GetProjectileID()
 void Projectile::Update()
 {
 
+
+	m_trailTime += TimeManager::GetDeltaTime();
+
 	CollisionTimer();
 
 	m_lifeTime += TimeManager::GetDeltaTime();
 
-	
+
 	//WHEN PROJECTILE CONTACT WITH GROUND
 	if (m_contact)
 	{
@@ -199,14 +226,16 @@ void Projectile::Update()
 		{*/
 		GetBox().getBody()->SetActive(false);
 		SetActive(false);
+		m_soundManager->PlaySFX("explosion1");
 
 
-		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x/2, m_box.getBody()->GetPosition().y/2, 0.0f);
-	
-	
-		m_emitter.SetParticleSystem(m_shadername, position, m_col, m_size, m_nrof, m_particleLife);
-	
-		m_renderParticles = true;
+		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x / 2, m_box.getBody()->GetPosition().y / 2, 0.0f);
+
+		if (m_hasParticles) {
+			m_emitter.SetParticleSystem(m_shadername, position, m_col, m_size, m_nrof, m_particleLife);
+			m_renderParticles = true;
+		}
+
 
 		m_lifeTime = 0;
 		//}
@@ -231,41 +260,48 @@ void Projectile::Update()
 	}
 
 
-	//SMOKE PARTICLE EFFFECT TRAIL
 
-	m_trailTime += TimeManager::GetDeltaTime();
-
-	if (m_trailTime > 0.5f) {
-
-		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0.0f);
-	//	m_emitter.SetParticleSystem(".\\Assets\\GLSL\\ParticleExplosion", position, glm::vec4(1.0, 1.0, 1.0, 1.0), 1.0f, 100, 1.0f);
-		m_trailTime = 0.0f;
-	}
 }
 
 void Projectile::Render(Camera camera)
 {
+
+
+
+
 	if (m_active)
 	{
 
 
 		m_prefabPointer.Update();
 		m_prefabPointer.Render(camera);
-		
+
 
 	}
 
-	if (m_renderParticles) {
+	if (m_hasParticles && m_renderParticles) {
 
 
 		Transform transform;
 
 		transform.SetPosition(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
 
+		m_texture.Bind(0);
+		//	glActiveTexture(0);
+
+		glDepthMask(false);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		m_texture.Bind(m_texture.GetTexture());
+
+
 		m_emitter.Update();
 		m_emitter.Render(transform);
-	}
 
+		glDepthMask(true);
+		glDisable(GL_BLEND);
+	
+	}
 }
 
 void Projectile::RenderShadow(Camera camera)

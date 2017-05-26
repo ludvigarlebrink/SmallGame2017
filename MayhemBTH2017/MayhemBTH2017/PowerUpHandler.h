@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "TimeManager.h"
 #include "GameSettings.h"
+#include <iostream>
 
 #include <stdlib.h>
 #include <time.h>
@@ -16,16 +17,17 @@ public:
 	virtual ~PowerUpHandler();
 
 	void Init(b2World * world);
+	void Free();
+
+	bool GetSpawn()const;
+	void SetSpawn(bool x);
 
 	void Update();
 
 	void Render(Camera camera);
 
-	void Destroy();
-
 private:
 
-	b2World * m_world;
 
 	float m_threshold;
 	float m_gameLenght;
@@ -33,11 +35,15 @@ private:
 	int m_rate;
 	int m_nrOfSpawns;
 	int m_currSpawnNr;
+	float m_spawnTimer;
+	int randomize;
+	int lastSpawned;
+	int lastSpawned2;
 
 	std::vector <PowerUp*> m_pu;
 	std::vector <glm::vec2> m_randLoc;
 
-	bool m_spawn;
+	bool m_spawn = false;
 };
 
 

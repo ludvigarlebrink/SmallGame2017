@@ -15,6 +15,7 @@
 #include "VideoManager.h"
 
 
+#include <algorithm>
 #include <glm.hpp>
 #include <cstdint>
 
@@ -55,6 +56,7 @@ private:
 	InputManager *				m_input;
 	StateManager *				m_stateManager;
 	TimeManager *				m_timeManager;
+	VideoManager	*			m_videoManager;
 
 	uint32_t					m_state;
 
@@ -74,7 +76,7 @@ private:
 
 	Camera						m_camera;
 	Timer						m_timer;
-	VideoManager	*			m_videoManager;
+	
 	
 };
 

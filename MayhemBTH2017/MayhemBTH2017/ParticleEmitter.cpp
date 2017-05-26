@@ -1,20 +1,15 @@
 #include "ParticleEmitter.h"
 
-#ifdef _DEBUG
-#define DEBUG_NEW_PLACEMENT (_NORMAL_BLOCK, __FILE__, __LINE__)
-#else
-#define DEBUG_NEW_PLACEMENT
-#endif
 
-
-#include <stdlib.h>  
-#include <crtdbg.h>  
 
 
 
 
 ParticleEmitter::ParticleEmitter()
 {
+
+
+
 	for (int i = 0; i < m_particleSystem.size(); i++) {
 		m_particleSystem.at(i) = nullptr;
 	}
@@ -29,6 +24,7 @@ ParticleEmitter::~ParticleEmitter()
 }
 
 void ParticleEmitter::Render(Transform transform) {
+
 
 	for (int i = 0; i < m_particleSystem.size(); i++) {
 
@@ -50,7 +46,7 @@ void ParticleEmitter::Update() {
 
 		//After 0.5 seconds delete particles
 
-		if (m_particleSystem.at(i)->GetTimer() > 0.5f) {
+		if (m_particleSystem.at(i)->GetTimer() > 0.4f) {
 
 			//Delete the Particle System at position i 
 			delete m_particleSystem.at(i);

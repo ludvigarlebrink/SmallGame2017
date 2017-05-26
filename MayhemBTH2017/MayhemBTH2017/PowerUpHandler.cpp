@@ -8,62 +8,88 @@ PowerUpHandler::PowerUpHandler()
 
 PowerUpHandler::~PowerUpHandler()
 {
+	/*for (int i = 0; i < 7; i++)
+	{
+		delete m_pu[i];
+		m_pu.clear();
+	}*/
 	
 }
 
 void PowerUpHandler::Init(b2World * world)
 {
 
-	m_world = world;
-
+	
 	m_gameLenght = GameSettings::GetGameLenght();
 
 	m_rate = GameSettings::GetPowerUpSpawnRate();
-	m_spawnPerSec = m_gameLenght / (2 * m_rate);
-	m_nrOfSpawns = (m_gameLenght / 2) * m_rate;
+	m_spawnPerSec = 0.05f;
+	m_nrOfSpawns = (m_gameLenght * m_spawnPerSec) * m_rate;
+	m_spawnTimer = m_gameLenght / m_nrOfSpawns;
 
 	m_currSpawnNr = 0;
 
-	for (int i = 0; i < m_nrOfSpawns; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		srand(i * time(NULL));
-
 		glm::vec2 rl;
 		rl.x = rand() % 80 + 2;
 		rl.y = rand() % 44 + 2;
 		m_randLoc.push_back(rl);
-		
-		PowerUp * pu = new PowerUp();
-		pu->Create(m_world, glm::vec2(m_randLoc[i].x, m_randLoc[i].y));
-		m_pu.push_back(pu);
 
-		for (int i = 0; i < 5; i++)
-		{
-			//relocate
+		PowerUp* p = new PowerUp();
+		p->Create(world, glm::vec2(m_randLoc[i].x, m_randLoc[i].y));
+		m_pu.push_back(p);
 
-
-		}
+		srand(time(NULL));
 	}
 	m_spawn = true;
+}
+
+void PowerUpHandler::Free()
+{
+	for (int i = 0; i < 5; i++)
+	{
+		m_pu.at(i)->Destroy();
+		delete m_pu[i];
+	}
+
+	m_pu.clear();
+	/*for (int i = 0; i < 7; i++)
+	{
+	m_pu.clear();
+	}*/
+}
+
+bool PowerUpHandler::GetSpawn() const
+{
+	return m_spawn;
+}
+
+void PowerUpHandler::SetSpawn(bool x)
+{
+	m_spawn = x;
 }
 
 
 void PowerUpHandler::Update()
 {
-	m_gameLenght -= TimeManager::Get()->GetDeltaTime();
 	m_threshold += TimeManager::Get()->GetDeltaTime();
-	std::cout << m_gameLenght;
 
 	//Spawn
+	//PROLEM MED SETACTIVE
 
-	if (m_threshold > m_spawnPerSec && m_gameLenght > 0.0)
+	if (m_threshold >= m_spawnTimer)
 	{
-		m_pu[m_currSpawnNr]->SetActive(true);
-		m_currSpawnNr++;
+		srand(time(NULL));
+
+		randomize = rand() % 5;
+		m_pu[randomize]->RandPosition();
+		m_pu[randomize]->SetActive(true);
 		m_threshold = 0;
+		lastSpawned = randomize;
 	}
-	
-	for (int i = 0; i <= m_currSpawnNr; i++)
+
+	for (int i = 0; i < 5; i++)
 	{
 		if (m_pu[i]->GetActive())
 		{
@@ -74,21 +100,11 @@ void PowerUpHandler::Update()
 
 void PowerUpHandler::Render(Camera camera)
 {
-	for (int i = 0; i <= m_currSpawnNr; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (m_pu[i]->GetActive())
 		{
 			m_pu[i]->Render(camera);
 		}
-	}
-}
-
-void PowerUpHandler::Destroy()
-{
-	for (int i = 0; i < m_nrOfSpawns; i++)
-	{
-		m_pu[i]->SetActive(false);
-		delete m_pu[i];
-		m_pu[i] = NULL;
 	}
 }

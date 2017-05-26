@@ -17,7 +17,7 @@ public:
 
 	void InitStatic(b2World* world, const glm::vec2& pos, const glm::vec2& scale);
 
-	b2Body* getBody() { return m_body; }
+	b2Body* getBody();
 	b2Fixture* getFixture() { return m_fixture; }
 
 	glm::vec2 getScale() { return m_scale; }
@@ -33,10 +33,12 @@ public:
 
 	bool IsBody();
 
+	void DestroyBody();
+
 
 
 private:
-	b2Body* m_body = nullptr;
+	b2Body* m_body;
 	b2Fixture* m_fixture;
 	b2FixtureDef m_fixtureDef;
 	b2BodyDef m_bodyDef;

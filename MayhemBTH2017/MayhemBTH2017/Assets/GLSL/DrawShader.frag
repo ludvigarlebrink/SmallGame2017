@@ -1,10 +1,16 @@
 #version 420
 
 out vec4 FragColor;
-in vec3 finalCol;
-in vec2 UV;
-uniform sampler2D DiffuseMap;
+
+
+in vec3 position2;
+in vec3 direction2;
 in vec4 color2;
+in float life2;
+in float size2;
+
+uniform sampler2D DiffuseMap;
+in vec2 UV;
 
 
 void main()
@@ -12,7 +18,8 @@ void main()
 
 	
 	vec4 tex=texture(DiffuseMap, UV);
-	FragColor = color2;
+	
+	FragColor = color2*tex;
 	
 	
 

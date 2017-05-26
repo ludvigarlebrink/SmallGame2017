@@ -15,15 +15,18 @@ in vec4 color1[];
 in float life1[];
 in float size1[];
 
-
-
+out vec3 position2;
+out vec3 direction2;
 out vec4 color2;
+out float life2;
+out float size2;
 
 
-out vec3 finalCol;
 out vec2 UV;
 
+
 mat4 MV=M*V;
+
 float particleSize=size1[0];
 	
 vec3 right = vec3(MV[0][0], 
@@ -36,6 +39,8 @@ vec3 up = vec3(MV[0][1],
 
 
 void CreateQuad(){
+
+	
 	for(int i=0; i<gl_in.length(); i++){
 	
 	color2=color1[0];
@@ -84,8 +89,13 @@ void CreateQuad(){
 
 void main(){
 
+	
+	position2=position1[0];
+	direction2=direction1[0];
+	color2=color1[0];
+	 life2=life1[0];
+	 size2=size1[0];
 	CreateQuad();
-
 
 }
 

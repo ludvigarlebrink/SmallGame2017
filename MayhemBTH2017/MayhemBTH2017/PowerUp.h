@@ -6,6 +6,7 @@
 #include "Prefab.h"
 #include "PrefabManager.h"
 #include "Collidable.h"
+#include <time.h>
 
 class PowerUp : public Collidable
 {
@@ -21,11 +22,12 @@ public:
 	Box GetBox();
 	Prefab * GetPrefab();
 	bool GetActive();
-
 	void CollidedWithPlayer(bool player);
 
 	//::..SET FUNCTIONS..:://
 	void SetActive(bool active);
+
+	void RandPosition();
 
 	void Update();
 
@@ -36,7 +38,9 @@ private:
 
 	Box m_boundingBox;
 	Sprite m_sprite;
-	Prefab* m_powerupPrefab;
+	//Prefab* m_powerupPrefab;
+
+	glm::vec2 scale;
 
 	bool m_collidedPlayer;
 

@@ -69,6 +69,7 @@ private:
 	GLuint m_shader[NR_SHADERS];
 	GLuint m_uniforms[NR_UNIFORMS];
 	GLuint m_textureID;
+
 };
 
 #endif

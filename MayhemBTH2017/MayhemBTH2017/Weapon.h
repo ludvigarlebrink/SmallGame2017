@@ -18,15 +18,21 @@ public:
 
 	void SetProjectileType(float restitution, float friction, float damping,
 		float density, float fireRate, int clearRate, int controllerID, float life);
-
+	void SetFirePower(GLfloat firepower);
+	float GetDamage();
+	void SetDamage(float damage);
 	Projectile * ReuseLast();
 	void Render(Camera camera);
 	void RenderShadow(Camera camera);
 	void Update(glm::vec3 playerPos, b2Vec2 force);
 	void DeleteProjectile();
+	void SetWeaponSound(const char* filepath);
+	void SetCollisionSound(const char* filepath);
+	void SetParticleTexture(Texture texture);
 	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life);
+	void SetTexture(const char* filepath);
 	//::.. SET FUNTIONS ..:://
-	void Shoot(GLfloat firePower, b2World * world, glm::vec3 pos, int controllerID);
+	void Shoot(b2World * world, glm::vec3 pos, int controllerID);
 	void UpdateParticles();
 	//::.. GET FUNTIONS ..:://
 	float GetFireRate();
@@ -34,18 +40,24 @@ public:
 	bool FireRate(float rate);
 
 private:
+	GLfloat m_firepower;
+	const char*				m_texturePath;
 	Prefab*					m_prefabGun;
 	Prefab*					m_muzzleFlash;
 	Prefab*					m_prefabProjectile;
 	std::vector<Projectile*>m_projectiles;
+	const char* m_soundpath;
+	const char* m_collisionpath;
 	TextureManager m_texMan;
 	Texture		m_tex;
-	ParticleEmitter* m_particleEmitter;
+	bool m_hasParticles;
+	ParticleEmitter* m_smokeEmitter;
 	float m_restitution;
 	glm::vec2 m_previousForce;
 	float m_friction;
 	float m_damping;
 	bool count;
+	float m_damage;
 	glm::vec3 m_muzzlePos;
 	float m_particletimer;
 	float m_density;
@@ -66,7 +78,10 @@ private:
 	bool					m_render;
 	int						m_nrOf;
 	float					m_plife;
-
+	const char*	m_partTexture;
+	TextureHandler m_textureHandler;
+	Texture	m_particleTexture;
+	TextureManager m_textureManager;
 	SoundManager * m_soundManager;
 };
 

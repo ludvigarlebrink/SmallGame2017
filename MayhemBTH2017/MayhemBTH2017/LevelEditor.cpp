@@ -101,8 +101,8 @@ void LevelEditor::Update()
 
 	case LOAD:
 		m_levelHandler.GetLevelNames(m_levelText);
-
-		for (int i = 0; i < m_levelHandler.GetNumLevels(); i++)
+		
+		for (int i = max(0, m_levelSelector - 5); i < m_levelHandler.GetNumLevels(); i++)
 		{
 			m_levelChoice[i].SetText(m_levelText.at(i).c_str());
 			m_levelChoice[i].SetPosition(0, 200 - (50 * i));
@@ -341,7 +341,7 @@ void LevelEditor::MenuInput()
 			m_videoManager->Swap();
 			m_levelHandler.Export(m_level, m_levelGUI.GetPropPlacer());
 			// FIX
-			glViewport(0, 0, 1280, 720); // FIX THIS?
+			glViewport(0, 0, m_videoManager->GetWidth(), m_videoManager->GetHeight()); // FIX THIS?
 			// REMOVE
 
 			m_levelHandler.IncrementNumLevels();
@@ -375,7 +375,7 @@ void LevelEditor::MenuInput()
 		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
 		{
 			Reset();
-			m_levelHandler.Import(m_level, m_levelID, m_levelChoice[m_levelSelector].GetText());
+			m_levelHandler.Import(m_level, m_levelChoice[m_levelSelector].GetText());
 			m_state = EDIT;
 		}
 		break;

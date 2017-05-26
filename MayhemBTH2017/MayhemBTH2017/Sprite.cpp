@@ -166,7 +166,7 @@ void Sprite::Render()
 	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(this->m_quad.vertArr[0]), &this->m_quad.vertArr, GL_STATIC_DRAW);
 	SendColor();
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	glBindVertexArray(0);
+	//glBindVertexArray(0);
 
 }
 
