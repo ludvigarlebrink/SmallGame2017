@@ -11,12 +11,11 @@ MenuSystem::MenuSystem()
 
 MenuSystem::~MenuSystem()
 {
-
+	delete m_rootMenu;
 }
 
 void MenuSystem::Update()
 {
-
 	// First: handle input.
 	if (!m_changeMenu)
 	{
@@ -67,36 +66,11 @@ void MenuSystem::Init()
 void MenuSystem::InitMainMenu(Menu* menu)
 {
 	menu->SetTitle("MAIN MENU");
-	InitPlayMenu(menu->AddChild("Play"));
-	InitCreateMenu(menu->AddChild("Create"));
-	InitOptionsMenu(menu->AddChild("Options"));
-	InitCreateMenu(menu->AddChild("Credits"));
+	menu->AddChild(GameState::LOAD_GAME, "Play");
+	menu->AddChild(GameState::LOAD_LEVEL_EDITOR, "Create");
 	menu->AddChild(GameState::EXIT, "Exit");
 }
 
-void MenuSystem::InitPlayMenu(Menu* menu)
-{
-	menu->SetTitle("PLAY");
-	menu->AddChild(GameState::GAME, "Quick Match");
-	menu->AddChild(GameState::MAIN_MENU, "Random Playlist");
-	menu->AddChild(GameState::MAIN_MENU, "Select Playlist");
-}
-
-void MenuSystem::InitCreateMenu(Menu* menu)
-{
-	menu->SetTitle("CREATE");
-	menu->AddChild(GameState::LEVEL_EDITOR, "Level");
-	menu->AddChild(GameState::MAIN_MENU, "Playlist");
-}
-
-void MenuSystem::InitOptionsMenu(Menu* menu)
-{
-	menu->SetTitle("OPTIONS");
-	menu->AddChild(GameState::MAIN_MENU, "Video");
-	menu->AddChild(GameState::MAIN_MENU, "Sound");
-	menu->AddChild(GameState::MAIN_MENU, "Game");
-	menu->AddChild(GameState::MAIN_MENU, "Controlls");
-}
 
 void MenuSystem::HandleInput()
 {

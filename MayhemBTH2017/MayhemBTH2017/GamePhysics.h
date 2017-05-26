@@ -8,8 +8,6 @@
 #include "Contact.h"
 #include "MyContactListener.h"
 #include "PowerUpHandler.h"
-#include "ShadowMap.h"
-#include "ShadowShader.h"
 
 
 class GamePhysics
@@ -18,7 +16,7 @@ public:
 
 	GamePhysics();
 	virtual ~GamePhysics();
-	void EnterWorld(Level & level);
+	void EnterWorld(std::string levelName);
 	void Update();
 	void Render(Camera camera);
 	glm::vec3 GetPosition();
@@ -29,11 +27,6 @@ public:
 	void Free();
 
 private:
-
-	ShadowMap		m_shadowMap;
-	ShadowShader	m_shadowShader;
-	ShadowShader	m_shadowShader2;
-
 	b2World				m_world;
 	Box					m_newBox;
 	Box					m_newBox2;

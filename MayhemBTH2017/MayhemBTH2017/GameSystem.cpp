@@ -7,7 +7,7 @@ GameSystem::GameSystem()
 	m_input = InputManager::Get();
 	m_soundManager = SoundManager::Get();
 	m_numPlayers = 0;
-	m_currState = GAME_SETUP;
+	m_currState = SELECT_LEVEL;
 	m_playerReadyUI = nullptr;
 
 	for (uint32_t i = 0; i < MAX_PLAYERS; i++)
@@ -18,14 +18,16 @@ GameSystem::GameSystem()
 	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 	m_gameSettings = new GameSettings;
 	m_gameSettings->CreateUI();
-	m_selectorImage.SetTexture(".\\Assets\\Textures\\menu_cursor.png");
-	m_selectorImage.SetSize(50, 50);
 
+	m_pressToCont.SetPosition(0, 80 - (VideoManager::Get()->GetHeight() / 2));
+	m_pressToCont.SetColor(255, 255, 255, 255);
+	m_pressToCont.SetText("Press S to continue");
 }
 
 
 GameSystem::~GameSystem()
 {
+	Free();
 }
 
 void GameSystem::Load(uint32_t gameMode)
@@ -42,6 +44,10 @@ void GameSystem::Update()
 {
 	switch (m_currState)
 	{
+	case SELECT_LEVEL:
+		SelectLevel();
+		break;
+
 	case GAME_SETUP:
 		GameSetup();
 		break;
@@ -66,10 +72,6 @@ void GameSystem::Update()
 		Play();
 		break;
 
-	case SELECT_LEVEL:
-		SelectLevel();
-		break;
-
 	case LOAD_NEXT_LEVEL:
 		LoadNextLevel();
 		break;
@@ -84,12 +86,32 @@ void GameSystem::Update()
 }
 
 
+void GameSystem::SelectLevel()
+{
+
+	if (!m_levelSelector.GetVisualsInitialized())
+	{
+		m_levelSelector.InitVisuals();
+	}
+
+	m_levelSelector.Update();
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
+	{
+		if (m_levelSelector.SaveQueue())
+		{
+			m_levelSelector.FreeVisuals();
+			m_currState = GAME_SETUP;
+
+		}
+	}
+
+	m_pressToCont.Render();
+}
+
+
 void GameSystem::GameSetup()
 {
-	m_pressToCont.SetPosition(0, -180);
-	m_pressToCont.SetColor(255, 255, 255, 255);
-	m_pressToCont.SetText("Press S to continue");
-
 	m_pressToCont.Render();
 
 	m_gameSettings->Update();
@@ -101,16 +123,17 @@ void GameSystem::GameSetup()
 	}
 }
 
+
 void GameSystem::InitPlayerReady()
 {
 	VideoManager * vm = VideoManager::Get();
-	m_playerReadyUI = new PlayerReadyUI[MAX_PLAYERS];
+	m_playerReadyUI = new PlayerReadyUI[4];
 
 
 	// FIX POS!
-	m_playerReadyUI[0].playerName.SetPosition((-0.75f * vm->GetWidth()) / 2, 20);
-	m_playerReadyUI[1].playerName.SetPosition((-0.25f * vm->GetWidth()) / 2, 20);
-	m_playerReadyUI[2].playerName.SetPosition((0.25f * vm->GetWidth()) / 2, 20);
+	m_playerReadyUI[0].playerName.SetPosition(static_cast<int>((-0.75f * vm->GetWidth()) / 2), 20);
+	m_playerReadyUI[1].playerName.SetPosition(static_cast<int>((-0.25f * vm->GetWidth()) / 2), 20);
+	m_playerReadyUI[2].playerName.SetPosition(static_cast<int>((0.25f * vm->GetWidth()) / 2), 20);
 	m_playerReadyUI[3].playerName.SetPosition((0.75f * vm->GetWidth()) / 2, 20);
 
 	m_playerReadyUI[0].playerName.SetText("PLAYER 1");
@@ -118,10 +141,10 @@ void GameSystem::InitPlayerReady()
 	m_playerReadyUI[2].playerName.SetText("PLAYER 3");
 	m_playerReadyUI[3].playerName.SetText("PLAYER 4");
 
-	m_playerReadyUI[0].playerReady.SetPosition((-0.75f * vm->GetWidth()) / 2, -20);
-	m_playerReadyUI[1].playerReady.SetPosition((-0.25f * vm->GetWidth()) / 2, -20);
-	m_playerReadyUI[2].playerReady.SetPosition((0.25f * vm->GetWidth()) / 2, -20);
-	m_playerReadyUI[3].playerReady.SetPosition((0.75f * vm->GetWidth()) / 2, -20);
+	m_playerReadyUI[0].playerReady.SetPosition(static_cast<int>((-0.75f * vm->GetWidth()) / 2), -20);
+	m_playerReadyUI[1].playerReady.SetPosition(static_cast<int>((-0.25f * vm->GetWidth()) / 2), -20);
+	m_playerReadyUI[2].playerReady.SetPosition(static_cast<int>((0.25f * vm->GetWidth()) / 2), -20);
+	m_playerReadyUI[3].playerReady.SetPosition(static_cast<int>((0.75f * vm->GetWidth()) / 2), -20);
 
 	m_playerReadyUI[0].r = 252;
 	m_playerReadyUI[0].g = 61;
@@ -144,19 +167,17 @@ void GameSystem::InitPlayerReady()
 	m_playerReadyUI[3].a = 255;
 
 
-	for (uint32_t i = 0; i < MAX_PLAYERS; i++)
+	for (uint32_t i = 0; i < 4; i++)
 	{
 		m_playerReadyUI[i].playerReady.SetText("PRESS A");
 	}
 
-	for (uint32_t i = 0; i < MAX_PLAYERS; i++)
+	for (uint32_t i = 0; i < 4; i++)
 	{
 		m_playerReadyUI[i].playerName.SetColor(170, 170, 170, 255);
 		m_playerReadyUI[i].playerReady.SetColor(170, 170, 170, 255);
 	}
 
-	m_pressToCont.SetPosition(0, -180);
-	m_pressToCont.SetColor(255, 255, 255, 255);
 	m_pressToCont.SetText("Press S to battle!");
 
 	m_currState = PLAYER_READY;
@@ -165,7 +186,7 @@ void GameSystem::InitPlayerReady()
 
 void GameSystem::PlayerReady()
 {
-	for (uint32_t i = 0; i < MAX_PLAYERS; i++)
+	for (uint32_t i = 0; i < 4; i++)
 	{
 		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A, i))
 		{
@@ -206,7 +227,7 @@ void GameSystem::PlayerReady()
 			{
 				// INIT PLAY
 				TransitionManager::StartFadingOut();
-				m_currState = SELECT_LEVEL;
+				m_currState = INIT_PLAY;
 				return;
 			}
 		}
@@ -224,14 +245,6 @@ void GameSystem::PlayerReady()
 
 void GameSystem::InitPlay()
 {
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
-	{
-		if (m_playerReady[i])
-		{
-			++m_numPlayers;
-		}
-	}
-
 	for (uint32_t i = 0; i < 4; i++)
 	{
 		m_playerReadyUI[i].playerReady.Render();
@@ -246,23 +259,29 @@ void GameSystem::InitPlay()
 			m_playerReadyUI = nullptr;
 		}
 
-		m_world = new GamePhysics;
-		m_world->EnterWorld(m_levelQueue.at(m_currentLevel));
+		if (m_world == nullptr)
+		{
+			m_world = new GamePhysics;
+		}
+
+		LevelHandler levelHandler;
+		m_world->EnterWorld(m_levelSelector.GetLevel());
 		m_currState = START_PLAY;
 
 		TransitionManager::StartFadingIn();
 		TimeManager::ResetDeltaTime();
 	}
-	m_soundManager->FadeInNewMusic("match_song_1", 3, 10);
+	m_soundManager->FadeInNewMusic("bensound-epic", 3, 10);
 	TransitionManager::Update();
 }
+
 
 void GameSystem::StartPlay()
 {
 	Camera camera;
 	camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 
-	m_world->Update(); // enterplay?
+	m_world->Update();
 	m_world->Render(camera);
 
 	if (!TransitionManager::GetIsFadingIn())
@@ -273,6 +292,7 @@ void GameSystem::StartPlay()
 
 	TransitionManager::Update();
 }
+
 
 void GameSystem::Play()
 {
@@ -300,95 +320,40 @@ void GameSystem::Play()
 	TransitionManager::Update();
 }
 
-void GameSystem::SelectLevel()
-{
-	m_levelHandler.GetLevelNames(m_levelText);
-	int texLen = m_levelText.at(m_levelSelector).size();
-	m_selectorImage.SetPosition(-80 - (10 * texLen), 200 - (50 * m_levelSelector));
-	m_selectorImage.Render();
-
-	for (int i = 0; i < m_levelHandler.GetNumLevels(); i++)
-	{
-		m_levelChoice[i].levelText.SetText(m_levelText.at(i).c_str());
-		m_levelChoice[i].levelText.SetPosition(0, 200 - (50 * i));
-
-		if (m_levelChoice[i].isSelect == true)
-			m_levelChoice[i].levelText.SetColor(0, 255, 0, 255);
-		else
-			m_levelChoice[i].levelText.SetColor(255, 0, 0, 255);
-
-		m_levelChoice[i].levelText.Render();
-	}
-
-
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
-	{
-		if (m_levelSelector - 1 >= 0)
-		{
-			m_levelSelector--;
-		}
-	}
-
-	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
-	{
-		if (m_levelSelector + 1 < m_levelHandler.GetNumLevels())
-		{
-			m_levelSelector++;
-		}
-	}
-
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
-	{
-
-		m_levelChoice[m_levelSelector].isSelect = !m_levelChoice[m_levelSelector].isSelect;
-
-	}
-
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
-	{
-
-		for (int i = 0; i < 10; i++)
-		{
-			if (m_levelChoice[i].isSelect == true)
-			{
-				m_levelHandler.Import(m_level, m_levelChoice[i].levelText.GetText());
-				m_level.SetName(m_levelChoice[i].levelText.GetText());
-				m_levelQueue.push_back(m_level);
-			}
-		}
-
-		for (int i = 0; i < m_levelQueue.size(); i++)
-		{
-			m_levelHandler.Import(m_levelQueue.at(i), m_levelQueue.at(i).GetName());
-		}
-		m_numOfLevels = m_levelQueue.size();
-		TransitionManager::StartFadingOut();
-		m_currState = INIT_PLAY;
-
-	}
-
-	m_pressToCont.Render();
-}
 
 void GameSystem::LoadNextLevel()
 {
 	TransitionManager::Update();
 
+	if (!TransitionManager::GetIsBlack())
+	{
+		return;
+	}
+
+	if (m_levelSelector.GetHasPlaylistEnded())
+	{
+		m_currState = GAME_OVER;
+	}
+
 	m_pressToCont.Render();
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
-
-		if (!(m_currentLevel + 1 == m_numOfLevels))
-			m_currentLevel++; // IF TRUE SWITCH TO GAME OVER
-
-		m_world->EnterWorld(m_levelQueue.at(m_currentLevel));
+		LevelHandler levelHandler;
+		m_world->EnterWorld(m_levelSelector.GetLevel());
 		m_currState = START_PLAY;
+
 		TransitionManager::StartFadingIn();
 	}
 }
 
+
 void GameSystem::GameOver()
 {
+	m_pressToCont.Render();
 
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
+	{
+		StateManager::Get()->SetCurrentState(GameState::LOAD_MAIN_MENU);
+	}
 }

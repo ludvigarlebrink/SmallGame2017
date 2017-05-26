@@ -32,10 +32,13 @@ Player::~Player()
 void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 {
 
-	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\spark2.png");
-	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\spark.png");
+	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\blue_explosion.png");
+	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\debree.png");
 	m_particleTexture3 = m_textureHandler.Import(".\\Assets\\Textures\\fireball.png");
-
+	m_particleTexture4 = m_textureHandler.Import(".\\Assets\\Textures\\spark2.png");
+	m_particleTexture5 = m_textureHandler.Import(".\\Assets\\Textures\\blue_explosion.png");
+	m_particleTexture6 = m_textureHandler.Import(".\\Assets\\Textures\\fireball.png");
+	m_particleTexture7 = m_textureHandler.Import(".\\Assets\\Textures\\spark2.png");
 
 	//MARTIN TEST SHIT REMOVE
 	//m_testCon = new PlayerController;
@@ -113,45 +116,45 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//	m_weapon = Weapon(gun, projectile);
 	m_weapons[0] = Weapon(gun, projectile, m_controllerID);
 	m_weapons[0].SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.15f, 10, m_controllerID, 3.0f);
-	m_weapons[0].SetWeaponSound("skorpion");
+	m_weapons[0].SetWeaponSound("assault_rifle");
 	m_weapons[0].SetFirePower(150.0);
 	m_weapons[0].SetDamage(0.1f);
 
 
 	m_weapons[1] = Weapon(gun, projectile2, m_controllerID);
 	m_weapons[1].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 3.0f, 10, m_controllerID, 0.7f);
-	m_weapons[1].SetWeaponSound("sword");
+	m_weapons[1].SetWeaponSound("scifi_weapon");
 	m_weapons[1].SetFirePower(20.0f);
 	m_weapons[1].SetDamage(1.0f);
 
 	m_weapons[2] = Weapon(gun, projectile3, m_controllerID);
 	m_weapons[2].SetProjectileType(0.5f, 1.0f, 0.0f, 0.0f, 0.5f, 15, m_controllerID, 2.0f);
-	m_weapons[2].SetWeaponSound("punch");
+	m_weapons[2].SetWeaponSound("shuriken");
 	m_weapons[2].SetFirePower(100.0f);
 	m_weapons[2].SetDamage(0.3f);
 
 
 	m_weapons[3] = Weapon(gun, projectile4, m_controllerID);
-	m_weapons[3].SetProjectileType(0.2f, 1.0f, 0.0f, 0.0f, 0.2f, 18, m_controllerID, 0.7f);
-	m_weapons[3].SetWeaponSound("click");
+	m_weapons[3].SetProjectileType(0.2f, 1.0f, 0.0f, 0.0f, 0.5f, 18, m_controllerID, 0.7f);
+	m_weapons[3].SetWeaponSound("heavy_shot");
 	m_weapons[3].SetFirePower(100.0f);
 	m_weapons[3].SetDamage(0.3f);
 
 	m_weapons[4] = Weapon(gun, projectile5, m_controllerID);
-	m_weapons[4].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.1f, 12, m_controllerID, 0.9f);
-	m_weapons[4].SetWeaponSound("skorpion");
+	m_weapons[4].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.5f, 12, m_controllerID, 0.9f);
+	m_weapons[4].SetWeaponSound("massive_shot");
 	m_weapons[4].SetFirePower(100.0f);
 	m_weapons[4].SetDamage(0.3f);
 
 	m_weapons[5] = Weapon(gun, projectile6, m_controllerID);
-	m_weapons[5].SetProjectileType(0.8f, 1.0f, 0.0f, 0.0f, 0.1f, 11, m_controllerID, 10.2f);
-	m_weapons[5].SetWeaponSound("skorpion");
+	m_weapons[5].SetProjectileType(0.8f, 1.0f, 0.0f, 0.0f, 0.5f, 11, m_controllerID, 10.2f);
+	m_weapons[5].SetWeaponSound("default_gun");
 	m_weapons[5].SetFirePower(100.0f);
 	m_weapons[5].SetDamage(0.3f);
 
 	m_weapons[6] = Weapon(gun, projectile7, m_controllerID);
-	m_weapons[6].SetProjectileType(0.7f, 1.0f, 0.0f, 0.0f, 0.1f, 14, m_controllerID, 10.2f);
-	m_weapons[6].SetWeaponSound("skorpion");
+	m_weapons[6].SetProjectileType(0.7f, 1.0f, 0.0f, 0.0f, 0.5f, 14, m_controllerID, 10.2f);
+	m_weapons[6].SetWeaponSound("default_gun");
 	m_weapons[6].SetFirePower(100.0f);
 	m_weapons[6].SetDamage(0.3f);
 
@@ -192,43 +195,45 @@ void Player::Update() {
 
 			if (m_currentWeapon == 0) {
 				std::cout << "part 1" << std::endl;
-				
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 1.0, 0.0, 1.0), 5.5, 50, 0.0f);
+				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
+
 			}
 
 			if (m_currentWeapon == 1) {
 				std::cout << "part 2" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 1.0, 0.0, 1.0), 6.0, 10, 0.0f);
-				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(1.0, 0.0, 0.0, 1.0), 6.0, 10, 0.0f);
+				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture2);
 			}
 
 			if (m_currentWeapon == 2) {
 				std::cout << "part 3" << std::endl;
 				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 1.0, 1.0), 6.0f, 10, 0.0f);
-				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
+				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture3);
 			}
 
 			if (m_currentWeapon == 3) {
 				std::cout << "part 4" << std::endl;
 				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(1.0, 1.0, 0.0, 1.0), 6.0f, 10, 0.0f);
-				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
+				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture4);
 			}
 
 			if (m_currentWeapon == 4) {
 				std::cout << "part 5" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 1.0, 1.0, 1.0), 15.0f, 3,0.0f);
-				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 1.0, 1.0, 1.0), 15.0f, 3, 0.0f);
+				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture5);
 
 			}
 			if (m_currentWeapon == 5) {
 				std::cout << "part 6" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.8f, 10, 0.0f);
-				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0),5.8f, 10, 0.0f);
+				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture6);
 			}
 
 			if (m_currentWeapon == 6) {
 				std::cout << "part 7" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.8f, 10, 0.0f);
-				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 1.0, 1.0), 5.8f, 10, 0.0f);
+				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture7);
 			}
 
 		}
@@ -310,12 +315,12 @@ void Player::Update() {
 
 		if (m_isMidAir) {
 
-			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-300)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
-
+			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-100)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+			
 		}
 		if (!m_isMidAir) {
 
-			GetBox().getBody()->SetLinearVelocity(b2Vec2(m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-300)*TimeManager::Get()->GetDeltaTime(), 0));
+			GetBox().getBody()->SetLinearVelocity(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-150)*TimeManager::Get()->GetDeltaTime(), 0));
 		}
 
 
@@ -324,7 +329,7 @@ void Player::Update() {
 
 
 
-	m_playerPrefab->Update(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
+	m_playerPrefab->Update(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
 		m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
 		m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID));
 
@@ -336,7 +341,7 @@ void Player::Update() {
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 230), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 130), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 
 
@@ -348,7 +353,7 @@ void Player::Update() {
 	if (m_doubleJump && m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f && m_isMidAir)
 	{
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 210), GetBox().getBody()->GetWorldCenter(), 1);
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 130), GetBox().getBody()->GetWorldCenter(), 1);
 
 	}
 

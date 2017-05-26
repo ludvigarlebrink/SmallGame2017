@@ -7,6 +7,7 @@
 #include "TextureHandler.h"
 #include "Box.h"
 #include "ParticleEmitter.h"
+#include "SoundManager.h"
 #include "Collidable.h"
 
 
@@ -62,6 +63,7 @@ private:
 	ParticleSystem* m_trailParticles;
 	bool m_renderSmoke;
 	Texture m_texture;
+	SoundManager * m_soundManager;
 	TextureHandler m_textureHandler;
 	Box			m_box;
 	float		m_fireRate;

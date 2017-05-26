@@ -9,9 +9,22 @@
 #include "ScoreManager.h"
 #include "SoundManager.h"
 #include "PostProcessingManager.h"
-
 #include "AntiAliasing.h"
 #include "MeshQuad.h"
+#include "Mesh.h"
+#include "MenuSystem.h"
+#include "UIText.h"
+#include "Prefab.h"
+#include "PrefabManager.h"
+#include "GamePhysics.h"
+#include "GameUI.h"
+#include "UIImage.h"
+#include "GameSystem.h"
+#include "TransitionManager.h"
+#include "AntiAliasing.h"
+#include "MeshQuad.h"
+#include "Background.h"
+
 
 
 class System
@@ -30,11 +43,16 @@ private:
 	void Free();
 
 private:
-	VideoManager	 *	m_videoManager;
-	InputManager	 *	m_inputManager;
-	TimeManager		 *	m_timeManager;
-	StateManager	 *	m_stateManager;
-	SoundManager	 *	m_soundManager;
+	VideoManager *	m_videoManager;
+	InputManager *	m_inputManager;
+	TimeManager *	m_timeManager;
+	StateManager *	m_stateManager;
+	SoundManager *	m_soundManager;
+
+	MenuSystem *	m_menuSystem;
+	Background *	m_background;
+	LevelEditor *	m_levelEditor;
+	GameSystem *	m_gameSystem;
 };
 
 

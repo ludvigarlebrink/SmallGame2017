@@ -20,21 +20,21 @@ LevelEditor::LevelEditor()
 	m_menuText[0].SetText("SAVE LEVEL");
 	m_menuText[0].SetSize(80);
 	m_menuText[0].SetPosition(0, 145);
-	m_menuText[0].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
+	m_menuText[0].SetFont(".\\Assets\\Fonts\\Snap.ttf");
 	m_menuText[0].SetPivot(UIText::CENTER);
 	m_menuText[0].SetColor(255, 255, 255, 255);
 
 	m_menuText[1].SetText("LOAD LEVEL");
 	m_menuText[1].SetSize(80);
 	m_menuText[1].SetPosition(0, 0);
-	m_menuText[1].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
+	m_menuText[1].SetFont(".\\Assets\\Fonts\\Snap.ttf");
 	m_menuText[1].SetPivot(UIText::CENTER);
 	m_menuText[1].SetColor(255, 255, 255, 255);
 
 	m_menuText[2].SetText("MAIN MENU");
 	m_menuText[2].SetSize(80);
 	m_menuText[2].SetPosition(0, -145);
-	m_menuText[2].SetFont(".\\Assets\\Fonts\\steelfish.ttf");
+	m_menuText[2].SetFont(".\\Assets\\Fonts\\Snap.ttf");
 	m_menuText[2].SetPivot(UIText::CENTER);
 	m_menuText[2].SetColor(255, 255, 255, 255);
 
@@ -44,24 +44,9 @@ LevelEditor::LevelEditor()
 
 }
 
-void LevelEditor::Init()
-{
-}
 
 LevelEditor::~LevelEditor()
 {
-	// Do nothing...
-
-
-	//delete m_input;
-	//delete m_stateManager;
-	//delete m_videoManager;
-	//delete m_timeManager ;
-	//m_input = nullptr;
-	//m_stateManager= nullptr;
-	//m_videoManager= nullptr;
-	//m_timeManager= nullptr;
-
 }
 
 
@@ -209,9 +194,9 @@ void LevelEditor::ButtonInput()
 	if (m_input->GetButtonUp(CONTROLLER_BUTTON_X) && m_levelMarker.GetMarkerMode() == ADD_SPAWN_POINT)
 	{
 
-		for (size_t x = m_levelMarker.GetStartX(); x <= m_levelMarker.GetEndX(); x++)
+		for (uint32_t x = m_levelMarker.GetStartX(); x <= m_levelMarker.GetEndX(); x++)
 		{
-			for (size_t y = m_levelMarker.GetStartY(); y <= m_levelMarker.GetEndY(); y++)
+			for (uint32_t y = m_levelMarker.GetStartY(); y <= m_levelMarker.GetEndY(); y++)
 			{
 				if (m_level.GetIsSpawnPoint(x, y))
 				{
@@ -318,7 +303,7 @@ void LevelEditor::MenuInput()
 			{
 				m_menuText[m_textPos].SetColor(255, 255, 255, 255);
 				m_menuText[m_textPos].SetSize(90);
-				m_textPos++;
+				++m_textPos;
 				m_menuText[m_textPos].SetSize(100);
 				m_menuText[m_textPos].SetColor(255, 0, 0, 128);
 			}
@@ -339,7 +324,7 @@ void LevelEditor::MenuInput()
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			m_level.Render(m_camera);
 			m_videoManager->Swap();
-			m_levelHandler.Export(m_level, m_levelGUI.GetPropPlacer());
+			m_levelHandler.Export(m_level);
 			// FIX
 			glViewport(0, 0, m_videoManager->GetWidth(), m_videoManager->GetHeight()); // FIX THIS?
 			// REMOVE
@@ -361,7 +346,7 @@ void LevelEditor::MenuInput()
 
 		else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
 		{
-			if (m_levelSelector + 1 < m_levelHandler.GetNumLevels())
+			if (static_cast<uint32_t>(m_levelSelector + 1) < m_levelHandler.GetNumLevels())
 			{
 				m_levelSelector++;
 			}
