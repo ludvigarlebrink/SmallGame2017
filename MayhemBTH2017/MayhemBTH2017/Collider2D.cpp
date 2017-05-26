@@ -46,7 +46,8 @@ void Collider2D::DrawColliderShadowPass(Camera camera)
 	m_level.Render(camera);
 }
 
-void Collider2D::CreateBoundingBoxes(b2World* world) {
+void Collider2D::CreateBoundingBoxes(b2World* world) 
+{
 
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
 	m_contact = false;
@@ -75,7 +76,6 @@ void Collider2D::CreateBoundingBoxes(b2World* world) {
 				}
 				
 				offset = (blocksInRow);
-
 
 				Box gameFloor;
 

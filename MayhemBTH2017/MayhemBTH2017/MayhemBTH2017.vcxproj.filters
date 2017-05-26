@@ -277,6 +277,7 @@
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
     <ClCompile Include="ParticleEmitter.cpp" />
+    <ClCompile Include="LevelSelector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -490,6 +491,7 @@
     <ClInclude Include="GamePhysics.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="LevelSelector.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

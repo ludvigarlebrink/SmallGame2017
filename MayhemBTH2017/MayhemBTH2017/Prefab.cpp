@@ -10,7 +10,10 @@ Prefab::Prefab()
 
 Prefab::~Prefab()
 {
-
+	if (m_mesh != nullptr)
+	{
+		delete m_mesh;
+	}
 }
 
 void Prefab::Update()

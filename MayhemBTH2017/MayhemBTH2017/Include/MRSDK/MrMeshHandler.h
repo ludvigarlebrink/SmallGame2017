@@ -6,13 +6,6 @@
 #include <glm.hpp>
 
 
-#if DLLEXPORT
-#define DLL __declspec(dllexport)
-#else
-#define DLL __declspec(dllimport)
-#endif
-
-
 class MrMeshHandler
 {
 public:
@@ -100,11 +93,6 @@ inline bool MrMeshHandler::Import(const char * filepath)
 		return false;
 	}
 
-	float x;
-	float y;
-	float z;
-	float w;
-
 	file.read(reinterpret_cast<char*>(&m_numVerts), sizeof(uint32_t));
 
 	m_postions = new glm::vec3[m_numVerts];
@@ -161,10 +149,6 @@ inline bool MrMeshHandler::Export(const char* filepath)
 		return false;
 	}
 
-	float x;
-	float y;
-	float z;
-	float w;
 
 	file.write(reinterpret_cast<char*>(&m_numVerts), sizeof(uint32_t));
 

@@ -29,7 +29,7 @@ void LevelHandler::Init()
 	//1. nr of maps
 	//2. map names
 	file.read(reinterpret_cast<char*>(m_nrOfMaps), sizeof(uint32_t));
-	for (int i = 0; i < m_nrOfMaps[0]; i++)
+	for (uint32_t i = 0; i < m_nrOfMaps[0]; i++)
 	{
 		file.read(reinterpret_cast<char*>(nameBuffer), m_size);
 		nameBuffer[m_size] = '\0';
@@ -75,9 +75,9 @@ void LevelHandler::Import(Level & level, uint32_t id, std::string levelName)
 	}
 
 
-	for (size_t x = 1; x < level.SIZE_X; x++)
+	for (uint32_t x = 1; x < level.SIZE_X; x++)
 	{
-		for (size_t y = 1; y < level.SIZE_Y; y++)
+		for (uint32_t y = 1; y < level.SIZE_Y; y++)
 		{
 			level.SetOccupied(x, y, isOccupied[i]);
 			level.SetSpawnPoint(x, y, isSpawn[i]);
@@ -123,9 +123,9 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	glm::vec2 uvCoords[nrOfBlocks] = { glm::vec2(0,0) };
 	uint32_t i = 0;
 
-	for (size_t x = 1; x < level.SIZE_X; x++)
+	for (uint32_t x = 1; x < level.SIZE_X; x++)
 	{
-		for (size_t y = 1; y < level.SIZE_Y; y++)
+		for (uint32_t y = 1; y < level.SIZE_Y; y++)
 		{
 			if (level.GetIsSpawnPoint(x, y) == true)
 				isSpawn[i] = level.GetIsSpawnPoint(x, y);
@@ -207,7 +207,7 @@ bool LevelHandler::ImportRegister(std::string & textField)
 		std::cout << stringSize << std::endl;
 
 		// The acual string.
-		for (int j = 0; j < stringSize; j++)
+		for (uint32_t j = 0; j < stringSize; j++)
 		{
 			char string = m_register[i].name[j];
 			file.read(reinterpret_cast<char*>(&string), sizeof(char));
@@ -312,7 +312,7 @@ bool LevelHandler::TestExportRegister()
 	// Update file with new number of levels.
 	file.write(reinterpret_cast<char*>(&m_numLevels), sizeof(uint32_t));
 
-	for (int i = 0; i < m_numLevels; i++)
+	for (uint32_t i = 0; i < m_numLevels; i++)
 	{
 		file.write(reinterpret_cast<char*>(&m_numLevels), sizeof(uint32_t));
 	}
@@ -373,7 +373,7 @@ void LevelHandler::GetLevelNames(std::vector<std::string> & strVec)
 
 void LevelHandler::IncrementNumLevels()
 {
-	numLevels++;
+	++numLevels;
 }
 
 

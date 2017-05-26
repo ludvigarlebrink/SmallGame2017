@@ -146,6 +146,7 @@
     <ClCompile Include="GameUI.cpp" />
     <ClCompile Include="LevelEditorPropPlacer.cpp" />
     <ClCompile Include="LevelEditorStateMachine.cpp" />
+    <ClCompile Include="LevelSelector.cpp" />
     <ClCompile Include="LevelTexture.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Menu.cpp">
@@ -247,6 +248,7 @@
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="LevelEditorPropPlacer.h" />
     <ClInclude Include="LevelEditorStateMachine.h" />
+    <ClInclude Include="LevelSelector.h" />
     <ClInclude Include="LevelTexture.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Menu.h">

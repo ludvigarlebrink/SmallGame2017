@@ -33,9 +33,6 @@ public:
 	bool TestImportRegister();
 	bool TestExportRegister();
 	
-
-
-
 	//::.. MODIFY FUNCTIONS ..:://
 	bool AddToRegister(Level * level);
 	bool RemoveFromRegister(const char* name);

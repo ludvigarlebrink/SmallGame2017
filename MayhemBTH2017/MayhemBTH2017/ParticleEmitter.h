@@ -15,7 +15,7 @@ public:
 	void Update();
 
 	void Delete();
-	void SetParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, static const int nrOf, float life);
+	void SetParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 col, GLfloat size, const int nrOf, float life);
 	void Refresh(glm::vec3 position);
 private:
 	GLfloat					m_timer = 0;

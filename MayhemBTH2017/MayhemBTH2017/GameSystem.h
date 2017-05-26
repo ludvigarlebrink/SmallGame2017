@@ -13,7 +13,8 @@
 #include "GameSettings.h"
 #include "SoundManager.h"
 #include "AtomicBomb.h"
-#include "ParticleSystem.h"
+#include "LevelSelector.h"
+#include "LevelHandler.h"
 
 
 #include <cstdint>
@@ -44,10 +45,10 @@ private:
 		GAME_SETUP = 0,
 		INIT_PLAYER_READY,
 		PLAYER_READY,
+		SELECT_LEVEL,
 		INIT_PLAY,
 		START_PLAY,
 		PLAY,
-		SELECT_LEVEL,
 		LOAD_NEXT_LEVEL,
 		GAME_OVER
 	};
@@ -63,15 +64,7 @@ private:
 	void GameOver();
 
 private:
-
-	struct LevelSelect
-	{
-		UIText	levelText;
-		bool	isSelect = false;
-	};
-
 	InputManager *	m_input;
-	ParticleSystem particles;
 	GamePhysics *	m_world;
 
 	bool		m_isPaused;
@@ -82,17 +75,8 @@ private:
 	uint32_t	m_numPlayers;
 	Timer		m_timer;
 
-	Level						m_level;
-	std::vector<Level>			m_levelQueue;
-	LevelHandler				m_levelHandler;
-	int32_t						m_levelSelector = 0;
-	UIImage						m_selectorImage;
-	LevelSelect					m_levelChoice[10]; // make vector??
-	std::vector<std::string>	m_levelText;
-	int32_t						m_currentLevel = 0;
-	int32_t						m_numOfLevels = 0;
-
-	GameUI		m_gameUI;
+	GameUI			m_gameUI;
+	LevelSelector	m_levelSelector;
 
 	// Init Players.
 	struct PlayerReadyUI
