@@ -44,24 +44,9 @@ LevelEditor::LevelEditor()
 
 }
 
-void LevelEditor::Init()
-{
-}
 
 LevelEditor::~LevelEditor()
 {
-	// Do nothing...
-
-
-	//delete m_input;
-	//delete m_stateManager;
-	//delete m_videoManager;
-	//delete m_timeManager ;
-	//m_input = nullptr;
-	//m_stateManager= nullptr;
-	//m_videoManager= nullptr;
-	//m_timeManager= nullptr;
-
 }
 
 
@@ -339,7 +324,7 @@ void LevelEditor::MenuInput()
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			m_level.Render(m_camera);
 			m_videoManager->Swap();
-			m_levelHandler.Export(m_level, m_levelGUI.GetPropPlacer());
+			m_levelHandler.Export(m_level);
 			// FIX
 			glViewport(0, 0, m_videoManager->GetWidth(), m_videoManager->GetHeight()); // FIX THIS?
 			// REMOVE

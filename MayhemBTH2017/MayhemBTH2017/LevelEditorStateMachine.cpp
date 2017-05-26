@@ -8,9 +8,6 @@ LevelEditorStateMachine::LevelEditorStateMachine()
 	//	m_height = 1080;
 
 	m_input = InputManager::Get();
-
-	m_propPlacer = new LevelEditorPropPlacer;
-
 	Init();
 }
 
@@ -20,11 +17,6 @@ LevelEditorStateMachine::~LevelEditorStateMachine()
 	// Do nothing...
 }
 
-
-LevelEditorPropPlacer & LevelEditorStateMachine::GetPropPlacer()
-{
-	return *m_propPlacer;
-}
 
 int32_t LevelEditorStateMachine::GetState()
 {
@@ -55,22 +47,11 @@ void LevelEditorStateMachine::Render(Camera& cam)
 		m_currentUV = m_gui[GUI_BLOCK].m_icons[m_pos].GetUV();
 		break;
 
-	case GUI_PROP:
-		Input();
-		RenderIcons(GUI_PROP);
-
-		m_propPlacer->Update(m_pos);
-		m_propPlacer->Render(cam);
-
-		break;
-
 	case GUI_BACKGROUND:
 		Input();
 		RenderIcons(GUI_BACKGROUND);
 		break;
 	}
-
-	m_propPlacer->RenderProps(cam);
 }
 
 void LevelEditorStateMachine::RenderIcons(size_t gui)
@@ -124,12 +105,6 @@ void LevelEditorStateMachine::Init()
 			m_gui[GUI_BLOCK].m_text.SetText("BLOCKS");
 			m_gui[GUI_BLOCK].m_texture.SetTexture(".\\Assets\\Textures\\textureMap.png");
 			m_gui[GUI_BLOCK].m_numIcons = 42;
-			break;
-
-		case GUI_PROP:
-			m_gui[GUI_PROP].m_text.SetText("PROPS");
-			m_gui[GUI_PROP].m_texture.SetTexture(".\\Assets\\Sprites\\stone.jpg");
-			m_gui[GUI_PROP].m_numIcons = 5;
 			break;
 
 		case GUI_BACKGROUND:

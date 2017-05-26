@@ -63,16 +63,6 @@ void LevelHandler::Import(Level & level, std::string levelName)
 	file.read(reinterpret_cast<char*>(uv), sizeof(glm::vec2) * nrOfBlocks);
 	file.ignore(sizeof(unsigned char) * (m_height * m_width) * 4);
 	file.read(reinterpret_cast<char*>(&propSize), sizeof(uint32_t));
-	std::cout << propSize << std::endl;
-
-	PropsImport * importedProps = new PropsImport[propSize];
-	for (uint32_t i = 0; i < propSize; i++)
-	{
-		file.read(reinterpret_cast<char*>(&importedProps[i].id), sizeof(uint32_t));
-		file.read(reinterpret_cast<char*>(&importedProps[i].pos), sizeof(glm::vec2));
-
-	}
-
 
 	for (uint32_t x = 1; x < level.SIZE_X; x++)
 	{
@@ -89,11 +79,10 @@ void LevelHandler::Import(Level & level, std::string levelName)
 	}
 
 	file.close();
-	delete[] importedProps;
 }
 
 
-void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
+void LevelHandler::Export(Level & level)
 {
 	LevelRegister newRegister;
 	newRegister.isLoaded = true;
@@ -110,9 +99,6 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	unsigned char* tempPixelBuffer;
 	tempPixelBuffer = new unsigned char[m_height * m_width * 4];
 	glReadPixels(0, 0, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, tempPixelBuffer);
-
-	outProps = propPlacer.GetPropExport();
-	uint32_t propsSize = propPlacer.GetNumProps();
 
 	char* nameBuffer = new char[m_size];
 
@@ -148,13 +134,6 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 
 	//output.write(reinterpret_cast<char*>(texData), sizeof(uint8_t) * (level.SIZE_X * level.SIZE_Y) * 4);
 	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(m_height * m_width) * 4);
-	output.write(reinterpret_cast<char*>(&propsSize), sizeof(uint32_t));
-	for (uint32_t i = 0; i < 2; i++)
-	{
-		output.write(reinterpret_cast<char*>(&outProps[i].id), sizeof(uint32_t));
-		output.write(reinterpret_cast<char*>(&outProps[i].pos), sizeof(glm::vec2));
-
-	}
 
 
 	std::cout << "saved" << std::endl;

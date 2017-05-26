@@ -2,9 +2,6 @@
 
 
 
-
-
-
 System::System()
 {
 	Init();

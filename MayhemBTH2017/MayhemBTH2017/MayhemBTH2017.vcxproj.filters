@@ -241,12 +241,6 @@
     <ClCompile Include="LevelEditorStateMachine.cpp">
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="LevelEditorPropPlacer.cpp">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="PropHandler.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="MyContactListener.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -447,12 +441,6 @@
     </ClInclude>
     <ClInclude Include="LevelEditorStateMachine.h">
       <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelEditorPropPlacer.h">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="PropHandler.h">
-      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="MyContactListener.h">
       <Filter>Engine</Filter>

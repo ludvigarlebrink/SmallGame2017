@@ -3,7 +3,6 @@
 
 
 #include "Level.h"
-#include "LevelEditorPropPlacer.h"
 #include "UIText.h"
 
 
@@ -27,7 +26,7 @@ public:
 	//::.. IMPORT/EXPORT ..:://
 	void Init();
 	void Import(Level & level, std::string levelName);
-	void Export(Level & level, LevelEditorPropPlacer & propPlacer);
+	void Export(Level & level);
 	bool ImportRegister(std::string & textField);
 	bool ExportRegister();
 	bool TestImportRegister();
@@ -73,7 +72,6 @@ private:
 	uint32_t							m_height = 48;
 	uint32_t							m_numLevels = 0;
 	uint32_t							numLevels;
-	LevelEditorPropPlacer::PropsExport* outProps;
 };
 
 #endif // ! __LEVELIMPORTER_H__

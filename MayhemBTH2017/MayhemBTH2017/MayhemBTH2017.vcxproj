@@ -144,7 +144,6 @@
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="GameUI.cpp" />
-    <ClCompile Include="LevelEditorPropPlacer.cpp" />
     <ClCompile Include="LevelEditorStateMachine.cpp" />
     <ClCompile Include="LevelSelector.cpp" />
     <ClCompile Include="LevelTexture.cpp" />
@@ -176,7 +175,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="PropHandler.cpp" />
     <ClCompile Include="QuadShader.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
@@ -246,7 +244,6 @@
     <ClInclude Include="GameSettings.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GameUI.h" />
-    <ClInclude Include="LevelEditorPropPlacer.h" />
     <ClInclude Include="LevelEditorStateMachine.h" />
     <ClInclude Include="LevelSelector.h" />
     <ClInclude Include="LevelTexture.h" />
@@ -278,7 +275,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Projectile.h" />
-    <ClInclude Include="PropHandler.h" />
     <ClInclude Include="QuadShader.h" />
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="ShaderManager.h" />
