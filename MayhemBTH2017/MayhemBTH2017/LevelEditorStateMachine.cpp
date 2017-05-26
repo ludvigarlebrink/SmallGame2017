@@ -61,7 +61,7 @@ void LevelEditorStateMachine::Render(Camera& cam)
 
 		m_propPlacer->Update(m_pos);
 		m_propPlacer->Render(cam);
-		
+
 		break;
 
 	case GUI_BACKGROUND:
@@ -123,7 +123,7 @@ void LevelEditorStateMachine::Init()
 		case GUI_BLOCK:
 			m_gui[GUI_BLOCK].m_text.SetText("BLOCKS");
 			m_gui[GUI_BLOCK].m_texture.SetTexture(".\\Assets\\Textures\\textureMap.png");
-			m_gui[GUI_BLOCK].m_numIcons = 15 ;
+			m_gui[GUI_BLOCK].m_numIcons = 42;
 			break;
 
 		case GUI_PROP:
@@ -166,10 +166,16 @@ void LevelEditorStateMachine::Init()
 
 			m_gui[guiIndex].m_icons[iconIndex].SetTexture(m_gui[guiIndex].m_texture.GetTexture());
 			m_gui[guiIndex].m_icons[iconIndex].SetUV(m_gui[guiIndex].m_iconUV);
-			++m_gui[guiIndex].m_iconUV.x;
 
-			if (m_gui[guiIndex].m_iconUV.x == 16)
+			if (m_gui[guiIndex].m_iconUV.x ==15)
+			{
+				m_gui[guiIndex].m_iconUV.x = 0;
 				++m_gui[guiIndex].m_iconUV.y;
+			}
+			else
+			{
+				++m_gui[guiIndex].m_iconUV.x;
+			}
 		}
 	}
 

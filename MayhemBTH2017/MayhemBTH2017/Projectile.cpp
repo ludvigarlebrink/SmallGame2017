@@ -288,7 +288,7 @@ void Projectile::Render(Camera camera)
 
 		glDepthMask(false);
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		m_texture.Bind(m_texture.GetTexture());
 
 
@@ -296,7 +296,7 @@ void Projectile::Render(Camera camera)
 		m_emitter.Render(transform);
 
 		glDepthMask(true);
-
+		glDisable(GL_BLEND);
 	
 	}
 }

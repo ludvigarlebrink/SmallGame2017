@@ -197,36 +197,39 @@ void Player::Update() {
 
 			if (m_currentWeapon == 1) {
 				std::cout << "part 2" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 1.0, 0.0, 1.0), 0.8f, 500, 1.0f);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 1.0, 0.0, 1.0), 6.0, 10, 0.0f);
 				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
 			}
 
 			if (m_currentWeapon == 2) {
 				std::cout << "part 3" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 1.0, 1.0), 0.8f, 500, 1.0f);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 1.0, 1.0), 6.0f, 10, 0.0f);
 				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
 			}
 
 			if (m_currentWeapon == 3) {
 				std::cout << "part 4" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(1.0, 1.0, 0.0, 1.0), 0.8f, 500, 1.0f);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(1.0, 1.0, 0.0, 1.0), 6.0f, 10, 0.0f);
 				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
 			}
 
 			if (m_currentWeapon == 4) {
 				std::cout << "part 5" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 1.0, 1.0, 1.0), 0.8f, 500, 1.0f);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 1.0, 1.0, 1.0), 15.0f, 3,0.0f);
 				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
 
 			}
 			if (m_currentWeapon == 5) {
 				std::cout << "part 6" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.8f, 500, 1.0f);
-				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1
-				
-				);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.8f, 10, 0.0f);
+				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
 			}
 
+			if (m_currentWeapon == 6) {
+				std::cout << "part 7" << std::endl;
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.8f, 10, 0.0f);
+				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
+			}
 
 		}
 	}

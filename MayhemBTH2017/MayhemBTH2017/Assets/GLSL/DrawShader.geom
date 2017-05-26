@@ -36,6 +36,8 @@ vec3 up = vec3(MV[0][1],
 
 
 void CreateQuad(){
+	
+	
 	for(int i=0; i<gl_in.length(); i++){
 	
 	color2=color1[0];
