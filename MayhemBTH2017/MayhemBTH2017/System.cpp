@@ -43,7 +43,7 @@ void System::Run()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
-	m_stateManager->SetCurrentState(GameState::LEVEL_EDITOR);
+	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
 	Transform transform;

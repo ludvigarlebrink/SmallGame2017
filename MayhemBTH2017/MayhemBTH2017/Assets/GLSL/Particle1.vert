@@ -21,12 +21,12 @@ void main()
 
 	int seed=gl_VertexID;
 
-	outPos=inPos+0.02*(normalize(inDir));
+	outPos=inPos+0.2*(normalize(inDir));
 	outDir=inDir;
 	outCol=inCol;
 	outLife=inLife;
-	outSize=inSize+0.4f*sin(seed);
-	outCol.a=inCol.a-0.05f;
+	outSize=inSize;
+	outCol.a=inCol.a-0.06f;
 
 }
 
