@@ -24,9 +24,6 @@ public:
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void InitMainMenu(Menu* menu);
-	void InitPlayMenu(Menu* menu);
-	void InitCreateMenu(Menu* menu);
-	void InitOptionsMenu(Menu* menu);
 	void HandleInput();
 	void Render();
 

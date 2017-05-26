@@ -29,7 +29,7 @@ void LevelHandler::Init()
 	//1. nr of maps
 	//2. map names
 	file.read(reinterpret_cast<char*>(m_nrOfMaps), sizeof(uint32_t));
-	for (int i = 0; i < m_nrOfMaps[0]; i++)
+	for (uint32_t i = 0; i < m_nrOfMaps[0]; i++)
 	{
 		file.read(reinterpret_cast<char*>(nameBuffer), m_size);
 		nameBuffer[m_size] = '\0';
@@ -63,20 +63,10 @@ void LevelHandler::Import(Level & level, std::string levelName)
 	file.read(reinterpret_cast<char*>(uv), sizeof(glm::vec2) * nrOfBlocks);
 	file.ignore(sizeof(unsigned char) * (m_height * m_width) * 4);
 	file.read(reinterpret_cast<char*>(&propSize), sizeof(uint32_t));
-	std::cout << propSize << std::endl;
 
-	PropsImport * importedProps = new PropsImport[propSize];
-	for (uint32_t i = 0; i < propSize; i++)
+	for (uint32_t x = 1; x < level.SIZE_X; x++)
 	{
-		file.read(reinterpret_cast<char*>(&importedProps[i].id), sizeof(uint32_t));
-		file.read(reinterpret_cast<char*>(&importedProps[i].pos), sizeof(glm::vec2));
-
-	}
-
-
-	for (size_t x = 1; x < level.SIZE_X; x++)
-	{
-		for (size_t y = 1; y < level.SIZE_Y; y++)
+		for (uint32_t y = 1; y < level.SIZE_Y; y++)
 		{
 			level.SetOccupied(x, y, isOccupied[i]);
 			level.SetSpawnPoint(x, y, isSpawn[i]);
@@ -89,11 +79,10 @@ void LevelHandler::Import(Level & level, std::string levelName)
 	}
 
 	file.close();
-	delete[] importedProps;
 }
 
 
-void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
+void LevelHandler::Export(Level & level)
 {
 	LevelRegister newRegister;
 	newRegister.isLoaded = true;
@@ -111,9 +100,6 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	tempPixelBuffer = new unsigned char[m_height * m_width * 4];
 	glReadPixels(0, 0, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, tempPixelBuffer);
 
-	outProps = propPlacer.GetPropExport();
-	uint32_t propsSize = propPlacer.GetNumProps();
-
 	char* nameBuffer = new char[m_size];
 
 	const int nrOfBlocks = level.SIZE_X * level.SIZE_Y;
@@ -122,9 +108,9 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 	glm::vec2 uvCoords[nrOfBlocks] = { glm::vec2(0,0) };
 	uint32_t i = 0;
 
-	for (size_t x = 1; x < level.SIZE_X; x++)
+	for (uint32_t x = 1; x < level.SIZE_X; x++)
 	{
-		for (size_t y = 1; y < level.SIZE_Y; y++)
+		for (uint32_t y = 1; y < level.SIZE_Y; y++)
 		{
 			if (level.GetIsSpawnPoint(x, y) == true)
 				isSpawn[i] = level.GetIsSpawnPoint(x, y);
@@ -148,13 +134,6 @@ void LevelHandler::Export(Level & level, LevelEditorPropPlacer & propPlacer)
 
 	//output.write(reinterpret_cast<char*>(texData), sizeof(uint8_t) * (level.SIZE_X * level.SIZE_Y) * 4);
 	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(m_height * m_width) * 4);
-	output.write(reinterpret_cast<char*>(&propsSize), sizeof(uint32_t));
-	for (uint32_t i = 0; i < 2; i++)
-	{
-		output.write(reinterpret_cast<char*>(&outProps[i].id), sizeof(uint32_t));
-		output.write(reinterpret_cast<char*>(&outProps[i].pos), sizeof(glm::vec2));
-
-	}
 
 
 	std::cout << "saved" << std::endl;
@@ -205,7 +184,7 @@ bool LevelHandler::ImportRegister(std::string & textField)
 		std::cout << stringSize << std::endl;
 
 		// The acual string.
-		for (int j = 0; j < stringSize; j++)
+		for (uint32_t j = 0; j < stringSize; j++)
 		{
 			char string = m_register[i].name[j];
 			file.read(reinterpret_cast<char*>(&string), sizeof(char));
@@ -310,7 +289,7 @@ bool LevelHandler::TestExportRegister()
 	// Update file with new number of levels.
 	file.write(reinterpret_cast<char*>(&m_numLevels), sizeof(uint32_t));
 
-	for (int i = 0; i < m_numLevels; i++)
+	for (uint32_t i = 0; i < m_numLevels; i++)
 	{
 		file.write(reinterpret_cast<char*>(&m_numLevels), sizeof(uint32_t));
 	}
@@ -371,7 +350,7 @@ void LevelHandler::GetLevelNames(std::vector<std::string> & strVec)
 
 void LevelHandler::IncrementNumLevels()
 {
-	numLevels++;
+	++numLevels;
 }
 
 

@@ -14,10 +14,6 @@ GamePhysics::GamePhysics()
 	}
 
 	m_loadWorld = false;
-	m_shadowShader.Init("ShadowShader");
-	m_shadowShader2.Init("ShadowShaderPlayer");
-	m_shadowMap.Init();
-
 	m_player[0].Init(&m_world, glm::vec2(42, 24), glm::vec2(2.0, 5.0), 0);
 	m_player[1].Init(&m_world, glm::vec2(15, 24), glm::vec2(2.0, 5.0), 1);
 }
@@ -27,15 +23,11 @@ GamePhysics::~GamePhysics()
 	Free();
 }
 
-void GamePhysics::EnterWorld(Level & level)
+void GamePhysics::EnterWorld(std::string levelName)
 {
 	m_time = TimeManager::Get();
 
-	if (m_powerupHandler.GetSpawn() == true)
-	{
-		m_powerupHandler.Free();
-	}
-	m_floorCollider.CreateBoundingBoxes(&m_world, level.GetName());
+	m_floorCollider.CreateBoundingBoxes(&m_world, levelName);
 
 	//at global scope
 
@@ -89,20 +81,6 @@ void GamePhysics::Render(Camera camera) {
 
 
 	m_transf.SetPosition(42.0, 24.0, -0.0);
-	//m_shadowMap.FirstPass();
-	//m_shadowShader.UpdateShadows(camera, m_transf);
-	//m_floorCollider.DrawColliderShadowPass(camera);
-	//m_shadowShader2.UpdateShadows(camera, m_transf);
-	//
-	//for (int i = 0; i < 1; i++) {
-	//
-	//	m_player[i].RenderShadow(camera);
-	//}
-	//
-	//
-	//m_shadowMap.SecPass();
-	//m_shadowMap.Bind();
-   
 	m_floorCollider.DrawCollider(camera);
 	for (int i = 0; i < 2; i++) {
 

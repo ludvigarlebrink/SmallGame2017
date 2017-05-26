@@ -8,9 +8,6 @@ LevelEditorStateMachine::LevelEditorStateMachine()
 	//	m_height = 1080;
 
 	m_input = InputManager::Get();
-
-	m_propPlacer = new LevelEditorPropPlacer;
-
 	Init();
 }
 
@@ -20,11 +17,6 @@ LevelEditorStateMachine::~LevelEditorStateMachine()
 	// Do nothing...
 }
 
-
-LevelEditorPropPlacer & LevelEditorStateMachine::GetPropPlacer()
-{
-	return *m_propPlacer;
-}
 
 int32_t LevelEditorStateMachine::GetState()
 {
@@ -55,22 +47,11 @@ void LevelEditorStateMachine::Render(Camera& cam)
 		m_currentUV = m_gui[GUI_BLOCK].m_icons[m_pos].GetUV();
 		break;
 
-	case GUI_PROP:
-		Input();
-		RenderIcons(GUI_PROP);
-
-		m_propPlacer->Update(m_pos);
-		m_propPlacer->Render(cam);
-
-		break;
-
 	case GUI_BACKGROUND:
 		Input();
 		RenderIcons(GUI_BACKGROUND);
 		break;
 	}
-
-	m_propPlacer->RenderProps(cam);
 }
 
 void LevelEditorStateMachine::RenderIcons(size_t gui)
@@ -90,7 +71,6 @@ void LevelEditorStateMachine::RenderIcons(size_t gui)
 
 void LevelEditorStateMachine::Init()
 {
-
 	m_nSize = 40;
 	m_hSize = 50;
 	m_pos = 0;
@@ -102,7 +82,7 @@ void LevelEditorStateMachine::Init()
 	{
 		m_gui[i].m_text.SetSize(80);
 		m_gui[i].m_text.SetPosition(-440, 280);
-		m_gui[i].m_text.SetFont(".\\Assets\\Fonts\\steelfish.ttf");
+		m_gui[i].m_text.SetFont(".\\Assets\\Fonts\\Snap.ttf");
 		m_gui[i].m_text.SetPivot(UIText::CENTER);
 		m_gui[i].m_text.SetColor(255, 255, 255, 255);
 
@@ -126,12 +106,6 @@ void LevelEditorStateMachine::Init()
 			m_gui[GUI_BLOCK].m_numIcons = 42;
 			break;
 
-		case GUI_PROP:
-			m_gui[GUI_PROP].m_text.SetText("PROPS");
-			m_gui[GUI_PROP].m_texture.SetTexture(".\\Assets\\Sprites\\stone.jpg");
-			m_gui[GUI_PROP].m_numIcons = 5;
-			break;
-
 		case GUI_BACKGROUND:
 			m_gui[GUI_BACKGROUND].m_text.SetText("BACKGROUNDS");
 			m_gui[GUI_BACKGROUND].m_numIcons = 12;
@@ -153,7 +127,7 @@ void LevelEditorStateMachine::Init()
 		for (int iconIndex = 0; iconIndex < m_gui[guiIndex].m_resolution; iconIndex++)
 		{
 			m_gui[guiIndex].m_icons[iconIndex].SetSize(m_nSize, m_nSize);
-			m_gui[guiIndex].m_icons[iconIndex].SetPosition(m_rows, m_columns);
+			m_gui[guiIndex].m_icons[iconIndex].SetPosition(static_cast<float>(m_rows), static_cast<float>(m_columns));
 			m_rows += m_offsetX;
 			++m_offsetCounter;
 
