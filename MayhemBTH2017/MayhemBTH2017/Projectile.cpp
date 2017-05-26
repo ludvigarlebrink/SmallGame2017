@@ -23,6 +23,8 @@ Projectile::~Projectile()
 
 void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID, float life)
 {
+
+	m_soundManager = SoundManager::Get();
 	m_hasParticles = false;
 
 	m_trailParticles = nullptr;
@@ -224,6 +226,7 @@ void Projectile::Update()
 		{*/
 		GetBox().getBody()->SetActive(false);
 		SetActive(false);
+		m_soundManager->PlaySFX("explosion1");
 
 
 		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x / 2, m_box.getBody()->GetPosition().y / 2, 0.0f);
@@ -288,7 +291,7 @@ void Projectile::Render(Camera camera)
 
 		glDepthMask(false);
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		m_texture.Bind(m_texture.GetTexture());
 
 

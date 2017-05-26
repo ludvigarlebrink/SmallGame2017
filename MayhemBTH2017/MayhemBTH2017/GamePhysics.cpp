@@ -6,7 +6,7 @@ MyContactListener * GamePhysics::m_contactListener = nullptr;
 
 
 GamePhysics::GamePhysics()
-	:m_world(b2Vec2(0.0f, -8.21f))
+	:m_world(b2Vec2(0.0f, -3.50f))
 {	
 	if (m_contactListener == nullptr)
 	{

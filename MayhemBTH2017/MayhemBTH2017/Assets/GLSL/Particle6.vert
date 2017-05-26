@@ -23,10 +23,10 @@ void main()
 
 	outPos=inPos+0.02*(normalize(inDir));
 	outDir=inDir;
-	outCol.a=inCol.a-0.2;
+	outCol=inCol;
 	outLife=inLife;
-	outSize=inSize+0.1f*seed;
-
+	outSize=inSize+0.4f*sin(seed);
+	outCol.a=inCol.a-0.05f;
 
 }
 
