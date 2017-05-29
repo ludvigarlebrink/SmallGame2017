@@ -15,7 +15,7 @@ public:
 	TextureHandler();
 	virtual ~TextureHandler();
 
-	Texture& Import(const char* filepath);
+	Texture * Import(const char* filepath);
 };
 
 

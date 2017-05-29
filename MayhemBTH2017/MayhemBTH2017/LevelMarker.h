@@ -78,7 +78,7 @@ private:
 
 private:
 	//glm::vec2			m_uv = glm::vec2(0,0);
-	Texture				m_megaTexture;
+	Texture	*			m_megaTexture;
 
 	glm::vec2			m_position;
 

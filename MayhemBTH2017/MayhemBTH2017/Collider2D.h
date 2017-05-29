@@ -42,7 +42,7 @@ public:
 	std::vector<Box> GetBoxes();
 
 private:
-	b2Fixture* m_filter;
+	b2Fixture*  m_filter;
 	GLuint		m_grid[SIZE_X][SIZE_Y];
 	Mesh		m_mesh;
 	glm::vec2	m_min;
@@ -74,7 +74,7 @@ private:
 		PROJECTILE4 = 0x0120,
 	};
 
-	Texture				m_megaTexture;
+	Texture	*			m_megaTexture;
 	TextureHandler		m_textureTemp;
 	glm::vec4 m_uv;
 

@@ -11,7 +11,6 @@ AShader::AShader(const std::string& filename, bool hasGeomShader, bool particles
 {
 
 	Init(filename, hasGeomShader, particles);
-	std::cout << "ShaderCreated" << std::endl;
 }
 
 AShader:: ~AShader()
@@ -74,7 +73,6 @@ void AShader::Init(const std::string& filename, bool hasGeomShader, bool particl
 	AddAttributeLocation();
 
 	if (particles) {
-		std::cout << "Particles transform feedback active" << std::endl;
 		//Names of ouput from vertex shader
 		const char* varyings[5] = { "outPos", "outDir", "outCol", "outLife", "outSize" };
 		glTransformFeedbackVaryings(m_programID, 5, varyings, GL_INTERLEAVED_ATTRIBS);
@@ -127,7 +125,6 @@ void AShader::Update(Transform& transform, Camera& camera)
 
 void AShader::AddAttributeLocation()
 {
-	std::cout << "ASHADERS" << std::endl;
 	// These are three attributes are set for all shaders.
 	glBindAttribLocation(m_programID, 0, "Position");
 	glBindAttribLocation(m_programID, 1, "Normal");
@@ -171,7 +168,7 @@ GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
 	GLuint shader = glCreateShader(shaderType);
 	if (shader == 0)
 	{
-		std::cout << "Error while creating shader" << std::endl;
+		return -1;
 	}
 
 	const GLchar* shaderSource[1];
@@ -231,7 +228,5 @@ void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::strin
 		{
 			glGetShaderInfoLog(shader, sizeof(logLength), 0, logLength);
 		}
-
-		std::cout << errorMsg << ": '" << logLength << "'" << std::endl;
 	}
 }

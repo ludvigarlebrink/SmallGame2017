@@ -17,7 +17,6 @@ public:
 	PrefabManager();
 	virtual ~PrefabManager();
 
-	static Prefab * Instantiate(const char * name);
 	static Prefab * Instantiate(const char * mesh, const char * skel, 
 		std::string * anim, uint32_t numAnim, const char * mat = nullptr);
 

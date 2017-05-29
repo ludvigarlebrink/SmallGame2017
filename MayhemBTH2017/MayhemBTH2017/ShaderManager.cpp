@@ -125,7 +125,7 @@ GLuint ShaderManager::CreateShader(std::string & textfile, GLenum shaderType)
 	GLuint shader = glCreateShader(shaderType);
 	if (shader == 0)
 	{
-		//std::cout << "Error while creating shader" << std::endl;
+		return -1;
 	}
 
 	const GLchar* shaderSource[1];
@@ -167,7 +167,5 @@ void ShaderManager::Debug(GLuint shader, GLuint flag, bool isProgram, const std:
 		{
 			glGetShaderInfoLog(shader, sizeof(logLength), 0, logLength);
 		}
-
-		std::cout << errorMsg << ": '" << logLength << "'" << std::endl;
 	}
 }
