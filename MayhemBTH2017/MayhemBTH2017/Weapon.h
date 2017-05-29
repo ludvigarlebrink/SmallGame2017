@@ -28,7 +28,7 @@ public:
 	void DeleteProjectile();
 	void SetWeaponSound(const char* filepath);
 	void SetCollisionSound(const char* filepath);
-	void SetParticleTexture(Texture texture);
+	void SetParticleTexture(Texture* texture);
 	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life);
 	void SetTexture(const char* filepath);
 	//::.. SET FUNTIONS ..:://
@@ -82,7 +82,7 @@ private:
 	float					m_plife;
 	const char*	m_partTexture;
 	TextureHandler m_textureHandler;
-	Texture	m_particleTexture;
+	Texture*	m_particleTexture;
 	TextureManager m_textureManager;
 	SoundManager * m_soundManager;
 };

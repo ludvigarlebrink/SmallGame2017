@@ -23,7 +23,7 @@ public:
 		float restitution, float friction,
 		float damping, float density,
 		float fireRate, bool startUp, Prefab * prefab, int controllerID, float life);
-	void SetTexture(Texture texture);
+	void SetTexture(Texture* texture);
 	void InitBullet(b2World * world, glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://
@@ -64,7 +64,7 @@ private:
 	ParticleEmitter trailEmitter;
 	ParticleSystem* m_trailParticles;
 	bool m_renderSmoke;
-	Texture m_texture;
+	Texture* m_texture;
 	SoundManager * m_soundManager;
 	TextureHandler m_textureHandler;
 	Box			m_box;
@@ -103,15 +103,18 @@ private:
 	float m_restitution;
 	float m_collisionTimer;
 	bool m_collision;
-
-
+	
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
-		PLAYER1 = 0x0002,
-		PROJECTILE1 = 0x0004,
-		POWERUP = 0x0008,
-		PLAYER2 = 0x0016,
-		PROJECTILE2 = 0x0032,
+		POWERUP = 0x0002,
+		PLAYER1 = 0x0004,
+		PLAYER3 = 0x0008,
+		PLAYER2 = 0x0010,
+		PLAYER4 = 0x0020,
+		PROJECTILE1 = 0x0040,
+		PROJECTILE2 = 0x0080,
+		PROJECTILE3 = 0x0100,
+		PROJECTILE4 = 0x0120,
 	};
 };
 

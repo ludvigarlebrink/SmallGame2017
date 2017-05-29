@@ -14,14 +14,17 @@ GamePhysics::GamePhysics()
 	}
 
 	m_loadWorld = false;
-	m_player[0].Init(&m_world, glm::vec2(42, 24), glm::vec2(2.0, 5.0), 0);
-	m_player[1].Init(&m_world, glm::vec2(15, 24), glm::vec2(2.0, 5.0), 1);
+	int spawn = rand() % 80;
+
+	m_player[0].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 0);
+	m_player[1].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 1);
+	m_player[2].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 2);
+	m_player[3].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 3);
 }
 
 GamePhysics::~GamePhysics()
 {
 	Free();
-	delete m_texture;
 }
 
 void GamePhysics::EnterWorld(std::string levelName)
@@ -46,13 +49,17 @@ void GamePhysics::EnterWorld(std::string levelName)
 
 void GamePhysics::Update()
 {
-	m_world.Step(1.0f / 20.0f, 8, 5);
+	m_world.Step(1.0f / 30.0f, 6, 2);
 
-	for (int i = 0; i < 2; i++) 
+	for (int i = 0; i < 4; i++) 
 	{
 
-		m_player[i].Update();
+		m_player[i].Update(m_player);
 	}
+
+
+		
+		
 
 	m_powerupHandler.Update();
 
@@ -83,7 +90,8 @@ void GamePhysics::Render(Camera camera)
 {
 	m_transf.SetPosition(42.0, 24.0, -0.0);
 	m_floorCollider.DrawCollider(camera);
-	for (int i = 0; i < 2; i++) {
+	
+	for (int i = 0; i < 4; i++) {
 
 		m_player[i].Render(camera);
 	}
@@ -92,9 +100,10 @@ void GamePhysics::Render(Camera camera)
 
 	glDisable(GL_DEPTH_TEST);
 
-	for (int i = 0; i < 2; i++) 
-	{
+	for (int i = 0; i <4; i++) {
 
+		m_texture->Bind(0);
+		m_texture->Bind(m_texture->GetTexture());
 		m_player[i].GetHealthBar()->SetAlbedoID(m_texture->GetTexture());
 		m_player[i].GetHealthBar()->Render(camera);
 	}

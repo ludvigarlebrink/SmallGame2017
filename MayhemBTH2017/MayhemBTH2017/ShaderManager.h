@@ -39,13 +39,10 @@ public:
 	//::.. GET FUNCTIONS ..:://
 	static GLuint GetProgram(const char * name);
 
-
 private:
 	static GLuint SetShader(std::string shader, uint32_t shaderType);
 	static std::string LoadShader(const std::string& filename);
 	static GLuint CreateShader(std::string& textfile, GLenum shaderType);
-	static void Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg);
-
 
 private:
 	static ShaderManager * m_instance;

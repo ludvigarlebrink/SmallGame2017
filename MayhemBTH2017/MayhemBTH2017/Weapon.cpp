@@ -96,7 +96,7 @@ float Weapon::GetDamage()
 	return m_damage;
 }
 
-void Weapon::SetParticleTexture(Texture texture) {
+void Weapon::SetParticleTexture(Texture* texture) {
 
 	
 	m_particleTexture = texture;
@@ -149,6 +149,7 @@ void Weapon::SetCollisionSound(const char * filepath)
 	m_collisionpath = filepath;
 	
 }
+
 
 void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life)
 {

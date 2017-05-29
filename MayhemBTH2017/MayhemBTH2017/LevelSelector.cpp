@@ -41,14 +41,18 @@ void LevelSelector::InitVisuals()
 
 	for (size_t i = 0; i < m_numToShow; i++)
 	{
-		m_levelChoice[i].SetText(m_levelText[i].c_str());
-		m_levelChoice[i].SetPosition(0, 200 - (50 * i));
+		m_levelChoice[i] = new UIText;
+		m_levelChoice[i]->SetText(m_levelText[i].c_str());
+		m_levelChoice[i]->SetPosition(0, 200 - (50 * i));
+		m_levelChoice[i]->SetColor(235, 235, 180, 255);
 	}
 
 	for (size_t i = 0; i < 10; ++i)
 	{
-		m_playListText[i].SetText("");
-		m_playListText[i].SetPosition((VideoManager::Get()->GetWidth() / 2) - 250, 200 - (50 * i));
+		m_playListText[i] = new UIText;
+		m_playListText[i]->SetText("");
+		m_playListText[i]->SetPosition((VideoManager::Get()->GetWidth() / 2) - 250, 200 - (50 * i));
+		m_playListText[i]->SetColor(235, 235, 180, 255);
 	}
 
 	m_visualsInitialized = true;
@@ -57,7 +61,15 @@ void LevelSelector::InitVisuals()
 
 void LevelSelector::FreeVisuals()
 {
-	// Do something...
+	for (size_t i = 0; i < m_levelChoice.size(); i++)
+	{
+		delete m_levelChoice[i];
+	}
+
+	for (size_t i = 0; i < m_playListText.size(); i++)
+	{
+		delete m_playListText[i];
+	}
 
 	m_playListText.clear();
 	m_levelChoice.clear();
@@ -73,28 +85,28 @@ bool LevelSelector::Update()
 	{
 		if (i == m_levelSelector && !m_playListSelected)
 		{
-			m_levelChoice[i].SetScale(1.3f);
+			m_levelChoice[i]->SetScale(1.3f);
 		}
 		else
 		{
-			m_levelChoice[i].SetScale(1.0f);
+			m_levelChoice[i]->SetScale(1.0f);
 		}
 		
-		m_levelChoice[i].Render();
+		m_levelChoice[i]->Render();
 	}
 
 	for (uint32_t i = 0; i < m_numLevels; ++i)
 	{
 		if (i == m_levelSelector && m_playListSelected)
 		{
-			m_playListText[i].SetScale(1.3f);
+			m_playListText[i]->SetScale(1.3f);
 		}
 		else
 		{
-			m_playListText[i].SetScale(1.0f);
+			m_playListText[i]->SetScale(1.0f);
 		}
 
-		m_playListText[i].Render();
+		m_playListText[i]->Render();
 	}
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
@@ -109,7 +121,7 @@ bool LevelSelector::Update()
 
 			for (size_t i = 0; i < m_numToShow; i++)
 			{
-				m_levelChoice[i].SetText(m_levelText[i + m_levelInc].c_str());
+				m_levelChoice[i]->SetText(m_levelText[i + m_levelInc].c_str());
 			}
 		}
 	}
@@ -127,7 +139,7 @@ bool LevelSelector::Update()
 
 				for (size_t i = 0; i < m_numToShow; i++)
 				{
-					m_levelChoice[i].SetText(m_levelText[i + m_levelInc].c_str());
+					m_levelChoice[i]->SetText(m_levelText[i + m_levelInc].c_str());
 				}
 			}
 		}
@@ -156,11 +168,11 @@ bool LevelSelector::Update()
 			{
 				if (i == m_numLevels - 1)
 				{
-					m_playListText[i].SetText("");
+					m_playListText[i]->SetText("");
 				}
 				else
 				{
-					m_playListText[i].SetText(m_playListText[i + 1].GetText());
+					m_playListText[i]->SetText(m_playListText[i + 1]->GetText());
 				}
 			}
 
@@ -175,11 +187,11 @@ bool LevelSelector::Update()
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_A) && !m_playListSelected)
 	{
-		m_levelQueue.push_back(m_levelChoice[m_levelSelector].GetText());
+		m_levelQueue.push_back(m_levelChoice[m_levelSelector]->GetText());
 
 		if (m_numLevels < 10)
 		{
-			m_playListText[m_numLevels].SetText(m_levelChoice[m_levelSelector].GetText());
+			m_playListText[m_numLevels]->SetText(m_levelChoice[m_levelSelector]->GetText());
 			++m_numLevels;
 		}
 	}
@@ -248,7 +260,7 @@ bool LevelSelector::SaveQueue()
 
 	for (uint32_t i = 0; i < m_numLevels; i++)
 	{
-		m_levelQueue[i] = m_playListText[i].GetText();
+		m_levelQueue[i] = m_playListText[i]->GetText();
 	}
 
 	return true;

@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "TimeManager.h"
 #include "GameSettings.h"
-#include <iostream>
+
 
 #include <stdlib.h>
 #include <time.h>

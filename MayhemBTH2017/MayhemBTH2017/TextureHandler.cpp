@@ -4,7 +4,7 @@
 #include <stb_image.h>
 
 
-#include <iostream>
+
 
 TextureHandler::TextureHandler()
 {
@@ -21,7 +21,7 @@ Texture* TextureHandler::Import(const char * filepath)
 	
 	Texture* texture = new Texture;
 
-	texture->LoadTexture(imageData, width, height, numComponents);
+	texture->LoadTexture((GLuint*)imageData, width, height, numComponents);
 	stbi_image_free(imageData);
 
 	return texture;

@@ -2,7 +2,7 @@
 #define __ANTIALIASING_H__
 
 #include <glew.h>
-#include <iostream>
+#include <cstdint>
 
 class AntiAliasing
 {
@@ -20,7 +20,7 @@ public:
 
 	void Update();
 	void Reset();
-private:
+
 private:
 	GLuint m_framebuffer;
 	GLuint m_rbo;
