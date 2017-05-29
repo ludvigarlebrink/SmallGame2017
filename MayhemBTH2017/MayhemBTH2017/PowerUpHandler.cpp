@@ -8,24 +8,16 @@ PowerUpHandler::PowerUpHandler()
 
 PowerUpHandler::~PowerUpHandler()
 {
-	/*for (int i = 0; i < 7; i++)
-	{
-		delete m_pu[i];
-		m_pu.clear();
-	}*/
-	
+	Free();
 }
 
 void PowerUpHandler::Init(b2World * world)
 {
 
-	
-	m_gameLenght = GameSettings::GetGameLenght();
-
 	m_rate = GameSettings::GetPowerUpSpawnRate();
 	m_spawnPerSec = 0.05f;
 	m_nrOfSpawns = 10;
-	m_spawnTimer = m_gameLenght / (m_gameLenght * m_spawnPerSec * m_rate); // gameLenght / nrOfTotalSpawns
+	m_spawnTimer = 1 / (m_spawnPerSec * m_rate); // gameLenght / nrOfTotalSpawns
 
 	m_currSpawnNr = 0;
 
@@ -49,7 +41,7 @@ void PowerUpHandler::Free()
 {
 	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
-		m_pu.at(i)->Destroy();
+		m_pu.at(i)->Free();
 		delete m_pu[i];
 	}
 

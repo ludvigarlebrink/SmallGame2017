@@ -9,6 +9,7 @@ PowerUp::PowerUp()
 
 PowerUp::~PowerUp()
 {
+	Free();
 }
 
 void PowerUp::Create(b2World* world, glm::vec2 pos)
@@ -116,7 +117,9 @@ void PowerUp::Update()
 	}
 }
 
-void PowerUp::Destroy()
+void PowerUp::Free()
 {
 	m_boundingBox.DestroyBody();
+	m_powerupPrefab->Free();
+	delete m_powerupPrefab;
 }
