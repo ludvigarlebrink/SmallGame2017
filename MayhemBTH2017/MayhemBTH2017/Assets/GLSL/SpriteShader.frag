@@ -9,7 +9,7 @@ uniform sampler2D AlbedoMap;
 
 void main()
 {	
-	vec4 rgba = texture2D(AlbedoMap, TexCoords1.xy).rgba;
+	vec4 rgba = texture2D(AlbedoMap, vec2(TexCoords1.x, TexCoords1.y)).rgba;
 
 	if(Greyscale > 0.01)
 	{

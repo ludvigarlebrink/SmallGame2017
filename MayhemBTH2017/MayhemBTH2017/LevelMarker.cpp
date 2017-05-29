@@ -18,27 +18,27 @@ LevelMarker::LevelMarker()
 
 	verts[0].position = glm::vec3(-0.5f, -0.5f, 0.0f);
 	verts[0].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[0].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
+	verts[0].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
-	verts[1].position = glm::vec3(0.5f, -0.5f, 0.0f);
+	verts[1].position = glm::vec3(-0.5f, 0.5f, 0.0f);
 	verts[1].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[1].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+	verts[1].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
 
-	verts[2].position = glm::vec3(-0.5f, 0.5f, 0.0f);
+	verts[2].position = glm::vec3(0.5f, -0.5f, 0.0f);
 	verts[2].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+	verts[2].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 0.0f);
 
-	verts[3].position = glm::vec3(-0.5f, 0.5f, 0.0f);
+	verts[3].position = glm::vec3(0.5f, -0.5f, 0.0f);
 	verts[3].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
+	verts[3].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 0.0f);
 
-	verts[4].position = glm::vec3(0.5f, -0.5f, 0.0f);
+	verts[4].position = glm::vec3(-0.5f, 0.5f, 0.0f);
 	verts[4].normal = glm::vec3(1.0f, 1.0f, 0.0f);
-	verts[4].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
+	verts[4].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	verts[5].position = glm::vec3(0.5f, 0.5f, 0.0f);
 	verts[5].normal = glm::vec3(0.5f, 0.5f, 0.0f);
-	verts[5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 0.0f);
+	verts[5].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
 
 	m_transform.SetPosition(0.0f, 0.0f, 0.0f);
 	m_mesh.Load(verts, 6);
@@ -187,6 +187,11 @@ void LevelMarker::Render(Camera & camera, glm::vec2 m_uv)
 	m_megaTexture->Bind(0);
 
 	glm::vec4 markerLoc;
+
+	// FIX TEXTURE
+	std::cout << m_uv.x << std::endl;
+	std::cout << m_uv.y << std::endl;
+	std::cout << "- - - - - - -" << std::endl;
 	markerLoc.x = (32 * m_uv.x) / 512.0;
 	markerLoc.y = (32 * m_uv.y) / 512.0;
 	markerLoc.z = 32 / 512.0;
@@ -196,6 +201,8 @@ void LevelMarker::Render(Camera & camera, glm::vec2 m_uv)
 	m_levelShader.Bind();
 
 
+
+	
 	//temp stuff-------------------------------END
 
 	if (m_mode == ADD_SPAWN_POINT)

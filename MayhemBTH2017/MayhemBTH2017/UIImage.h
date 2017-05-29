@@ -18,11 +18,13 @@ class UIImage
 {
 public:
 	UIImage();
+	UIImage(glm::vec2 uv);
 	virtual ~UIImage();
 
 	//::.. UPDATE FUNCTIONS ..:://
 	void Render();
-	void RenderWithUV();
+	//void RenderWithUV();
+	//void UIImage::RenderWithUV(glm::vec2 uv);
 
 
 	//::.. GET FUNCTIONS ..:://
@@ -43,6 +45,7 @@ public:
 	void SetTexture(Texture * texture);
 	void SetUV(glm::vec2 uv);
 	void SetIsGreyscale(bool value);
+	void CreateMesh(glm::vec2 uv);
 
 private:
 	//::.. HELP FUNCTIONS ..:://
@@ -84,6 +87,7 @@ private:
 	int			m_isGreyscale;
 
 	static Mesh *	m_mesh;	// Shader program.
+	Mesh *			m_meshWithUV = nullptr;
 	static GLuint	m_program;
 	static GLuint	m_uniforms[NUM_UNIFORMS];
 };

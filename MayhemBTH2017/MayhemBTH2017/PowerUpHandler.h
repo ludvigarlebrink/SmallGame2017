@@ -28,7 +28,6 @@ public:
 
 private:
 
-
 	float m_threshold;
 	float m_gameLenght;
 	float m_spawnPerSec;
@@ -36,9 +35,7 @@ private:
 	int m_nrOfSpawns;
 	int m_currSpawnNr;
 	float m_spawnTimer;
-	int randomize;
-	int lastSpawned;
-	int lastSpawned2;
+	int counter;
 
 	std::vector <PowerUp*> m_pu;
 	std::vector <glm::vec2> m_randLoc;

@@ -63,6 +63,8 @@ void SoundManager::PlayMusic(std::string soundName, bool paused)
 			m_system->playSound(m_musicSounds.at(i).m_sound, m_channelGroup[SOUND_GROUP_MUSIC], paused, &m_channel[SOUND_CHANNEL_MUSIC_01]);
 		}
 	}
+
+
 }
 
 void SoundManager::PlaySFX(std::string soundName, bool paused)
@@ -166,7 +168,7 @@ void SoundManager::InitMusic()
 	for (auto & p : std::experimental::filesystem::directory_iterator(path))
 	{
 		sounds.m_soundPath = p.path().string();
-		m_system->createStream(sounds.m_soundPath.c_str(), FMOD_DEFAULT, 0, &sounds.m_sound);
+		m_system->createStream(sounds.m_soundPath.c_str(), FMOD_LOOP_NORMAL | FMOD_DEFAULT, 0, &sounds.m_sound);
 		m_musicSounds.push_back(sounds);
 		m_channel[SOUND_CHANNEL_MUSIC_01]->setChannelGroup(m_channelGroup[SOUND_GROUP_MUSIC]);
 		m_channel[SOUND_CHANNEL_MUSIC_02]->setChannelGroup(m_channelGroup[SOUND_GROUP_MUSIC]);
@@ -181,7 +183,7 @@ void SoundManager::InitAmbient()
 	for (auto & p : std::experimental::filesystem::directory_iterator(path))
 	{
 		sounds.m_soundPath = p.path().string();
-		m_system->createStream(sounds.m_soundPath.c_str(), FMOD_DEFAULT, 0, &sounds.m_sound);
+		m_system->createStream(sounds.m_soundPath.c_str(), FMOD_LOOP_NORMAL | FMOD_DEFAULT, 0, &sounds.m_sound);
 		m_ambientSounds.push_back(sounds);
 		m_channel[SOUND_CHANNEL_AMBIENT_01]->setChannelGroup(m_channelGroup[SOUND_GROUP_AMBIENT]);
 		m_channel[SOUND_CHANNEL_AMBIENT_02]->setChannelGroup(m_channelGroup[SOUND_GROUP_AMBIENT]);
