@@ -4,7 +4,7 @@
 #include "fmod.hpp"
 #include "fmod_errors.h"
 
-#include <iostream>
+
 #include <string>
 #include <experimental/filesystem>
 

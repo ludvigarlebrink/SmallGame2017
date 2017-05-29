@@ -9,7 +9,7 @@
 #include<GL\GLU.h>
 #include <SDL.h>
 #include <glm.hpp>
-#include <iostream>
+
 #include <fstream>
 #include <string>
 
@@ -42,7 +42,6 @@ private:
 	//::.. HELP FUNCTIONS ..:://
 	static GLuint CreateShader(const std::string& textfile, GLenum shaderType);
 	static std::string LoadShader(const std::string& filename);
-	static void Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg);
 
 private:
 	enum Shader

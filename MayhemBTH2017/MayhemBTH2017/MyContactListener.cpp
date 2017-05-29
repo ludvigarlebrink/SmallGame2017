@@ -108,7 +108,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 	}
 
 
-	//std::cout << "Collision" << std::endl;
+	// << "Collision" << std::endl;
 
 }
 
@@ -197,7 +197,7 @@ void MyContactListener::EndContact(b2Contact * contact)
 		static_cast<Player*>(bodyUserData)->EndContact();
 	}
 
-	//std::cout << "No Collision..." << std::endl;
+	// << "No Collision..." << std::endl;
 
 	//check if fixture A was a Player
 }

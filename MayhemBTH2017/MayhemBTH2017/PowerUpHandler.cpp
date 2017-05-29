@@ -70,8 +70,6 @@ void PowerUpHandler::Update()
 		m_pu[counter]->SetActive(true);
 		m_threshold = 0;
 
-		std::cout << "spawn" << std::endl;
-
 		counter++;
 		if (counter >= m_nrOfSpawns)
 		{

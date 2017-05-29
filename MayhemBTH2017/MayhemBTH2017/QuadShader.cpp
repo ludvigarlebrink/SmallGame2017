@@ -36,17 +36,12 @@ void QuadShader::Init(const std::string& filename, bool hasGeomShader)
 	m_shader[FRAGMENT_SHADER] = CreateShader(LoadShader(filename + ".frag"), GL_FRAGMENT_SHADER);
 
 	glAttachShader(m_programID, m_shader[VERTEX_SHADER]);
-	Debug(m_shader[VERTEX_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
 	glAttachShader(m_programID, m_shader[FRAGMENT_SHADER]);
-	Debug(m_shader[FRAGMENT_SHADER], GL_COMPILE_STATUS, false, "Error: Shader attachment failed.");
 
 	AddAttributeLocation();
 
 	glLinkProgram(m_programID);
-	Debug(m_programID, GL_LINK_STATUS, true, "Error: Linking failed: ");
-
 	glValidateProgram(m_programID);
-	Debug(m_programID, GL_VALIDATE_STATUS, true, "Error: Invalid program: ");
 
 	AddUniforms();
 }
@@ -117,10 +112,6 @@ GLuint QuadShader::CreateShader(const std::string& textfile, GLenum shaderType)
 {
 
 	GLuint shader = glCreateShader(shaderType);
-	if (shader == 0)
-	{
-		std::cout << "Error while creating shader" << std::endl;
-	}
 
 	const GLchar* shaderSource[1];
 	GLint sourceLength[1];
@@ -130,7 +121,6 @@ GLuint QuadShader::CreateShader(const std::string& textfile, GLenum shaderType)
 
 	glShaderSource(shader, 1, shaderSource, sourceLength);
 	glCompileShader(shader);
-	Debug(shader, GL_COMPILE_STATUS, false, "Compilation failed\n");
 
 	return shader;
 }
@@ -152,34 +142,4 @@ std::string QuadShader::LoadShader(const std::string& filename)
 	}
 
 	return output;
-}
-
-void QuadShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg)
-{
-
-	GLint errorCheck = 0;
-	GLchar logLength[1024] = { 0 };
-
-	if (isProgram)
-	{
-		glGetProgramiv(shader, flag, &errorCheck);
-	}
-	else
-	{
-		glGetShaderiv(shader, flag, &errorCheck);
-	}
-
-	if (errorCheck == GL_FALSE)
-	{
-		if (isProgram)
-		{
-			glGetProgramInfoLog(shader, sizeof(logLength), 0, logLength);
-		}
-		else
-		{
-			glGetShaderInfoLog(shader, sizeof(logLength), 0, logLength);
-		}
-
-		std::cout << errorMsg << ": '" << logLength << "'" << std::endl;
-	}
 }

@@ -210,7 +210,7 @@ void Player::Free()
 }
 
 void Player::Update() {
-	//std::cout << m_currentWeapon << std::endl;
+	// << m_currentWeapon << std::endl;
 	if (m_boundingBox.getBody()->GetPosition().y < -5.0f)
 	{
 		m_dead = true;
@@ -303,8 +303,6 @@ void Player::Update() {
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
 
-
-			std::cout << m_life << std::endl;
 			if (m_life <= 0.0f)
 			{
 				int hitSound = rand() % 3;

@@ -67,7 +67,7 @@ UIImage::~UIImage()
 	{
 		delete m_texture;
 	}
-}
+
 	delete m_meshWithUV;
 }
 

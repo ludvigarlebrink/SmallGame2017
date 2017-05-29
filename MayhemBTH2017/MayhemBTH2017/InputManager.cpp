@@ -79,7 +79,7 @@ void InputManager::Init()
 	m_nrOfPlayers = 1;
 	m_maxNrOfPlayers = 4;
 
-	std::cout << "INITTED" << std::endl;
+	// << "INITTED" << std::endl;
 }
 
 void InputManager::ShutDown()

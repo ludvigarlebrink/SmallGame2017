@@ -34,7 +34,6 @@ void LevelHandler::Init()
 		file.read(reinterpret_cast<char*>(nameBuffer), m_size);
 		nameBuffer[m_size] = '\0';
 		m_names[i] = nameBuffer;
-		std::cout << m_names[i] << " : " << m_nrOfMaps[0] << std::endl;
 	}
 
 	file.close();
@@ -135,11 +134,7 @@ void LevelHandler::Export(Level & level)
 	//output.write(reinterpret_cast<char*>(texData), sizeof(uint8_t) * (level.SIZE_X * level.SIZE_Y) * 4);
 	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(m_height * m_width) * 4);
 
-
-	std::cout << "saved" << std::endl;
 	output.close();
-
-
 }
 
 
@@ -174,14 +169,12 @@ bool LevelHandler::ImportRegister(std::string & textField)
 	// Resize to fit the levels.
 	m_register.resize(numLevels);
 
-	std::cout << "import numLevels: " << numLevels << std::endl;
 	// Loop through the level cache and read from file.
 	for (uint32_t i = 0; i < numLevels; i++)
 	{
 		// Size of the file string.
 		uint32_t stringSize = static_cast<uint32_t>(m_register[i].name.length());
 		file.read(reinterpret_cast<char*>(&stringSize), sizeof(uint32_t));
-		std::cout << stringSize << std::endl;
 
 		// The acual string.
 		for (uint32_t j = 0; j < stringSize; j++)
@@ -191,11 +184,6 @@ bool LevelHandler::ImportRegister(std::string & textField)
 			m_register[i].name.push_back(string);
 
 		}
-		// Add to the register.
-		/*m_register[i].name = string;
-		m_register[i].level = nullptr;*/
-		std::cout << m_register[i].name.c_str() << std::endl;
-
 	}
 
 	// Close the file.
@@ -223,7 +211,6 @@ bool LevelHandler::ExportRegister()
 	// Number of levels.
 	uint32_t numLevels = static_cast<uint32_t>(m_register.size());
 	file.write(reinterpret_cast<char*>(&numLevels), sizeof(uint32_t));
-	std::cout << "export numLevels: " << numLevels << std::endl;
 
 	// Loop through the level cache and write to file.
 	for (uint32_t i = 0; i < numLevels; i++)
@@ -261,8 +248,6 @@ bool LevelHandler::TestImportRegister()
 
 	file.read(reinterpret_cast<char*>(&m_numLevels), sizeof(uint32_t));
 
-	std::cout << "Import m_numLevels: " << m_numLevels << std::endl;
-
 	// Close the file.
 	file.close();
 
@@ -294,8 +279,6 @@ bool LevelHandler::TestExportRegister()
 		file.write(reinterpret_cast<char*>(&m_numLevels), sizeof(uint32_t));
 	}
 
-
-	std::cout << "Export m_numLevels: " << m_numLevels << std::endl;
 	// Close the file.
 	file.close();
 

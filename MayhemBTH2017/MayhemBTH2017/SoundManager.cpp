@@ -134,21 +134,8 @@ void SoundManager::Update()
 
 void SoundManager::Init()
 {
-
-	if (FMOD::System_Create(&m_system) != FMOD_OK)
-	{
-		std::cout << "FMOD System_Create Error!" << std::endl;
-		return;
-	}
-
 	int driverCount = 0;
 	m_system->getNumDrivers(&driverCount);
-
-	if (driverCount == 0)
-	{
-		std::cout << "FMOD driverCount Error!" << std::endl;
-		return;
-	}
 
 	m_system->init(36, FMOD_INIT_NORMAL, NULL);
 

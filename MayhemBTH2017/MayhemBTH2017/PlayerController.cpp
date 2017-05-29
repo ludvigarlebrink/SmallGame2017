@@ -78,11 +78,8 @@ void PlayerController::AddPlayerController(int playerControllerID)
 
 	if (SDL_JoystickIsHaptic(joy)) {
 		m_haptic = SDL_HapticOpenFromJoystick(joy);
-		printf("Haptic Effects: %d\n", SDL_HapticNumEffects(m_haptic));
-		printf("Haptic Query: %x\n", SDL_HapticQuery(m_haptic));
 		if (SDL_HapticRumbleSupported(m_haptic)) {
 			if (SDL_HapticRumbleInit(m_haptic) != 0) {
-				printf("Haptic Rumble Init: %s\n", SDL_GetError());
 				SDL_HapticClose(m_haptic);
 				m_haptic = 0;
 			}

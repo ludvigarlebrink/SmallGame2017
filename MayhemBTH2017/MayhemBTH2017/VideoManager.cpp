@@ -107,12 +107,14 @@ void VideoManager::Init()
 
 	if (status != GLEW_OK)
 	{
-		std::cout << "GLEW STATUS FAIL\n";
+		// << "GLEW STATUS FAIL\n";
 	}
 
 	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 	glEnable(GL_DEBUG_OUTPUT);
+#ifdef _DEBUG
 	glDebugMessageCallback(openglCallbackFunction, nullptr);
+#endif
 	glDebugMessageControl(
 		GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
 
