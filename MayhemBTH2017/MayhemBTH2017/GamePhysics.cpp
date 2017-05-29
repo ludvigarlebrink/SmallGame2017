@@ -25,6 +25,7 @@ GamePhysics::~GamePhysics()
 
 void GamePhysics::EnterWorld(std::string levelName)
 {
+	m_texture = m_textureHandler.Import(".\\Assets\\Textures\\health.jpg");
 	m_time = TimeManager::Get();
 
 	m_floorCollider.CreateBoundingBoxes(&m_world, levelName);
@@ -89,11 +90,14 @@ void GamePhysics::Render(Camera camera) {
 	
 	m_powerupHandler.Render(camera);
 
-
-	//glClear(GL_DEPTH_BUFFER_BIT);
+	glDisable(GL_DEPTH_TEST);
 
 	for (int i = 0; i < 2; i++) {
 
+		m_texture.Bind(0);
+		m_texture.Bind(m_texture.GetTexture());
+		m_player[i].GetHealthBar()->SetAlbedoID(m_texture.GetTexture());
 		m_player[i].GetHealthBar()->Render(camera);
 	}
+	glEnable(GL_DEPTH_TEST);
 }

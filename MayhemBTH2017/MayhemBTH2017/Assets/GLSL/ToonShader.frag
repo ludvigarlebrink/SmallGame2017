@@ -18,10 +18,10 @@ void main()
 	vec3 col2 = vec3(0.6);
 	vec3 col3 = vec3(0.9);
 
-	vec3 lightDir = vec3(0.0f, 0.0f, 3.0f);
+	vec3 lightDir = vec3(12.0f, 51.0f, 3.0f);
 	lightDir = normalize(lightDir);
 
-	vec3 ambient = vec3(0.2f);
+	vec3 ambient = vec3(25.8f);
 	
 	float intensity = clamp(dot(lightDir, Normal1), 0, 1);
 	vec3 rgb = texture2D(AlbedoMap, vec2(TexCoords1.x, 1 - TexCoords1.y)).rgb;

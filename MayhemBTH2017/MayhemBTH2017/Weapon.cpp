@@ -224,8 +224,8 @@ void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 		Transform temptransform;
 
 
-		projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
-
+	projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
+		
 
 
 		m_projectiles.push_back(projectile);
