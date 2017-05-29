@@ -41,7 +41,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
 	m_world = nullptr;
-	m_deathSkull = nullptr;
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
 	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\debree.png");
@@ -70,9 +69,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//SET BOUNDING BOX SIZE 
 	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_playerPrefab->GetPlayerPrefab()->GetScale().x + 1, m_playerPrefab->GetPlayerPrefab()->GetScale().y * 3.0f));
 	//sprite for size of bouding box
-
-	//m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
-
+	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
@@ -105,10 +102,8 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	Prefab * gun = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
-	m_deathSkull = PrefabManager::Instantiate("deathSkull", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar->Create();
-	m_deathSkull->Create();
 
 	gun->SetScale(glm::vec3(2, 2, 2));
 
@@ -177,9 +172,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBar->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
-	m_deathSkull->SetScale(glm::vec3(1, 1, 1));
-	m_deathSkull->Rotate(glm::vec3(0.0, 90.0, 0.0));
-
 	//Set fixture 
 
 }
@@ -204,11 +196,14 @@ void Player::Free()
 		m_healthBar = nullptr;
 	}
 
-	if (m_deathSkull != nullptr)
-	{
-		delete m_deathSkull;
-		m_deathSkull = nullptr;
-	}
+	delete m_particleTexture1;
+	delete m_particleTexture2;
+	delete m_particleTexture3;
+	delete m_particleTexture4;
+	delete m_particleTexture5;
+	delete m_particleTexture6;
+	delete m_particleTexture7;
+
 
 
 	// LUKAS DELETE WORLD
@@ -238,38 +233,38 @@ void Player::Update() {
 
 			if (m_currentWeapon == 0) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 1.0, 0.0, 1.0), 5.5, 50, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture1);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture1);
 
 			}
 
 			if (m_currentWeapon == 1) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(1.0, 0.0, 0.0, 1.0), 6.0, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture2);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture2);
 			}
 
 			if (m_currentWeapon == 2) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 1.0, 1.0), 6.0f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture3);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture3);
 			}
 
 			if (m_currentWeapon == 3) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(1.0, 1.0, 0.0, 1.0), 6.0f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture4);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture4);
 			}
 
 			if (m_currentWeapon == 4) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 1.0, 1.0, 1.0), 15.0f, 3, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture5);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture5);
 
 			}
 			if (m_currentWeapon == 5) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 5.8f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture6);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture6);
 			}
 
 			if (m_currentWeapon == 6) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 1.0, 1.0), 5.8f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture7);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture7);
 			}
 
 		}
@@ -359,8 +354,6 @@ void Player::Update() {
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
 			m_dead = false;
 		}
-
-
 	}
 
 

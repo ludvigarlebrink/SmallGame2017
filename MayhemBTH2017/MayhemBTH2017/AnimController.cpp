@@ -19,6 +19,11 @@ AnimController::~AnimController()
 
 void AnimController::Free()
 {
+	for (size_t i = 0; i < m_clips.size(); i++)
+	{
+		delete m_clips[i];
+	}
+
 	m_clips.clear();
 	delete m_skel;
 }

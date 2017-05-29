@@ -48,7 +48,7 @@ LevelMarker::LevelMarker()
 
 LevelMarker::~LevelMarker()
 {
-
+	delete m_megaTexture;
 }
 
 void LevelMarker::MoveUp(float speed)
@@ -184,7 +184,7 @@ void LevelMarker::Render(Camera & camera, glm::vec2 m_uv)
 {
 	ClampPos();
 	//temp stuff-------------------------------
-	m_megaTexture.Bind(0);
+	m_megaTexture->Bind(0);
 
 	glm::vec4 markerLoc;
 

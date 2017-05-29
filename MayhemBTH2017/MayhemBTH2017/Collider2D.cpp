@@ -10,6 +10,7 @@ Collider2D::Collider2D()
 
 Collider2D::~Collider2D()
 {
+	delete m_megaTexture;
 }
 
 void Collider2D::SetBoxCollider(glm::vec2 min, glm::vec2 max)
@@ -30,7 +31,7 @@ void Collider2D::DrawCollider(Camera camera)
 {
 	m_transf.SetPosition(42.0, 24.0, -0.0);
 	m_shader.Update(m_transf, camera);
-	m_megaTexture.Bind(0);
+	m_megaTexture->Bind(0);
 	m_level.Render(camera);	
 }
 

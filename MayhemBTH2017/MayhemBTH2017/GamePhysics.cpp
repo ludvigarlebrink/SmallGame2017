@@ -21,6 +21,7 @@ GamePhysics::GamePhysics()
 GamePhysics::~GamePhysics()
 {
 	Free();
+	delete m_texture;
 }
 
 void GamePhysics::EnterWorld(std::string levelName)
@@ -91,11 +92,10 @@ void GamePhysics::Render(Camera camera)
 
 	glDisable(GL_DEPTH_TEST);
 
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 2; i++) 
+	{
 
-		m_texture.Bind(0);
-		m_texture.Bind(m_texture.GetTexture());
-		m_player[i].GetHealthBar()->SetAlbedoID(m_texture.GetTexture());
+		m_player[i].GetHealthBar()->SetAlbedoID(m_texture->GetTexture());
 		m_player[i].GetHealthBar()->Render(camera);
 	}
 	glEnable(GL_DEPTH_TEST);
