@@ -137,7 +137,6 @@ void SoundManager::Init()
 
 	if (FMOD::System_Create(&m_system) != FMOD_OK)
 	{
-		std::cout << "FMOD System_Create Error!" << std::endl;
 		return;
 	}
 
@@ -146,7 +145,6 @@ void SoundManager::Init()
 
 	if (driverCount == 0)
 	{
-		std::cout << "FMOD driverCount Error!" << std::endl;
 		return;
 	}
 

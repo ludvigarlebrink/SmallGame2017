@@ -357,7 +357,6 @@ void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, glm::vec
 
 	if (pos < 0)
 	{
-		std::cout << "RETURN!" << std::endl;
 		return;
 	}
 

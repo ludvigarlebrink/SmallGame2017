@@ -11,7 +11,6 @@ ParticleTest::ParticleTest()
 
 void ParticleTest::Render()
 {
-	//std::cout << "render" << std::endl;
 	//Camera camera;
 	//camera.SetPosition(glm::vec3(0, 2, -0));
 	//Transform transform;

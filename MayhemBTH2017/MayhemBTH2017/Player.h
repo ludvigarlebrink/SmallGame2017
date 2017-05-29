@@ -68,6 +68,7 @@ private:
 	InputManager *	m_input;
 	b2Fixture *		m_filter;
 	Box				m_boundingBox;
+	Box				m_skullBoundingBox;
 	PlayerPrefab *	m_playerPrefab;
 	Sprite			m_playerSprite;
 	Transform		m_transf;
@@ -96,7 +97,6 @@ private:
 	b2World *	m_world;
 
 	bool		m_collidedPowerUp;
-	Mesh		m_goldSkull;
 
 	b2FixtureDef m_fixture;
 	enum _entityCategory {
