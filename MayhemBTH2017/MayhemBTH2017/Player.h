@@ -13,7 +13,7 @@
 #include "ScoreManager.h"
 #include "PostProcessingManager.h"
 #include "SoundManager.h"
-
+#include "AtomicBomb.h"
 class Player : public Collidable
 {
 public:
@@ -97,14 +97,32 @@ private:
 	bool		m_collidedPowerUp;
 
 	b2FixtureDef m_fixture;
+	//enum _entityCategory {
+	//	BOUNDARY = 0x0001,
+	//	POWERUP = 0x0008,
+	//	PLAYER1 = 0x0002,
+	//	PLAYER3 = 0x0064,
+	//	PLAYER2 = 0x0016,
+	//	PLAYER4 = 0x00128,
+	//	PROJECTILE1 = 0x0004,
+	//	PROJECTILE2 = 0x0032,
+	//	PROJECTILE3 = 0x00256,
+	//	PROJECTILE4 = 0x00512,
+	//};
+
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
-		PLAYER1 = 0x0002,
-		PROJECTILE1 = 0x0004,
-		POWERUP = 0x0008,
-		PLAYER2 = 0x0016,
-		PROJECTILE2 = 0x0032,
+		POWERUP = 0x0002,
+		PLAYER1 = 0x0004,
+		PLAYER3 = 0x0008,
+		PLAYER2 = 0x0010,
+		PLAYER4 = 0x0020,
+		PROJECTILE1 = 0x0040,
+		PROJECTILE2 = 0x0080,
+		PROJECTILE3 = 0x0100,
+		PROJECTILE4 = 0x0120,
 	};
+
 };
 
 #endif

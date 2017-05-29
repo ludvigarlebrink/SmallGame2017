@@ -14,10 +14,12 @@ GamePhysics::GamePhysics()
 	}
 
 	m_loadWorld = false;
-	m_player[0].Init(&m_world, glm::vec2(42, 24), glm::vec2(2.0, 5.0), 0);
-	m_player[1].Init(&m_world, glm::vec2(15, 24), glm::vec2(2.0, 5.0), 1);
-	m_player[2].Init(&m_world, glm::vec2(42, 24), glm::vec2(2.0, 5.0), 2);
-	m_player[3].Init(&m_world, glm::vec2(15, 24), glm::vec2(2.0, 5.0), 3);
+	int spawn = rand() % 80;
+
+	m_player[0].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 0);
+	m_player[1].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 1);
+	m_player[2].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 2);
+	m_player[3].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 3);
 }
 
 GamePhysics::~GamePhysics()
@@ -54,8 +56,7 @@ void GamePhysics::Update()
 
 		m_player[i].Update();
 	}
-		m_player[0].SetEnemyWeaponDamage(m_player[1].GetWeaponDamage());
-		m_player[1].SetEnemyWeaponDamage(m_player[0].GetWeaponDamage());
+
 
 		
 		
@@ -89,6 +90,7 @@ void GamePhysics::Render(Camera camera)
 {
 	m_transf.SetPosition(42.0, 24.0, -0.0);
 	m_floorCollider.DrawCollider(camera);
+	
 	for (int i = 0; i < 4; i++) {
 
 		m_player[i].Render(camera);

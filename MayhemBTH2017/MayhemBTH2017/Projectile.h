@@ -103,19 +103,18 @@ private:
 	float m_restitution;
 	float m_collisionTimer;
 	bool m_collision;
-
-
+	
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
-		POWERUP = 0x0008,
-		PLAYER1 = 0x0002,
-		PLAYER3 = 0x0064,
-		PLAYER2 = 0x0016,
-		PLAYER4 = 0x00128,
-		PROJECTILE1 = 0x0004,
-		PROJECTILE2 = 0x0032,
-		PROJECTILE3 = 0x00256,
-		PROJECTILE4 = 0x00512,
+		POWERUP = 0x0002,
+		PLAYER1 = 0x0004,
+		PLAYER3 = 0x0008,
+		PLAYER2 = 0x0010,
+		PLAYER4 = 0x0020,
+		PROJECTILE1 = 0x0040,
+		PROJECTILE2 = 0x0080,
+		PROJECTILE3 = 0x0100,
+		PROJECTILE4 = 0x0120,
 	};
 };
 

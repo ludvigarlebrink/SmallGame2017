@@ -152,7 +152,6 @@ void Level::Clear()
 //::.. HELP FUNCTIONS ..:://
 void Level::Init()
 {
-	m_debugShader.Init("DebugShader", false, 0);
 	m_debugShader.Init(".\\Assets\\GLSL\\LevelShader", false, false);
 	InitGrid();
 	InitMesh();
