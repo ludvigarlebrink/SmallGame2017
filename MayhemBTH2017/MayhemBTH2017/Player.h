@@ -55,13 +55,13 @@ public:
 
 private:
 
-	Texture m_particleTexture1;
-	Texture m_particleTexture2;
-	Texture m_particleTexture3;
-	Texture	m_particleTexture4;
-	Texture	m_particleTexture5;
-	Texture	m_particleTexture6;
-	Texture	m_particleTexture7;
+	Texture * m_particleTexture1;
+	Texture * m_particleTexture2;
+	Texture * m_particleTexture3;
+	Texture * m_particleTexture4;
+	Texture * m_particleTexture5;
+	Texture * m_particleTexture6;
+	Texture * m_particleTexture7;
 
 	TextureHandler	m_textureHandler;
 	ParticleSystem	m_particles;

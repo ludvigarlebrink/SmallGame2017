@@ -189,12 +189,20 @@ void Player::Free()
 		delete m_playerPrefab;
 		m_playerPrefab = nullptr;
 	}
-	
+
 	if (m_healthBar != nullptr)
 	{
 		delete m_healthBar;
 		m_healthBar = nullptr;
 	}
+
+	delete m_particleTexture1;
+	delete m_particleTexture2;
+	delete m_particleTexture3;
+	delete m_particleTexture4;
+	delete m_particleTexture5;
+	delete m_particleTexture6;
+	delete m_particleTexture7;
 
 
 
@@ -225,38 +233,38 @@ void Player::Update() {
 
 			if (m_currentWeapon == 0) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 1.0, 0.0, 1.0), 5.5, 50, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture1);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture1);
 
 			}
 
 			if (m_currentWeapon == 1) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(1.0, 0.0, 0.0, 1.0), 6.0, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture2);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture2);
 			}
 
 			if (m_currentWeapon == 2) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 1.0, 1.0), 6.0f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture3);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture3);
 			}
 
 			if (m_currentWeapon == 3) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(1.0, 1.0, 0.0, 1.0), 6.0f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture4);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture4);
 			}
 
 			if (m_currentWeapon == 4) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 1.0, 1.0, 1.0), 15.0f, 3, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture5);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture5);
 
 			}
 			if (m_currentWeapon == 5) {
-				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0),5.8f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture6);
+				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 5.8f, 10, 0.0f);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture6);
 			}
 
 			if (m_currentWeapon == 6) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 1.0, 1.0), 5.8f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture7);
+				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture7);
 			}
 
 		}
@@ -268,21 +276,21 @@ void Player::Update() {
 		if (m_collidedProjectile)
 		{
 			int hitSound = rand() % 4;
-			
-			if (hitSound == 0 && m_life>0.0f) {
+
+			if (hitSound == 0 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit1");
 				m_soundManager->PlaySFX("man_scream1");
 			}
-			if (hitSound == 1 && m_life>0.0f) {
+			if (hitSound == 1 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit2");
 				m_soundManager->PlaySFX("man_scream2");
 			}
-			if (hitSound == 2 && m_life>0.0f) {
+			if (hitSound == 2 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit3");
 				m_soundManager->PlaySFX("man_scream3");
 			}
 
-			if (hitSound == 3 && m_life>0.0f) {
+			if (hitSound == 3 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit3");
 				m_soundManager->PlaySFX("man_scream4");
 			}
@@ -294,7 +302,7 @@ void Player::Update() {
 			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
-			
+
 
 			std::cout << m_life << std::endl;
 			if (m_life <= 0.0f)
@@ -375,7 +383,7 @@ void Player::Update() {
 		if (m_isMidAir) {
 
 			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-150)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
-			
+
 		}
 		if (!m_isMidAir) {
 

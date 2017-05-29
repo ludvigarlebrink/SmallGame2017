@@ -10,11 +10,7 @@ Prefab::Prefab()
 
 Prefab::~Prefab()
 {
-	if (m_mesh != nullptr)
-	{
-		delete m_mesh;
-		m_mesh = nullptr;
-	}
+	Free();
 }
 
 void Prefab::Update()
@@ -162,6 +158,18 @@ void Prefab::Create()
 
 void Prefab::Free()
 {
+	if (m_mesh != nullptr)
+	{
+		delete m_mesh;
+		m_mesh = nullptr;
+	}
+
+	if (m_animController != nullptr)
+	{
+		delete m_animController;
+	}
+
+	glDeleteTextures(1, &m_albedoID);
 }
 
 

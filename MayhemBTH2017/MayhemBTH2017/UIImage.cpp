@@ -37,12 +37,17 @@ UIImage::UIImage()
 	}
 
 	m_showTexture = false;
+
+	m_texture = nullptr;
 }
 
 
 UIImage::~UIImage()
 {
-
+	if (m_texture != nullptr)
+	{
+		delete m_texture;
+	}
 }
 
 
@@ -86,7 +91,7 @@ void UIImage::Render()
 
 	if (m_showTexture)
 	{
-		m_texture.Bind(0);
+		m_texture->Bind(0);
 	}
 	else
 	{
@@ -125,8 +130,8 @@ void UIImage::Render()
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
 
-
 	glDeleteTextures(1, &texture);
+
 	SDL_FreeSurface(surface);
 }
 
@@ -179,7 +184,7 @@ void UIImage::RenderWithUV()
 
 	if (m_showTexture)
 	{
-		m_texture.Bind(0);
+		m_texture->Bind(0);
 	}
 	else
 	{
@@ -256,7 +261,7 @@ float UIImage::GetPosY()
 	return m_posY;
 }
 
-Texture UIImage::GetTexture()
+Texture * UIImage::GetTexture()
 {
 	return m_texture;
 }
@@ -308,7 +313,7 @@ void UIImage::SetTexture(const char * filepath)
 	m_showTexture = true;
 }
 
-void UIImage::SetTexture(Texture texture)
+void UIImage::SetTexture(Texture * texture)
 {
 	m_texture = texture;
 	m_showTexture = true;

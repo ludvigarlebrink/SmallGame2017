@@ -30,7 +30,7 @@ public:
 	int32_t GetSizeY();
 	float GetPosX();
 	float GetPosY();
-	Texture GetTexture();
+	Texture * GetTexture();
 	glm::vec2 GetUV();
 
 	//::.. SET FUNCTIONS ..:://
@@ -40,7 +40,7 @@ public:
 	void SetAlpha(float alpha);
 	void SetAlpha(uint8_t alpha);
 	void SetTexture(const char* filepath);
-	void SetTexture(Texture texture);
+	void SetTexture(Texture * texture);
 	void SetUV(glm::vec2 uv);
 	void SetIsGreyscale(bool value);
 
@@ -79,7 +79,7 @@ private:
 	glm::vec2 m_UV;	
 
 	SDL_Color	m_color;
-	Texture		m_texture;
+	Texture *	m_texture;
 	bool		m_showTexture;
 	int			m_isGreyscale;
 

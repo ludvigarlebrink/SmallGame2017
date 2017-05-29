@@ -119,9 +119,10 @@ Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, std::s
 
 			// Set animations.
 			AnimClip * animClip = new AnimClip;
-			KeyFrame * key = new KeyFrame[30];
+			int numKeyFrames = animHandler->GetKeyFramedJoints()[0].numKeyframes;
+			KeyFrame * key = new KeyFrame[numKeyFrames];
 
-			for (uint32_t i = 0; i < 30; i++)
+			for (uint32_t i = 0; i < numKeyFrames; i++)
 			{
 				key[i].localTx = new glm::mat4[animHandler->GetNumKeyFramedJoints()];
 
@@ -132,7 +133,7 @@ Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, std::s
 			}
 
 			animClip->SetName("SUPER");
-			animClip->SetAnimation(key, 1, 59);
+			animClip->SetAnimation(key, 0, numKeyFrames);
 
 			animCtrl->AddAnimation(animClip);
 		}
