@@ -18,8 +18,8 @@ void main()
 
 	
 	vec4 tex=texture(DiffuseMap, UV);
-	
-	FragColor = color2*tex;
+	tex.a*=color2.a;
+	FragColor = tex;
 	
 	
 

@@ -8,6 +8,8 @@
 #include "Contact.h"
 #include "MyContactListener.h"
 #include "PowerUpHandler.h"
+#include "Texture.h"
+#include "TextureHandler.h"
 
 
 class GamePhysics
@@ -33,9 +35,12 @@ private:
 	Box					m_powerUpBox;
 	Player				m_player[4];
 	Collider2D			gameFloor;
+	Texture m_texture;
+	TextureHandler m_textureHandler;
+
 
 	Level		m_level;
-
+		
 	TimeManager* m_time;
 	GLfloat				m_jumpTimer = 0.0f;
 	bool				m_isMidAir;
