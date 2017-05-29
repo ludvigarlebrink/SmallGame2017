@@ -16,7 +16,6 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
 	m_world = nullptr;
-	m_skullImage = nullptr;
 }
 
 Player::Player()
@@ -42,11 +41,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
 	m_world = nullptr;
-	m_skullImage = nullptr;
-
-	m_skullImage = new UIImage;
-	m_skullImage->SetSize(50, 50);
-	m_skullImage->SetColor(255, 0, 0, 255);
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
 	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\debree.png");
@@ -71,12 +65,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	SetControllerID(controllerID);
 
 	m_playerPrefab = new PlayerPrefab(m_controllerID);
-	m_deathSkull = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
-	m_deathSkull->Create();
 
 	//SET BOUNDING BOX SIZE 
 	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_playerPrefab->GetPlayerPrefab()->GetScale().x + 1, m_playerPrefab->GetPlayerPrefab()->GetScale().y * 3.0f));
-	m_skullBoundingBox.InitDynamic(world, pos, glm::vec2(m_deathSkull->GetScale().x, m_deathSkull->GetScale().y));
 	//sprite for size of bouding box
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
@@ -181,10 +172,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBar->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
-	m_deathSkull->SetScale(glm::vec3(1, 1, m_life * 10));
-	m_deathSkull->Rotate(glm::vec3(0.0, 90.0, 0.0));
-	m_deathSkull->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
-
 	//Set fixture 
 
 }
@@ -207,12 +194,6 @@ void Player::Free()
 	{
 		delete m_healthBar;
 		m_healthBar = nullptr;
-	}
-
-	if (m_deathSkull != nullptr)
-	{
-		delete m_deathSkull;
-		m_deathSkull = nullptr;
 	}
 
 	delete m_particleTexture1;
@@ -239,9 +220,6 @@ void Player::Update() {
 	{
 		m_currentWeapon = 0;
 	}
-
-	m_deathSkull->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 2 + 5, 0.0));
-	m_deathSkull->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 10.5f, m_healthBar->GetPosition().y + 2, m_healthBar->GetPosition().z));
 
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
@@ -360,14 +338,13 @@ void Player::Update() {
 		m_contact = false;
 	}
 
-	
+
+
 
 	if (m_dead)
 	{
-		m_skullImage->Render();
 		m_time += TimeManager::Get()->GetDeltaTime();
 		Respawn(glm::vec2(70, 70));
-
 
 		m_currentWeapon = 0;
 
@@ -455,7 +432,6 @@ void Player::Update() {
 	GLfloat xScale = GetBox().getScale().x;
 	GLfloat yScale = GetBox().getScale().y;
 
-	m_playerPrefab->GetPlayerPrefab()->SetPosition(glm::vec3(xPos + 0.5, yPos + GetBox().getScale().y - 6, 0));
 
 	//////////////////////////////////////////////////////////
 	for (int i = 0; i < 7; i++)

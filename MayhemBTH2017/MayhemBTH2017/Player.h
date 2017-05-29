@@ -89,10 +89,8 @@ private:
 	float	m_life;
 
 	Prefab *		m_healthBar;
-	Prefab *		m_deathSkull;
 	int				m_hitByProjectileID;
 	SoundManager *	m_soundManager;
-	UIImage		*	m_skullImage;
 
 	Weapon *		m_weapons[7];
 	int				m_currentWeapon;
