@@ -135,6 +135,8 @@ void LevelHandler::Export(Level & level)
 	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(m_height * m_width) * 4);
 
 	output.close();
+
+
 }
 
 
@@ -184,6 +186,10 @@ bool LevelHandler::ImportRegister(std::string & textField)
 			m_register[i].name.push_back(string);
 
 		}
+		// Add to the register.
+		/*m_register[i].name = string;
+		m_register[i].level = nullptr;*/
+
 	}
 
 	// Close the file.
@@ -247,6 +253,7 @@ bool LevelHandler::TestImportRegister()
 	}
 
 	file.read(reinterpret_cast<char*>(&m_numLevels), sizeof(uint32_t));
+
 
 	// Close the file.
 	file.close();

@@ -106,10 +106,6 @@ void MyContactListener::BeginContact(b2Contact * contact)
 		static_cast<Player*>(bodyUserData)->StartContact(false, true);
 		static_cast<PowerUp*>(bodyUserData2)->CollidedWithPlayer(true);
 	}
-
-
-	// << "Collision" << std::endl;
-
 }
 
 void MyContactListener::EndContact(b2Contact * contact)
@@ -196,8 +192,4 @@ void MyContactListener::EndContact(b2Contact * contact)
 	{
 		static_cast<Player*>(bodyUserData)->EndContact();
 	}
-
-	// << "No Collision..." << std::endl;
-
-	//check if fixture A was a Player
 }

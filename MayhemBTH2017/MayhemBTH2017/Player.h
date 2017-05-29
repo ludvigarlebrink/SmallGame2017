@@ -14,6 +14,8 @@
 #include "PostProcessingManager.h"
 #include "SoundManager.h"
 
+#include "UIImage.h"
+
 class Player : public Collidable
 {
 public:
@@ -68,6 +70,7 @@ private:
 	InputManager *	m_input;
 	b2Fixture *		m_filter;
 	Box				m_boundingBox;
+	Box				m_skullBoundingBox;
 	PlayerPrefab *	m_playerPrefab;
 	Sprite			m_playerSprite;
 	Transform		m_transf;
@@ -86,8 +89,10 @@ private:
 	float	m_life;
 
 	Prefab *		m_healthBar;
+	Prefab *		m_deathSkull;
 	int				m_hitByProjectileID;
 	SoundManager *	m_soundManager;
+	UIImage		*	m_skullImage;
 
 	Weapon *		m_weapons[7];
 	int				m_currentWeapon;
