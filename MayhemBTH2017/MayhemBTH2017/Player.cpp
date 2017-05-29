@@ -16,7 +16,6 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
 	m_world = nullptr;
-	m_skullImage = nullptr;
 }
 
 Player::Player()
@@ -42,11 +41,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
 	m_world = nullptr;
-	m_skullImage = nullptr;
-
-	m_skullImage = new UIImage;
-	m_skullImage->SetSize(50, 50);
-	m_skullImage->SetColor(255, 0, 0, 255);
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
 	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\debree.png");
@@ -71,13 +65,11 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	SetControllerID(controllerID);
 
 	m_playerPrefab = new PlayerPrefab(m_controllerID);
-	m_deathSkull = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
-	m_deathSkull->Create();
 
 	//SET BOUNDING BOX SIZE 
 	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_playerPrefab->GetPlayerPrefab()->GetScale().x + 1, m_playerPrefab->GetPlayerPrefab()->GetScale().y * 3.0f));
-	m_skullBoundingBox.InitDynamic(world, pos, glm::vec2(m_deathSkull->GetScale().x, m_deathSkull->GetScale().y));
 	//sprite for size of bouding box
+	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
@@ -91,14 +83,24 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	if (m_controllerID == 0)
 	{
 		filter.categoryBits = PLAYER1;
-		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE2;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE2 | PROJECTILE3 | PROJECTILE4;
 	}
-	else if (m_controllerID == 1)
+	if (m_controllerID == 1)
 	{
 		filter.categoryBits = PLAYER2;
-		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE3 | PROJECTILE4;
 	}
 
+	if (m_controllerID == 2)
+	{
+		filter.categoryBits = PLAYER3;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE4;
+	}
+	if (m_controllerID == 3)
+	{
+		filter.categoryBits = PLAYER4;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE3;
+	}
 	GetBox().getFixture()->SetFilterData(filter);
 
 	GetBox().getBody()->SetUserData(this);
@@ -112,7 +114,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar->Create();
-
 
 	gun->SetScale(glm::vec3(2, 2, 2));
 
@@ -130,45 +131,45 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	//	m_weapon = Weapon(gun, projectile);
 	m_weapons[0] = new Weapon(gun, projectile, m_controllerID);
-	m_weapons[0]->SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.15f, 10, m_controllerID, 3.0f);
+	m_weapons[0]->SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.15f, 10, m_controllerID, 0.0);
 	m_weapons[0]->SetWeaponSound("assault_rifle");
 	m_weapons[0]->SetFirePower(150.0);
 	m_weapons[0]->SetDamage(0.1f);
 
 
 	m_weapons[1] = new Weapon(gun, projectile2, m_controllerID);
-	m_weapons[1]->SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 3.0f, 10, m_controllerID, 0.7f);
+	m_weapons[1]->SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 3.0f, 10, m_controllerID, 0.0);
 	m_weapons[1]->SetWeaponSound("scifi_weapon");
 	m_weapons[1]->SetFirePower(20.0f);
 	m_weapons[1]->SetDamage(1.0f);
 
 	m_weapons[2] = new Weapon(gun, projectile3, m_controllerID);
-	m_weapons[2]->SetProjectileType(0.5f, 1.0f, 0.0f, 0.0f, 0.5f, 15, m_controllerID, 2.0f);
+	m_weapons[2]->SetProjectileType(0.9f, 1.0f, 0.0f, 0.0f, 0.5f, 15, m_controllerID, 5.0);
 	m_weapons[2]->SetWeaponSound("shuriken");
 	m_weapons[2]->SetFirePower(100.0f);
 	m_weapons[2]->SetDamage(0.3f);
 
 
 	m_weapons[3] = new Weapon(gun, projectile4, m_controllerID);
-	m_weapons[3]->SetProjectileType(0.2f, 1.0f, 0.0f, 0.0f, 0.5f, 18, m_controllerID, 0.7f);
+	m_weapons[3]->SetProjectileType(0.2f, 1.0f, 0.0f, 0.0f, 0.5f, 18, m_controllerID, 0.0);
 	m_weapons[3]->SetWeaponSound("heavy_shot");
 	m_weapons[3]->SetFirePower(100.0f);
 	m_weapons[3]->SetDamage(0.3f);
 
 	m_weapons[4] = new Weapon(gun, projectile5, m_controllerID);
-	m_weapons[4]->SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.5f, 12, m_controllerID, 0.9f);
+	m_weapons[4]->SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.5f, 12, m_controllerID, 0.0);
 	m_weapons[4]->SetWeaponSound("massive_shot");
 	m_weapons[4]->SetFirePower(100.0f);
 	m_weapons[4]->SetDamage(0.3f);
 
 	m_weapons[5] = new Weapon(gun, projectile6, m_controllerID);
-	m_weapons[5]->SetProjectileType(0.8f, 1.0f, 0.0f, 0.0f, 0.5f, 11, m_controllerID, 10.2f);
-	m_weapons[5]->SetWeaponSound("default_gun");
+	m_weapons[5]->SetProjectileType(0.8f, 1.0f, 0.0f, 0.0f, 0.5f, 11, m_controllerID, 0.0);
+	m_weapons[5]->SetWeaponSound("scifi2");
 	m_weapons[5]->SetFirePower(100.0f);
 	m_weapons[5]->SetDamage(0.3f);
 
 	m_weapons[6] = new Weapon(gun, projectile7, m_controllerID);
-	m_weapons[6]->SetProjectileType(0.7f, 1.0f, 0.0f, 0.0f, 0.5f, 14, m_controllerID, 10.2f);
+	m_weapons[6]->SetProjectileType(0.7f, 1.0f, 0.0f, 0.0f, 0.5f, 14, m_controllerID, 0.0);
 	m_weapons[6]->SetWeaponSound("default_gun");
 	m_weapons[6]->SetFirePower(100.0f);
 	m_weapons[6]->SetDamage(0.3f);
@@ -180,10 +181,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
 	m_healthBar->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
-
-	m_deathSkull->SetScale(glm::vec3(1, 1, m_life * 10));
-	m_deathSkull->Rotate(glm::vec3(0.0, 90.0, 0.0));
-	m_deathSkull->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
 	//Set fixture 
 
@@ -209,27 +206,13 @@ void Player::Free()
 		m_healthBar = nullptr;
 	}
 
-	if (m_deathSkull != nullptr)
-	{
-		delete m_deathSkull;
-		m_deathSkull = nullptr;
-	}
-
-	delete m_particleTexture1;
-	delete m_particleTexture2;
-	delete m_particleTexture3;
-	delete m_particleTexture4;
-	delete m_particleTexture5;
-	delete m_particleTexture6;
-	delete m_particleTexture7;
-
 
 
 	// LUKAS DELETE WORLD
 }
 
-void Player::Update() {
-
+void Player::Update(Player * p_arr) {
+	//std::cout << m_currentWeapon << std::endl;
 	if (m_boundingBox.getBody()->GetPosition().y < -5.0f)
 	{
 		m_dead = true;
@@ -239,9 +222,6 @@ void Player::Update() {
 	{
 		m_currentWeapon = 0;
 	}
-
-	m_deathSkull->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 2 + 5, 0.0));
-	m_deathSkull->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 10.5f, m_healthBar->GetPosition().y + 2, m_healthBar->GetPosition().z));
 
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
@@ -254,39 +234,37 @@ void Player::Update() {
 
 
 			if (m_currentWeapon == 0) {
-				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 1.0, 0.0, 1.0), 5.5, 50, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture1);
 
 			}
 
 			if (m_currentWeapon == 1) {
-				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(1.0, 0.0, 0.0, 1.0), 6.0, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture2);
+				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(1.0, 0.0, 0.0, 1.0), 0.0, 10, 0.0f);
+				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture2);
 			}
 
 			if (m_currentWeapon == 2) {
-				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 1.0, 1.0), 6.0f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture3);
+				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 1.0, 1.0), 0.0, 10, 0.0f);
+				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture3);
 			}
 
 			if (m_currentWeapon == 3) {
-				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(1.0, 1.0, 0.0, 1.0), 6.0f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture4);
+				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(1.0, 1.0, 0.0, 1.0), 0.0, 10, 0.0f);
+				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture4);
 			}
 
 			if (m_currentWeapon == 4) {
-				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 1.0, 1.0, 1.0), 15.0f, 3, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture5);
+				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 1.0, 1.0, 1.0), 0.0, 10, 0.0f);
+				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture5);
 
 			}
 			if (m_currentWeapon == 5) {
-				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 5.8f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture6);
+				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.0, 10, 0.0f);
+				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture6);
 			}
 
 			if (m_currentWeapon == 6) {
-				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 1.0, 1.0), 5.8f, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(*m_particleTexture7);
+				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.0, 10, 0.0f);
+				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture7);
 			}
 
 		}
@@ -319,13 +297,18 @@ void Player::Update() {
 
 
 			ScoreManager::AddHitScore(m_hitByProjectileID);
-			m_life -= m_weapons[m_currentWeapon]->GetDamage();
+
+
+
+			m_life -= p_arr[m_hitByProjectileID].GetDamage();
+
 
 			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
 
 
+			std::cout << m_life << std::endl;
 			if (m_life <= 0.0f)
 			{
 				int hitSound = rand() % 3;
@@ -352,34 +335,36 @@ void Player::Update() {
 		}
 		if (m_collidedPowerUp)
 		{
-
-			m_currentWeapon = rand() % 6 + 1;
-
+			int atomic = rand() % 6;
+			if (atomic != 5) {
+				m_currentWeapon = rand() % 6 + 1;
+			}
+			if (atomic == 5) {
+				m_soundManager->PlaySFX("siren");
+				m_soundManager->PlayAmbient("airplane");
+				AtomicBomb::StartBombSequence();
+			}
 			m_collidedPowerUp = false;
 		}
 		m_contact = false;
 	}
 
-	
-
 	if (m_dead)
 	{
-		m_skullImage->Render();
+		int spawn = rand() % 80;
 		m_time += TimeManager::Get()->GetDeltaTime();
-		Respawn(glm::vec2(70, 70));
-
+		Respawn(glm::vec2(spawn, 70));
 
 		m_currentWeapon = 0;
 
 		if (Timer(2))
 		{
-			Respawn(glm::vec2(40, 30));
+			Respawn(glm::vec2(spawn, 30));
 			m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
 			m_life = 1.0;
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
 			m_dead = false;
 		}
-
 	}
 
 
@@ -476,10 +461,20 @@ Box Player::GetBox()
 	return m_boundingBox;
 }
 
+float Player::GetDamage()
+{
+	return m_weapons[m_currentWeapon]->GetDamage();
+}
+
 
 PlayerPrefab* Player::GetPrefab()
 {
 	return m_playerPrefab;
+}
+
+int Player::GetProjectileID()
+{
+	return m_hitByProjectileID;
 }
 
 
