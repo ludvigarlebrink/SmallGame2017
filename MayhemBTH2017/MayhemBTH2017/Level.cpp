@@ -313,7 +313,7 @@ void Level::InitMesh()
 void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, glm::vec2 uv)
 {
 	float x = uv.x;
-	float y = uv.y;
+	float y = -uv.y;
 
 
 	uint64_t pos = (posY + (posX * SIZE_Y)) * 6;

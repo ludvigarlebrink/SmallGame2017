@@ -14,11 +14,11 @@
 struct GUI
 {
 	glm::vec2				m_iconUV = glm::vec2(0, 0);
-	static const int32_t	m_resolution = 256;
+	static const int32_t	m_resolution = 255;
 	int32_t					m_numIcons = 0;
 	UIText					m_text;
 	UIImage					m_texture;
-	UIImage					m_icons[m_resolution];
+	UIImage		*			m_icons[m_resolution];
 };
 
 enum LevelEditorState

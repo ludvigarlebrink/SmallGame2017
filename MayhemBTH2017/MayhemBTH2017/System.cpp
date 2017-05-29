@@ -43,7 +43,7 @@ void System::Run()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
-	m_stateManager->SetCurrentState(GameState::LEVEL_EDITOR);
+	m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 	bool isRunning = true;
 
 	Transform transform;
@@ -70,7 +70,7 @@ void System::Run()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
 
-		m_inputManager->Update();
+
 		m_soundManager->Update();
 
 		switch (m_stateManager->GetCurrentState())
@@ -119,7 +119,7 @@ void System::Run()
 		PostProcessingManager::Update();
 		ScoreManager::Update();
 
-
+		m_inputManager->Update();
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
 		counter += m_timeManager->GetDeltaTime();

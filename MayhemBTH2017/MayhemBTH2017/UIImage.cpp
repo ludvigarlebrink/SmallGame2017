@@ -33,9 +33,35 @@ UIImage::UIImage()
 	m_showTexture = false;
 }
 
+UIImage::UIImage(glm::vec2 uv)
+{
+	m_videoManager = VideoManager::Get();
+
+	m_windowHeight = m_videoManager->GetHeight();
+	m_windowWidth = m_videoManager->GetWidth();
+	m_isGreyscale = 0;	
+
+	// TEMP
+	m_posY = 0;
+	m_posX = 0;
+	m_color.r = 255;
+	m_color.b = 255;
+	m_color.g = 255;
+	m_color.a = 255;
+
+	m_sizeX = 600;
+	m_sizeY = 500;
+	// ????????????????
+	CreateShader();
+	CreateMesh(uv);
+
+	m_showTexture = false;
+}
+
 
 UIImage::~UIImage()
 {
+	delete m_meshWithUV;
 }
 
 
@@ -112,7 +138,11 @@ void UIImage::Render()
 
 	glUniform1i(m_uniforms[ALBEDO_MAP], 0);
 
-	m_mesh->Render();
+	if(m_mesh != nullptr)
+		m_mesh->Render();
+
+	if (m_meshWithUV != nullptr)
+		m_meshWithUV->Render();
 
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
@@ -195,10 +225,18 @@ void UIImage::RenderWithUV()
 			static_cast<GLfloat>(x - ((m_sizeX / 2) - halfWidth)),
 			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
 
+
+
+
+
 		glTexCoord2f((32.0 * (m_UV.x + 1) / 512), (32.0 * (m_UV.y + 0) / 512));
 		glVertex2f(
 			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
 			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
+
+
+
+
 
 		glTexCoord2f((32.0 * (m_UV.x + 1) / 512), -(32.0 * (m_UV.y + 1) / 512));
 
@@ -206,11 +244,17 @@ void UIImage::RenderWithUV()
 			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
 			static_cast<GLfloat>(y + ((m_sizeY / 2) + halfHeight)));
 
+
+
+
+
 		glTexCoord2f((32.0 * (m_UV.x + 0) / 512), -(32.0 * (m_UV.y + 1) / 512));
 
 		glVertex2f(
 			static_cast<GLfloat>(x - ((m_sizeX / 2) - halfWidth)),
 			static_cast<GLfloat>(y + ((m_sizeY / 2) + halfHeight)));
+
+
 
 	}
 	glEnd();
@@ -227,6 +271,126 @@ void UIImage::RenderWithUV()
 	glDeleteTextures(1, &texture);
 	SDL_FreeSurface(surface);
 }
+
+
+void UIImage::RenderWithUV(glm::vec2 uv)
+{
+	glUseProgram(0);
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	// m_Width and m_Height is the resolution of window.
+	glOrtho(0, m_windowWidth, 0, m_windowHeight, -1, 1);
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+
+	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	GLuint texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+
+	// FIX THIS !
+	Uint32 rmask, gmask, bmask, amask;
+
+	/* SDL interprets each pixel as a 32-bit number, so our masks must depend
+	on the endianness (byte order) of the machine */
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+	rmask = 0xff000000;
+	gmask = 0x00ff0000;
+	bmask = 0x0000ff00;
+	amask = 0x000000ff;
+#else
+	rmask = 0x000000ff;
+	gmask = 0x0000ff00;
+	bmask = 0x00ff0000;
+	amask = 0xff000000;
+#endif
+
+	int x = m_posX;
+	int y = m_posY;
+
+	SDL_Surface * surface = nullptr;
+
+	if (m_showTexture)
+	{
+		m_texture.Bind(0);
+	}
+	else
+	{
+		surface = SDL_CreateRGBSurface(0, m_sizeX, m_sizeY, 32, rmask, gmask, bmask, amask);
+		SDL_FillRect(surface, NULL, SDL_MapRGBA(surface->format, m_color.r, m_color.g, m_color.b, m_color.a));
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, surface->pixels);
+	}
+
+	float halfHeight = m_windowHeight / 2;
+	float halfWidth = m_windowWidth / 2;
+
+	glBegin(GL_QUADS);
+	{
+
+		glTexCoord2f((32.0 * (uv.x + 0) / 512), (32.0 * (uv.y + 0) / 512));
+		glVertex2f(
+			static_cast<GLfloat>(x - ((m_sizeX / 2) - halfWidth)),
+			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
+
+
+
+
+
+		glTexCoord2f((32.0 * (uv.x + 1) / 512), (32.0 * (uv.y + 0) / 512));
+		glVertex2f(
+			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
+			static_cast<GLfloat>(y - ((m_sizeY / 2) - halfHeight)));
+
+
+
+
+
+		glTexCoord2f((32.0 * (uv.x + 1) / 512), -(32.0 * (uv.y + 1) / 512));
+
+		glVertex2f(
+			static_cast<GLfloat>(x + ((m_sizeX / 2) + halfWidth)),
+			static_cast<GLfloat>(y + ((m_sizeY / 2) + halfHeight)));
+
+
+
+
+
+		glTexCoord2f((32.0 * (uv.x + 0) / 512), -(32.0 * (uv.y + 1) / 512));
+
+		glVertex2f(
+			static_cast<GLfloat>(x - ((m_sizeX / 2) - halfWidth)),
+			static_cast<GLfloat>(y + ((m_sizeY / 2) + halfHeight)));
+
+
+
+	}
+	glEnd();
+
+	glDisable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_DEPTH_TEST);
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+
+	glDeleteTextures(1, &texture);
+	SDL_FreeSurface(surface);
+}
+
 
 //::.. GET FUNCTIONS ..:://
 int32_t UIImage::GetSizeX()
@@ -332,20 +496,70 @@ void UIImage::CreateMesh()
 	m_mesh = new Mesh;
 
 	Vertex2D vert[6];
+	//Tri 1
 	vert[0].position = glm::vec2(-1.0f, -1.0f);
 	vert[0].texCoords = glm::vec2(0.0f, 1.0f);
+
 	vert[1].position = glm::vec2(1.0f, -1.0f);
 	vert[1].texCoords = glm::vec2(1.0f, 1.0f);
+
 	vert[2].position = glm::vec2(-1.0f, 1.0f);
 	vert[2].texCoords = glm::vec2(0.0f, 0.0f);
+
+	//Tri 2
 	vert[3].position = glm::vec2(1.0f, -1.0f);
 	vert[3].texCoords = glm::vec2(1.0f, 1.0f);
+
 	vert[4].position = glm::vec2(-1.0f, 1.0f);
 	vert[4].texCoords = glm::vec2(0.0f, 0.0f);
+
 	vert[5].position = glm::vec2(1.0f, 1.0f);
 	vert[5].texCoords = glm::vec2(1.0f, 0.0f);
 
+
+	//FOR SCIENCE
+	//(32.0 * (0 + 0) / 512) ,  (32.0 * (0 + 0) / 512)
+	//(32.0 * (0 + 1) / 512) ,  (32.0 * (0 + 0) / 512)
+	//(32.0 * (0 + 1) / 512) , -(32.0 * (0 + 1) / 512)	
+	//(32.0 * (0 + 0) / 512) , -(32.0 * (0 + 1) / 512)
+
 	m_mesh->Load(vert, 6);
+}
+
+void UIImage::CreateMesh(glm::vec2 uv)
+{
+	if (m_meshWithUV != nullptr)
+	{
+		delete m_meshWithUV;
+	}
+
+	m_meshWithUV = new Mesh;
+
+	Vertex2D vert[6];
+
+	std::cout << uv.x << std::endl;
+	std::cout << uv.y << std::endl;
+	std::cout << "- - - - - - - -" << std::endl;
+
+	vert[0].position = glm::vec2(-1.0f, -1.0f);
+	vert[0].texCoords = glm::vec2((32.0 * (uv.x + 0) / 512), (32.0 * (uv.y + 1) / 512));
+
+	vert[1].position = glm::vec2(1.0f, -1.0f);
+	vert[1].texCoords = glm::vec2((32.0 * (uv.x + 1) / 512), (32.0 * (uv.y + 1) / 512));
+
+	vert[2].position = glm::vec2(-1.0f, 1.0f);
+	vert[2].texCoords = glm::vec2((32.0 * (uv.x + 0) / 512), (32.0 * (uv.y + 0) / 512));
+
+	vert[3].position = glm::vec2(1.0f, -1.0f);
+	vert[3].texCoords = glm::vec2((32.0 * (uv.x + 1) / 512), (32.0 * (uv.y + 1) / 512));
+
+	vert[4].position = glm::vec2(-1.0f, 1.0f);
+	vert[4].texCoords = glm::vec2((32.0 * (uv.x + 0) / 512), (32.0 * (uv.y + 0) / 512));
+
+	vert[5].position = glm::vec2(1.0f, 1.0f);
+	vert[5].texCoords = glm::vec2((32.0 * (uv.x + 1) / 512), (32.0 * (uv.y + 0) / 512));
+
+	m_meshWithUV->Load(vert, 6);
 }
 
 
