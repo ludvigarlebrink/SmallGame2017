@@ -24,6 +24,7 @@ void System::Run()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
+	m_soundManager->PlayMusic("Mayhem Mania Theme");
 	m_stateManager->SetCurrentState(GameState::START);
 
 	bool isRunning = true;

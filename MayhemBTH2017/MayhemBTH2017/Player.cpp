@@ -37,7 +37,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_particleTexture3 = m_textureHandler.Import(".\\Assets\\Textures\\fireball.png");
 	m_particleTexture4 = m_textureHandler.Import(".\\Assets\\Textures\\spark2.png");
 	m_particleTexture5 = m_textureHandler.Import(".\\Assets\\Textures\\blue_explosion.png");
-	m_particleTexture6 = m_textureHandler.Import(".\\Assets\\Textures\\fireball.png");
+	m_particleTexture6 = m_textureHandler.Import(".\\Assets\\Textures\\ring.png");
 	m_particleTexture7 = m_textureHandler.Import(".\\Assets\\Textures\\spark2.png");
 
 	//MARTIN TEST SHIT REMOVE
@@ -103,7 +103,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	gun->SetPosition(glm::vec3(30.0f, 30.0f, 0.0));
 
-	Prefab * projectile = PrefabManager::Instantiate("missile3", nullptr, nullptr, 0, "Candle");
+	Prefab * projectile = PrefabManager::Instantiate("bullet", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile2 = PrefabManager::Instantiate("sword3", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile3 = PrefabManager::Instantiate("spike2", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile4 = PrefabManager::Instantiate("Rifle", nullptr, nullptr, 0, "Candle");
@@ -117,21 +117,21 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_weapons[0] = Weapon(gun, projectile, m_controllerID);
 	m_weapons[0].SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.15f, 10, m_controllerID, 3.0f);
 	m_weapons[0].SetWeaponSound("rifle");
-	m_weapons[0].SetFirePower(150.0);
-	m_weapons[0].SetDamage(0.30f);
+	m_weapons[0].SetFirePower(100.0f);
+	m_weapons[0].SetDamage(0.05);
 
 
 	m_weapons[1] = Weapon(gun, projectile2, m_controllerID);
 	m_weapons[1].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 3.0f, 10, m_controllerID, 0.7f);
 	m_weapons[1].SetWeaponSound("scifi_weapon");
-	m_weapons[1].SetFirePower(20.0f);
+	m_weapons[1].SetFirePower(100.0f);
 	m_weapons[1].SetDamage(40000000.0f);
 
 	m_weapons[2] = Weapon(gun, projectile3, m_controllerID);
 	m_weapons[2].SetProjectileType(0.5f, 1.0f, 0.0f, 0.0f, 0.5f, 15, m_controllerID, 2.0f);
 	m_weapons[2].SetWeaponSound("shuriken");
 	m_weapons[2].SetCollisionSound("shuriken_hit");
-	m_weapons[2].SetFirePower(150.0f);
+	m_weapons[2].SetFirePower(100.0f);
 	m_weapons[2].SetDamage(0.80f);
 
 
@@ -144,7 +144,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_weapons[4] = Weapon(gun, projectile5, m_controllerID);
 	m_weapons[4].SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.5f, 12, m_controllerID, 0.9f);
 	m_weapons[4].SetWeaponSound("massive_shot");
-	m_weapons[4].SetFirePower(50);
+	m_weapons[4].SetFirePower(100.0f);
 	m_weapons[4].SetDamage(0.9f);
 
 	m_weapons[5] = Weapon(gun, projectile6, m_controllerID);
@@ -172,7 +172,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 }
 
 void Player::Update() {
-	std::cout << m_currentWeapon << std::endl;
+	//std::cout << m_currentWeapon << std::endl;
 	if (m_boundingBox.getBody()->GetPosition().y < -5.0f)
 	{
 		m_dead = true;
@@ -197,14 +197,14 @@ void Player::Update() {
 
 			if (m_currentWeapon == 0) {
 				std::cout << "part 1" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(0.0, 1.0, 0.0, 1.0), 0.2, 500, 0.0f);
-				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
+				//m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(0.0, 0.0, 0.0, 1.0), 0.0, 10, 0.0f);
+				//m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture1);
 
 			}
 
 			if (m_currentWeapon == 1) {
 				std::cout << "part 2" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(1.0, 0.0, 0.0, 1.0), 6.0, 10, 0.0f);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 0.0, 1.0), 0.0, 10, 0.0f);
 				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture2);
 			}
 
@@ -215,25 +215,25 @@ void Player::Update() {
 
 			if (m_currentWeapon == 3) {
 				std::cout << "part 4" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(1.0, 1.0, 0.0, 1.0), 6.0f, 10, 0.0f);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle4", glm::vec4(0.0, 0.0, 0.0, 1.0), 0.0, 10, 0.0f);
 				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture4);
 			}
 
 			if (m_currentWeapon == 4) {
 				std::cout << "part 5" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 1.0, 1.0, 1.0), 15.0f, 3, 0.0f);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle5", glm::vec4(0.0, 0.0, 0.0, 1.0), 0.0, 10, 0.0f);
 				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture5);
 
 			}
 			if (m_currentWeapon == 5) {
 				std::cout << "part 6" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0),5.8f, 10, 0.0f);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(0.0, 0.0, 0.0, 1.0), 0.0, 10, 0.0f);
 				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture6);
 			}
 
 			if (m_currentWeapon == 6) {
 				std::cout << "part 7" << std::endl;
-				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 1.0, 1.0), 5.8f, 10, 0.0f);
+				m_weapons[m_currentWeapon].InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(0.0, 0.0, 0.0, 1.0), 0.0, 10, 0.0f);
 				m_weapons[m_currentWeapon].SetParticleTexture(m_particleTexture7);
 			}
 
