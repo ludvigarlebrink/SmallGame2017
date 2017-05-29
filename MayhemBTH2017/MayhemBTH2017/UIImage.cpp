@@ -586,4 +586,5 @@ void UIImage::CreateShader()
 
 void UIImage::CreateTexture()
 {
+
 }

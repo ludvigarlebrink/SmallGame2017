@@ -41,6 +41,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
 	m_world = nullptr;
+	m_deathSkull = nullptr;
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
 	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\debree.png");
@@ -69,7 +70,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//SET BOUNDING BOX SIZE 
 	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_playerPrefab->GetPlayerPrefab()->GetScale().x + 1, m_playerPrefab->GetPlayerPrefab()->GetScale().y * 3.0f));
 	//sprite for size of bouding box
-	m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
+
+	//m_playerSprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
+
 	//Load player shader
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
@@ -102,8 +105,10 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	Prefab * gun = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
+	m_deathSkull = PrefabManager::Instantiate("deathSkull", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar->Create();
+	m_deathSkull->Create();
 
 	gun->SetScale(glm::vec3(2, 2, 2));
 
@@ -172,6 +177,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBar->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
+	m_deathSkull->SetScale(glm::vec3(1, 1, 1));
+	m_deathSkull->Rotate(glm::vec3(0.0, 90.0, 0.0));
+
 	//Set fixture 
 
 }
@@ -189,13 +197,18 @@ void Player::Free()
 		delete m_playerPrefab;
 		m_playerPrefab = nullptr;
 	}
-	
+
 	if (m_healthBar != nullptr)
 	{
 		delete m_healthBar;
 		m_healthBar = nullptr;
 	}
 
+	if (m_deathSkull != nullptr)
+	{
+		delete m_deathSkull;
+		m_deathSkull = nullptr;
+	}
 
 
 	// LUKAS DELETE WORLD
@@ -250,7 +263,7 @@ void Player::Update() {
 
 			}
 			if (m_currentWeapon == 5) {
-				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0),5.8f, 10, 0.0f);
+				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 5.8f, 10, 0.0f);
 				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture6);
 			}
 
@@ -268,21 +281,21 @@ void Player::Update() {
 		if (m_collidedProjectile)
 		{
 			int hitSound = rand() % 4;
-			
-			if (hitSound == 0 && m_life>0.0f) {
+
+			if (hitSound == 0 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit1");
 				m_soundManager->PlaySFX("man_scream1");
 			}
-			if (hitSound == 1 && m_life>0.0f) {
+			if (hitSound == 1 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit2");
 				m_soundManager->PlaySFX("man_scream2");
 			}
-			if (hitSound == 2 && m_life>0.0f) {
+			if (hitSound == 2 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit3");
 				m_soundManager->PlaySFX("man_scream3");
 			}
 
-			if (hitSound == 3 && m_life>0.0f) {
+			if (hitSound == 3 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit3");
 				m_soundManager->PlaySFX("man_scream4");
 			}
@@ -294,7 +307,7 @@ void Player::Update() {
 			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
-			
+
 
 			std::cout << m_life << std::endl;
 			if (m_life <= 0.0f)
@@ -346,6 +359,8 @@ void Player::Update() {
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
 			m_dead = false;
 		}
+
+
 	}
 
 
@@ -375,7 +390,7 @@ void Player::Update() {
 		if (m_isMidAir) {
 
 			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-150)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
-			
+
 		}
 		if (!m_isMidAir) {
 

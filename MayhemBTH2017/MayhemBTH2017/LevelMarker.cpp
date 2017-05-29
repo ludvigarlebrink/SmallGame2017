@@ -189,9 +189,6 @@ void LevelMarker::Render(Camera & camera, glm::vec2 m_uv)
 	glm::vec4 markerLoc;
 
 	// FIX TEXTURE
-	std::cout << m_uv.x << std::endl;
-	std::cout << m_uv.y << std::endl;
-	std::cout << "- - - - - - -" << std::endl;
 	markerLoc.x = (32 * m_uv.x) / 512.0;
 	markerLoc.y = (32 * m_uv.y) / 512.0;
 	markerLoc.z = 32 / 512.0;
