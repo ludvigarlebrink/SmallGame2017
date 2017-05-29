@@ -11,6 +11,8 @@ Weapon::Weapon()
 
 Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 {
+	
+	m_collisionpath = "explosion1";
 	m_prefabGun = nullptr;
 	m_muzzleFlash = nullptr;
 	m_prefabProjectile = nullptr;
@@ -139,11 +141,13 @@ void Weapon::SetWeaponSound(const char * filepath)
 {
 
 	m_soundpath = filepath;
+
 }
 
 void Weapon::SetCollisionSound(const char * filepath)
 {
 	m_collisionpath = filepath;
+	
 }
 
 void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life)
@@ -198,7 +202,7 @@ void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 	GLfloat firePower = m_firepower;
 
 
-
+	
 	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
 
 	if (abs(force.x) > 0.3f || abs(force.y) > 0.3f)
@@ -238,14 +242,15 @@ void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 
 			projectile->SetHasParticles(m_hasParticles);
 			projectile->SetTexture(m_particleTexture);
+			projectile->SetCollisionSound(m_collisionpath);
 		}
 
 		Camera camera;
 		Transform temptransform;
 
 
-		projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
-
+	projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
+		
 
 
 		m_projectiles.push_back(projectile);
@@ -276,6 +281,7 @@ void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 
 			m_projectiles[m_projectileCounter]->SetHasParticles(m_hasParticles);
 			m_projectiles[m_projectileCounter]->SetTexture(m_particleTexture);
+			m_projectiles[m_projectileCounter]->SetCollisionSound(m_collisionpath);
 
 			m_projectileCounter++;
 

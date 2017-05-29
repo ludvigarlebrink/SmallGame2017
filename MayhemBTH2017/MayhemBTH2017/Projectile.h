@@ -51,6 +51,7 @@ public:
 	bool GetContact();
 	void CollisionTimer();
 	void CollisionTrue();
+	void SetCollisionSound(const char* filepath);
 
 
 
@@ -58,6 +59,7 @@ private:
 	Prefab*		m_prefab;
 	Prefab m_prefabPointer;
 	GLuint m_texID;
+	const char* m_collisionSoundPath;
 	ParticleEmitter emitter;
 	ParticleEmitter trailEmitter;
 	ParticleSystem* m_trailParticles;

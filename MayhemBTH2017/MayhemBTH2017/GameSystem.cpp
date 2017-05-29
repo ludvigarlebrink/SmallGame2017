@@ -293,8 +293,7 @@ void GameSystem::InitPlay()
 		TransitionManager::StartFadingIn();
 		TimeManager::ResetDeltaTime();
 	}
-
-	m_soundManager->FadeInNewMusic("bensound-epic", 3, 10);
+	m_soundManager->FadeInNewMusic("match_song_1", 3, 10);
 	TransitionManager::Update();
 }
 
