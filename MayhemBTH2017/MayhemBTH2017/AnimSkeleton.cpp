@@ -14,6 +14,8 @@ AnimSkeleton::AnimSkeleton()
 
 AnimSkeleton::~AnimSkeleton()
 {
+	delete[] m_skel;
+	delete[] m_skinnedTx;
 }
 
 void AnimSkeleton::Update(KeyFrame * kf, KeyFrame * preKf, float inter, bool animateBindPose, int32_t from, int32_t to)

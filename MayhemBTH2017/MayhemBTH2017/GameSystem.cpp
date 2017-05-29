@@ -37,6 +37,23 @@ void GameSystem::Load(uint32_t gameMode)
 
 void GameSystem::Free()
 {
+	if (m_gameSettings != nullptr)
+	{
+		delete m_gameSettings;
+		m_gameSettings = nullptr;
+	}
+
+	if (m_playerReadyUI != nullptr)
+	{
+		delete[] m_playerReadyUI;
+		m_playerReadyUI = nullptr;
+	}
+
+	if (m_world != nullptr)
+	{
+		delete m_world;
+		m_world = nullptr;
+	}
 }
 
 
@@ -82,6 +99,11 @@ void GameSystem::Update()
 
 	default:
 		break;
+	}
+
+	if (m_input->GetButtonDown(CONTROLLER_BUTTON_BACK))
+	{
+		StateManager::Get()->SetCurrentState(GameState::LOAD_MAIN_MENU);
 	}
 }
 

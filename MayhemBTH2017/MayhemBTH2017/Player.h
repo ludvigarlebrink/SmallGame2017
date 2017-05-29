@@ -22,10 +22,12 @@ public:
 	Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID);
 	virtual ~Player();
 
-	//::..INITIALIZER..:://
+	//::.. INITIALIZER ..:://
 	void Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID);
 
-	//::..RENDER..:://
+	void Free();
+
+	//::.. RENDER ..:://
 	void Render(Camera camera);
 	void RenderShadow(Camera camera);
 
@@ -33,7 +35,6 @@ public:
 	void Respawn(glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://
-	void SetWorld(b2World* world, glm::vec2 pos);
 	void SetCategoryBits(short CATEGORY);
 	void SetMaskBits(short MASK);
 	bool Timer(float rate);
@@ -62,36 +63,38 @@ private:
 	Texture	m_particleTexture6;
 	Texture	m_particleTexture7;
 
-	TextureHandler m_textureHandler;
-	ParticleSystem m_particles;
-	InputManager * m_input;
-	b2Fixture* m_filter;
-	Box m_boundingBox;
-	PlayerPrefab * m_playerPrefab;
-	Sprite m_playerSprite;
-	Transform m_transf;
-	Camera m_cam;
-	AShader m_shader;
-	AShader m_toonShader;
+	TextureHandler	m_textureHandler;
+	ParticleSystem	m_particles;
+	InputManager *	m_input;
+	b2Fixture *		m_filter;
+	Box				m_boundingBox;
+	PlayerPrefab *	m_playerPrefab;
+	Sprite			m_playerSprite;
+	Transform		m_transf;
+	Camera			m_cam;
+	AShader			m_shader;
+	AShader			m_toonShader;
+
 	bool	m_isMidAir;
-	bool m_doubleJump;
-	bool m_contact;
-	bool m_dead;
-	float m_time;
-	int m_controllerID;
-	bool m_collidedProjectile;
-	bool m_hitByProjectile;
-	float m_life;
-	Prefab * m_healthBar;
-	int m_hitByProjectileID;
-	SoundManager * m_soundManager;
+	bool	m_doubleJump;
+	bool	m_contact;
+	bool	m_dead;
+	float	m_time;
+	int		m_controllerID;
+	bool	m_collidedProjectile;
+	bool	m_hitByProjectile;
+	float	m_life;
 
-	Weapon  m_weapons[7];
-	int		m_currentWeapon;
+	Prefab *		m_healthBar;
+	int				m_hitByProjectileID;
+	SoundManager *	m_soundManager;
 
-	b2World * m_world;
+	Weapon *		m_weapons[7];
+	int				m_currentWeapon;
 
-	bool m_collidedPowerUp;
+	b2World *	m_world;
+
+	bool		m_collidedPowerUp;
 
 	b2FixtureDef m_fixture;
 	enum _entityCategory {
@@ -102,13 +105,6 @@ private:
 		PLAYER2 = 0x0016,
 		PROJECTILE2 = 0x0032,
 	};
-
-
-
-
-
-	//TEMP DEBUG MARTIN
-	PlayerController*	m_testCon;
 };
 
 #endif

@@ -66,6 +66,7 @@ private:
 
 private:
 	InputManager *	m_input;
+
 	GamePhysics *	m_world;
 
 	bool		m_isPaused;

@@ -65,6 +65,7 @@ inline MrMatHandler::MrMatHandler()
 
 inline MrMatHandler::~MrMatHandler()
 {
+	Free();
 }
 
 
@@ -101,6 +102,8 @@ inline bool MrMatHandler::Import(const char * filepath)
 	}
 
 	file.close();
+
+	m_isLoaded = true;
 
 	return true;
 }
@@ -140,7 +143,17 @@ inline bool MrMatHandler::Export(const char * filepath)
 
 inline void MrMatHandler::Free()
 {
-	// TODO
+	if (!m_isLoaded)
+	{
+		return;
+	}
+
+	for (uint32_t i = 0; i < m_numTextures; i++)
+	{
+		delete[] m_textures[i].data;
+	}
+
+	delete m_textures;
 }
 
 inline uint32_t MrMatHandler::GetNumTextures()

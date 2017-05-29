@@ -9,11 +9,19 @@ Level::Level()
 	m_input = InputManager::Get();
 }
 
-///////BUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+
 Level::~Level()
 {
-
+	FreeMesh();
 }
+
+
+void Level::FreeMesh()
+{
+	delete[] m_vertices;
+	delete[] m_vertices2;
+}
+
 
 void Level::Render(Camera camera)
 {
@@ -48,8 +56,8 @@ void Level::AddBlock(uint32_t posX, uint32_t posY, glm::vec2 uv)
 		setUv(posX, posY, uv);
 	}
 	UpdateBlocks(posX, posY, true, uv);
-	m_mesh.Update(); //Front quad
-	m_mesh2.Update(); //Z-quad
+	m_mesh.Update(m_vertices); //Front quad
+	m_mesh2.Update(m_vertices2); //Z-quad
 
 }
 
@@ -59,8 +67,8 @@ void Level::RemoveBlock(uint32_t posX, uint32_t posY)
 	{
 		SetOccupied(posX, posY, false);
 		UpdateBlocks(posX, posY, false, glm::vec2(0, 0));
-		m_mesh.Update(); //Front quad
-		m_mesh2.Update(); //Z-quad
+		m_mesh.Update(m_vertices); //Front quad
+		m_mesh2.Update(m_vertices2); //Z-quad
 	}
 }
 
@@ -150,6 +158,7 @@ void Level::Init()
 	InitMesh();
 }
 
+
 void Level::InitGrid()
 {
 	for (size_t x = 0; x < SIZE_X; x++)
@@ -164,14 +173,13 @@ void Level::InitGrid()
 	}
 }
 
+
 void Level::InitMesh()
 {
 	const uint64_t length = SIZE_X * SIZE_Y * 6;
 	const uint64_t length2 = SIZE_X * SIZE_Y * 12;
-	//const uint64_t length3 = SIZE_X * SIZE_Y;
-	m_vertices = (Vertex3D*)malloc(sizeof(Vertex3D) * length);
-	m_vertices2 = (Vertex3D*)malloc(sizeof(Vertex3D) * length2);
-	m_vertices3 = (Vertex3D*)malloc(sizeof(Vertex3D) * 6);
+	m_vertices = new Vertex3D[length];
+	m_vertices2 = new Vertex3D[length2];
 
 	uint64_t i = 0;
 
@@ -271,43 +279,8 @@ void Level::InitMesh()
 		}
 	}
 
-
-	// Background quad
-
-	m_vertices3[0].position = glm::vec3(1.0f, 1.0f, 2.0f);
-	m_vertices3[0].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[0].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 1.0f);
-
-	m_vertices3[1].position = glm::vec3(1.0f, -1.0f, 2.0f);
-	m_vertices3[1].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[1].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 1.0f);
-
-	m_vertices3[2].position = glm::vec3(-1.0f, 1.0f, 2.0f);
-	m_vertices3[2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
-
-	m_vertices3[3].position = glm::vec3(-1.0f, 1.0f, 2.0f);
-	m_vertices3[3].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 1.0f);
-
-	m_vertices3[4].position = glm::vec3(1.0f, -1.0f, 2.0f);
-	m_vertices3[4].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[4].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 1.0f);
-
-	m_vertices3[5].position = glm::vec3(-1.0f, -1.0f, 2.0f);
-	m_vertices3[5].normal = glm::vec3(0.0f, 0.0f, -1.0f);
-	m_vertices3[5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 1.0f);
-
 	m_mesh.Load(m_vertices, length);
 	m_mesh2.Load(m_vertices2, length2);
-
-	m_meshBackground = new Mesh;
-	m_meshBackground->Load(m_vertices3, 6);
-
-	m_backgroundShader = new Prefab;
-	m_backgroundShader->SetMesh(m_meshBackground);
-	m_backgroundShader->Create();
-
 }
 
 void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, glm::vec2 uv)

@@ -9,21 +9,24 @@ PowerUp::PowerUp()
 
 PowerUp::~PowerUp()
 {
+	Free();
 }
 
 void PowerUp::Create(b2World* world, glm::vec2 pos)
 {
 
-	//m_powerupPrefab = PrefabManager::Instantiate("Player", nullptr, nullptr, 0, "Player2");
-	//m_powerupPrefab->SetScale(glm::vec3(1.5));
+	m_powerupPrefab = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
 
+	m_powerupPrefab->Create();
+	m_powerupPrefab->SetScale(glm::vec3(1.5, 1.5, 1.5));
+	m_powerupPrefab->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	scale = glm::vec2(1.5);
 
 	m_boundingBox.InitDynamic(world, pos, scale);
 	SetActive(false);
 
-	m_sprite.CreateSprite(glm::vec2(GetBox().getBody()->GetPosition().x - (scale.x / 2), GetBox().getBody()->GetPosition().y - (scale.y / 2)), glm::vec2(scale.x, scale.y));
-	m_sprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
+	//m_sprite.CreateSprite(glm::vec2(GetBox().getBody()->GetPosition().x - (scale.x / 2), GetBox().getBody()->GetPosition().y - (scale.y / 2)), glm::vec2(scale.x, scale.y));
+	//m_sprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
 
 	b2Filter filter;
 	filter.categoryBits = POWERUP;
@@ -32,16 +35,17 @@ void PowerUp::Create(b2World* world, glm::vec2 pos)
 
 	m_boundingBox.getBody()->SetUserData(this);
 
+	lifeTime = 0;
 }
 
 //::.. RENDER ..:://
 void PowerUp::Render(Camera camera) {
 
-	Transform transform;
-	m_sprite.Bind();
-	m_sprite.Update(transform, camera);
-	m_sprite.Render();
-	//m_powerupPrefab->Render(camera);
+	//Transform transform;
+	//m_sprite.Bind();
+	//m_sprite.Update(transform, camera);
+	//m_sprite.Render();
+	m_powerupPrefab->Render(camera);
 
 }
 
@@ -91,6 +95,8 @@ void PowerUp::RandPosition()
 
 void PowerUp::Update()
 {
+	lifeTime += TimeManager::Get()->GetDeltaTime();
+
 	if (m_collidedPlayer)
 	{
 		m_collidedPlayer = false;
@@ -102,17 +108,18 @@ void PowerUp::Update()
 	GLfloat xScale = m_boundingBox.getScale().x;
 	GLfloat yScale = m_boundingBox.getScale().y;
 
-	//m_powerupPrefab->SetPosition(glm::vec3(xPos, yPos, 0));
+	m_powerupPrefab->SetPosition(glm::vec3(xPos, yPos, 0));
 
-	m_sprite.ModifyPos(glm::vec2(xPos - (scale.x / 2), yPos - (scale.y / 2)), scale);
-
+	if (lifeTime > 10.0)
+	{
+		SetActive(false);
+		lifeTime = 0;
+	}
 }
 
-void PowerUp::Destroy()
+void PowerUp::Free()
 {
-	//delete m_powerupPrefab;
-	//m_powerupPrefab = NULL;
 	m_boundingBox.DestroyBody();
-	//delete m_powerupPrefab;
-
+	m_powerupPrefab->Free();
+	delete m_powerupPrefab;
 }

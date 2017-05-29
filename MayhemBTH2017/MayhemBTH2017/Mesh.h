@@ -53,12 +53,11 @@ public:
 
 	//::.. GET FUNCTIONS ..:://
 	bool GetIsLoaded();
-	GLfloat GetHeight();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetRenderMode(GLenum renderMode);
 
-	void Update();
+	void Update(Vertex3D * vertices3D);
 
 private:
 	bool		m_isLoaded;
@@ -66,11 +65,9 @@ private:
 	GLuint		m_vao;
 	GLuint		m_buffer;
 
-	Vertex2D *				m_vertices2D;
-	Vertex3D *				m_vertices3D;
-	Vertex3DSkelAnimation *	m_vertices3DSkelAnimation;
+	int			m_vertexType;
 
-	GLenum		m_renderMode;
+	GLenum					m_renderMode;
 
 };
 

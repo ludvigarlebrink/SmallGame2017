@@ -15,6 +15,7 @@ GameSettings::GameSettings()
 
 GameSettings::~GameSettings()
 {
+	FreeUI();
 }
 
 void GameSettings::CreateUI()
@@ -68,6 +69,11 @@ void GameSettings::CreateUI()
 
 void GameSettings::FreeUI()
 {
+	delete[] m_ui;
+	delete[] m_uiV;
+
+	m_ui = nullptr;
+	m_uiV = nullptr;
 }
 
 
