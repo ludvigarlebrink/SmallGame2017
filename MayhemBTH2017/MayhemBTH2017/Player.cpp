@@ -16,6 +16,7 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
 	m_world = nullptr;
+	m_skullImage = nullptr;
 }
 
 Player::Player()
@@ -41,6 +42,11 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
 	m_world = nullptr;
+	m_skullImage = nullptr;
+
+	m_skullImage = new UIImage;
+	m_skullImage->SetSize(50, 50);
+	m_skullImage->SetColor(255, 0, 0, 255);
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
 	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\debree.png");
@@ -235,7 +241,7 @@ void Player::Update() {
 	}
 
 	m_deathSkull->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 2 + 5, 0.0));
-	m_deathSkull->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y + 2, m_healthBar->GetPosition().z));
+	m_deathSkull->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 10.5f, m_healthBar->GetPosition().y + 2, m_healthBar->GetPosition().z));
 
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
@@ -354,10 +360,14 @@ void Player::Update() {
 		m_contact = false;
 	}
 
+	
+
 	if (m_dead)
 	{
+		m_skullImage->Render();
 		m_time += TimeManager::Get()->GetDeltaTime();
 		Respawn(glm::vec2(70, 70));
+
 
 		m_currentWeapon = 0;
 
@@ -369,6 +379,7 @@ void Player::Update() {
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
 			m_dead = false;
 		}
+
 	}
 
 
