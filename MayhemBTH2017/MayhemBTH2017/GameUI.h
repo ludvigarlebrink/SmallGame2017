@@ -33,7 +33,6 @@ private:
 	uint32_t		m_numPlayers;
 
 	UIText *		m_gameTimer;
-	UIText			m_playerName[4];
 	UIText			m_playerScore[4];
 };
 

@@ -45,9 +45,6 @@ bool LevelTexture::SaveImage(std::string fileName)
 	free(m_dataBuffer);
 
 	return true;
-
-
-
 }
 
 void LevelTexture::SetStatus(bool save)

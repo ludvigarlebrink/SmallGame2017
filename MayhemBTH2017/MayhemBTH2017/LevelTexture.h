@@ -3,7 +3,7 @@
 
 #include <string>
 #include <glew.h>
-#include <iostream>
+
 #include <fstream>
 
 class LevelTexture

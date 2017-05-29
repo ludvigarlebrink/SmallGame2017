@@ -2,7 +2,7 @@
 
 #include "TimeManager.h"
 
-#include <iostream>
+
 #include <iomanip>
 
 AnimSkeleton::AnimSkeleton()

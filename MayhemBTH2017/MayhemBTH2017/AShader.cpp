@@ -82,10 +82,9 @@ void AShader::Init(const std::string& filename, bool hasGeomShader, bool particl
 	}
 
 	glLinkProgram(m_programID);
-	Debug(m_programID, GL_LINK_STATUS, true, "Error: Linking failed: ");
 
 	glValidateProgram(m_programID);
-	Debug(m_programID, GL_VALIDATE_STATUS, true, "Error: Invalid program: ");
+	
 
 	AddUniforms();
 
@@ -166,10 +165,6 @@ GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
 {
 
 	GLuint shader = glCreateShader(shaderType);
-	if (shader == 0)
-	{
-		return -1;
-	}
 
 	const GLchar* shaderSource[1];
 	GLint sourceLength[1];
@@ -179,7 +174,6 @@ GLuint AShader::CreateShader(const std::string& textfile, GLenum shaderType)
 
 	glShaderSource(shader, 1, shaderSource, sourceLength);
 	glCompileShader(shader);
-	Debug(shader, GL_COMPILE_STATUS, false, "Compilation failed\n");
 
 	return shader;
 }
@@ -201,32 +195,4 @@ std::string AShader::LoadShader(const std::string& filename)
 	}
 
 	return output;
-}
-
-void AShader::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg)
-{
-
-	GLint errorCheck = 0;
-	GLchar logLength[1024] = { 0 };
-
-	if (isProgram)
-	{
-		glGetProgramiv(shader, flag, &errorCheck);
-	}
-	else
-	{
-		glGetShaderiv(shader, flag, &errorCheck);
-	}
-
-	if (errorCheck == GL_FALSE)
-	{
-		if (isProgram)
-		{
-			glGetProgramInfoLog(shader, sizeof(logLength), 0, logLength);
-		}
-		else
-		{
-			glGetShaderInfoLog(shader, sizeof(logLength), 0, logLength);
-		}
-	}
 }

@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-#include <iostream>
+
 
 //::.. DUMMY CONSTRUCTORS ..:://
 

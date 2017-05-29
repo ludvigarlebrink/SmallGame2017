@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <fstream>
-#include <iostream>
+
 #include <glm.hpp>
 
 #include <glew.h>

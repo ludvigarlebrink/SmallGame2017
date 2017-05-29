@@ -1,6 +1,6 @@
 #include "TimeManager.h"
 
-#include <iostream>
+
 
 TimeManager * TimeManager::m_instance = nullptr;
 float TimeManager::m_deltaTime = 0.0f;

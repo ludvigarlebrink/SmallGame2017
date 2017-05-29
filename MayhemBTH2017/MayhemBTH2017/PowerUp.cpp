@@ -120,6 +120,6 @@ void PowerUp::Update()
 void PowerUp::Free()
 {
 	m_boundingBox.DestroyBody();
-	m_powerupPrefab->Free();
-	delete m_powerupPrefab;
+
+	delete[] m_powerupPrefab;
 }

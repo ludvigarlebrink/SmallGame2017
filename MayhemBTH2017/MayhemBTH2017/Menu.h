@@ -9,7 +9,7 @@
 #include "UIImage.h"
 
 
-#include <iostream>
+
 #include <vector>
 
 
