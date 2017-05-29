@@ -6,13 +6,6 @@
 #include <glm.hpp>
 
 
-#if DLLEXPORT
-#define DLL __declspec(dllexport)
-#else
-#define DLL __declspec(dllimport)
-#endif
-
-
 
 struct MrKeyFramedJoint
 {
@@ -115,6 +108,8 @@ inline bool MrAnimHandler::Import(const char * filepath)
 	}
 
 	file.close();
+
+	m_isLoaded = true;
 
 	return true;
 }

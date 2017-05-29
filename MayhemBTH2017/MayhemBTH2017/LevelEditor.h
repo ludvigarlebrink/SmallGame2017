@@ -56,7 +56,7 @@ private:
 	InputManager *				m_input;
 	StateManager *				m_stateManager;
 	TimeManager *				m_timeManager;
-	VideoManager	*			m_videoManager;
+	VideoManager *				m_videoManager;
 
 	uint32_t					m_state;
 

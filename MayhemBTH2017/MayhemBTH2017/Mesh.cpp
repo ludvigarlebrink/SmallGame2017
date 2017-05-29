@@ -7,7 +7,6 @@
 Mesh::Mesh()
 	: m_isLoaded(false), m_drawCount(0), m_renderMode(GL_TRIANGLES)
 {
-
 }
 
 Mesh::~Mesh()
@@ -24,8 +23,8 @@ bool Mesh::Load(Vertex2D * vertices, uint64_t numVerts)
 		return false;
 	}
 
+	m_vertexType = 0;
 	m_drawCount = numVerts;
-	m_vertices2D = vertices;
 
 	// Generate VAO.
 	glGenVertexArrays(1, &m_vao);
@@ -66,8 +65,8 @@ bool Mesh::Load(Vertex3D * vertices, uint64_t numVerts)
 		return false;
 	}
 
+	m_vertexType = 1;
 	m_drawCount = numVerts;
-	m_vertices3D = vertices;
 
 	// Generate VAO.
 	glGenVertexArrays(1, &m_vao);
@@ -116,8 +115,8 @@ bool Mesh::Load(Vertex3DSkelAnimation * vertices, uint64_t numVerts)
 		return false;
 	}
 
+	m_vertexType = 2;
 	m_drawCount = numVerts;
-	m_vertices3DSkelAnimation = vertices;
 
 	// Generate VAO.
 	glGenVertexArrays(1, &m_vao);
@@ -163,7 +162,6 @@ bool Mesh::Load(Vertex3DSkelAnimation * vertices, uint64_t numVerts)
 	// Unbind
 	glBindVertexArray(0);
 
-
 	m_isLoaded = true;
 	return true;
 }
@@ -175,6 +173,7 @@ bool Mesh::Free()
 		return false;
 	}
 
+	glDeleteBuffers(1, &m_buffer);	
 	glDeleteVertexArrays(1, &m_vao);
 
 	m_isLoaded = false;
@@ -198,29 +197,15 @@ bool Mesh::GetIsLoaded()
 	return m_isLoaded;
 }
 
-GLfloat Mesh::GetHeight() {
-
-	GLfloat maxY = 0;
-
-	for (int i = 0; i < m_drawCount; i++) {
-
-		if (m_vertices3DSkelAnimation[i].position.y > maxY) {
-			maxY = m_vertices3DSkelAnimation[i].position.y;
-
-		}
-	}
-
-	return maxY;
-}
 
 void Mesh::SetRenderMode(GLenum renderMode)
 {
 	m_renderMode = renderMode;
 }
 
-void Mesh::Update()
+void Mesh::Update(Vertex3D * vertices3D)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex3D) * m_drawCount, m_vertices3D, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex3D) * m_drawCount, vertices3D, GL_STATIC_DRAW);
 }
 

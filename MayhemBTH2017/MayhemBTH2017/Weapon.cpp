@@ -4,11 +4,16 @@
 
 Weapon::Weapon()
 {
+	m_prefabGun = nullptr;
+	m_muzzleFlash = nullptr;
+	m_prefabProjectile = nullptr;
 }
 
 Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 {
-	
+	m_prefabGun = nullptr;
+	m_muzzleFlash = nullptr;
+	m_prefabProjectile = nullptr;
 
 	m_isBullet = false;
 	m_prefabGun = gun;
@@ -42,6 +47,24 @@ Weapon::Weapon(Prefab * gun)
 
 Weapon::~Weapon()
 {
+	// Check this.
+	//if (m_prefabGun != nullptr)
+	//{
+	//	delete m_prefabGun;
+	//	m_prefabGun = nullptr;
+	//}
+
+	if (m_muzzleFlash != nullptr)
+	{
+		delete m_muzzleFlash;
+		m_muzzleFlash = nullptr;
+	}
+	if (m_prefabProjectile != nullptr)
+	{
+		delete m_prefabProjectile;
+		m_prefabProjectile = nullptr;
+	}
+
 	m_projectiles.clear();
 
 }

@@ -27,7 +27,6 @@ void PlayerPrefab::Update(float x, float y, float speed)
 	m_x = x;
 	m_y = y;
 
-
 	AnimController * anim = m_player->GetAnimController();
 	AnimSkeleton * skel = anim->GetSkeleton();
 	anim->GetCurrentAnimClip()->SetSpeedModifier(speed * 4);
@@ -91,8 +90,6 @@ void PlayerPrefab::Update(float x, float y, float speed)
 	m_weapon->SetRotation(glm::vec3(y * -90, m_weapRotY, 0.0f));
 
 	m_projectileSpawnPoint = glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]);
-
-	
 }
 
 
@@ -105,7 +102,6 @@ void PlayerPrefab::Render(Camera & cam)
 void PlayerPrefab::RenderShadow(Camera & cam)
 {
 	//Renders the prefab meshes
-	m_player->RenderShadow(cam);
 	m_weapon->Render(cam);
 }
 
@@ -199,6 +195,46 @@ void PlayerPrefab::Init(int32_t id, Prefab * weapon)
 
 void PlayerPrefab::Free()
 {
-	delete m_player;
-	delete m_weapon;
+	if (m_kf != nullptr)
+	{
+		delete[] m_kf->localTx;
+		delete m_kf;
+		m_kf = nullptr;
+	}
+
+	if (m_keyUp != nullptr)
+	{
+		delete[] m_keyUp->localTx;
+		delete m_keyUp;
+		m_keyUp = nullptr;
+	}
+
+	if (m_keyBase != nullptr)
+	{
+		delete[] m_keyBase->localTx;
+		delete m_keyBase;
+		m_keyBase = nullptr;
+	}
+
+	if (m_keyDown1 != nullptr)
+	{
+		delete[] m_keyDown1->localTx;
+		delete m_keyDown1;
+		m_keyDown1 = nullptr;
+	}
+
+	if (m_keyDown2 != nullptr)
+	{
+		delete[] m_keyDown2->localTx;
+		delete m_keyDown2;
+		m_keyDown2 = nullptr;
+	}
+
+	// Delete the player last.
+	if (m_player != nullptr)
+	{
+	
+		delete m_player;
+		m_player = nullptr;
+	}
 }

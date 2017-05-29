@@ -32,7 +32,18 @@ Menu::Menu()
 
 Menu::~Menu()
 {
-	// Do nothing...
+	delete m_selection;
+	m_selection = nullptr;
+
+	for (size_t i = 0; i < m_button.size(); i++)
+	{
+		delete m_button[i]->text;
+		delete m_button[i];
+		m_button[i] = nullptr;
+	}
+
+	m_button.clear();
+
 }
 
 

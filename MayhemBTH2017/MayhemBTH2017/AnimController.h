@@ -17,6 +17,8 @@ public:
 	AnimController();
 	virtual ~AnimController();
 
+	void Free();
+
 	void QuickUpdate(GLuint locations);
 	void Update(GLuint locations);
 

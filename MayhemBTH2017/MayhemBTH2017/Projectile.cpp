@@ -309,7 +309,6 @@ void Projectile::RenderShadow(Camera camera)
 	if (m_active)
 	{
 		m_prefabPointer.Update();
-		m_prefabPointer.RenderShadow(camera);
 	}
 }
 
