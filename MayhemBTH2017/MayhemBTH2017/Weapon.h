@@ -40,7 +40,7 @@ public:
 	bool FireRate(float rate);
 
 private:
-	GLfloat m_firepower;
+	GLfloat					m_firepower;
 	const char*				m_texturePath;
 	Prefab*					m_prefabGun;
 	Prefab*					m_muzzleFlash;
@@ -70,7 +70,9 @@ private:
 	int  m_controllerID;
 	unsigned int m_counter;
 	float m_life;
+
 	Transform m_transform;
+	
 	std::string				m_shaderName;
 	glm::vec3				m_pos;
 	glm::vec4				m_col;

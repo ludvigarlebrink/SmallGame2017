@@ -39,9 +39,9 @@ private:
 	TextureHandler m_textureHandler;
 
 
-	Level		m_level;
-		
-	TimeManager* m_time;
+	Level				m_level;
+
+	TimeManager *		m_time;
 	GLfloat				m_jumpTimer = 0.0f;
 	bool				m_isMidAir;
 	bool				m_loadWorld;

@@ -69,18 +69,13 @@ private:
 	Menu *					m_parent;
 	int32_t					m_currentSelection;
 	int32_t					m_activeSubMenu;
-	static UIImage *			m_selection;
+	static UIImage *		m_selection;
 
 	bool					m_isScalning;
 
 	SoundManager *			m_soundManager;
 	StateManager *			m_stateManager;
 	TimeManager	*			m_timeManager;
-
-
-	Button * x_button;
-
-	Menu * x_menu;
 };
 
 

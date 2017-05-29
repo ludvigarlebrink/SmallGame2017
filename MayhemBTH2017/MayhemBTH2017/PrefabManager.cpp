@@ -54,6 +54,8 @@ Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, std::s
 			}
 
 			mesh->Load(verts, numVerts);
+
+			delete[] verts;
 		}
 		else
 		{
@@ -67,10 +69,11 @@ Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, std::s
 			}
 
 			mesh->Load(verts, numVerts);
-			
+
+			delete[] verts;
 		}
 
-	//	delete meshHandler;
+		delete meshHandler;
 
 		prefab->SetMesh(mesh);
 	}
@@ -153,7 +156,9 @@ Prefab * PrefabManager::Instantiate(const char * mesh, const char * skel, std::s
 
 		matHandler->Import(filepath.c_str());
 
+
 		prefab->SetAlbedoID(TextureManager::Load(matHandler->GetTextures()));
+		delete matHandler;
 	}
 
 	return prefab;

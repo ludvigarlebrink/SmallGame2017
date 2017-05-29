@@ -6,14 +6,6 @@
 #include <glm.hpp>
 
 
-#if DLLEXPORT
-#define DLL __declspec(dllexport)
-#else
-#define DLL __declspec(dllimport)
-#endif
-
-
-
 class MrSkelHandler
 {
 public:
@@ -93,6 +85,8 @@ inline bool MrSkelHandler::Import(const char * filepath)
 
 	file.close();
 
+	m_isLoaded = true;
+
 	return true;
 }
 
@@ -123,14 +117,16 @@ inline void MrSkelHandler::Free()
 		return;
 	}
 
-	delete m_matrix;
-	delete m_parentIDs;
+	delete[] m_matrix;
+	delete[] m_ids;
+	delete[] m_parentIDs;
 
 	m_isLoaded = false;
 
 	m_numJoints = 0;
 
 	m_matrix = nullptr;
+	m_ids = nullptr;
 	m_parentIDs = nullptr;
 
 }

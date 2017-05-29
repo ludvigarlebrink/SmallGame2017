@@ -38,11 +38,12 @@ void GamePhysics::EnterWorld(std::string levelName)
 	m_world.SetContactListener(m_contactListener);
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
-
 	m_powerupHandler.Init(&m_world);
+
 	//player fixture is of type PLAYER
 	m_loadWorld = true;
 }
+
 
 void GamePhysics::Update()
 {
@@ -66,11 +67,9 @@ void GamePhysics::Update()
 }
 
 
-
-glm::vec3 GamePhysics::GetPosition() {
-
+glm::vec3 GamePhysics::GetPosition() 
+{
 	return m_transform.GetPosition();
-
 }
 
 
@@ -82,12 +81,12 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 
 void GamePhysics::Free()
 {
+
 }
 
 
-void GamePhysics::Render(Camera camera) {
-
-
+void GamePhysics::Render(Camera camera) 
+{
 	m_transf.SetPosition(42.0, 24.0, -0.0);
 	m_floorCollider.DrawCollider(camera);
 	for (int i = 0; i < 4; i++) {

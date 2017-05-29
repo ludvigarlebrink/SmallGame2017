@@ -2,7 +2,6 @@
 #define __POWERUP_H__
 
 #include "Box.h"
-#include "Sprite.h"
 #include "Prefab.h"
 #include "PrefabManager.h"
 #include "Collidable.h"
@@ -20,7 +19,6 @@ public:
 
 	//::..GET FUNCTIONS..:://
 	Box GetBox();
-	Prefab * GetPrefab();
 	bool GetActive();
 	void CollidedWithPlayer(bool player);
 
@@ -31,20 +29,17 @@ public:
 
 	void Update();
 
-	void Destroy();
+	void Free();
 
 
 private:
 
 	Box m_boundingBox;
-	Sprite m_sprite;
-	//Prefab* m_powerupPrefab;
-
+	Prefab* m_powerupPrefab;
 	glm::vec2 scale;
-
 	bool m_collidedPlayer;
-
 	bool m_active;
+	float lifeTime;
 
 	enum _entityCategory {
 		BOUNDARY = 0x0001,

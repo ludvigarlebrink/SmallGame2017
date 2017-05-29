@@ -13,6 +13,7 @@ Prefab::~Prefab()
 	if (m_mesh != nullptr)
 	{
 		delete m_mesh;
+		m_mesh = nullptr;
 	}
 }
 
@@ -51,36 +52,6 @@ void Prefab::Render(Camera & cam)
 
 }
 
-void Prefab::RenderShadow(Camera & cam)
-{
-	{
-		if (!m_hasBeenCreated || !m_isEnabled)
-		{
-			return;
-		}
-
-
-		//glUseProgram(m_shaderProgram);
-
-
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, m_albedoID);
-
-		glUniformMatrix4fv(m_uniforms[M], 1, GL_FALSE, &m_tx[SPACE_LOCAL].GetModelMatrix()[0][0]);
-		glUniformMatrix4fv(m_uniforms[V], 1, GL_FALSE, &cam.GetView()[0][0]);
-		glUniformMatrix4fv(m_uniforms[P], 1, GL_FALSE, &cam.GetProjection()[0][0]);
-
-		if (m_hasAnimation)
-		{
-			m_animController->QuickUpdate(m_uniforms[JOINTS]);
-			glUniform1i(m_uniforms[ALBEDO_MAP], 0);
-		}
-
-
-		m_mesh->Render();
-		glUseProgram(0);
-	}
-}
 
 //::.. HELP FUNCTIONS ..:://
 void Prefab::Create()
