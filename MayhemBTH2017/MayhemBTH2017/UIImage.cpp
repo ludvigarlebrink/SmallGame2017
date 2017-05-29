@@ -26,9 +26,15 @@ UIImage::UIImage()
 
 	m_sizeX = 600;
 	m_sizeY = 500;
-	// ????????????????
-	CreateShader();
-	CreateMesh();
+	
+	if (m_mesh == nullptr)
+	{
+		CreateMesh();
+	}
+	if (m_program == 0)
+	{
+		CreateShader();
+	}
 
 	m_showTexture = false;
 }
@@ -36,6 +42,7 @@ UIImage::UIImage()
 
 UIImage::~UIImage()
 {
+
 }
 
 

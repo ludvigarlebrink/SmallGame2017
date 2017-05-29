@@ -12,7 +12,7 @@
 class AnimSkeleton
 {
 public:
-	static const uint32_t MAX_JOINTS = 16;
+	static const uint32_t MAX_JOINTS = 30;
 
 	//::.. CONSTRUCTORS ..:://
 	AnimSkeleton();

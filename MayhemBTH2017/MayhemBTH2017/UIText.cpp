@@ -45,7 +45,7 @@ UIText::UIText(const UIText & object)
 
 UIText::~UIText()
 {
-	// TODO
+	glDeleteTextures(1, &m_texture);
 }
 
 

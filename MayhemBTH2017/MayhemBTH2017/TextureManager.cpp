@@ -105,8 +105,6 @@ GLuint TextureManager::Load(MrTexture * texture)
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	delete texture;
-
 	return id;
 }
 

@@ -48,7 +48,6 @@ public:
 	bool operator==(const char* text);
 
 	//::.. UPDATE FUNCTIONS .:://
-	void Update();
 	void Render();
 
 	//::.. MODIFY FUNCTIONS ..:://

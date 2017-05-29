@@ -13,7 +13,16 @@ AnimController::AnimController()
 
 AnimController::~AnimController()
 {
+	Free();
 }
+
+
+void AnimController::Free()
+{
+	m_clips.clear();
+	delete m_skel;
+}
+
 
 void AnimController::QuickUpdate(GLuint locations)
 {
@@ -22,10 +31,6 @@ void AnimController::QuickUpdate(GLuint locations)
 
 void AnimController::Update(GLuint locations)
 {
-
-
-//	m_skel->Update(kf, pre_ktrue, 1, 11);
-
 	m_clips[m_currClip]->Update();
 
 	m_skel->Update(m_clips[m_currClip]->GetCurrentKeyFrame(), 
@@ -36,7 +41,6 @@ void AnimController::Update(GLuint locations)
 
 bool AnimController::SwitchAnim(const char * anim)
 {
-
 
 	return true;
 }
@@ -94,19 +98,17 @@ void AnimController::SetSkeleton(AnimSkeleton * skel)
 {
 	m_skel = skel;
 
-	MrAnimHandler * animHandler1 = new MrAnimHandler;
+	MrAnimHandler * animHandler = new MrAnimHandler;
 
-	animHandler1->Import(".\\Assets\\Animations\\Player@Up.mranim");
+	animHandler->Import(".\\Assets\\Animations\\Player@Up.mranim");
 
-	m_keyUp = new KeyFrame[animHandler1->GetNumKeyFramedJoints()];
+	m_keyUp = new KeyFrame[animHandler->GetNumKeyFramedJoints()];
 	m_keyUp->localTx = new glm::mat4[m_skel->GetNumJoints()];
 
 	for (uint32_t j = 0; j < m_skel->GetNumJoints(); j++)
 	{
-		m_keyUp->localTx[j] = animHandler1->GetKeyFramedJoints()[j].matrix[0];
+		m_keyUp->localTx[j] = animHandler->GetKeyFramedJoints()[j].matrix[0];
 	}
-
-	MrAnimHandler * animHandler = new MrAnimHandler;
 
 	animHandler->Import(".\\Assets\\Animations\\Player@Run.mranim");
 
@@ -118,28 +120,25 @@ void AnimController::SetSkeleton(AnimSkeleton * skel)
 		m_keyBase->localTx[j] = animHandler->GetKeyFramedJoints()[j].matrix[0];
 	}
 
-	MrAnimHandler * animHandler2 = new MrAnimHandler;
-
-	animHandler2->Import(".\\Assets\\Animations\\Player@Down_01.mranim");
+	animHandler->Import(".\\Assets\\Animations\\Player@Down_01.mranim");
 
 	m_keyDown = new KeyFrame[animHandler->GetNumKeyFramedJoints()];
 	m_keyDown->localTx = new glm::mat4[m_skel->GetNumJoints()];
 
 	for (uint32_t j = 0; j < m_skel->GetNumJoints(); j++)
 	{
-		m_keyDown->localTx[j] = animHandler2->GetKeyFramedJoints()[j].matrix[0];
+		m_keyDown->localTx[j] = animHandler->GetKeyFramedJoints()[j].matrix[0];
 	}
 
-
-	MrAnimHandler * animHandler3 = new MrAnimHandler;
-	animHandler3->Import(".\\Assets\\Animations\\Player@Down_02.mranim");
+	animHandler->Import(".\\Assets\\Animations\\Player@Down_02.mranim");
 
 	m_keyDown2 = new KeyFrame[animHandler->GetNumKeyFramedJoints()];
 	m_keyDown2->localTx = new glm::mat4[m_skel->GetNumJoints()];
 
 	for (uint32_t j = 0; j < m_skel->GetNumJoints(); j++)
 	{
-		m_keyDown2->localTx[j] = animHandler3->GetKeyFramedJoints()[j].matrix[0];
+		m_keyDown2->localTx[j] = animHandler->GetKeyFramedJoints()[j].matrix[0];
 	}
 
+	delete animHandler;
 }

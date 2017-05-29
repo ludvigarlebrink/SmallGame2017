@@ -32,8 +32,8 @@ public:
 	Level();
 	virtual ~Level();
 	
+	void FreeMesh();
 	void Render(Camera camera);
-	void Render();
 
 	//::.. MODIFY FUNCTIONS ..:://
 	void AddBlock(uint32_t posX, uint32_t posY, glm::vec2 uv);
@@ -77,18 +77,13 @@ private:
 	Mesh		m_mesh2;
 	Vertex3D *	m_vertices2;
 
-	Mesh *		m_meshBackground;
-	Vertex3D *	m_vertices3;
-
 	AShader		m_debugShader;
-	Prefab *	m_backgroundShader;
 
 	uint32_t	m_nrOfSpawnPoints;
 	uint32_t	m_nrOfBlocks;
 
 	InputManager *		m_input;
 	glm::vec4			m_uv;
-
 };
 
 
