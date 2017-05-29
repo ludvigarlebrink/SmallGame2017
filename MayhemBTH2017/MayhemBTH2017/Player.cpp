@@ -85,18 +85,18 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 		filter.categoryBits = PLAYER1;
 		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE2 | PROJECTILE3 | PROJECTILE4;
 	}
-	 if (m_controllerID == 1)
+	if (m_controllerID == 1)
 	{
 		filter.categoryBits = PLAYER2;
 		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE3 | PROJECTILE4;
 	}
 
-	 if (m_controllerID == 2)
+	if (m_controllerID == 2)
 	{
 		filter.categoryBits = PLAYER3;
 		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE4;
 	}
-	 if (m_controllerID == 3)
+	if (m_controllerID == 3)
 	{
 		filter.categoryBits = PLAYER4;
 		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE3;
@@ -211,7 +211,7 @@ void Player::Free()
 	// LUKAS DELETE WORLD
 }
 
-void Player::Update() {
+void Player::Update(Player * p_arr) {
 	//std::cout << m_currentWeapon << std::endl;
 	if (m_boundingBox.getBody()->GetPosition().y < -5.0f)
 	{
@@ -298,8 +298,10 @@ void Player::Update() {
 
 			ScoreManager::AddHitScore(m_hitByProjectileID);
 
-			m_life -= m_weapons[m_currentWeapon]->GetDamage();
-		
+
+
+			m_life -= p_arr[m_hitByProjectileID].GetDamage();
+
 
 			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
@@ -457,6 +459,11 @@ void Player::Respawn(glm::vec2 pos)
 Box Player::GetBox()
 {
 	return m_boundingBox;
+}
+
+float Player::GetDamage()
+{
+	return m_weapons[m_currentWeapon]->GetDamage();
 }
 
 

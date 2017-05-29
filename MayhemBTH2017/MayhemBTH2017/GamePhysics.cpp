@@ -54,7 +54,7 @@ void GamePhysics::Update()
 	for (int i = 0; i < 4; i++) 
 	{
 
-		m_player[i].Update();
+		m_player[i].Update(m_player);
 	}
 
 

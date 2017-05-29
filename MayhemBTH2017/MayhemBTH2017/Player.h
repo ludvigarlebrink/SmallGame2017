@@ -31,7 +31,7 @@ public:
 	void Render(Camera camera);
 	void RenderShadow(Camera camera);
 
-	void Update();
+	void Update(Player * p_arr);
 	void Respawn(glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://
@@ -45,6 +45,7 @@ public:
 	uint16 GetCategoryBits();
 	uint16 GetMaskBits();
 	Box GetBox();
+	float GetDamage();
 	PlayerPrefab* GetPrefab();
 	int GetProjectileID();
 	void StartContact(bool projectile, bool powerup);
