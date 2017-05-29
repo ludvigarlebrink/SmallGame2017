@@ -86,7 +86,7 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 
 }
 
-void Projectile::SetTexture(Texture texture)
+void Projectile::SetTexture(Texture* texture)
 {
 
 	m_texture = texture;
@@ -304,13 +304,13 @@ void Projectile::Render(Camera camera)
 
 		transform.SetPosition(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
 
-		m_texture.Bind(0);
+		m_texture->Bind(0);
 		//	glActiveTexture(0);
 
 		glDepthMask(false);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		m_texture.Bind(m_texture.GetTexture());
+		m_texture->Bind(0);
 
 
 		m_emitter.Update();

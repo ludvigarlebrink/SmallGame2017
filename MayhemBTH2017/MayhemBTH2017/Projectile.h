@@ -23,7 +23,7 @@ public:
 		float restitution, float friction,
 		float damping, float density,
 		float fireRate, bool startUp, Prefab * prefab, int controllerID, float life);
-	void SetTexture(Texture texture);
+	void SetTexture(Texture* texture);
 	void InitBullet(b2World * world, glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://
@@ -64,7 +64,7 @@ private:
 	ParticleEmitter trailEmitter;
 	ParticleSystem* m_trailParticles;
 	bool m_renderSmoke;
-	Texture m_texture;
+	Texture* m_texture;
 	SoundManager * m_soundManager;
 	TextureHandler m_textureHandler;
 	Box			m_box;

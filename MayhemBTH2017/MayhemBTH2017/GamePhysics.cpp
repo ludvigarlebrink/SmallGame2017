@@ -102,9 +102,9 @@ void GamePhysics::Render(Camera camera)
 
 	for (int i = 0; i <4; i++) {
 
-		m_texture.Bind(0);
-		m_texture.Bind(m_texture.GetTexture());
-		m_player[i].GetHealthBar()->SetAlbedoID(m_texture.GetTexture());
+		m_texture->Bind(0);
+		m_texture->Bind(m_texture->GetTexture());
+		m_player[i].GetHealthBar()->SetAlbedoID(m_texture->GetTexture());
 		m_player[i].GetHealthBar()->Render(camera);
 	}
 	glEnable(GL_DEPTH_TEST);

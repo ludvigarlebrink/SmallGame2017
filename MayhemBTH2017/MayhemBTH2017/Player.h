@@ -46,7 +46,7 @@ public:
 	uint16 GetMaskBits();
 	Box GetBox();
 	PlayerPrefab* GetPrefab();
-
+	int GetProjectileID();
 	void StartContact(bool projectile, bool powerup);
 	void EndContact();
 	int GetControllerID();
@@ -75,6 +75,7 @@ private:
 	Camera			m_cam;
 	AShader			m_shader;
 	AShader			m_toonShader;
+	
 
 	bool	m_isMidAir;
 	bool	m_doubleJump;

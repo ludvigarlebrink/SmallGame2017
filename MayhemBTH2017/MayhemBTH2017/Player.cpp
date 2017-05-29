@@ -297,7 +297,9 @@ void Player::Update() {
 
 
 			ScoreManager::AddHitScore(m_hitByProjectileID);
+
 			m_life -= m_weapons[m_currentWeapon]->GetDamage();
+		
 
 			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
@@ -461,6 +463,11 @@ Box Player::GetBox()
 PlayerPrefab* Player::GetPrefab()
 {
 	return m_playerPrefab;
+}
+
+int Player::GetProjectileID()
+{
+	return m_hitByProjectileID;
 }
 
 
