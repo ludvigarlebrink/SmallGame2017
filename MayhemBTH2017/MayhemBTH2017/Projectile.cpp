@@ -49,12 +49,25 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	if (controllerID == 0)
 	{
 		filter.categoryBits = PROJECTILE1;
-		filter.maskBits = BOUNDARY | PLAYER2;
+		filter.maskBits = BOUNDARY | PLAYER2 | PLAYER3 | PLAYER4;
 	}
+	  
 	else if (controllerID == 1)
 	{
 		filter.categoryBits = PROJECTILE2;
-		filter.maskBits = PLAYER1 | BOUNDARY;
+		filter.maskBits = BOUNDARY |PLAYER1 | PLAYER3 | PLAYER4; 
+	}
+
+	else if (controllerID == 2)
+	{
+		filter.categoryBits = PROJECTILE3;
+		filter.maskBits = BOUNDARY | PLAYER1 | PLAYER2 | PLAYER4;
+	}
+
+	else if (controllerID == 3)
+	{
+		filter.categoryBits = PROJECTILE4;
+		filter.maskBits = BOUNDARY | PLAYER1 | PLAYER2 | PLAYER3 ;
 	}
 
 	m_controllerID = controllerID;
@@ -100,10 +113,10 @@ void Projectile::InitBullet(b2World * world, glm::vec2 spawnPos)
 	m_box.getBody()->SetLinearDamping(0.0);
 
 	//Collision info
-	b2Filter filter;
-	filter.categoryBits = PROJECTILE1;
-	filter.maskBits = BOUNDARY;
-	m_box.getFixture()->SetFilterData(filter);
+	//b2Filter filter;
+	//filter.categoryBits = PROJECTILE1;
+	//filter.maskBits = BOUNDARY;
+	//m_box.getFixture()->SetFilterData(filter);
 
 }
 
@@ -227,11 +240,11 @@ void Projectile::Update()
 	//WHEN PROJECTILE CONTACT WITH GROUND
 	if (m_contact)
 	{
-		/*if (m_lifeTime >= m_life)
-		{*/
+		m_soundManager->PlaySFX(m_collisionSoundPath);
+		if (m_lifeTime >= m_life)
+		{
 		GetBox().getBody()->SetActive(false);
 		SetActive(false);
-		m_soundManager->PlaySFX(m_collisionSoundPath);
 
 
 		glm::vec3 position = glm::vec3(m_box.getBody()->GetPosition().x / 2, m_box.getBody()->GetPosition().y / 2, 0.0f);
@@ -243,7 +256,7 @@ void Projectile::Update()
 
 
 		m_lifeTime = 0;
-		//}
+		}
 	}
 
 	if (m_active)

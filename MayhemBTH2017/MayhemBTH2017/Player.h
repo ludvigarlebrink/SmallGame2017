@@ -13,6 +13,7 @@
 #include "ScoreManager.h"
 #include "PostProcessingManager.h"
 #include "SoundManager.h"
+#include "AtomicBomb.h"
 
 class Player : public Collidable
 {
@@ -36,6 +37,7 @@ public:
 	void SetWorld(b2World* world, glm::vec2 pos);
 	void SetCategoryBits(short CATEGORY);
 	void SetMaskBits(short MASK);
+	void SetEnemyWeaponDamage(float enemyDamage);
 	bool Timer(float rate);
 	void SetControllerID(int ID);
 	void  Hit(int projectileID);
@@ -45,7 +47,9 @@ public:
 	uint16 GetMaskBits();
 	Box GetBox();
 	PlayerPrefab* GetPrefab();
-
+	float GetWeaponDamage();
+	float m_CurrentWeaponDamage;
+	float m_enemyWeaponDamage;
 	void StartContact(bool projectile, bool powerup);
 	void EndContact();
 	int GetControllerID();
@@ -94,15 +98,20 @@ private:
 	bool m_collidedPowerUp;
 
 	b2FixtureDef m_fixture;
+
+
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
-		PLAYER1 = 0x0002,
-		PROJECTILE1 = 0x0004,
 		POWERUP = 0x0008,
+		PLAYER1 = 0x0002,
+		PLAYER3 = 0x0064,
 		PLAYER2 = 0x0016,
+		PLAYER4 = 0x00128,
+		PROJECTILE1 = 0x0004,
 		PROJECTILE2 = 0x0032,
+		PROJECTILE3 = 0x00256,
+		PROJECTILE4 = 0x00512,
 	};
-
 
 
 

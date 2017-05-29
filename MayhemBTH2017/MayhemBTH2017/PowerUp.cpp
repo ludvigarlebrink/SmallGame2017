@@ -27,7 +27,7 @@ void PowerUp::Create(b2World* world, glm::vec2 pos)
 
 	b2Filter filter;
 	filter.categoryBits = POWERUP;
-	filter.maskBits = BOUNDARY | PLAYER1 | PLAYER2;
+	filter.maskBits = BOUNDARY | PLAYER1 | PLAYER2 | PLAYER3 | PLAYER4;
 	m_boundingBox.getFixture()->SetFilterData(filter);
 
 	m_boundingBox.getBody()->SetUserData(this);
