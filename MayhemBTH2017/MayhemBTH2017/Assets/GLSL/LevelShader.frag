@@ -37,5 +37,5 @@ void main()
 
 	vec3 result = ambient + diffuse + specular;
 
-	FragColor = texture2D(ShadowMap, vec2(TexCoords1.x, -TexCoords1.y)) * vec4(result, 1.0);
+	FragColor = texture2D(ShadowMap, vec2(TexCoords1.x, TexCoords1.y)) * vec4(result, 1.0);
 }

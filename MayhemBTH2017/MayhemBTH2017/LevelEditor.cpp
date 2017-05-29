@@ -61,7 +61,7 @@ void LevelEditor::Update()
 		{
 			AxisMove();
 		}
-		m_levelMarker.Render(m_camera, m_levelGUI.GetCurrentUV());
+		m_levelMarker.Render(m_camera, glm::vec2(m_levelGUI.GetCurrentUV().x, m_levelGUI.GetCurrentUV().y));
 		m_level.Render(m_camera);
 		m_levelGUI.Render(m_camera);
 

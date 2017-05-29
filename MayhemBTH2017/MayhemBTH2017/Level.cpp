@@ -30,7 +30,7 @@ void Level::Render(Camera camera)
 	m_uv.z = 32.0 / 512.0;
 	m_uv.w = 32.0 / 512.0;
 
-	m_debugShader.SendTexture(0, "t", m_uv);
+	//m_debugShader.SendTexture(0, "t", m_uv); //SHADER DEBUG
 
 	m_mesh.Render();
 	m_mesh2.Render();
@@ -144,7 +144,7 @@ void Level::Clear()
 //::.. HELP FUNCTIONS ..:://
 void Level::Init()
 {
-	//m_debugShader.Init("DebugShader", false, 0);
+	m_debugShader.Init("DebugShader", false, 0);
 	m_debugShader.Init(".\\Assets\\GLSL\\LevelShader", false, false);
 	InitGrid();
 	InitMesh();
@@ -159,10 +159,9 @@ void Level::InitGrid()
 			m_grid[x][y].textureID = 0;
 			m_grid[x][y].isOccupied = false;
 			m_grid[x][y].isSpawnPoint = false;
-			m_grid[x][y].uvCoord = glm::vec2(0, 1);
+			m_grid[x][y].uvCoord = glm::vec2(0, 0);
 		}
 	}
-
 }
 
 void Level::InitMesh()
@@ -183,27 +182,28 @@ void Level::InitMesh()
 		for (uint64_t y = 0; y < SIZE_Y; y++)
 		{
 			// Quad 1.
-			m_vertices[i].position = glm::vec3((x + 0.5f), (y + 0.5f), -2.0f * scaler);
+			m_vertices[i].position = glm::vec3((x - 0.5f), (y - 0.5f), -2.0f * scaler);
 			m_vertices[i].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			m_vertices[i].texCoordsAlpha = glm::vec3(0.0f, 0.0f, 0.0f);
 
-			m_vertices[i + 1].position = glm::vec3((x + 0.5f), (y - 0.5f), -2.0f * scaler);
+			m_vertices[i + 1].position = glm::vec3((x - 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i + 1].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			m_vertices[i + 1].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
 
-			m_vertices[i + 2].position = glm::vec3((x - 0.5f), (y + 0.5f), -2.0f * scaler);
+			m_vertices[i + 2].position = glm::vec3((x + 0.5f), (y - 0.5f), -2.0f * scaler);
 			m_vertices[i + 2].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			m_vertices[i + 2].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
-			m_vertices[i + 3].position = glm::vec3((x - 0.5f), (y + 0.5f), -2.0f * scaler);
+
+			m_vertices[i + 3].position = glm::vec3((x + 0.5f), (y - 0.5f), -2.0f * scaler);
 			m_vertices[i + 3].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			m_vertices[i + 3].texCoordsAlpha = glm::vec3(0.0f, 1.0f, 0.0f);
 
-			m_vertices[i + 4].position = glm::vec3((x + 0.5f), (y - 0.5f), -2.0f * scaler);
+			m_vertices[i + 4].position = glm::vec3((x - 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i + 4].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			m_vertices[i + 4].texCoordsAlpha = glm::vec3(1.0f, 0.0f, 0.0f);
 
-			m_vertices[i + 5].position = glm::vec3((x - 0.5f), (y - 0.5f), -2.0f * scaler);
+			m_vertices[i + 5].position = glm::vec3((x + 0.5f), (y + 0.5f), -2.0f * scaler);
 			m_vertices[i + 5].normal = glm::vec3(0.0f, 0.0f, -1.0f);
 			m_vertices[i + 5].texCoordsAlpha = glm::vec3(1.0f, 1.0f, 0.0f);
 			i += 6;
@@ -313,7 +313,7 @@ void Level::InitMesh()
 void Level::UpdateBlocks(uint32_t posX, uint32_t posY, bool isOccupied, glm::vec2 uv)
 {
 	float x = uv.x;
-	float y = -uv.y;
+	float y = uv.y;
 
 
 	uint64_t pos = (posY + (posX * SIZE_Y)) * 6;

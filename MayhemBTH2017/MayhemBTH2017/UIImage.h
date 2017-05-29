@@ -23,8 +23,8 @@ public:
 
 	//::.. UPDATE FUNCTIONS ..:://
 	void Render();
-	void RenderWithUV();
-	void UIImage::RenderWithUV(glm::vec2 uv);
+	//void RenderWithUV();
+	//void UIImage::RenderWithUV(glm::vec2 uv);
 
 
 	//::.. GET FUNCTIONS ..:://
