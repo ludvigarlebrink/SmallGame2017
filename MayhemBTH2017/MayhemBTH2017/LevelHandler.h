@@ -3,7 +3,6 @@
 
 
 #include "Level.h"
-#include "LevelEditorPropPlacer.h"
 #include "UIText.h"
 
 
@@ -27,15 +26,12 @@ public:
 	//::.. IMPORT/EXPORT ..:://
 	void Init();
 	void Import(Level & level, std::string levelName);
-	void Export(Level & level, LevelEditorPropPlacer & propPlacer);
+	void Export(Level & level);
 	bool ImportRegister(std::string & textField);
 	bool ExportRegister();
 	bool TestImportRegister();
 	bool TestExportRegister();
 	
-
-
-
 	//::.. MODIFY FUNCTIONS ..:://
 	bool AddToRegister(Level * level);
 	bool RemoveFromRegister(const char* name);
@@ -47,7 +43,6 @@ public:
 	uint32_t	GetMaxNumLevels();
 	Level *		GetLoadedLevel();
 	uint32_t	ReadNumLevels();
-	std::string ReadLevel(std::string levelName);
 	uint32_t	GetNumLevels();
 	void		GetLevelNames(std::vector<std::string> & strVec);
 
@@ -77,7 +72,6 @@ private:
 	uint32_t							m_height = 48;
 	uint32_t							m_numLevels = 0;
 	uint32_t							numLevels;
-	LevelEditorPropPlacer::PropsExport* outProps;
 };
 
 #endif // ! __LEVELIMPORTER_H__

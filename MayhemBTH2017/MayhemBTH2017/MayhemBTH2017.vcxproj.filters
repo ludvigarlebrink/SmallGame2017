@@ -241,12 +241,6 @@
     <ClCompile Include="LevelEditorStateMachine.cpp">
       <Filter>Engine\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="LevelEditorPropPlacer.cpp">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="PropHandler.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="MyContactListener.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -277,6 +271,7 @@
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
     <ClCompile Include="ParticleEmitter.cpp" />
+    <ClCompile Include="LevelSelector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -447,12 +442,6 @@
     <ClInclude Include="LevelEditorStateMachine.h">
       <Filter>Engine\LevelEditor</Filter>
     </ClInclude>
-    <ClInclude Include="LevelEditorPropPlacer.h">
-      <Filter>Engine\LevelEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="PropHandler.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="MyContactListener.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -490,6 +479,7 @@
     <ClInclude Include="GamePhysics.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="LevelSelector.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

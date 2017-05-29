@@ -14,13 +14,15 @@ PowerUp::~PowerUp()
 void PowerUp::Create(b2World* world, glm::vec2 pos)
 {
 
-	m_powerupPrefab = PrefabManager::Instantiate("Player", nullptr, nullptr, 0, "Player2");
-	m_powerupPrefab->SetScale(glm::vec3(1.5));
+	//m_powerupPrefab = PrefabManager::Instantiate("Player", nullptr, nullptr, 0, "Player2");
+	//m_powerupPrefab->SetScale(glm::vec3(1.5));
 
-	m_boundingBox.InitDynamic(world, pos, glm::vec2(m_powerupPrefab->GetScale().x, m_powerupPrefab->GetScale().y));
+	scale = glm::vec2(1.5);
+
+	m_boundingBox.InitDynamic(world, pos, scale);
 	SetActive(false);
 
-	m_sprite.CreateSprite(glm::vec2(GetBox().getBody()->GetPosition().x - (m_powerupPrefab->GetScale().x / 2), GetBox().getBody()->GetPosition().y - (m_powerupPrefab->GetScale().y / 2)), glm::vec2(m_powerupPrefab->GetScale().x, m_powerupPrefab->GetScale().y));
+	m_sprite.CreateSprite(glm::vec2(GetBox().getBody()->GetPosition().x - (scale.x / 2), GetBox().getBody()->GetPosition().y - (scale.y / 2)), glm::vec2(scale.x, scale.y));
 	m_sprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
 
 	b2Filter filter;
@@ -48,10 +50,10 @@ Box PowerUp::GetBox()
 	return m_boundingBox;
 }
 
-Prefab* PowerUp::GetPrefab()
-{
-	return m_powerupPrefab;
-}
+//Prefab* PowerUp::GetPrefab()
+//{
+//	return m_powerupPrefab;
+//}
 
 bool PowerUp::GetActive()
 {
@@ -100,9 +102,9 @@ void PowerUp::Update()
 	GLfloat xScale = m_boundingBox.getScale().x;
 	GLfloat yScale = m_boundingBox.getScale().y;
 
-	m_powerupPrefab->SetPosition(glm::vec3(xPos, yPos, 0));
+	//m_powerupPrefab->SetPosition(glm::vec3(xPos, yPos, 0));
 
-	m_sprite.ModifyPos(glm::vec2(xPos - (m_powerupPrefab->GetScale().x / 2), yPos - (m_powerupPrefab->GetScale().y / 2)), glm::vec2(m_powerupPrefab->GetScale().x, m_powerupPrefab->GetScale().y));
+	m_sprite.ModifyPos(glm::vec2(xPos - (scale.x / 2), yPos - (scale.y / 2)), scale);
 
 }
 
@@ -111,5 +113,6 @@ void PowerUp::Destroy()
 	//delete m_powerupPrefab;
 	//m_powerupPrefab = NULL;
 	m_boundingBox.DestroyBody();
+	//delete m_powerupPrefab;
 
 }

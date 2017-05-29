@@ -36,7 +36,6 @@ public:
 	uint16 GetCategoryBits();
 	void SetMaskBits(uint16 MASK);
 	void SetCategoryBits(uint16 CATEGORY);
-	b2Filter* GetFilter();
 	void StartContact();
 	void EndContact();
 

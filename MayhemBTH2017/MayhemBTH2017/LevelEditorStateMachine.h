@@ -5,8 +5,8 @@
 #include "UIImage.h"
 #include "UIText.h"
 #include "InputManager.h"
-#include "LevelEditorPropPlacer.h"
 #include "VideoManager.h"
+#include "Camera.h"
 
 #include <fstream>
 #include <vector>
@@ -26,7 +26,6 @@ enum LevelEditorState
 	GUI_CLOSED = 0,
 	GUI_OPEN,
 	GUI_BLOCK,
-	GUI_PROP,
 	GUI_BACKGROUND,
 	GUI_NUM
 };
@@ -38,7 +37,6 @@ public:
 	virtual ~LevelEditorStateMachine();
 
 	//::.. GET FUNCTIONS ..:://
-	LevelEditorPropPlacer& GetPropPlacer();
 	int32_t GetState();
 	glm::vec2 GetCurrentUV();
 
@@ -72,8 +70,6 @@ private:
 	int32_t			m_offsetMother;
 	int32_t			m_offsetCounter;
 	glm::vec2		m_currentUV;
-
-	LevelEditorPropPlacer*  m_propPlacer;
 };
 
 #endif // !__LEVELEDITORSTATEMACHINE_H__

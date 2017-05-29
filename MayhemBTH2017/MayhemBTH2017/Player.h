@@ -24,7 +24,7 @@ public:
 
 	//::..INITIALIZER..:://
 	void Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID);
-	
+
 	//::..RENDER..:://
 	void Render(Camera camera);
 	void RenderShadow(Camera camera);
@@ -39,7 +39,7 @@ public:
 	bool Timer(float rate);
 	void SetControllerID(int ID);
 	void  Hit(int projectileID);
-	
+
 	//::..GETTERS..:://
 	uint16 GetCategoryBits();
 	uint16 GetMaskBits();
@@ -51,12 +51,16 @@ public:
 	int GetControllerID();
 	void UpdateParticles();
 	Prefab * GetHealthBar();
-	
+
 private:
 
 	Texture m_particleTexture1;
 	Texture m_particleTexture2;
 	Texture m_particleTexture3;
+	Texture	m_particleTexture4;
+	Texture	m_particleTexture5;
+	Texture	m_particleTexture6;
+	Texture	m_particleTexture7;
 
 	TextureHandler m_textureHandler;
 	ParticleSystem m_particles;

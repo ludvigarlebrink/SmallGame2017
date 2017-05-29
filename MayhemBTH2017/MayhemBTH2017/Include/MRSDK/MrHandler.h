@@ -119,7 +119,7 @@ inline bool MrHandler::Export()
 	{
 		std::string path = filepathMeshes + m_name + ".mrmesh";
 
-		uint32_t strLenght = path.length();
+		uint32_t strLenght = static_cast<uint32_t>(path.length());
 
 		file.write(reinterpret_cast<char*>(&strLenght), sizeof(uint32_t));
 
@@ -140,7 +140,7 @@ inline bool MrHandler::Export()
 		// GET NAME
 		std::string path = filepathSkel + m_name + ".mrskel";
 
-		uint32_t strLenght = path.length();
+		uint32_t strLenght = static_cast<uint32_t>(path.length());
 
 		file.write(reinterpret_cast<char*>(&strLenght), sizeof(uint32_t));
 
@@ -160,7 +160,7 @@ inline bool MrHandler::Export()
 	{
 		std::string path = filepathAnim + m_name + "@" + m_animHandler[i].GetName() + ".mranim";
 
-		uint32_t strLenght = path.length();
+		uint32_t strLenght = static_cast<uint32_t>(path.length());
 
 		file.write(reinterpret_cast<char*>(&strLenght), sizeof(uint32_t));
 

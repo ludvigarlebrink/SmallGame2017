@@ -45,7 +45,7 @@ void PowerUpHandler::Init(b2World * world)
 	m_spawn = true;
 }
 
-void PowerUpHandler::free()
+void PowerUpHandler::Free()
 {
 	for (int i = 0; i < 5; i++)
 	{
@@ -58,9 +58,6 @@ void PowerUpHandler::free()
 	{
 	m_pu.clear();
 	}*/
-
-
-
 }
 
 bool PowerUpHandler::GetSpawn() const

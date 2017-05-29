@@ -18,6 +18,7 @@ ParticleSystem::ParticleSystem(std::string shadername, glm::vec3 pos, glm::vec4 
 
 	glGenVertexArrays(1, &m_vao[0]);
 	m_drawShader.Init(".\\Assets\\GLSL\\DrawShader", 1, 0); //Shade for drawing the transformed particles
+	m_drawShader.AddUniforms();
 
 	m_camera.SetPosition(glm::vec3(((84 / 2)), ((48 / 2)), -51.2f));
 
