@@ -83,7 +83,8 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 
 void GamePhysics::Free()
 {
-
+	delete m_texture[0];
+	delete m_texture[1];
 }
 
 
