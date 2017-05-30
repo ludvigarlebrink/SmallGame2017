@@ -53,6 +53,7 @@ public:
 	int GetControllerID();
 	void UpdateParticles();
 	Prefab * GetHealthBar();
+	Prefab* GetHealthBarBackground();
 
 private:
 
@@ -89,7 +90,7 @@ private:
 	float	m_life;
 
 	Prefab *		m_healthBar;
-	Prefab *		m_deathSkull;
+	Prefab*			m_healthBarBackground;
 	int				m_hitByProjectileID;
 	SoundManager *	m_soundManager;
 
