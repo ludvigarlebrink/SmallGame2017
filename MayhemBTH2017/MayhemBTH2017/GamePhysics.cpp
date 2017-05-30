@@ -50,16 +50,13 @@ void GamePhysics::EnterWorld(std::string levelName)
 
 void GamePhysics::Update()
 {
-	m_world.Step(1.0f / 30.0f, 6, 2);
+	m_world.Step(1.0f / 20.0f, 8, 5);
 
 	for (int i = 0; i < 4; i++) 
 	{
-
 		m_player[i].Update(m_player);
 	}
-
-
-		
+	
 		
 
 	m_powerupHandler.Update();
@@ -112,7 +109,9 @@ void GamePhysics::Render(Camera camera)
 		m_texture[0]->Bind(m_texture[0]->GetTexture());
 		m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
 		m_player[i].GetHealthBar()->Render(camera);
-		
 	}
+
+	m_skull.Render(camera);
+
 	glEnable(GL_DEPTH_TEST);
 }

@@ -10,6 +10,7 @@
 #include "PowerUpHandler.h"
 #include "Texture.h"
 #include "TextureHandler.h"
+#include "Skull.h"
 
 
 class GamePhysics
@@ -65,6 +66,8 @@ private:
 	Sprite				m_shot;
 	//Temporary
 	b2FixtureDef		m_powerUpFixture;
+
+	Skull				m_skull;
 
 	static MyContactListener * m_contactListener;
 

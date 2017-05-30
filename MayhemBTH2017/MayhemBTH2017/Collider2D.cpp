@@ -93,7 +93,7 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 				gameFloor.getBody()->SetUserData(this);
 				b2Filter filter;
 				filter.categoryBits = BOUNDARY;
-				filter.maskBits = PLAYER1 | PLAYER2 | PLAYER3 | PLAYER4 | PROJECTILE1 | PROJECTILE2 | PROJECTILE3 | PROJECTILE4 | POWERUP;
+				filter.maskBits = PLAYER1 | PLAYER2 | PLAYER3 | PLAYER4 | PROJECTILE1 | PROJECTILE2 | PROJECTILE3 | PROJECTILE4 | POWERUP |SKULL;
 				gameFloor.getFixture()->SetFilterData(filter);
 
 				m_boxes.push_back(gameFloor);

@@ -6,6 +6,7 @@
 #include "PowerUp.h"
 #include "Collider2D.h"
 #include "PostProcessingManager.h"
+#include "Skull.h"
 
 #include <box2d.h>
 
