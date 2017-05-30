@@ -54,16 +54,25 @@ void ScoreManager::Reset()
 	}
 }
 
+
 void ScoreManager::AddScore(uint32_t id, uint32_t score)
 {
-	//m_score += score;
+	m_playerScore[id].score += score;
+	m_playerScore[id].gotScore = true;
+
+	if (m_playerScore[id].score < 0)
+	{
+		m_playerScore[id].score = 0;
+	}
 }
+
 
 void ScoreManager::AddHitScore(uint32_t id)
 {
 	m_playerScore[id].score += 5;
 	m_playerScore[id].gotScore = true;
 }
+
 
 void ScoreManager::AddDeath(uint32_t id)
 {
@@ -77,6 +86,7 @@ void ScoreManager::AddDeath(uint32_t id)
 	m_playerScore[id].currKillStreak = 0;
 }
 
+
 void ScoreManager::AddKill(uint32_t id)
 {
 	m_playerScore[id].kills += 1;
@@ -88,37 +98,59 @@ void ScoreManager::AddKill(uint32_t id)
 	//++m_currKillStreak;
 }
 
+
 int32_t ScoreManager::GetScore(uint32_t id)
 {
 	return m_playerScore[id].score;
 }
+
 
 uint32_t ScoreManager::GetDeaths(uint32_t id)
 {
 	return m_playerScore[id].deaths;
 }
 
+
 uint32_t ScoreManager::GetKills(uint32_t id)
 {
 	return 0;
 }
+
 
 uint32_t ScoreManager::GetCurrKillStreak(uint32_t id)
 {
 	return 0;
 }
 
+
 uint32_t ScoreManager::GetHighestKillStreak(uint32_t id)
 {
 	return 0;
 }
+
 
 float ScoreManager::GetKDRatio(uint32_t id)
 {
 	return 0.0f;
 }
 
+
 bool ScoreManager::GetGotScore(uint32_t id)
 {
 	return m_playerScore[id].gotScore;
+}
+
+int ScoreManager::GetWinnerIndex()
+{
+	int tmpWinner = 0;
+
+	for (uint32_t i = 0; i < 4; ++i)
+	{
+		if (m_playerScore[i].score > m_playerScore[tmpWinner].score)
+		{
+			tmpWinner = i;
+		}
+	}
+
+	return tmpWinner;
 }
