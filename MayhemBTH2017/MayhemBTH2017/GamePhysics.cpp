@@ -6,7 +6,7 @@ MyContactListener * GamePhysics::m_contactListener = nullptr;
 
 
 GamePhysics::GamePhysics()
-	:m_world(b2Vec2(0.0f, -3.50f))
+	:m_world(b2Vec2(0.0f, -8.0f))
 {	
 	if (m_contactListener == nullptr)
 	{
@@ -31,9 +31,16 @@ void GamePhysics::EnterWorld(std::string levelName)
 {
 	m_texture[0] = m_textureHandler.Import(".\\Assets\\Textures\\health.jpg");
 	m_texture[1] = m_textureHandler.Import(".\\Assets\\Textures\\healthbackground.jpg");
+	m_texture[2] = m_textureHandler.Import(".\\Assets\\Textures\\sight.png");
 	m_time = TimeManager::Get();
 
 	m_floorCollider.CreateBoundingBoxes(&m_world, levelName);
+
+
+	if (m_powerupHandler.GetSpawn())
+	{
+		m_powerupHandler.Free();
+	}
 
 	//at global scope
 
@@ -50,13 +57,16 @@ void GamePhysics::EnterWorld(std::string levelName)
 
 void GamePhysics::Update()
 {
-	m_world.Step(1.0f / 20.0f, 8, 5);
+	m_world.Step(1.0f / 30.0f, 6, 2);
 
 	for (int i = 0; i < 4; i++) 
 	{
+
 		m_player[i].Update(m_player);
 	}
-	
+
+
+		
 		
 
 	m_powerupHandler.Update();
@@ -80,7 +90,9 @@ void GamePhysics::SetNrOfPlayers(int nrOf)
 
 void GamePhysics::Free()
 {
-
+	delete m_texture[0];
+	delete m_texture[1];
+	delete m_texture[2];
 }
 
 
@@ -90,7 +102,19 @@ void GamePhysics::Render(Camera camera)
 	m_floorCollider.DrawCollider(camera);
 	
 	for (int i = 0; i < 4; i++) {
+		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
+		//glBlendFunc(GL_ONE, GL_SRC0_ALPHA);
+		//Laser sight
+		m_texture[2]->Bind(0);
+		m_texture[2]->Bind(m_texture[2]->GetTexture());
+		m_player[i].GetLaserSight()->SetAlbedoID(m_texture[2]->GetTexture());
+		m_player[i].GetLaserSight()->Render(camera);
 
+
+		glDisable(GL_BLEND);
+		glEnable(GL_DEPTH_TEST);
 		m_player[i].Render(camera);
 	}
 	
@@ -100,18 +124,23 @@ void GamePhysics::Render(Camera camera)
 
 	for (int i = 0; i <4; i++) {
 
+
+		
+		//Health bar background
 		m_texture[1]->Bind(0);
 		m_texture[1]->Bind(m_texture[1]->GetTexture());
 		m_player[i].GetHealthBarBackground()->SetAlbedoID(m_texture[1]->GetTexture());
 		m_player[i].GetHealthBarBackground()->Render(camera);
-		
+	
+		//Health bar
 		m_texture[0]->Bind(0);
 		m_texture[0]->Bind(m_texture[0]->GetTexture());
 		m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
 		m_player[i].GetHealthBar()->Render(camera);
+
+
+
+		
 	}
-
-	m_skull.Render(camera);
-
 	glEnable(GL_DEPTH_TEST);
 }

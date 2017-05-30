@@ -14,7 +14,6 @@
 #include "PostProcessingManager.h"
 #include "SoundManager.h"
 #include "AtomicBomb.h"
-
 class Player : public Collidable
 {
 public:
@@ -41,26 +40,21 @@ public:
 	bool Timer(float rate);
 	void SetControllerID(int ID);
 	void  Hit(int projectileID);
-	void SetCollisionSkull(bool value);
-
 
 	//::..GETTERS..:://
 	uint16 GetCategoryBits();
 	uint16 GetMaskBits();
 	Box GetBox();
-	b2World * GetWorld();
 	float GetDamage();
 	PlayerPrefab* GetPrefab();
-	bool GetDead();
 	int GetProjectileID();
-	void StartContact(bool projectile, bool powerup, bool skull, uint32_t skullID);
+	void StartContact(bool projectile, bool powerup);
 	void EndContact();
 	int GetControllerID();
 	void UpdateParticles();
-	Prefab	*	GetHealthBar();
-	Prefab	*	GetHealthBarBackground();
-	bool GetCollisionSkull();
-	bool GetCollidedSkullID();
+	Prefab * GetHealthBar();
+	Prefab* GetHealthBarBackground();
+	Prefab* GetLaserSight();
 
 private:
 
@@ -77,12 +71,14 @@ private:
 	InputManager *	m_input;
 	b2Fixture *		m_filter;
 	Box				m_boundingBox;
+	Box				m_skullBoundingBox;
 	PlayerPrefab *	m_playerPrefab;
 	Sprite			m_playerSprite;
 	Transform		m_transf;
 	Camera			m_cam;
 	AShader			m_shader;
 	AShader			m_toonShader;
+
 
 	bool	m_isMidAir;
 	bool	m_doubleJump;
@@ -93,16 +89,11 @@ private:
 	bool	m_collidedProjectile;
 	bool	m_hitByProjectile;
 	float	m_life;
-	bool	m_collisionSkull;
-	uint32_t m_collidedSkullID;
-
-
 
 	Prefab *		m_healthBar;
+	Prefab *		m_laserSight;
 	Prefab*			m_healthBarBackground;
-
 	int				m_hitByProjectileID;
-	int				m_skullTimer = 0;
 	SoundManager *	m_soundManager;
 
 	Weapon *		m_weapons[7];
@@ -137,7 +128,6 @@ private:
 		PROJECTILE2 = 0x0080,
 		PROJECTILE3 = 0x0100,
 		PROJECTILE4 = 0x0120,
-		SKULL = 0x0140,
 	};
 
 };

@@ -19,6 +19,7 @@ Projectile::Projectile()
 
 Projectile::~Projectile()
 {
+	delete m_texture;
 }
 
 void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID, float life)

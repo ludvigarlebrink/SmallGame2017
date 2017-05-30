@@ -41,7 +41,6 @@ void PowerUpHandler::Free()
 {
 	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
-		m_pu.at(i)->Free();
 		delete m_pu[i];
 	}
 

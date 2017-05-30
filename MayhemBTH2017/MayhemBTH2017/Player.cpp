@@ -26,26 +26,26 @@ Player::Player()
 	m_dead = false;
 
 	m_hitByProjectile = -1;
+
+
 }
 
 
 Player::~Player()
 {
 	Free();
-
 }
 
 
 //::..INITIALIZERS..:://
 void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 {
+
 	m_input = nullptr;
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
 	m_healthBarBackground = nullptr;
 	m_world = nullptr;
-
-	m_collisionSkull = false;
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
 	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\debree.png");
@@ -79,36 +79,34 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
 	//GetBox().getFixture()->SetDensity(0.1);
-	GetBox().getFixture()->SetFriction(10.0);
+	GetBox().getFixture()->SetFriction(1000.0);
 	GetBox().getFixture()->SetRestitution(0.0);
-	GetBox().getBody()->SetLinearDamping(0.0);
+	GetBox().getBody()->SetLinearDamping(0.3);
 	GetBox().getBody()->ResetMassData();
 
 	b2Filter filter;
 	if (m_controllerID == 0)
 	{
 		filter.categoryBits = PLAYER1;
-		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE2 | PROJECTILE3 | PROJECTILE4 | SKULL;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE2 | PROJECTILE3 | PROJECTILE4;
 	}
 	if (m_controllerID == 1)
 	{
 		filter.categoryBits = PLAYER2;
-		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE3 | PROJECTILE4 | SKULL;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE3 | PROJECTILE4;
 	}
 
 	if (m_controllerID == 2)
 	{
 		filter.categoryBits = PLAYER3;
-		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE4 | SKULL;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE4;
 	}
 	if (m_controllerID == 3)
 	{
 		filter.categoryBits = PLAYER4;
-		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE3 | SKULL;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE3;
 	}
-
 	GetBox().getFixture()->SetFilterData(filter);
-
 
 	GetBox().getBody()->SetUserData(this);
 
@@ -120,10 +118,11 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 	m_healthBarBackground = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
-
+	m_laserSight = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar->Create();
 	m_healthBarBackground->Create();
+	m_laserSight->Create();
 
 	gun->SetScale(glm::vec3(2, 2, 2));
 
@@ -192,9 +191,15 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBarBackground->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
+
 	m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
 	m_healthBar->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
+
+
+	m_laserSight->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
+	m_laserSight->SetScale(glm::vec3(0.2, 8.5, 0.2));
+
 
 	//Set fixture 
 
@@ -225,6 +230,19 @@ void Player::Free()
 		m_healthBarBackground = nullptr;
 	}
 
+	if (m_laserSight != nullptr) {
+		delete m_laserSight;
+		m_laserSight = nullptr;
+	}
+
+	delete m_particleTexture1;
+	delete m_particleTexture2;
+	delete m_particleTexture3;
+	delete m_particleTexture4;
+	delete m_particleTexture5;
+	delete m_particleTexture6;
+	delete m_particleTexture7;
+
 	// LUKAS DELETE WORLD
 }
 
@@ -245,7 +263,15 @@ void Player::Update(Player * p_arr) {
 
 	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
-	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
+
+	glm::vec2 force = glm::vec2(m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID), m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y, m_controllerID));
+
+	float angle = glm::degrees(atan2(force.y, force.x));
+	
+	m_laserSight->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y+0.6, 0.0));
+	m_laserSight->SetRotation(-90, 90, angle);
+
+	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
 	{
 		if (m_weapons[m_currentWeapon]->FireRate(m_weapons[m_currentWeapon]->GetFireRate()))
 		{
@@ -289,31 +315,9 @@ void Player::Update(Player * p_arr) {
 		}
 	}
 
-	if (m_dead)
-	{
-		
-
-		int spawn = rand() % 80;
-		m_time += TimeManager::Get()->GetDeltaTime();
-		Respawn(glm::vec2(spawn, 70));
-
-		m_currentWeapon = 0;
-
-		if (Timer(2))
-		{
-			Respawn(glm::vec2(spawn, 30));
-			m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
-			m_life = 1.0;
-			m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
-			m_dead = false;
-			//m_skullSpawn = false;
-			m_skullTimer = 0;
-		}
-	}
 
 	if (m_contact)
 	{
-
 		if (m_collidedProjectile)
 		{
 			int hitSound = rand() % 4;
@@ -377,7 +381,7 @@ void Player::Update(Player * p_arr) {
 		}
 		if (m_collidedPowerUp)
 		{
-			int atomic = rand() % 6;
+			int atomic = rand() % 15;
 			if (atomic != 5) {
 				m_currentWeapon = rand() % 6 + 1;
 			}
@@ -389,8 +393,26 @@ void Player::Update(Player * p_arr) {
 			m_collidedPowerUp = false;
 		}
 		m_contact = false;
-		m_collidedProjectile = false;
 	}
+
+	if (m_dead)
+	{
+		int spawn = rand() % 80;
+		m_time += TimeManager::Get()->GetDeltaTime();
+		Respawn(glm::vec2(spawn, 70));
+
+		m_currentWeapon = 0;
+
+		if (Timer(2))
+		{
+			Respawn(glm::vec2(spawn, 30));
+			m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
+			m_life = 1.0;
+			m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
+			m_dead = false;
+		}
+	}
+
 
 	if (GetBox().getBody()->GetLinearVelocity().y != 0) {
 		m_isMidAir = true;
@@ -411,29 +433,40 @@ void Player::Update(Player * p_arr) {
 
 
 	// THIS STUFF WORKS
+	if (!(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID))) {
+		GetBox().getBody()->ApplyForce(b2Vec2((-GetBox().getBody()->GetLinearVelocity().x)*(300)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+	}
 
-	if (m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID))
+	if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID))
 	{
 
+		std::cout << GetBox().getBody()->GetLinearVelocity().x << " " << GetBox().getBody()->GetLinearVelocity().y << std::endl;
+
 		if (m_isMidAir) {
-
-			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-150)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
-
+			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+			//GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-50)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+			//GetBox().getBody()->SetLinearVelocity(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-200)*TimeManager::Get()->GetDeltaTime(), GetBox().getBody()->GetLinearVelocity().y));
+			if (GetBox().getBody()->GetLinearVelocity().x > 6)
+			{
+				GetBox().getBody()->SetLinearVelocity(b2Vec2(6, GetBox().getBody()->GetLinearVelocity().y));
+			}
+			if (GetBox().getBody()->GetLinearVelocity().x < -6)
+			{
+				GetBox().getBody()->SetLinearVelocity(b2Vec2(-6, GetBox().getBody()->GetLinearVelocity().y));
+			}
 		}
 		if (!m_isMidAir) {
 
-			GetBox().getBody()->SetLinearVelocity(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-200)*TimeManager::Get()->GetDeltaTime(), 0));
+			GetBox().getBody()->SetLinearVelocity(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-250)*TimeManager::Get()->GetDeltaTime(), 0));
 		}
-
-
 	}
 	// ** //
 
 
 
 	m_playerPrefab->Update(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
-		m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
-		m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID));
+		m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
+		m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID));
 
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f)
@@ -443,7 +476,7 @@ void Player::Update(Player * p_arr) {
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 130), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 200), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 
 
@@ -455,8 +488,8 @@ void Player::Update(Player * p_arr) {
 	if (m_doubleJump && m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f && m_isMidAir)
 	{
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 130), GetBox().getBody()->GetWorldCenter(), 1);
-
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 200 - (GetBox().getBody()->GetLinearVelocity().y * 20)), GetBox().getBody()->GetWorldCenter(), 1);
+		//GetBox().getBody()->SetLinearVelocity(b2Vec2(GetBox().getBody()->GetLinearVelocity().x, 20));
 	}
 
 	GLfloat xPos = GetBox().getBody()->GetPosition().x;
@@ -485,12 +518,6 @@ Box Player::GetBox()
 	return m_boundingBox;
 }
 
-
-b2World * Player::GetWorld()
-{
-	return m_world;
-}
-
 float Player::GetDamage()
 {
 	return m_weapons[m_currentWeapon]->GetDamage();
@@ -502,18 +529,13 @@ PlayerPrefab* Player::GetPrefab()
 	return m_playerPrefab;
 }
 
-bool Player::GetDead()
-{
-	return m_dead;
-}
-
 int Player::GetProjectileID()
 {
 	return m_hitByProjectileID;
 }
 
 
-void Player::StartContact(bool projectile, bool powerup, bool skull, uint32_t skullID)
+void Player::StartContact(bool projectile, bool powerup)
 {
 	m_contact = true;
 
@@ -527,11 +549,7 @@ void Player::StartContact(bool projectile, bool powerup, bool skull, uint32_t sk
 		m_collidedPowerUp = true;
 		m_collidedProjectile = false;
 	}
-	if (skull)
-	{
-		m_collidedSkullID = skullID;
-		m_collisionSkull = skull;
-	}
+
 }
 
 
@@ -563,6 +581,14 @@ Prefab * Player::GetHealthBarBackground()
 {
 	return m_healthBarBackground;
 }
+
+Prefab * Player::GetLaserSight()
+{
+	return m_laserSight;
+}
+
+
+
 
 
 //::.. SET FUNCTIONS ..:://
@@ -599,21 +625,6 @@ void Player::SetControllerID(int ID)
 void Player::Hit(int projectileID)
 {
 	m_hitByProjectileID = projectileID;
-}
-
-void Player::SetCollisionSkull(bool value)
-{
-	m_collisionSkull = value;
-}
-
-bool Player::GetCollisionSkull()
-{
-	return m_collisionSkull;
-}
-
-bool Player::GetCollidedSkullID()
-{
-	return m_collidedSkullID;
 }
 
 //::.. GET FUNCTIONS ..:://
