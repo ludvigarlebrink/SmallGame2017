@@ -72,7 +72,6 @@ void AntiAliasing::Init()
 
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{
-		std::cout << "FRAMEBUFFER MSAA ERROR\n";
 	}
 #endif
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -87,7 +86,7 @@ void AntiAliasing::Init()
 
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{
-		std::cout << "FRAMEBUFFER MSAA ERROR\n";
+
 	}
 #endif
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);

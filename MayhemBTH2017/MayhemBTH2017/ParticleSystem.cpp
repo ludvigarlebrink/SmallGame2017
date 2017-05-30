@@ -127,9 +127,6 @@ void ParticleSystem::ShadersInit() {
 
 ParticleSystem::~ParticleSystem()
 {
-	std::cout << "DECONSTRUCTOR" << std::endl;
-
-
 	//delete after linking
 	m_pShader.Release();
 

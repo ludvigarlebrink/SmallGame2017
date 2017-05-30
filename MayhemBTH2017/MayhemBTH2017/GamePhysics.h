@@ -35,8 +35,8 @@ private:
 	Box					m_powerUpBox;
 	Player				m_player[4];
 	Collider2D			gameFloor;
-	Texture m_texture;
-	TextureHandler m_textureHandler;
+	Texture *			m_texture[2];
+	TextureHandler		m_textureHandler;
 
 
 	Level				m_level;
@@ -74,14 +74,6 @@ private:
 	Transform m_transf;
 	int m_nrOfPlayers;
 
-	enum _entityCategory {
-		BOUNDARY = 0x0001,
-		PLAYER1 = 0x0002,
-		PROJECTILE1 = 0x0004,
-		POWERUP = 0x0008,
-		PLAYER2 = 0x0016,
-		PROJECTILE2 = 0x0032,
-	};
 
 };
 

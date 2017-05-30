@@ -34,6 +34,7 @@ public:
 	static uint32_t GetHighestKillStreak(uint32_t id);
 	static float GetKDRatio(uint32_t id);
 	static bool GetGotScore(uint32_t id);
+	static int GetWinnerIndex();
 
 private:
 	static ScoreManager * m_instance;

@@ -7,7 +7,7 @@
 
 #include <SDL.h>
 #include <glew.h>
-#include <iostream>
+
 
 class PostProcessingManager
 {

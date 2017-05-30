@@ -11,6 +11,12 @@ AnimClip::AnimClip()
 
 AnimClip::~AnimClip()
 {
+	for (size_t i = 0; i < m_numKeys; i++)
+	{
+		delete[] m_keys[i].localTx;
+	}
+
+	delete[] m_keys;
 }
 
 
@@ -109,7 +115,8 @@ void AnimClip::SetAnimation(KeyFrame * keyFrames,
 	m_currKeyI = 0;
 	m_preKeyI = 28;
 	m_keys = keyFrames;
-	m_firstKey = lastKey;
+	m_firstKey = firstKey;
+	m_lastKey = lastKey;
 	m_numKeys = m_lastKey - m_firstKey;
 }
 

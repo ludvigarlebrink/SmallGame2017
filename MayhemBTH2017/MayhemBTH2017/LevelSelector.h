@@ -33,12 +33,12 @@ public:
 private:
 	InputManager *				m_input;
 
-	std::vector<UIText>			m_playListText;
+	std::vector<UIText *>		m_playListText;
 	Level						m_level;
 	std::vector<std::string>	m_levelQueue;
 	LevelHandler				m_levelHandler;
 	UIImage						m_selectorImage;
-	std::vector<UIText>			m_levelChoice;
+	std::vector<UIText *>		m_levelChoice;
 
 	std::vector<std::string>	m_levelText;
 

@@ -42,7 +42,7 @@ public:
 	std::vector<Box> GetBoxes();
 
 private:
-	b2Fixture* m_filter;
+	b2Fixture*  m_filter;
 	GLuint		m_grid[SIZE_X][SIZE_Y];
 	Mesh		m_mesh;
 	glm::vec2	m_min;
@@ -60,17 +60,21 @@ private:
 	bool m_contact;
 	Box m_gameFloor;
 	std::vector<Box>	m_boxes;
-
+	
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
-		PLAYER1 = 0x0002,
-		PROJECTILE1 = 0x0004,
-		POWERUP = 0x0008,
-		PLAYER2 = 0x0016,
-		PROJECTILE2 = 0x0032,
+		POWERUP = 0x0002,
+		PLAYER1 = 0x0004,
+		PLAYER3 = 0x0008,
+		PLAYER2 = 0x0010,
+		PLAYER4 = 0x0020,
+		PROJECTILE1 = 0x0040,
+		PROJECTILE2 = 0x0080,
+		PROJECTILE3 = 0x0100,
+		PROJECTILE4 = 0x0120,
 	};
 
-	Texture				m_megaTexture;
+	Texture	*			m_megaTexture;
 	TextureHandler		m_textureTemp;
 	glm::vec4 m_uv;
 

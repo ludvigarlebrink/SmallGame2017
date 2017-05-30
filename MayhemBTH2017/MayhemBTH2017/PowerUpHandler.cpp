@@ -41,7 +41,6 @@ void PowerUpHandler::Free()
 {
 	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
-		m_pu.at(i)->Free();
 		delete m_pu[i];
 	}
 
@@ -69,8 +68,6 @@ void PowerUpHandler::Update()
 		m_pu[counter]->RandPosition();
 		m_pu[counter]->SetActive(true);
 		m_threshold = 0;
-
-		std::cout << "spawn" << std::endl;
 
 		counter++;
 		if (counter >= m_nrOfSpawns)

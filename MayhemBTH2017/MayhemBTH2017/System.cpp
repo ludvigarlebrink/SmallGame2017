@@ -44,38 +44,46 @@ void System::Run()
 		case GameState::START:
 			m_stateManager->SetCurrentState(GameState::LOAD_MAIN_MENU);
 			break;
+
 		case GameState::LOAD_MAIN_MENU:
 			Free();
 			m_menuSystem = new MenuSystem;
 			m_stateManager->SetCurrentState(GameState::MAIN_MENU);
 			break;
+
 		case GameState::MAIN_MENU:
 			m_menuSystem->Update();
 			break;
+
 		case GameState::LOAD_LEVEL_EDITOR:
 			Free();
 			m_background = new Background;
 			m_levelEditor = new LevelEditor;
 			m_stateManager->SetCurrentState(GameState::LEVEL_EDITOR);
 			break;
+
 		case GameState::LEVEL_EDITOR:
 			m_background->UpdateAndRender();
 			m_levelEditor->Update();
 			break;
+
 		case GameState::LOAD_GAME:
 			Free();
 			m_background = new Background;
 			m_gameSystem = new GameSystem;
 			m_stateManager->SetCurrentState(GameState::GAME);
 			break;
+
 		case GameState::GAME:
 			m_background->UpdateAndRender();
 			m_gameSystem->Update();
 			break;
+
 		case GameState::EXIT:
 			Free();
 			isRunning = false;
 			break;
+
 		default:
 			break;
 		}

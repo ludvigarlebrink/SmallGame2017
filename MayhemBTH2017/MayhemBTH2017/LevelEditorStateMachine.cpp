@@ -14,7 +14,14 @@ LevelEditorStateMachine::LevelEditorStateMachine()
 
 LevelEditorStateMachine::~LevelEditorStateMachine()
 {
-	// Do nothing...
+
+	for (int guiIndex = GUI_OPEN + 1; guiIndex < GUI_NUM; guiIndex++)
+	{
+		for (int iconIndex = 0; iconIndex < m_gui[guiIndex].m_resolution; iconIndex++)
+		{
+			delete m_gui[guiIndex].m_icons[iconIndex];
+		}
+	}
 }
 
 
@@ -44,7 +51,7 @@ void LevelEditorStateMachine::Render(Camera& cam)
 	case GUI_BLOCK:
 		Input();
 		RenderIcons(GUI_BLOCK);
-		m_currentUV = m_gui[GUI_BLOCK].m_icons[m_pos].GetUV();
+		m_currentUV = m_gui[GUI_BLOCK].m_icons[m_pos]->GetUV();
 		break;
 
 	case GUI_BACKGROUND:
@@ -63,7 +70,7 @@ void LevelEditorStateMachine::RenderIcons(size_t gui)
 
 	for (int i = 0; i < m_gui[gui].m_numIcons; i++)
 	{
-		m_gui[gui].m_icons[i].RenderWithUV();
+		m_gui[gui].m_icons[i]->Render();
 	}
 	m_gui[gui].m_text.Render();
 }
@@ -80,8 +87,8 @@ void LevelEditorStateMachine::Init()
 	// Init text
 	for (int i = 0; i < GUI_NUM; i++)
 	{
-		m_gui[i].m_text.SetSize(80);
-		m_gui[i].m_text.SetPosition(-440, 280);
+		m_gui[i].m_text.SetSize(50);
+		m_gui[i].m_text.SetPosition(-300, 315);
 		m_gui[i].m_text.SetFont(".\\Assets\\Fonts\\Snap.ttf");
 		m_gui[i].m_text.SetPivot(UIText::CENTER);
 		m_gui[i].m_text.SetColor(255, 255, 255, 255);
@@ -90,14 +97,14 @@ void LevelEditorStateMachine::Init()
 		{
 		case GUI_CLOSED:
 			m_gui[GUI_CLOSED].m_texture.SetTexture(".\\Assets\\Sprites\\LevelEditorMenuClosed2.png");
-			m_gui[GUI_CLOSED].m_texture.SetPosition(-430, 320);
+			m_gui[GUI_CLOSED].m_texture.SetPosition(-300, 320);
 			m_gui[GUI_CLOSED].m_texture.SetSize(400, 90);
 			break;
 
 		case GUI_OPEN:
 			m_gui[GUI_OPEN].m_texture.SetTexture(".\\Assets\\Sprites\\LevelEditorMenu.png");
-			m_gui[GUI_OPEN].m_texture.SetPosition(-430, 120);
-			m_gui[GUI_OPEN].m_texture.SetSize(400, 500);
+			m_gui[GUI_OPEN].m_texture.SetPosition(-280, 50);
+			m_gui[GUI_OPEN].m_texture.SetSize(600, 600);
 			break;
 
 		case GUI_BLOCK:
@@ -118,30 +125,32 @@ void LevelEditorStateMachine::Init()
 	{
 		m_offsetX = 50;
 		m_offsetY = 50;
-		m_offsetMother = 3;
+		m_offsetMother = 6;
 		m_offsetCounter = 0;
 
-		m_rows = -490;
-		m_columns = 170;
+		m_rows = -430;
+		m_columns = 200;
 
 		for (int iconIndex = 0; iconIndex < m_gui[guiIndex].m_resolution; iconIndex++)
 		{
-			m_gui[guiIndex].m_icons[iconIndex].SetSize(m_nSize, m_nSize);
-			m_gui[guiIndex].m_icons[iconIndex].SetPosition(static_cast<float>(m_rows), static_cast<float>(m_columns));
+			m_gui[guiIndex].m_icons[iconIndex] = new UIImage(m_gui[guiIndex].m_iconUV);
+
+			m_gui[guiIndex].m_icons[iconIndex]->SetSize(m_nSize, m_nSize);
+			m_gui[guiIndex].m_icons[iconIndex]->SetPosition(static_cast<float>(m_rows), static_cast<float>(m_columns));
 			m_rows += m_offsetX;
 			++m_offsetCounter;
 
 			if (m_offsetCounter == m_offsetMother)
 			{
 				m_columns -= 50;
-				m_rows = -490;
+				m_rows = -430;
 				m_offsetCounter = 0;
 			}
 
-			m_gui[guiIndex].m_icons[iconIndex].SetTexture(m_gui[guiIndex].m_texture.GetTexture());
-			m_gui[guiIndex].m_icons[iconIndex].SetUV(m_gui[guiIndex].m_iconUV);
+			m_gui[guiIndex].m_icons[iconIndex]->SetTexture(m_gui[guiIndex].m_texture.GetTexture());
+			m_gui[guiIndex].m_icons[iconIndex]->SetUV(m_gui[guiIndex].m_iconUV);
 
-			if (m_gui[guiIndex].m_iconUV.x ==15)
+			if (m_gui[guiIndex].m_iconUV.x == 15)
 			{
 				m_gui[guiIndex].m_iconUV.x = 0;
 				++m_gui[guiIndex].m_iconUV.y;
@@ -153,7 +162,7 @@ void LevelEditorStateMachine::Init()
 		}
 	}
 
-	m_gui[GUI_BLOCK].m_icons[m_pos].SetSize(m_hSize, m_hSize);
+	m_gui[GUI_BLOCK].m_icons[m_pos]->SetSize(m_hSize, m_hSize);
 }
 
 void LevelEditorStateMachine::Input()
@@ -162,9 +171,9 @@ void LevelEditorStateMachine::Input()
 	{
 		if (m_pos - m_offsetMother >= 0)
 		{
-			m_gui[m_state].m_icons[m_pos].SetSize(m_nSize, m_nSize);
+			m_gui[m_state].m_icons[m_pos]->SetSize(m_nSize, m_nSize);
 			m_pos -= m_offsetMother;
-			m_gui[m_state].m_icons[m_pos].SetSize(m_hSize, m_hSize);
+			m_gui[m_state].m_icons[m_pos]->SetSize(m_hSize, m_hSize);
 		}
 	}
 	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
@@ -172,27 +181,27 @@ void LevelEditorStateMachine::Input()
 
 		if (m_pos + m_offsetMother < m_gui[m_state].m_numIcons)
 		{
-			m_gui[m_state].m_icons[m_pos].SetSize(m_nSize, m_nSize);
+			m_gui[m_state].m_icons[m_pos]->SetSize(m_nSize, m_nSize);
 			m_pos += m_offsetMother;
-			m_gui[m_state].m_icons[m_pos].SetSize(m_hSize, m_hSize);
+			m_gui[m_state].m_icons[m_pos]->SetSize(m_hSize, m_hSize);
 		}
 	}
 	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_LEFT))
 	{
 		if (m_pos - 1 >= 0)
 		{
-			m_gui[m_state].m_icons[m_pos].SetSize(m_nSize, m_nSize);
+			m_gui[m_state].m_icons[m_pos]->SetSize(m_nSize, m_nSize);
 			--m_pos;
-			m_gui[m_state].m_icons[m_pos].SetSize(m_hSize, m_hSize);
+			m_gui[m_state].m_icons[m_pos]->SetSize(m_hSize, m_hSize);
 		}
 	}
 	else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_RIGHT))
 	{
 		if (m_pos + 1 < m_gui[m_state].m_numIcons)
 		{
-			m_gui[m_state].m_icons[m_pos].SetSize(m_nSize, m_nSize);
+			m_gui[m_state].m_icons[m_pos]->SetSize(m_nSize, m_nSize);
 			++m_pos;
-			m_gui[m_state].m_icons[m_pos].SetSize(m_hSize, m_hSize);
+			m_gui[m_state].m_icons[m_pos]->SetSize(m_hSize, m_hSize);
 		}
 	}
 
@@ -202,7 +211,7 @@ void LevelEditorStateMachine::Input()
 		{
 			for (int i = 0; i < m_gui[m_state].m_numIcons; i++)
 			{
-				m_gui[m_state].m_icons[m_pos].SetSize(m_nSize, m_nSize);
+				m_gui[m_state].m_icons[m_pos]->SetSize(m_nSize, m_nSize);
 			}
 
 			++m_state;
@@ -210,7 +219,7 @@ void LevelEditorStateMachine::Input()
 			{
 				m_pos = 0;
 			}
-			m_gui[m_state].m_icons[m_pos].SetSize(m_hSize, m_hSize);
+			m_gui[m_state].m_icons[m_pos]->SetSize(m_hSize, m_hSize);
 		}
 	}
 
@@ -221,7 +230,7 @@ void LevelEditorStateMachine::Input()
 
 			for (int i = 0; i < m_gui[m_state].m_numIcons; i++)
 			{
-				m_gui[m_state].m_icons[m_pos].SetSize(m_nSize, m_nSize);
+				m_gui[m_state].m_icons[m_pos]->SetSize(m_nSize, m_nSize);
 			}
 
 			--m_state;
@@ -230,7 +239,7 @@ void LevelEditorStateMachine::Input()
 			{
 				m_pos = 0;
 			}
-			m_gui[m_state].m_icons[m_pos].SetSize(m_hSize, m_hSize);
+			m_gui[m_state].m_icons[m_pos]->SetSize(m_hSize, m_hSize);
 		}
 	}
 }

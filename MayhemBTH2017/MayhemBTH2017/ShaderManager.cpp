@@ -1,5 +1,5 @@
 #include "ShaderManager.h"
-#include <iostream>
+
 
 
 ShaderManager * ShaderManager::m_instance = nullptr;
@@ -50,10 +50,8 @@ GLuint ShaderManager::LinkAndValidate(const char * programName)
 {
 	GLuint hej = m_programs[programName];
 	glLinkProgram(m_programs[programName]);
-	Debug(m_programs[programName], GL_LINK_STATUS, true, "Error: Linking failed: ");
 
 	glValidateProgram(m_programs[programName]);
-	Debug(m_programs[programName], GL_VALIDATE_STATUS, true, "Error: Invalid program: ");
 
 	return m_programs[programName];
 }
@@ -125,7 +123,7 @@ GLuint ShaderManager::CreateShader(std::string & textfile, GLenum shaderType)
 	GLuint shader = glCreateShader(shaderType);
 	if (shader == 0)
 	{
-		//std::cout << "Error while creating shader" << std::endl;
+		return -1;
 	}
 
 	const GLchar* shaderSource[1];
@@ -136,38 +134,6 @@ GLuint ShaderManager::CreateShader(std::string & textfile, GLenum shaderType)
 
 	glShaderSource(shader, 1, shaderSource, sourceLength);
 	glCompileShader(shader);
-	Debug(shader, GL_COMPILE_STATUS, false, "Compilation failed\n");
 
 	return shader;
-}
-
-
-void ShaderManager::Debug(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg)
-{
-
-	GLint errorCheck = 0;
-	GLchar logLength[1024] = { 0 };
-
-	if (isProgram)
-	{
-		glGetProgramiv(shader, flag, &errorCheck);
-	}
-	else
-	{
-		glGetShaderiv(shader, flag, &errorCheck);
-	}
-
-	if (errorCheck == GL_FALSE)
-	{
-		if (isProgram)
-		{
-			glGetProgramInfoLog(shader, sizeof(logLength), 0, logLength);
-		}
-		else
-		{
-			glGetShaderInfoLog(shader, sizeof(logLength), 0, logLength);
-		}
-
-		std::cout << errorMsg << ": '" << logLength << "'" << std::endl;
-	}
 }

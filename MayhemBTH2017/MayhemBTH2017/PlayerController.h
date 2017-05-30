@@ -4,7 +4,7 @@
 #include <SDL.h>
 
 //Used for debug
-#include <iostream>
+
 
 struct Button
 {

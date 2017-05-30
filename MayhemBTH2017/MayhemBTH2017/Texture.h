@@ -13,13 +13,12 @@ public:
 	virtual ~Texture();
 	
 	Texture(const Texture& other);
-	Texture& Texture::operator=(const Texture& other);
 	void LoadTexture(GLuint * textureData, GLsizei width, GLsizei height, GLuint numComponents);
 
 	//::.. GET FUNCTIONS ..:://
 	uint32_t GetHeight() const;
 	uint32_t GetWidth() const;
-	GLuint GetTexture()const;
+	GLuint GetTexture() const;
 
 	void Bind(unsigned int unit);
 
@@ -27,8 +26,6 @@ private:
 	GLuint m_texture;
 	uint32_t m_height;
 	uint32_t m_width;
-
-
 };
 
 
