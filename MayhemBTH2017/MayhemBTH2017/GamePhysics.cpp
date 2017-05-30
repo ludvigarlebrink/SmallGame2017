@@ -31,6 +31,7 @@ void GamePhysics::EnterWorld(std::string levelName)
 {
 	m_texture[0] = m_textureHandler.Import(".\\Assets\\Textures\\health.jpg");
 	m_texture[1] = m_textureHandler.Import(".\\Assets\\Textures\\healthbackground.jpg");
+	m_texture[2] = m_textureHandler.Import(".\\Assets\\Textures\\sight.png");
 	m_time = TimeManager::Get();
 
 	m_floorCollider.CreateBoundingBoxes(&m_world, levelName);
@@ -85,6 +86,7 @@ void GamePhysics::Free()
 {
 	delete m_texture[0];
 	delete m_texture[1];
+	delete m_texture[2];
 }
 
 
@@ -94,7 +96,19 @@ void GamePhysics::Render(Camera camera)
 	m_floorCollider.DrawCollider(camera);
 	
 	for (int i = 0; i < 4; i++) {
+		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
+		//glBlendFunc(GL_ONE, GL_SRC0_ALPHA);
+		//Laser sight
+		m_texture[2]->Bind(0);
+		m_texture[2]->Bind(m_texture[2]->GetTexture());
+		m_player[i].GetLaserSight()->SetAlbedoID(m_texture[2]->GetTexture());
+		m_player[i].GetLaserSight()->Render(camera);
 
+
+		glDisable(GL_BLEND);
+		glEnable(GL_DEPTH_TEST);
 		m_player[i].Render(camera);
 	}
 	
@@ -104,15 +118,22 @@ void GamePhysics::Render(Camera camera)
 
 	for (int i = 0; i <4; i++) {
 
+
+		
+		//Health bar background
 		m_texture[1]->Bind(0);
 		m_texture[1]->Bind(m_texture[1]->GetTexture());
 		m_player[i].GetHealthBarBackground()->SetAlbedoID(m_texture[1]->GetTexture());
 		m_player[i].GetHealthBarBackground()->Render(camera);
-		
+	
+		//Health bar
 		m_texture[0]->Bind(0);
 		m_texture[0]->Bind(m_texture[0]->GetTexture());
 		m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
 		m_player[i].GetHealthBar()->Render(camera);
+
+
+
 		
 	}
 	glEnable(GL_DEPTH_TEST);

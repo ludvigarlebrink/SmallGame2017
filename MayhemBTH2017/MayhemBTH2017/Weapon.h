@@ -36,6 +36,7 @@ public:
 	void UpdateParticles();
 	//::.. GET FUNTIONS ..:://
 	float GetFireRate();
+	glm::vec2 GetWeaponForce();
 
 	bool FireRate(float rate);
 

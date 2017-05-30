@@ -117,9 +117,11 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 	m_healthBarBackground = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
+	m_laserSight = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar->Create();
 	m_healthBarBackground->Create();
+	m_laserSight->Create();
 
 	gun->SetScale(glm::vec3(2, 2, 2));
 
@@ -188,9 +190,16 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBarBackground->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
+
 	m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
 	m_healthBar->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
+
+
+	m_laserSight->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
+	m_laserSight->SetScale(glm::vec3(0.2, 8.5, 0.2));
+
+
 	//Set fixture 
 
 }
@@ -220,6 +229,11 @@ void Player::Free()
 		m_healthBarBackground = nullptr;
 	}
 
+	if (m_laserSight != nullptr) {
+		delete m_laserSight;
+		m_laserSight = nullptr;
+	}
+
 	delete m_particleTexture1;
 	delete m_particleTexture2;
 	delete m_particleTexture3;
@@ -246,9 +260,17 @@ void Player::Update(Player * p_arr) {
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 
-	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x+0.5f , m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
+	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
-	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
+
+	glm::vec2 force = glm::vec2(m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID), m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y, m_controllerID));
+
+	float angle = glm::degrees(atan2(force.y, force.x));
+	
+	m_laserSight->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y+0.6, 0.0));
+	m_laserSight->SetRotation(-90, 90, angle);
+
+	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
 	{
 		if (m_weapons[m_currentWeapon]->FireRate(m_weapons[m_currentWeapon]->GetFireRate()))
 		{
@@ -358,7 +380,7 @@ void Player::Update(Player * p_arr) {
 		}
 		if (m_collidedPowerUp)
 		{
-			int atomic = rand() % 6;
+			int atomic = rand() % 15;
 			if (atomic != 5) {
 				m_currentWeapon = rand() % 6 + 1;
 			}
@@ -546,6 +568,11 @@ Prefab * Player::GetHealthBar()
 Prefab * Player::GetHealthBarBackground()
 {
 	return m_healthBarBackground;
+}
+
+Prefab * Player::GetLaserSight()
+{
+	return m_laserSight;
 }
 
 

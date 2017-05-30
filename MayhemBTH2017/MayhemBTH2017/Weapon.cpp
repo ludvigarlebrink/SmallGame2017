@@ -198,6 +198,11 @@ float Weapon::GetFireRate()
 	return m_fireRate;
 }
 
+glm::vec2 Weapon::GetWeaponForce()
+{
+	return m_previousForce;
+}
+
 void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 {
 	GLfloat firePower = m_firepower;
