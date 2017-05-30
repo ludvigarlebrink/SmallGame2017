@@ -27,6 +27,9 @@ public:
 	//::.. SET FUNCTIONS ..:://
 	void SetNumPLayers(uint32_t numPlayers);
 
+	void SetPauseDisplay(bool value);
+	void SetShowWinner(bool value);
+
 private:
 	VideoManager *	m_video;
 
@@ -34,6 +37,10 @@ private:
 
 	UIText *		m_gameTimer;
 	UIText			m_playerScore[4];
+	UIText *		m_winnerText;
+
+	bool			m_pauseDisplay;
+	bool			m_showWinner;
 };
 
 

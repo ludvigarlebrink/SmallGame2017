@@ -26,6 +26,8 @@ Player::Player()
 	m_dead = false;
 
 	m_hitByProjectile = -1;
+
+
 }
 
 
@@ -217,6 +219,14 @@ void Player::Free()
 		delete m_healthBarBackground;
 		m_healthBarBackground = nullptr;
 	}
+
+	delete m_particleTexture1;
+	delete m_particleTexture2;
+	delete m_particleTexture3;
+	delete m_particleTexture4;
+	delete m_particleTexture5;
+	delete m_particleTexture6;
+	delete m_particleTexture7;
 
 	// LUKAS DELETE WORLD
 }

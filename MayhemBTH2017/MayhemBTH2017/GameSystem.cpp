@@ -357,10 +357,13 @@ void GameSystem::LoadNextLevel()
 		m_currState = GAME_OVER;
 	}
 
+	m_gameUI.SetPauseDisplay(true);
+	m_gameUI.Render();
 	m_pressToCont.Render();
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
+		m_gameUI.SetPauseDisplay(false);
 		LevelHandler levelHandler;
 		m_world->EnterWorld(m_levelSelector.GetLevel());
 		m_currState = START_PLAY;
