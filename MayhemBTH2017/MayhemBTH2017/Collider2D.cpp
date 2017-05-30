@@ -18,7 +18,7 @@ void Collider2D::SetBoxCollider(glm::vec2 min, glm::vec2 max)
 
 }
 
-void Collider2D::ImportLevel(Level level) 
+void Collider2D::ImportLevel(Level level)
 {
 	m_level = level;
 }
@@ -30,8 +30,8 @@ void Collider2D::DrawCollider(Camera camera)
 {
 	m_transf.SetPosition(42.0, 24.0, -0.0);
 	m_shader.Update(m_transf, camera);
-	m_megaTexture.Bind(0);
-	m_level.Render(camera);	
+	m_megaTexture->Bind(0);
+	m_level.Render(camera);
 }
 
 void Collider2D::DrawColliderShadowPass(Camera camera)
@@ -51,9 +51,9 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 	m_megaTexture = m_textureTemp.Import(".\\Assets\\Textures\\textureMap.png");
 	m_contact = false;
 	m_levelImport.Import(m_level, levelName);
-	
+
 	const uint32_t length = SIZE_X * SIZE_Y * 6;
-	
+
 	uint32_t i = 0;
 	float scaler = 1.0f;
 	GLuint blocksInRow = 0.0;
@@ -73,7 +73,7 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 					blocksInRow += 1;
 
 				}
-				
+
 				offset = (blocksInRow);
 
 
@@ -84,17 +84,17 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 				tempY = y;
 				GLfloat scale = 0.5f;
 
-				gameFloor.InitStatic(world, glm::vec2((tempX-0.5), (tempY-0.5)), glm::vec2(offset+0.84, scale+0.42));
+				gameFloor.InitStatic(world, glm::vec2((tempX - 0.5), (tempY - 0.5)), glm::vec2(offset + 0.84, scale + 0.42));
 				gameFloor.getFixture()->SetRestitution(0.0); //floor bounciness
 				gameFloor.getFixture()->SetFriction(0.00); //floor friction
 				gameFloor.getFixture()->SetRestitution(0.0);
 				gameFloor.getBody()->ResetMassData();
-			
+
 				gameFloor.getBody()->SetUserData(this);
 				b2Filter filter;
 				filter.categoryBits = BOUNDARY;
-				filter.maskBits = PLAYER1|PLAYER2|PROJECTILE1| PROJECTILE2 | POWERUP;
-				gameFloor.getFixture()->SetFilterData(filter);			
+				filter.maskBits = PLAYER1 | PLAYER2 | PLAYER3 | PLAYER4 | PROJECTILE1 | PROJECTILE2 | PROJECTILE3 | PROJECTILE4 | POWERUP;
+				gameFloor.getFixture()->SetFilterData(filter);
 
 				m_boxes.push_back(gameFloor);
 
@@ -113,7 +113,7 @@ void Collider2D::CreatePlayerBoundingBox(b2World* world) {
 
 	//SIZE OF THE PLAYER BOUNDING BOXZ
 	tempBox.InitDynamic(world, glm::vec2(42.0, 24.0), glm::vec2(0.5, 0.5));
-	
+
 	m_boxes.push_back(tempBox);
 
 
@@ -125,20 +125,20 @@ uint16 Collider2D::GetMaskBits() {
 
 uint16 Collider2D::GetCategoryBits() {
 	return m_boxes.at(0).GetCategoryBits();
-	std::cout << m_boxes.at(0).GetCategoryBits() << std::endl;
+	
 }
 
 void Collider2D::SetMaskBits(uint16 MASK) {
-	
+
 }
 
 void Collider2D::SetCategoryBits(uint16 CATEGORY) {
-	
+
 }
 
-void Collider2D::StartContact() { 
-	m_contact = true; 
+void Collider2D::StartContact() {
+	m_contact = true;
 }
-void Collider2D::EndContact() { 
+void Collider2D::EndContact() {
 	m_contact = false;
 }

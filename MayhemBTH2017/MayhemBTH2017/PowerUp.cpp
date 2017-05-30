@@ -30,7 +30,7 @@ void PowerUp::Create(b2World* world, glm::vec2 pos)
 
 	b2Filter filter;
 	filter.categoryBits = POWERUP;
-	filter.maskBits = BOUNDARY | PLAYER1 | PLAYER2;
+	filter.maskBits = BOUNDARY | PLAYER1 | PLAYER2 | PLAYER3 | PLAYER4;
 	m_boundingBox.getFixture()->SetFilterData(filter);
 
 	m_boundingBox.getBody()->SetUserData(this);
@@ -90,6 +90,7 @@ void PowerUp::RandPosition()
 	r.y = rand() % 44 + 2;
 
 	m_boundingBox.getBody()->SetTransform(r, 0);
+
 }
 
 void PowerUp::Update()
@@ -118,6 +119,7 @@ void PowerUp::Update()
 
 void PowerUp::Free()
 {
-	m_powerupPrefab->Free();
-	//delete m_powerupPrefab;
+	m_boundingBox.DestroyBody();
+
+	delete m_powerupPrefab;
 }
