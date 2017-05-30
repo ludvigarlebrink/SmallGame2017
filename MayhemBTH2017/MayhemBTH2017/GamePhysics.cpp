@@ -6,7 +6,7 @@ MyContactListener * GamePhysics::m_contactListener = nullptr;
 
 
 GamePhysics::GamePhysics()
-	:m_world(b2Vec2(0.0f, -3.50f))
+	:m_world(b2Vec2(0.0f, -8.0f))
 {	
 	if (m_contactListener == nullptr)
 	{
@@ -29,6 +29,12 @@ void GamePhysics::EnterWorld(std::string levelName)
 	m_time = TimeManager::Get();
 
 	m_floorCollider.CreateBoundingBoxes(&m_world, levelName);
+
+
+	if (m_powerupHandler.GetSpawn())
+	{
+		m_powerupHandler.Free();
+	}
 
 	//at global scope
 

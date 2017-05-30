@@ -37,6 +37,7 @@ Player::~Player()
 //::..INITIALIZERS..:://
 void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 {
+
 	m_input = nullptr;
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
@@ -74,9 +75,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	//m_shader.Init(".\\Assets\\GLSL\\ToonShader", 0, 0);
 
 	//GetBox().getFixture()->SetDensity(0.1);
-	GetBox().getFixture()->SetFriction(10.0);
+	GetBox().getFixture()->SetFriction(1000.0);
 	GetBox().getFixture()->SetRestitution(0.0);
-	GetBox().getBody()->SetLinearDamping(0.0);
+	GetBox().getBody()->SetLinearDamping(0.3);
 	GetBox().getBody()->ResetMassData();
 
 	b2Filter filter;
@@ -189,7 +190,7 @@ void Player::Free()
 		delete m_playerPrefab;
 		m_playerPrefab = nullptr;
 	}
-	
+
 	if (m_healthBar != nullptr)
 	{
 		delete m_healthBar;
@@ -250,7 +251,7 @@ void Player::Update() {
 
 			}
 			if (m_currentWeapon == 5) {
-				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0),5.8f, 10, 0.0f);
+				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 5.8f, 10, 0.0f);
 				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture6);
 			}
 
@@ -268,21 +269,21 @@ void Player::Update() {
 		if (m_collidedProjectile)
 		{
 			int hitSound = rand() % 4;
-			
-			if (hitSound == 0 && m_life>0.0f) {
+
+			if (hitSound == 0 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit1");
 				m_soundManager->PlaySFX("man_scream1");
 			}
-			if (hitSound == 1 && m_life>0.0f) {
+			if (hitSound == 1 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit2");
 				m_soundManager->PlaySFX("man_scream2");
 			}
-			if (hitSound == 2 && m_life>0.0f) {
+			if (hitSound == 2 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit3");
 				m_soundManager->PlaySFX("man_scream3");
 			}
 
-			if (hitSound == 3 && m_life>0.0f) {
+			if (hitSound == 3 && m_life > 0.0f) {
 				m_soundManager->PlaySFX("player_hit3");
 				m_soundManager->PlaySFX("man_scream4");
 			}
@@ -294,7 +295,7 @@ void Player::Update() {
 			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
-			
+
 
 			std::cout << m_life << std::endl;
 			if (m_life <= 0.0f)
@@ -368,29 +369,40 @@ void Player::Update() {
 
 
 	// THIS STUFF WORKS
+	if (!(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID))) {
+		GetBox().getBody()->ApplyForce(b2Vec2((-GetBox().getBody()->GetLinearVelocity().x)*(300)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+	}
 
-	if (m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID))
+	if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID))
 	{
 
-		if (m_isMidAir) {
+		std::cout << GetBox().getBody()->GetLinearVelocity().x << " " << GetBox().getBody()->GetLinearVelocity().y << std::endl;
 
-			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-150)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
-			
+		if (m_isMidAir) {
+			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+			//GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-50)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
+			//GetBox().getBody()->SetLinearVelocity(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-200)*TimeManager::Get()->GetDeltaTime(), GetBox().getBody()->GetLinearVelocity().y));
+			if (GetBox().getBody()->GetLinearVelocity().x > 6)
+			{
+				GetBox().getBody()->SetLinearVelocity(b2Vec2(6, GetBox().getBody()->GetLinearVelocity().y));
+			}
+			if (GetBox().getBody()->GetLinearVelocity().x < -6)
+			{
+				GetBox().getBody()->SetLinearVelocity(b2Vec2(-6, GetBox().getBody()->GetLinearVelocity().y));
+			}
 		}
 		if (!m_isMidAir) {
 
-			GetBox().getBody()->SetLinearVelocity(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-200)*TimeManager::Get()->GetDeltaTime(), 0));
+			GetBox().getBody()->SetLinearVelocity(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-250)*TimeManager::Get()->GetDeltaTime(), 0));
 		}
-
-
 	}
 	// ** //
 
 
 
 	m_playerPrefab->Update(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
-		m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
-		m_input->GetAxisRaw(CONTROLLER_AXIS_LEFT_X, m_controllerID));
+		m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
+		m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID));
 
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f)
@@ -400,7 +412,7 @@ void Player::Update() {
 		if (!m_isMidAir) {
 
 			//First jump
-			GetBox().getBody()->ApplyForce(b2Vec2(0, 130), GetBox().getBody()->GetWorldCenter(), 1);
+			GetBox().getBody()->ApplyForce(b2Vec2(0, 200), GetBox().getBody()->GetWorldCenter(), 1);
 			m_doubleJump = true;
 
 
@@ -412,8 +424,8 @@ void Player::Update() {
 	if (m_doubleJump && m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f && m_isMidAir)
 	{
 		m_doubleJump = false;
-		GetBox().getBody()->ApplyForce(b2Vec2(0, 130), GetBox().getBody()->GetWorldCenter(), 1);
-
+		GetBox().getBody()->ApplyForce(b2Vec2(0, 200 - (GetBox().getBody()->GetLinearVelocity().y * 20)), GetBox().getBody()->GetWorldCenter(), 1);
+		//GetBox().getBody()->SetLinearVelocity(b2Vec2(GetBox().getBody()->GetLinearVelocity().x, 20));
 	}
 
 	GLfloat xPos = GetBox().getBody()->GetPosition().x;
