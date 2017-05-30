@@ -125,7 +125,6 @@ uint16 Collider2D::GetMaskBits() {
 
 uint16 Collider2D::GetCategoryBits() {
 	return m_boxes.at(0).GetCategoryBits();
-	std::cout << m_boxes.at(0).GetCategoryBits() << std::endl;
 }
 
 void Collider2D::SetMaskBits(uint16 MASK) {

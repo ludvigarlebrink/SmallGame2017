@@ -308,7 +308,6 @@ void Player::Update(Player * p_arr) {
 			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
 
 
-			std::cout << m_life << std::endl;
 			if (m_life <= 0.0f)
 			{
 				int hitSound = rand() % 3;
