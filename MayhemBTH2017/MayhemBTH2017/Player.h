@@ -54,6 +54,7 @@ public:
 	void UpdateParticles();
 	Prefab * GetHealthBar();
 	Prefab* GetHealthBarBackground();
+	Prefab* GetLaserSight();
 
 private:
 
@@ -77,7 +78,7 @@ private:
 	Camera			m_cam;
 	AShader			m_shader;
 	AShader			m_toonShader;
-	
+
 
 	bool	m_isMidAir;
 	bool	m_doubleJump;
@@ -90,6 +91,7 @@ private:
 	float	m_life;
 
 	Prefab *		m_healthBar;
+	Prefab *		m_laserSight;
 	Prefab*			m_healthBarBackground;
 	int				m_hitByProjectileID;
 	SoundManager *	m_soundManager;

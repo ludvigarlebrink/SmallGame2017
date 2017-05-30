@@ -17,6 +17,7 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 	m_healthBar = nullptr;
 	m_healthBarBackground = nullptr;
 	m_world = nullptr;
+	m_laserSight = nullptr;
 }
 
 Player::Player()
@@ -42,6 +43,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
 	m_healthBarBackground = nullptr;
+	m_laserSight = nullptr;
 	m_world = nullptr;
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
@@ -115,9 +117,11 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 	m_healthBarBackground = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
+	m_laserSight = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar->Create();
 	m_healthBarBackground->Create();
+	m_laserSight->Create();
 
 	gun->SetScale(glm::vec3(2, 2, 2));
 
@@ -218,6 +222,13 @@ void Player::Free()
 		m_healthBarBackground = nullptr;
 	}
 
+
+	if (m_laserSight != nullptr) {
+		delete m_laserSight;
+		m_laserSight = nullptr;
+	}
+
+
 	// LUKAS DELETE WORLD
 }
 
@@ -236,7 +247,7 @@ void Player::Update(Player * p_arr) {
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 
-	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x+0.5f , m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
+	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
 	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
 	{
@@ -536,6 +547,11 @@ Prefab * Player::GetHealthBar()
 Prefab * Player::GetHealthBarBackground()
 {
 	return m_healthBarBackground;
+}
+
+Prefab * Player::GetLaserSight()
+{
+	return m_laserSight;
 }
 
 
