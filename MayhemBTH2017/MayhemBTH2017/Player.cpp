@@ -15,6 +15,7 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 	m_input = nullptr;
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
+	m_healthBarBackground = nullptr;
 	m_world = nullptr;
 }
 
@@ -40,6 +41,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_input = nullptr;
 	m_playerPrefab = nullptr;
 	m_healthBar = nullptr;
+	m_healthBarBackground = nullptr;
 	m_world = nullptr;
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
@@ -112,10 +114,10 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	Prefab * gun = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
-	m_skull = PrefabManager::Instantiate("Skull", nullptr, nullptr, 0, "Candle");
+	m_healthBarBackground = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar->Create();
-	m_skull->Create();
+	m_healthBarBackground->Create();
 
 	gun->SetScale(glm::vec3(2, 2, 2));
 
@@ -128,7 +130,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	Prefab * projectile5 = PrefabManager::Instantiate("missile3", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile6 = PrefabManager::Instantiate("boomerang", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile7 = PrefabManager::Instantiate("spear", nullptr, nullptr, 0, "Candle");
-
 
 	projectile->SetScale(glm::vec3(1, 1, 1));
 
@@ -181,14 +182,13 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_life = 1.0f;
 
-	m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
+	m_healthBarBackground->SetScale(glm::vec3(1, 0.6, m_life * 5));
+	m_healthBarBackground->Rotate(glm::vec3(0.0, 90.0, 0.0));
+	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
+
+	m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
 	m_healthBar->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
-
-	m_skull->SetScale(glm::vec3(1, 1, m_life * 10));
-	m_skull->Rotate(glm::vec3(0.0, 90.0, 0.0));
-	m_skull->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
-
 	//Set fixture 
 
 }
@@ -213,7 +213,10 @@ void Player::Free()
 		m_healthBar = nullptr;
 	}
 
-
+	if (m_healthBarBackground != nullptr) {
+		delete m_healthBarBackground;
+		m_healthBarBackground = nullptr;
+	}
 
 	// LUKAS DELETE WORLD
 }
@@ -233,8 +236,7 @@ void Player::Update(Player * p_arr) {
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
 
-	m_skull->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
-	m_skull->SetPosition(glm::vec3(m_skull->GetPosition().x - 5.5f, m_skull->GetPosition().y + 3, m_skull->GetPosition().z));
+	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x+0.5f , m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
 	if (m_input->GetAxisRaw(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) > 0.0001f)
 	{
@@ -253,7 +255,8 @@ void Player::Update(Player * p_arr) {
 			}
 
 			if (m_currentWeapon == 2) {
-				// Shuriken
+				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle2", glm::vec4(0.0, 0.0, 1.0, 1.0), 0.0, 10, 0.0f);
+				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture3);
 			}
 
 			if (m_currentWeapon == 3) {
@@ -314,11 +317,10 @@ void Player::Update(Player * p_arr) {
 
 			m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 			m_healthBar->SetPosition(glm::vec3(m_healthBar->GetPosition().x - m_life * 2.5f, m_healthBar->GetPosition().y, m_healthBar->GetPosition().z));
-			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
+			m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
 
-			m_skull->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
-			m_skull->SetPosition(glm::vec3(m_skull->GetPosition().x * 2.5f, m_skull->GetPosition().y + 3, m_skull->GetPosition().z));
-			m_skull->SetScale(glm::vec3(1, 1, 0));
+			//m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
+
 
 			if (m_life <= 0.0f)
 			{
@@ -339,7 +341,7 @@ void Player::Update(Player * p_arr) {
 
 
 				ScoreManager::AddKill(m_hitByProjectileID);
-				m_healthBar->SetScale(glm::vec3(1.0, 1.0, 0));
+				m_healthBar->SetScale(glm::vec3(1.0, 0.7, 0));
 				ScoreManager::AddDeath(m_controllerID);
 				m_dead = true;
 			}
@@ -360,7 +362,6 @@ void Player::Update(Player * p_arr) {
 		m_contact = false;
 	}
 
-
 	if (m_dead)
 	{
 		int spawn = rand() % 80;
@@ -374,7 +375,7 @@ void Player::Update(Player * p_arr) {
 			Respawn(glm::vec2(spawn, 30));
 			m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
 			m_life = 1.0;
-			m_healthBar->SetScale(glm::vec3(1, 1, m_life * 5));
+			m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
 			m_dead = false;
 		}
 	}
@@ -531,9 +532,10 @@ Prefab * Player::GetHealthBar()
 	return m_healthBar;
 }
 
-Prefab * Player::GetSkull()
+
+Prefab * Player::GetHealthBarBackground()
 {
-	return m_skull;
+	return m_healthBarBackground;
 }
 
 

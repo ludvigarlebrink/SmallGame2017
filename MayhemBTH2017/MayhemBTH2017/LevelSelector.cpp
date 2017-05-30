@@ -132,8 +132,13 @@ bool LevelSelector::Update()
 			if (static_cast<uint32_t>(m_levelSelector) < m_numToShow - 1)
 			{
 				++m_levelSelector;
+
+				if (m_levelSelector > m_numToShow)
+				{
+					m_levelSelector = m_numToShow - 2;
+				}
 			}
-			else if (0 < m_levelText.size() - 10 - m_levelInc)
+			else if (0 < m_levelText.size() - 10 - m_levelInc && m_numToShow > 10)
 			{
 				++m_levelInc;
 

@@ -53,7 +53,7 @@ public:
 	int GetControllerID();
 	void UpdateParticles();
 	Prefab * GetHealthBar();
-	Prefab * GetSkull();
+	Prefab* GetHealthBarBackground();
 
 private:
 
@@ -90,7 +90,7 @@ private:
 	float	m_life;
 
 	Prefab *		m_healthBar;
-	Prefab *		m_skull;
+	Prefab*			m_healthBarBackground;
 	int				m_hitByProjectileID;
 	SoundManager *	m_soundManager;
 
@@ -126,7 +126,6 @@ private:
 		PROJECTILE2 = 0x0080,
 		PROJECTILE3 = 0x0100,
 		PROJECTILE4 = 0x0120,
-		SKULL		= 0x0140 
 	};
 
 };
