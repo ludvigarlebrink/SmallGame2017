@@ -372,10 +372,13 @@ void GameSystem::LoadNextLevel()
 
 void GameSystem::GameOver()
 {
+	TransitionManager::Update();
+
 	m_pressToCont.Render();
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
 	{
+		TransitionManager::StartFadingIn();
 		StateManager::Get()->SetCurrentState(GameState::LOAD_MAIN_MENU);
 	}
 }
