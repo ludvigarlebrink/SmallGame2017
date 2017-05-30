@@ -335,7 +335,6 @@ void GameSystem::Play()
 	else
 	{
 		m_gameUI.Update(static_cast<float>(m_gameSettings->GetGameLenght()) - m_timer.GetElapsed());
-		m_gameUI.Render();
 	}
 
 
@@ -355,10 +354,11 @@ void GameSystem::LoadNextLevel()
 	if (m_levelSelector.GetHasPlaylistEnded())
 	{
 		m_currState = GAME_OVER;
+		return;
 	}
 
 	m_gameUI.SetPauseDisplay(true);
-	m_gameUI.Render();
+	m_gameUI.Update(0);
 	m_pressToCont.Render();
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
@@ -377,6 +377,9 @@ void GameSystem::GameOver()
 {
 	TransitionManager::Update();
 
+	m_gameUI.SetPauseDisplay(true);
+	m_gameUI.SetShowWinner(true);
+	m_gameUI.Update(0);
 	m_pressToCont.Render();
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))

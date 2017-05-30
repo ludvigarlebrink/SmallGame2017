@@ -22,7 +22,6 @@ public:
 	virtual ~GameUI();
 	
 	void Update(float time);
-	void Render();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetNumPLayers(uint32_t numPlayers);
@@ -36,7 +35,7 @@ private:
 	uint32_t		m_numPlayers;
 
 	UIText *		m_gameTimer;
-	UIText			m_playerScore[4];
+	UIText *		m_playerScore[4];
 	UIText *		m_winnerText;
 
 	bool			m_pauseDisplay;
