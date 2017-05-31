@@ -85,16 +85,13 @@ void GamePhysics::Update()
 			m_player[i].SetSkullCheck(false);
 		}
 
-
-
-
-
 		m_powerupHandler.Update();
 		m_skullHandler.Update();
 
 		//Update player bounding box sprite position to the position of the player mesh
 	}
-		m_world.Step(1.0f / 20.0f, 8, 5);
+	
+	m_world.Step(1.0f / 20.0f, 8, 5);
 }
 
 
@@ -115,7 +112,7 @@ void GamePhysics::Free()
 	delete m_texture[0];
 	delete m_texture[1];
 	delete m_texture[2];
-	delete	m_texture[3];
+	delete m_texture[3];
 	delete m_texture[4];
 	delete m_texture[5];
 	delete m_texture[6];
@@ -148,8 +145,6 @@ void GamePhysics::Render(Camera camera)
 		//LASER SIGHT
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
-		m_player[i].GetLaserSight()->SetAlbedoID(m_texture[2]->GetTexture());
-		m_player[i].GetLaserSight()->Render(camera);
 		glDisable(GL_BLEND);
 
 

@@ -15,18 +15,13 @@ PowerUp::~PowerUp()
 void PowerUp::Create(b2World* world, glm::vec2 pos)
 {
 
-	m_powerupPrefab = PrefabManager::Instantiate("Candle", nullptr, nullptr, 0, "Candle");
+	m_powerupPrefab = PrefabManager::Instantiate("Powerup", nullptr, nullptr, 0, "Powerup");
 
-	m_powerupPrefab->Create();
-	m_powerupPrefab->SetScale(glm::vec3(1.5, 1.5, 1.5));
-	m_powerupPrefab->Rotate(glm::vec3(0.0, 90.0, 0.0));
+	m_powerupPrefab->SetScale(glm::vec3(1.5f));
 	scale = glm::vec2(1.5);
 
 	m_boundingBox.InitDynamic(world, pos, scale);
 	SetActive(false);
-
-	//m_sprite.CreateSprite(glm::vec2(GetBox().getBody()->GetPosition().x - (scale.x / 2), GetBox().getBody()->GetPosition().y - (scale.y / 2)), glm::vec2(scale.x, scale.y));
-	//m_sprite.Init(".\\Assets\\GLSL\\ColliderShader", 0, 0);
 
 	m_filter.categoryBits = POWERUP;
 	m_filter.maskBits = BOUNDARY | PLAYER1 | PLAYER2 | PLAYER3 | PLAYER4;
@@ -40,11 +35,10 @@ void PowerUp::Create(b2World* world, glm::vec2 pos)
 
 void PowerUp::CreateSkull(b2World * world, glm::vec2 pos)
 {
-	m_powerupPrefab = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
+	m_powerupPrefab = PrefabManager::Instantiate("Skull", nullptr, nullptr, 0, "Yellow");
 
-	m_powerupPrefab->Create();
-	m_powerupPrefab->SetScale(glm::vec3(1.5, 1.5, 1.5));
-	m_powerupPrefab->Rotate(glm::vec3(0.0, 90.0, 0.0));
+	m_powerupPrefab->SetScale(glm::vec3(1.0f));
+	m_powerupPrefab->Rotate(glm::vec3(0.0, 0.0f, 0.0));
 	scale = glm::vec2(1.5);
 
 	m_boundingBox.InitDynamic(world, pos, scale);

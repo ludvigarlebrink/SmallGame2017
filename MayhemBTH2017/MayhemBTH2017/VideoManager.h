@@ -39,7 +39,6 @@ public:
 private:
 	//::.. HELPER FUNCTIONS ..:://
 	void Init();
-	void Create(int width, int height, const std::string& title);
 
 
 private:

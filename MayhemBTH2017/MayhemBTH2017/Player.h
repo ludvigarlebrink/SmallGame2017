@@ -32,7 +32,6 @@ public:
 
 	//::.. RENDER ..:://
 	void Render(Camera camera);
-	void RenderShadow(Camera camera);
 
 	void Update(Player * p_arr, int nrOfPlayer);
 	void Respawn(glm::vec2 pos);
@@ -59,7 +58,6 @@ public:
 	void UpdateParticles();
 	Prefab * GetHealthBar();
 	Prefab* GetHealthBarBackground();
-	Prefab* GetLaserSight();
 	Prefab* GetPlayerArrow();
 	Prefab* GetMuzzleFlash();
 	bool	GetDead();
@@ -107,7 +105,7 @@ private:
 
 	Prefab *		m_healthBar;
 	Prefab*			m_muzzleFlash;
-	Prefab *		m_laserSight;
+
 	Prefab*			m_healthBarBackground;
 	Prefab*			m_playerArrow;
 	int				m_hitByProjectileID;
