@@ -19,7 +19,7 @@ LevelEditorStateMachine::~LevelEditorStateMachine()
 	{
 		for (int iconIndex = 0; iconIndex < m_gui[guiIndex].m_resolution; iconIndex++)
 		{
-			delete m_gui[guiIndex].m_icons[iconIndex];
+			m_gui[guiIndex].m_icons[iconIndex]->DeleteMesh();
 		}
 	}
 }

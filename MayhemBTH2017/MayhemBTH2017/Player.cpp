@@ -434,10 +434,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 				m_soundManager->PlaySFX("man_scream4");
 			}
 
-
 			ScoreManager::AddHitScore(m_hitByProjectileID);
-
-
 
 			m_life -= p_arr[m_hitByProjectileID].GetDamage();
 
