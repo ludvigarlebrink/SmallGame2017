@@ -161,14 +161,14 @@ void GamePhysics::Render(Camera camera)
 		glDisable(GL_BLEND);
 		////////////////////////////////////////////
 
-		for (int i = 0; i < 4; i++) {
+	for (int i = 0; i <4; i++) 
+	{
 
-			//Health bar
-			m_texture[0]->Bind(0);
-			m_texture[0]->Bind(m_texture[0]->GetTexture());
-			m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
-			m_player[i].GetHealthBar()->Render(camera);
-			//Health bar background
+		m_player[i].GetHealthBarBackground()->SetAlbedoID(m_texture[1]->GetTexture());
+		m_player[i].GetHealthBarBackground()->Render(camera);
+		
+		m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
+		m_player[i].GetHealthBar()->Render(camera);
 
 			m_player[i].GetHealthBarBackground()->SetAlbedoID(m_texture[1]->GetTexture());
 			m_player[i].GetHealthBarBackground()->Render(camera);

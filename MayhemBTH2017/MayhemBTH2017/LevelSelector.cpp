@@ -30,6 +30,16 @@ void LevelSelector::InitVisuals()
 
 	m_numToShow;
 
+	m_textLevels.SetText("Levels");
+	m_textLevels.SetColor(229, 122, 16, 255);
+	m_textLevels.SetPosition(-250, 275);
+	m_textLevels.SetSize(60);
+
+	m_textPlaylist.SetText("Playlist");
+	m_textPlaylist.SetColor(229, 122, 16, 255);
+	m_textPlaylist.SetPosition(250, 275);
+	m_textPlaylist.SetSize(60);
+
 	if (m_levelText.size() > 10)
 	{
 		m_numToShow = 10;
@@ -43,7 +53,7 @@ void LevelSelector::InitVisuals()
 	{
 		m_levelChoice[i] = new UIText;
 		m_levelChoice[i]->SetText(m_levelText[i].c_str());
-		m_levelChoice[i]->SetPosition(0, 200 - (50 * i));
+		m_levelChoice[i]->SetPosition(-250, 200 - (50 * i));
 		m_levelChoice[i]->SetColor(235, 235, 180, 255);
 	}
 
@@ -51,7 +61,7 @@ void LevelSelector::InitVisuals()
 	{
 		m_playListText[i] = new UIText;
 		m_playListText[i]->SetText("");
-		m_playListText[i]->SetPosition((VideoManager::Get()->GetWidth() / 2) - 250, 200 - (50 * i));
+		m_playListText[i]->SetPosition(250, 200 - (50 * i));
 		m_playListText[i]->SetColor(235, 235, 180, 255);
 	}
 
@@ -81,6 +91,8 @@ void LevelSelector::FreeVisuals()
 
 bool LevelSelector::Update()
 {
+	m_textLevels.Render();
+	m_textPlaylist.Render();
 	for (uint32_t i = 0; i < m_numToShow; i++)
 	{
 		if (i == m_levelSelector && !m_playListSelected)
@@ -165,7 +177,9 @@ bool LevelSelector::Update()
 		}
 	}
 
-	if ((m_input->GetButtonDown(CONTROLLER_BUTTON_A) || m_input->GetButtonDown(CONTROLLER_BUTTON_X)) && m_playListSelected)
+	if ((m_input->GetButtonDown(CONTROLLER_BUTTON_A) || 
+		m_input->GetButtonDown(CONTROLLER_BUTTON_X)) && 
+		m_playListSelected)
 	{
 		if (m_numLevels > 0)
 		{
@@ -187,6 +201,12 @@ bool LevelSelector::Update()
 			{
 				m_levelSelector = m_numLevels - 1;
 			}
+
+			if (m_numLevels <= 0)
+			{
+				m_playListSelected = false;
+				m_levelSelector = 0;
+			}
 		}
 	}
 
@@ -201,7 +221,8 @@ bool LevelSelector::Update()
 		}
 	}
 
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_LEFT) || m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_RIGHT))
+	if ((m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_LEFT) || m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_RIGHT))
+		&& m_numLevels > 0)
 	{
 		m_playListSelected = !m_playListSelected;
 
