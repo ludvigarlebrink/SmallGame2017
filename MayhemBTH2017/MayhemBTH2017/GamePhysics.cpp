@@ -44,16 +44,7 @@ void GamePhysics::EnterWorld(std::string levelName)
 
 	m_floorCollider.CreateBoundingBoxes(&m_world, levelName);
 
-
-	if (m_powerupHandler.GetSpawn())
-	{
-		m_powerupHandler.Free();
-	}
-
-	if (m_skullHandler.GetSpawn())
-	{
-		m_skullHandler.Free();
-	}
+	
 
 
 	//at global scope
@@ -85,10 +76,6 @@ void GamePhysics::Update()
 			m_player[i].SetSkullCheck(false);
 		}
 
-
-
-
-
 		m_powerupHandler.Update();
 		m_skullHandler.Update();
 
@@ -115,7 +102,7 @@ void GamePhysics::Free()
 	delete m_texture[0];
 	delete m_texture[1];
 	delete m_texture[2];
-	delete	m_texture[3];
+	delete m_texture[3];
 	delete m_texture[4];
 	delete m_texture[5];
 	delete m_texture[6];

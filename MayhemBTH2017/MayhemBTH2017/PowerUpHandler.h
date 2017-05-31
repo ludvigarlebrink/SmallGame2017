@@ -39,7 +39,8 @@ private:
 	std::vector <PowerUp*> m_pu;
 	std::vector <glm::vec2> m_randLoc;
 
-	bool m_spawn = false;
+	bool m_spawn;
+	bool m_hasBeenCreated;
 };
 
 

@@ -328,6 +328,8 @@ void GameSystem::StartPlay()
 
 void GameSystem::Play()
 {
+	TransitionManager::Update();
+
 	m_timer.Update();
 	m_world->Update();
 	m_world->Render(m_camera);
@@ -353,7 +355,7 @@ void GameSystem::Play()
 	}
 
 
-	TransitionManager::Update();
+
 }
 
 

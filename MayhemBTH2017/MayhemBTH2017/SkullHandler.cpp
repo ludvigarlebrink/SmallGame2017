@@ -5,6 +5,8 @@
 SkullHandler::SkullHandler()
 {
 	// Do nothing
+
+	m_hasBeenCreated = false;
 }
 
 
@@ -15,6 +17,11 @@ SkullHandler::~SkullHandler()
 
 void SkullHandler::Init(b2World * world)
 {
+	if (m_hasBeenCreated)
+	{
+		Free();
+	}
+
 	m_nrOfSpawns = 4;
 	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
@@ -23,13 +30,26 @@ void SkullHandler::Init(b2World * world)
 		m_skulls.push_back(p);
 	}
 	m_spawn = true;
+
+	m_hasBeenCreated = true;
 }
 
 void SkullHandler::Free()
 {
+	if (!m_hasBeenCreated)
+	{
+		return;
+	}
+
+	m_hasBeenCreated = false;
+
 	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
-		delete m_skulls[i];
+		if (m_skulls[i] != nullptr)
+		{
+			delete m_skulls[i];
+			m_skulls[i] = nullptr;
+		}
 	}
 
 	m_skulls.clear();

@@ -34,6 +34,8 @@ private:
 	bool m_spawn = false;
 	float m_nrOfSpawns;
 	float m_currentSkull = 0;
+
+	bool m_hasBeenCreated;
 };
 
 #endif
