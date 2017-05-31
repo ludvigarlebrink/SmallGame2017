@@ -254,15 +254,15 @@ void GameSystem::PlayerReady()
 				++num;
 			}
 
-			// TEMP CHANGE TO TWO
-			if (num >= 1)
-			{
-				// INIT PLAY
-				m_numPlayers = num;
-				TransitionManager::StartFadingOut();
-				m_currState = INIT_PLAY;
-				return;
-			}
+		}
+
+		if (num >= 1)
+		{
+			// INIT PLAY
+			m_numPlayers = num;
+			TransitionManager::StartFadingOut();
+			m_currState = INIT_PLAY;
+			return;
 		}
 	}
 

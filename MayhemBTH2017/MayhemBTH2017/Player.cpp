@@ -33,6 +33,7 @@ Player::Player()
 	m_hitByProjectile = -1;
 
 
+
 }
 
 
@@ -200,6 +201,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_muzzleFlash->SetPosition(glm::vec3(999, 999, 999));
 	m_muzzleFlash->SetScale(glm::vec3(1.7, 1.7, 1.7));
+
+	int spawn = rand() % 80;
+	Respawn(glm::vec2(spawn, 100));
 
 	//Set fixture->SetScale(glm::vec3(0.2, 8.5, 0.2)); 
 
@@ -601,7 +605,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	m_playerPrefab->GetPlayerPrefab()->SetPosition(glm::vec3(xPos + 0.5, yPos + GetBox().getScale().y - 6, 0));
 
 	//////////////////////////////////////////////////////////
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		m_weapons[i]->Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 	}
