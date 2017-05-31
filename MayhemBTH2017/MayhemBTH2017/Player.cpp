@@ -299,10 +299,10 @@ void Player::Update(Player * p_arr) {
 	m_laserSight->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 0.6, 0.0));
 	m_laserSight->SetRotation(-90, 90, angle);
 
-	m_playerArrow->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x+0.5f, m_boundingBox.getBody()->GetPosition().y + 3.5, 0.0));
+	m_playerArrow->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 3.5, 0.0));
 
 
-	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) !=0.0)
+	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) != 0.0)
 	{
 
 
@@ -356,13 +356,13 @@ void Player::Update(Player * p_arr) {
 
 		}
 
-		else{
+		else {
 
 			m_muzzleFlash->SetPosition(glm::vec3(999, 999, 325));
 
 		}
 
-	
+
 	}
 
 
@@ -434,15 +434,16 @@ void Player::Update(Player * p_arr) {
 		if (m_collidedPowerUp)
 		{
 			m_soundManager->PlaySFX("pickup");
-			int atomic = rand() % 15;
-			if (atomic != 14) {
+			int atomic = rand() % 3;
+			if (atomic != 2) {
 				m_currentWeapon = rand() % 6 + 1;
 			}
-			if (atomic == 14) {
+			if (atomic == 2) {
 				m_soundManager->PlaySFX("siren");
 				m_soundManager->PlaySFX("airplane");
 				AtomicBomb::StartBombSequence();
-				m_dead = true;
+
+		
 			}
 			m_collidedPowerUp = false;
 		}
