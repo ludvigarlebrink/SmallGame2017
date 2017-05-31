@@ -12,7 +12,7 @@ Weapon::Weapon()
 
 Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID, glm::vec3 projectileSpawnPoint)
 {
-	m_collisionpath = "explosion1";
+	m_collisionpath = "";
 	m_prefabGun = nullptr;
 	m_muzzleFlash = nullptr;
 	m_prefabProjectile = nullptr;

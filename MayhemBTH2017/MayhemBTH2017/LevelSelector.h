@@ -52,6 +52,7 @@ private:
 	bool						m_hasPlaylistEnded;
 	bool						m_visualsInitialized;
 	bool						m_playListSelected;
+	bool						m_isLevelEditor;
 
 	uint32_t					m_numToShow;
 	int32_t						m_levelInc;
