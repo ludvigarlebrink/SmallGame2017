@@ -31,6 +31,7 @@ void PowerUp::Create(b2World* world, glm::vec2 pos)
 
 	lifeTime = 0;
 	deathBound = 10.0;
+	scaleTime = 1;
 }
 
 void PowerUp::CreateSkull(b2World * world, glm::vec2 pos)
@@ -53,6 +54,7 @@ void PowerUp::CreateSkull(b2World * world, glm::vec2 pos)
 	lifeTime = 0;
 	deathBound = 7.0;
 	m_score = 0;
+
 }
 
 //::.. RENDER ..:://
@@ -127,7 +129,8 @@ void PowerUp::SetScore(uint32_t value)
 void PowerUp::Update()
 {
 	lifeTime += TimeManager::Get()->GetDeltaTime();
-	float scaler = glm::abs(glm::sin(lifeTime));
+
+
 
 	if (m_collidedPlayer)
 	{
@@ -141,12 +144,21 @@ void PowerUp::Update()
 	GLfloat yScale = m_boundingBox.getScale().y;
 
 	m_powerupPrefab->SetPosition(glm::vec3(xPos, yPos, 0));
-	m_powerupPrefab->SetScale(xScale*scaler, yScale*scaler, 0);
+	//m_powerupPrefab->SetScale(xScale*scaler, yScale*scaler, 0);
+	m_powerupPrefab->SetRotation(m_powerupPrefab->GetRotation().x, m_powerupPrefab->GetRotation().y + 1, m_powerupPrefab->GetRotation().z);
+
+	if (lifeTime > deathBound - 1)
+	{
+		scaleTime -= 0.01f;
+		m_powerupPrefab->SetScale(m_powerupPrefab->GetScale().x*scaleTime, m_powerupPrefab->GetScale().y*scaleTime, m_powerupPrefab->GetScale().z*scaleTime);
+	}
+
 
 	if (lifeTime > deathBound)
 	{
 		SetActive(false);
 		lifeTime = 0;
+		scaleTime = 1;
 	}
 }
 
@@ -167,7 +179,6 @@ void PowerUp::SkullUpdate()
 	GLfloat yScale = m_boundingBox.getScale().y;
 
 	m_powerupPrefab->SetPosition(glm::vec3(xPos, yPos, 0));
-	m_powerupPrefab->SetScale(m_powerupPrefab->GetScale().x + 0.005 * (scaler * 10), m_powerupPrefab->GetScale().y + 0.005 * (scaler * 10), 0);
 
 	if (lifeTime > deathBound)
 	{
