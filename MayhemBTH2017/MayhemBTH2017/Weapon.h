@@ -34,6 +34,8 @@ public:
 
 	void Shoot(b2World * world, glm::vec3 pos, int controllerID);
 	void UpdateParticles();
+
+	glm::vec3 GetWeaponOffset();
 	
 
 	float GetFireRate();

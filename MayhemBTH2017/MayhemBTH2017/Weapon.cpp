@@ -193,10 +193,15 @@ Projectile * Weapon::ReuseLast()
 }
 
 
-void Weapon::UpdateParticles() {
+void Weapon::UpdateParticles() 
+{
+
+}
 
 
-
+glm::vec3 Weapon::GetWeaponOffset()
+{
+	return m_projectileSpawnPoint;
 }
 
 float Weapon::GetFireRate()
