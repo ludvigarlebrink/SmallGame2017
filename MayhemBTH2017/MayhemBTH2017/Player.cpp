@@ -143,13 +143,13 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_playerArrow->Create();
 	m_muzzleFlash->Create();
 
-	gun1->SetScale(glm::vec3(1.3f));
+	gun1->SetScale(glm::vec3(1.4f));
 	gun2->SetScale(glm::vec3(0.7f));
 	gun3->SetScale(glm::vec3(0.7f));
-	gun4->SetScale(glm::vec3(0.7f));
-	gun5->SetScale(glm::vec3(0.7f));
-	gun6->SetScale(glm::vec3(0.7f));
-	gun7->SetScale(glm::vec3(0.7f));
+	gun4->SetScale(glm::vec3(1.4f));
+	gun5->SetScale(glm::vec3(1.3f));
+	gun6->SetScale(glm::vec3(1.0f));
+	gun7->SetScale(glm::vec3(1.0f));
 
 	Prefab * projectile1 = PrefabManager::Instantiate("Bullet", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile2 = PrefabManager::Instantiate("Sword", nullptr, nullptr, 0, "Candle");
@@ -162,7 +162,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	projectile1->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapons[0] = new Weapon(gun1, projectile1, m_controllerID);
+	m_weapons[0] = new Weapon(gun5, projectile1, m_controllerID);
 	m_weapons[0]->SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.15f, 10, m_controllerID, 0.0);
 	m_weapons[0]->SetWeaponSound("assault_rifle");
 	m_weapons[0]->SetFirePower(150.0);
