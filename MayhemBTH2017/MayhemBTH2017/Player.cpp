@@ -53,7 +53,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBarBackground = nullptr;
 	m_world = nullptr;
 	m_muzzleFlash = nullptr;
-	m_atomic_timer_active = false;
+	m_atomic_timer_active = true;
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
 	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\debree.png");
@@ -128,20 +128,12 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	Prefab * gun4 = PrefabManager::Instantiate("GrenadeLauncher", nullptr, nullptr, 0, "GrenadeLauncher");
 	Prefab * gun5 = PrefabManager::Instantiate("RocketLauncher", nullptr, nullptr, 0, "RocketLauncher");
 	Prefab * gun6 = PrefabManager::Instantiate("Boomerang", nullptr, nullptr, 0, "Candle");
-	Prefab * gun7 = PrefabManager::Instantiate("Spear", nullptr, nullptr, 0, "Candle");
 
 	m_healthBar = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
 	m_healthBarBackground = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
-	m_laserSight = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
 
 	m_playerArrow = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
 	m_muzzleFlash = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
-
-	m_healthBar->Create();
-	m_healthBarBackground->Create();
-	m_laserSight->Create();
-	m_playerArrow->Create();
-	m_muzzleFlash->Create();
 
 	gun1->SetScale(glm::vec3(1.4f));
 	gun2->SetScale(glm::vec3(0.7f));
@@ -149,62 +141,54 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	gun4->SetScale(glm::vec3(1.4f));
 	gun5->SetScale(glm::vec3(1.3f));
 	gun6->SetScale(glm::vec3(1.0f));
-	gun7->SetScale(glm::vec3(1.0f));
 
 	Prefab * projectile1 = PrefabManager::Instantiate("Bullet", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile2 = PrefabManager::Instantiate("Sword", nullptr, nullptr, 0, "Candle");
-	Prefab * projectile3 = PrefabManager::Instantiate("Spike", nullptr, nullptr, 0, "Candle");
+	Prefab * projectile3 = PrefabManager::Instantiate("Bullet", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile4 = PrefabManager::Instantiate("Rifle", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile5 = PrefabManager::Instantiate("Missile", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile6 = PrefabManager::Instantiate("Boomerang", nullptr, nullptr, 0, "Candle");
-	Prefab * projectile7 = PrefabManager::Instantiate("Spear", nullptr, nullptr, 0, "Candle");
 
 	projectile1->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapons[0] = new Weapon(gun5, projectile1, m_controllerID);
+	m_weapons[0] = new Weapon(gun1, projectile1, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[0]->SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.15f, 10, m_controllerID, 0.0);
 	m_weapons[0]->SetWeaponSound("assault_rifle");
 	m_weapons[0]->SetFirePower(150.0);
 	m_weapons[0]->SetDamage(0.05f);
 
 
-	m_weapons[1] = new Weapon(gun2, projectile2, m_controllerID);
+	m_weapons[1] = new Weapon(gun2, projectile2, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[1]->SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 3.0f, 10, m_controllerID, 0.0);
 	m_weapons[1]->SetWeaponSound("scifi_weapon");
 	m_weapons[1]->SetFirePower(100.0f);
 	m_weapons[1]->SetDamage(1.0f);
 
-	m_weapons[2] = new Weapon(gun3, projectile3, m_controllerID);
+	m_weapons[2] = new Weapon(gun3, projectile3, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[2]->SetProjectileType(0.9f, 1.0f, 0.0f, 0.0f, 0.5f, 15, m_controllerID, 5.0);
 	m_weapons[2]->SetWeaponSound("shuriken");
 	m_weapons[2]->SetFirePower(100.0f);
 	m_weapons[2]->SetDamage(0.3f);
 
 
-	m_weapons[3] = new Weapon(gun4, projectile4, m_controllerID);
+	m_weapons[3] = new Weapon(gun4, projectile4, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[3]->SetProjectileType(0.2f, 1.0f, 0.0f, 0.0f, 0.5f, 18, m_controllerID, 0.0);
 	m_weapons[3]->SetWeaponSound("grenade_launcher");
 	m_weapons[3]->SetFirePower(4.0);
 	m_weapons[3]->SetDamage(0.3f);
 
-	m_weapons[4] = new Weapon(gun5, projectile5, m_controllerID);
+	m_weapons[4] = new Weapon(gun5, projectile5, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[4]->SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.5f, 12, m_controllerID, 0.0);
 	m_weapons[4]->SetWeaponSound("heavy_shot");
 	m_weapons[4]->SetFirePower(100.0f);
 	m_weapons[4]->SetDamage(0.3f);
 
-	m_weapons[5] = new Weapon(gun6, projectile6, m_controllerID);
+	m_weapons[5] = new Weapon(gun6, projectile6, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[5]->SetProjectileType(0.8f, 1.0f, 0.0f, 0.0f, 0.5f, 11, m_controllerID, 0.0);
 	m_weapons[5]->SetWeaponSound("scifi2");
 	m_weapons[5]->SetFirePower(100.0f);
-	m_weapons[5]->SetDamage(0.3f);
-
-	m_weapons[6] = new Weapon(gun7, projectile7, m_controllerID);
-	m_weapons[6]->SetProjectileType(0.7f, 1.0f, 0.0f, 0.0f, 0.5f, 14, m_controllerID, 0.0);
-	m_weapons[6]->SetWeaponSound("default_gun");
-	m_weapons[6]->SetFirePower(100.0f);
-	m_weapons[6]->SetDamage(0.3f);
+	m_weapons[5]->SetDamage(0.3f);;
 
 	
 
@@ -221,10 +205,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBar->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
-
-	m_laserSight->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
-	m_laserSight->SetScale(glm::vec3(0.2, 8.5, 0.2));
-
 	m_playerArrow->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 9, 0.0));
 	m_playerArrow->SetScale(glm::vec3(0.7, 0.7, 0.7));
 
@@ -238,10 +218,10 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 void Player::Free()
 {
 
-	for (size_t i = 0; i < 7; i++)
+	/*for (size_t i = 0; i < 7; i++)
 	{
 		delete m_weapons[i];
-	}
+	}*/
 
 	if (m_playerPrefab != nullptr)
 	{
@@ -260,12 +240,6 @@ void Player::Free()
 		m_healthBarBackground = nullptr;
 	}
 
-	if (m_laserSight != nullptr) {
-		delete m_laserSight;
-		m_laserSight = nullptr;
-	}
-
-
 	if (m_playerArrow != nullptr) {
 		delete m_playerArrow;
 		m_playerArrow = nullptr;
@@ -283,7 +257,6 @@ void Player::Free()
 	delete m_particleTexture4;
 	delete m_particleTexture5;
 	delete m_particleTexture6;
-	delete m_particleTexture7;
 
 	// LUKAS DELETE WORLD
 }
@@ -297,7 +270,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 		m_dead = true;
 	}
 
-	if (m_currentWeapon > 6)
+	if (m_currentWeapon > 5)
 	{
 		m_currentWeapon = 0;
 	}
@@ -305,25 +278,22 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	switch (m_currentWeapon)
 	{
 	case 0:
-		m_playerPrefab->SetWeapon(m_weapons[0]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[0]->GetWeaponPre(), m_weapons[0]->GetWeaponOffset());
 		break;
 	case 1:
-		m_playerPrefab->SetWeapon(m_weapons[1]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[1]->GetWeaponPre(), m_weapons[1]->GetWeaponOffset());
 		break;
 	case 2:
-		m_playerPrefab->SetWeapon(m_weapons[2]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[2]->GetWeaponPre(), m_weapons[2]->GetWeaponOffset());
 		break;
 	case 3:
-		m_playerPrefab->SetWeapon(m_weapons[3]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[3]->GetWeaponPre(), m_weapons[3]->GetWeaponOffset());
 		break;
 	case 4:
-		m_playerPrefab->SetWeapon(m_weapons[4]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[4]->GetWeaponPre(), m_weapons[4]->GetWeaponOffset());
 		break;
 	case 5:
-		m_playerPrefab->SetWeapon(m_weapons[5]->GetWeaponPre());
-		break;
-	case 6:
-		m_playerPrefab->SetWeapon(m_weapons[6]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[5]->GetWeaponPre(), m_weapons[5]->GetWeaponOffset());
 		break;
 	default:
 		break;
@@ -335,20 +305,17 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
 
-	glm::vec2 force = glm::vec2(m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID), m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y, m_controllerID));
-
-
-
-	float angle = glm::degrees(atan2(force.y, force.x));
-	m_laserSight->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 0.6, 0.0));
-	m_laserSight->SetRotation(-90, 90, angle);
+	//glm::vec2 force = glm::vec2(m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID), m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID));
 
 	m_playerArrow->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 3.5, 0.0));
 
 
-	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) != 0.0)
+	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) != 0.0 && !m_dead)
 	{
-
+		if (m_currentWeapon > 5)
+		{
+			m_currentWeapon = 0;
+		}
 
 
 		if (m_weapons[m_currentWeapon]->FireRate(m_weapons[m_currentWeapon]->GetFireRate()))
@@ -356,14 +323,8 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 			m_weapons[m_currentWeapon]->Shoot(m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
 
 
-			float angle2 = rand() % 360;
-			float scale = 2 + rand() % 3;
-
-			m_muzzleFlash->Rotate(glm::vec3(0, 0, angle2));
-			m_muzzleFlash->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x - 2.5f*m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID), m_boundingBox.getBody()->GetPosition().y + 1.0, 0.0));
-			m_muzzleFlash->SetScale(glm::vec3(scale, scale, 0.0));
-
-
+			
+			m_muzzleFlash->SetPosition(m_playerPrefab->GetProjectileSpawnPoint());
 
 			if (m_currentWeapon == 0) {
 
@@ -391,11 +352,6 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 			if (m_currentWeapon == 5) {
 				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle6", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.0, 10, 0.0f);
 				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture6);
-			}
-
-			if (m_currentWeapon == 6) {
-				m_weapons[m_currentWeapon]->InitParticleSystem(".\\Assets\\GLSL\\Particle1", glm::vec4(1.0, 0.0, 1.0, 1.0), 0.0, 10, 0.0f);
-				m_weapons[m_currentWeapon]->SetParticleTexture(m_particleTexture7);
 			}
 
 		}
@@ -481,17 +437,21 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 			m_soundManager->PlaySFX("pickup");
 			int atomic = rand() % 20;
 			
-			if (atomic != 19) {
+			if (atomic != 20) {
 				m_currentWeapon = rand() % 6 + 1;
 			}
-			if (atomic == 19) {
+
+			if (atomic == 1 && m_atomic_timer_active) {
 				m_atomic_timer_active = true;
 				m_soundManager->PlaySFX("siren");
 				m_soundManager->PlaySFX("airplane");
 				AtomicBomb::StartBombSequence();
-
-
 			}
+			else
+			{
+				m_currentWeapon = rand() % 6 + 1;
+			}
+
 			m_collidedPowerUp = false;
 		}
 
@@ -598,7 +558,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 
 	m_playerPrefab->Update(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
-		m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
+		m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
 		m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID));
 
 
@@ -633,7 +593,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	m_playerPrefab->GetPlayerPrefab()->SetPosition(glm::vec3(xPos + 0.5, yPos + GetBox().getScale().y - 6, 0));
 
 	//////////////////////////////////////////////////////////
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		m_weapons[i]->Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 	}
@@ -715,16 +675,11 @@ Prefab * Player::GetHealthBarBackground()
 	return m_healthBarBackground;
 }
 
-Prefab * Player::GetLaserSight()
-{
-	return m_laserSight;
-}
 
 Prefab * Player::GetPlayerArrow()
 {
 	return m_playerArrow;
 }
-
 
 
 Prefab * Player::GetMuzzleFlash()
@@ -819,7 +774,7 @@ void Player::Render(Camera camera) {
 	m_playerPrefab->Render(camera);
 
 	//Renders projectiles of a weapon and its particles
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		m_weapons[i]->Render(camera);
 	}

@@ -12,7 +12,7 @@ class Weapon
 public:
 	//::.. CONSTRUCTORS/DESTRUCTOR ..:://
 	Weapon();
-	Weapon(Prefab * gun, Prefab * projectile, int controllerID);
+	Weapon(Prefab * gun, Prefab * projectile, int controllerID, glm::vec3 projectileSpawnPoint);
 	Weapon(Prefab * gun);
 	virtual ~Weapon();
 
@@ -31,16 +31,21 @@ public:
 	void SetParticleTexture(Texture* texture);
 	void InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life);
 	void SetTexture(const char* filepath);
-	//::.. SET FUNTIONS ..:://
+
 	void Shoot(b2World * world, glm::vec3 pos, int controllerID);
 	void UpdateParticles();
-	//::.. GET FUNTIONS ..:://
+
+	glm::vec3 GetWeaponOffset();
+	
+
 	float GetFireRate();
 	Prefab * GetWeaponPre();
 
 	bool FireRate(float rate);
 
 private:
+
+	// WTF IS THIS!
 	GLfloat					m_firepower;
 	const char*				m_texturePath;
 	Prefab*					m_prefabGun;
@@ -86,6 +91,10 @@ private:
 	Texture*	m_particleTexture;
 	TextureManager m_textureManager;
 	SoundManager * m_soundManager;
+
+
+	//::.. NORMAL FACTORING ..:://
+	glm::vec3		m_projectileSpawnPoint;
 };
 
 

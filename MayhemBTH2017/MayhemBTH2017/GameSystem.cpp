@@ -258,6 +258,7 @@ void GameSystem::PlayerReady()
 			if (num >= 1)
 			{
 				// INIT PLAY
+				m_numPlayers = num;
 				TransitionManager::StartFadingOut();
 				m_currState = INIT_PLAY;
 				return;
@@ -294,6 +295,7 @@ void GameSystem::InitPlay()
 		if (m_world == nullptr)
 		{
 			m_world = new GamePhysics;
+			m_world->SetNrOfPlayers(m_numPlayers);
 		}
 
 		LevelHandler levelHandler;
@@ -362,6 +364,8 @@ void GameSystem::Play()
 void GameSystem::LoadNextLevel()
 {
 	TransitionManager::Update();
+
+	m_atomicBomb.Reset();
 
 	if (!TransitionManager::GetIsBlack())
 	{

@@ -32,7 +32,6 @@ public:
 
 	//::.. RENDER ..:://
 	void Render(Camera camera);
-	void RenderShadow(Camera camera);
 
 	void Update(Player * p_arr, int nrOfPlayer);
 	void Respawn(glm::vec2 pos);
@@ -59,7 +58,6 @@ public:
 	void UpdateParticles();
 	Prefab * GetHealthBar();
 	Prefab* GetHealthBarBackground();
-	Prefab* GetLaserSight();
 	Prefab* GetPlayerArrow();
 	Prefab* GetMuzzleFlash();
 	bool	GetDead();
@@ -107,13 +105,13 @@ private:
 
 	Prefab *		m_healthBar;
 	Prefab*			m_muzzleFlash;
-	Prefab *		m_laserSight;
+
 	Prefab*			m_healthBarBackground;
 	Prefab*			m_playerArrow;
 	int				m_hitByProjectileID;
 	SoundManager *	m_soundManager;
 
-	Weapon *		m_weapons[7];
+	Weapon *		m_weapons[6];
 	int				m_currentWeapon;
 
 	b2World *	m_world;
@@ -126,18 +124,6 @@ private:
 	float m_deathTImer = 0;
 
 	b2FixtureDef m_fixture;
-	//enum _entityCategory {
-	//	BOUNDARY = 0x0001,
-	//	POWERUP = 0x0008,
-	//	PLAYER1 = 0x0002,
-	//	PLAYER3 = 0x0064,
-	//	PLAYER2 = 0x0016,
-	//	PLAYER4 = 0x00128,
-	//	PROJECTILE1 = 0x0004,
-	//	PROJECTILE2 = 0x0032,
-	//	PROJECTILE3 = 0x00256,
-	//	PROJECTILE4 = 0x00512,
-	//};
 
 	enum _entityCategory {
 		BOUNDARY = 0x0001,
