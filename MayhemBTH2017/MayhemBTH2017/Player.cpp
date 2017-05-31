@@ -191,7 +191,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBarBackground->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
-
 	m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
 	m_healthBar->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
@@ -607,7 +606,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	//////////////////////////////////////////////////////////
 	for (int i = 0; i < 5; i++)
 	{
-		m_weapons[i]->Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
+		m_weapons[i]->Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0), m_controllerID);
 	}
 
 

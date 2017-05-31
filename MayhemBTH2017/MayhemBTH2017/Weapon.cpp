@@ -36,6 +36,8 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID, glm::vec3 pr
 	m_controllerID = controllerID;
 
 	m_soundManager = SoundManager::Get();
+
+	m_isRight = true;
 }
 
 
@@ -109,13 +111,13 @@ float Weapon::GetDamage()
 }
 
 
-void Weapon::SetParticleTexture(Texture* texture) 
-{	
+void Weapon::SetParticleTexture(Texture* texture)
+{
 	m_particleTexture = texture;
 }
 
 
-void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
+void Weapon::Update(glm::vec3 playerPos, b2Vec2 force, uint32_t controllerID)
 {
 
 	m_time += TimeManager::Get()->GetDeltaTime();
@@ -124,6 +126,30 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
 		m_projectiles[i]->Update();
+
+	}
+
+	if (InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, controllerID) > 0.300000f)
+	{
+		m_isRight = true;
+	}
+
+	else if (InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, controllerID) < -0.300000f)
+	{
+		m_isRight = false;
+	}
+
+	float y = InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID);
+
+	if (m_isRight)
+	{
+		m_force = glm::vec2(-1.0f + abs(y), -y);
+		m_force = glm::normalize(m_force);
+	}
+	else
+	{
+		m_force = glm::vec2(1.0f - abs(y), -y);
+		m_force = glm::normalize(m_force);
 	}
 }
 
@@ -154,7 +180,7 @@ void Weapon::SetWeaponSound(const char * filepath)
 void Weapon::SetCollisionSound(const char * filepath)
 {
 	m_collisionpath = filepath;
-	
+
 }
 
 
@@ -172,8 +198,6 @@ void Weapon::InitParticleSystem(std::string shadername, glm::vec4 col, GLfloat s
 		m_projectiles[i]->InitParticles(shadername, col, size, nrof, life);
 
 	}
-
-
 }
 
 void Weapon::SetTexture(const char * filepath)
@@ -194,7 +218,7 @@ Projectile * Weapon::ReuseLast()
 }
 
 
-void Weapon::UpdateParticles() 
+void Weapon::UpdateParticles()
 {
 
 }
@@ -218,28 +242,9 @@ Prefab * Weapon::GetWeaponPre()
 void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 {
 	GLfloat firePower = m_firepower;
-	
-	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
 
-	if (abs(force.x) > 0.3f || abs(force.y) > 0.3f)
-	{
-		m_previousForce = glm::normalize(force);
-	}
-	else
-	{
-		if (m_previousForce.x < -0.3f)
-		{
-			m_previousForce = glm::vec2(1.0f, -0.1f);
-		}
-		else
-		{
-			m_previousForce = glm::vec2(-1.0f, 0.0f);
-		}
-	}
-
-	firePower *= -10;
-	m_previousForce *= firePower;
-
+	firePower *= 10;
+	glm::vec2 force = m_force * firePower;
 
 	if (m_projectiles.size() < m_clearRate)
 	{
@@ -249,9 +254,9 @@ void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 			//create new projectile
 
 		if (m_isBullet == false) {
-			
+
 			m_soundManager->PlaySFX(m_soundpath);
-			
+
 			projectile->InitProjectile(world, glm::vec2(pos.x, pos.y),
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 				m_restitution, m_friction, m_damping, m_density, m_fireRate, true, m_prefabProjectile, m_controllerID, m_life);
@@ -261,20 +266,8 @@ void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 			projectile->SetCollisionSound(m_collisionpath);
 		}
 
-		Camera camera;
-		Transform temptransform;
-
-
-	projectile->AddForce(glm::vec3(m_previousForce, 0.0f), m_controllerID);
-		
-
-
+		projectile->AddForce(glm::vec3(force, 0.0f), m_controllerID);
 		m_projectiles.push_back(projectile);
-
-
-
-
-
 	}
 	else if (m_projectiles.size() == m_clearRate)
 	{
@@ -293,7 +286,7 @@ void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 				glm::vec2(m_prefabProjectile->GetScale().x, m_prefabProjectile->GetScale().y),
 				m_restitution, m_friction, m_damping, m_density, m_fireRate, false, m_prefabProjectile, controllerID, m_life);
 			//m_projectiles[m_projectileCounter]->GetPrefab()->SetPosition(m_prefabGun->GetPosition());
-			m_projectiles[m_projectileCounter]->AddForce(glm::vec3(m_previousForce, 0.0f), controllerID);
+			m_projectiles[m_projectileCounter]->AddForce(glm::vec3(force, 0.0f), controllerID);
 
 			m_projectiles[m_projectileCounter]->SetHasParticles(m_hasParticles);
 			m_projectiles[m_projectileCounter]->SetTexture(m_particleTexture);

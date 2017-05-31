@@ -24,7 +24,7 @@ public:
 	Projectile * ReuseLast();
 	void Render(Camera camera);
 	void RenderShadow(Camera camera);
-	void Update(glm::vec3 playerPos, b2Vec2 force);
+	void Update(glm::vec3 playerPos, b2Vec2 force, uint32_t controllerID);
 	void DeleteProjectile();
 	void SetWeaponSound(const char* filepath);
 	void SetCollisionSound(const char* filepath);
@@ -36,6 +36,7 @@ public:
 	void UpdateParticles();
 
 	glm::vec3 GetWeaponOffset();
+
 	
 
 	float GetFireRate();
@@ -59,7 +60,7 @@ private:
 	bool m_hasParticles;
 	ParticleEmitter* m_smokeEmitter;
 	float m_restitution;
-	glm::vec2 m_previousForce;
+	glm::vec2 m_force;
 	float m_friction;
 	float m_damping;
 	bool count;
@@ -76,6 +77,10 @@ private:
 	int  m_controllerID;
 	unsigned int m_counter;
 	float m_life;
+
+	// GOOD VARIABLES
+	bool		m_isRight;
+
 
 	Transform m_transform;
 	
