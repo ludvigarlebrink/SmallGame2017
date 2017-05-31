@@ -18,29 +18,29 @@ LevelEditor::LevelEditor()
 
 	// Text
 	m_menuText[0].SetText("SAVE LEVEL");
-	m_menuText[0].SetSize(80);
-	m_menuText[0].SetPosition(0, 145);
+	m_menuText[0].SetSize(50);
+	m_menuText[0].SetPosition(0, 100);
 	m_menuText[0].SetFont(".\\Assets\\Fonts\\Snap.ttf");
 	m_menuText[0].SetPivot(UIText::CENTER);
-	m_menuText[0].SetColor(255, 255, 255, 255);
+	m_menuText[0].SetColor(235, 235, 180, 255);
 
 	m_menuText[1].SetText("LOAD LEVEL");
-	m_menuText[1].SetSize(80);
+	m_menuText[1].SetSize(50);
 	m_menuText[1].SetPosition(0, 0);
 	m_menuText[1].SetFont(".\\Assets\\Fonts\\Snap.ttf");
 	m_menuText[1].SetPivot(UIText::CENTER);
-	m_menuText[1].SetColor(255, 255, 255, 255);
+	m_menuText[1].SetColor(235, 235, 180, 255);
 
 	m_menuText[2].SetText("MAIN MENU");
-	m_menuText[2].SetSize(80);
-	m_menuText[2].SetPosition(0, -145);
+	m_menuText[2].SetSize(50);
+	m_menuText[2].SetPosition(0, -100);
 	m_menuText[2].SetFont(".\\Assets\\Fonts\\Snap.ttf");
 	m_menuText[2].SetPivot(UIText::CENTER);
-	m_menuText[2].SetColor(255, 255, 255, 255);
+	m_menuText[2].SetColor(235, 235, 180, 255);
 
 	m_textPos = 0;
-	m_menuText[m_textPos].SetSize(100);
-	m_menuText[m_textPos].SetColor(255, 0, 0, 128);
+	m_menuText[m_textPos].SetSize(60);
+	m_menuText[m_textPos].SetColor(229, 122, 16, 255);
 	m_state = EDIT;
 
 }
@@ -284,11 +284,11 @@ void LevelEditor::MenuInput()
 		{
 			if (m_textPos - 1 >= 0)
 			{
-				m_menuText[m_textPos].SetColor(255, 255, 255, 255);
-				m_menuText[m_textPos].SetSize(90);
+				m_menuText[m_textPos].SetColor(235, 235, 180, 255);
+				m_menuText[m_textPos].SetSize(50);
 				m_textPos--;
-				m_menuText[m_textPos].SetSize(100);
-				m_menuText[m_textPos].SetColor(255, 0, 0, 128);
+				m_menuText[m_textPos].SetSize(60);
+				m_menuText[m_textPos].SetColor(229, 122, 16, 255);
 			}
 		}
 
@@ -296,11 +296,11 @@ void LevelEditor::MenuInput()
 		{
 			if (m_textPos + 1 < 3)
 			{
-				m_menuText[m_textPos].SetColor(255, 255, 255, 255);
-				m_menuText[m_textPos].SetSize(90);
+				m_menuText[m_textPos].SetColor(235, 235, 180, 255);
+				m_menuText[m_textPos].SetSize(50);
 				++m_textPos;
-				m_menuText[m_textPos].SetSize(100);
-				m_menuText[m_textPos].SetColor(255, 0, 0, 128);
+				m_menuText[m_textPos].SetSize(60);
+				m_menuText[m_textPos].SetColor(229, 122, 16, 255);
 			}
 		}
 
@@ -360,13 +360,13 @@ void LevelEditor::MenuInput()
 			{
 				if (i == m_textPos)
 				{
-					m_menuText[i].SetColor(255, 0, 0, 128);
-					m_menuText[i].SetSize(100);
+					m_menuText[i].SetColor(229, 122, 16, 255);
+					m_menuText[i].SetSize(60);
 				}
 				else
 				{
-					m_menuText[i].SetColor(255, 255, 255, 255);
-					m_menuText[i].SetSize(90);
+					m_menuText[i].SetColor(235, 235, 180, 255);
+					m_menuText[i].SetSize(50);
 				}
 			}
 

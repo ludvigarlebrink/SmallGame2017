@@ -35,9 +35,7 @@ public:
 	void Shoot(b2World * world, glm::vec3 pos, int controllerID);
 	void UpdateParticles();
 
-	glm::vec3 GetWeaponOffset();
-
-	
+	glm::vec3 GetWeaponOffset();	
 
 	float GetFireRate();
 	Prefab * GetWeaponPre();
