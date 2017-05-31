@@ -68,17 +68,56 @@ void LevelSelector::InitVisuals()
 	m_visualsInitialized = true;
 }
 
+void LevelSelector::InitEditorVisuals()
+{
+	m_playListText.resize(10);
+	m_levelChoice.resize(10);
+	m_levelHandler.GetLevelNames(m_levelText);
+
+	m_numToShow;
+
+	m_textLevels.SetText("Levels");
+	m_textLevels.SetColor(229, 122, 16, 255);
+	m_textLevels.SetPosition(0, 275);
+	m_textLevels.SetSize(60);
+
+	if (m_levelText.size() > 10)
+	{
+		m_numToShow = 10;
+	}
+	else
+	{
+		m_numToShow = m_levelText.size();
+	}
+
+	for (size_t i = 0; i < m_numToShow; i++)
+	{
+		m_levelChoice[i] = new UIText;
+		m_levelChoice[i]->SetText(m_levelText[i].c_str());
+		m_levelChoice[i]->SetPosition(0, 200 - (50 * i));
+		m_levelChoice[i]->SetColor(235, 235, 180, 255);
+	}
+
+	m_visualsInitialized = true;
+}
+
 
 void LevelSelector::FreeVisuals()
 {
 	for (size_t i = 0; i < m_levelChoice.size(); i++)
 	{
-		delete m_levelChoice[i];
+		if (m_levelChoice[i] != nullptr)
+		{
+			delete m_levelChoice[i];
+			m_levelChoice[i] = nullptr;
+
+		}
 	}
 
 	for (size_t i = 0; i < m_playListText.size(); i++)
 	{
 		delete m_playListText[i];
+		m_playListText[i] = nullptr;
 	}
 
 	m_playListText.clear();
@@ -150,7 +189,7 @@ bool LevelSelector::Update()
 					m_levelSelector = m_numToShow - 2;
 				}
 			}
-			else if (0 < m_levelText.size() - 10 - m_levelInc && m_numToShow > 10)
+			else if (0 < m_levelText.size() - 10 - m_levelInc)
 			{
 				++m_levelInc;
 

@@ -13,6 +13,7 @@
 #include "LevelTexture.h"
 #include "Thumbnail.h"
 #include "VideoManager.h"
+#include "LevelSelector.h"
 
 
 #include <algorithm>
@@ -64,6 +65,8 @@ private:
 	LevelHandler				m_levelHandler;
 	LevelMarker					m_levelMarker;
 	LevelEditorStateMachine		m_levelGUI;
+	LevelSelector				m_levelSelect;
+	
 	VirtualKeyboard				m_virtualKeyboard;
 
 	UIText						m_menuText[3];
