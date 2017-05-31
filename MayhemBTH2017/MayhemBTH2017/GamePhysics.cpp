@@ -85,6 +85,10 @@ void GamePhysics::Update()
 			m_player[i].SetSkullCheck(false);
 		}
 
+
+
+
+
 		m_powerupHandler.Update();
 		m_skullHandler.Update();
 
@@ -111,7 +115,7 @@ void GamePhysics::Free()
 	delete m_texture[0];
 	delete m_texture[1];
 	delete m_texture[2];
-	delete m_texture[3];
+	delete	m_texture[3];
 	delete m_texture[4];
 	delete m_texture[5];
 	delete m_texture[6];
@@ -125,6 +129,9 @@ void GamePhysics::Render(Camera camera)
 	m_floorCollider.DrawCollider(camera);
 
 	for (int i = 0; i < 4; i++) {
+
+
+
 
 		// PLAYER RENDER
 		m_player[i].Render(camera);
@@ -140,12 +147,17 @@ void GamePhysics::Render(Camera camera)
 
 
 
-		m_powerupHandler.Render(camera);
-		m_skullHandler.Render(camera);
 
 	}
 
+	m_powerupHandler.Render(camera);
+	m_skullHandler.Render(camera);
+
+
+
 	for (int i = 0; i < 4; i++) {
+
+
 
 		//Player Arrow
 		glEnable(GL_BLEND);
@@ -162,21 +174,19 @@ void GamePhysics::Render(Camera camera)
 		glDisable(GL_BLEND);
 		////////////////////////////////////////////
 
-	for (int i = 0; i <4; i++) 
-	{
-
-		m_player[i].GetHealthBarBackground()->SetAlbedoID(m_texture[1]->GetTexture());
-		m_player[i].GetHealthBarBackground()->Render(camera);
-		
-		m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
-		m_player[i].GetHealthBar()->Render(camera);
+		for (int i = 0; i < 4; i++)
+		{
+			m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
+			m_player[i].GetHealthBar()->Render(camera);
 
 			m_player[i].GetHealthBarBackground()->SetAlbedoID(m_texture[1]->GetTexture());
 			m_player[i].GetHealthBarBackground()->Render(camera);
 
 
+
+
+
 		}
 
 	}
-
 }

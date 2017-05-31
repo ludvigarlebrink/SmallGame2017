@@ -4,6 +4,7 @@
 
 GameSystem::GameSystem()
 {
+	m_playCountdown = true;
 	m_input = InputManager::Get();
 	m_soundManager = SoundManager::Get();
 	m_numPlayers = 0;
@@ -331,6 +332,11 @@ void GameSystem::Play()
 	m_world->Update();
 	m_world->Render(m_camera);
 
+	if (m_timer.GetElapsed() >= m_timer.GetSetTime() - 11 && m_playCountdown) {
+		m_soundManager->PlaySFX("countdown");
+		m_playCountdown = false;
+	}
+
 	m_atomicBomb.Update(m_camera);
 
 	if (TransitionManager::GetIsBlack())
@@ -376,7 +382,7 @@ void GameSystem::LoadNextLevel()
 		LevelHandler levelHandler;
 		m_world->EnterWorld(m_levelSelector.GetLevel());
 		m_currState = START_PLAY;
-
+		m_playCountdown = true;
 		TransitionManager::StartFadingIn();
 	}
 }

@@ -22,6 +22,11 @@ void Timer::SetTimer(float time, bool start, bool resetWhenDone)
 	
 }
 
+float Timer::GetSetTime()
+{
+	return m_setTime;
+}
+
 void Timer::StartTimer(float time)
 {
 	m_setTime = time;

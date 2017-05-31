@@ -82,6 +82,8 @@ AtomicBomb::~AtomicBomb()
 }
 
 
+
+
 void AtomicBomb::StartBombSequence()
 {
 	m_sequenceStarted = true;
@@ -169,3 +171,6 @@ void AtomicBomb::Update(Camera &cam)
 
 	m_bomber->Render(cam);
 }
+
+
+

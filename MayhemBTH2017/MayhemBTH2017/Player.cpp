@@ -6,7 +6,7 @@
 Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 {
 	m_contact = false;
-
+	m_atomic_timer = 0.0f;
 	m_dead = false;
 
 	m_hitByProjectile = -1;
@@ -19,6 +19,7 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 	m_world = nullptr;
 	m_playerArrow = nullptr;
 	m_muzzleFlash = nullptr;
+	m_atomic_timer_active = false;
 }
 
 Player::Player()
@@ -42,6 +43,7 @@ Player::~Player()
 //::..INITIALIZERS..:://
 void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 {
+	m_atomic_timer = 0.0f;
 	m_firing = false;
 	m_fireTimer = 0.0f;
 	m_playerArrow = nullptr;
@@ -51,6 +53,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBarBackground = nullptr;
 	m_world = nullptr;
 	m_muzzleFlash = nullptr;
+	m_atomic_timer_active = false;
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
 	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\debree.png");
@@ -127,9 +130,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	Prefab * gun6 = PrefabManager::Instantiate("Boomerang", nullptr, nullptr, 0, "Candle");
 	Prefab * gun7 = PrefabManager::Instantiate("Spear", nullptr, nullptr, 0, "Candle");
 
-	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
-	m_healthBarBackground = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
-	m_laserSight = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
+	m_healthBar = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
+	m_healthBarBackground = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
+	m_laserSight = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
 	m_playerArrow = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
 	m_muzzleFlash = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
 	m_healthBar->Create();
@@ -283,8 +286,9 @@ void Player::Free()
 	// LUKAS DELETE WORLD
 }
 
-void Player::Update(Player * p_arr) 
-{
+void Player::Update(Player * p_arr) {
+
+
 	//std::cout << m_currentWeapon << std::endl;
 	if (m_boundingBox.getBody()->GetPosition().y < -5.0f)
 	{
@@ -337,10 +341,10 @@ void Player::Update(Player * p_arr)
 	m_laserSight->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 0.6, 0.0));
 	m_laserSight->SetRotation(-90, 90, angle);
 
-	m_playerArrow->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x+0.5f, m_boundingBox.getBody()->GetPosition().y + 3.5, 0.0));
+	m_playerArrow->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 3.5, 0.0));
 
 
-	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) !=0.0)
+	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) != 0.0)
 	{
 
 
@@ -394,13 +398,13 @@ void Player::Update(Player * p_arr)
 
 		}
 
-		else{
+		else {
 
 			m_muzzleFlash->SetPosition(glm::vec3(999, 999, 325));
 
 		}
 
-	
+
 	}
 
 
@@ -459,31 +463,32 @@ void Player::Update(Player * p_arr)
 					m_soundManager->PlaySFX("death_3");
 				}
 
+
 				ScoreManager::AddKill(m_hitByProjectileID);
-
-				if (ScoreManager::GetCurrKillStreak(m_hitByProjectileID) > 10)
-				{
-					m_soundManager->PlaySFX("siren");
-				}
-
 				m_healthBar->SetScale(glm::vec3(1.0, 0.7, 0));
 				ScoreManager::AddDeath(m_controllerID);
 				m_dead = true;
 			}
 		}
 
+
+		
 		if (m_collidedPowerUp)
 		{
+
 			m_soundManager->PlaySFX("pickup");
-			int atomic = rand() % 15;
-			if (atomic != 14) {
+			int atomic = rand() % 3;
+			
+			if (atomic != 2) {
 				m_currentWeapon = rand() % 6 + 1;
 			}
-			if (atomic == 14) {
+			if (atomic == 2) {
+				m_atomic_timer_active = true;
 				m_soundManager->PlaySFX("siren");
 				m_soundManager->PlaySFX("airplane");
 				AtomicBomb::StartBombSequence();
-				m_dead = true;
+
+
 			}
 			m_collidedPowerUp = false;
 		}
@@ -497,25 +502,30 @@ void Player::Update(Player * p_arr)
 		m_contact = false;
 	}
 
-	switch (ScoreManager::GetCurrKillStreak(m_controllerID))
-	{
-	case 3:
-		break;
 
-	case 4:
-		break;
+	if (m_atomic_timer_active) {
 
-	case 5:
-		break;
+	
+		m_atomic_timer += TimeManager::GetDeltaTime();
+
+		if (m_atomic_timer >= 7.0f) {
+
+			p_arr[0].m_dead = true;
+			p_arr[1].m_dead = true;
+			p_arr[2].m_dead = true;
+			p_arr[3].m_dead = true;
+			m_atomic_timer_active = false;
+			m_atomic_timer = 0.0f;
+
+		}
 	}
-
 
 	if (m_dead)
 	{
 		int spawn = rand() % 80;
 		m_time += TimeManager::Get()->GetDeltaTime();
 		m_deathTImer++;
-		if(m_deathTImer == 1)
+		if (m_deathTImer == 1)
 			m_deathPos = m_boundingBox.getBody()->GetPosition();
 
 		Respawn(glm::vec2(spawn, 70));
@@ -559,6 +569,9 @@ void Player::Update(Player * p_arr)
 
 	if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID))
 	{
+
+
+
 		if (m_isMidAir) {
 			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 			//GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-50)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
@@ -709,6 +722,8 @@ Prefab * Player::GetPlayerArrow()
 	return m_playerArrow;
 }
 
+
+
 Prefab * Player::GetMuzzleFlash()
 {
 	return m_muzzleFlash;
@@ -728,6 +743,8 @@ b2Vec2 Player::GetDeathPos()
 {
 	return m_deathPos;
 }
+
+
 
 //::.. SET FUNCTIONS ..:://
 void Player::SetCategoryBits(short CATEGORY)

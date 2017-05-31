@@ -18,6 +18,7 @@ public:
 
 	//::.. SET FUNCTIONS ..:://
 	void SetTimer(float time, bool start = false, bool resetWhenDone = false);
+	float GetSetTime();
 	void StartTimer(float time);
 	void StartTimer();
 
