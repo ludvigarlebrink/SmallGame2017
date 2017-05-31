@@ -13,9 +13,33 @@ MyContactListener::~MyContactListener()
 
 void MyContactListener::BeginContact(b2Contact * contact)
 {
-	
+
 	Collidable * bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
 	Collidable * bodyUserData2 = static_cast<Collidable*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	/*skullStruct * skull = dynamic_cast<skullStruct*>(bodyUserData);
+	Player * playa = dynamic_cast<Player*>(bodyUserData2);
+
+	if ((skull != nullptr) && (playa != nullptr))
+	{
+		playa->StartContact(false, false, true, skull->skullID);
+		skull->collided = true;
+	}*/
+
+	/*bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	bodyUserData2 = static_cast<Collidable*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	Player * playa2 = dynamic_cast<Player*>(bodyUserData);
+	skullStruct * skull2 = dynamic_cast<skullStruct*>(bodyUserData2);
+
+	if ((playa2 != nullptr) && (skull2 != nullptr))
+	{
+		playa2->StartContact(false, false, true, skull2->skullID);
+		skull2->collided = true;
+	}*/
+	
+	bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	bodyUserData2 = static_cast<Collidable*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
 	Projectile * proj = dynamic_cast<Projectile*>(bodyUserData);
 	Player * player = dynamic_cast<Player*>(bodyUserData2);
@@ -23,7 +47,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 	if ((proj != nullptr) && (player != nullptr))
 	{
 		static_cast<Projectile*>(bodyUserData)->StartContact();
-		static_cast<Player*>(bodyUserData2)->StartContact(true, false);
+		static_cast<Player*>(bodyUserData2)->StartContact(true, false, false, -1);
 		PostProcessingManager::SetState(PostProcessingManager::SHAKE);
 
 		static_cast<Player*>(bodyUserData2)->Hit(static_cast<Projectile*>(bodyUserData)->GetProjectileID());
@@ -38,7 +62,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 
 	if ((player1 != nullptr) && (proj1 != nullptr))
 	{
-		static_cast<Player*>(bodyUserData)->StartContact(true, false);
+		static_cast<Player*>(bodyUserData)->StartContact(true, false, false, -1);
 		static_cast<Projectile*>(bodyUserData2)->StartContact();
 
 		PostProcessingManager::SetState(PostProcessingManager::SHAKE);
@@ -78,7 +102,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 
 	if ((player3 != nullptr) && (pu1 != nullptr))
 	{
-		static_cast<Player*>(bodyUserData)->StartContact(false, true);
+		static_cast<Player*>(bodyUserData)->StartContact(false, true, false, -1);
 		static_cast<PowerUp*>(bodyUserData2)->CollidedWithPlayer(true);
 	}
 
@@ -92,7 +116,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 	if ((pu != nullptr) && (player2 != nullptr))
 	{
 		static_cast<PowerUp*>(bodyUserData)->CollidedWithPlayer(true);
-		static_cast<Player*>(bodyUserData2)->StartContact(false, true);
+		static_cast<Player*>(bodyUserData2)->StartContact(false, true, false, -1);
 	}
 
 	bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
@@ -103,7 +127,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 
 	if ((player3 != nullptr) && (pu1 != nullptr))
 	{
-		static_cast<Player*>(bodyUserData)->StartContact(false, true);
+		static_cast<Player*>(bodyUserData)->StartContact(false, true, false, -1);
 		static_cast<PowerUp*>(bodyUserData2)->CollidedWithPlayer(true);
 	}
 }
@@ -113,6 +137,30 @@ void MyContactListener::EndContact(b2Contact * contact)
 
 	Collidable * bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
 	Collidable * bodyUserData2 = static_cast<Collidable*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
+	//skullStruct * skull = dynamic_cast<skullStruct*>(bodyUserData);
+	//Player * player5 = dynamic_cast<Player*>(bodyUserData2);
+
+	//if ((skull != nullptr) && (player5 != nullptr))
+	//{
+	//	static_cast<skullStruct*>(bodyUserData)->collided = false;
+	//	static_cast<Player*>(bodyUserData2)->EndContact();
+	//}
+
+	/*bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	bodyUserData2 = static_cast<Collidable*>(contact->GetFixtureB()->GetBody()->GetUserData());*/
+
+	//Player * player9 = dynamic_cast<Player*>(bodyUserData);
+	//skullStruct * skull2 = dynamic_cast<skullStruct*>(bodyUserData2);
+
+	//if ((skull2 != nullptr) && (player9 != nullptr))
+	//{
+	//	static_cast<Player*>(bodyUserData)->EndContact();
+	//	static_cast<skullStruct*>(bodyUserData2)->collided = false;
+	//}
+
+	bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	bodyUserData2 = static_cast<Collidable*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
 	Projectile * proj = dynamic_cast<Projectile*>(bodyUserData);
 	Player * player = dynamic_cast<Player*>(bodyUserData2);
