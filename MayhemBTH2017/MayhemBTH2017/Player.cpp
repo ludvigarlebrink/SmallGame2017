@@ -417,9 +417,6 @@ void Player::Update(Player * p_arr) {
 
 	if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID))
 	{
-
-		std::cout << GetBox().getBody()->GetLinearVelocity().x << " " << GetBox().getBody()->GetLinearVelocity().y << std::endl;
-
 		if (m_isMidAir) {
 			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 			//GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-50)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
