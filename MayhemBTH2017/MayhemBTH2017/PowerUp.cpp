@@ -40,7 +40,7 @@ void PowerUp::Create(b2World* world, glm::vec2 pos)
 
 void PowerUp::CreateSkull(b2World * world, glm::vec2 pos)
 {
-	m_powerupPrefab = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
+	m_powerupPrefab = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
 
 	m_powerupPrefab->Create();
 	m_powerupPrefab->SetScale(glm::vec3(1.5, 1.5, 1.5));

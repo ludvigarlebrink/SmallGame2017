@@ -15,7 +15,7 @@ SkullHandler::~SkullHandler()
 
 void SkullHandler::Init(b2World * world)
 {
-	m_nrOfSpawns = 20;
+	m_nrOfSpawns = 4;
 	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
 		PowerUp* p = new PowerUp;
