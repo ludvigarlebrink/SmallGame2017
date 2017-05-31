@@ -238,10 +238,10 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 void Player::Free()
 {
 
-	for (size_t i = 0; i < 7; i++)
+	/*for (size_t i = 0; i < 7; i++)
 	{
 		delete m_weapons[i];
-	}
+	}*/
 
 	if (m_playerPrefab != nullptr)
 	{

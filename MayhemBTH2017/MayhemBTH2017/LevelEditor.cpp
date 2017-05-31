@@ -225,6 +225,7 @@ void LevelEditor::ButtonInput()
 		{
 			for (size_t y = m_levelMarker.GetStartY(); y <= m_levelMarker.GetEndY(); y++)
 			{
+				m_level.RemoveBlock(x, y);
 				m_level.AddBlock(x, y, m_levelGUI.GetCurrentUV());
 			}
 		}

@@ -48,8 +48,7 @@ void LevelHandler::Import(Level & level, std::string levelName)
 
 	bool isOccupied[nrOfBlocks] = { 0 };
 	bool isSpawn[nrOfBlocks] = { 0 };
-	glm::vec2 *uv = new glm::vec2[nrOfBlocks];
-
+	glm::vec2 * uv = new glm::vec2[nrOfBlocks];
 
 	//int nSize = m_width * m_height * 3;
 	uint32_t i = 0;
@@ -58,26 +57,25 @@ void LevelHandler::Import(Level & level, std::string levelName)
 	std::ifstream file(".\\Assets\\Levels\\" + levelName + ".mrlevel", std::ios::binary);
 
 	file.read(reinterpret_cast<char*>(isOccupied), sizeof(bool) * nrOfBlocks);
-	file.read(reinterpret_cast<char*>(isSpawn), sizeof(bool) * nrOfBlocks);
 	file.read(reinterpret_cast<char*>(uv), sizeof(glm::vec2) * nrOfBlocks);
-	file.ignore(sizeof(unsigned char) * (m_height * m_width) * 4);
-	file.read(reinterpret_cast<char*>(&propSize), sizeof(uint32_t));
+//	file.ignore(sizeof(unsigned char) * (m_height * m_width) * 4);
 
 	for (uint32_t x = 1; x < level.SIZE_X; x++)
 	{
 		for (uint32_t y = 1; y < level.SIZE_Y; y++)
 		{
 			level.SetOccupied(x, y, isOccupied[i]);
-			level.SetSpawnPoint(x, y, isSpawn[i]);
-			if (isOccupied[i])
-				level.AddBlock(x, y, uv[i]);
 
+			if (level.GetIsOccupied(x,y))
+				level.AddBlock(x, y, uv[i]);
 
 			i++;
 		}
 	}
 
 	file.close();
+
+	delete uv;
 }
 
 
@@ -104,20 +102,18 @@ void LevelHandler::Export(Level & level)
 	const int nrOfBlocks = level.SIZE_X * level.SIZE_Y;
 	bool isOccupied[nrOfBlocks] = { 0 };
 	bool isSpawn[nrOfBlocks] = { 0 };
-	glm::vec2 uvCoords[nrOfBlocks] = { glm::vec2(0,0) };
-	uint32_t i = 0;
 
+	//glm::vec2 uvCoords[nrOfBlocks] = { glm::vec2(4,0) };
+	glm::vec2 * uvCoords = new glm::vec2[nrOfBlocks];
+
+	uint32_t i = 0;
 	for (uint32_t x = 1; x < level.SIZE_X; x++)
 	{
 		for (uint32_t y = 1; y < level.SIZE_Y; y++)
 		{
-			if (level.GetIsSpawnPoint(x, y) == true)
-				isSpawn[i] = level.GetIsSpawnPoint(x, y);
-			else
-			{
-				isOccupied[i] = level.GetIsOccupied(x, y);
-				uvCoords[i] = level.GetTempUV(x, y);
-			}
+			isOccupied[i] = level.GetIsOccupied(x, y);
+			uvCoords[i] = level.GetTempUV(x, y);
+			
 
 			++i;
 		}
@@ -126,15 +122,16 @@ void LevelHandler::Export(Level & level)
 	std::ofstream output(".\\Assets\\Levels\\" + level.GetName() + ".mrlevel", std::ios::binary);
 
 	output.write(reinterpret_cast<char*>(isOccupied), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
-	output.write(reinterpret_cast<char*>(isSpawn), sizeof(bool) * (level.SIZE_X * level.SIZE_Y));
 	output.write(reinterpret_cast<char*>(uvCoords), sizeof(glm::vec2) * (level.SIZE_X * level.SIZE_Y));
 	// TEST:
 
 
 	//output.write(reinterpret_cast<char*>(texData), sizeof(uint8_t) * (level.SIZE_X * level.SIZE_Y) * 4);
-	output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(m_height * m_width) * 4);
+	//output.write(reinterpret_cast<char*>(tempPixelBuffer), sizeof(unsigned char) *(m_height * m_width) * 4);
 
 	output.close();
+
+	delete uvCoords;
 
 
 }
