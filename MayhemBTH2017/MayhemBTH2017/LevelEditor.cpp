@@ -41,6 +41,7 @@ LevelEditor::LevelEditor()
 	m_textPos = 0;
 	m_menuText[m_textPos].SetSize(100);
 	m_menuText[m_textPos].SetColor(255, 0, 0, 128);
+	m_state = EDIT;
 
 }
 
@@ -399,7 +400,7 @@ void LevelEditor::MenuInput()
 				}
 			}
 
-			m_stateManager->SetCurrentState(GameState::MAIN_MENU);
+			m_stateManager->SetCurrentState(GameState::LOAD_MAIN_MENU);
 			break;
 		}
 	}

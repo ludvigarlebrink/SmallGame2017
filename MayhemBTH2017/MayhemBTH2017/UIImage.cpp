@@ -337,6 +337,12 @@ void UIImage::CreateMesh(glm::vec2 uv)
 	m_meshWithUV->Load(vert, 6);
 }
 
+void UIImage::DeleteMesh()
+{
+	delete m_meshWithUV;
+	m_meshWithUV = nullptr;
+}
+
 
 void UIImage::CreateShader()
 {
