@@ -71,7 +71,7 @@ private:
 
 	bool		m_isPaused;
 	bool		m_playerReady[MAX_PLAYERS];
-
+	bool		m_playCountdown;
 	uint32_t	m_gameMode;
 	uint32_t	m_currState;
 	uint32_t	m_numPlayers;

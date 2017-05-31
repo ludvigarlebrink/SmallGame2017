@@ -100,6 +100,8 @@ private:
 	bool	m_collidedProjectile;
 	bool	m_hitByProjectile;
 	float	m_life;
+	float	m_atomic_timer;
+	bool	m_atomic_timer_active;
 
 	Prefab *		m_healthBar;
 	Prefab*			m_muzzleFlash;
