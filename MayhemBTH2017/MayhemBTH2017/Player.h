@@ -105,7 +105,6 @@ private:
 
 	Prefab *		m_healthBar;
 	Prefab*			m_muzzleFlash;
-
 	Prefab*			m_healthBarBackground;
 	Prefab*			m_playerArrow;
 	int				m_hitByProjectileID;
