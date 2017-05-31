@@ -14,6 +14,7 @@
 #include "PostProcessingManager.h"
 #include "SoundManager.h"
 #include "AtomicBomb.h"
+
 class Player : public Collidable
 {
 public:
@@ -40,6 +41,8 @@ public:
 	bool Timer(float rate);
 	void SetControllerID(int ID);
 	void  Hit(int projectileID);
+	void SetSkullCheck(bool value);
+	void SetPointToGet(uint32_t value);
 
 	//::..GETTERS..:://
 	uint16 GetCategoryBits();
@@ -48,7 +51,7 @@ public:
 	float GetDamage();
 	PlayerPrefab* GetPrefab();
 	int GetProjectileID();
-	void StartContact(bool projectile, bool powerup);
+	void StartContact(bool projectile, bool powerup, bool skull);
 	void EndContact();
 	int GetControllerID();
 	void UpdateParticles();
@@ -57,6 +60,9 @@ public:
 	Prefab* GetLaserSight();
 	Prefab* GetPlayerArrow();
 	Prefab* GetMuzzleFlash();
+	bool	GetDead();
+	bool GetSkullCheck();
+	b2Vec2 GetDeathPos();
 
 private:
 
@@ -86,6 +92,7 @@ private:
 	bool	m_doubleJump;
 	bool	m_contact;
 	bool	m_dead;
+	bool	m_skullCheck = true;
 	bool	m_firing;
 	float	m_fireTimer;
 	float	m_time;
@@ -106,8 +113,13 @@ private:
 	int				m_currentWeapon;
 
 	b2World *	m_world;
+	b2Vec2		m_deathPos;
 
 	bool		m_collidedPowerUp;
+	bool		m_collidedSkull;
+	uint32_t	m_pointsToGet;
+
+	float m_deathTImer = 0;
 
 	b2FixtureDef m_fixture;
 	//enum _entityCategory {
@@ -134,6 +146,7 @@ private:
 		PROJECTILE2 = 0x0080,
 		PROJECTILE3 = 0x0100,
 		PROJECTILE4 = 0x0120,
+		SKULL = 0x0140,
 	};
 
 };
