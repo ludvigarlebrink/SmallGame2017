@@ -10,7 +10,6 @@ AtomicBomb::AtomicBomb()
 	m_atomicBomb = PrefabManager::Instantiate("AtomicBomb", nullptr, nullptr, 0, "AtomicBomb");
 	m_bomber->SetRotation(0.0f, 90.0f, 0.0f);
 	m_atomicBomb->SetRotation(90.0f, 0.0f, 0.0f);
-//	VideoManager->VM
 
 	m_bomber->SetPosition(glm::vec3(100.0f, 38.0f, -10.0f));
 	m_atomicBomb->SetPosition(glm::vec3(42.0f, 38.0f, -10.0f));
@@ -170,6 +169,14 @@ void AtomicBomb::Update(Camera &cam)
 	}
 
 	m_bomber->Render(cam);
+}
+
+
+void AtomicBomb::Reset()
+{
+	Background::SetIsPostNuclear(false);
+	m_sequenceStarted = false;
+	m_t = 0.0f;
 }
 
 

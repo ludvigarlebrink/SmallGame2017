@@ -73,7 +73,7 @@ private:
 
 
 	Transform m_transf;
-	int m_nrOfPlayers;
+	int m_numPlayers;
 
 
 };
