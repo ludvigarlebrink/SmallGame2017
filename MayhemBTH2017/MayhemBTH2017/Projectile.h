@@ -37,7 +37,6 @@ public:
 	Prefab* GetPrefab();
 	Box GetBox();
 	ParticleSystem* m_particles;
-	bool GetContactStatus();
 	bool IsActive();
 	void InitParticles(std::string shadername, glm::vec4 col, GLfloat size, const int nrof, float life);
 	int GetProjectileID();
@@ -57,12 +56,11 @@ public:
 
 private:
 	Prefab*		m_prefab;
-	Prefab m_prefabPointer;
-	GLuint m_texID;
+	Prefab		m_prefabPointer;
+	GLuint		m_texID;
 	const char* m_collisionSoundPath;
 	ParticleEmitter emitter;
 	ParticleEmitter trailEmitter;
-	ParticleSystem* m_trailParticles;
 	bool m_renderSmoke;
 	Texture* m_texture;
 	SoundManager * m_soundManager;
@@ -85,24 +83,24 @@ private:
 	float m_particleLife;
 	bool m_particlesCreated;
 
-	Transform m_transform;
-	GLfloat m_angle;
-	Camera	m_camera;
-	GLfloat m_rotationUpdate;
-	Prefab* m_bulletSprite;
-	GLfloat m_bulletScale;
-	bool m_isBullet;
-	bool m_fired;
-	bool m_contact;
-	GLfloat tempAngle;
-	float m_xAngle;
-	float m_yAngle;
-	int m_controllerID;
+	Transform		m_transform;
+	GLfloat			m_angle;
+	Camera			m_camera;
+	GLfloat			m_rotationUpdate;
+	Prefab*			m_bulletSprite;
+	GLfloat			m_bulletScale;
+	bool			m_isBullet;
+	bool			m_fired;
+	bool			m_contact;
+	GLfloat			tempAngle;
+	float			m_xAngle;
+	float			m_yAngle;
+	int				m_controllerID;
 	ParticleEmitter m_emitter;
-	bool m_active;
-	float m_restitution;
-	float m_collisionTimer;
-	bool m_collision;
+	bool			m_active;
+	float			m_restitution;
+	float			m_collisionTimer;
+	bool			m_collision;
 	
 	enum _entityCategory {
 		BOUNDARY = 0x0001,

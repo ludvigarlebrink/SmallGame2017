@@ -20,6 +20,7 @@ Projectile::Projectile()
 Projectile::~Projectile()
 {
 	delete m_texture;
+	delete m_prefab;
 }
 
 void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID, float life)
@@ -27,8 +28,6 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_collisionSoundPath = "explosion1";
 	m_soundManager = SoundManager::Get();
 	m_hasParticles = false;
-
-	m_trailParticles = nullptr;
 
 	m_renderSmoke = false;
 	m_isBullet = false;

@@ -39,6 +39,12 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID)
 
 Weapon::Weapon(Prefab * gun)
 {
+	if (m_prefabGun != nullptr)
+	{
+		delete m_prefabGun;
+		m_prefabGun = nullptr;
+	}
+
 	m_prefabGun = gun;
 
 	m_time = 0;
@@ -50,11 +56,11 @@ Weapon::Weapon(Prefab * gun)
 Weapon::~Weapon()
 {
 	// Check this.
-	//if (m_prefabGun != nullptr)
-	//{
-	//	delete m_prefabGun;
-	//	m_prefabGun = nullptr;
-	//}
+	if (m_prefabGun != nullptr)
+	{
+		delete m_prefabGun;
+		m_prefabGun = nullptr;
+	}
 
 	if (m_muzzleFlash != nullptr)
 	{
@@ -196,6 +202,11 @@ void Weapon::UpdateParticles() {
 float Weapon::GetFireRate()
 {
 	return m_fireRate;
+}
+
+Prefab * Weapon::GetWeaponPre()
+{
+	return m_prefabGun;
 }
 
 void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)

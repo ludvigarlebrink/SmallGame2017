@@ -380,6 +380,7 @@ void GameSystem::GameOver()
 	m_gameUI.SetPauseDisplay(true);
 	m_gameUI.SetShowWinner(true);
 	m_gameUI.Update(0);
+	m_pressToCont.SetText("Press S to return");
 	m_pressToCont.Render();
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))

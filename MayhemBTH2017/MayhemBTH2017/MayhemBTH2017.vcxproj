@@ -204,7 +204,6 @@
     </ClCompile>
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="PlayerController.cpp" />
-    <ClCompile Include="Playlist.cpp" />
     <ClCompile Include="PlaylistEditor.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceExporter.cpp" />
@@ -301,7 +300,6 @@
     </ClInclude>
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="PlayerController.h" />
-    <ClInclude Include="Playlist.h" />
     <ClInclude Include="PlaylistEditor.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceExporter.h" />

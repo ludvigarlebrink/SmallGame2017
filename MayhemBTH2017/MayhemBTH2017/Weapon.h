@@ -36,6 +36,7 @@ public:
 	void UpdateParticles();
 	//::.. GET FUNTIONS ..:://
 	float GetFireRate();
+	Prefab * GetWeaponPre();
 
 	bool FireRate(float rate);
 
