@@ -53,7 +53,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBarBackground = nullptr;
 	m_world = nullptr;
 	m_muzzleFlash = nullptr;
-	m_atomic_timer_active = false;
+	m_atomic_timer_active = true;
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
 	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\debree.png");
@@ -460,7 +460,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 			if (atomic != 19) {
 				m_currentWeapon = rand() % 6 + 1;
 			}
-			if (atomic == 19) {
+			if (atomic == 19 && m_atomic_timer_active) {
 				m_atomic_timer_active = true;
 				m_soundManager->PlaySFX("siren");
 				m_soundManager->PlaySFX("airplane");
