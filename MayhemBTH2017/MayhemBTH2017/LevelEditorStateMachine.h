@@ -26,7 +26,6 @@ enum LevelEditorState
 	GUI_CLOSED = 0,
 	GUI_OPEN,
 	GUI_BLOCK,
-	GUI_BACKGROUND,
 	GUI_NUM
 };
 

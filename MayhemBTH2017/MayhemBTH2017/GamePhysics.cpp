@@ -44,16 +44,7 @@ void GamePhysics::EnterWorld(std::string levelName)
 
 	m_floorCollider.CreateBoundingBoxes(&m_world, levelName);
 
-
-	if (m_powerupHandler.GetSpawn())
-	{
-		m_powerupHandler.Free();
-	}
-
-	if (m_skullHandler.GetSpawn())
-	{
-		m_skullHandler.Free();
-	}
+	
 
 
 	//at global scope
