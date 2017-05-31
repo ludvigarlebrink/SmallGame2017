@@ -56,12 +56,9 @@ void PowerUp::CreateSkull(b2World * world, glm::vec2 pos)
 }
 
 //::.. RENDER ..:://
+
 void PowerUp::Render(Camera camera) {
 
-	//Transform transform;
-	//m_sprite.Bind();
-	//m_sprite.Update(transform, camera);
-	//m_sprite.Render();
 	m_powerupPrefab->Render(camera);
 
 }
@@ -70,11 +67,6 @@ Box PowerUp::GetBox()
 {
 	return m_boundingBox;
 }
-
-//Prefab* PowerUp::GetPrefab()
-//{
-//	return m_powerupPrefab;
-//}
 
 bool PowerUp::GetActive()
 {

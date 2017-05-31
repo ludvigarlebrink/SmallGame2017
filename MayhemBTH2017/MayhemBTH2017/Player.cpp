@@ -152,39 +152,39 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	projectile1->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapons[0] = new Weapon(gun1, projectile1, m_controllerID);
+	m_weapons[0] = new Weapon(gun1, projectile1, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[0]->SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.15f, 10, m_controllerID, 0.0);
 	m_weapons[0]->SetWeaponSound("assault_rifle");
 	m_weapons[0]->SetFirePower(150.0);
 	m_weapons[0]->SetDamage(0.05f);
 
 
-	m_weapons[1] = new Weapon(gun2, projectile2, m_controllerID);
+	m_weapons[1] = new Weapon(gun2, projectile2, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[1]->SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 3.0f, 10, m_controllerID, 0.0);
 	m_weapons[1]->SetWeaponSound("scifi_weapon");
 	m_weapons[1]->SetFirePower(100.0f);
 	m_weapons[1]->SetDamage(1.0f);
 
-	m_weapons[2] = new Weapon(gun3, projectile3, m_controllerID);
+	m_weapons[2] = new Weapon(gun3, projectile3, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[2]->SetProjectileType(0.9f, 1.0f, 0.0f, 0.0f, 0.5f, 15, m_controllerID, 5.0);
 	m_weapons[2]->SetWeaponSound("shuriken");
 	m_weapons[2]->SetFirePower(100.0f);
 	m_weapons[2]->SetDamage(0.3f);
 
 
-	m_weapons[3] = new Weapon(gun4, projectile4, m_controllerID);
+	m_weapons[3] = new Weapon(gun4, projectile4, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[3]->SetProjectileType(0.2f, 1.0f, 0.0f, 0.0f, 0.5f, 18, m_controllerID, 0.0);
 	m_weapons[3]->SetWeaponSound("grenade_launcher");
 	m_weapons[3]->SetFirePower(4.0);
 	m_weapons[3]->SetDamage(0.3f);
 
-	m_weapons[4] = new Weapon(gun5, projectile5, m_controllerID);
+	m_weapons[4] = new Weapon(gun5, projectile5, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[4]->SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.5f, 12, m_controllerID, 0.0);
 	m_weapons[4]->SetWeaponSound("heavy_shot");
 	m_weapons[4]->SetFirePower(100.0f);
 	m_weapons[4]->SetDamage(0.3f);
 
-	m_weapons[5] = new Weapon(gun6, projectile6, m_controllerID);
+	m_weapons[5] = new Weapon(gun6, projectile6, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
 	m_weapons[5]->SetProjectileType(0.8f, 1.0f, 0.0f, 0.0f, 0.5f, 11, m_controllerID, 0.0);
 	m_weapons[5]->SetWeaponSound("scifi2");
 	m_weapons[5]->SetFirePower(100.0f);
@@ -278,22 +278,22 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	switch (m_currentWeapon)
 	{
 	case 0:
-		m_playerPrefab->SetWeapon(m_weapons[0]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[0]->GetWeaponPre(), m_weapons[0]->GetWeaponOffset());
 		break;
 	case 1:
-		m_playerPrefab->SetWeapon(m_weapons[1]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[1]->GetWeaponPre(), m_weapons[1]->GetWeaponOffset());
 		break;
 	case 2:
-		m_playerPrefab->SetWeapon(m_weapons[2]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[2]->GetWeaponPre(), m_weapons[2]->GetWeaponOffset());
 		break;
 	case 3:
-		m_playerPrefab->SetWeapon(m_weapons[3]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[3]->GetWeaponPre(), m_weapons[3]->GetWeaponOffset());
 		break;
 	case 4:
-		m_playerPrefab->SetWeapon(m_weapons[4]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[4]->GetWeaponPre(), m_weapons[4]->GetWeaponOffset());
 		break;
 	case 5:
-		m_playerPrefab->SetWeapon(m_weapons[5]->GetWeaponPre());
+		m_playerPrefab->SetWeapon(m_weapons[5]->GetWeaponPre(), m_weapons[5]->GetWeaponOffset());
 		break;
 	default:
 		break;
