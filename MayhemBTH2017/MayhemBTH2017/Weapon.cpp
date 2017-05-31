@@ -204,6 +204,11 @@ float Weapon::GetFireRate()
 	return m_fireRate;
 }
 
+Prefab * Weapon::GetWeaponPre()
+{
+	return m_prefabGun;
+}
+
 void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 {
 	GLfloat firePower = m_firepower;

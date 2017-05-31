@@ -75,24 +75,26 @@ void GamePhysics::Update()
 
 	for (int i = 0; i < 4; i++)
 	{
-		m_player[i].Update(m_player);	
+		m_player[i].Update(m_player);
 
 		if (m_player[i].GetDead() && m_player[i].GetSkullCheck())
 		{
 			m_skullHandler.SpawnSkull(m_player[i].GetDeathPos(), ScoreManager::GetScore(m_player[i].GetControllerID()) / 10);
 			ScoreManager::AddScore(m_player[i].GetControllerID(), -(ScoreManager::GetScore(m_player[i].GetControllerID()) / 10));
 			m_player[i].SetSkullCheck(false);
-		}		
+		}
 
 
-		
-		
 
-	m_powerupHandler.Update();
-	m_skullHandler.Update();
 
-	m_world.Step(1.0f / 20.0f, 8, 5);
-	//Update player bounding box sprite position to the position of the player mesh
+
+		m_powerupHandler.Update();
+		m_skullHandler.Update();
+
+		m_world.Step(1.0f / 20.0f, 8, 5);
+		//Update player bounding box sprite position to the position of the player mesh
+	}
+
 }
 
 
@@ -147,7 +149,7 @@ void GamePhysics::Render(Camera camera)
 
 
 	}
-	
+
 	m_powerupHandler.Render(camera);
 	m_skullHandler.Render(camera);
 
@@ -172,18 +174,19 @@ void GamePhysics::Render(Camera camera)
 		glDisable(GL_BLEND);
 		////////////////////////////////////////////
 
-	for (int i = 0; i <4; i++) 
-	{
+		for (int i = 0; i < 4; i++)
+		{
 
-		m_player[i].GetHealthBarBackground()->SetAlbedoID(m_texture[1]->GetTexture());
-		m_player[i].GetHealthBarBackground()->Render(camera);
-		
-		m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
-		m_player[i].GetHealthBar()->Render(camera);
+			m_player[i].GetHealthBarBackground()->SetAlbedoID(m_texture[1]->GetTexture());
+			m_player[i].GetHealthBarBackground()->Render(camera);
+
+			m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
+			m_player[i].GetHealthBar()->Render(camera);
 
 
 
-		
+
+		}
+
 	}
-
 }
