@@ -23,7 +23,7 @@ Skull::~Skull()
 void Skull::Update(Player & player)
 {
 
-	m_dead = player.GetDead();
+	//m_dead = player.GetDead();
 
 	if(!m_dead)
 		m_skullTimer = 0;
@@ -43,7 +43,7 @@ void Skull::Update(Player & player)
 		m_tempSkull->Rotate(0, 90, 0);
 
 		Box m_tempBoxSkull;
-		m_tempBoxSkull.InitDynamic(player.GetWorld(), glm::vec2(m_deathPos.x, m_deathPos.y), glm::vec2(1.5, 1.5));
+	//	m_tempBoxSkull.InitDynamic(player.GetWorld(), glm::vec2(m_deathPos.x, m_deathPos.y), glm::vec2(1.5, 1.5));
 
 		m_tempBoxSkull.getBody()->SetTransform(m_deathPos, 0);
 		m_tempSkull->SetPosition(m_tempBoxSkull.getBody()->GetPosition().x, m_tempBoxSkull.getBody()->GetPosition().y, 0);

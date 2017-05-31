@@ -299,7 +299,7 @@ void Player::Update(Player * p_arr) {
 	m_laserSight->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 0.6, 0.0));
 	m_laserSight->SetRotation(-90, 90, angle);
 
-	m_playerArrow->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x, m_boundingBox.getBody()->GetPosition().y + 3.5, 0.0));
+	m_playerArrow->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x+0.5f, m_boundingBox.getBody()->GetPosition().y + 3.5, 0.0));
 
 
 	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) !=0.0)

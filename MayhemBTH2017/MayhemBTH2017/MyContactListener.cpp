@@ -47,7 +47,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 	if ((proj != nullptr) && (player != nullptr))
 	{
 		static_cast<Projectile*>(bodyUserData)->StartContact();
-		static_cast<Player*>(bodyUserData2)->StartContact(true, false, false, -1);
+		static_cast<Player*>(bodyUserData2)->StartContact(true, false);
 		PostProcessingManager::SetState(PostProcessingManager::SHAKE);
 
 		static_cast<Player*>(bodyUserData2)->Hit(static_cast<Projectile*>(bodyUserData)->GetProjectileID());
@@ -62,7 +62,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 
 	if ((player1 != nullptr) && (proj1 != nullptr))
 	{
-		static_cast<Player*>(bodyUserData)->StartContact(true, false, false, -1);
+		static_cast<Player*>(bodyUserData)->StartContact(true, false);
 		static_cast<Projectile*>(bodyUserData2)->StartContact();
 
 		PostProcessingManager::SetState(PostProcessingManager::SHAKE);
@@ -102,7 +102,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 
 	if ((player3 != nullptr) && (pu1 != nullptr))
 	{
-		static_cast<Player*>(bodyUserData)->StartContact(false, true, false, -1);
+		static_cast<Player*>(bodyUserData)->StartContact(false, true);
 		static_cast<PowerUp*>(bodyUserData2)->CollidedWithPlayer(true);
 	}
 
@@ -116,7 +116,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 	if ((pu != nullptr) && (player2 != nullptr))
 	{
 		static_cast<PowerUp*>(bodyUserData)->CollidedWithPlayer(true);
-		static_cast<Player*>(bodyUserData2)->StartContact(false, true, false, -1);
+		static_cast<Player*>(bodyUserData2)->StartContact(false, true);
 	}
 
 	bodyUserData = static_cast<Collidable*>(contact->GetFixtureA()->GetBody()->GetUserData());
@@ -127,7 +127,7 @@ void MyContactListener::BeginContact(b2Contact * contact)
 
 	if ((player3 != nullptr) && (pu1 != nullptr))
 	{
-		static_cast<Player*>(bodyUserData)->StartContact(false, true, false, -1);
+		static_cast<Player*>(bodyUserData)->StartContact(false, true);
 		static_cast<PowerUp*>(bodyUserData2)->CollidedWithPlayer(true);
 	}
 }
