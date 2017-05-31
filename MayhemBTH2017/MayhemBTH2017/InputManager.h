@@ -2,7 +2,7 @@
 #define __INPUTMANAGER_H__
 
 
-#include <SDL.h>
+#include "PlayerController.h"
 
 
 class InputManager
@@ -16,25 +16,28 @@ public:
 	void StartUp();
 	void ShutDown();
 
-	void Update();
-
 	//::.. GET FUNCTIONS ..:://
-	InputManager& Get();
+	static InputManager* Get();
+	bool GetButtonDown(size_t button, size_t controller = 0);
+	bool GetButtonHeld(size_t button, size_t controller = 0);
+	bool GetButtonUp(size_t button, size_t controller = 0);
+	float GetAxis(size_t axis, size_t controller = 0);
+	float GetAxisRaw(size_t axis, size_t controller = 0);
+	int GetControllerID(int ID);
+	PlayerController * GetController();
+
+	//::.. MODIFY FUNCTIONS ..:://
+	void Update();
 
 private:
 	//::.. HELP FUNCTIONS ..:://
 	void Init();
 
 private:
-	//::.. CONSTANT VARIABLES ..:://
-	static const uint8_t	MAX_PLAYERS = 1;
+	uint32_t m_nrOfPlayers, m_maxNrOfPlayers;
+	static InputManager*	m_instance;
+	PlayerController		m_playerController[1];
 
-	static InputManager *	m_instance;
-
-	SDL_Event				m_event;
-	SDL_GameController *	m_controller[MAX_PLAYERS];
-	uint8_t					m_controllerCount;
 };
-
 
 #endif

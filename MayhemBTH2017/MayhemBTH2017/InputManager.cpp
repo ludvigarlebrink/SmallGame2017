@@ -1,73 +1,86 @@
 #include "InputManager.h"
 
-//temp
-#include <iostream>
+
 
 InputManager * InputManager::m_instance = nullptr;
 
 
-//::.. DUMMY CONSTRUCTORS ..:://
 InputManager::InputManager()
 {
 	// Do nothing...
 }
+
 
 InputManager::~InputManager()
 {
 	// Do nothing...
 }
 
-
 //::.. FAKE CONSTRUCTORS ..:://
 void InputManager::StartUp()
 {
 	if (m_instance == nullptr)
 	{
+		m_instance = this;
 		Init();
 	}
 }
 
-void InputManager::ShutDown()
+InputManager * InputManager::Get()
 {
-	// CLEAR SHIT
+	return m_instance;
+}
+
+
+bool InputManager::GetButtonDown(size_t button, size_t controller)
+{
+	return m_playerController->GetButtonDown(button, controller);
+}
+
+bool InputManager::GetButtonHeld(size_t button, size_t controller)
+{
+	return m_playerController->GetButtonHeld(button, controller);
+}
+
+bool InputManager::GetButtonUp(size_t button, size_t controller)
+{
+	return m_playerController->GetButtonUp(button, controller);
+}
+
+float InputManager::GetAxis(size_t axis, size_t controller)
+{
+	return m_playerController->GetAxis(axis, controller);
+}
+
+float InputManager::GetAxisRaw(size_t axis, size_t controller)
+{
+	return m_playerController->GetAxisRaw(axis, controller);
+}
+
+int InputManager::GetControllerID(int ID)
+{
+	return m_playerController->GetControllerIndex(ID);
+}
+
+
+PlayerController * InputManager::GetController()
+{
+	return &m_playerController[0];
 }
 
 void InputManager::Update()
 {
-	while (SDL_PollEvent(&m_event) != 0)
-	{
-		if (m_event.type = SDL_CONTROLLERBUTTONDOWN)
-		{
-			if (m_event.cbutton.button == SDL_CONTROLLER_BUTTON_A)
-			{
-				std::cout << "A Pressed" << std::endl;
-			}
-		}
-	}
+	m_playerController[0].Reset();
+	m_playerController[0].Update();
 }
 
-
-//::.. GET FUNCTIONS ..:://
-InputManager & InputManager::Get()
-{
-	return *m_instance;
-}
-
-
-//::.. HELP FUNCTIONS ..:://
 void InputManager::Init()
 {
-	SDL_Init(SDL_INIT_GAMECONTROLLER);
-	
-	uint8_t nrOfContollers = 0;
-	for (uint8_t i = 0; SDL_NumJoysticks() > i; i++)
-	{
-		if (SDL_IsGameController(i) && MAX_PLAYERS > nrOfContollers)
-		{
-			m_controller[nrOfContollers] = SDL_GameControllerOpen(i);
-			++nrOfContollers;
-		}
-	}
+	m_nrOfPlayers = 1;
+	m_maxNrOfPlayers = 4;
+}
 
-
+void InputManager::ShutDown()
+{
+	// Do something...
 }

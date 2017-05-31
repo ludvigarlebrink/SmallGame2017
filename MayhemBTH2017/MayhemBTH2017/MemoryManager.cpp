@@ -11,17 +11,18 @@ MemoryManager::MemoryManager()
 	// Do nothing...
 }
 
-
 MemoryManager::~MemoryManager()
 {
 	// Do nothing...
 }
+
 
 //::.. FAKE CONSTRUCTORS ..:://
 void MemoryManager::StartUp()
 {
 	if (m_instance == nullptr)
 	{
+		m_instance = this;
 		Init();
 	}
 }
@@ -29,6 +30,11 @@ void MemoryManager::StartUp()
 void MemoryManager::ShutDown()
 {
 	free((void*)m_marker);
+}
+
+MemoryManager & MemoryManager::Get()
+{
+	return *m_instance;
 }
 
 StackPool& MemoryManager::GetMeshPool()
@@ -45,7 +51,6 @@ StackPool& MemoryManager::GetTexturePool()
 void MemoryManager::Init()
 {
 	// Allocating heap memory.
-	m_instance = (MemoryManager*)malloc(sizeof MemoryManager);
 	m_marker = (Marker)malloc(MEMORY_SIZE);
 	m_currentMarker = m_marker;
 
