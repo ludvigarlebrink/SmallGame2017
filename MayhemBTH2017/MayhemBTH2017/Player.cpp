@@ -288,7 +288,7 @@ void Player::Free()
 	// LUKAS DELETE WORLD
 }
 
-void Player::Update(Player * p_arr) {
+void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 
 	//std::cout << m_currentWeapon << std::endl;
@@ -479,12 +479,12 @@ void Player::Update(Player * p_arr) {
 		{
 
 			m_soundManager->PlaySFX("pickup");
-			int atomic = rand() % 3;
+			int atomic = rand() % 20;
 			
-			if (atomic != 2) {
+			if (atomic != 19) {
 				m_currentWeapon = rand() % 6 + 1;
 			}
-			if (atomic == 2) {
+			if (atomic == 19) {
 				m_atomic_timer_active = true;
 				m_soundManager->PlaySFX("siren");
 				m_soundManager->PlaySFX("airplane");
@@ -512,10 +512,11 @@ void Player::Update(Player * p_arr) {
 
 		if (m_atomic_timer >= 7.0f) {
 
-			p_arr[0].m_dead = true;
-			p_arr[1].m_dead = true;
-			p_arr[2].m_dead = true;
-			p_arr[3].m_dead = true;
+			for (int i = 0; i < nrOfPlayer; i++) {
+				p_arr[i].m_dead = true;
+	
+			}
+
 			m_atomic_timer_active = false;
 			m_atomic_timer = 0.0f;
 

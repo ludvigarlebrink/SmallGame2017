@@ -34,7 +34,7 @@ public:
 	void Render(Camera camera);
 	void RenderShadow(Camera camera);
 
-	void Update(Player * p_arr);
+	void Update(Player * p_arr, int nrOfPlayer);
 	void Respawn(glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://

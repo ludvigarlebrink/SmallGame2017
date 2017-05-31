@@ -76,7 +76,7 @@ void GamePhysics::Update()
 
 	for (int i = 0; i < 4; i++)
 	{
-		m_player[i].Update(m_player);
+		m_player[i].Update(m_player, m_nrOfPlayers);
 
 		if (m_player[i].GetDead() && m_player[i].GetSkullCheck())
 		{
@@ -130,21 +130,9 @@ void GamePhysics::Render(Camera camera)
 
 	for (int i = 0; i < 4; i++) {
 
-
-
-
 		// PLAYER RENDER
 		m_player[i].Render(camera);
-		//
-
-		//LASER SIGHT
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
-		glBlendFunc(GL_ONE, GL_SRC0_ALPHA);
-		m_player[i].GetLaserSight()->SetAlbedoID(m_texture[2]->GetTexture());
-		m_player[i].GetLaserSight()->Render(camera);
-		glDisable(GL_BLEND);
-
+		
 
 
 
@@ -157,6 +145,12 @@ void GamePhysics::Render(Camera camera)
 
 	for (int i = 0; i < 4; i++) {
 
+		//LASER SIGHT
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
+		m_player[i].GetLaserSight()->SetAlbedoID(m_texture[2]->GetTexture());
+		m_player[i].GetLaserSight()->Render(camera);
+		glDisable(GL_BLEND);
 
 
 		//Player Arrow
