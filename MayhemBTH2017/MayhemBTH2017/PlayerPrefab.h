@@ -38,7 +38,7 @@ public:
 	glm::vec3 GetProjectileSpawnPoint();
 
 	//::.. SET FUNCTIONS ..:://
-	void SetWeapon(Prefab * weapon);
+	void SetWeapon(Prefab * weapon, glm::vec3 spawnPoint);
 	void SetAnimState(uint32_t playerAnimState);
 
 private:
@@ -49,6 +49,7 @@ private:
 	Prefab *	m_player;
 	Prefab *	m_weapon;
 	glm::vec3	m_projectileSpawnPoint;
+	glm::vec3	m_spawnPointOffset;
 
 	KeyFrame *	m_kf;
 	KeyFrame *	m_keyUp;

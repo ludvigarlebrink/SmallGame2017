@@ -323,14 +323,8 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 			m_weapons[m_currentWeapon]->Shoot(m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
 
 
-			float angle2 = rand() % 360;
-			float scale = 2 + rand() % 3;
-
-			m_muzzleFlash->Rotate(glm::vec3(0, 0, angle2));
-			m_muzzleFlash->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x - 2.5f*m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID), m_boundingBox.getBody()->GetPosition().y + 1.0, 0.0));
-			m_muzzleFlash->SetScale(glm::vec3(scale, scale, 0.0));
-
-
+			
+			m_muzzleFlash->SetPosition(m_playerPrefab->GetProjectileSpawnPoint());
 
 			if (m_currentWeapon == 0) {
 
@@ -564,7 +558,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 
 	m_playerPrefab->Update(InputManager::Get()->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID),
-		m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
+		m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID),
 		m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID));
 
 
