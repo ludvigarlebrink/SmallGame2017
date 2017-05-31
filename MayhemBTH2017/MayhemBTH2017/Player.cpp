@@ -364,11 +364,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 		}
 
-
 	}
-
-
-
 
 	if (m_contact)
 	{

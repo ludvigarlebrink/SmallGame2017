@@ -103,6 +103,7 @@ GLuint TextureManager::Load(MrTexture * texture)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture->width,
 		texture->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture->data);
 
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	return id;

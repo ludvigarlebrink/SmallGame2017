@@ -86,7 +86,7 @@ void SkullHandler::Update()
 	{
 		if (m_skulls[i]->GetActive())
 		{
-			m_skulls[i]->Update();
+			m_skulls[i]->SkullUpdate();
 		}
 	}
 }
