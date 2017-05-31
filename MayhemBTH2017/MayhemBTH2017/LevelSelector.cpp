@@ -13,6 +13,7 @@ LevelSelector::LevelSelector()
 	m_hasPlaylistEnded = false;
 	m_visualsInitialized = false;
 	m_playListSelected = false;
+	m_isLevelEditor = false;
 }
 
 
@@ -66,11 +67,11 @@ void LevelSelector::InitVisuals()
 	}
 
 	m_visualsInitialized = true;
+	m_isLevelEditor = false;
 }
 
 void LevelSelector::InitEditorVisuals()
 {
-	m_playListText.resize(10);
 	m_levelChoice.resize(10);
 	m_levelHandler.GetLevelNames(m_levelText);
 
@@ -80,7 +81,7 @@ void LevelSelector::InitEditorVisuals()
 	m_textLevels.SetColor(229, 122, 16, 255);
 	m_textLevels.SetPosition(0, 275);
 	m_textLevels.SetSize(60);
-
+	
 	if (m_levelText.size() > 10)
 	{
 		m_numToShow = 10;
@@ -99,6 +100,7 @@ void LevelSelector::InitEditorVisuals()
 	}
 
 	m_visualsInitialized = true;
+	m_isLevelEditor = true;
 }
 
 
@@ -189,7 +191,7 @@ bool LevelSelector::Update()
 					m_levelSelector = m_numToShow - 2;
 				}
 			}
-			else if (0 < m_levelText.size() - 10 - m_levelInc)
+			else if (0 < m_levelText.size() - 10 - m_levelInc && m_numLevels >= 10)
 			{
 				++m_levelInc;
 
@@ -253,7 +255,7 @@ bool LevelSelector::Update()
 	{
 		m_levelQueue.push_back(m_levelChoice[m_levelSelector]->GetText());
 
-		if (m_numLevels < 10)
+		if (m_numLevels < 10 && !m_isLevelEditor)
 		{
 			m_playListText[m_numLevels]->SetText(m_levelChoice[m_levelSelector]->GetText());
 			++m_numLevels;
