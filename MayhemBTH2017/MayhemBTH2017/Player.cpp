@@ -122,19 +122,21 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	//set weapon
 
-	Prefab * gun1 = PrefabManager::Instantiate("Blunderbuster", nullptr, nullptr, 0, "Candle");
-	Prefab * gun2 = PrefabManager::Instantiate("Flamethrower", nullptr, nullptr, 0, "Candle");
-	Prefab * gun3 = PrefabManager::Instantiate("Machinegun", nullptr, nullptr, 0, "Candle");
-	Prefab * gun4 = PrefabManager::Instantiate("GrenadeLauncher", nullptr, nullptr, 0, "Candle");
-	Prefab * gun5 = PrefabManager::Instantiate("RocketLauncher", nullptr, nullptr, 0, "Candle");
+	Prefab * gun1 = PrefabManager::Instantiate("Blunderbuster", nullptr, nullptr, 0, "Blunderbuster");
+	Prefab * gun2 = PrefabManager::Instantiate("Flamethrower", nullptr, nullptr, 0, "Flamethrower");
+	Prefab * gun3 = PrefabManager::Instantiate("Machinegun", nullptr, nullptr, 0, "Machinegun");
+	Prefab * gun4 = PrefabManager::Instantiate("GrenadeLauncher", nullptr, nullptr, 0, "GrenadeLauncher");
+	Prefab * gun5 = PrefabManager::Instantiate("RocketLauncher", nullptr, nullptr, 0, "RocketLauncher");
 	Prefab * gun6 = PrefabManager::Instantiate("Boomerang", nullptr, nullptr, 0, "Candle");
 	Prefab * gun7 = PrefabManager::Instantiate("Spear", nullptr, nullptr, 0, "Candle");
 
-	m_healthBar = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
-	m_healthBarBackground = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
-	m_laserSight = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
+	m_healthBar = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
+	m_healthBarBackground = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
+	m_laserSight = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
+
 	m_playerArrow = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
 	m_muzzleFlash = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
+
 	m_healthBar->Create();
 	m_healthBarBackground->Create();
 	m_laserSight->Create();

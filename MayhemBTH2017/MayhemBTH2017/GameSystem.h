@@ -100,7 +100,6 @@ private:
 	SoundManager * m_soundManager;
 
 	// TMP ATOMIC BOMB
-
 	AtomicBomb m_atomicBomb;
 };
 
