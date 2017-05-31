@@ -102,7 +102,7 @@ void AntiAliasing::Update()
 	glBlitFramebuffer(0, 0, m_width, m_height, 0, 0, m_width, m_height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glDisable(GL_DEPTH_TEST);
 
@@ -117,7 +117,7 @@ void AntiAliasing::Bind()
 void AntiAliasing::Reset()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
-	glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 }
