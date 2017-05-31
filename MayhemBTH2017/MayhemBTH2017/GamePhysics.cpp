@@ -175,12 +175,12 @@ void GamePhysics::Render(Camera camera)
 
 		for (int i = 0; i < 4; i++)
 		{
+			m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
+			m_player[i].GetHealthBar()->Render(camera);
 
 			m_player[i].GetHealthBarBackground()->SetAlbedoID(m_texture[1]->GetTexture());
 			m_player[i].GetHealthBarBackground()->Render(camera);
 
-			m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
-			m_player[i].GetHealthBar()->Render(camera);
 
 
 
