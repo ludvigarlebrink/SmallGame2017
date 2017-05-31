@@ -5,6 +5,7 @@
 #include "Box.h"
 #include "AShader.h"
 #include "InputManager.h"
+#include "Timer.h"
 #include "TimeManager.h"
 #include "PlayerPrefab.h"
 #include "Collidable.h"
@@ -120,6 +121,8 @@ private:
 	bool		m_collidedPowerUp;
 	bool		m_collidedSkull;
 	bool		m_atomicBombLaunched;
+	bool		m_weaponIsPicked;
+	float		m_weaponTimer;
 	uint32_t	m_pointsToGet;
 
 	float m_deathTImer = 0;
