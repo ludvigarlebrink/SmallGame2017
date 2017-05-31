@@ -51,7 +51,7 @@ void PowerUp::CreateSkull(b2World * world, glm::vec2 pos)
 	m_boundingBox.getBody()->SetUserData(this);
 
 	lifeTime = 0;
-	deathBound = 5.0;
+	deathBound = 7.0;
 	m_score = 0;
 }
 
@@ -127,6 +127,7 @@ void PowerUp::SetScore(uint32_t value)
 void PowerUp::Update()
 {
 	lifeTime += TimeManager::Get()->GetDeltaTime();
+	float yolo = glm::sin(lifeTime);
 
 	if (m_collidedPlayer)
 	{
@@ -140,6 +141,7 @@ void PowerUp::Update()
 	GLfloat yScale = m_boundingBox.getScale().y;
 
 	m_powerupPrefab->SetPosition(glm::vec3(xPos, yPos, 0));
+	//m_powerupPrefab->SetScale(m_powerupPrefab->GetScale().x + 0.01 * yolo, m_powerupPrefab->GetScale().y + 0.01 * yolo, 0);
 
 	if (lifeTime > deathBound)
 	{

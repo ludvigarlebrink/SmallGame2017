@@ -494,12 +494,12 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 		if (m_deathTImer == 1)
 			m_deathPos = m_boundingBox.getBody()->GetPosition();
 
-		Respawn(glm::vec2(spawn, 70));
+		Respawn(glm::vec2(spawn, 300));
 		m_currentWeapon = 0;
 
 		if (Timer(2))
 		{
-			Respawn(glm::vec2(spawn, 30));
+			Respawn(glm::vec2(spawn, 100));
 			m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
 			m_life = 1.0;
 			m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
@@ -567,8 +567,6 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f)
 	{
-
-
 		if (!m_isMidAir) {
 
 			//First jump
