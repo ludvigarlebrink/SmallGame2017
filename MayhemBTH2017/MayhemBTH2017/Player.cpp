@@ -318,7 +318,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	m_healthBarBackground->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
 
-	glm::vec2 force = glm::vec2(m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID), m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y, m_controllerID));
+	//glm::vec2 force = glm::vec2(m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, m_controllerID), m_input->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, m_controllerID));
 
 
 	m_playerArrow->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 3.5, 0.0));
@@ -457,17 +457,21 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 			m_soundManager->PlaySFX("pickup");
 			int atomic = rand() % 20;
 			
-			if (atomic != 19) {
+			if (atomic != 20) {
 				m_currentWeapon = rand() % 6 + 1;
 			}
-			if (atomic == 19 && m_atomic_timer_active) {
+
+			if (atomic == 1 && m_atomic_timer_active) {
 				m_atomic_timer_active = true;
 				m_soundManager->PlaySFX("siren");
 				m_soundManager->PlaySFX("airplane");
 				AtomicBomb::StartBombSequence();
-
-
 			}
+			else
+			{
+				m_currentWeapon = rand() % 6 + 1;
+			}
+
 			m_collidedPowerUp = false;
 		}
 
