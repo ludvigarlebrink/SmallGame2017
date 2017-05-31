@@ -33,6 +33,7 @@ Player::Player()
 	m_hitByProjectile = -1;
 
 
+
 }
 
 
@@ -65,7 +66,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_particleTexture6 = m_textureHandler.Import(".\\Assets\\Textures\\ring.png");
 	m_particleTexture7 = m_textureHandler.Import(".\\Assets\\Textures\\spark2.png");
 
-	//MARTIN TEST SHIT REMOVE
 	m_input = InputManager::Get();
 	m_soundManager = SoundManager::Get();
 
@@ -202,6 +202,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_muzzleFlash->SetPosition(glm::vec3(999, 999, 999));
 	m_muzzleFlash->SetScale(glm::vec3(1.7, 1.7, 1.7));
 
+	int spawn = rand() % 80;
+	Respawn(glm::vec2(spawn, 100));
+
 	//Set fixture->SetScale(glm::vec3(0.2, 8.5, 0.2)); 
 
 }
@@ -265,6 +268,19 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	{
 		m_currentWeapon = 0;
 	}
+
+	if (m_weaponIsPicked)
+	{
+		m_weaponTimer += TimeManager::GetDeltaTime();
+
+		if (m_weaponTimer >= 10)
+		{
+			m_currentWeapon = 0;
+			m_weaponIsPicked = false;
+			m_weaponTimer = 0;
+		}
+	}
+
 
 	switch (m_currentWeapon)
 	{
@@ -408,15 +424,29 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 				m_dead = true;
 			}
 		}
-	
+
+
+		
 		if (m_collidedPowerUp)
 		{
 
 			m_soundManager->PlaySFX("pickup");
 			int atomic = rand() % 20;
-			
+
 			if (atomic != 19) {
-				m_currentWeapon = rand() % 6 + 1;
+
+				int tempWep = -1;
+
+				do 
+				{
+					tempWep = rand() % 4 + 1;
+
+				} while (tempWep == m_currentWeapon);
+
+				m_currentWeapon = tempWep;
+
+				m_weaponTimer = 0;
+				m_weaponIsPicked = true;
 			}
 
 			if (atomic == 19 && !m_atomicBombLaunched) {
@@ -425,10 +455,20 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 				m_soundManager->PlaySFX("airplane");
 				AtomicBomb::StartBombSequence();
 			}
-			else
+			/*else
 			{
-				m_currentWeapon = rand() % 6 + 1;
-			}
+				int tempWep = -1;
+
+				do
+				{
+					tempWep = rand() % 4 + 1;
+
+				} while (tempWep == m_currentWeapon);
+
+				m_currentWeapon = tempWep;
+				m_weaponTimer = 0;
+				m_weaponIsPicked = true;
+			}*/
 
 			m_collidedPowerUp = false;
 		}
@@ -451,7 +491,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 			for (int i = 0; i < nrOfPlayer; i++) {
 				p_arr[i].m_dead = true;
-	
+
 			}
 
 			m_atomic_timer_active = false;
@@ -468,7 +508,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 		if (m_deathTImer == 1)
 			m_deathPos = m_boundingBox.getBody()->GetPosition();
 
-		Respawn(glm::vec2(spawn, 300));
+		Respawn(glm::vec2(999, 999));
 		m_currentWeapon = 0;
 
 		if (Timer(2))
@@ -542,7 +582,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 			//First jump
 			GetBox().getBody()->ApplyForce(b2Vec2(0, 200), GetBox().getBody()->GetWorldCenter(), 1);
-			
+
 
 
 			//m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(0, impulse), m_player.GetBox().getBody()->GetWorldCenter(), 1);

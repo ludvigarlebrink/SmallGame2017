@@ -254,15 +254,15 @@ void GameSystem::PlayerReady()
 				++num;
 			}
 
-			// TEMP CHANGE TO TWO
-			if (num >= 1)
-			{
-				// INIT PLAY
-				m_numPlayers = num;
-				TransitionManager::StartFadingOut();
-				m_currState = INIT_PLAY;
-				return;
-			}
+		}
+
+		if (num >= 1)
+		{
+			// INIT PLAY
+			m_numPlayers = num;
+			TransitionManager::StartFadingOut();
+			m_currState = INIT_PLAY;
+			return;
 		}
 	}
 
@@ -294,7 +294,7 @@ void GameSystem::InitPlay()
 
 		if (m_world == nullptr)
 		{
-			m_world = new GamePhysics;
+			m_world = new GamePhysics(m_numPlayers);
 			m_world->SetNrOfPlayers(m_numPlayers);
 		}
 
