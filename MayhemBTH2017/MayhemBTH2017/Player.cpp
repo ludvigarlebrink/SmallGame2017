@@ -271,9 +271,8 @@ void Player::Free()
 	// LUKAS DELETE WORLD
 }
 
-void Player::Update(Player * p_arr) {
-
-
+void Player::Update(Player * p_arr) 
+{
 	//std::cout << m_currentWeapon << std::endl;
 	if (m_boundingBox.getBody()->GetPosition().y < -5.0f)
 	{
@@ -424,8 +423,13 @@ void Player::Update(Player * p_arr) {
 					m_soundManager->PlaySFX("death_3");
 				}
 
-
 				ScoreManager::AddKill(m_hitByProjectileID);
+
+				if (ScoreManager::GetCurrKillStreak(m_hitByProjectileID) > 10)
+				{
+					m_soundManager->PlaySFX("siren");
+				}
+
 				m_healthBar->SetScale(glm::vec3(1.0, 0.7, 0));
 				ScoreManager::AddDeath(m_controllerID);
 				m_dead = true;
@@ -456,6 +460,19 @@ void Player::Update(Player * p_arr) {
 
 		m_contact = false;
 	}
+
+	switch (ScoreManager::GetCurrKillStreak(m_controllerID))
+	{
+	case 3:
+		break;
+
+	case 4:
+		break;
+
+	case 5:
+		break;
+	}
+
 
 	if (m_dead)
 	{
@@ -506,9 +523,6 @@ void Player::Update(Player * p_arr) {
 
 	if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID))
 	{
-
-		std::cout << GetBox().getBody()->GetLinearVelocity().x << " " << GetBox().getBody()->GetLinearVelocity().y << std::endl;
-
 		if (m_isMidAir) {
 			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 			//GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-50)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
@@ -654,14 +668,30 @@ Prefab * Player::GetLaserSight()
 	return m_laserSight;
 }
 
-
+Prefab * Player::GetPlayerArrow()
+{
+	return m_playerArrow;
+}
 
 Prefab * Player::GetMuzzleFlash()
 {
 	return m_muzzleFlash;
 }
 
+bool Player::GetDead()
+{
+	return m_dead;
+}
 
+bool Player::GetSkullCheck()
+{
+	return m_skullCheck;
+}
+
+b2Vec2 Player::GetDeathPos()
+{
+	return m_deathPos;
+}
 
 //::.. SET FUNCTIONS ..:://
 void Player::SetCategoryBits(short CATEGORY)
