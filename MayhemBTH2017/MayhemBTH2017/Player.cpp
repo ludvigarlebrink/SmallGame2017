@@ -130,9 +130,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	Prefab * gun6 = PrefabManager::Instantiate("Boomerang", nullptr, nullptr, 0, "Candle");
 	Prefab * gun7 = PrefabManager::Instantiate("Spear", nullptr, nullptr, 0, "Candle");
 
-	m_healthBar = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
-	m_healthBarBackground = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
-	m_laserSight = PrefabManager::Instantiate("lukas", nullptr, nullptr, 0, "Candle");
+	m_healthBar = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
+	m_healthBarBackground = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
+	m_laserSight = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
 	m_playerArrow = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
 	m_muzzleFlash = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
 	m_healthBar->Create();
