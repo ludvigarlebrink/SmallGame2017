@@ -35,7 +35,7 @@ private:
 	Box					m_powerUpBox;
 	Player				m_player[4];
 	Collider2D			gameFloor;
-	Texture *			m_texture[3];
+	Texture *			m_texture[8];
 	TextureHandler		m_textureHandler;
 
 
