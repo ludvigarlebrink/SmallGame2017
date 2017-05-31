@@ -9,10 +9,10 @@ uniform float T;
 
 void main()
 {
-	float ratio =  1280.0 / 720;
+	float ratio =  1920.0 / 1080.0;
 
-	float x = gl_FragCoord.x / 1280.0;
-	float y = gl_FragCoord.y / 720.0;
+	float x = gl_FragCoord.x / 1920.0;
+	float y = gl_FragCoord.y / 1080.0;
 	x = x * ratio;
 	vec3 center = vec3(0.5 * ratio, 0.5, 0.0);
 

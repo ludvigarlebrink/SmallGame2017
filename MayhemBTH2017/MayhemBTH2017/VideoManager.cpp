@@ -94,13 +94,16 @@ void VideoManager::Init()
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-	m_width = 1280;
-	m_height = 768;
+	SDL_DisplayMode dm;
+	SDL_GetDesktopDisplayMode(0, &dm);
+	
+	m_width = dm.w;
+	m_height = dm.h;
 
-	m_window = SDL_CreateWindow("Mayhem Mainia", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+	m_window = SDL_CreateWindow("Mayhem Mania", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		m_width, m_height, SDL_WINDOW_OPENGL);
 
-	SDL_SetWindowFullscreen(m_window, 0);
+	SDL_SetWindowFullscreen(m_window, SDL_WINDOW_FULLSCREEN);
 	SDL_ShowCursor(SDL_DISABLE);
 
 	m_glContext = SDL_GL_CreateContext(m_window);
@@ -137,14 +140,3 @@ void VideoManager::SetIsClosed(bool x)
 {
 	m_isClosed = x;
 }
-
-void VideoManager::SetHeight(int x)
-{
-	m_height = x;
-}
-
-void VideoManager::SetWidth(int x)
-{
-	m_width = x;
-}
-

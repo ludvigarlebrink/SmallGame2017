@@ -4,8 +4,8 @@
 //::.. DUMMY CONSTRUCTORS ..:://
 AntiAliasing::AntiAliasing()
 {
-	m_height = 1280;
-	m_width = 768;
+	m_width = VideoManager::Get()->GetWidth();
+	m_height = VideoManager::Get()->GetHeight();
 	this->Init();
 }
 
@@ -22,7 +22,7 @@ GLuint AntiAliasing::GenerateMultiSampleTexture(GLuint samples)
 	glGenTextures(1, &texture);
 
 	glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, texture);
-	glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB, m_height, m_width, GL_TRUE);
+	glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB, m_width, m_height, GL_TRUE);
 	glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
 
 	return texture;
@@ -42,10 +42,10 @@ GLuint AntiAliasing::GenerateAttachmentTexture(GLboolean depth, GLboolean stenci
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	if (!depth && !stencil)
-		glTexImage2D(GL_TEXTURE_2D, 0, attachment_type, m_height, m_width, 0, attachment_type,
+		glTexImage2D(GL_TEXTURE_2D, 0, attachment_type, m_width, m_height, 0, attachment_type,
 			GL_UNSIGNED_BYTE, NULL);
 	else
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, m_height, m_width, 0, GL_DEPTH_STENCIL,
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, m_width, m_height, 0, GL_DEPTH_STENCIL,
 			GL_UNSIGNED_INT_24_8, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -65,7 +65,7 @@ void AntiAliasing::Init()
 	
 	glGenRenderbuffers(1, &m_rbo);
 	glBindRenderbuffer(GL_RENDERBUFFER, m_rbo);
-	glRenderbufferStorageMultisample(GL_RENDERBUFFER, 8, GL_DEPTH24_STENCIL8, m_height, m_width);
+	glRenderbufferStorageMultisample(GL_RENDERBUFFER, 8, GL_DEPTH24_STENCIL8, m_width, m_height);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_rbo);
 
@@ -99,7 +99,7 @@ void AntiAliasing::Update()
 
 //	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer);
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_intermediateFBO);
-	glBlitFramebuffer(0, 0, m_height, m_width, 0, 0, m_height, m_width, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+	glBlitFramebuffer(0, 0, m_width, m_height, 0, 0, m_width, m_height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClearColor(1.0, 1.0, 1.0, 1.0);

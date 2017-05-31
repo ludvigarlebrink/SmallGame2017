@@ -3,6 +3,7 @@
 
 #include <glew.h>
 #include <cstdint>
+#include "VideoManager.h"
 
 class AntiAliasing
 {
@@ -28,8 +29,8 @@ private:
 	GLuint m_intermediateFBO;
 	GLuint m_screenTexture;
 	//GLuint m_texture;
-	uint32_t m_height;
 	uint32_t m_width;
+	uint32_t m_height;
 };
 
 #endif // !__ANTIALIASING_H__

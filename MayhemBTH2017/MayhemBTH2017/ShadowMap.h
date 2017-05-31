@@ -24,7 +24,7 @@ public:
 
 
 private:
-	const GLuint SHADOW_WIDTH = 1280, SHADOW_HEIGHT = 768;
+	const GLuint SHADOW_WIDTH = 1920, SHADOW_HEIGHT = 1080;
 	GLuint m_depthMap;
 	GLuint m_depthMapFBO;
 };

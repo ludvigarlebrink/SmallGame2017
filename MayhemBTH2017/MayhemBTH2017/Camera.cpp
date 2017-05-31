@@ -63,5 +63,5 @@ void Camera::Init()
 	m_up = glm::vec3(0, 1, 0);
 
 	
-	m_perspective = glm::perspective(70.0f, 1280.0f/ 720.0f, 10.0f, 200.0f);
+	m_perspective = glm::perspective(70.0f, static_cast<float>(VideoManager::Get()->GetWidth()) / static_cast<float>(VideoManager::Get()->GetHeight()), 10.0f, 200.0f);
 }

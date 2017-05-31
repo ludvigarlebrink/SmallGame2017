@@ -1,7 +1,7 @@
 #ifndef __CAMERA_H__
 #define __CAMERA_H__
 
-
+#include "VideoManager.h"
 #include <glm.hpp>
 #include <gtx\transform.hpp>
 
