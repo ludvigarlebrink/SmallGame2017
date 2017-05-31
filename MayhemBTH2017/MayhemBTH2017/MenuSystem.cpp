@@ -17,6 +17,7 @@ MenuSystem::~MenuSystem()
 void MenuSystem::Update()
 {
 	// First: handle input.
+	
 	if (!m_changeMenu)
 	{
 		HandleInput();

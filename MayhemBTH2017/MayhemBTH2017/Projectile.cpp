@@ -304,15 +304,11 @@ void Projectile::Render(Camera camera)
 
 		transform.SetPosition(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
 
-		m_texture->Bind(0);
-		//	glActiveTexture(0);
-
 		glDepthMask(false);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		m_texture->Bind(0);
-
-
+	
 		m_emitter.Update();
 		m_emitter.Render(transform);
 

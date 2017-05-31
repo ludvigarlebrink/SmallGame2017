@@ -113,6 +113,7 @@ private:
 		PROJECTILE2 = 0x0080,
 		PROJECTILE3 = 0x0100,
 		PROJECTILE4 = 0x0120,
+		SKULL = 0x0140,
 	};
 };
 

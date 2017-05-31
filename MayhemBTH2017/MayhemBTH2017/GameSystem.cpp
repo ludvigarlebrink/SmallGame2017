@@ -75,6 +75,7 @@ void GameSystem::Update()
 
 	case PLAYER_READY:
 		PlayerReady();
+
 		break;
 
 	case INIT_PLAY:
@@ -221,6 +222,14 @@ void GameSystem::PlayerReady()
 				m_playerReadyUI[i].playerName.SetColor(m_playerReadyUI[i].r,
 					m_playerReadyUI[i].g, m_playerReadyUI[i].b, 255);
 
+				if (i == 0)
+					m_soundManager->PlaySFX("ready1");
+				if (i == 1)
+					m_soundManager->PlaySFX("ready2");
+				if (i == 2)
+					m_soundManager->PlaySFX("ready3");
+				if (i == 3)
+					m_soundManager->PlaySFX("ready4");
 
 				m_playerReadyUI[i].playerReady.SetText("READY!");
 			}

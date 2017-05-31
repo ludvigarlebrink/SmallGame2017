@@ -86,14 +86,14 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 
 				gameFloor.InitStatic(world, glm::vec2((tempX - 0.5), (tempY - 0.5)), glm::vec2(offset + 0.84, scale + 0.42));
 				gameFloor.getFixture()->SetRestitution(0.0); //floor bounciness
-				gameFloor.getFixture()->SetFriction(0.01); //floor friction
+				gameFloor.getFixture()->SetFriction(0.00); //floor friction
 				gameFloor.getFixture()->SetRestitution(0.0);
 				gameFloor.getBody()->ResetMassData();
 
 				gameFloor.getBody()->SetUserData(this);
 				b2Filter filter;
 				filter.categoryBits = BOUNDARY;
-				filter.maskBits = PLAYER1 | PLAYER2 | PLAYER3 | PLAYER4 | PROJECTILE1 | PROJECTILE2 | PROJECTILE3 | PROJECTILE4 | POWERUP;
+				filter.maskBits = PLAYER1 | PLAYER2 | PLAYER3 | PLAYER4 | PROJECTILE1 | PROJECTILE2 | PROJECTILE3 | PROJECTILE4 | POWERUP |SKULL;
 				gameFloor.getFixture()->SetFilterData(filter);
 
 				m_boxes.push_back(gameFloor);
