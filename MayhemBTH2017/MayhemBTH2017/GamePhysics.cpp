@@ -5,7 +5,7 @@ MyContactListener * GamePhysics::m_contactListener = nullptr;
 
 
 
-GamePhysics::GamePhysics()
+GamePhysics::GamePhysics(uint32_t nrOfPlayers)
 	:m_world(b2Vec2(0.0f, -8.0f))
 {
 	if (m_contactListener == nullptr)
@@ -16,10 +16,11 @@ GamePhysics::GamePhysics()
 	m_loadWorld = false;
 	int spawn = rand() % 80;
 
-	m_player[0].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 0);
-	m_player[1].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 1);
-	m_player[2].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 2);
-	m_player[3].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), 3);
+	for (int i = 0; i < nrOfPlayers; i++)
+	{
+		m_player[i].Init(&m_world, glm::vec2(spawn, 24), glm::vec2(2.0, 5.0), i);
+	}
+
 }
 
 GamePhysics::~GamePhysics()

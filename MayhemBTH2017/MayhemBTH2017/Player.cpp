@@ -508,7 +508,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 		if (m_deathTImer == 1)
 			m_deathPos = m_boundingBox.getBody()->GetPosition();
 
-		Respawn(glm::vec2(spawn, 300));
+		Respawn(glm::vec2(999, 999));
 		m_currentWeapon = 0;
 
 		if (Timer(2))

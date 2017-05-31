@@ -17,7 +17,7 @@ class GamePhysics
 {
 public:
 
-	GamePhysics();
+	GamePhysics(uint32_t nrOfPlayers);
 	virtual ~GamePhysics();
 	void EnterWorld(std::string levelName);
 	void Update();

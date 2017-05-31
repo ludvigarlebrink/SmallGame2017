@@ -294,7 +294,7 @@ void GameSystem::InitPlay()
 
 		if (m_world == nullptr)
 		{
-			m_world = new GamePhysics;
+			m_world = new GamePhysics(m_numPlayers);
 			m_world->SetNrOfPlayers(m_numPlayers);
 		}
 
