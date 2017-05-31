@@ -8,7 +8,7 @@
 #include "Camera.h"
 #include "PostProcessingManager.h"
 #include "Background.h"
-
+#include "SoundManager.h"
 
 class AtomicBomb
 {
@@ -43,6 +43,7 @@ private:
 
 	static bool		m_sequenceStarted;
 
+	SoundManager* m_soundManager;
 	GLuint m_shader;
 	GLuint m_vao;
 	GLuint m_buffer;

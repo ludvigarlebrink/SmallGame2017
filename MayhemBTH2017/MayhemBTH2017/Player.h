@@ -58,6 +58,8 @@ public:
 	Prefab * GetHealthBar();
 	Prefab* GetHealthBarBackground();
 	Prefab* GetLaserSight();
+	Prefab* GetPlayerArrow();
+	Prefab* GetMuzzleFlash();
 	bool	GetDead();
 	bool GetSkullCheck();
 	b2Vec2 GetDeathPos();
@@ -91,6 +93,8 @@ private:
 	bool	m_contact;
 	bool	m_dead;
 	bool	m_skullCheck = true;
+	bool	m_firing;
+	float	m_fireTimer;
 	float	m_time;
 	int		m_controllerID;
 	bool	m_collidedProjectile;
@@ -98,8 +102,10 @@ private:
 	float	m_life;
 
 	Prefab *		m_healthBar;
+	Prefab*			m_muzzleFlash;
 	Prefab *		m_laserSight;
 	Prefab*			m_healthBarBackground;
+	Prefab*			m_playerArrow;
 	int				m_hitByProjectileID;
 	SoundManager *	m_soundManager;
 

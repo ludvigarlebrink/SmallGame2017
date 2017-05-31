@@ -25,7 +25,7 @@ void main()
 	
 	float intensity = clamp(dot(lightDir, Normal1), 0, 1);
 	vec3 rgb = texture2D(AlbedoMap, vec2(TexCoords1.x, 1 - TexCoords1.y)).rgb;
-
+	vec4 tex=texture2D(AlbedoMap, vec2(TexCoords1.x, 1-TexCoords1.y));
 
     if(intensity >= 0.0f && intensity < 0.2f)
         lightColor = col1;
@@ -37,6 +37,6 @@ void main()
         lightColor = col3;
 	
 	
-	FragColor = vec4(rgb * lightColor, 1);
-
+	FragColor = vec4(1.0, 0.0, 1.0, 1.0);
+	FragColor=vec4(rgb*lightColor, tex.a);
 }
