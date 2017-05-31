@@ -36,7 +36,7 @@ void PowerUp::Create(b2World* world, glm::vec2 pos)
 
 void PowerUp::CreateSkull(b2World * world, glm::vec2 pos)
 {
-	m_powerupPrefab = PrefabManager::Instantiate("Skull", nullptr, nullptr, 0, "Yellow");
+	m_powerupPrefab = PrefabManager::Instantiate("Skull", nullptr, nullptr, 0, "Gold");
 
 	m_powerupPrefab->SetScale(glm::vec3(1.0f));
 	m_powerupPrefab->Rotate(glm::vec3(0.0, 0.0f, 0.0));
@@ -57,12 +57,11 @@ void PowerUp::CreateSkull(b2World * world, glm::vec2 pos)
 
 }
 
+
 //::.. RENDER ..:://
-
-void PowerUp::Render(Camera camera) {
-
+void PowerUp::Render(Camera camera) 
+{
 	m_powerupPrefab->Render(camera);
-
 }
 
 Box PowerUp::GetBox()
@@ -86,15 +85,18 @@ void PowerUp::CollidedWithPlayer(bool player)
 	m_collidedPlayer = false;
 }
 
+
 uint32_t PowerUp::GetScore()
 {
 	return m_score;
 }
 
+
 b2Filter PowerUp::GetFilter()
 {
 	return m_filter;
 }
+
 
 void PowerUp::SetActive(bool active)
 {
@@ -103,9 +105,9 @@ void PowerUp::SetActive(bool active)
 	m_boundingBox.getBody()->SetAwake(active);
 }
 
+
 void PowerUp::RandPosition()
 {
-	srand(time(NULL));
 	b2Vec2 r;
 	r.x = rand() % 80 + 2;
 	r.y = rand() % 44 + 2;
@@ -114,10 +116,12 @@ void PowerUp::RandPosition()
 
 }
 
+
 void PowerUp::SetPosition(b2Vec2 value)
 {
 	m_boundingBox.getBody()->SetTransform(value, 0);
 }
+
 
 void PowerUp::SetScore(uint32_t value)
 {
@@ -125,12 +129,9 @@ void PowerUp::SetScore(uint32_t value)
 }
 
 
-
 void PowerUp::Update()
 {
 	lifeTime += TimeManager::Get()->GetDeltaTime();
-
-
 
 	if (m_collidedPlayer)
 	{
@@ -144,7 +145,6 @@ void PowerUp::Update()
 	GLfloat yScale = m_boundingBox.getScale().y;
 
 	m_powerupPrefab->SetPosition(glm::vec3(xPos, yPos, 0));
-	//m_powerupPrefab->SetScale(xScale*scaler, yScale*scaler, 0);
 	m_powerupPrefab->SetRotation(m_powerupPrefab->GetRotation().x, m_powerupPrefab->GetRotation().y + 1, m_powerupPrefab->GetRotation().z);
 
 	if (lifeTime > deathBound - 1)
@@ -164,7 +164,7 @@ void PowerUp::Update()
 
 void PowerUp::SkullUpdate()
 {
-	lifeTime += TimeManager::Get()->GetDeltaTime();
+	lifeTime += TimeManager::GetDeltaTime();
 	float scaler = glm::sin(lifeTime);
 
 	if (m_collidedPlayer)

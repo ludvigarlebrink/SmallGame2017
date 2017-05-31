@@ -88,20 +88,20 @@ private:
 	AShader			m_toonShader;
 
 
-	bool	m_isMidAir;
-	bool	m_doubleJump;
-	bool	m_contact;
-	bool	m_dead;
-	bool	m_skullCheck = true;
-	bool	m_firing;
-	float	m_fireTimer;
-	float	m_time;
-	int		m_controllerID;
-	bool	m_collidedProjectile;
-	bool	m_hitByProjectile;
-	float	m_life;
-	float	m_atomic_timer;
-	bool	m_atomic_timer_active;
+	bool			m_isMidAir;
+	bool			m_doubleJump;
+	bool			m_contact;
+	bool			m_dead;
+	bool			m_skullCheck = true;
+	bool			m_firing;
+	float			m_fireTimer;
+	float			m_time;
+	int				m_controllerID;
+	bool			m_collidedProjectile;
+	bool			m_hitByProjectile;
+	float			m_life;
+	float			m_atomic_timer;
+	bool			m_atomic_timer_active;
 
 	Prefab *		m_healthBar;
 	Prefab*			m_muzzleFlash;

@@ -4,7 +4,7 @@
 
 #include "PrefabManager.h"
 #include "Player.h"
-#include <iostream>
+
 #include <vector>
 #include "Sprite.h"
 

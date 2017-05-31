@@ -66,8 +66,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_particleTexture7 = m_textureHandler.Import(".\\Assets\\Textures\\spark2.png");
 
 	//MARTIN TEST SHIT REMOVE
-	//m_testCon = new PlayerController;
-	//TEST END
 	m_input = InputManager::Get();
 	m_soundManager = SoundManager::Get();
 
@@ -142,11 +140,11 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	gun4->SetScale(glm::vec3(1.4f));
 	gun5->SetScale(glm::vec3(1.3f));
 
-	Prefab * projectile1 = PrefabManager::Instantiate("Bullet", nullptr, nullptr, 0, "Candle");
-	Prefab * projectile2 = PrefabManager::Instantiate("Missile", nullptr, nullptr, 0, "Candle");
-	Prefab * projectile3 = PrefabManager::Instantiate("Bullet", nullptr, nullptr, 0, "Candle");
-	Prefab * projectile4 = PrefabManager::Instantiate("Missile", nullptr, nullptr, 0, "Candle");
-	Prefab * projectile5 = PrefabManager::Instantiate("Missile", nullptr, nullptr, 0, "Candle");
+	Prefab * projectile1 = PrefabManager::Instantiate("Bullet", nullptr, nullptr, 0, "Copper");
+	Prefab * projectile2 = PrefabManager::Instantiate("Bullet", nullptr, nullptr, 0, "Neon");
+	Prefab * projectile3 = PrefabManager::Instantiate("Bullet", nullptr, nullptr, 0, "Copper");
+	Prefab * projectile4 = PrefabManager::Instantiate("Grenade", nullptr, nullptr, 0, "Grenade");
+	Prefab * projectile5 = PrefabManager::Instantiate("Missile", nullptr, nullptr, 0, "Grey");
 
 	projectile1->SetScale(glm::vec3(1, 1, 1));
 
@@ -567,7 +565,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	m_playerPrefab->GetPlayerPrefab()->SetPosition(glm::vec3(xPos + 0.5, yPos + GetBox().getScale().y - 6, 0));
 
 	//////////////////////////////////////////////////////////
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		m_weapons[i]->Update(GetPrefab()->GetProjectileSpawnPoint(), b2Vec2(1.0, 1.0));
 	}

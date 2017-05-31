@@ -109,9 +109,6 @@ void PlayerPrefab::Update(float x, float y, float speed)
 			t.SetPosition(m_player->GetTransform().GetModelMatrix() * hand->globalTx * glm::vec4(m_spawnPointOffset, 1.0f));
 		}
 		glm::mat4 m = t.GetModelMatrix();
-	//	m = glm::translate(m, -m_weapon->GetPosition());
-	//	m = glm::rotate(m, glm::radians(m_weapRotY), glm::vec3(0.0f, 0.0f, 1.0f));
-	//	m = glm::translate(m, m_weapon->GetPosition());
 
 		m_projectileSpawnPoint = glm::vec3(m[3].x, m[3].y, 0.0f);
 	}

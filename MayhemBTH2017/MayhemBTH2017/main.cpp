@@ -36,6 +36,7 @@ void Terminate();
 
 int main(int argc, char *argv[])
 {
+	srand(time(NULL));
 
 	// Init all singleton managers.
 	BigInit();
