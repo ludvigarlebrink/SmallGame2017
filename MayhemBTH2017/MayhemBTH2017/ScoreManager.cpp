@@ -113,13 +113,13 @@ uint32_t ScoreManager::GetDeaths(uint32_t id)
 
 uint32_t ScoreManager::GetKills(uint32_t id)
 {
-	return 0;
+	return m_playerScore[id].kills;
 }
 
 
 uint32_t ScoreManager::GetCurrKillStreak(uint32_t id)
 {
-	return 0;
+	return m_playerScore[id].currKillStreak;
 }
 
 
@@ -131,7 +131,7 @@ uint32_t ScoreManager::GetHighestKillStreak(uint32_t id)
 
 float ScoreManager::GetKDRatio(uint32_t id)
 {
-	return 0.0f;
+	return (m_playerScore[id].kills / m_playerScore[id].deaths);
 }
 
 

@@ -15,6 +15,8 @@
 #include "SoundManager.h"
 #include "AtomicBomb.h"
 
+#include <iostream>
+
 class Player : public Collidable
 {
 public:

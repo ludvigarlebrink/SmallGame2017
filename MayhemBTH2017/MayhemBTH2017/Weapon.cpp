@@ -305,12 +305,12 @@ void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 bool Weapon::FireRate(float rate)
 {
 
-
 	if (m_time >= rate)
 	{
 		m_time = 0;
 		return true;
 	}
+
 
 	return false;
 }
