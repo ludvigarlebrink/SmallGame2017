@@ -18,7 +18,7 @@ public:
 
 	static void StartBombSequence();
 	void Update(Camera &cam);
-
+	void Reset();
 
 private:
 	enum States
