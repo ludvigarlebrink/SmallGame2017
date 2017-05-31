@@ -55,6 +55,7 @@ void GamePhysics::EnterWorld(std::string levelName)
 		m_skullHandler.Free();
 	}
 
+
 	//at global scope
 
 	//in FooTest constructor
@@ -87,9 +88,9 @@ void GamePhysics::Update()
 		m_powerupHandler.Update();
 		m_skullHandler.Update();
 
-		m_world.Step(1.0f / 20.0f, 8, 5);
 		//Update player bounding box sprite position to the position of the player mesh
 	}
+		m_world.Step(1.0f / 20.0f, 8, 5);
 }
 
 
