@@ -135,9 +135,6 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Engine\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="Playlist.cpp">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClCompile>
@@ -344,9 +341,6 @@
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Playlist.h">
-      <Filter>Engine\Resources\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Engine\Resources\ResourceTypes</Filter>

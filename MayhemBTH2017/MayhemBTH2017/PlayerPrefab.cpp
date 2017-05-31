@@ -34,13 +34,19 @@ void PlayerPrefab::Update(float x, float y, float speed)
 	if (x > 0.3f)
 	{
 		m_player->SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
-		m_weapRotY = 90;
+		if (m_weapon != nullptr)
+		{
+			m_weapRotY = 90;
+		}
 	}
 	
 	if( x < -0.3f)
 	{
 		m_player->SetRotation(glm::vec3(0.0f, -90.0f, 0.0f));
-		m_weapRotY = -90;
+		if (m_weapon != nullptr)
+		{
+			m_weapRotY = -90;
+		}
 	}
 
 	if (y < 0.0f)
@@ -86,10 +92,14 @@ void PlayerPrefab::Update(float x, float y, float speed)
 		anim->GetCurrentAnimClip()->GetPreviousKeyFrame(), anim->GetCurrentAnimClip()->GetInter(), false, 12);
 
 	Joint * hand = skel->GetJointAt(6);
-	m_weapon->SetPosition(glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]));
-	m_weapon->SetRotation(glm::vec3(y * -90, m_weapRotY, 0.0f));
 
-	m_projectileSpawnPoint = glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]);
+	if (m_weapon != nullptr)
+	{
+		m_weapon->SetPosition(glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]));
+		m_weapon->SetRotation(glm::vec3(y * -90, m_weapRotY, 0.0f));
+
+		m_projectileSpawnPoint = glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]);
+	}
 }
 
 
@@ -97,18 +107,18 @@ void PlayerPrefab::Render(Camera & cam)
 {
 	//Renders the prefab meshes
 	m_player->Render(cam);
-	m_weapon->Render(cam);
+	if (m_weapon != nullptr)
+	{
+		m_weapon->Render(cam);
+	}
 }
-void PlayerPrefab::RenderShadow(Camera & cam)
-{
-	//Renders the prefab meshes
-	m_weapon->Render(cam);
-}
+
 
 Prefab * PlayerPrefab::GetPlayerPrefab()
 {
 	return m_player;
 }
+
 
 glm::vec3 PlayerPrefab::GetProjectileSpawnPoint()
 {
@@ -130,9 +140,6 @@ void PlayerPrefab::SetAnimState(uint32_t playerAnimState)
 //::.. HELP FUNCTIONS ..:://
 void PlayerPrefab::Init(int32_t id, Prefab * weapon)
 {
-	m_weapon = PrefabManager::Instantiate("Rifle", nullptr, nullptr, 0);
-	m_weapon->SetScale(glm::vec3(1.3f));
-
 	std::string mat = "Player";
 	mat.append(std::to_string(id + 1));
 
