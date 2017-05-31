@@ -19,6 +19,7 @@ public:
 	virtual ~LevelSelector();
 
 	void InitVisuals();
+	void InitEditorVisuals();
 	void FreeVisuals();
 
 	bool Update();

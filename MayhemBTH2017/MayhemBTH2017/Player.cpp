@@ -486,8 +486,11 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	}
 
 
-	if (GetBox().getBody()->GetLinearVelocity().y != 0) 
-	{
+	if (GetBox().getBody()->GetLinearVelocity().y != 0) {
+		if (!m_isMidAir)
+		{
+			m_doubleJump = true;
+		}
 		m_isMidAir = true;
 	}
 	else 
@@ -495,7 +498,6 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 		m_isMidAir = false;
 		m_doubleJump = false;
 	}
-
 
 	//controller input///////////////////////////////////////////
 
@@ -542,7 +544,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 			//First jump
 			GetBox().getBody()->ApplyForce(b2Vec2(0, 200), GetBox().getBody()->GetWorldCenter(), 1);
-			m_doubleJump = true;
+			
 
 
 			//m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(0, impulse), m_player.GetBox().getBody()->GetWorldCenter(), 1);

@@ -60,6 +60,7 @@ private:
 	bool m_collidedPlayer;
 	bool m_active;
 	float lifeTime;
+	float scaleTime;
 	float deathBound;
 	uint32_t m_score;
 	b2Filter m_filter;

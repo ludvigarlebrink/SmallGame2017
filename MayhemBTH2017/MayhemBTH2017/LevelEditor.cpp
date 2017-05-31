@@ -86,24 +86,17 @@ void LevelEditor::Update()
 		break;
 
 	case LOAD:
-		m_levelHandler.GetLevelNames(m_levelText);
-		
-		for (int i = max(0, m_levelSelector - 5); i < m_levelHandler.GetNumLevels(); i++)
+		if (!m_levelSelect.GetVisualsInitialized())
 		{
-			m_levelChoice[i].SetText(m_levelText.at(i).c_str());
-			m_levelChoice[i].SetPosition(0, 200 - (50 * i));
-			
+			m_levelSelect.InitEditorVisuals();
+		}
 
-			if (m_levelSelector == i)
-			{
-				m_levelChoice[i].SetColor(255, 255, 255, 128);
-			}
-			else
-			{
-				m_levelChoice[i].SetColor(255, 0, 0, 128);
-			}
+		m_levelSelect.Update();
 
-			m_levelChoice[i].Render();
+		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
+		{
+			m_levelHandler.Import(m_level, m_levelSelect.GetLevel());
+			m_state = EDIT;
 		}
 
 		MenuInput();
@@ -337,33 +330,9 @@ void LevelEditor::MenuInput()
 		break;
 
 	case LOAD:
-
-		if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_UP))
-		{
-			if (m_levelSelector - 1 >= 0)
-			{
-				m_levelSelector--;
-			}
-		}
-
-		else if (m_input->GetButtonDown(CONTROLLER_BUTTON_DPAD_DOWN))
-		{
-			if (static_cast<uint32_t>(m_levelSelector + 1) < m_levelHandler.GetNumLevels())
-			{
-				m_levelSelector++;
-			}
-		}
-
-		if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))
+		if (m_input->GetButtonDown(CONTROLLER_BUTTON_START) || m_input->GetButtonDown(CONTROLLER_BUTTON_B))
 		{
 			m_state = MENU;
-		}
-
-		if (m_input->GetButtonDown(CONTROLLER_BUTTON_A))
-		{
-			Reset();
-			m_levelHandler.Import(m_level, m_levelChoice[m_levelSelector].GetText());
-			m_state = EDIT;
 		}
 		break;
 	}

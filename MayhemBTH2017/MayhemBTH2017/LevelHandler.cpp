@@ -115,8 +115,7 @@ void LevelHandler::Export(Level & level)
 		for (uint32_t y = 1; y < level.SIZE_Y; y++)
 		{
 			isOccupied[i] = level.GetIsOccupied(x, y);
-			uvCoords[i] = level.GetTempUV(x, y);
-			
+			uvCoords[i] = level.GetTempUV(x, y);			
 
 			++i;
 		}
