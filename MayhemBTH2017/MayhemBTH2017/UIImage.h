@@ -46,6 +46,7 @@ public:
 	void SetUV(glm::vec2 uv);
 	void SetIsGreyscale(bool value);
 	void CreateMesh(glm::vec2 uv);
+	void DeleteMesh();
 
 private:
 	//::.. HELP FUNCTIONS ..:://
