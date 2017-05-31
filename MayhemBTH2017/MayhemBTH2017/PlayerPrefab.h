@@ -50,6 +50,8 @@ private:
 	Prefab *	m_weapon;
 	glm::vec3	m_projectileSpawnPoint;
 	glm::vec3	m_spawnPointOffset;
+	glm::mat4	m_matrix;
+	Transform	m_transform;
 
 	KeyFrame *	m_kf;
 	KeyFrame *	m_keyUp;
@@ -60,6 +62,7 @@ private:
 	float		m_y;
 	float		m_x;
 
+	float		m_defaultRot;
 	float		m_weapRotY = 0.0f;
 };
 

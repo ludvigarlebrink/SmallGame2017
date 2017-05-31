@@ -130,8 +130,6 @@ void PowerUp::Update()
 {
 	lifeTime += TimeManager::Get()->GetDeltaTime();
 
-
-
 	if (m_collidedPlayer)
 	{
 		m_collidedPlayer = false;
