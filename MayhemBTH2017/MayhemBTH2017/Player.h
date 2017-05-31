@@ -59,7 +59,6 @@ public:
 	void UpdateParticles();
 	Prefab * GetHealthBar();
 	Prefab* GetHealthBarBackground();
-	Prefab* GetLaserSight();
 	Prefab* GetPlayerArrow();
 	Prefab* GetMuzzleFlash();
 	bool	GetDead();
@@ -107,7 +106,6 @@ private:
 
 	Prefab *		m_healthBar;
 	Prefab*			m_muzzleFlash;
-	Prefab *		m_laserSight;
 	Prefab*			m_healthBarBackground;
 	Prefab*			m_playerArrow;
 	int				m_hitByProjectileID;

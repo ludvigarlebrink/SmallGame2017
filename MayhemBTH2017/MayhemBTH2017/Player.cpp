@@ -132,16 +132,9 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	m_healthBar = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
 	m_healthBarBackground = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
-	m_laserSight = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
 
 	m_playerArrow = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
 	m_muzzleFlash = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
-
-	m_healthBar->Create();
-	m_healthBarBackground->Create();
-	m_laserSight->Create();
-	m_playerArrow->Create();
-	m_muzzleFlash->Create();
 
 	gun1->SetScale(glm::vec3(1.4f));
 	gun2->SetScale(glm::vec3(0.7f));
@@ -221,10 +214,6 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBar->Rotate(glm::vec3(0.0, 90.0, 0.0));
 	m_healthBar->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
 
-
-	m_laserSight->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 5, 0.0));
-	m_laserSight->SetScale(glm::vec3(0.2, 8.5, 0.2));
-
 	m_playerArrow->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 3, m_boundingBox.getBody()->GetPosition().y + 9, 0.0));
 	m_playerArrow->SetScale(glm::vec3(0.7, 0.7, 0.7));
 
@@ -259,12 +248,6 @@ void Player::Free()
 		delete m_healthBarBackground;
 		m_healthBarBackground = nullptr;
 	}
-
-	if (m_laserSight != nullptr) {
-		delete m_laserSight;
-		m_laserSight = nullptr;
-	}
-
 
 	if (m_playerArrow != nullptr) {
 		delete m_playerArrow;
@@ -337,11 +320,6 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 	glm::vec2 force = glm::vec2(m_input->GetAxis(CONTROLLER_AXIS_RIGHT_X, m_controllerID), m_input->GetAxis(CONTROLLER_AXIS_RIGHT_Y, m_controllerID));
 
-
-
-	float angle = glm::degrees(atan2(force.y, force.x));
-	m_laserSight->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 0.6, 0.0));
-	m_laserSight->SetRotation(-90, 90, angle);
 
 	m_playerArrow->SetPosition(glm::vec3(m_boundingBox.getBody()->GetPosition().x + 0.5f, m_boundingBox.getBody()->GetPosition().y + 3.5, 0.0));
 
@@ -713,16 +691,10 @@ Prefab * Player::GetHealthBarBackground()
 	return m_healthBarBackground;
 }
 
-Prefab * Player::GetLaserSight()
-{
-	return m_laserSight;
-}
-
 Prefab * Player::GetPlayerArrow()
 {
 	return m_playerArrow;
 }
-
 
 
 Prefab * Player::GetMuzzleFlash()

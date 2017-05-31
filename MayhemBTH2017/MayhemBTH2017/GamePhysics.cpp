@@ -132,14 +132,6 @@ void GamePhysics::Render(Camera camera)
 
 	for (int i = 0; i < 4; i++) {
 
-		//LASER SIGHT
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
-		m_player[i].GetLaserSight()->SetAlbedoID(m_texture[2]->GetTexture());
-		m_player[i].GetLaserSight()->Render(camera);
-		glDisable(GL_BLEND);
-
-
 		//Player Arrow
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
