@@ -20,6 +20,8 @@ Player::Player(b2World* world, glm::vec2 pos, glm::vec2 scale, int controllerID)
 	m_playerArrow = nullptr;
 	m_muzzleFlash = nullptr;
 	m_atomic_timer_active = false;
+	m_atomicBombLaunched = false;
+
 }
 
 Player::Player()
@@ -53,7 +55,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_healthBarBackground = nullptr;
 	m_world = nullptr;
 	m_muzzleFlash = nullptr;
-	m_atomic_timer_active = true;
+	m_atomic_timer_active = false;
 
 	m_particleTexture1 = m_textureHandler.Import(".\\Assets\\Textures\\particle_glow.png");
 	m_particleTexture2 = m_textureHandler.Import(".\\Assets\\Textures\\debree.png");
@@ -159,32 +161,32 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_weapons[0]->SetDamage(0.05f);
 
 
-	m_weapons[1] = new Weapon(gun2, projectile2, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
+	m_weapons[1] = new Weapon(gun2, projectile2, m_controllerID, glm::vec3(0));
 	m_weapons[1]->SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 3.0f, 10, m_controllerID, 0.0);
 	m_weapons[1]->SetWeaponSound("scifi_weapon");
 	m_weapons[1]->SetFirePower(100.0f);
 	m_weapons[1]->SetDamage(1.0f);
 
-	m_weapons[2] = new Weapon(gun3, projectile3, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
+	m_weapons[2] = new Weapon(gun3, projectile3, m_controllerID, glm::vec3(0));
 	m_weapons[2]->SetProjectileType(0.9f, 1.0f, 0.0f, 0.0f, 0.5f, 15, m_controllerID, 5.0);
 	m_weapons[2]->SetWeaponSound("shuriken");
 	m_weapons[2]->SetFirePower(100.0f);
 	m_weapons[2]->SetDamage(0.3f);
 
 
-	m_weapons[3] = new Weapon(gun4, projectile4, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
+	m_weapons[3] = new Weapon(gun4, projectile4, m_controllerID, glm::vec3(0));
 	m_weapons[3]->SetProjectileType(0.2f, 1.0f, 0.0f, 0.0f, 0.5f, 18, m_controllerID, 0.0);
 	m_weapons[3]->SetWeaponSound("grenade_launcher");
 	m_weapons[3]->SetFirePower(4.0);
 	m_weapons[3]->SetDamage(0.3f);
 
-	m_weapons[4] = new Weapon(gun5, projectile5, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
+	m_weapons[4] = new Weapon(gun5, projectile5, m_controllerID, glm::vec3(0));
 	m_weapons[4]->SetProjectileType(0.1f, 1.0f, 0.0f, 0.0f, 0.5f, 12, m_controllerID, 0.0);
 	m_weapons[4]->SetWeaponSound("heavy_shot");
 	m_weapons[4]->SetFirePower(100.0f);
 	m_weapons[4]->SetDamage(0.3f);
 
-	m_weapons[5] = new Weapon(gun6, projectile6, m_controllerID, glm::vec3(3.0f, 0.0f, 0.0f));
+	m_weapons[5] = new Weapon(gun6, projectile6, m_controllerID, glm::vec3(0));
 	m_weapons[5]->SetProjectileType(0.8f, 1.0f, 0.0f, 0.0f, 0.5f, 11, m_controllerID, 0.0);
 	m_weapons[5]->SetWeaponSound("scifi2");
 	m_weapons[5]->SetFirePower(100.0f);
@@ -278,22 +280,22 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	switch (m_currentWeapon)
 	{
 	case 0:
-		m_playerPrefab->SetWeapon(m_weapons[0]->GetWeaponPre(), m_weapons[0]->GetWeaponOffset());
+		m_playerPrefab->SetWeapon(m_weapons[0]->GetWeaponPre(), glm::vec3(0));
 		break;
 	case 1:
-		m_playerPrefab->SetWeapon(m_weapons[1]->GetWeaponPre(), m_weapons[1]->GetWeaponOffset());
+		m_playerPrefab->SetWeapon(m_weapons[1]->GetWeaponPre(), glm::vec3(0));
 		break;
 	case 2:
-		m_playerPrefab->SetWeapon(m_weapons[2]->GetWeaponPre(), m_weapons[2]->GetWeaponOffset());
+		m_playerPrefab->SetWeapon(m_weapons[2]->GetWeaponPre(), glm::vec3(0));
 		break;
 	case 3:
-		m_playerPrefab->SetWeapon(m_weapons[3]->GetWeaponPre(), m_weapons[3]->GetWeaponOffset());
+		m_playerPrefab->SetWeapon(m_weapons[3]->GetWeaponPre(), glm::vec3(0));
 		break;
 	case 4:
-		m_playerPrefab->SetWeapon(m_weapons[4]->GetWeaponPre(), m_weapons[4]->GetWeaponOffset());
+		m_playerPrefab->SetWeapon(m_weapons[4]->GetWeaponPre(), glm::vec3(0));
 		break;
 	case 5:
-		m_playerPrefab->SetWeapon(m_weapons[5]->GetWeaponPre(), m_weapons[5]->GetWeaponOffset());
+		m_playerPrefab->SetWeapon(m_weapons[5]->GetWeaponPre(), glm::vec3(0));
 		break;
 	default:
 		break;
@@ -437,11 +439,11 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 			m_soundManager->PlaySFX("pickup");
 			int atomic = rand() % 20;
 			
-			if (atomic != 20) {
+			if (atomic != 19) {
 				m_currentWeapon = rand() % 6 + 1;
 			}
 
-			if (atomic == 1 && m_atomic_timer_active) {
+			if (atomic == 19 && !m_atomicBombLaunched) {
 				m_atomic_timer_active = true;
 				m_soundManager->PlaySFX("siren");
 				m_soundManager->PlaySFX("airplane");
@@ -478,6 +480,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 			}
 
 			m_atomic_timer_active = false;
+			m_atomicBombLaunched = true;
 			m_atomic_timer = 0.0f;
 
 		}
@@ -491,12 +494,12 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 		if (m_deathTImer == 1)
 			m_deathPos = m_boundingBox.getBody()->GetPosition();
 
-		Respawn(glm::vec2(spawn, 70));
+		Respawn(glm::vec2(spawn, 300));
 		m_currentWeapon = 0;
 
 		if (Timer(2))
 		{
-			Respawn(glm::vec2(spawn, 30));
+			Respawn(glm::vec2(spawn, 100));
 			m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
 			m_life = 1.0;
 			m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
@@ -522,7 +525,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 
 	//PLAYER MOVEMENT
-	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x * InputManager::Get()->GetAxis(CONTROLLER_AXIS_LEFT_X);
+	GLfloat leftVelocity = GetBox().getBody()->GetLinearVelocity().x * InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_LEFT_X);
 
 
 	// THIS STUFF WORKS
@@ -564,8 +567,6 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_LEFTBUTTON, m_controllerID) != 0.0f)
 	{
-
-
 		if (!m_isMidAir) {
 
 			//First jump
