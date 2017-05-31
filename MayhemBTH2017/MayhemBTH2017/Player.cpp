@@ -154,7 +154,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	projectile1->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapons[0] = new Weapon(gun1, projectile1, m_controllerID, glm::vec3(0));
+	m_weapons[0] = new Weapon(gun1, projectile1, m_controllerID, glm::vec3(8.0f, 0.0f, 0.0f));
 	m_weapons[0]->SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.15f, 10, m_controllerID, 0.0);
 	m_weapons[0]->SetWeaponSound("assault_rifle");
 	m_weapons[0]->SetFirePower(150.0);
@@ -507,15 +507,16 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 
 	if (GetBox().getBody()->GetLinearVelocity().y != 0) {
+		if (!m_isMidAir)
+		{
+			m_doubleJump = true;
+		}
 		m_isMidAir = true;
-
-
 	}
 	else {
 		m_isMidAir = false;
 		m_doubleJump = false;
 	}
-
 
 	//controller input///////////////////////////////////////////
 
@@ -567,7 +568,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 			//First jump
 			GetBox().getBody()->ApplyForce(b2Vec2(0, 200), GetBox().getBody()->GetWorldCenter(), 1);
-			m_doubleJump = true;
+			
 
 
 			//m_player.GetBox().getBody()->ApplyLinearImpulse(b2Vec2(0, impulse), m_player.GetBox().getBody()->GetWorldCenter(), 1);

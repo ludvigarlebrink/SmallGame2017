@@ -60,7 +60,6 @@ void Collider2D::CreateBoundingBoxes(b2World* world, std::string levelName) {
 	GLfloat offset = 0.0f;
 	GLfloat blockScale = 0.4;
 
-	//IF pos(X,Y) IS OCCUPIED BY BLOCK, FILL WITH BOUNDING BOX
 	for (uint32_t y = 1; y < SIZE_Y; y++)
 
 	{

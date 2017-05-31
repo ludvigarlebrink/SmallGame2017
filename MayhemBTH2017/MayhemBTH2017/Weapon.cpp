@@ -9,6 +9,7 @@ Weapon::Weapon()
 	m_prefabProjectile = nullptr;
 }
 
+
 Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID, glm::vec3 projectileSpawnPoint)
 {
 	m_collisionpath = "explosion1";
@@ -37,6 +38,7 @@ Weapon::Weapon(Prefab * gun, Prefab * projectile, int controllerID, glm::vec3 pr
 	m_soundManager = SoundManager::Get();
 }
 
+
 Weapon::Weapon(Prefab * gun)
 {
 	if (m_prefabGun != nullptr)
@@ -52,6 +54,7 @@ Weapon::Weapon(Prefab * gun)
 	m_counter = 0;
 	m_isBullet = true;
 }
+
 
 Weapon::~Weapon()
 {
@@ -77,6 +80,7 @@ Weapon::~Weapon()
 
 }
 
+
 void Weapon::SetProjectileType(float restitution, float friction, float damping, float density, float fireRate, int clearRate, int controllerID, float life)
 {
 
@@ -92,28 +96,28 @@ void Weapon::SetProjectileType(float restitution, float friction, float damping,
 
 }
 
+
 void Weapon::SetFirePower(GLfloat firepower)
 {
 	m_firepower = firepower;
 }
+
 
 float Weapon::GetDamage()
 {
 	return m_damage;
 }
 
-void Weapon::SetParticleTexture(Texture* texture) {
 
-	
+void Weapon::SetParticleTexture(Texture* texture) 
+{	
 	m_particleTexture = texture;
-
-
-
 }
+
 
 void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 {
-	//m_prefabGun->SetPosition(playerPos);
+
 	m_time += TimeManager::Get()->GetDeltaTime();
 	m_clearTime += TimeManager::Get()->GetDeltaTime();
 
@@ -121,13 +125,8 @@ void Weapon::Update(glm::vec3 playerPos, b2Vec2 force)
 	{
 		m_projectiles[i]->Update();
 	}
-
-	//DeleteProjectile();
-
-
-
-
 }
+
 
 void Weapon::DeleteProjectile()
 {
@@ -143,12 +142,14 @@ void Weapon::DeleteProjectile()
 	}
 }
 
+
 void Weapon::SetWeaponSound(const char * filepath)
 {
 
 	m_soundpath = filepath;
 
 }
+
 
 void Weapon::SetCollisionSound(const char * filepath)
 {
