@@ -181,6 +181,7 @@
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="ShadowShader.cpp" />
     <ClCompile Include="Skull.cpp" />
+    <ClCompile Include="SkullHandler.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -282,6 +283,7 @@
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="ShadowShader.h" />
     <ClInclude Include="Skull.h" />
+    <ClInclude Include="SkullHandler.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

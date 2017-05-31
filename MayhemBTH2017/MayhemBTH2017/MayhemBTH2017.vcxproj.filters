@@ -273,6 +273,7 @@
     <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="LevelSelector.cpp" />
     <ClCompile Include="Skull.cpp" />
+    <ClCompile Include="SkullHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoManager.h">
@@ -482,6 +483,7 @@
     </ClInclude>
     <ClInclude Include="LevelSelector.h" />
     <ClInclude Include="Skull.h" />
+    <ClInclude Include="SkullHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GLSL\BlurrShader.frag">

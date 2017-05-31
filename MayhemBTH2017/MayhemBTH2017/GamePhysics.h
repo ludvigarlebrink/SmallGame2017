@@ -10,7 +10,7 @@
 #include "PowerUpHandler.h"
 #include "Texture.h"
 #include "TextureHandler.h"
-#include "Skull.h"
+#include "SkullHandler.h"
 
 
 class GamePhysics
@@ -39,7 +39,6 @@ private:
 	Texture *			m_texture[3];
 	TextureHandler		m_textureHandler;
 
-
 	Level				m_level;
 
 	TimeManager *		m_time;
@@ -67,11 +66,10 @@ private:
 	//Temporary
 	b2FixtureDef		m_powerUpFixture;
 
-	Skull				m_skull;
-
 	static MyContactListener * m_contactListener;
 
-	PowerUpHandler m_powerupHandler;
+	PowerUpHandler	m_powerupHandler;
+	SkullHandler	m_skullHandler;
 
 
 	Transform m_transf;

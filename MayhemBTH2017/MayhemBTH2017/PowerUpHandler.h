@@ -33,7 +33,6 @@ private:
 	float m_spawnPerSec;
 	int m_rate;
 	int m_nrOfSpawns;
-	int m_currSpawnNr;
 	float m_spawnTimer;
 	int counter;
 

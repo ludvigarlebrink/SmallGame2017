@@ -88,23 +88,23 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	if (m_controllerID == 0)
 	{
 		filter.categoryBits = PLAYER1;
-		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE2 | PROJECTILE3 | PROJECTILE4;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE2 | PROJECTILE3 | PROJECTILE4 | SKULL;
 	}
 	if (m_controllerID == 1)
 	{
 		filter.categoryBits = PLAYER2;
-		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE3 | PROJECTILE4;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE3 | PROJECTILE4 | SKULL;
 	}
 
 	if (m_controllerID == 2)
 	{
 		filter.categoryBits = PLAYER3;
-		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE4;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE4 | SKULL;
 	}
 	if (m_controllerID == 3)
 	{
 		filter.categoryBits = PLAYER4;
-		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE3;
+		filter.maskBits = BOUNDARY | POWERUP | PROJECTILE1 | PROJECTILE2 | PROJECTILE3 | SKULL;
 	}
 	GetBox().getFixture()->SetFilterData(filter);
 
@@ -379,6 +379,7 @@ void Player::Update(Player * p_arr) {
 				m_dead = true;
 			}
 		}
+
 		if (m_collidedPowerUp)
 		{
 			int atomic = rand() % 15;
@@ -392,6 +393,13 @@ void Player::Update(Player * p_arr) {
 			}
 			m_collidedPowerUp = false;
 		}
+
+		if (m_collidedSkull)
+		{
+			ScoreManager::AddScore(m_controllerID, m_pointsToGet);
+			m_collidedSkull = false;
+		}
+
 		m_contact = false;
 	}
 
@@ -399,8 +407,11 @@ void Player::Update(Player * p_arr) {
 	{
 		int spawn = rand() % 80;
 		m_time += TimeManager::Get()->GetDeltaTime();
-		Respawn(glm::vec2(spawn, 70));
+		m_deathTImer++;
+		if(m_deathTImer == 1)
+			m_deathPos = m_boundingBox.getBody()->GetPosition();
 
+		Respawn(glm::vec2(spawn, 70));
 		m_currentWeapon = 0;
 
 		if (Timer(2))
@@ -410,6 +421,8 @@ void Player::Update(Player * p_arr) {
 			m_life = 1.0;
 			m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
 			m_dead = false;
+			m_skullCheck = true;
+			m_deathTImer = 0;
 		}
 	}
 
@@ -440,7 +453,6 @@ void Player::Update(Player * p_arr) {
 	if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID))
 	{
 
-		std::cout << GetBox().getBody()->GetLinearVelocity().x << " " << GetBox().getBody()->GetLinearVelocity().y << std::endl;
 
 		if (m_isMidAir) {
 			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
@@ -535,20 +547,13 @@ int Player::GetProjectileID()
 }
 
 
-void Player::StartContact(bool projectile, bool powerup)
+void Player::StartContact(bool projectile, bool powerup, bool skull)
 {
 	m_contact = true;
 
-	if (projectile)
-	{
-		m_collidedProjectile = true;
-		m_collidedPowerUp = false;
-	}
-	if (powerup)
-	{
-		m_collidedPowerUp = true;
-		m_collidedProjectile = false;
-	}
+	m_collidedPowerUp = powerup;
+	m_collidedProjectile = projectile;
+	m_collidedSkull = skull;
 
 }
 
@@ -585,6 +590,21 @@ Prefab * Player::GetHealthBarBackground()
 Prefab * Player::GetLaserSight()
 {
 	return m_laserSight;
+}
+
+bool Player::GetDead()
+{
+	return m_dead;
+}
+
+bool Player::GetSkullCheck()
+{
+	return m_skullCheck;
+}
+
+b2Vec2 Player::GetDeathPos()
+{
+	return m_deathPos;
 }
 
 
@@ -625,6 +645,16 @@ void Player::SetControllerID(int ID)
 void Player::Hit(int projectileID)
 {
 	m_hitByProjectileID = projectileID;
+}
+
+void Player::SetSkullCheck(bool value)
+{
+	m_skullCheck = value;
+}
+
+void Player::SetPointToGet(uint32_t value)
+{
+	m_pointsToGet = value;
 }
 
 //::.. GET FUNCTIONS ..:://

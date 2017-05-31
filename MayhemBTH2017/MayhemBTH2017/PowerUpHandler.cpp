@@ -13,13 +13,10 @@ PowerUpHandler::~PowerUpHandler()
 
 void PowerUpHandler::Init(b2World * world)
 {
-
 	m_rate = GameSettings::GetPowerUpSpawnRate();
 	m_spawnPerSec = 0.05f;
 	m_nrOfSpawns = 10;
 	m_spawnTimer = 1 / (m_spawnPerSec * m_rate); // gameLenght / nrOfTotalSpawns
-
-	m_currSpawnNr = 0;
 
 	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
