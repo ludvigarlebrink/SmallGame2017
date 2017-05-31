@@ -165,7 +165,7 @@ void LevelEditor::AxisMove()
 
 void LevelEditor::ButtonInput()
 {
-	if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
+	/*if (m_input->GetButtonDown(CONTROLLER_BUTTON_Y))
 	{
 		if (m_levelMarker.GetMarkerMode() == NORMAL)
 		{
@@ -175,7 +175,7 @@ void LevelEditor::ButtonInput()
 		{
 			m_levelMarker.SetMarkerMode(NORMAL);
 		}
-	}
+	}*/
 
 	if (m_input->GetButtonUp(CONTROLLER_BUTTON_A) && m_levelMarker.GetMarkerMode() == ADD_SPAWN_POINT)
 	{

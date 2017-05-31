@@ -217,8 +217,6 @@ Prefab * Weapon::GetWeaponPre()
 void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 {
 	GLfloat firePower = m_firepower;
-
-
 	
 	glm::vec2 force = glm::vec2(InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_X, controllerID), InputManager::Get()->GetAxisRaw(CONTROLLER_AXIS_RIGHT_Y, controllerID));
 
@@ -234,7 +232,7 @@ void Weapon::Shoot(b2World * world, glm::vec3 pos, int controllerID)
 		}
 		else
 		{
-			m_previousForce = glm::vec2(-1.0f, -0.0f);
+			m_previousForce = glm::vec2(-1.0f, 0.0f);
 		}
 	}
 

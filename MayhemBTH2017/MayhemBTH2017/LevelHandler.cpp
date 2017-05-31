@@ -66,8 +66,11 @@ void LevelHandler::Import(Level & level, std::string levelName)
 		{
 			level.SetOccupied(x, y, isOccupied[i]);
 
-			if (level.GetIsOccupied(x,y))
+			if (level.GetIsOccupied(x, y))
+			{
+				level.RemoveBlock(x, y);
 				level.AddBlock(x, y, uv[i]);
+			}
 
 			i++;
 		}
