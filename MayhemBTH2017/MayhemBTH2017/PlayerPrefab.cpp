@@ -36,7 +36,7 @@ void PlayerPrefab::Update(float x, float y, float speed)
 		m_player->SetRotation(glm::vec3(0.0f, 90.0f, 0.0f));
 		if (m_weapon != nullptr)
 		{
-			m_weapRotY = 90;
+			m_weapRotY = m_player->GetRotation().y;
 		}
 	}
 	
@@ -45,7 +45,7 @@ void PlayerPrefab::Update(float x, float y, float speed)
 		m_player->SetRotation(glm::vec3(0.0f, -90.0f, 0.0f));
 		if (m_weapon != nullptr)
 		{
-			m_weapRotY = -90;
+			m_weapRotY = m_player->GetRotation().y;
 		}
 	}
 
@@ -101,11 +101,11 @@ void PlayerPrefab::Update(float x, float y, float speed)
 		m_projectileSpawnPoint = glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]);
 		m_weapon->SetRotation(glm::vec3(y * -90, m_weapRotY, 0.0f));
 
-		Transform t;
-		t.SetPosition(m_spawnPointOffset);
-		t.SetRotation->SetRotation(glm::vec3(y * -90, m_weapRotY, 0.0f));
+		//Transform t;
+		//t.SetPosition(m_spawnPointOffset);
+		//t.SetRotation->SetRotation(glm::vec3(y * -90, m_weapRotY, 0.0f));
 
-		m_projectileSpawnPoint = t.GetModelMatrix() * glm::vec4(m_projectileSpawnPoint, 1.0f);
+		//m_projectileSpawnPoint = t.GetModelMatrix() * glm::vec4(m_projectileSpawnPoint, 1.0f);
 	}
 }
 

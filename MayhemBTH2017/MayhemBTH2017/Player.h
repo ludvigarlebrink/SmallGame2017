@@ -118,6 +118,7 @@ private:
 
 	bool		m_collidedPowerUp;
 	bool		m_collidedSkull;
+	bool		m_atomicBombLaunched;
 	uint32_t	m_pointsToGet;
 
 	float m_deathTImer = 0;
