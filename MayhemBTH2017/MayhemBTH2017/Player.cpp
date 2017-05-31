@@ -122,32 +122,34 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 
 	//set weapon
 
-	Prefab * gun1 = PrefabManager::Instantiate("Blunderbuster", nullptr, nullptr, 0, "Candle");
-	Prefab * gun2 = PrefabManager::Instantiate("Flamethrower", nullptr, nullptr, 0, "Candle");
-	Prefab * gun3 = PrefabManager::Instantiate("Machinegun", nullptr, nullptr, 0, "Candle");
-	Prefab * gun4 = PrefabManager::Instantiate("GrenadeLauncher", nullptr, nullptr, 0, "Candle");
-	Prefab * gun5 = PrefabManager::Instantiate("RocketLauncher", nullptr, nullptr, 0, "Candle");
+	Prefab * gun1 = PrefabManager::Instantiate("Blunderbuster", nullptr, nullptr, 0, "Blunderbuster");
+	Prefab * gun2 = PrefabManager::Instantiate("Flamethrower", nullptr, nullptr, 0, "Flamethrower");
+	Prefab * gun3 = PrefabManager::Instantiate("Machinegun", nullptr, nullptr, 0, "Machinegun");
+	Prefab * gun4 = PrefabManager::Instantiate("GrenadeLauncher", nullptr, nullptr, 0, "GrenadeLauncher");
+	Prefab * gun5 = PrefabManager::Instantiate("RocketLauncher", nullptr, nullptr, 0, "RocketLauncher");
 	Prefab * gun6 = PrefabManager::Instantiate("Boomerang", nullptr, nullptr, 0, "Candle");
 	Prefab * gun7 = PrefabManager::Instantiate("Spear", nullptr, nullptr, 0, "Candle");
 
-	m_healthBar = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
-	m_healthBarBackground = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
-	m_laserSight = PrefabManager::Instantiate("quad", nullptr, nullptr, 0, "Candle");
+	m_healthBar = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
+	m_healthBarBackground = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
+	m_laserSight = PrefabManager::Instantiate("Quad", nullptr, nullptr, 0, "Candle");
+
 	m_playerArrow = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
 	m_muzzleFlash = PrefabManager::Instantiate("muzzleflash", nullptr, nullptr, 0, "Candle");
+
 	m_healthBar->Create();
 	m_healthBarBackground->Create();
 	m_laserSight->Create();
 	m_playerArrow->Create();
 	m_muzzleFlash->Create();
 
-	gun1->SetScale(glm::vec3(1.3f));
+	gun1->SetScale(glm::vec3(1.4f));
 	gun2->SetScale(glm::vec3(0.7f));
 	gun3->SetScale(glm::vec3(0.7f));
-	gun4->SetScale(glm::vec3(0.7f));
-	gun5->SetScale(glm::vec3(0.7f));
-	gun6->SetScale(glm::vec3(0.7f));
-	gun7->SetScale(glm::vec3(0.7f));
+	gun4->SetScale(glm::vec3(1.4f));
+	gun5->SetScale(glm::vec3(1.3f));
+	gun6->SetScale(glm::vec3(1.0f));
+	gun7->SetScale(glm::vec3(1.0f));
 
 	Prefab * projectile1 = PrefabManager::Instantiate("Bullet", nullptr, nullptr, 0, "Candle");
 	Prefab * projectile2 = PrefabManager::Instantiate("Sword", nullptr, nullptr, 0, "Candle");
@@ -160,7 +162,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	projectile1->SetScale(glm::vec3(1, 1, 1));
 
 	//	m_weapon = Weapon(gun, projectile);
-	m_weapons[0] = new Weapon(gun1, projectile1, m_controllerID);
+	m_weapons[0] = new Weapon(gun5, projectile1, m_controllerID);
 	m_weapons[0]->SetProjectileType(0.6, 1.0, 0.5f, 0.2f, 0.15f, 10, m_controllerID, 0.0);
 	m_weapons[0]->SetWeaponSound("assault_rifle");
 	m_weapons[0]->SetFirePower(150.0);
@@ -286,7 +288,7 @@ void Player::Free()
 	// LUKAS DELETE WORLD
 }
 
-void Player::Update(Player * p_arr) {
+void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 
 	//std::cout << m_currentWeapon << std::endl;
@@ -477,12 +479,12 @@ void Player::Update(Player * p_arr) {
 		{
 
 			m_soundManager->PlaySFX("pickup");
-			int atomic = rand() % 3;
+			int atomic = rand() % 20;
 			
-			if (atomic != 2) {
+			if (atomic != 19) {
 				m_currentWeapon = rand() % 6 + 1;
 			}
-			if (atomic == 2) {
+			if (atomic == 19) {
 				m_atomic_timer_active = true;
 				m_soundManager->PlaySFX("siren");
 				m_soundManager->PlaySFX("airplane");
@@ -510,10 +512,11 @@ void Player::Update(Player * p_arr) {
 
 		if (m_atomic_timer >= 7.0f) {
 
-			p_arr[0].m_dead = true;
-			p_arr[1].m_dead = true;
-			p_arr[2].m_dead = true;
-			p_arr[3].m_dead = true;
+			for (int i = 0; i < nrOfPlayer; i++) {
+				p_arr[i].m_dead = true;
+	
+			}
+
 			m_atomic_timer_active = false;
 			m_atomic_timer = 0.0f;
 
