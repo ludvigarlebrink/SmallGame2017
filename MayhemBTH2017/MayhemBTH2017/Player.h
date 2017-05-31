@@ -112,7 +112,7 @@ private:
 	int				m_hitByProjectileID;
 	SoundManager *	m_soundManager;
 
-	Weapon *		m_weapons[6];
+	Weapon *		m_weapons[5];
 	int				m_currentWeapon;
 
 	b2World *	m_world;
