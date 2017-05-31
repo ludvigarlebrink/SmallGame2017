@@ -5,6 +5,7 @@ bool AtomicBomb::m_sequenceStarted = false;
 
 AtomicBomb::AtomicBomb()
 {
+	m_soundManager = SoundManager::Get();
 	m_bomber = PrefabManager::Instantiate("Bomber", nullptr, nullptr, 0, "Bomber");
 	m_atomicBomb = PrefabManager::Instantiate("AtomicBomb", nullptr, nullptr, 0, "AtomicBomb");
 	m_bomber->SetRotation(0.0f, 90.0f, 0.0f);
@@ -81,6 +82,8 @@ AtomicBomb::~AtomicBomb()
 }
 
 
+
+
 void AtomicBomb::StartBombSequence()
 {
 	m_sequenceStarted = true;
@@ -116,6 +119,8 @@ void AtomicBomb::Update(Camera &cam)
 		if (m_atomicBomb->GetPosition().y < 20.0f)
 		{
 			m_currState = BOMB_EXPLOSION;
+		
+			
 		}
 
 		m_bomber->Render(cam);
@@ -128,6 +133,7 @@ void AtomicBomb::Update(Camera &cam)
 		{
 			PostProcessingManager::SetState(PostProcessingManager::ATOMIC);
 			m_shakeEffect = true;
+			m_soundManager->PlaySFX("nuke");
 		}
 
 		m_t += TimeManager::GetDeltaTime() * 1.0f;
@@ -140,7 +146,9 @@ void AtomicBomb::Update(Camera &cam)
 		glUniform1f(m_uniforms[SCREEN_WIDTH], VideoManager::Get()->GetWidth());
 		glUniform1f(m_uniforms[SCREEN_HEIGHT], VideoManager::Get()->GetHeight());
 		glUniform1f(m_uniforms[T], m_t);
-
+	
+	
+	
 		glBindVertexArray(m_vao);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
@@ -163,3 +171,6 @@ void AtomicBomb::Update(Camera &cam)
 
 	m_bomber->Render(cam);
 }
+
+
+

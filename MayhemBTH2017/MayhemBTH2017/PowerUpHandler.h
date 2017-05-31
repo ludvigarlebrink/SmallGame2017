@@ -33,14 +33,14 @@ private:
 	float m_spawnPerSec;
 	int m_rate;
 	int m_nrOfSpawns;
-	int m_currSpawnNr;
 	float m_spawnTimer;
 	int counter;
 
 	std::vector <PowerUp*> m_pu;
 	std::vector <glm::vec2> m_randLoc;
 
-	bool m_spawn = false;
+	bool m_spawn;
+	bool m_hasBeenCreated;
 };
 
 

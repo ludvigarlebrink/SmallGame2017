@@ -4,6 +4,7 @@
 
 GameSystem::GameSystem()
 {
+	m_playCountdown = true;
 	m_input = InputManager::Get();
 	m_soundManager = SoundManager::Get();
 	m_numPlayers = 0;
@@ -75,6 +76,7 @@ void GameSystem::Update()
 
 	case PLAYER_READY:
 		PlayerReady();
+
 		break;
 
 	case INIT_PLAY:
@@ -221,6 +223,14 @@ void GameSystem::PlayerReady()
 				m_playerReadyUI[i].playerName.SetColor(m_playerReadyUI[i].r,
 					m_playerReadyUI[i].g, m_playerReadyUI[i].b, 255);
 
+				if (i == 0)
+					m_soundManager->PlaySFX("ready1");
+				if (i == 1)
+					m_soundManager->PlaySFX("ready2");
+				if (i == 2)
+					m_soundManager->PlaySFX("ready3");
+				if (i == 3)
+					m_soundManager->PlaySFX("ready4");
 
 				m_playerReadyUI[i].playerReady.SetText("READY!");
 			}
@@ -318,9 +328,16 @@ void GameSystem::StartPlay()
 
 void GameSystem::Play()
 {
+	TransitionManager::Update();
+
 	m_timer.Update();
 	m_world->Update();
 	m_world->Render(m_camera);
+
+	if (m_timer.GetElapsed() >= m_timer.GetSetTime() - 11 && m_playCountdown) {
+		m_soundManager->PlaySFX("countdown");
+		m_playCountdown = false;
+	}
 
 	m_atomicBomb.Update(m_camera);
 
@@ -338,7 +355,7 @@ void GameSystem::Play()
 	}
 
 
-	TransitionManager::Update();
+
 }
 
 
@@ -367,7 +384,7 @@ void GameSystem::LoadNextLevel()
 		LevelHandler levelHandler;
 		m_world->EnterWorld(m_levelSelector.GetLevel());
 		m_currState = START_PLAY;
-
+		m_playCountdown = true;
 		TransitionManager::StartFadingIn();
 	}
 }
@@ -380,6 +397,7 @@ void GameSystem::GameOver()
 	m_gameUI.SetPauseDisplay(true);
 	m_gameUI.SetShowWinner(true);
 	m_gameUI.Update(0);
+	m_pressToCont.SetText("Press S to return");
 	m_pressToCont.Render();
 
 	if (m_input->GetButtonDown(CONTROLLER_BUTTON_START))

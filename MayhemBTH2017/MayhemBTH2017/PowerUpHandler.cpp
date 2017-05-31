@@ -4,6 +4,8 @@
 
 PowerUpHandler::PowerUpHandler()
 {
+	m_spawn = false;
+	m_hasBeenCreated = false;
 }
 
 PowerUpHandler::~PowerUpHandler()
@@ -13,13 +15,16 @@ PowerUpHandler::~PowerUpHandler()
 
 void PowerUpHandler::Init(b2World * world)
 {
+	if (m_hasBeenCreated)
+	{
+		Free();
+	}
+
 
 	m_rate = GameSettings::GetPowerUpSpawnRate();
 	m_spawnPerSec = 0.05f;
 	m_nrOfSpawns = 10;
 	m_spawnTimer = 1 / (m_spawnPerSec * m_rate); // gameLenght / nrOfTotalSpawns
-
-	m_currSpawnNr = 0;
 
 	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
@@ -35,13 +40,22 @@ void PowerUpHandler::Init(b2World * world)
 		srand(time(NULL));
 	}
 	m_spawn = true;
+	m_hasBeenCreated = true;
 }
 
 void PowerUpHandler::Free()
 {
+	if (!m_hasBeenCreated)
+	{
+		return;
+	}
+
+	m_hasBeenCreated = false;
+
 	for (int i = 0; i < m_nrOfSpawns; i++)
 	{
 		delete m_pu[i];
+		m_pu[i] = nullptr;
 	}
 
 	m_pu.clear();

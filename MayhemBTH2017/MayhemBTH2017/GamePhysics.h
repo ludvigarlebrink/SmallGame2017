@@ -10,6 +10,7 @@
 #include "PowerUpHandler.h"
 #include "Texture.h"
 #include "TextureHandler.h"
+#include "SkullHandler.h"
 
 
 class GamePhysics
@@ -35,9 +36,8 @@ private:
 	Box					m_powerUpBox;
 	Player				m_player[4];
 	Collider2D			gameFloor;
-	Texture *			m_texture[2];
+	Texture *			m_texture[8];
 	TextureHandler		m_textureHandler;
-
 
 	Level				m_level;
 
@@ -68,7 +68,8 @@ private:
 
 	static MyContactListener * m_contactListener;
 
-	PowerUpHandler m_powerupHandler;
+	PowerUpHandler	m_powerupHandler;
+	SkullHandler	m_skullHandler;
 
 
 	Transform m_transf;

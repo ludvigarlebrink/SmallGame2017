@@ -20,6 +20,7 @@ Projectile::Projectile()
 Projectile::~Projectile()
 {
 	delete m_texture;
+	delete m_prefab;
 }
 
 void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale, float restitution, float friction, float damping, float density, float fireRate, bool startUp, Prefab * prefab, int controllerID, float life)
@@ -27,8 +28,6 @@ void Projectile::InitProjectile(b2World * world, glm::vec2 pos, glm::vec2 scale,
 	m_collisionSoundPath = "explosion1";
 	m_soundManager = SoundManager::Get();
 	m_hasParticles = false;
-
-	m_trailParticles = nullptr;
 
 	m_renderSmoke = false;
 	m_isBullet = false;
@@ -305,15 +304,11 @@ void Projectile::Render(Camera camera)
 
 		transform.SetPosition(m_box.getBody()->GetPosition().x, m_box.getBody()->GetPosition().y, 0);
 
-		m_texture->Bind(0);
-		//	glActiveTexture(0);
-
 		glDepthMask(false);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		m_texture->Bind(0);
-
-
+	
 		m_emitter.Update();
 		m_emitter.Render(transform);
 

@@ -14,6 +14,9 @@
 #include "PostProcessingManager.h"
 #include "SoundManager.h"
 #include "AtomicBomb.h"
+
+#include <iostream>
+
 class Player : public Collidable
 {
 public:
@@ -31,7 +34,7 @@ public:
 	void Render(Camera camera);
 	void RenderShadow(Camera camera);
 
-	void Update(Player * p_arr);
+	void Update(Player * p_arr, int nrOfPlayer);
 	void Respawn(glm::vec2 pos);
 
 	//::.. SET FUNCTIONS ..:://
@@ -40,6 +43,8 @@ public:
 	bool Timer(float rate);
 	void SetControllerID(int ID);
 	void  Hit(int projectileID);
+	void SetSkullCheck(bool value);
+	void SetPointToGet(uint32_t value);
 
 	//::..GETTERS..:://
 	uint16 GetCategoryBits();
@@ -48,12 +53,18 @@ public:
 	float GetDamage();
 	PlayerPrefab* GetPrefab();
 	int GetProjectileID();
-	void StartContact(bool projectile, bool powerup);
+	void StartContact(bool projectile, bool powerup, bool skull);
 	void EndContact();
 	int GetControllerID();
 	void UpdateParticles();
 	Prefab * GetHealthBar();
 	Prefab* GetHealthBarBackground();
+	Prefab* GetLaserSight();
+	Prefab* GetPlayerArrow();
+	Prefab* GetMuzzleFlash();
+	bool	GetDead();
+	bool GetSkullCheck();
+	b2Vec2 GetDeathPos();
 
 private:
 
@@ -77,20 +88,28 @@ private:
 	Camera			m_cam;
 	AShader			m_shader;
 	AShader			m_toonShader;
-	
+
 
 	bool	m_isMidAir;
 	bool	m_doubleJump;
 	bool	m_contact;
 	bool	m_dead;
+	bool	m_skullCheck = true;
+	bool	m_firing;
+	float	m_fireTimer;
 	float	m_time;
 	int		m_controllerID;
 	bool	m_collidedProjectile;
 	bool	m_hitByProjectile;
 	float	m_life;
+	float	m_atomic_timer;
+	bool	m_atomic_timer_active;
 
 	Prefab *		m_healthBar;
+	Prefab*			m_muzzleFlash;
+	Prefab *		m_laserSight;
 	Prefab*			m_healthBarBackground;
+	Prefab*			m_playerArrow;
 	int				m_hitByProjectileID;
 	SoundManager *	m_soundManager;
 
@@ -98,8 +117,13 @@ private:
 	int				m_currentWeapon;
 
 	b2World *	m_world;
+	b2Vec2		m_deathPos;
 
 	bool		m_collidedPowerUp;
+	bool		m_collidedSkull;
+	uint32_t	m_pointsToGet;
+
+	float m_deathTImer = 0;
 
 	b2FixtureDef m_fixture;
 	//enum _entityCategory {
@@ -126,6 +150,7 @@ private:
 		PROJECTILE2 = 0x0080,
 		PROJECTILE3 = 0x0100,
 		PROJECTILE4 = 0x0120,
+		SKULL = 0x0140,
 	};
 
 };

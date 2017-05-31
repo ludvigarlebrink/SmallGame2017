@@ -19,7 +19,7 @@ LevelEditorStateMachine::~LevelEditorStateMachine()
 	{
 		for (int iconIndex = 0; iconIndex < m_gui[guiIndex].m_resolution; iconIndex++)
 		{
-			delete m_gui[guiIndex].m_icons[iconIndex];
+			m_gui[guiIndex].m_icons[iconIndex]->DeleteMesh();
 		}
 	}
 }
@@ -52,11 +52,6 @@ void LevelEditorStateMachine::Render(Camera& cam)
 		Input();
 		RenderIcons(GUI_BLOCK);
 		m_currentUV = m_gui[GUI_BLOCK].m_icons[m_pos]->GetUV();
-		break;
-
-	case GUI_BACKGROUND:
-		Input();
-		RenderIcons(GUI_BACKGROUND);
 		break;
 	}
 }
@@ -110,12 +105,7 @@ void LevelEditorStateMachine::Init()
 		case GUI_BLOCK:
 			m_gui[GUI_BLOCK].m_text.SetText("BLOCKS");
 			m_gui[GUI_BLOCK].m_texture.SetTexture(".\\Assets\\Textures\\textureMap.png");
-			m_gui[GUI_BLOCK].m_numIcons = 42;
-			break;
-
-		case GUI_BACKGROUND:
-			m_gui[GUI_BACKGROUND].m_text.SetText("BACKGROUNDS");
-			m_gui[GUI_BACKGROUND].m_numIcons = 12;
+			m_gui[GUI_BLOCK].m_numIcons = 46;
 			break;
 		}
 	}

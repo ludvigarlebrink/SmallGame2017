@@ -7,7 +7,7 @@ MyContactListener * GamePhysics::m_contactListener = nullptr;
 
 GamePhysics::GamePhysics()
 	:m_world(b2Vec2(0.0f, -8.0f))
-{	
+{
 	if (m_contactListener == nullptr)
 	{
 		m_contactListener = new MyContactListener;
@@ -25,21 +25,27 @@ GamePhysics::GamePhysics()
 GamePhysics::~GamePhysics()
 {
 	Free();
+	m_powerupHandler.Free();
+	m_skullHandler.Free();
 }
 
 void GamePhysics::EnterWorld(std::string levelName)
 {
 	m_texture[0] = m_textureHandler.Import(".\\Assets\\Textures\\health.jpg");
 	m_texture[1] = m_textureHandler.Import(".\\Assets\\Textures\\healthbackground.jpg");
-	m_time = TimeManager::Get();
+	m_texture[2] = m_textureHandler.Import(".\\Assets\\Textures\\sight.png");
+
+	//Player arrows
+	m_texture[3] = m_textureHandler.Import(".\\Assets\\Textures\\red.png");
+	m_texture[4] = m_textureHandler.Import(".\\Assets\\Textures\\orange.png");
+	m_texture[5] = m_textureHandler.Import(".\\Assets\\Textures\\blue.png");
+	m_texture[6] = m_textureHandler.Import(".\\Assets\\Textures\\green.png");
+	m_texture[7] = m_textureHandler.Import(".\\Assets\\Textures\\spark2.png");
 
 	m_floorCollider.CreateBoundingBoxes(&m_world, levelName);
 
+	
 
-	if (m_powerupHandler.GetSpawn())
-	{
-		m_powerupHandler.Free();
-	}
 
 	//at global scope
 
@@ -48,6 +54,7 @@ void GamePhysics::EnterWorld(std::string levelName)
 
 	//Set spawn position of player AND SIZE OF SPRITE BOX
 	m_powerupHandler.Init(&m_world);
+	m_skullHandler.Init(&m_world);
 
 	//player fixture is of type PLAYER
 	m_loadWorld = true;
@@ -58,24 +65,27 @@ void GamePhysics::Update()
 {
 	m_world.Step(1.0f / 30.0f, 6, 2);
 
-	for (int i = 0; i < 4; i++) 
+	for (int i = 0; i < 4; i++)
 	{
+		m_player[i].Update(m_player, m_nrOfPlayers);
 
-		m_player[i].Update(m_player);
+		if (m_player[i].GetDead() && m_player[i].GetSkullCheck())
+		{
+			m_skullHandler.SpawnSkull(m_player[i].GetDeathPos(), ScoreManager::GetScore(m_player[i].GetControllerID()) / 10);
+			ScoreManager::AddScore(m_player[i].GetControllerID(), -(ScoreManager::GetScore(m_player[i].GetControllerID()) / 10));
+			m_player[i].SetSkullCheck(false);
+		}
+
+		m_powerupHandler.Update();
+		m_skullHandler.Update();
+
+		//Update player bounding box sprite position to the position of the player mesh
 	}
-
-
-		
-		
-
-	m_powerupHandler.Update();
-
-	m_world.Step(1.0f / 20.0f, 8, 5);
-	//Update player bounding box sprite position to the position of the player mesh
+		m_world.Step(1.0f / 20.0f, 8, 5);
 }
 
 
-glm::vec3 GamePhysics::GetPosition() 
+glm::vec3 GamePhysics::GetPosition()
 {
 	return m_transform.GetPosition();
 }
@@ -91,35 +101,73 @@ void GamePhysics::Free()
 {
 	delete m_texture[0];
 	delete m_texture[1];
+	delete m_texture[2];
+	delete m_texture[3];
+	delete m_texture[4];
+	delete m_texture[5];
+	delete m_texture[6];
+	delete m_texture[7];
 }
 
 
-void GamePhysics::Render(Camera camera) 
+void GamePhysics::Render(Camera camera)
 {
-	m_transf.SetPosition(42.0, 24.0, -0.0);
+	//	m_transf.SetPosition(42.0, 24.0, -0.0);
 	m_floorCollider.DrawCollider(camera);
-	
+
 	for (int i = 0; i < 4; i++) {
 
+		// PLAYER RENDER
 		m_player[i].Render(camera);
+		
+
+
+
 	}
-	
+
 	m_powerupHandler.Render(camera);
+	m_skullHandler.Render(camera);
 
-	glDisable(GL_DEPTH_TEST);
 
-	for (int i = 0; i <4; i++) {
 
-		m_texture[1]->Bind(0);
-		m_texture[1]->Bind(m_texture[1]->GetTexture());
-		m_player[i].GetHealthBarBackground()->SetAlbedoID(m_texture[1]->GetTexture());
-		m_player[i].GetHealthBarBackground()->Render(camera);
-		
-		m_texture[0]->Bind(0);
-		m_texture[0]->Bind(m_texture[0]->GetTexture());
-		m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
-		m_player[i].GetHealthBar()->Render(camera);
-		
+	for (int i = 0; i < 4; i++) {
+
+		//LASER SIGHT
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
+		m_player[i].GetLaserSight()->SetAlbedoID(m_texture[2]->GetTexture());
+		m_player[i].GetLaserSight()->Render(camera);
+		glDisable(GL_BLEND);
+
+
+		//Player Arrow
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		m_player[i].GetPlayerArrow()->SetAlbedoID(m_texture[i + 3]->GetTexture());
+		m_player[i].GetPlayerArrow()->Render(camera);
+		glDisable(GL_BLEND);
+
+		//MUZZLE FLASH/////////////////////////////
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		m_player[i].GetMuzzleFlash()->SetAlbedoID(m_texture[7]->GetTexture());
+		m_player[i].GetMuzzleFlash()->Render(camera);
+		glDisable(GL_BLEND);
+		////////////////////////////////////////////
+
+		for (int i = 0; i < 4; i++)
+		{
+			m_player[i].GetHealthBar()->SetAlbedoID(m_texture[0]->GetTexture());
+			m_player[i].GetHealthBar()->Render(camera);
+
+			m_player[i].GetHealthBarBackground()->SetAlbedoID(m_texture[1]->GetTexture());
+			m_player[i].GetHealthBarBackground()->Render(camera);
+
+
+
+
+
+		}
+
 	}
-	glEnable(GL_DEPTH_TEST);
 }

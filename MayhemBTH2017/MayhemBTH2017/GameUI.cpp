@@ -7,11 +7,16 @@ GameUI::GameUI()
 
 	m_numPlayers = 1;
 
+	m_winnerText = new UIText;
+
 	m_gameTimer = new UIText;
 	for (uint32_t i = 0; i < 4; i++)
 	{
 		m_playerScore[i] = new UIText;
 	}
+
+	m_winnerText->SetSize(60);
+	m_winnerText->SetPosition(0, 150.0f);
 
 	m_gameTimer->SetText("60");
 	m_gameTimer->SetSize(46);
@@ -47,6 +52,8 @@ GameUI::~GameUI()
 	{
 		delete m_playerScore[i];
 	}
+
+	delete m_winnerText;
 }
 
 
@@ -67,7 +74,30 @@ void GameUI::Update(float time)
 
 		if (m_showWinner)
 		{
-			// TODO
+			int winner = ScoreManager::GetWinnerIndex();
+
+			if (winner == 0)
+			{
+				m_winnerText->SetText("WINNER: PLAYER 1");
+				m_winnerText->SetColor(252, 61, 73, 255);
+			}
+			else if (winner == 1)
+			{
+				m_winnerText->SetText("WINNER: PLAYER 2");
+				m_winnerText->SetColor(255, 147, 73, 255);
+			}
+			else if (winner == 2)
+			{
+				m_winnerText->SetText("WINNER: PLAYER 3");
+				m_winnerText->SetColor(61, 212, 66, 255);
+			}
+			else if (winner == 3)
+			{
+				m_winnerText->SetText("WINNER: PLAYER 4");
+				m_winnerText->SetColor(43, 166, 160, 255);
+			}
+
+			m_winnerText->Render();
 		}
 	}
 	else
