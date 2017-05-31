@@ -1,5 +1,5 @@
 #include "PlayerPrefab.h"
-
+#include <iostream>
 
 //::.. CONSTRUCTORS ..:://
 PlayerPrefab::PlayerPrefab(int32_t id)
@@ -98,23 +98,22 @@ void PlayerPrefab::Update(float x, float y, float speed)
 		m_weapon->SetPosition(glm::vec3(m_player->GetTransform().GetModelMatrix() * hand->globalTx[3]));
 		m_weapon->SetRotation(glm::vec3(y * -90, m_weapRotY, 0.0f));
 
+
 		Transform t;
-		t.SetPosition(m_spawnPointOffset);
+		if (x < -0.3f)
+		{
+			t.SetPosition(m_player->GetTransform().GetModelMatrix() * hand->globalTx * glm::vec4(m_spawnPointOffset.x, m_spawnPointOffset.y, m_spawnPointOffset.z, 1.0f));
+		}
+		else if (x > 0.3f)
+		{
+			t.SetPosition(m_player->GetTransform().GetModelMatrix() * hand->globalTx * glm::vec4(m_spawnPointOffset, 1.0f));
+		}
+		glm::mat4 m = t.GetModelMatrix();
+	//	m = glm::translate(m, -m_weapon->GetPosition());
+	//	m = glm::rotate(m, glm::radians(m_weapRotY), glm::vec3(0.0f, 0.0f, 1.0f));
+	//	m = glm::translate(m, m_weapon->GetPosition());
 
-		glm::vec4 tmp = m_weapon->GetTransform().GetModelMatrix() * glm::vec4(m_spawnPointOffset.x, m_spawnPointOffset.y, m_spawnPointOffset.z, 1.0f);
-		m_projectileSpawnPoint = glm::vec3(tmp.z, tmp.y, 0.0f);
-		
-
-		//float s = glm::sin(m_weapRotY);
-		//float c = glm::cos(m_weapRotY);
-		//
-		//float xx = m_spawnPointOffset.x - m_projectileSpawnPoint.x;
-		//float yy = m_spawnPointOffset.y - m_projectileSpawnPoint.y;
-		//
-		//float nx = (xx * c) - (yy * s);
-		//float ny = (xx * s) + (yy * c);
-
-	//	m_projectileSpawnPoint = //glm::vec3(nx + m_projectileSpawnPoint.x, ny + m_projectileSpawnPoint.y, 0.0f);
+		m_projectileSpawnPoint = glm::vec3(m[3].x, m[3].y, 0.0f);
 	}
 }
 
