@@ -102,6 +102,9 @@ void System::Run()
 
 		m_videoManager->Swap();
 		m_timeManager->UpdateDeltaTime();
+
+		// 60 FPS.
+		SDL_Delay(max((1.0f / 60.0f) - m_timeManager->GetDeltaTime(), 0.0f));
 	}
 }
 
