@@ -81,6 +81,7 @@ void Background::UpdateGrandCanyon()
 
 	if (!m_isPostNuclear)
 	{
+		m_sprites[6].SetIsGreyscale(false);
 		for (uint32_t i = 0; i < 7; i++)
 		{
 			m_sprites[i].Render();
@@ -129,8 +130,8 @@ void Background::UpdateParty()
 
 void Background::InitBackground()
 {
-	float deltaHeight = VideoManager::Get()->GetHeight() / 1080.0f;
-	float deltaWidth = VideoManager::Get()->GetWidth() / 1920.0f;
+	float deltaHeight = 1;
+	float deltaWidth = 1;
 
 	switch (m_backgroundType)
 	{
