@@ -162,7 +162,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_weapons[1]->SetFirePower(100.0f);
 	m_weapons[1]->SetDamage(1.0f);
 
-	m_weapons[2] = new Weapon(gun3, projectile3, m_controllerID, glm::vec3(2.0f, 1.0f, 0.0f));
+	m_weapons[2] = new Weapon(gun3, projectile3, m_controllerID, glm::vec3(3.4f, -0.4f, 0.0f));
 	m_weapons[2]->SetProjectileType(0.9f, 1.0f, 0.0f, 0.0f, 0.5f, 15, m_controllerID, 5.0);
 	m_weapons[2]->SetWeaponSound("shuriken");
 	m_weapons[2]->SetFirePower(100.0f);
@@ -181,7 +181,7 @@ void Player::Init(b2World* world, glm::vec2 pos, glm::vec2 scale, int controller
 	m_weapons[4]->SetFirePower(100.0f);
 	m_weapons[4]->SetDamage(0.3f);
 
-	
+
 
 	m_currentWeapon = 0;
 
@@ -324,7 +324,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 		if (m_weapons[m_currentWeapon]->FireRate(m_weapons[m_currentWeapon]->GetFireRate()))
 		{
 			m_weapons[m_currentWeapon]->Shoot(m_world, glm::vec3(GetPrefab()->GetProjectileSpawnPoint().x, GetPrefab()->GetProjectileSpawnPoint().y, GetPrefab()->GetProjectileSpawnPoint().z), m_controllerID);
-			
+
 			m_muzzleFlash->SetPosition(m_playerPrefab->GetProjectileSpawnPoint());
 
 
@@ -352,7 +352,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 			}
 		}
-		else 
+		else
 		{
 			m_muzzleFlash->SetPosition(glm::vec3(100000, 1000000, 100000));
 		}
@@ -425,7 +425,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 		}
 
 
-		
+
 		if (m_collidedPowerUp)
 		{
 
@@ -436,7 +436,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 				int tempWep = -1;
 
-				do 
+				do
 				{
 					tempWep = rand() % 4 + 1;
 
@@ -482,7 +482,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	}
 
 
-	if (m_atomic_timer_active) 
+	if (m_atomic_timer_active)
 	{
 		m_atomic_timer += TimeManager::GetDeltaTime();
 
@@ -530,7 +530,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 		}
 		m_isMidAir = true;
 	}
-	else 
+	else
 	{
 		m_isMidAir = false;
 		m_doubleJump = false;
@@ -550,7 +550,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 
 	if (m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID))
 	{
-		if (m_isMidAir) 
+		if (m_isMidAir)
 		{
 			GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-500)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
 			//GetBox().getBody()->ApplyForce(b2Vec2(m_input->GetAxis(CONTROLLER_AXIS_LEFT_X, m_controllerID)*(-50)*TimeManager::Get()->GetDeltaTime(), 0), GetBox().getBody()->GetWorldCenter(), 1);
@@ -610,7 +610,7 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 	}
 
 
-	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) == 0.0) 
+	if (m_input->GetAxis(CONTROLLER_AXIS_TRIGGERRIGHT, m_controllerID) == 0.0)
 	{
 		m_muzzleFlash->SetPosition(glm::vec3(999, 999, 325));
 	}
@@ -622,6 +622,20 @@ void Player::Update(Player * p_arr, int nrOfPlayer) {
 void Player::Respawn(glm::vec2 pos)
 {
 	m_boundingBox.getBody()->SetTransform(b2Vec2(pos.x, pos.y), 0.0f);
+}
+
+void Player::Reset()
+{
+	m_life = 1.0;
+	m_currentWeapon = 0;
+	int spawn = rand() % 80;
+	m_boundingBox.getBody()->ApplyForce(b2Vec2(1.0, 1.0), m_boundingBox.getBody()->GetWorldCenter(), true);
+	Respawn(glm::vec2(spawn, 100));
+	m_life = 1.0;
+	m_healthBar->SetScale(glm::vec3(1, 0.6, m_life * 5));
+	m_dead = false;
+	m_skullCheck = true;
+	m_deathTImer = 0;
 }
 
 

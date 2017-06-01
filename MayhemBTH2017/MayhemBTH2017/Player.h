@@ -36,6 +36,7 @@ public:
 
 	void Update(Player * p_arr, int nrOfPlayer);
 	void Respawn(glm::vec2 pos);
+	void Reset();
 
 	//::.. SET FUNCTIONS ..:://
 	void SetCategoryBits(short CATEGORY);

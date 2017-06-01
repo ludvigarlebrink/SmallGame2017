@@ -32,6 +32,11 @@ GamePhysics::~GamePhysics()
 
 void GamePhysics::EnterWorld(std::string levelName)
 {
+	for (int i = 0; i < m_numPlayers; ++i)
+	{
+		m_player[i].Reset();
+	}
+
 	m_texture[0] = m_textureHandler.Import(".\\Assets\\Textures\\health.jpg");
 	m_texture[1] = m_textureHandler.Import(".\\Assets\\Textures\\healthbackground.jpg");
 	m_texture[2] = m_textureHandler.Import(".\\Assets\\Textures\\sight.png");
